@@ -1,0 +1,78 @@
+name: Unit tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - gradle-plugin/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: |
+            17
+            11
+      - name: Run assemble
+        run: ./gradlew :gradle-plugin:assemble
+
+  unit_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: |
+            17
+            11
+      - name: Run unit tests
+        run: ./gradlew :gradle-plugin:test
+
+  functional_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: |
+            17
+            11
+      - name: Run functional tests
+        run: ./gradlew :gradle-plugin:functionalTest
+      - name: Publish Test Report
+        uses: mikepenz/action-junit-report@v3.4.0
+        if: always() # always run even if the previous step fails
+        with:
+          report_paths: '**/build/reports/tests/functionalTest/*.xml'
+
+  detekt:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: |
+            17
+            11
+      - name: Run Detekt
+        run: ./gradlew detekt

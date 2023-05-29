@@ -1,0 +1,35 @@
+buildscript {
+  repositories {
+    google()
+  }
+}
+
+plugins {
+  id 'com.emergetools.android'
+}
+
+subprojects {
+  repositories {
+    google()
+  }
+}
+
+emerge {
+  apiToken = 'abcdef123'
+  appProjectPath = ':app'
+
+  performance {
+    perfProjectPath = ':performance'
+  }
+
+  vcs {
+    sha = 'testSha'
+    baseSha = 'testBaseSha'
+    branchName = 'testBranchName'
+    gitHub {
+      repoOwner = 'repoOwner'
+      repoName = 'repoName'
+    }
+  }
+}
+

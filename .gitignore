@@ -1,0 +1,23 @@
+.DS_Store
+.externalNativeBuild
+.cxx
+
+# IntelliJ/local
+.idea/
+*.iml
+local.properties
+
+# Generated
+.gradle
+**/build/
+out/
+captures/
+
+# Environment
+*.env
+
+# Release output dirs
+*/release
+
+# Any perfetto traces left around
+*.perfetto-trace

@@ -1,0 +1,12 @@
+config:
+  validation: true
+  warningsAsErrors: false
+  excludes: ''
+
+formatting:
+  Indentation:
+    indentSize: 2
+  FinalNewline:
+    insertFinalNewLine: true
+  MaximumLineLength:
+    maxLineLength: 100
