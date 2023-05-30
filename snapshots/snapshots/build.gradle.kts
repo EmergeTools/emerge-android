@@ -6,7 +6,7 @@ plugins {
 version = "0.1.0"
 
 android {
-  namespace = "com.emergetools.snapshots" // TODO: Remove
+  namespace = "com.emergetools.snapshots"
   compileSdk = 33
 
   compileOptions {
@@ -35,8 +35,8 @@ dependencies {
   implementation(libs.compose.runtime)
   implementation(libs.compose.ui)
 
-  api(libs.androidx.test.core) // TODO
-  api(libs.androidx.test.core.ktx) // TODO
+  api(libs.androidx.test.core)
+  api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)
   api(libs.compose.ui.test.junit)
 }
