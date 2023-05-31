@@ -8,19 +8,19 @@ import org.junit.runners.model.FrameworkMethod
 
 internal class SnapshotsRunner(testClass: Class<*>) : AndroidJUnit4ClassRunner(testClass) {
 
-	override fun computeTestMethods(): MutableList<FrameworkMethod> {
-		testClass.getAnnotatedFields(Rule::class.java).joinToString("\n") {
-			"Field: ${it.name} ${it.type}"
-		}.also { Log.d("SnapshotsRunner", it) }
+  override fun computeTestMethods(): MutableList<FrameworkMethod> {
+    testClass.getAnnotatedFields(Rule::class.java).joinToString("\n") {
+      "Field: ${it.name} ${it.type}"
+    }.also { Log.d("SnapshotsRunner", it) }
 
-		val hasEmergeSnapshotTestRule = testClass.getAnnotatedFields(Rule::class.java)
-			.filterIsInstance<EmergeSnapshots>()
-			.isNotEmpty()
+    val hasEmergeSnapshotTestRule = testClass.getAnnotatedFields(Rule::class.java)
+      .filterIsInstance<EmergeSnapshots>()
+      .isNotEmpty()
 
-		return if (!hasEmergeSnapshotTestRule) {
-			mutableListOf()
-		} else {
-			testClass.getAnnotatedMethods(Test::class.java)
-		}
-	}
+    return if (!hasEmergeSnapshotTestRule) {
+      mutableListOf()
+    } else {
+      testClass.getAnnotatedMethods(Test::class.java)
+    }
+  }
 }

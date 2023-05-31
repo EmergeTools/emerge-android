@@ -21,11 +21,9 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: |
-            17
-            11
-      - name: Run assemble
-        run: ./gradlew :gradle-plugin:assemble
+          java-version: 17
+      - name: Run build
+        run: ./gradlew :gradle-plugin:build
 
   unit_tests:
     runs-on: ubuntu-latest
@@ -36,9 +34,7 @@ jobs:
         uses: actions/setup-java@v3
         with:
           distribution: 'adopt'
-          java-version: |
-            17
-            11
+          java-version: 17
       - name: Run unit tests
         run: ./gradlew :gradle-plugin:test
 
@@ -52,8 +48,8 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: |
-            17
             11
+            17
       - name: Run functional tests
         run: ./gradlew :gradle-plugin:functionalTest
       - name: Publish Test Report

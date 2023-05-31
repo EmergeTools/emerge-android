@@ -1,4 +1,6 @@
-package com.example.quickstartertest.ui.theme
+@file:Suppress("MagicNumber")
+
+package com.emergetools.snapshots.sample.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

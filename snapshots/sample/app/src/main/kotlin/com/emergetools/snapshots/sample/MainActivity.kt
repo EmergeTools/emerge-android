@@ -9,17 +9,17 @@ import com.emergetools.snapshots.sample.ui.TextRowWithIcon
 
 class MainActivity : ComponentActivity() {
 
-	override fun onCreate(savedInstanceState: Bundle?) {
-		super.onCreate(savedInstanceState)
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
 
-		setContent {
-			Column {
-				Greeting("Snapshots sample")
-				TextRowWithIcon(
-					titleText = "TextRow title",
-					subtitleText = "TextRow subtitle"
-				)
-			}
-		}
-	}
+    setContent {
+      Column {
+        Greeting("Snapshots sample")
+        TextRowWithIcon(
+          titleText = "TextRow title",
+          subtitleText = "TextRow subtitle"
+        )
+      }
+    }
+  }
 }

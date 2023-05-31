@@ -10,3 +10,7 @@ formatting:
     insertFinalNewLine: true
   MaximumLineLength:
     maxLineLength: 100
+
+naming:
+  FunctionNaming:
+    functionPattern: '[a-zA-Z][a-zA-Z0-9]*'

@@ -17,98 +17,97 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.writeTo
 
 class PreviewProcessor(
-	private val environment: SymbolProcessorEnvironment,
+  private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
 
-	private val logger = environment.logger
+  private val logger = environment.logger
 
-	override fun process(resolver: Resolver): List<KSAnnotated> {
+  override fun process(resolver: Resolver): List<KSAnnotated> {
+    val previewFunctions = resolver
+      .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
+      .filterIsInstance<KSFunctionDeclaration>()
 
-		val previewFunctions = resolver
-			.getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
-			.filterIsInstance<KSFunctionDeclaration>()
+    val codeGenerator = environment.codeGenerator
+    previewFunctions.forEach { previewFunction ->
+      // Intentionally skipping functions with parameters for now.
+      if (previewFunction.parameters.isNotEmpty()) {
+        logger.info("Skipping ${previewFunction.simpleName.asString()} because it has parameters")
+        return@forEach
+      }
+      generateEmergeSnapshotTest(codeGenerator, previewFunction)
+    }
+    return emptyList()
+  }
 
-		val codeGenerator = environment.codeGenerator
-		previewFunctions.forEach { previewFunction ->
-			// Intentionally skipping functions with parameters for now.
-			if (previewFunction.parameters.isNotEmpty()) {
-				logger.info("Skipping ${previewFunction.simpleName.asString()} because it has parameters")
-				return@forEach
-			}
-			generateEmergeSnapshotTest(codeGenerator, previewFunction)
-		}
-		return emptyList()
-	}
+  private fun generateEmergeSnapshotTest(
+    codeGenerator: CodeGenerator,
+    previewFunction: KSFunctionDeclaration,
+  ) {
+    val packageName = previewFunction.containingFile!!.packageName.asString()
+    val functionName = previewFunction.simpleName.asString()
+    val testClassName = "${functionName}_EmergeSnapshot"
 
-	private fun generateEmergeSnapshotTest(
-		codeGenerator: CodeGenerator,
-		previewFunction: KSFunctionDeclaration,
-	) {
-		val packageName = previewFunction.containingFile!!.packageName.asString()
-		val functionName = previewFunction.simpleName.asString()
-		val testClassName = "${functionName}_EmergeSnapshot"
+    val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
+      .build()
 
-		val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
-			.build()
+    val ruleAnnotation = AnnotationSpec.builder(JUNIT_RULE_ANNOTATION_CLASSNAME)
+      .useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
+      .build()
 
-		val ruleAnnotation = AnnotationSpec.builder(JUNIT_RULE_ANNOTATION_CLASSNAME)
-			.useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
-			.build()
+    val snapshotsRuleProperty =
+      PropertySpec.builder("snapshots", ClassName("com.emergetools.snapshots", "EmergeSnapshots"))
+        .initializer("EmergeSnapshots()")
+        .addAnnotation(ruleAnnotation)
+        .build()
 
-		val snapshotsRuleProperty =
-			PropertySpec.builder("snapshots", ClassName("com.emergetools.snapshots", "EmergeSnapshots"))
-				.initializer("EmergeSnapshots()")
-				.addAnnotation(ruleAnnotation)
-				.build()
+    val funSpec = FunSpec.builder("${functionName}EmergeSnapshot")
+      .addAnnotation(testAnnotation)
+      .addStatement("composeRule.setContent { $functionName() }")
+      .addStatement("snapshots.take(\"$functionName\", composeRule)")
+      .build()
 
-		val funSpec = FunSpec.builder("${functionName}EmergeSnapshot")
-			.addAnnotation(testAnnotation)
-			.addStatement("composeRule.setContent { $functionName() }")
-			.addStatement("snapshots.take(\"$functionName\", composeRule)")
-			.build()
+    val composeRuleProperty =
+      PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME)
+        .addAnnotation(ruleAnnotation)
+        .initializer("%T()", ClassName("androidx.compose.ui.test.junit4", "createComposeRule"))
+        .build()
 
-		val composeRuleProperty =
-			PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME)
-				.addAnnotation(ruleAnnotation)
-				.initializer("%T()", ClassName("androidx.compose.ui.test.junit4", "createComposeRule"))
-				.build()
+    val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
+      .addMember("%T::class", ANDROID_JUNIT_RUNNER_CLASSNAME)
+      .build()
 
-		val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
-			.addMember("%T::class", ANDROID_JUNIT_RUNNER_CLASSNAME)
-			.build()
+    val typeSpec = TypeSpec.classBuilder(testClassName)
+      .addFunction(funSpec)
+      .addAnnotation(testRunnerAnnotation)
+      .addProperty(composeRuleProperty)
+      .addProperty(snapshotsRuleProperty)
+      .build()
 
-		val typeSpec = TypeSpec.classBuilder(testClassName)
-			.addFunction(funSpec)
-			.addAnnotation(testRunnerAnnotation)
-			.addProperty(composeRuleProperty)
-			.addProperty(snapshotsRuleProperty)
-			.build()
+    val fileSpec = FileSpec.builder(packageName, testClassName)
+      .addType(typeSpec)
+      .addImport("androidx.compose.runtime", "Composable")
+      .build()
 
-		val fileSpec = FileSpec.builder(packageName, testClassName)
-			.addType(typeSpec)
-			.addImport("androidx.compose.runtime", "Composable")
-			.build()
+    fileSpec.writeTo(codeGenerator, Dependencies(false))
+  }
 
-		fileSpec.writeTo(codeGenerator, Dependencies(false))
-	}
+  companion object {
+    private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
+      "androidx.compose.ui.tooling.preview.Preview"
 
-	companion object {
-		private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
-			"androidx.compose.ui.tooling.preview.Preview"
+    private val COMPOSE_CONTENT_TEST_RULE_CLASSNAME =
+      ClassName("androidx.compose.ui.test.junit4", "ComposeContentTestRule")
 
-		private val COMPOSE_CONTENT_TEST_RULE_CLASSNAME =
-			ClassName("androidx.compose.ui.test.junit4", "ComposeContentTestRule")
-
-		private val ANDROID_JUNIT_RUNNER_CLASSNAME =
-			ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
-		private val JUNIT_TEST_ANNOTATION_CLASSNAME = ClassName("org.junit", "Test")
-		private val JUNIT_RULE_ANNOTATION_CLASSNAME = ClassName("org.junit", "Rule")
-	}
+    private val ANDROID_JUNIT_RUNNER_CLASSNAME =
+      ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
+    private val JUNIT_TEST_ANNOTATION_CLASSNAME = ClassName("org.junit", "Test")
+    private val JUNIT_RULE_ANNOTATION_CLASSNAME = ClassName("org.junit", "Rule")
+  }
 }
 
 class PreviewProcessorProvider : SymbolProcessorProvider {
 
-	override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
-		return PreviewProcessor(environment)
-	}
+  override fun create(environment: SymbolProcessorEnvironment): SymbolProcessor {
+    return PreviewProcessor(environment)
+  }
 }

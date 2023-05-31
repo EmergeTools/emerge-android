@@ -7,27 +7,27 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
 fun TextRowWithIcon(
-	titleText: String,
-	subtitleText: String?,
+  titleText: String,
+  subtitleText: String?,
 ) {
-	Column {
-		Text(
-			text = titleText,
-		)
-		subtitleText?.let {
-			Text(
-				text = subtitleText,
-			)
-		}
-	}
+  Column {
+    Text(
+      text = titleText,
+    )
+    subtitleText?.let {
+      Text(
+        text = subtitleText,
+      )
+    }
+  }
 }
 
 // Should not be snapshotted as this is in the main sourceSet
 @Preview
 @Composable
 fun TextRowWithIconPreview() {
-	TextRowWithIcon(
-		titleText = "Title",
-		subtitleText = "Subtitle"
-	)
+  TextRowWithIcon(
+    titleText = "Title",
+    subtitleText = "Subtitle"
+  )
 }
