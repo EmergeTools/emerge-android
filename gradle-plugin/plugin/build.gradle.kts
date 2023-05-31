@@ -14,7 +14,7 @@ plugins {
 }
 
 group = "com.emergetools"
-version = "2.0.0-alpha01"
+version = "2.0.0-alpha02"
 
 val perfProjectTemplateResDir = File(buildDir, "generated/performance-project-template/")
 

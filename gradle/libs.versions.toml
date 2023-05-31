@@ -24,6 +24,7 @@ kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 gradle-publish = { id = "com.gradle.plugin-publish", version = "0.20.0" }
+grgit = { id = "org.ajoberstar.grgit", version = "5.0.0" }
 
 [libraries]
 android-gradle-plugin = "com.android.tools.build:gradle:7.3.1"

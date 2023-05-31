@@ -6,7 +6,6 @@ import org.gradle.api.logging.Logger
 import java.nio.file.Files
 import java.nio.file.Path
 
-// TODO: Let's clean this up a bit
 class AdbHelper(
   private val logger: Logger,
   private val path: Path = Path.of("${System.getenv("ANDROID_HOME")}/platform-tools/adb"),
@@ -45,7 +44,6 @@ class AdbHelper(
 
   fun exec(args: List<String>): String? {
     val command = "$path ${args.joinToString(" ")}"
-		logger.lifecycle("Executing command: $command")
     return command.execute().trimmedText
   }
 }

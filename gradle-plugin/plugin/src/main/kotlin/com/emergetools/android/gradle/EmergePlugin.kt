@@ -58,7 +58,8 @@ class EmergePlugin : Plugin<Project> {
         val appProjectPath = emergeExtension.appProjectPath
         val appProject = checkNotNull(
           project.subprojects.find { subProject ->
-            subProject.path.substringAfter(rootProject.path) == appProjectPath.get()
+            subProject.path.substringAfter(rootProject.path)
+              .removePrefix(":") == appProjectPath.get().removePrefix(":")
           }
         ) {
           "Did not find appProjectPath \"${emergeExtension.appProjectPath.get()}\""
@@ -445,7 +446,6 @@ class EmergePlugin : Plugin<Project> {
     private const val EMERGE_EXTENSION_NAME = "emerge"
     private const val EMERGE_TASK_PREFIX = "emerge"
     private const val EMERGE_TASK_GROUP = "Emerge"
-    // TODO: Size/perf/snapshot tasks should be in their own group.
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"

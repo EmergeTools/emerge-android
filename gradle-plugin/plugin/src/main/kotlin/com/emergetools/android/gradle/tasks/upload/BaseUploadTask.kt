@@ -130,7 +130,7 @@ abstract class BaseUploadTask : DefaultTask() {
     ) {
       null
     } else {
-      "${gitHubRepoName.get()}/${gitHubRepoOwner.get()}"
+      "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
     }
 
     val uploadRequestData = EmergeUploadRequestData(

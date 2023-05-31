@@ -10,7 +10,7 @@ android {
 
   defaultConfig {
     applicationId = "com.emergetools.snapshots.sample"
-    minSdk = 26
+    minSdk = 23
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"
@@ -41,7 +41,7 @@ android {
   }
 
   kotlinOptions {
-    jvmTarget = "17"
+    jvmTarget = JavaVersion.VERSION_17.toString()
   }
 
   buildFeatures {

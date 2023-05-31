@@ -14,11 +14,11 @@ android {
   }
 
   kotlinOptions {
-    jvmTarget = "17"
+    jvmTarget = JavaVersion.VERSION_17.toString()
   }
 
   defaultConfig {
-    minSdk = 26
+    minSdk = 23
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 

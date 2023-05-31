@@ -2,7 +2,7 @@
 
 An all-in-one Android screenshot testing solution.
 
-**⚠️ Emerge snapshots are currently in an experimental state and is subject to breaking changes.**
+**⚠️ Emerge snapshots are currently in an experimental state and are subject to breaking changes.**
 
 ## Features
 
@@ -19,10 +19,25 @@ plugins {
   id("com.emergetools.android") version "2.0.0-alpha01"
 }
 
+android {
+
+  buildTypes {
+    ...
+    // Add generated sources to the `androidTest` sourceSet.
+    debug {
+      sourceSets {
+        getByName("androidTest") {
+          java.srcDir("generated/ksp/debugAndroidTest/kotlin")
+        }
+      }
+    }
+  }
+}
+
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.1.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.1.1")
   // For Compose @Preview support:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.1.0")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.1.1")
 }
 ```
 
@@ -96,7 +111,7 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-alpha01"
+  id("com.emergetools.android") version "2.0.0-alpha02"
 }
 
 emerge {

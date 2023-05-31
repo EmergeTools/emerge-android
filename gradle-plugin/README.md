@@ -28,8 +28,7 @@ In your root project's `build.gradle(.kts)`:
 
 ```kotlin build.gradle.kts (root)
 plugins {
-  // …
-  id("com.emergetools.android") version "2.0.0-alpha01"
+  id("com.emergetools.android") version "2.0.0-alpha02"
 }
 
 emerge {
@@ -304,7 +303,7 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub
-1. Tag version `vX.Y.Z`
-2. Release title `vX.Y.Z`
-3. Paste the content from `CHANGELOG.md` as the description
+  1. Tag version `vX.Y.Z`
+  2. Release title `vX.Y.Z`
+  3. Paste the content from `CHANGELOG.md` as the description
 7. `./gradlew publishPlugins`
