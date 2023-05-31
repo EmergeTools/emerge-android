@@ -165,11 +165,9 @@ tasks.withType<Wrapper> {
 	distributionType = Wrapper.DistributionType.ALL
 }
 
-val localProperties = Properties().apply {
-	load(project.file("local.properties").reader())
-}
+val emergeBaseUrl: String? by project
 
-val baseUrl = localProperties["emergeBaseUrl"] ?: "https://api.emergetools.com"
+val baseUrl = emergeBaseUrl ?: "https://api.emergetools.com"
 buildConfig {
 	packageName("com.emergetools.android.gradle")
 	useKotlinOutput()

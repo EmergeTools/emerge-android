@@ -1,4 +1,4 @@
-name: Unit tests
+name: Gradle-plugin tests
 
 on:
   push:
@@ -62,17 +62,3 @@ jobs:
         with:
           report_paths: '**/build/reports/tests/functionalTest/*.xml'
 
-  detekt:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDKs
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: |
-            17
-            11
-      - name: Run Detekt
-        run: ./gradlew detekt
