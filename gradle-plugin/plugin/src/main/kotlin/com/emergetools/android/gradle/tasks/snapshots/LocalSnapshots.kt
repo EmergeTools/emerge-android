@@ -76,7 +76,7 @@ abstract class LocalSnapshots : DefaultTask() {
 				"false",
 				"-e",
 				"runnerBuilder",
-				"com.emergetools.snapshots.SnapshotsRunnerBuilder",
+				"com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
 				"${testAppId}/${testInstrumentationRunner.get()}"
 			)
 

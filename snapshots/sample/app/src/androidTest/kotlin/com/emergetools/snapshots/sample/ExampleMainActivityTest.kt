@@ -1,9 +1,8 @@
-package com.emergetools.snapshots.sample.ui
+package com.emergetools.snapshots.sample
 
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.emergetools.snapshots.EmergeSnapshots
-import com.emergetools.snapshots.sample.MainActivity
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith

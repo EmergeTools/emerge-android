@@ -29,6 +29,16 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = "1.4.7"
   }
+
+  buildTypes {
+    debug {
+      sourceSets {
+        getByName("androidTest") {
+          java.srcDir("generated/ksp/debugAndroidTest/kotlin")
+        }
+      }
+    }
+  }
 }
 
 dependencies {

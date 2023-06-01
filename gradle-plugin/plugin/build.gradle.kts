@@ -1,6 +1,5 @@
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import java.util.Properties
 
 plugins {
 	alias(libs.plugins.gradle.publish)
@@ -14,7 +13,7 @@ plugins {
 }
 
 group = "com.emergetools"
-version = "2.0.0-alpha02"
+version = libs.versions.emerge.gradle.plugin.get()
 
 val perfProjectTemplateResDir = File(buildDir, "generated/performance-project-template/")
 

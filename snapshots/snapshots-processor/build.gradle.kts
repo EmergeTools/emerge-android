@@ -11,7 +11,7 @@ plugins {
 }
 
 group = "com.emergetools.snapshots"
-version = "0.1.1"
+version = libs.versions.emerge.snapshots.get()
 
 var metaInfResDir = File(buildDir, "generated/emerge/")
 var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
