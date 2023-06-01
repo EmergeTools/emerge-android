@@ -1,13 +1,13 @@
-# 🛰️ Emerge Snapshots
+# 🛰️ Emerge Snapshot Testing
 
-An all-in-one Android screenshot testing solution.
+An all-in-one Android snapshot testing solution.
 
 **⚠️ Emerge snapshots are currently in an experimental state and are subject to breaking changes.**
 
 ## Features
 
 - Automatically generate snapshots of composable previews.
-- Built-in support for Activity & View screenshotting.
+- Built-in support for Activity & View snapshotting.
 - Gradle plugin for easy setup & helper tasks (see below for full documentation).
 
 ## Quickstart
@@ -41,10 +41,8 @@ dependencies {
 }
 ```
 
-Emerge snapshots leverages a KSP compiler plugin to generate screenshot tests for your compose
-previews.
-
-By design, Emerge snapshots is intended to generate previews from the `androidTest` sourceSet. This
+A KSP compiler plugin is leveraged to automatically generate snapshot tests for your compose
+previews. By design, snapshots are only generated from the `androidTest` sourceSet. This
 is so snapshot tests are explicitly separate from application code.
 
 ### Compose
@@ -67,14 +65,11 @@ all `@Preview` annotated functions in the `androidTest` sourceSet.
 We recommend creating `@Preview` functions in the `androidTest` sourceSet that depend directly on
 composables located in your `main` sourceSet.
 
-_Emerge snapshots currently only support no-arg `@Preview` annotated composables._
-
-_Emerge snapshots currently do not handle configuration specified in `@Preview` annotation
-parameters._
+_⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are supported._
 
 ### Activities & Views
 
-Create a simple test class that uses the `EmergeSnapshot` rule to generate screenshots.
+Create a basic test class that uses the `EmergeSnapshot` rule to generate snapshots.
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)
@@ -102,11 +97,11 @@ class MainActivityTest {
 }
 ```
 
-_Each `name` must be unique as it's used as the primary key for saving & diffing._
+_Each `name` parameter must be unique as it's used as the primary key for saving & diffing._
 
 ## Gradle plugin
 
-The Emerge Gradle plugin provides a simple task to generate snapshots locally for snapshot tests.
+The Emerge Gradle plugin provides a task to generate snapshots locally for snapshot tests.
 Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
@@ -127,7 +122,7 @@ emerge {
 
 _Snapshot support was added in 2.0.0, versions below 2.X do not support snapshots._
 
-Then run the `emergeLocalSnapshots<variant>` task to generate snapshots. You'll need a connected
+Then, run the `emergeLocalSnapshots<variant>` task to generate snapshots. You'll need a connected
 device or emulator actively running.
 
 ```shell
