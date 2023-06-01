@@ -55,7 +55,7 @@ class PreviewProcessor(
       .build()
 
     val snapshotsRuleProperty =
-      PropertySpec.builder("snapshots", ClassName("com.emergetools.snapshots", "EmergeSnapshots"))
+      PropertySpec.builder("snapshots", EMERGE_SNAPSHOTS_CLASSNAME)
         .initializer("EmergeSnapshots()")
         .addAnnotation(ruleAnnotation)
         .build()
@@ -69,7 +69,7 @@ class PreviewProcessor(
     val composeRuleProperty =
       PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME)
         .addAnnotation(ruleAnnotation)
-        .initializer("%T()", ClassName("androidx.compose.ui.test.junit4", "createComposeRule"))
+        .initializer("%T()", CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME)
         .build()
 
     val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
@@ -95,8 +95,13 @@ class PreviewProcessor(
     private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
       "androidx.compose.ui.tooling.preview.Preview"
 
+    private val EMERGE_SNAPSHOTS_CLASSNAME =
+      ClassName("com.emergetools.snapshots", "EmergeSnapshots")
+
     private val COMPOSE_CONTENT_TEST_RULE_CLASSNAME =
       ClassName("androidx.compose.ui.test.junit4", "ComposeContentTestRule")
+    private val CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME =
+      ClassName("androidx.compose.ui.test.junit4", "createComposeRule")
 
     private val ANDROID_JUNIT_RUNNER_CLASSNAME =
       ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
