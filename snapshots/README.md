@@ -16,7 +16,7 @@ Add the Emerge Gradle plugin and `androidTest` dependencies to your application 
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-alpha01"
+  id("com.emergetools.android") version "2.0.0-alpha02"
 }
 
 android {
@@ -35,9 +35,9 @@ android {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.1.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.2.0")
   // For Compose @Preview support:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.1.1")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.2.0")
 }
 ```
 
