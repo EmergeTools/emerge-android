@@ -35,9 +35,9 @@ android {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.2.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.3.0")
   // For Compose @Preview support:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.2.0")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.3.0")
 }
 ```
 
