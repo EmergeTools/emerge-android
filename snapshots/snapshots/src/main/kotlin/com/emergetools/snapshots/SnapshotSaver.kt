@@ -107,12 +107,12 @@ internal object SnapshotSaver {
     val keyName = userDefinedName.replace(Regex("\\s"), "_") // replace spaces with underscore
       .lowercase()
 
-    if (keyName.length <= MAX_FILENAME_LENGTH) return keyName
+    if (keyName.length <= MAX_NAME_LENGTH) return keyName
     // If the string is still too long, shorten to 32 characters
-    return keyName.substring(0, MAX_FILENAME_LENGTH)
+    return keyName.substring(0, MAX_NAME_LENGTH)
   }
 
-  private const val MAX_FILENAME_LENGTH = 32
+  private const val MAX_NAME_LENGTH = 32
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }
