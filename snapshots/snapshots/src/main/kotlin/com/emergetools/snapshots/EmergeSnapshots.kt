@@ -33,6 +33,7 @@ class EmergeSnapshots : TestRule {
     bitmap = Screenshot.capture(view).bitmap,
     testClass = testClass,
     testMethod = testName,
+    type = SnapshotType.VIEW,
   )
 
   fun take(
@@ -43,6 +44,7 @@ class EmergeSnapshots : TestRule {
     bitmap = Screenshot.capture(activity).bitmap,
     testClass = testClass,
     testMethod = testName,
+    type = SnapshotType.ACTIVITY,
   )
 
   fun take(
@@ -55,6 +57,7 @@ class EmergeSnapshots : TestRule {
       bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
       testClass = testClass,
       testMethod = testName,
+      type = SnapshotType.COMPOSABLE,
     )
   }
 }

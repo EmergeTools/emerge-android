@@ -30,52 +30,57 @@ internal object SnapshotSaver {
     bitmap: Bitmap,
     testClass: String,
     testMethod: String,
+    type: SnapshotType,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
     }
 
-    val safeFileName = safeFilename(name)
-    saveImage(snapshotsDir, safeFileName, bitmap)
+    val keyName = keyName(name)
+    saveImage(snapshotsDir, keyName, bitmap)
     if (
       args.getBoolean(ARG_KEY_SAVE_METADATA, false) ||
       args.getString(ARG_KEY_SAVE_METADATA, "false").toBoolean()
     ) {
       saveMetadata(
         snapshotsDir = snapshotsDir,
-        userSpecifiedName = name,
-        filename = safeFileName,
+        displayName = name,
+        keyName = keyName,
         testClass = testClass,
         testMethod = testMethod,
+        type = type,
       )
     }
   }
 
   private fun saveImage(
     snapshotsDir: File,
-    filename: String,
+    keyName: String,
     bitmap: Bitmap,
   ) {
-    saveFile(snapshotsDir, "$filename.png") {
+    saveFile(snapshotsDir, "$keyName$PNG_EXTENSION") {
       bitmap.compress(Bitmap.CompressFormat.PNG, DEFAULT_PNG_QUALITY, this)
     }
   }
 
   private fun saveMetadata(
     snapshotsDir: File,
-    userSpecifiedName: String,
-    filename: String,
+    displayName: String,
+    keyName: String,
     testClass: String,
     testMethod: String,
+    type: SnapshotType,
   ) {
     val metadata = SnapshotImageMetadata(
-      userSpecifiedName = userSpecifiedName,
-      filename = "$filename.png",
+      displayName = displayName,
+      keyName = keyName,
+      filename = "$keyName$PNG_EXTENSION",
       testClass = testClass,
       testMethod = testMethod,
+      type = type,
     )
-    saveFile(snapshotsDir, "$filename.json") {
+    saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(metadata.toJsonString().toByteArray(Charset.defaultCharset()))
     }
   }
@@ -93,15 +98,21 @@ internal object SnapshotSaver {
     outputFile.outputStream().use { writer(it) }
   }
 
-  private fun safeFilename(userDefinedName: String): String {
+  /**
+   * Normalize the user defined name to a key name that can be used as a filename and for
+   * later indexing when comparing screenshots.
+   */
+  private fun keyName(userDefinedName: String): String {
     // Replace spaces with underscores and lowercase the string
-    val safeFilename = userDefinedName.replace(Regex("\\s"), "_") // replace spaces with underscore
+    val keyName = userDefinedName.replace(Regex("\\s"), "_") // replace spaces with underscore
       .lowercase()
 
-    if (safeFilename.length <= MAX_FILENAME_LENGTH) return safeFilename
+    if (keyName.length <= MAX_FILENAME_LENGTH) return keyName
     // If the string is still too long, shorten to 32 characters
-    return safeFilename.substring(0, MAX_FILENAME_LENGTH)
+    return keyName.substring(0, MAX_FILENAME_LENGTH)
   }
 
   private const val MAX_FILENAME_LENGTH = 32
+  private const val PNG_EXTENSION = ".png"
+  private const val JSON_EXTENSION = ".json"
 }
