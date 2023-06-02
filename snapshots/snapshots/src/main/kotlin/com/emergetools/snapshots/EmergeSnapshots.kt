@@ -13,15 +13,13 @@ import org.junit.runners.model.Statement
 
 class EmergeSnapshots : TestRule {
 
-  private lateinit var testClass: String
-  private lateinit var testName: String
+  private lateinit var fqn: String
 
   override fun apply(
     base: Statement,
     description: Description,
   ): Statement {
-    testClass = description.className
-    testName = description.methodName
+    fqn = "${description.className}.${description.methodName}"
     return base
   }
 
@@ -29,10 +27,9 @@ class EmergeSnapshots : TestRule {
     name: String,
     view: View,
   ) = SnapshotSaver.save(
-    name = name,
+    displayName = name,
     bitmap = Screenshot.capture(view).bitmap,
-    testClass = testClass,
-    testMethod = testName,
+    fqn = fqn,
     type = SnapshotType.VIEW,
   )
 
@@ -40,10 +37,9 @@ class EmergeSnapshots : TestRule {
     name: String,
     activity: Activity,
   ) = SnapshotSaver.save(
-    name = name,
+    displayName = name,
     bitmap = Screenshot.capture(activity).bitmap,
-    testClass = testClass,
-    testMethod = testName,
+    fqn = fqn,
     type = SnapshotType.ACTIVITY,
   )
 
@@ -53,10 +49,9 @@ class EmergeSnapshots : TestRule {
   ) {
     composeTestRule.waitForIdle()
     SnapshotSaver.save(
-      name = name,
+      displayName = name,
       bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
-      testClass = testClass,
-      testMethod = testName,
+      fqn = fqn,
       type = SnapshotType.COMPOSABLE,
     )
   }

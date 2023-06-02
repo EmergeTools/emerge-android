@@ -10,8 +10,7 @@ internal data class SnapshotImageMetadata(
   val keyName: String,
   val displayName: String,
   val filename: String,
-  val testClass: String,
-  val testMethod: String,
+  val fqn: String,
   val type: SnapshotType,
 ) {
 
@@ -22,8 +21,7 @@ internal data class SnapshotImageMetadata(
       "keyName": "$keyName",
       "displayName": "$displayName",
       "filename": "$filename",
-      "testClass": "$testClass",
-      "testMethod": "$testMethod",
+      "fqn": "$fqn",
       "type": "$type"
     }
     """.trimIndent()

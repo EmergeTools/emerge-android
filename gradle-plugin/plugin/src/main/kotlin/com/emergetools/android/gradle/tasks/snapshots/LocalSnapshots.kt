@@ -77,6 +77,10 @@ abstract class LocalSnapshots : DefaultTask() {
 				"-e",
 				"runnerBuilder",
 				"com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
+        "-e",
+        "save_metadata",
+        "true",
+        //  TODO: Arg for metadata
 				"${testAppId}/${testInstrumentationRunner.get()}"
 			)
 

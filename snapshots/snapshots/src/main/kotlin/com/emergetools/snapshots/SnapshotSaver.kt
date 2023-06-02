@@ -26,10 +26,9 @@ internal object SnapshotSaver {
     get() = InstrumentationRegistry.getArguments()
 
   fun save(
-    name: String,
+    displayName: String,
     bitmap: Bitmap,
-    testClass: String,
-    testMethod: String,
+    fqn: String,
     type: SnapshotType,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
@@ -37,19 +36,25 @@ internal object SnapshotSaver {
       error("Unable to create snapshots storage directory.")
     }
 
-    val keyName = keyName(name)
-    saveImage(snapshotsDir, keyName, bitmap)
+    val keyName = keyName(
+      displayName = displayName,
+      fqn = fqn
+    )
+    saveImage(
+      snapshotsDir = snapshotsDir,
+      keyName = keyName,
+      bitmap = bitmap
+    )
     if (
       args.getBoolean(ARG_KEY_SAVE_METADATA, false) ||
       args.getString(ARG_KEY_SAVE_METADATA, "false").toBoolean()
     ) {
       saveMetadata(
         snapshotsDir = snapshotsDir,
-        displayName = name,
+        displayName = displayName,
         keyName = keyName,
-        testClass = testClass,
-        testMethod = testMethod,
         type = type,
+        fqn = fqn,
       )
     }
   }
@@ -68,16 +73,14 @@ internal object SnapshotSaver {
     snapshotsDir: File,
     displayName: String,
     keyName: String,
-    testClass: String,
-    testMethod: String,
+    fqn: String,
     type: SnapshotType,
   ) {
     val metadata = SnapshotImageMetadata(
       displayName = displayName,
       keyName = keyName,
       filename = "$keyName$PNG_EXTENSION",
-      testClass = testClass,
-      testMethod = testMethod,
+      fqn = fqn,
       type = type,
     )
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
@@ -99,12 +102,16 @@ internal object SnapshotSaver {
   }
 
   /**
-   * Normalize the user defined name to a key name that can be used as a filename and for
-   * later indexing when comparing screenshots.
+   * Normalize the user defined & fully qualified name to be used as a filename/key for comparisons.
+   * This ensures uniqueness across test classes and methods & user-defined names.
    */
-  private fun keyName(userDefinedName: String): String {
-    // Replace spaces with underscores and lowercase the string
-    val keyName = userDefinedName.replace(Regex("\\s"), "_") // replace spaces with underscore
+  private fun keyName(
+    displayName: String,
+    fqn: String,
+  ): String {
+    val combined = "${fqn.take(FQN_TRIM_LENGTH)}_${displayName.take(DISPLAY_NAME_TRIM_LENGTH)}"
+    // Replace spaces & periods with underscores and lowercase the string
+    val keyName = combined.replace(Regex("[ .]"), "_")
       .lowercase()
 
     if (keyName.length <= MAX_NAME_LENGTH) return keyName
@@ -112,7 +119,9 @@ internal object SnapshotSaver {
     return keyName.substring(0, MAX_NAME_LENGTH)
   }
 
-  private const val MAX_NAME_LENGTH = 32
+  private const val MAX_NAME_LENGTH = 64
+  private const val FQN_TRIM_LENGTH = 31
+  private const val DISPLAY_NAME_TRIM_LENGTH = 32
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }
