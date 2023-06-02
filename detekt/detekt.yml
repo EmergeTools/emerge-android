@@ -3,6 +3,10 @@ config:
   warningsAsErrors: false
   excludes: ''
 
+complexity:
+  LongParameterList:
+    functionThreshold: 8
+
 formatting:
   Indentation:
     indentSize: 2

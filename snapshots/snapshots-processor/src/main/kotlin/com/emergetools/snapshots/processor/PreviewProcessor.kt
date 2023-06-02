@@ -45,7 +45,7 @@ class PreviewProcessor(
   ) {
     val packageName = previewFunction.containingFile!!.packageName.asString()
     val functionName = previewFunction.simpleName.asString()
-    val testClassName = "${functionName}_EmergeSnapshot"
+    val testClassName = "${functionName}_GeneratedSnapshot"
 
     val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
       .build()
@@ -60,7 +60,7 @@ class PreviewProcessor(
         .addAnnotation(ruleAnnotation)
         .build()
 
-    val funSpec = FunSpec.builder("${functionName}EmergeSnapshot")
+    val funSpec = FunSpec.builder("${functionName}_Generated")
       .addAnnotation(testAnnotation)
       .addStatement("composeRule.setContent { $functionName() }")
       .addStatement("snapshots.take(\"$functionName\", composeRule)")
