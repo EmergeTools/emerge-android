@@ -36,10 +36,7 @@ internal object SnapshotSaver {
       error("Unable to create snapshots storage directory.")
     }
 
-    val keyName = keyName(
-      displayName = displayName,
-      fqn = fqn
-    )
+    val keyName = keyName(displayName)
     saveImage(
       snapshotsDir = snapshotsDir,
       keyName = keyName,
@@ -102,16 +99,15 @@ internal object SnapshotSaver {
   }
 
   /**
-   * Normalize the user defined & fully qualified name to be used as a filename/key for comparisons.
+   * Normalize the user defined name to be used as a filename/key for comparisons.
    * This ensures uniqueness across test classes and methods & user-defined names.
+   *
+   * We intentionally don't account for FQN here as we still want to diff an image if
+   * the test might move packages, which user-defined name ensures.
    */
-  private fun keyName(
-    displayName: String,
-    fqn: String,
-  ): String {
-    val combined = "${fqn.take(FQN_TRIM_LENGTH)}_${displayName.take(DISPLAY_NAME_TRIM_LENGTH)}"
+  private fun keyName(displayName: String): String {
     // Replace spaces & periods with underscores and lowercase the string
-    val keyName = combined.replace(Regex("[ .]"), "_")
+    val keyName = displayName.replace(Regex("[ .]"), "_")
       .lowercase()
 
     if (keyName.length <= MAX_NAME_LENGTH) return keyName
