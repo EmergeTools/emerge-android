@@ -1,0 +1,40 @@
+name: snapshots-processor checks
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+    paths:
+      - snapshots/**
+      - snapshots-processor/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 17
+      - name: Run build
+        run: ./gradlew :snapshots:snapshots-processor:build
+
+  unit_tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDKs
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'adopt'
+          java-version: 17
+      - name: Run unit tests
+        run: ./gradlew :snapshots:snapshots-processor:test
