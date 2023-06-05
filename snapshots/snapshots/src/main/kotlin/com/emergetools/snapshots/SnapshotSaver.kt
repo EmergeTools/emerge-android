@@ -116,8 +116,6 @@ internal object SnapshotSaver {
   }
 
   private const val MAX_NAME_LENGTH = 64
-  private const val FQN_TRIM_LENGTH = 31
-  private const val DISPLAY_NAME_TRIM_LENGTH = 32
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }
