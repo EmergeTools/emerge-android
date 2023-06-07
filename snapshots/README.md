@@ -16,13 +16,14 @@ Add the Emerge Gradle plugin and `androidTest` dependencies to your application 
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-alpha02"
+  id("com.emergetools.android") version "2.0.0-beta01"
+  // For Compose @Preview snapshot generation:
+  id("com.google.devtools.ksp")
 }
 
 android {
 
   buildTypes {
-    ...
     // Add generated sources to the `androidTest` sourceSet.
     debug {
       sourceSets {
@@ -35,9 +36,9 @@ android {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.3.0")
-  // For Compose @Preview support:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.3.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.0")
+  // For Compose @Preview snapshot generation:
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.4.0")
 }
 ```
 
@@ -47,7 +48,7 @@ is so snapshot tests are explicitly separate from application code.
 
 ### Compose
 
-Add compose `@Preview` annotated methods to your `androidTest` sourceSet.
+Add compose `@Preview` annotated methods directly to your `androidTest` sourceSet.
 
 ```kotlin
 @Preview
@@ -106,7 +107,7 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-alpha02"
+  id("com.emergetools.android") version "2.0.0-beta01"
 }
 
 emerge {

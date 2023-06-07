@@ -28,7 +28,7 @@ In your root project's `build.gradle(.kts)`:
 
 ```kotlin build.gradle.kts (root)
 plugins {
-  id("com.emergetools.android") version "2.0.0-alpha02"
+  id("com.emergetools.android") version "2.0.0-beta01"
 }
 
 emerge {
@@ -53,22 +53,22 @@ file. The example in this guide uses the `EMERGE_API_TOKEN` environment variable
 
 ### VCS
 
-Emerge is designed to work as part of your CI workflow for diffing and comparing size, performance
-and snapshots. To ensure these comparisons are accurate, Emerge leverages VCS information to
-accurately determine the proper comparison builds.
+Emerge is best designed to work as part of your CI workflow for diffing and comparing size,
+performance and snapshots. To ensure these comparisons are accurate, Emerge leverages VCS
+information to accurately determine the proper comparison builds.
 
 #### Configuration
 
-By default, necessary Git values are set automatically for you. If you need to override these
+**By default, necessary Git values are set automatically for you.** If you need to override these
 values, you can do so using the `vcs` extension.
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   vcs {
-    sha.set("...")
-    baseSha.set("...")
+    sha.set("..")
+    baseSha.set("..")
     branchName.set("my-feature")
     prNumber.set("123")
   }
@@ -77,21 +77,21 @@ emerge {
 
 #### GitHub
 
-The GitHub sub-extension can be used to set GitHub-specific values. These are set automatically for
-you if not specified using repoId information from Git's remoteUrl.
+The GitHub sub-extension can be used to set GitHub-specific values. These are set automatically
+using `repoId` information from Git's remoteUrl for you if not specified.
 
 These are used for CI integrations, like posting GitHub comments and status checks.
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   vcs {
-    ...
+    ..
 
     gitHub {
-      repoOwner.set("...")
-      repoName.set("...")
+      repoOwner.set("..")
+      repoName.set("..")
     }
   }
 }
@@ -104,31 +104,31 @@ are not set automatically and will need to be set manually for GitLab CI integra
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   vcs {
-    ...
+    ..
 
     gitLab {
-      projectId.set("...")
+      projectId.set("..")
     }
   }
 }
 ```
 
-##### Fields
+##### Properties
 
-| Field                | Type     | Default                | Description                                       |
-|----------------------|----------|------------------------|---------------------------------------------------|
-| `sha`                | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                    |
-| `baseSha`            | `String` | base branch commit sha | The Git sha of the base build to compare against. |
-| `branchName`         | `String` | Current branch name    | The name of the branch being built.               |
-| `prNumber`           | `String` |                        | The number of the pull request being built.       |
-| `gitHub.repoOwner`   | `String` | Repo ID before '/'     | The owner of the GitHub repository.               |
-| `gitHub.repoName`    | `String` | Repo ID after '/'      | The name of the GitHub repository.                |
-| `gitLab.[projectId]` | `String` |                        | The ID of the GitLab repository.                  |
+| Field              | Type     | Default                | Description                                       |
+|--------------------|----------|------------------------|---------------------------------------------------|
+| `sha`              | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                    |
+| `baseSha`          | `String` | base branch commit sha | The Git sha of the base build to compare against. |
+| `branchName`       | `String` | Current branch name    | The name of the branch being built.               |
+| `prNumber`         | `String` |                        | The number of the pull request being built.       |
+| `gitHub.repoOwner` | `String` | Repo ID before '/'     | The owner of the GitHub repository.               |
+| `gitHub.repoName`  | `String` | Repo ID after '/'      | The name of the GitHub repository.                |
+| `gitLab.projectId` | `String` |                        | The ID of the GitLab repository.                  |
 
-### App size
+## App size
 
 #### Tasks
 
@@ -143,7 +143,7 @@ The `size` extension allows you to configure size-specific fields.
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   size {
     buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
@@ -176,11 +176,11 @@ Additionally, the `performance` extension allows you to configure perf-specific 
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   performance {
-    perfProjectPath.set(":perf") // REQUIRED - Module path to the Emerge performance module
     buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
+    perfProjectPath.set(":perf") // REQUIRED - Module path to the Emerge performance module
   }
 }
 ```
@@ -196,10 +196,10 @@ emerge {
 
 #### Tasks
 
-| Task                                  | Description                                                                                                                 |
-|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `emergeUploadSnapshotBundle{Variant}` | Builds & uploads target & test APKs for the specified variant. Snapshots will be generated & saved on Emerge's cloud infra. |
-| `emergeLocalSnapshots{Variant}`       | Run snapshot tests locally.                                                                                                 |
+| Task                                  | Description                                                                                                                             |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `emergeLocalSnapshots{Variant}`       | Run snapshot tests locally.                                                                                                             |
+| `emergeUploadSnapshotBundle{Variant}` | Builds & uploads target & test APKs for the specified variant. Snapshots will be generated & saved in Emerge's cloud snapshot offering. |
 
 #### Configuration
 
@@ -207,7 +207,7 @@ The `snapshot` extension allows you to configure snapshot-specific fields.
 
 ```kotlin
 emerge {
-  ...
+  ..
 
   snapshots {
     snapshotsStorageDirectory.set(
@@ -222,52 +222,85 @@ emerge {
 
 | Field                       | Type     | Default                           | Description                                                                  |
 |-----------------------------|----------|-----------------------------------|------------------------------------------------------------------------------|
-| `snapshotsStorageDirectory` | `String` | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
 | `buildType`                 | `String` | `release`                         | The build type to use for grouping builds in the Emerge dashboard.           |
+| `snapshotsStorageDirectory` | `String` | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
 
-## Full configuration example
+## Full configuration
 
 ```kotlin
 emerge {
 
-  appProjectPath.set(":app")
+  appProjectPath.set(":app") // Required
   apiToken.set(System.getenv("EMERGE_API_TOKEN")) // Required
 
   vcs {
-    sha.set("...") // Optional, will be set automatically using Git information.
-    baseSha.set("...") // Optional, will be set automatically using Git information.
+    sha.set("..") // Optional, will be set automatically using Git information.
+    baseSha.set("..") // Optional, will be set automatically using Git information.
     branchName.set("my-feature") // Optional, will be set automatically using Git information.
     prNumber.set("123")
 
     gitHub {
-      repoOwner.set("...") // Required for CI status checks (only if using GitHub)
-      repoName.set("...") // Required for CI status checks (only if using GitHub)
+      repoOwner.set("..") // Required for CI status checks (only if using GitHub)
+      repoName.set("..") // Required for CI status checks (only if using GitHub)
     }
 
     gitLab {
-      projectId.set("...") // Required for CI status checks (only if using GitLab)
+      projectId.set("..") // Required for CI status checks (only if using GitLab)
     }
   }
 
   size {
-    buildType.set("release")
+    buildType.set("release") // Optional, defaults to 'release'
   }
 
   performance {
-    buildType.set("release")
-    perfProjectPath.set(":perf")
+    perfProjectPath.set(":perf") // Required for performance testing
+    buildType.set("release") // Optional, defaults to 'release'
   }
 
   snapshots {
-    buildType.set("snapshots") // Snapshots use debug builds, recommend using a separate build type.
+    // Optional, snapshots use debug builds, we recommend using separate build type.
+    buildType.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
   }
 }
 ```
 
+## Gradle configuration cache
+
+- The Emerge Gradle Plugin is compatible with
+  the [Gradle configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html).
+
 ## Migration from 1.X
 
-TODO: Migration guide
+Breaking changes:
+
+#### General
+
+- Top-level `buildType` field has been removed in favor of per-product `buildType` setting
+  - We recommend setting any existing `buildType` values as `size.buildType`.
+- Top-level `performanceProjectPath` has been moved to `performance.perfProjectPath`.
+
+#### VCS
+
+- `vcsOptions` has become `vcs`.
+- `vcsOptions.gitHubOptions` has become `vcs.gitHub`.
+- `vcsOptions.gitLabOptions` has become `vcs.gitLab`.
+
+#### Performance
+
+- Users must now add the kotlin-android plugin to their performance module:
+
+```kotlin
+plugins {
+  id("org.jetbrains.kotlin.android")
+}
+```
+
+#### Launch booster
+
+- Removal of `launchBooster` extension.
+- Removal of `emergeGenerate{Variant}BaselineProfile` task.
 
 # Maintenance
 
@@ -303,7 +336,7 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub
-  1. Tag version `vX.Y.Z`
-  2. Release title `vX.Y.Z`
-  3. Paste the content from `CHANGELOG.md` as the description
-7. `./gradlew publishPlugins`
+7. Tag version `vX.Y.Z`
+8. Release title `vX.Y.Z`
+9. Paste the content from `CHANGELOG.md` as the description
+10. `./gradlew publishPlugins`
