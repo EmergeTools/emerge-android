@@ -2,7 +2,7 @@
 
 An all-in-one Android snapshot testing solution.
 
-**⚠️ Emerge snapshots are currently in an experimental state and are subject to breaking changes.**
+**⚠️ Emerge snapshots are currently in beta and are subject to changes.**
 
 ## Features
 
