@@ -24,7 +24,7 @@ See [gradle-plugin](./gradle-plugin/README.md) for more information.
 
 ## Snapshots
 
-**⚠️ Emerge snapshots are currently in a beta state and are subject changes.**
+**⚠️ Emerge snapshots are currently in beta and is subject changes.**
 
 Emerge offers tooling to snapshot your Android UI components, including Compose previews, activities
 and legacy views.
