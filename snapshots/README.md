@@ -12,11 +12,29 @@ An all-in-one Android snapshot testing solution.
 
 ## Quickstart
 
-Add the Emerge Gradle plugin and `androidTest` dependencies to your application module:
+### Setup Emerge Gradle plugin
+
+Add the Emerge Gradle plugin to your root-level `build.gradle.kts` file:
 
 ```kotlin
 plugins {
   id("com.emergetools.android") version "2.0.0-beta01"
+}
+
+emerge {
+  appProjectPath.set(":app") // Your application module
+  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
+}
+```
+
+See [gradle-plugin](../gradle-plugin/README.md) for more information.
+
+### Add Snapshot SDK(s)
+
+Add the Emerge snapshot SDK(s) as `androidTest` dependencies to your application module:
+
+```kotlin
+plugins {
   // For Compose @Preview snapshot generation:
   id("com.google.devtools.ksp")
 }
@@ -46,7 +64,7 @@ A KSP compiler plugin is leveraged to automatically generate snapshot tests for 
 previews. By design, snapshots are only generated from the `androidTest` sourceSet. This
 is so snapshot tests are explicitly separate from application code.
 
-### Compose
+### Compose snapshotting
 
 Add compose `@Preview` annotated methods directly to your `androidTest` sourceSet.
 
@@ -66,9 +84,10 @@ all `@Preview` annotated functions in the `androidTest` sourceSet.
 We recommend creating `@Preview` functions in the `androidTest` sourceSet that depend directly on
 composables located in your `main` sourceSet.
 
-_⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are supported._
+_⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are
+supported._
 
-### Activities & Views
+### Activities & View snapshotting
 
 Create a basic test class that uses the `EmergeSnapshot` rule to generate snapshots.
 
@@ -86,14 +105,14 @@ class MainActivityTest {
   fun mainActivitySnapshot() {
     val scenario = activityScenarioRule.scenario
     scenario.onActivity {
-      snapshots.snapshot(name = "MainActivity", activity = it)
+      snapshots.take(name = "MainActivity", activity = it)
     }
   }
 
   @Test
   fun customViewSnapshot() {
     val view = CustomView(InstrumentationRegistry.getInstrumentation().targetContext)
-    snapshots.snapshot(name = "CustomView", view = view)
+    snapshots.take(name = "CustomView", view = view)
   }
 }
 ```
@@ -141,10 +160,50 @@ the `emergeUploadSnapshotBundle<variant>` task.
 ./gradlew :snapshots:snapshots-sample:emergeUploadSnapshotBundleDebug
 ```
 
-### Configuration
+For full documentation on Emerge's cloud snapshotting service,
+see [the Emerge Snapshots documentation](https://docs.emergetools.com/docs/android-snapshots).
+
+### Diffing
 
 To properly diff snapshots, Emerge needs to know which snapshots to compare against. This is done
 using Git information, which is set automatically for you.
 
 See [gradle-plugin](../gradle-plugin) documentation for a full list of configuration VCS
 configuration options.
+
+#### Image Keys
+
+Emerge uses the `name` set in the `take()` block as the "key" for storage and diffing.
+
+```kotlin
+class ExampleMainActivityTest {
+
+  @get:Rule
+  val snapshots = EmergeSnapshots()
+
+  @Test
+  fun basicActivityView() {
+    ..
+
+    // The primary key for saving/diffing this snapshot is the "Main Activity" string.
+    snapshots.take("Main Activity", activity)
+  }
+}
+```
+
+For generated composable snapshots, the name is the composable function's name.
+
+```kotlin
+/**
+ * If Composable snapshot generation is enabled, Emerge will generate a snapshot test
+ * for this composable with the name "TextRowWithIconPreview".
+ */
+@Preview
+@Composable
+fun TextRowWithIconPreview() {
+  TextRowWithIcon(
+    titleText = "Title",
+    subtitleText = "Subtitle"
+  )
+}
+```
