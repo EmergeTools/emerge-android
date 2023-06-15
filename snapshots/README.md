@@ -39,24 +39,10 @@ plugins {
   id("com.google.devtools.ksp")
 }
 
-android {
-
-  buildTypes {
-    // Add generated sources to the `androidTest` sourceSet.
-    debug {
-      sourceSets {
-        getByName("androidTest") {
-          java.srcDir("generated/ksp/debugAndroidTest/kotlin")
-        }
-      }
-    }
-  }
-}
-
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.1")
   // For Compose @Preview snapshot generation:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.4.0")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.4.1")
 }
 ```
 
@@ -126,7 +112,7 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta01"
+  id("com.emergetools.android") version "2.0.0-beta02"
 }
 
 emerge {
