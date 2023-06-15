@@ -8,6 +8,11 @@ android {
   namespace = "com.emergetools.snapshots.sample.ui"
   compileSdk = 33
 
+  defaultConfig {
+    minSdk = 23
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+  }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
@@ -17,27 +22,12 @@ android {
     jvmTarget = JavaVersion.VERSION_17.toString()
   }
 
-  defaultConfig {
-    minSdk = 23
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-  }
-
   buildFeatures {
     compose = true
   }
 
   composeOptions {
     kotlinCompilerExtensionVersion = "1.4.7"
-  }
-
-  buildTypes {
-    debug {
-      sourceSets {
-        getByName("androidTest") {
-          java.srcDir("generated/ksp/debugAndroidTest/kotlin")
-        }
-      }
-    }
   }
 }
 
@@ -49,8 +39,6 @@ dependencies {
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
 
-  kspAndroidTest(projects.snapshots.snapshotsProcessor)
-  androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.junit)
 }

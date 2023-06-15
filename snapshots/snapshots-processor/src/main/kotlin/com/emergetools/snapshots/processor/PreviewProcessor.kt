@@ -55,38 +55,41 @@ class PreviewProcessor(
       .build()
 
     val snapshotsRuleProperty =
-      PropertySpec.builder("snapshots", EMERGE_SNAPSHOTS_CLASSNAME)
-        .initializer("EmergeSnapshots()")
-        .addAnnotation(ruleAnnotation)
-        .build()
+      PropertySpec.builder("snapshots", EMERGE_SNAPSHOTS_CLASSNAME).apply {
+        initializer("EmergeSnapshots()")
+        addAnnotation(ruleAnnotation)
+      }.build()
 
-    val funSpec = FunSpec.builder("${functionName}_Generated")
-      .addAnnotation(testAnnotation)
-      .addStatement("composeRule.setContent { $functionName() }")
-      .addStatement("snapshots.take(\"$functionName\", composeRule)")
-      .build()
+    val funSpec = FunSpec.builder("${functionName}_Generated").apply {
+      addAnnotation(testAnnotation)
+      addStatement("composeRule.setContent { $functionName() }")
+      addStatement("snapshots.take(\"$functionName\", composeRule)")
+    }.build()
 
     val composeRuleProperty =
-      PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME)
-        .addAnnotation(ruleAnnotation)
-        .initializer("%T()", CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME)
-        .build()
+      PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME).apply {
+        addAnnotation(ruleAnnotation)
+        initializer("%T()", CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME)
+      }.build()
 
     val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
       .addMember("%T::class", ANDROID_JUNIT_RUNNER_CLASSNAME)
       .build()
 
-    val typeSpec = TypeSpec.classBuilder(testClassName)
-      .addFunction(funSpec)
-      .addAnnotation(testRunnerAnnotation)
-      .addProperty(composeRuleProperty)
-      .addProperty(snapshotsRuleProperty)
-      .build()
+    val typeSpec = TypeSpec.classBuilder(testClassName).apply {
+      addFunction(funSpec)
+      addAnnotation(testRunnerAnnotation)
+      addProperty(composeRuleProperty)
+      addProperty(snapshotsRuleProperty)
+    }.build()
 
-    val fileSpec = FileSpec.builder(packageName, testClassName)
-      .addType(typeSpec)
-      .addImport("androidx.compose.runtime", "Composable")
-      .build()
+    val fileSpec = FileSpec.builder(packageName, testClassName).apply {
+      addType(typeSpec)
+      addImport("androidx.compose.runtime", "Composable")
+      previewFunction.qualifiedName?.asString()?.let {
+        addImport(previewFunction.packageName.asString(), functionName)
+      }
+    }.build()
 
     fileSpec.writeTo(codeGenerator, Dependencies(false))
   }

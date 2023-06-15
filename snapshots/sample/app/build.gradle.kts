@@ -28,11 +28,13 @@ android {
     }
     debug {
       applicationIdSuffix = ".debug"
-      sourceSets {
-        getByName("androidTest") {
-          java.srcDir("generated/ksp/debugAndroidTest/kotlin")
-        }
-      }
+    }
+  }
+
+  sourceSets {
+    getByName("androidTest") {
+      // Adds sources from submodules for including snapshot tests
+      kotlin.srcDir("../ui-module/src/androidTest/kotlin")
     }
   }
 
@@ -68,8 +70,10 @@ dependencies {
 
   kspAndroidTest(projects.snapshots.snapshotsProcessor)
 
-  debugImplementation(projects.snapshots.sample.uiModule)
   androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.junit)
+
+  // Necessary for multi-module snapshotting
+  androidTestImplementation(projects.snapshots.sample.uiModule)
 }
