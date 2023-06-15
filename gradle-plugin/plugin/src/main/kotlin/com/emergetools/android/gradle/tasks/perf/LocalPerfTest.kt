@@ -75,7 +75,8 @@ abstract class LocalPerfTest : DefaultTask() {
         }
         it.add("${testPackageName.get()}/${EmergePlugin.EMERGE_JUNIT_RUNNER}")
       }
-      shell(instrumentationArgs)
+      val output = shell(instrumentationArgs)
+      logger.lifecycle(output)
     }
   }
 }
