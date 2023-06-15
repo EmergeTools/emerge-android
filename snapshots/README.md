@@ -71,7 +71,7 @@ We recommend creating `@Preview` functions in the `androidTest` sourceSet that d
 composables located in your `main` sourceSet.
 
 _⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are
-supported._
+supported. Let us know if there's specific configurations or variants you'd like to see supported!_
 
 ### Activities & View snapshotting
 
