@@ -195,7 +195,7 @@ class EmergePlugin : Plugin<Project> {
     perfVariant: Variant,
   ) {
     registerUploadPerfBundleTask(rootProject, performanceProject, extension, perfVariant)
-    registerEmergeLocalTestTask(appProject, performanceProject, perfVariant)
+    registerEmergeLocalTestTask(rootProject, appProject, performanceProject, perfVariant)
   }
 
   private fun registerUploadPerfBundleTask(
@@ -243,6 +243,7 @@ class EmergePlugin : Plugin<Project> {
   }
 
   private fun registerEmergeLocalTestTask(
+    rootProject: Project,
     appProject: Project,
     performanceProject: Project,
     performanceVariant: Variant,
@@ -251,7 +252,7 @@ class EmergePlugin : Plugin<Project> {
     val perfVariantName = performanceVariant.name.capitalize()
 
     val taskName = "emergeLocal${perfVariantName}Test"
-    val task = performanceProject.tasks.register(taskName, LocalPerfTest::class.java) {
+    val task = rootProject.tasks.register(taskName, LocalPerfTest::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Installs and runs tests for ${performanceVariant.name} on" +
         " connected devices. For testing and debugging."
