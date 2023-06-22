@@ -28,6 +28,7 @@ import java.util.concurrent.atomic.AtomicReference
  * Taken from https://github.com/androidx/androidx/blob/androidx-main/benchmark/benchmark-common/src/main/java/androidx/benchmark/IsolationActivity.kt
  * and modified for Emerge's specific needs.
  */
+@Suppress("EmptyFunctionBlock")
 class IsolationActivity : Activity() {
   private var destroyed = false
 
@@ -48,7 +49,7 @@ class IsolationActivity : Activity() {
 
     val old = singleton.getAndSet(this)
     if (old != null && !old.destroyed && !old.isFinishing) {
-      throw IllegalStateException("Only one IsolationActivity should exist")
+      error("Only one IsolationActivity should exist")
     }
 
     intent?.extras?.getString(KEY_EXTRA_MESSAGE)?.let(::updateMessage)

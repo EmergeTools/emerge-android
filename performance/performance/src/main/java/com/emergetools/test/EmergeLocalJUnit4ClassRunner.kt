@@ -132,9 +132,9 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
     val initMethod = initMethods.firstOrNull() ?: return EMPTY_STATEMENT
     val summary = addSummary(EmergeInit::class.java, initMethod)
 
-    if (initMethod.getAnnotation(EmergeSetup::class.java) != null
-      || initMethod.getAnnotation(EmergeTest::class.java) != null
-      || initMethod.getAnnotation(EmergeStartupTest::class.java) != null
+    if (initMethod.getAnnotation(EmergeSetup::class.java) != null ||
+      initMethod.getAnnotation(EmergeTest::class.java) != null ||
+      initMethod.getAnnotation(EmergeStartupTest::class.java) != null
     ) {
       summary.result = MethodResult.FAILURE
       val duplicateMethodMessage =
@@ -166,9 +166,9 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
     val setupMethod = setupMethods.firstOrNull() ?: return EMPTY_STATEMENT
     val summary = addSummary(EmergeSetup::class.java, setupMethod)
 
-    if (setupMethod.getAnnotation(EmergeInit::class.java) != null
-      || setupMethod.getAnnotation(EmergeTest::class.java) != null
-      || setupMethod.getAnnotation(EmergeStartupTest::class.java) != null
+    if (setupMethod.getAnnotation(EmergeInit::class.java) != null ||
+      setupMethod.getAnnotation(EmergeTest::class.java) != null ||
+      setupMethod.getAnnotation(EmergeStartupTest::class.java) != null
     ) {
       summary.result = MethodResult.FAILURE
       val duplicateMethodMessage =
@@ -229,8 +229,8 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
       }
 
       // Show error if they have Init or Setup annotations
-      if (method.getAnnotation(EmergeInit::class.java) != null
-        || method.getAnnotation(EmergeSetup::class.java) != null
+      if (method.getAnnotation(EmergeInit::class.java) != null ||
+        method.getAnnotation(EmergeSetup::class.java) != null
       ) {
         summary.result = MethodResult.FAILURE
         val duplicateMethodMessage =
@@ -309,7 +309,8 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
               summary.messages.forEach {
                 addChild(SimpleTreeNode(it))
               }
-            })
+            }
+          )
         }
       }
 
@@ -349,7 +350,8 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
               summary.messages.forEach {
                 addChild(SimpleTreeNode(it))
               }
-            })
+            }
+          )
         }
       }
 

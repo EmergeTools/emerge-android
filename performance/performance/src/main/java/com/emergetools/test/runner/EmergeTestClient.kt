@@ -26,7 +26,7 @@ import org.json.JSONObject
 class EmergeTestClient private constructor(
   private val enabled: Boolean,
   private val port: Int,
-  private val traceEnabled: Boolean
+  private val traceEnabled: Boolean,
 ) {
 
   companion object {
@@ -94,7 +94,10 @@ class EmergeTestClient private constructor(
     } while (result)
   }
 
-  fun <T> trace(name: String, block: () -> T): T {
+  fun <T> trace(
+    name: String,
+    block: () -> T,
+  ): T {
     if (!enabled || !traceEnabled) {
       return block()
     }
@@ -112,10 +115,12 @@ class EmergeTestClient private constructor(
   }
 
   fun sendErrorAsync(error: String) {
-    sendAsync(JSONObject().apply {
-      put("type", "error")
-      put("error", error)
-    })
+    sendAsync(
+      JSONObject().apply {
+        put("type", "error")
+        put("error", error)
+      }
+    )
   }
 
   fun sendAsync(json: JSONObject) = runBlocking {

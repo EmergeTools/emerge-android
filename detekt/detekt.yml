@@ -4,8 +4,14 @@ config:
   excludes: ''
 
 complexity:
+  CyclomaticComplexMethod:
+    threshold: 20
+  LongMethod:
+    threshold: 100
   LongParameterList:
     functionThreshold: 8
+  NestedBlockDepth:
+    threshold: 5
 
 formatting:
   Indentation:
@@ -18,3 +24,7 @@ formatting:
 naming:
   FunctionNaming:
     functionPattern: '[a-zA-Z][a-zA-Z0-9]*'
+
+style:
+  ReturnCount:
+    max: 4

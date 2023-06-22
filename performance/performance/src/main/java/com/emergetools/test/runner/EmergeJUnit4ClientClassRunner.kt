@@ -62,7 +62,7 @@ internal class EmergeJUnit4ClientClassRunner(
   /**
    * Runs before @Before functions for each test.
    */
-  private fun firstBefore(target: Any) = client.trace("$TAG.firstBefore") {
+  private fun firstBefore() = client.trace("$TAG.firstBefore") {
     Log.i(TAG, "Running any @Before methods for test ${testClass.name}")
   }
 
@@ -105,7 +105,7 @@ internal class EmergeJUnit4ClientClassRunner(
     // Prepend first before
     return object : Statement() {
       override fun evaluate() {
-        firstBefore(target)
+        firstBefore()
         withAnnotatedBefores.evaluate()
       }
     }
@@ -161,9 +161,11 @@ internal class EmergeJUnit4ClientClassRunner(
 
     val statement = object : Statement() {
       override fun evaluate() {
-        client.sendAsync(JSONObject().apply {
-          put("type", "command_ready")
-        })
+        client.sendAsync(
+          JSONObject().apply {
+            put("type", "command_ready")
+          }
+        )
 
         client.loop { json ->
           process(test, json, aftersStatement, beforesStatement, testStatement)
@@ -226,12 +228,14 @@ internal class EmergeJUnit4ClientClassRunner(
 
       "exit" -> return false
       else -> {
-        client.sendAsync(JSONObject().apply {
-          put("type", "command_result")
-          put("name", name)
-          put("result", "error")
-          put("error", "Unsupported command name \"$name\" in $json")
-        })
+        client.sendAsync(
+          JSONObject().apply {
+            put("type", "command_result")
+            put("name", name)
+            put("result", "error")
+            put("error", "Unsupported command name \"$name\" in $json")
+          }
+        )
         return true // keep going
       }
     }
