@@ -1,0 +1,27 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.emergetools.test">
+
+
+  <!-- QUERY_ALL_PACKAGES is used to enable Emerge to read package information from
+  potential target packages, e.g. for querying debuggable, profileable, or default launch intent.
+  This could also be done by making each client specify a <queries/> tag, with the target app's
+  packageName, but this removes the need for documenting that setup step, and detecting
+  misconfiguration.
+  -->
+
+  <uses-permission
+      android:name="android.permission.QUERY_ALL_PACKAGES"
+      tools:ignore="QueryAllPackagesPermission" />
+
+  <uses-permission android:name="android.permission.INTERNET" />
+
+  <application>
+    <!-- Activity used to block background content while benchmarks are running -->
+    <activity
+        android:name="com.emergetools.test.utils.IsolationActivity"
+        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen"
+        android:exported="true" />
+  </application>
+
+</manifest>
