@@ -2,7 +2,7 @@
 //
 // - The SDK version targets are automatically set to be identical to the app project.
 // - The same build types as your app project are automatically created.
-// - Test libraries like UI Automator and the Emerge SDK are automatically added as dependencies.
+// - Test libraries including UI Automator and Junit and are automatically added as dependencies.
 //
 // The configuration can be modified in this file as needed.
 
