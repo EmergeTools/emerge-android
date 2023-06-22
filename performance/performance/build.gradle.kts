@@ -10,7 +10,7 @@ plugins {
 }
 
 group = "com.emergetools.test"
-version = "2.0.0-beta01"
+version = libs.versions.emerge.peformance.get()
 
 var metaInfResDir = File(buildDir, "generated/emerge/")
 var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
