@@ -11,7 +11,9 @@ plugins {
 }
 
 dependencies {
-    // Emerge's UIAutomator helper library (Alpha): https://github.com/EmergeTools/relax
+    // Emerge's Performance Testing SDK (Required):
+    implementation("com.emergetools.test:performance:2.0.0-beta01")
+    // Emerge's UIAutomator helper library (Optional): https://github.com/EmergeTools/relax
     implementation("com.emergetools.test:relax:0.1.0")
 
     // Add additional dependencies here as needed.

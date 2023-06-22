@@ -456,7 +456,6 @@ class EmergePlugin : Plugin<Project> {
     private val PERFORMANCE_PROJECT_DEPENDENCIES = listOf(
       "androidx.test.ext:junit:1.1.3",
       "androidx.test.uiautomator:uiautomator:2.2.0",
-      "com.emergetools.test:performance:1.0.0"
     )
   }
 }
