@@ -7,7 +7,7 @@
 // The configuration can be modified in this file as needed.
 
 plugins {
-  id("org.jetbrains.kotlin.android")
+  alias(libs.plugins.kotlin.android)
 }
 
 dependencies {

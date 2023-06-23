@@ -21,6 +21,9 @@ enableFeaturePreview("STABLE_CONFIGURATION_CACHE")
 include(
   ":performance",
   ":performance:performance",
+  ":performance:sample",
+  ":performance:sample:app",
+  ":performance:sample:perftesting",
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-processor",
