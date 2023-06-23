@@ -11,19 +11,20 @@ on:
       - performance/**
 
 jobs:
-
-  build:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-      - name: Set up JDKs
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: 17
-      - name: Run build
-        run: ./gradlew :performance:performance:build -Pandroid.useAndroidX=true
+  
+#  TODO: Ryan: Re-enable when build hang issue can be resolved.
+#  build:
+#    runs-on: ubuntu-latest
+#
+#    steps:
+#      - uses: actions/checkout@v2
+#      - name: Set up JDKs
+#        uses: actions/setup-java@v3
+#        with:
+#          distribution: 'adopt'
+#          java-version: 17
+#      - name: Run build
+#        run: ./gradlew :performance:performance:build -Pandroid.useAndroidX=true
 
   unit_tests:
     runs-on: ubuntu-latest
