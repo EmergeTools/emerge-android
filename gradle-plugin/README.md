@@ -297,6 +297,14 @@ plugins {
 }
 ```
 
+- Users must now add the Emerge perf test SDK dependency to their performance module:
+
+```kotlin
+dependencies {
+  implementation("com.emergetools.test:performance:{version}")
+}
+```
+
 #### Launch booster
 
 - Removal of `launchBooster` extension.
