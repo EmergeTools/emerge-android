@@ -32,8 +32,8 @@ plugins {
 }
 
 emerge {
-  // By default, Emerge will use the EMERGE_API_TOKEN environment variable
-  apiToken.set("...")
+  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
 
@@ -231,7 +231,8 @@ emerge {
 
 ```kotlin
 emerge {
-  apiToken.set("...") // By default, Emerge will use the EMERGE_API_TOKEN environment variable
+  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   vcs {
     sha.set("..") // Optional, will be set automatically using Git information.
