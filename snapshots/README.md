@@ -14,15 +14,14 @@ An all-in-one Android snapshot testing solution.
 
 ### Setup Emerge Gradle plugin
 
-Add the Emerge Gradle plugin to your root-level `build.gradle.kts` file:
+Add the Emerge Gradle plugin to your application's `build.gradle.kts` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta03"
+  id("com.emergetools.android") version "2.0.0-rc01"
 }
 
 emerge {
-  appProjectPath.set(":app") // Your application module
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
@@ -112,11 +111,10 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta03"
+  id("com.emergetools.android") version "2.0.0-rc01"
 }
 
 emerge {
-  appProjectPath.set(":app")
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   // Optional

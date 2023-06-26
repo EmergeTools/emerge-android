@@ -15,7 +15,7 @@ If you haven't already, add the Emerge Gradle plugin to your root-level `build.g
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta03"
+  id("com.emergetools.android") version "2.0.0-rc01"
 }
 
 emerge {
@@ -36,7 +36,7 @@ emerge {
   // ...
 
   performance {
-    perfProjectPath.set(":perf") // The performance module to create
+    projectPath.set(":perf") // The performance module to create
   }
 }
 ```
@@ -97,9 +97,9 @@ cloud perf testing suite:
 ./gradlew emergeUpload{Variant}PerfBundle
 ```
 
-This will build the specific variant of your target app (specified by the `appProjectPath`
-property) as well as the `perfTestProject` test APK. It will then upload both to Emerge, where
-Emerge will run your performance tests on real, physical devices with 99% accuracy.
+This will build the specific variant of your target app as well as the `performance.projectPath`
+test APK. It will then upload both to Emerge, where Emerge will run your performance tests on real,
+physical devices with 99% accuracy.
 
 A link will be outputted in the console to the view the test upon a successful upload:
 
