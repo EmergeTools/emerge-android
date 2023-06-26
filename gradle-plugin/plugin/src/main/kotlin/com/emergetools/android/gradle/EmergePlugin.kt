@@ -45,49 +45,29 @@ class EmergePlugin : Plugin<Project> {
       EmergePluginExtension::class.java
     )
 
-    // Emerge supports top-level vs single module configuration. Top-level support is primarily
-    // used with performance testing, as perf is reliant on a separate test module for building
-    // self-targeting instrumentation tests.
-    // If subprojects are present, we can assume we're configured at the top level.
-    if (project.subprojects.isNotEmpty()) {
-      project.afterEvaluate { rootProject ->
-        check(emergeExtension.appProjectPath.isPresent) {
-          "Multi-project usage requires setting the \"appProjectPath\" property"
-        }
 
-        val appProjectPath = emergeExtension.appProjectPath
-        val appProject = checkNotNull(
-          project.subprojects.find { subProject ->
-            subProject.path.substringAfter(rootProject.path)
-              .removePrefix(":") == appProjectPath.get().removePrefix(":")
-          }
-        ) {
-          "Did not find appProjectPath \"${emergeExtension.appProjectPath.get()}\""
-        }
+    applyToAppProject(project, emergeExtension)
 
-        applyToAppProject(appProject, emergeExtension)
-
-        val perfProjectPath = emergeExtension.perfOptions.perfProjectPath
-        val performanceProject = project.subprojects.find { subProject ->
-          subProject.path == perfProjectPath.orNull
-        }
-
-        performanceProject?.let {
-          applyToPerformanceProject(rootProject, appProject, it, emergeExtension)
-        } ?: run {
-          // No perf project, but user has set the perfProjectPath,
-          // so register the generate task only
-          if (perfProjectPath.isPresent) {
-            registerGeneratePerfProjectTask(project, appProjectPath, perfProjectPath)
-          }
+    // Perf project must be configured after application as the configuration is reliant on
+    // property values set from appProject.
+    project.afterEvaluate { appProject ->
+      val rootProject = appProject.rootProject
+      val perfProjectPath = emergeExtension.perfOptions.projectPath
+      val performanceProject = rootProject.subprojects.find { subProject ->
+        rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
+      }
+      performanceProject?.let { perfProject ->
+        applyToPerformanceProject(appProject, perfProject, emergeExtension)
+      } ?: run {
+        // No perf project, but user has set the perfOptions.projectPath property
+        // so register the generate task only
+        if (perfProjectPath.isPresent) {
+          registerGeneratePerfProjectTask(project, perfProjectPath)
         }
       }
-    } else {
-      // Configured at the application module level, only register size & snapshot tasks
-      applyToAppProject(project, emergeExtension)
-    }
 
-    project.afterEvaluate { logExtension(it, emergeExtension) }
+      logExtension(project, emergeExtension)
+    }
   }
 
   private fun applyToAppProject(
@@ -114,19 +94,13 @@ class EmergePlugin : Plugin<Project> {
   }
 
   private fun applyToPerformanceProject(
-    rootProject: Project,
     appProject: Project,
     performanceProject: Project,
     emergeExtension: EmergePluginExtension,
   ) {
     performanceProject.pluginManager.apply(ANDROID_TEST_PLUGIN_ID)
 
-    appProject.afterEvaluate {
-      configurePerformanceProject(performanceProject, appProject)
-    }
-
-    // Make sure the app project is evaluated first since we rely on it to set default values
-    performanceProject.evaluationDependsOn(appProject.path)
+    configurePerformanceProject(performanceProject, appProject)
 
     performanceProject.pluginManager.withPlugin(ANDROID_TEST_PLUGIN_ID) { _ ->
       val androidTestComponents = performanceProject.extensions.getByType(
@@ -135,7 +109,6 @@ class EmergePlugin : Plugin<Project> {
 
       androidTestComponents.onVariants { perfVariant ->
         registerPerformanceTasks(
-          rootProject,
           appProject,
           performanceProject,
           emergeExtension,
@@ -146,63 +119,62 @@ class EmergePlugin : Plugin<Project> {
   }
 
   private fun registerSizeTasks(
-    project: Project,
+    appProject: Project,
     extension: EmergePluginExtension,
     variant: Variant,
   ) {
-    registerUploadAPKTask(project, extension, variant)
-    registerUploadAABTask(project, extension, variant)
+    registerUploadAPKTask(appProject, extension, variant)
+    registerUploadAABTask(appProject, extension, variant)
   }
 
   private fun registerUploadAPKTask(
-    project: Project,
+    appProject: Project,
     extension: EmergePluginExtension,
     variant: Variant,
   ) {
     val taskName = "${EMERGE_TASK_PREFIX}Upload${variant.name.capitalize()}Apk"
 
-    project.tasks.register(taskName, UploadAPK::class.java) {
+    appProject.tasks.register(taskName, UploadAPK::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an APK for variant ${variant.name} to Emerge."
       it.buildType.set(extension.sizeOptions.buildType)
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.proguardMapping.set(variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE))
-      it.setUploadTaskInputs(extension, project)
+      it.setUploadTaskInputs(extension, appProject)
     }
   }
 
   private fun registerUploadAABTask(
-    project: Project,
+    appProject: Project,
     extension: EmergePluginExtension,
     variant: Variant,
   ) {
     val taskName = "${EMERGE_TASK_PREFIX}Upload${variant.name.capitalize()}Aab"
 
-    project.tasks.register(taskName, UploadAAB::class.java) {
+    appProject.tasks.register(taskName, UploadAAB::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an AAB for variant ${variant.name} to Emerge."
       it.buildType.set(extension.sizeOptions.buildType)
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, project)
+      it.setUploadTaskInputs(extension, appProject)
     }
   }
 
   private fun registerPerformanceTasks(
-    rootProject: Project,
     appProject: Project,
     performanceProject: Project,
     extension: EmergePluginExtension,
     perfVariant: Variant,
   ) {
-    registerUploadPerfBundleTask(rootProject, performanceProject, extension, perfVariant)
-    registerEmergeLocalTestTask(rootProject, appProject, performanceProject, perfVariant)
+    registerEmergeLocalTestTask(appProject, performanceProject, perfVariant)
+    registerUploadPerfBundleTask(appProject, performanceProject, perfVariant, extension)
   }
 
   private fun registerUploadPerfBundleTask(
-    rootProject: Project,
+    appProject: Project,
     performanceProject: Project,
-    extension: EmergePluginExtension,
     performanceVariant: Variant,
+    extension: EmergePluginExtension,
   ) {
     val taskName = "${EMERGE_TASK_PREFIX}Upload${performanceVariant.name.capitalize()}PerfBundle"
     val appVariant = appVariants.find { it.name == performanceVariant.name }
@@ -210,40 +182,37 @@ class EmergePlugin : Plugin<Project> {
       "Could not find app variant matching performance variant ${performanceVariant.name}"
     }
 
-    rootProject.tasks.register(taskName, UploadPerfBundle::class.java) {
+    appProject.tasks.register(taskName, UploadPerfBundle::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds & uploads an AAB for variant ${appVariant.name} to " +
         "Emerge with ${performanceProject.name} test APK."
       it.buildType.set(extension.perfOptions.buildType)
       it.artifact.set(appVariant.artifacts.get(SingleArtifact.BUNDLE))
       it.perfArtifactDir.set(performanceVariant.artifacts.get(SingleArtifact.APK))
-      it.setUploadTaskInputs(extension, rootProject)
+      it.setUploadTaskInputs(extension, appProject)
     }
   }
 
   private fun registerGeneratePerfProjectTask(
-    rootProject: Project,
-    appProjectPath: Property<String>,
+    appProject: Project,
     performanceProjectPath: Property<String>,
   ) {
-    rootProject.tasks.register(GENERATE_PERF_PROJECT_TASK_NAME, GeneratePerfProject::class.java) {
+    appProject.tasks.register(GENERATE_PERF_PROJECT_TASK_NAME, GeneratePerfProject::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Generates a new performance testing project."
       it.appPackageName.set(
-        rootProject.provider {
+        appProject.provider {
           if (appVariants.isEmpty()) return@provider null
           val appVariant =
             appVariants.find { appVariant -> appVariant.name == "release" } ?: appVariants.first()
           appVariant.applicationId.get()
         }
       )
-      it.appProjectPath.set(appProjectPath)
       it.performanceProjectPath.set(performanceProjectPath)
     }
   }
 
   private fun registerEmergeLocalTestTask(
-    rootProject: Project,
     appProject: Project,
     performanceProject: Project,
     performanceVariant: Variant,
@@ -252,7 +221,7 @@ class EmergePlugin : Plugin<Project> {
     val perfVariantName = performanceVariant.name.capitalize()
 
     val taskName = "emergeLocal${perfVariantName}Test"
-    val task = rootProject.tasks.register(taskName, LocalPerfTest::class.java) {
+    val task = performanceProject.tasks.register(taskName, LocalPerfTest::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Installs and runs tests for ${performanceVariant.name} on" +
         " connected devices. For testing and debugging."
@@ -416,13 +385,12 @@ class EmergePlugin : Plugin<Project> {
           = Emerge configuration =
           ========================
           apiToken:                      ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
-          appProjectPath:                ${extension.appProjectPath.orEmpty()}
           dryRun (optional):             ${extension.dryRun.orEmpty()}
           verbose (optional):            ${extension.verbose.orEmpty()}
           size
           └── buildType (optional):      ${extension.sizeOptions.buildType.orEmpty()}
           performance
-          ├── perfProjectPath:           ${extension.perfOptions.perfProjectPath.orEmpty()}
+          ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
           └── buildType (optional):      ${extension.perfOptions.buildType.orEmpty()}
           snapshots
           ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}

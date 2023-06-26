@@ -26,7 +26,7 @@ class MultiProjectEmergePluginTest : EmergePluginTest() {
       .withDefaultServer()
       .assert { result, server ->
         assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleasePerfBundle")
+        result.assertSuccessfulTask(":app:emergeUploadReleasePerfBundle")
       }
       .build()
   }
@@ -34,12 +34,12 @@ class MultiProjectEmergePluginTest : EmergePluginTest() {
   @Test
   fun multiProjectGeneratePerformanceProjectMissing() {
     EmergeGradleRunner.create("multi-project")
-      .withArguments("emergeGeneratePerformanceProject")
+      .withArguments(":app:emergeGeneratePerformanceProject")
       .withDefaultServer()
       .assert { result, _ ->
         assertTrue(
           result.output.contains(
-            "Task 'emergeGeneratePerformanceProject' not found in root project 'Test'"
+            "task 'emergeGeneratePerformanceProject' not found in project ':app'"
           )
         )
       }

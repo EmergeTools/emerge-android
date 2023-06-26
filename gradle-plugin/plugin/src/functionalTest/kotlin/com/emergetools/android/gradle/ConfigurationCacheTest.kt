@@ -45,7 +45,7 @@ class ConfigurationCacheTest : EmergePluginTest() {
       .withDefaultServer()
       .assert { result, server ->
         assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleasePerfBundle")
+        result.assertSuccessfulTask(":app:emergeUploadReleasePerfBundle")
       }
       .build()
   }

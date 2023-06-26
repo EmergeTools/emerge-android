@@ -1,36 +1,3 @@
-buildscript {
-  repositories {
-    google()
-  }
-}
-
 plugins {
-  id 'com.emergetools.android'
+  id 'com.android.test' apply false
 }
-
-subprojects {
-  repositories {
-    google()
-    mavenCentral()
-  }
-}
-
-emerge {
-  apiToken = 'abcdef123'
-  appProjectPath = ':app'
-
-  performance {
-    perfProjectPath = ':performance'
-  }
-
-  vcs {
-    sha = 'testSha'
-    baseSha = 'testBaseSha'
-    branchName = 'testBranchName'
-    gitHub {
-      repoOwner = 'repoOwner'
-      repoName = 'repoName'
-    }
-  }
-}
-

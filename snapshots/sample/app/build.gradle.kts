@@ -2,6 +2,11 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.ksp)
+  id("com.emergetools.android")
+}
+
+emerge {
+  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 
 android {

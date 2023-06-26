@@ -27,9 +27,6 @@ abstract class GeneratePerfProject : DefaultTask() {
     .convention("<REPLACE WITH APP PACKAGE NAME>")
 
   @get:Input
-  abstract val appProjectPath: Property<String>
-
-  @get:Input
   abstract val performanceProjectPath: Property<String>
 
   @TaskAction
