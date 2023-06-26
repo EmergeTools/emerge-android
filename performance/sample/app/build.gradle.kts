@@ -6,8 +6,6 @@ plugins {
 }
 
 emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
-
   performance {
     // Note that this is the relative path from the rootProject
     projectPath.set(":performance:sample:perftesting")

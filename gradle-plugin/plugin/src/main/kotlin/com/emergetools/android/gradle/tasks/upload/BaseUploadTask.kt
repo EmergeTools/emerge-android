@@ -75,9 +75,9 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val gitLabProjectId: Property<String>
 
-	@get:Input
-	@get:Optional
-	abstract val snapshotsEnabled: Property<Boolean>
+  @get:Input
+  @get:Optional
+  abstract val snapshotsEnabled: Property<Boolean>
 
   /**
    * Internal only for testing.
@@ -87,9 +87,10 @@ abstract class BaseUploadTask : DefaultTask() {
   abstract val baseUrl: Property<String>
 
   protected fun upload(artifactMetadata: ArtifactMetadata): EmergeUploadResponse? {
-    check(apiToken.get().isNotEmpty()) {
-      "Missing API token. Please set the 'apiToken' property in the emerge {} extension block." +
-        " See https://docs.emergetools.com/gradle-plugin/configuration for more information."
+    check(!apiToken.getOrElse(System.getenv(DEFAULT_API_TOKEN_ENV_KEY)).isNullOrBlank()) {
+      "Missing API token. Please set the 'apiToken' property in the emerge {} extension block or" +
+        " ensure an 'EMERGE_API_TOKEN' environment variable is set with a valid API token." +
+        " See https://docs.emergetools.com/docs/gradle-plugin for more information."
     }
 
     val outputDir = outputDir.get().asFile
@@ -143,7 +144,7 @@ abstract class BaseUploadTask : DefaultTask() {
       prNumber = prNumber.orNull,
       buildType = buildType.orNull,
       gitlabProjectId = gitLabProjectId.orNull,
-			androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),
+      androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),
       source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}"
     )
 
@@ -182,6 +183,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
   companion object {
     const val OUTPUT_FILE_NAME = "emerge.zip"
+    const val DEFAULT_API_TOKEN_ENV_KEY = "EMERGE_API_TOKEN"
 
     private const val BASE_URL_ARG_KEY = "baseUrl"
 
