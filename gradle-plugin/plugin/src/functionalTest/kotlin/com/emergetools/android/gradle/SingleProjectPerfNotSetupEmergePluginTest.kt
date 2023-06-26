@@ -25,7 +25,7 @@ class SingleProjectPerfNotSetupEmergePluginTest : EmergePluginTest() {
       .withArguments("emergeGeneratePerformanceProject", "--package", "com.test.performance")
       .withDefaultServer()
       .assert { result, _ ->
-        result.assertSuccessfulTask(":emergeGeneratePerformanceProject")
+        result.assertSuccessfulTask(":app:emergeGeneratePerformanceProject")
       }
       .build()
   }

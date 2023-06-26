@@ -32,7 +32,6 @@ plugins {
 }
 
 emerge {
-  appProjectPath.set(":app") // Your primary application module
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
@@ -161,11 +160,11 @@ emerge {
 
 #### Tasks
 
-| Task                               | Description                                                                                                                 |
-|------------------------------------|-----------------------------------------------------------------------------------------------------------------------------|
-| `emergeGeneratePerformanceProject` | Create a pre-configured Emerge performance module. Only available if `perfProjectPath` value is set and doesn't yet exist . |
-| `emergeUpload{Variant}PerfBundle`  | Upload an AAB matching the specified variant to Emerge packaged with the `perfProjectPath`'s test APK.                      |
-| `emergeLocal{Variant}Test`         | Run performance tests from `perfProjectPath` locally for debugging & testing.                                               |
+| Task                               | Description                                                                                                                         |
+|------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------|
+| `emergeGeneratePerformanceProject` | Create a pre-configured Emerge performance module. Only available if `performance.projectPath` value is set and doesn't yet exist . |
+| `emergeUpload{Variant}PerfBundle`  | Upload an AAB matching the specified variant to Emerge packaged with the `performance.projectPath`'s test APK.                      |
+| `emergeLocal{Variant}Test`         | Run performance tests from `performance.projectPath` locally for debugging & testing.                                               |
 
 #### Configuration
 
@@ -229,8 +228,6 @@ emerge {
 
 ```kotlin
 emerge {
-
-  appProjectPath.set(":app") // Required
   apiToken.set(System.getenv("EMERGE_API_TOKEN")) // Required
 
   vcs {

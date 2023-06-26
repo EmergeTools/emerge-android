@@ -77,7 +77,6 @@ supportedKotlinVersions.forEach { version ->
 		ensureParentDirsCreated()
 	}
 	classpathFile.writeText(configuration.joinToString(separator = "\n"))
-
 }
 
 val functionalTest: SourceSet by sourceSets.creating {

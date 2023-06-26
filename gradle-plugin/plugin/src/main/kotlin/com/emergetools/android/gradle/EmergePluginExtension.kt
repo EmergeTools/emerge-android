@@ -19,12 +19,6 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
    */
   abstract val apiToken: Property<String>
 
-  /**
-   * Primary application module.
-   * Required.
-   */
-  abstract val appProjectPath: Property<String>
-
   @get:Nested
   abstract val sizeOptions: SizeOptions
 
@@ -118,7 +112,7 @@ abstract class ProductOptions {
 abstract class SizeOptions : ProductOptions()
 
 abstract class PerfOptions : ProductOptions() {
-  abstract val perfProjectPath: Property<String>
+  abstract val projectPath: Property<String>
 }
 
 abstract class SnapshotOptions : ProductOptions() {

@@ -1,5 +1,6 @@
 plugins {
   id 'com.android.application'
+  id 'com.emergetools.android'
 }
 
 android {
@@ -13,3 +14,22 @@ android {
     versionName "1.0"
   }
 }
+
+emerge {
+  apiToken = 'abcdef123'
+
+  performance {
+    projectPath = ':performance'
+  }
+
+  vcs {
+    sha = 'testSha'
+    baseSha = 'testBaseSha'
+    branchName = 'testBranchName'
+    gitHub {
+      repoOwner = 'repoOwner'
+      repoName = 'repoName'
+    }
+  }
+}
+

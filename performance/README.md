@@ -19,7 +19,6 @@ plugins {
 }
 
 emerge {
-  appProjectPath.set(":app") // Your application module
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
