@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle
 
+import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
 import com.emergetools.android.gradle.util.Git
 import com.emergetools.android.gradle.util.GitHub
 import com.emergetools.android.gradle.util.property
@@ -17,7 +18,8 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
    * Emerge API token generated from the Emerge profile page.
    * Required.
    */
-  abstract val apiToken: Property<String>
+  val apiToken: Property<String> = objects.property<String>()
+    .convention(System.getenv(BaseUploadTask.DEFAULT_API_TOKEN_ENV_KEY))
 
   @get:Nested
   abstract val sizeOptions: SizeOptions

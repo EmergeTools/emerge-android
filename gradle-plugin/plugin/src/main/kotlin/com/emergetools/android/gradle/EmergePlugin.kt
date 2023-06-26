@@ -45,7 +45,6 @@ class EmergePlugin : Plugin<Project> {
       EmergePluginExtension::class.java
     )
 
-
     applyToAppProject(project, emergeExtension)
 
     // Perf project must be configured after application as the configuration is reliant on

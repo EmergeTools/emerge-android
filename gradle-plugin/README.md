@@ -32,7 +32,8 @@ plugins {
 }
 
 emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
+  // By default, Emerge will use the EMERGE_API_TOKEN environment variable
+  apiToken.set("...")
 }
 ```
 
@@ -40,7 +41,9 @@ _Gradle plugins are often applied and configured in the `build.gradle(.kts)` fil
 *It is highly recommended to apply the Emerge plugin to the root project, ie. the
 top-level `build.gradle(.kts)`.* This facilitates cross-project features like performance analysis._
 
-`appProjectPath` and `apiToken` are required. Other configuration properties are documented below.
+`appProjectPath` and `apiToken` are required. By default, without any property set, `apiToken` will
+attempt to use the `EMERGE_API_TOKEN` EMERGE_API_TOKEN. Other configuration properties are
+documented below.
 
 ### Obtain an API key
 
@@ -228,7 +231,7 @@ emerge {
 
 ```kotlin
 emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN")) // Required
+  apiToken.set("...") // By default, Emerge will use the EMERGE_API_TOKEN environment variable
 
   vcs {
     sha.set("..") // Optional, will be set automatically using Git information.
