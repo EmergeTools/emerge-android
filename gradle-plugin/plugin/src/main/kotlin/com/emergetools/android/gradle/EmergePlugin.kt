@@ -48,7 +48,8 @@ class EmergePlugin : Plugin<Project> {
 
     applyToAppProject(project, emergeExtension)
 
-    // TODO: Comment why this has to be after evaluate
+    // Perf project must be configured after application as the configuration is reliant on
+    // property values set from appProject.
     project.afterEvaluate { appProject ->
       val rootProject = appProject.rootProject
       val perfProjectPath = emergeExtension.perfOptions.projectPath
