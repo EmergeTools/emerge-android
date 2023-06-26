@@ -15,7 +15,7 @@ If you haven't already, add the Emerge Gradle plugin to your root-level `build.g
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta03"
+  id("com.emergetools.android") version "2.0.0-rc01"
 }
 
 emerge {
@@ -36,7 +36,7 @@ emerge {
   // ...
 
   performance {
-    perfProjectPath.set(":perf") // The performance module to create
+    projectPath.set(":perf") // The performance module to create
   }
 }
 ```

@@ -24,11 +24,11 @@ pluginManagement {
 
 ### Apply the Emerge Gradle plugin to your top-level project
 
-In your root project's `build.gradle(.kts)`:
+In your application-level `build.gradle(.kts)`:
 
-```kotlin build.gradle.kts (root)
+```kotlin build.gradle.kts (app)
 plugins {
-  id("com.emergetools.android") version "2.0.0-beta03"
+  id("com.emergetools.android") version "2.0.0-rc01"
 }
 
 emerge {
@@ -37,11 +37,7 @@ emerge {
 }
 ```
 
-_Gradle plugins are often applied and configured in the `build.gradle(.kts)` file of subprojects.
-*It is highly recommended to apply the Emerge plugin to the root project, ie. the
-top-level `build.gradle(.kts)`.* This facilitates cross-project features like performance analysis._
-
-`appProjectPath` and `apiToken` are required. By default, without any property set, `apiToken` will
+Only the `apiToken` property is required. By default, without any property set, `apiToken` will
 attempt to use the `EMERGE_API_TOKEN` EMERGE_API_TOKEN. Other configuration properties are
 documented below.
 
@@ -172,7 +168,7 @@ emerge {
 #### Configuration
 
 By default, Emerge will automatically add the necessary build configuration needed for the
-specified `perfProjectPath` module.
+specified `projectPath` module.
 
 Additionally, the `performance` extension allows you to configure perf-specific fields.
 
@@ -182,17 +178,19 @@ emerge {
 
   performance {
     buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
-    perfProjectPath.set(":perf") // REQUIRED - Module path to the Emerge performance module
+    projectPath.set(
+      ":perf"
+    ) // REQUIRED - Relative gradle path from root project to the Emerge performance module
   }
 }
 ```
 
 ##### Fields
 
-| Field             | Type     | Default   | Description                                                        |
-|-------------------|----------|-----------|--------------------------------------------------------------------|
-| `perfProjectPath` | `String` |           | The module path to the Emerge performance module.                  |
-| `buildType`       | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard. |
+| Field         | Type     | Default   | Description                                                          |
+|---------------|----------|-----------|----------------------------------------------------------------------|
+| `projectPath` | `String` |           | The relative gradle path from root to the Emerge performance module. |
+| `buildType`   | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard.   |
 
 ### Snapshots
 
@@ -255,7 +253,7 @@ emerge {
   }
 
   performance {
-    perfProjectPath.set(":perf") // Required for performance testing
+    projectPath.set(":perf") // Required for performance testing
     buildType.set("release") // Optional, defaults to 'release'
   }
 
@@ -278,9 +276,11 @@ Breaking changes:
 
 #### General
 
+- Root-project configuration is no longer supported. Users should move the Emerge plugin's
+  configuration to the application module(s) they wish to use with Emerge.
 - Top-level `buildType` field has been removed in favor of per-product `buildType` setting
   - We recommend setting any existing `buildType` values as `size.buildType`.
-- Top-level `performanceProjectPath` has been moved to `performance.perfProjectPath`.
+- Top-level `performanceProjectPath` has been moved to `performance.projectPath`.
 
 #### VCS
 
