@@ -97,9 +97,9 @@ cloud perf testing suite:
 ./gradlew emergeUpload{Variant}PerfBundle
 ```
 
-This will build the specific variant of your target app (specified by the `appProjectPath`
-property) as well as the `perfTestProject` test APK. It will then upload both to Emerge, where
-Emerge will run your performance tests on real, physical devices with 99% accuracy.
+This will build the specific variant of your target app as well as the `performance.projectPath`
+test APK. It will then upload both to Emerge, where Emerge will run your performance tests on real,
+physical devices with 99% accuracy.
 
 A link will be outputted in the console to the view the test upon a successful upload:
 
