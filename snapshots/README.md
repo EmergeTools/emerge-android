@@ -22,6 +22,7 @@ plugins {
 }
 
 emerge {
+  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
@@ -46,7 +47,9 @@ dependencies {
 ```
 
 A KSP compiler plugin is leveraged to automatically generate snapshot tests for your compose
-previews. By design, snapshots are only generated from the `androidTest` sourceSet. This
+previews. 
+
+By design, snapshots are intended to be generated from the `androidTest` sourceSet. This
 is so snapshot tests are explicitly separate from application code.
 
 ### Compose snapshotting
