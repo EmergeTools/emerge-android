@@ -331,12 +331,6 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 
 ## Releasing
 
-### Prerequisites
-
-- The following Gradle properties must be set:
-  - `gradle.publish.key`
-  - `gradle.publish.secret`
-
 ### Releasing a new version
 
 1. Update the version in `build.gradle.kts`
@@ -345,7 +339,9 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub
-7. Tag version `vX.Y.Z`
-8. Release title `vX.Y.Z`
+7. Tag version `gradle-plugin-vX.Y.Z`
+8. Release title `Gradle Plugin vX.Y.Z`
 9. Paste the content from `CHANGELOG.md` as the description
-10. `./gradlew publishPlugins`
+
+The `gradle-plugin-release` workflow will automatically publish the new version to the Gradle Plugin
+portal upon new release publish.
