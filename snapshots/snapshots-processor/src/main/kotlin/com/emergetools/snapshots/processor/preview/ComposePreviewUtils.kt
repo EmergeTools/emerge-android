@@ -1,0 +1,67 @@
+package com.emergetools.snapshots.processor.preview
+
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSFunctionDeclaration
+import com.google.devtools.ksp.symbol.KSValueArgument
+
+object ComposePreviewUtils {
+
+  private const val PREVIEW_ANNOTATION_SIMPLE_NAME = "Preview"
+  private const val PREVIEW_NAME_ARGUMENT_NAME = "name"
+  private const val PREVIEW_GROUP_ARGUMENT_NAME = "group"
+  private const val PREVIEW_LOCALE_ARGUMENT_NAME = "locale"
+  private const val PREVIEW_FONT_SCALE_ARGUMENT_NAME = "fontScale"
+  private const val PREVIEW_UI_MODE_ARGUMENT_NAME = "uiMode"
+
+  /**
+   * Simple helper to get unique preview annotations for a given function.
+   * A unique preview annotation is one that has a unique combination of name, group, locale,
+   * fontScale and uiMode, the current supported arguments for Emerge snapshots of the @Preview
+   * annotation.
+   */
+  fun getUniqueSnapshotConfigsFromPreviewAnnotations(
+    previewFunction: KSFunctionDeclaration,
+  ): Sequence<ComposePreviewSnapshotConfig> = previewFunction.annotations.filter {
+    it.shortName.asString() == PREVIEW_ANNOTATION_SIMPLE_NAME
+  }.map(::composePreviewShapshotConfigFromPreviewAnnotation)
+    .distinct()
+
+  private fun composePreviewShapshotConfigFromPreviewAnnotation(
+    previewAnnotation: KSAnnotation,
+  ): ComposePreviewSnapshotConfig {
+    // We need to explicitly check for nulls here so we don't set a default unintentionally and
+    // so we don't default to the Preview annotation default empty values.
+    val nameArgument = previewAnnotation.argumentForName(PREVIEW_NAME_ARGUMENT_NAME)
+    val nameValue =
+      nameArgument?.value?.takeIf { (it as? String)?.isNotBlank() == true }?.toString()
+
+    val groupArgument = previewAnnotation.argumentForName(PREVIEW_GROUP_ARGUMENT_NAME)
+    val groupValue =
+      groupArgument?.value?.takeIf { (it as? String)?.isNotBlank() == true }?.toString()
+
+    val localeArgument = previewAnnotation.argumentForName(PREVIEW_LOCALE_ARGUMENT_NAME)
+    val localeValue =
+      localeArgument?.value?.takeIf { (it as? String)?.isNotBlank() == true }?.toString()
+
+    val fontScaleArgument = previewAnnotation.argumentForName(PREVIEW_FONT_SCALE_ARGUMENT_NAME)
+    val fontScaleValue = fontScaleArgument?.value?.takeIf {
+      (it as? Float) != 1.0f
+    }?.let { it as Float }
+
+    val uiModeArgument = previewAnnotation.argumentForName(PREVIEW_UI_MODE_ARGUMENT_NAME)
+    val uiModeValue = uiModeArgument?.value?.takeIf { (it as? Int) != 0 }?.let { it as Int }
+
+    return ComposePreviewSnapshotConfig(
+      name = nameValue,
+      group = groupValue,
+      locale = localeValue,
+      fontScale = fontScaleValue,
+      uiMode = uiModeValue,
+    )
+  }
+
+  private fun KSAnnotation.argumentForName(name: String): KSValueArgument? {
+    return arguments.firstOrNull { it.name?.asString() == name }
+  }
+}

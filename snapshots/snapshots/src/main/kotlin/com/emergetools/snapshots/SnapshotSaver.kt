@@ -5,6 +5,10 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig.Companion.DEFAULT
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.charset.Charset
@@ -25,18 +29,21 @@ internal object SnapshotSaver {
   private val args: Bundle
     get() = InstrumentationRegistry.getArguments()
 
+  // TODO: Filename for composable should be functionName, previewName
   fun save(
     displayName: String,
     bitmap: Bitmap,
     fqn: String,
     type: SnapshotType,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
     }
 
-    val keyName = keyName(displayName)
+    // TODO: Might need to take config into account
+    val keyName = keyName(displayName, composePreviewSnapshotConfig)
     saveImage(
       snapshotsDir = snapshotsDir,
       keyName = keyName,
@@ -52,6 +59,7 @@ internal object SnapshotSaver {
         keyName = keyName,
         type = type,
         fqn = fqn,
+        composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
   }
@@ -72,6 +80,7 @@ internal object SnapshotSaver {
     keyName: String,
     fqn: String,
     type: SnapshotType,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     val metadata = SnapshotImageMetadata(
       displayName = displayName,
@@ -79,9 +88,13 @@ internal object SnapshotSaver {
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,
       type = type,
+      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
+
+    val jsonString = Json.encodeToString(metadata)
+
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
-      write(metadata.toJsonString().toByteArray(Charset.defaultCharset()))
+      write(jsonString.toByteArray(Charset.defaultCharset()))
     }
   }
 
@@ -105,17 +118,30 @@ internal object SnapshotSaver {
    * We intentionally don't account for FQN here as we still want to diff an image if
    * the test might move packages, which user-defined name ensures.
    */
-  private fun keyName(displayName: String): String {
-    // Replace spaces & periods with underscores and lowercase the string
-    val keyName = displayName.replace(Regex("[ .]"), "_")
-      .lowercase()
+  private fun keyName(
+    displayName: String,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+  ): String {
+    val keyName = composePreviewSnapshotConfig?.let {
+      // If not default, we'll append the hashcode to the name to ensure uniqueness based on config
+      // Hashcode should preserve equality across field additions/removals in the future.
+      if (it.hashCode() != DEFAULT.hashCode()) {
+        "${displayName.normalize()}_${it.hashCode()}"
+      } else displayName.normalize()
+    } ?: displayName.normalize()
 
     if (keyName.length <= MAX_NAME_LENGTH) return keyName
-    // If the string is still too long, shorten to 32 characters
+    // If the string is still too long, shorten to max length
     return keyName.substring(0, MAX_NAME_LENGTH)
   }
 
-  private const val MAX_NAME_LENGTH = 64
+  private fun String.normalize(): String {
+    return replace(Regex("[ .-]"), "_")
+      //  lowercase the string
+      .lowercase()
+  }
+
+  private const val MAX_NAME_LENGTH = 128
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }

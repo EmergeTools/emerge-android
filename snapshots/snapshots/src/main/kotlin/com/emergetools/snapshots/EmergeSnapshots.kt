@@ -7,6 +7,7 @@ import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onRoot
 import androidx.test.runner.screenshot.Screenshot
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import org.junit.rules.TestRule
 import org.junit.runner.Description
 import org.junit.runners.model.Statement
@@ -46,6 +47,7 @@ class EmergeSnapshots : TestRule {
   fun take(
     name: String,
     composeTestRule: ComposeTestRule,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     composeTestRule.waitForIdle()
     SnapshotSaver.save(
@@ -53,6 +55,7 @@ class EmergeSnapshots : TestRule {
       bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
       fqn = fqn,
       type = SnapshotType.COMPOSABLE,
+      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
   }
 }

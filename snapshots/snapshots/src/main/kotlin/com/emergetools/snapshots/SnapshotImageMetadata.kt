@@ -1,29 +1,20 @@
 package com.emergetools.snapshots
 
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import kotlinx.serialization.Serializable
+
 enum class SnapshotType {
   COMPOSABLE,
   VIEW,
   ACTIVITY,
 }
 
+@Serializable
 internal data class SnapshotImageMetadata(
   val keyName: String,
   val displayName: String,
   val filename: String,
   val fqn: String,
   val type: SnapshotType,
-) {
-
-  // Simple helper so we don't need a dependency on a JSON serializer for the time being.
-  fun toJsonString(): String {
-    return """
-    {
-      "keyName": "$keyName",
-      "displayName": "$displayName",
-      "filename": "$filename",
-      "fqn": "$fqn",
-      "type": "$type"
-    }
-    """.trimIndent()
-  }
-}
+  val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+)

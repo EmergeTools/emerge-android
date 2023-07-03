@@ -4,6 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
+@Preview(
+  fontScale = 1.5f
+)
 @Composable
 fun TextRowWithIconPreview() {
   TextRowWithIcon(

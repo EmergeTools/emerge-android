@@ -15,7 +15,7 @@ android {
 
   defaultConfig {
     applicationId = "com.emergetools.snapshots.sample"
-    minSdk = 23
+    minSdk = 24
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"
@@ -57,7 +57,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.4.7"
+    kotlinCompilerExtensionVersion = "1.4.8"
   }
 }
 
@@ -77,6 +77,7 @@ dependencies {
 
   androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
+  androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
 
   // Necessary for multi-module snapshotting

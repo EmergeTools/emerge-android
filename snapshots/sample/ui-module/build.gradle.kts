@@ -8,7 +8,7 @@ android {
   compileSdk = 33
 
   defaultConfig {
-    minSdk = 23
+    minSdk = 24
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
   }
 
@@ -26,7 +26,7 @@ android {
   }
 
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.4.7"
+    kotlinCompilerExtensionVersion = "1.4.8"
   }
 }
 
