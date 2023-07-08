@@ -2,9 +2,10 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 plugins {
-  alias(libs.plugins.kotlin.android)
   alias(libs.plugins.android.library)
   alias(libs.plugins.grgit)
+  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.serialization)
   `maven-publish`
   signing
 }
@@ -29,10 +30,15 @@ android {
   }
 
   defaultConfig {
-    minSdk = 23
+    minSdk = 24
   }
+
+  buildFeatures {
+    compose = true
+  }
+
   composeOptions {
-    kotlinCompilerExtensionVersion = "1.4.7"
+    kotlinCompilerExtensionVersion = "1.4.8"
   }
 }
 
@@ -45,10 +51,15 @@ dependencies {
   implementation(libs.compose.runtime)
   implementation(libs.compose.ui)
 
+  implementation(libs.kotlinx.serialization)
+
+  api(projects.snapshots.shared)
   api(libs.androidx.test.core)
   api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)
   api(libs.compose.ui.test.junit)
+
+  testImplementation(libs.junit)
 }
 
 tasks.register("generateMetaInfVersion") {

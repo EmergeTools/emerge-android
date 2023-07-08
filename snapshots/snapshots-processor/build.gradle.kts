@@ -3,9 +3,9 @@ import java.text.SimpleDateFormat
 import java.util.Date
 
 plugins {
-  `java-library`
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.grgit)
+  `java-library`
   `maven-publish`
   signing
 }
@@ -36,6 +36,7 @@ dependencies {
   implementation(libs.ksp)
 
   implementation(libs.junit)
+  implementation(projects.snapshots.shared)
 }
 
 tasks.register("generateMetaInfVersion") {

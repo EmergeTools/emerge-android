@@ -1,5 +1,11 @@
 package com.emergetools.snapshots.processor
 
+import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposableSnapshotBlock
+import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposeRuleProperty
+import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
+import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
+import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
@@ -12,10 +18,13 @@ import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
-import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.writeTo
 
+/**
+ * A generally simple processor, finds all functions annotated with `@Preview`, filters to unique
+ * preview configurations and generates a test class that takes a snapshot of each.
+ */
 class PreviewProcessor(
   private val environment: SymbolProcessorEnvironment,
 ) : SymbolProcessor {
@@ -43,73 +52,73 @@ class PreviewProcessor(
     codeGenerator: CodeGenerator,
     previewFunction: KSFunctionDeclaration,
   ) {
-    val packageName = previewFunction.containingFile!!.packageName.asString()
-    val functionName = previewFunction.simpleName.asString()
-    val testClassName = "${functionName}_GeneratedSnapshot"
+    val previewConfigs = getUniqueSnapshotConfigsFromPreviewAnnotations(previewFunction)
+    previewConfigs.forEach { previewConfig ->
+      val packageName = previewFunction.containingFile!!.packageName.asString()
+      val functionName = previewFunction.simpleName.asString()
 
-    val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
-      .build()
+      val testClassName = getTestClassName(functionName, previewConfig)
+      val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
+        .build()
 
-    val ruleAnnotation = AnnotationSpec.builder(JUNIT_RULE_ANNOTATION_CLASSNAME)
-      .useSiteTarget(AnnotationSpec.UseSiteTarget.GET)
-      .build()
-
-    val snapshotsRuleProperty =
-      PropertySpec.builder("snapshots", EMERGE_SNAPSHOTS_CLASSNAME).apply {
-        initializer("EmergeSnapshots()")
-        addAnnotation(ruleAnnotation)
-      }.build()
-
-    val funSpec = FunSpec.builder("${functionName}_Generated").apply {
-      addAnnotation(testAnnotation)
-      addStatement("composeRule.setContent { $functionName() }")
-      addStatement("snapshots.take(\"$functionName\", composeRule)")
-    }.build()
-
-    val composeRuleProperty =
-      PropertySpec.builder("composeRule", COMPOSE_CONTENT_TEST_RULE_CLASSNAME).apply {
-        addAnnotation(ruleAnnotation)
-        initializer("%T()", CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME)
-      }.build()
-
-    val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
-      .addMember("%T::class", ANDROID_JUNIT_RUNNER_CLASSNAME)
-      .build()
-
-    val typeSpec = TypeSpec.classBuilder(testClassName).apply {
-      addFunction(funSpec)
-      addAnnotation(testRunnerAnnotation)
-      addProperty(composeRuleProperty)
-      addProperty(snapshotsRuleProperty)
-    }.build()
-
-    val fileSpec = FileSpec.builder(packageName, testClassName).apply {
-      addType(typeSpec)
-      addImport("androidx.compose.runtime", "Composable")
-      previewFunction.qualifiedName?.asString()?.let {
-        addImport(previewFunction.packageName.asString(), functionName)
+      var snapshotName = functionName
+      val previewName = previewConfig.name
+      if (!previewName.isNullOrBlank()) {
+        snapshotName += " - $previewName"
       }
-    }.build()
 
-    fileSpec.writeTo(codeGenerator, Dependencies(false))
+      val testFunctionSpec = FunSpec.builder("${functionName}_GenSnapshot").apply {
+        addAnnotation(testAnnotation)
+        addComposableSnapshotBlock(functionName, snapshotName)
+      }.build()
+
+      val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))
+        .addMember("%T::class", ANDROID_JUNIT_RUNNER_CLASSNAME)
+        .build()
+
+      val typeSpec = TypeSpec.classBuilder(testClassName).apply {
+        addFunction(testFunctionSpec)
+        addAnnotation(testRunnerAnnotation)
+        addComposeRuleProperty()
+        addPreviewConfigProperty(previewConfig)
+        addEmergeSnapshotRuleProperty()
+      }.build()
+
+      val fileSpec = FileSpec.builder(packageName, testClassName).apply {
+        addType(typeSpec)
+        addImport("androidx.compose.runtime", "Composable")
+        previewFunction.qualifiedName?.asString()?.let {
+          addImport(previewFunction.packageName.asString(), functionName)
+        }
+        addImport("com.emergetools.snapshots.compose", "SnapshotVariantProvider")
+      }.build()
+
+      fileSpec.writeTo(codeGenerator, Dependencies(false))
+    }
+  }
+
+  /**
+   * Helper to create a unique testClass name. We do so by appending the hashcode of the Preview
+   * config if the config is not a default preview, to ensure test names are unique.
+   */
+  private fun getTestClassName(
+    composableFunctionName: String,
+    previewConfig: ComposePreviewSnapshotConfig,
+  ): String {
+    var testFunctionName = composableFunctionName
+    if (previewConfig.hashCode() != ComposePreviewSnapshotConfig.DEFAULT.hashCode()) {
+      testFunctionName += "_${previewConfig.hashCode()}"
+    }
+    return "${testFunctionName}_GenSnapshot"
   }
 
   companion object {
     private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
       "androidx.compose.ui.tooling.preview.Preview"
 
-    private val EMERGE_SNAPSHOTS_CLASSNAME =
-      ClassName("com.emergetools.snapshots", "EmergeSnapshots")
-
-    private val COMPOSE_CONTENT_TEST_RULE_CLASSNAME =
-      ClassName("androidx.compose.ui.test.junit4", "ComposeContentTestRule")
-    private val CREATE_COMPOSE_RULE_FUNCTION_CLASSNAME =
-      ClassName("androidx.compose.ui.test.junit4", "createComposeRule")
-
     private val ANDROID_JUNIT_RUNNER_CLASSNAME =
       ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
     private val JUNIT_TEST_ANNOTATION_CLASSNAME = ClassName("org.junit", "Test")
-    private val JUNIT_RULE_ANNOTATION_CLASSNAME = ClassName("org.junit", "Rule")
   }
 }
 

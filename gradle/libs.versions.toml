@@ -3,11 +3,11 @@ androidx-test = "1.5.0"
 androidx-test-ext = "1.1.5"
 agp = "8.0.1"
 androidxactivity = "1.7.1"
-compose-bom = "2023.05.01"
+compose-bom = "2023.06.01"
 detekt = "1.22.0"
-kotlin = "1.8.21"
-kotlinpoet = "1.13.2"
-ksp = "1.8.21-1.0.11"
+kotlin = "1.8.22"
+kotlinpoet = "1.14.2"
+ksp = "1.8.22-1.0.11"
 okhttp = "4.10.0"
 junit-jupiter = "5.8.2"
 
@@ -46,13 +46,13 @@ androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version = "1.1
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
+compose-material = { group = "androidx.compose.material3", name = "material3" }
 compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-test = { group = "androidx.compose.ui", name = "ui-test" }
 compose-ui-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-compose-material = { group = "androidx.compose.material3", name = "material3" }
 
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
