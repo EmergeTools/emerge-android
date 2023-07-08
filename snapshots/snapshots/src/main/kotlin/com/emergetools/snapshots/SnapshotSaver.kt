@@ -4,6 +4,7 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
+import androidx.annotation.VisibleForTesting
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig.Companion.DEFAULT
@@ -29,7 +30,6 @@ internal object SnapshotSaver {
   private val args: Bundle
     get() = InstrumentationRegistry.getArguments()
 
-  // TODO: Filename for composable should be functionName, previewName
   fun save(
     displayName: String,
     bitmap: Bitmap,
@@ -42,7 +42,6 @@ internal object SnapshotSaver {
       error("Unable to create snapshots storage directory.")
     }
 
-    // TODO: Might need to take config into account
     val keyName = keyName(displayName, composePreviewSnapshotConfig)
     saveImage(
       snapshotsDir = snapshotsDir,
@@ -118,30 +117,34 @@ internal object SnapshotSaver {
    * We intentionally don't account for FQN here as we still want to diff an image if
    * the test might move packages, which user-defined name ensures.
    */
-  private fun keyName(
+  @VisibleForTesting
+  fun keyName(
     displayName: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ): String {
-    val keyName = composePreviewSnapshotConfig?.let {
+    val normalizedDisplayName = displayName.normalize()
+      .take(MAX_NAME_LENGTH)
+
+    return composePreviewSnapshotConfig?.let {
       // If not default, we'll append the hashcode to the name to ensure uniqueness based on config
       // Hashcode should preserve equality across field additions/removals in the future.
       if (it.hashCode() != DEFAULT.hashCode()) {
-        "${displayName.normalize()}_${it.hashCode()}"
-      } else displayName.normalize()
-    } ?: displayName.normalize()
-
-    if (keyName.length <= MAX_NAME_LENGTH) return keyName
-    // If the string is still too long, shorten to max length
-    return keyName.substring(0, MAX_NAME_LENGTH)
+        "${normalizedDisplayName}_${it.hashCode()}"
+      } else {
+        normalizedDisplayName
+      }
+    } ?: normalizedDisplayName
   }
 
-  private fun String.normalize(): String {
+  @VisibleForTesting
+  fun String.normalize(): String {
     return replace(Regex("[ .-]"), "_")
       //  lowercase the string
       .lowercase()
   }
 
-  private const val MAX_NAME_LENGTH = 128
+  @VisibleForTesting
+  const val MAX_NAME_LENGTH = 128
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }

@@ -58,6 +58,8 @@ dependencies {
   api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)
   api(libs.compose.ui.test.junit)
+
+  testImplementation(libs.junit)
 }
 
 tasks.register("generateMetaInfVersion") {

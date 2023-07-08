@@ -17,18 +17,17 @@ fun SnapshotVariantProvider(
   val fontScale = config.fontScale ?: 1.0f
   val fontScaleDensity = Density(fontScale = fontScale, density = LocalDensity.current.density)
 
-  val resolvedUiMode = config.uiMode ?: Configuration.UI_MODE_NIGHT_NO
-  val resolvedLocale: Locale = config.locale?.let {
-    Locale(it)
-  } ?: LocalConfiguration.current.locales[0]
-  val uiModeConfiguration = Configuration(LocalConfiguration.current).apply {
-    uiMode = resolvedUiMode
-    setLocale(resolvedLocale)
+  val localConfiguration = Configuration(LocalConfiguration.current).apply {
+    config.uiMode?.let { uiMode = it }
+    config.locale?.let { setLocale(Locale(it)) }
   }
 
+  val providedValues = arrayOf(
+    LocalConfiguration provides localConfiguration,
+    config.fontScale?.let { LocalDensity provides fontScaleDensity }
+  )
   CompositionLocalProvider(
-    LocalDensity provides fontScaleDensity,
-    LocalConfiguration provides uiModeConfiguration,
+    values = providedValues.filterNotNull().toTypedArray(),
   ) {
     content()
   }

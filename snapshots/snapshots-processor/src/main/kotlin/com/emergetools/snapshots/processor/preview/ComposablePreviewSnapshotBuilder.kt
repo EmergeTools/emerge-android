@@ -78,12 +78,13 @@ object ComposablePreviewSnapshotBuilder {
   ) {
     val codeBlock = CodeBlock.builder().apply {
       addStatement("$COMPOSE_RULE_PROPERTY_NAME.setContent {")
-      addStatement("  %T(${PREVIEW_CONFIG_PROPERTY_NAME}) {", SNAPSHOT_VARIANT_PROVIDER_CLASSNAME)
+      addStatement("  %T($PREVIEW_CONFIG_PROPERTY_NAME) {", SNAPSHOT_VARIANT_PROVIDER_CLASSNAME)
       addStatement("    $functionName()")
       addStatement("  }")
       addStatement("}")
       addStatement(
-        "$SNAPSHOT_RULE_PROPERTY_NAME.take(\"$snapshotName\", composeRule, $PREVIEW_CONFIG_PROPERTY_NAME)"
+        "$SNAPSHOT_RULE_PROPERTY_NAME.take(\"$snapshotName\"," +
+          " composeRule, $PREVIEW_CONFIG_PROPERTY_NAME)"
       )
     }.build()
 

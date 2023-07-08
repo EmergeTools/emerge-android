@@ -14,7 +14,7 @@ private const val APP_PACKAGE_NAME = "com.emergetools.performance.sample"
  * Note that each test (ie. each method annotated with @EmergeTest) will be run on a separate device, they cannot
  * impact each other in any way.
  */
-class ExampleStartupPerformanceTest {
+class ExamplePerformanceTest {
 
   /**
    * Not implemented as this is a simple sample, but this method can be used to set up persistent
