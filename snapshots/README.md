@@ -97,7 +97,8 @@ dependencies {
 }
 ```
 
-`includeFromMainSourceSet` must be set when generating snapshots from the `main` sourceSet, otherwise
+`includeFromMainSourceSet` must be set when generating snapshots from the `main` sourceSet,
+otherwise
 Kotlin compilation errors are likely to occur. Emerge relies on a custom sourceSet that generated
 snapshot tests are moved to before compilation to get around KSP cross-sourceSet generation
 restrictions.
@@ -235,6 +236,9 @@ fun TextRowWithIconPreview() {
 7. Tag version `snapshots-vX.Y.Z`
 8. Release title `Snapshots vX.Y.Z`
 9. Paste the content from `/snapshots/CHANGELOG.md` as the description
-10. Publish snapshot release from local `./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository`
-11. Publish snapshot processor from local `./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository`
-12. Promote staging to production in Sonatype
+
+The `snapshots-release` workflow will automatically publish the new version to Sonatype upon new
+release publish.
+
+From there, the release will need to be promoted to the main repository from the Sonatype UI.
+
