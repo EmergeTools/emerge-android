@@ -221,3 +221,20 @@ fun TextRowWithIconPreview() {
   )
 }
 ```
+
+## Releasing
+
+### Releasing a new version
+
+1. Update the `emerge-snapshots` version in `/gradle/libs.versions.toml`
+2. Update the `/snapshots/CHANGELOG.md`
+3. `gt bc -a -m "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+4. `gt ss`
+5. Get PR approved and merge
+6. Create a new release on GitHub
+7. Tag version `snapshots-vX.Y.Z`
+8. Release title `Snapshots vX.Y.Z`
+9. Paste the content from `/snapshots/CHANGELOG.md` as the description
+10. Publish snapshot release from local `./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository`
+11. Publish snapshot processor from local `./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository`
+12. Promote staging to production in Sonatype
