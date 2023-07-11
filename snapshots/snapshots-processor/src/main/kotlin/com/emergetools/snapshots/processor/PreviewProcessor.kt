@@ -43,12 +43,6 @@ class PreviewProcessor(
 
     val codeGenerator = environment.codeGenerator
 
-    val outputSrcDir = environment.options[OUTPUT_SRC_DIR_OPTION_NAME]
-
-    logger.info("Options: ${environment.options.size}")
-    environment.options.forEach { (s, s2) ->
-      logger.info("Option: $s = $s2")
-    }
     previewFunctions.forEach { previewFunction ->
       // Intentionally skipping functions with parameters for now.
       if (previewFunction.parameters.isNotEmpty()) {
@@ -63,7 +57,7 @@ class PreviewProcessor(
 
     /**
      * KSP currently doesn't allow for generation across source sets, so we have to
-     * manually move files to an "intermediate" source directory that our plugin sets.
+     * manually move files to a custom source directory that our plugin sets.
      *
      * This file move must take place as part of the process step to ensure no compilation takes
      * place on the generated files while they're in the default KSP generated sourceSet.
@@ -72,6 +66,7 @@ class PreviewProcessor(
      * - https://github.com/google/ksp/issues/799
      * - https://github.com/google/ksp/issues/1037
      */
+    val outputSrcDir = environment.options[OUTPUT_SRC_DIR_OPTION_NAME]
     if (outputSrcDir != null) {
       codeGenerator.generatedFile.forEach { generatedFile ->
         moveFile(generatedFile.toPath(), outputSrcDir)
