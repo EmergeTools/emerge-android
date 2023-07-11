@@ -31,9 +31,11 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
+  implementation(libs.kotlin.reflect)
   implementation(libs.kotlinpoet)
   implementation(libs.kotlinpoet.ksp)
   implementation(libs.ksp)
+  implementation(libs.ksp.api)
 
   implementation(libs.junit)
   implementation(projects.snapshots.shared)

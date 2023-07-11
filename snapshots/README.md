@@ -46,11 +46,7 @@ dependencies {
 }
 ```
 
-A KSP compiler plugin is leveraged to automatically generate snapshot tests for your compose
-previews. 
-
-By design, snapshots are intended to be generated from the `androidTest` sourceSet. This
-is so snapshot tests are explicitly separate from application code.
+A KSP compiler plugin is leveraged to automatically generate snapshot tests for compose previews.
 
 ### Compose snapshotting
 
@@ -75,9 +71,39 @@ composables located in your `main` sourceSet.
 _⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are
 supported. Let us know if there's specific configurations or variants you'd like to see supported!_
 
+#### Generating Preview snapshots from the main sourceSet
+
+While we recommend Previews intended for snapshot testing to live in the `androidTest` sourceSet,
+Preview snapshots can be generated directly from Composable Previews in the `main` sourceSet.
+
+```kotlin
+plugins {
+  id("com.emergetools.android") version "2.0.0-rc01"
+  id("com.google.devtools.ksp")
+}
+
+emerge {
+
+  snapshots {
+    fromMainSourceSet.set(true)
+  }
+}
+
+dependencies {
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.1")
+  // For Compose @Preview snapshot generation from main sourceSet:
+  ksp("com.emergetools.snapshots:snapshots-processor:0.4.1")
+}
+```
+
+`fromMainSourceSet` must be set when generating snapshots from the `main` sourceSet, otherwise
+Kotlin compilation errors are likely to occur. Emerge relies on a custom sourceSet that generated
+snapshot tests are moved to before compilation to get around KSP cross-sourceSet generation
+restrictions.
+
 ### Activities & View snapshotting
 
-Create a basic test class that uses the `EmergeSnapshot` rule to generate snapshots.
+Create a basic instrumentation test class that uses the `EmergeSnapshot` rule to generate snapshots.
 
 ```kotlin
 @RunWith(AndroidJUnit4::class)

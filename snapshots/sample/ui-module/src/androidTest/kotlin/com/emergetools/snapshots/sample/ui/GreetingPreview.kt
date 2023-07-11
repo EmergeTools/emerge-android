@@ -5,6 +5,6 @@ import androidx.compose.ui.tooling.preview.Preview
 
 @Preview
 @Composable
-fun GreetingPreview() {
+fun GreetingPreviewFromAndroidTest() {
   Greeting("AndroidTest")
 }

@@ -20,6 +20,11 @@ import com.squareup.kotlinpoet.FileSpec
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.writeTo
+import java.nio.file.Path
+import kotlin.io.path.absolutePathString
+import kotlin.io.path.createDirectories
+import kotlin.io.path.moveTo
+import kotlin.io.path.writeText
 
 /**
  * A generally simple processor, finds all functions annotated with `@Preview`, filters to unique
@@ -37,14 +42,49 @@ class PreviewProcessor(
       .filterIsInstance<KSFunctionDeclaration>()
 
     val codeGenerator = environment.codeGenerator
+
+    val fromMainSourceSet =
+      environment.options[GENERATE_MAIN_SOURCE_SET_OPTION_NAME]?.toBoolean() ?: false
+    val generatedSourceDir = environment.options[GENERATED_SRC_DIR_OPTION_NAME]
+
+    logger.info("Options: ${environment.options.size}")
+    environment.options.forEach { (s, s2) ->
+      logger.info("Option: $s = $s2")
+    }
     previewFunctions.forEach { previewFunction ->
       // Intentionally skipping functions with parameters for now.
       if (previewFunction.parameters.isNotEmpty()) {
         logger.info("Skipping ${previewFunction.simpleName.asString()} because it has parameters")
         return@forEach
       }
-      generateEmergeSnapshotTest(codeGenerator, previewFunction)
+      generateEmergeSnapshotTest(
+        codeGenerator = codeGenerator,
+        previewFunction = previewFunction,
+      )
     }
+
+    /**
+     * KSP currently doesn't allow for generation across source sets, so we have to
+     * manually move files to an "intermediate" source directory that our plugin sets.
+     *
+     * This file move must take place as part of the process step to ensure no compilation takes
+     * place on the generated files while they're in the default KSP generated sourceSet.
+     *
+     * Relevant KSP Issues:
+     * - https://github.com/google/ksp/issues/799
+     * - https://github.com/google/ksp/issues/1037
+     */
+    if (fromMainSourceSet) {
+      if (generatedSourceDir == null) {
+        logger.error("Generated source directory not specified")
+        return emptyList()
+      }
+
+      codeGenerator.generatedFile.forEach { generatedFile ->
+        moveFile(generatedFile.toPath(), generatedSourceDir)
+      }
+    }
+
     return emptyList()
   }
 
@@ -97,6 +137,35 @@ class PreviewProcessor(
     }
   }
 
+  private fun moveFile(
+    path: Path,
+    outputDir: String,
+  ) {
+    val pathAfterKotlin = path.absolutePathString().substringAfter("kotlin")
+
+    val newPathFile = Path.of(outputDir, pathAfterKotlin)
+    logger.info("Moving generated snapshot test from $path to $newPathFile")
+    path.moveTo(newPathFile.apply { parent?.createDirectories() }, true)
+
+    /**
+     * Kotlin compilation will fail if test dependencies aren't available for the test class.
+     * Deleting these files also won't work as KSP && Kotlin compilation seem to be closely tied
+     * together. TODO: Ryan to investigate further to see if we can delete these.
+     *
+     * In our generated snapshot test cases, without deleting the file, the main sourceSet would
+     * need to include test dependencies, which is not ideal.
+     *
+     * To avoid this, we'll just write a placeholder file that will ensure Kotlin compilation
+     * succeeds and won't have any direct impact on the main sourceSet's build.
+     */
+    path.writeText(
+      """
+        // This file has been moved to $newPathFile
+        // This file acts as a placeholder and will have no effect on the build.
+        """.trimIndent(),
+    )
+  }
+
   /**
    * Helper to create a unique testClass name. We do so by appending the hashcode of the Preview
    * config if the config is not a default preview, to ensure test names are unique.
@@ -113,6 +182,9 @@ class PreviewProcessor(
   }
 
   companion object {
+    private const val GENERATE_MAIN_SOURCE_SET_OPTION_NAME = "emerge.fromMainSourceSet"
+    private const val GENERATED_SRC_DIR_OPTION_NAME = "emerge.srcDir"
+
     private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
       "androidx.compose.ui.tooling.preview.Preview"
 

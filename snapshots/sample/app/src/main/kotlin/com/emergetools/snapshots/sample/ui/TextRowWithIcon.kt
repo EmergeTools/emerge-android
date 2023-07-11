@@ -24,10 +24,14 @@ fun TextRowWithIcon(
 
 // Should not be snapshotted as this is in the main sourceSet
 @Preview
+@Preview(
+  fontScale = 1.5f
+)
 @Composable
-fun TextRowWithIconPreview() {
+fun TextRowWithIconPreviewFromMain() {
   TextRowWithIcon(
     titleText = "Title",
     subtitleText = "Subtitle"
   )
 }
+

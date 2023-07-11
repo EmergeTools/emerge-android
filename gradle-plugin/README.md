@@ -210,20 +210,26 @@ emerge {
   ..
 
   snapshots {
+    buildType.set("snapshots") // Build type to use for grouping builds in the Emerge dashboard
+
+    fromMainSourceSet.set(
+      true
+    ) // Generate composable previews snapshots from the main sourceSet, defaults to `false`
+
     snapshotsStorageDirectory.set(
       "/src/main/snapshots"
     ) // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
-    buildType.set("snapshots") // Build type to use for grouping builds in the Emerge dashboard
   }
 }
 ```
 
 ##### Fields
 
-| Field                       | Type     | Default                           | Description                                                                  |
-|-----------------------------|----------|-----------------------------------|------------------------------------------------------------------------------|
-| `buildType`                 | `String` | `release`                         | The build type to use for grouping builds in the Emerge dashboard.           |
-| `snapshotsStorageDirectory` | `String` | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
+| Field                       | Type      | Default                           | Description                                                                  |
+|-----------------------------|-----------|-----------------------------------|------------------------------------------------------------------------------|
+| `buildType`                 | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.           |
+| `fromMainSourceSet`         | `Boolean` | `false`                           | Enables composable `@Preview` snapshot generation from the main sourceSet.   |
+| `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
 
 ## Full configuration
 
@@ -260,6 +266,8 @@ emerge {
   snapshots {
     // Optional, snapshots use debug builds, we recommend using separate build type.
     buildType.set("snapshots")
+    // Optional, for generating snapshot test from main sourceSet, defaults to 'false'
+    fromMainSourceSet.set(true)
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
   }
 }

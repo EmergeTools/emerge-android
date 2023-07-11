@@ -8,7 +8,7 @@ import androidx.compose.ui.tooling.preview.Preview
   fontScale = 1.5f
 )
 @Composable
-fun TextRowWithIconPreview() {
+fun TextRowWithIconPreviewFromAndroidTest() {
   TextRowWithIcon(
     titleText = "Title",
     subtitleText = "Subtitle"
