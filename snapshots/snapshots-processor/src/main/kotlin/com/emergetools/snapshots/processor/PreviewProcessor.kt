@@ -43,9 +43,7 @@ class PreviewProcessor(
 
     val codeGenerator = environment.codeGenerator
 
-    val fromMainSourceSet =
-      environment.options[GENERATE_MAIN_SOURCE_SET_OPTION_NAME]?.toBoolean() ?: false
-    val generatedSourceDir = environment.options[GENERATED_SRC_DIR_OPTION_NAME]
+    val outputSrcDir = environment.options[OUTPUT_SRC_DIR_OPTION_NAME]
 
     logger.info("Options: ${environment.options.size}")
     environment.options.forEach { (s, s2) ->
@@ -74,17 +72,11 @@ class PreviewProcessor(
      * - https://github.com/google/ksp/issues/799
      * - https://github.com/google/ksp/issues/1037
      */
-    if (fromMainSourceSet) {
-      if (generatedSourceDir == null) {
-        logger.error("Generated source directory not specified")
-        return emptyList()
-      }
-
+    if (outputSrcDir != null) {
       codeGenerator.generatedFile.forEach { generatedFile ->
-        moveFile(generatedFile.toPath(), generatedSourceDir)
+        moveFile(generatedFile.toPath(), outputSrcDir)
       }
     }
-
     return emptyList()
   }
 
@@ -160,9 +152,9 @@ class PreviewProcessor(
      */
     path.writeText(
       """
-        // This file has been moved to $newPathFile
-        // This file acts as a placeholder and will have no effect on the build.
-        """.trimIndent(),
+      // This file has been moved to $newPathFile
+      // This file acts as a placeholder and will have no effect on the build.
+      """.trimIndent(),
     )
   }
 
@@ -182,8 +174,7 @@ class PreviewProcessor(
   }
 
   companion object {
-    private const val GENERATE_MAIN_SOURCE_SET_OPTION_NAME = "emerge.fromMainSourceSet"
-    private const val GENERATED_SRC_DIR_OPTION_NAME = "emerge.srcDir"
+    private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
 
     private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
       "androidx.compose.ui.tooling.preview.Preview"

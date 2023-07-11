@@ -340,9 +340,7 @@ class EmergePlugin : Plugin<Project> {
     // Currently we only configure snapshot-specific options on the appProject when
     // the fromMainSourceSet flag is set. So just return early if it's not set.
     if (!emergeExtension.snapshotOptions.fromMainSourceSet.getOrElse(false)) {
-      appProject.logger.info(
-        "Emerge: fromMainSourceSet is not set. Skipping appProject configuration."
-      )
+      appProject.logger.info("fromMainSourceSet not set. Skipping appProject configuration.")
       return
     }
 
@@ -358,8 +356,7 @@ class EmergePlugin : Plugin<Project> {
 
     val kspExtension = appProject.extensions.getByType(KspExtension::class.java)
     kspExtension.apply {
-      arg(GENERATE_MAIN_SOURCE_SET_OPTION_NAME, "true")
-      arg(GENERATED_SRC_DIR_OPTION_NAME, emergeSrcDir)
+      arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
     }
 
     val appExtension = appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java)
@@ -464,8 +461,7 @@ class EmergePlugin : Plugin<Project> {
     private const val KSP_PLUGIN_ID = "com.google.devtools.ksp"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
 
-    private const val GENERATE_MAIN_SOURCE_SET_OPTION_NAME = "emerge.fromMainSourceSet"
-    private const val GENERATED_SRC_DIR_OPTION_NAME = "emerge.srcDir"
+    private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 

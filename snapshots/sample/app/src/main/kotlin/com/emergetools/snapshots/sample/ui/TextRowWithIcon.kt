@@ -34,4 +34,3 @@ fun TextRowWithIconPreviewFromMain() {
     subtitleText = "Subtitle"
   )
 }
-
