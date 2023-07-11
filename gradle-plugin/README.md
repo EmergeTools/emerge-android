@@ -343,7 +343,7 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 
 1. Update the version in `build.gradle.kts`
 2. Update the `CHANGELOG.md`
-3. `gt bc -a -m "Prepare for release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+3. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub
