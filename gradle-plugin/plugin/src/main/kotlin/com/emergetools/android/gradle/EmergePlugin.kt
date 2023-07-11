@@ -450,7 +450,6 @@ class EmergePlugin : Plugin<Project> {
 
   companion object {
     const val BUILD_OUTPUT_DIR_NAME = "emerge"
-    const val OUTPUT_DIR_NAME = "/$BUILD_OUTPUT_DIR_NAME/plugin"
 
     private const val EMERGE_EXTENSION_NAME = "emerge"
     private const val EMERGE_TASK_PREFIX = "emerge"
