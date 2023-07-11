@@ -77,7 +77,7 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.afterEvaluate {
-      configureAppProject(it, emergeExtension)
+      configureAppProjectSnapshots(it, emergeExtension)
     }
 
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
@@ -333,14 +333,14 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
-  private fun configureAppProject(
+  private fun configureAppProjectSnapshots(
     appProject: Project,
     emergeExtension: EmergePluginExtension,
   ) {
     // Currently we only configure snapshot-specific options on the appProject when
-    // the fromMainSourceSet flag is set. So just return early if it's not set.
-    if (!emergeExtension.snapshotOptions.fromMainSourceSet.getOrElse(false)) {
-      appProject.logger.info("fromMainSourceSet not set. Skipping appProject configuration.")
+    // the includeFromMainSourceSet flag is set. So just return early if it's not set.
+    if (!emergeExtension.snapshotOptions.includeFromMainSourceSet.getOrElse(false)) {
+      appProject.logger.info("includeFromMainSourceSet not set. Skipping appProject configuration.")
       return
     }
 
@@ -432,7 +432,7 @@ class EmergePlugin : Plugin<Project> {
           └── buildType (optional):      ${extension.perfOptions.buildType.orEmpty()}
           snapshots
           ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          ├── fromMainSourceSet:         ${extension.snapshotOptions.fromMainSourceSet.orEmpty()}
+          ├── includeFromMainSourceSet:  ${extension.snapshotOptions.includeFromMainSourceSet.orEmpty()}
           └── buildType (optional):      ${extension.snapshotOptions.buildType.orEmpty()}
           vcsOptions (optional, defaults to Git values)
           ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}

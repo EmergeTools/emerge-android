@@ -83,9 +83,10 @@ plugins {
 }
 
 emerge {
+  // ..
 
   snapshots {
-    fromMainSourceSet.set(true)
+    includeFromMainSourceSet.set(true)
   }
 }
 
@@ -96,7 +97,7 @@ dependencies {
 }
 ```
 
-`fromMainSourceSet` must be set when generating snapshots from the `main` sourceSet, otherwise
+`includeFromMainSourceSet` must be set when generating snapshots from the `main` sourceSet, otherwise
 Kotlin compilation errors are likely to occur. Emerge relies on a custom sourceSet that generated
 snapshot tests are moved to before compilation to get around KSP cross-sourceSet generation
 restrictions.

@@ -62,7 +62,7 @@ values, you can do so using the `vcs` extension.
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   vcs {
     sha.set("..")
@@ -82,10 +82,10 @@ These are used for CI integrations, like posting GitHub comments and status chec
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   vcs {
-    ..
+    // ..
 
     gitHub {
       repoOwner.set("..")
@@ -102,10 +102,10 @@ are not set automatically and will need to be set manually for GitLab CI integra
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   vcs {
-    ..
+    // ..
 
     gitLab {
       projectId.set("..")
@@ -141,7 +141,7 @@ The `size` extension allows you to configure size-specific fields.
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   size {
     buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
@@ -174,7 +174,7 @@ Additionally, the `performance` extension allows you to configure perf-specific 
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   performance {
     buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
@@ -207,12 +207,12 @@ The `snapshot` extension allows you to configure snapshot-specific fields.
 
 ```kotlin
 emerge {
-  ..
+  // ..
 
   snapshots {
     buildType.set("snapshots") // Build type to use for grouping builds in the Emerge dashboard
 
-    fromMainSourceSet.set(
+    includeFromMainSourceSet.set(
       true
     ) // Generate composable previews snapshots from the main sourceSet, defaults to `false`
 
@@ -228,7 +228,7 @@ emerge {
 | Field                       | Type      | Default                           | Description                                                                  |
 |-----------------------------|-----------|-----------------------------------|------------------------------------------------------------------------------|
 | `buildType`                 | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.           |
-| `fromMainSourceSet`         | `Boolean` | `false`                           | Enables composable `@Preview` snapshot generation from the main sourceSet.   |
+| `includeFromMainSourceSet`  | `Boolean` | `false`                           | Enables composable `@Preview` snapshot generation from the main sourceSet.   |
 | `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
 
 ## Full configuration
@@ -267,7 +267,7 @@ emerge {
     // Optional, snapshots use debug builds, we recommend using separate build type.
     buildType.set("snapshots")
     // Optional, for generating snapshot test from main sourceSet, defaults to 'false'
-    fromMainSourceSet.set(true)
+    includeFromMainSourceSet.set(true)
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
   }
 }

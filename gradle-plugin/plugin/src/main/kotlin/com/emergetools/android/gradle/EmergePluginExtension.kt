@@ -121,5 +121,5 @@ abstract class SnapshotOptions : ProductOptions() {
 
   abstract val snapshotsStorageDirectory: DirectoryProperty
 
-  abstract val fromMainSourceSet: Property<Boolean>
+  abstract val includeFromMainSourceSet: Property<Boolean>
 }
