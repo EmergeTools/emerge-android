@@ -130,6 +130,10 @@ dependencies {
 	implementation(libs.kotlinx.datetime)
 	implementation(libs.kotlinx.serialization)
 
+  // Needs to be impl as users might not always have the plugin applied, which compileOnly
+  // would require.
+  implementation(libs.ksp.gradle.plugin)
+
 	testImplementation(libs.junit.jupiter.api)
 	testImplementation(libs.google.truth)
 	testRuntimeOnly(libs.junit.jupiter.engine)

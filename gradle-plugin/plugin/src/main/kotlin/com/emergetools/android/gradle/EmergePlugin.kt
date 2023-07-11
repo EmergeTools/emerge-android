@@ -21,11 +21,14 @@ import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setU
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
+import com.google.devtools.ksp.gradle.KspExtension
+import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.TaskProvider
+import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 class EmergePlugin : Plugin<Project> {
 
@@ -73,6 +76,10 @@ class EmergePlugin : Plugin<Project> {
     appProject: Project,
     emergeExtension: EmergePluginExtension,
   ) {
+    appProject.afterEvaluate {
+      configureAppProjectSnapshots(it, emergeExtension)
+    }
+
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
       val androidComponents = appProject.extensions.getByType(
         ApplicationAndroidComponentsExtension::class.java
@@ -326,6 +333,38 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
+  private fun configureAppProjectSnapshots(
+    appProject: Project,
+    emergeExtension: EmergePluginExtension,
+  ) {
+    // Currently we only configure snapshot-specific options on the appProject when
+    // the includeFromMainSourceSet flag is set. So just return early if it's not set.
+    if (!emergeExtension.snapshotOptions.includeFromMainSourceSet.getOrElse(false)) {
+      appProject.logger.info("includeFromMainSourceSet not set. Skipping appProject configuration.")
+      return
+    }
+
+    if (!appProject.plugins.hasPlugin(KSP_PLUGIN_ID)) {
+      throw GradleException(
+        "The Emerge plugin requires the KSP plugin to be applied to the" +
+          " app module for snapshot testing. Please apply the KSP plugin to the app module."
+      )
+    }
+
+    // TODO: Ryan: See if we can configure this by variant rather than hardcoding debugAndroidTest
+    val emergeSrcDir = "${appProject.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+
+    val kspExtension = appProject.extensions.getByType(KspExtension::class.java)
+    kspExtension.apply {
+      arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
+    }
+
+    val appExtension = appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java)
+    appExtension.apply {
+      sourceSets.getByName("androidTest").kotlin.srcDir(emergeSrcDir)
+    }
+  }
+
   @Suppress("UnstableApiUsage")
   private fun configurePerformanceProject(
     performanceProject: Project,
@@ -393,6 +432,7 @@ class EmergePlugin : Plugin<Project> {
           └── buildType (optional):      ${extension.perfOptions.buildType.orEmpty()}
           snapshots
           ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
+          ├── includeFromMainSourceSet:  ${extension.snapshotOptions.includeFromMainSourceSet.orEmpty()}
           └── buildType (optional):      ${extension.snapshotOptions.buildType.orEmpty()}
           vcsOptions (optional, defaults to Git values)
           ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}
@@ -409,7 +449,7 @@ class EmergePlugin : Plugin<Project> {
   }
 
   companion object {
-    const val OUTPUT_DIR_NAME = "/emerge/plugin"
+    const val BUILD_OUTPUT_DIR_NAME = "emerge"
 
     private const val EMERGE_EXTENSION_NAME = "emerge"
     private const val EMERGE_TASK_PREFIX = "emerge"
@@ -417,7 +457,10 @@ class EmergePlugin : Plugin<Project> {
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
+    private const val KSP_PLUGIN_ID = "com.google.devtools.ksp"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
+
+    private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 

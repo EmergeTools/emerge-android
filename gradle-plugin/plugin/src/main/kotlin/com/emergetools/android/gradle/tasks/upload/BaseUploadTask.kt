@@ -2,6 +2,7 @@ package com.emergetools.android.gradle.tasks.upload
 
 import com.emergetools.android.gradle.BuildConfig
 import com.emergetools.android.gradle.EmergePlugin
+import com.emergetools.android.gradle.EmergePlugin.Companion
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
@@ -184,6 +185,7 @@ abstract class BaseUploadTask : DefaultTask() {
   companion object {
     const val OUTPUT_FILE_NAME = "emerge.zip"
     const val DEFAULT_API_TOKEN_ENV_KEY = "EMERGE_API_TOKEN"
+    private const val ARTIFACT_OUTPUT_DIR = "${EmergePlugin.BUILD_OUTPUT_DIR_NAME}/artifacts"
 
     private const val BASE_URL_ARG_KEY = "baseUrl"
 
@@ -194,7 +196,7 @@ abstract class BaseUploadTask : DefaultTask() {
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
-      outputDir.set(File(project.buildDir, EmergePlugin.OUTPUT_DIR_NAME).also(File::mkdirs))
+      outputDir.set(File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs))
 
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
