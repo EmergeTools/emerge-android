@@ -28,7 +28,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Sanity check snapshots test
-        run: ./gradlew :snapshots:snapshots:test
+        run: ./gradlew :snapshots:snapshots:test -Pandroid.useAndroidX=true
       - name: Sanity check snapshots-processor test
         run: ./gradlew :snapshots:snapshots-processor:test
       - name: Deploy snapshots
