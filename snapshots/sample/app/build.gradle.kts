@@ -88,7 +88,7 @@ dependencies {
   // This will generate snapshots from Composable Previews in the main source set, with
   // snapshots.includeFromMainSourceSet set to true from the Emerge Gradle plugin configuration block
   ksp(projects.snapshots.snapshotsProcessor)
-  // This will generate snapshots from Composable Previews in the androidTest sourceSet.
+  // This will generate snapshots from Composable Previews in the androidTest source set.
   kspAndroidTest(projects.snapshots.snapshotsProcessor)
 
   androidTestImplementation(projects.snapshots.snapshots)

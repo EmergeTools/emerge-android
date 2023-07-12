@@ -13,7 +13,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
   )
 }
 
-// Will not be included in the snapshot since it's in main sourceSet
+// Will not be included in the snapshot since it's in main source set
 @Preview
 @Composable
 fun GreetingPreviewFromMain() {

@@ -22,7 +22,7 @@ fun TextRowWithIcon(
   }
 }
 
-// Should not be snapshotted as this is in the main sourceSet
+// Should not be snapshotted as this is in the main source set
 @Preview
 @Composable
 fun TextRowWithIconPreview() {

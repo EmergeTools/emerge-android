@@ -50,7 +50,7 @@ A KSP compiler plugin is leveraged to automatically generate snapshot tests for 
 
 ### Compose snapshotting
 
-Add compose `@Preview` annotated methods directly to your `androidTest` sourceSet.
+Add compose `@Preview` annotated methods directly to your `androidTest` source set.
 
 ```kotlin
 @Preview
@@ -63,18 +63,18 @@ fun MyComposablePreview() {
 ```
 
 That's it! Using KSP, `snapshot-processor` will automatically generate snapshot tests for
-all `@Preview` annotated functions in the `androidTest` sourceSet.
+all `@Preview` annotated functions in the `androidTest` source set.
 
-We recommend creating `@Preview` functions in the `androidTest` sourceSet that depend directly on
-composables located in your `main` sourceSet.
+We recommend creating `@Preview` functions in the `androidTest` source set that depend directly on
+composables located in your `main` source set.
 
 _⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are
 supported. Let us know if there's specific configurations or variants you'd like to see supported!_
 
-#### Generating Preview snapshots from the main sourceSet
+#### Generating Preview snapshots from the main source set
 
-While we recommend Previews intended for snapshot testing to live in the `androidTest` sourceSet,
-Preview snapshots can be generated directly from Composable Previews in the `main` sourceSet.
+While we recommend Previews intended for snapshot testing to live in the `androidTest` source set,
+Preview snapshots can be generated directly from Composable Previews in the `main` source set.
 
 ```kotlin
 plugins {
@@ -93,15 +93,15 @@ emerge {
 
 dependencies {
   androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.0")
-  // For Compose @Preview snapshot generation from main sourceSet:
+  // For Compose @Preview snapshot generation from main source set:
   ksp("com.emergetools.snapshots:snapshots-processor:0.5.0")
 }
 ```
 
-`includeFromMainSourceSet` must be set when generating snapshots from the `main` sourceSet,
+`includeFromMainSourceSet` must be set when generating snapshots from the `main` source set,
 otherwise
-Kotlin compilation errors are likely to occur. Emerge relies on a custom sourceSet that generated
-snapshot tests are moved to before compilation to get around KSP cross-sourceSet generation
+Kotlin compilation errors are likely to occur. Emerge relies on a custom source set that generated
+snapshot tests are moved to before compilation to get around KSP cross-source set generation
 restrictions.
 
 ### Activities & View snapshotting

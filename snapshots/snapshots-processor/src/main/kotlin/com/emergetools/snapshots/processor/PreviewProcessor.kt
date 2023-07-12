@@ -60,7 +60,7 @@ class PreviewProcessor(
      * manually move files to a custom source directory that our plugin sets.
      *
      * This file move must take place as part of the process step to ensure no compilation takes
-     * place on the generated files while they're in the default KSP generated sourceSet.
+     * place on the generated files while they're in the default KSP generated source set.
      *
      * Relevant KSP Issues:
      * - https://github.com/google/ksp/issues/799
@@ -139,11 +139,11 @@ class PreviewProcessor(
      * Deleting these files also won't work as KSP && Kotlin compilation seem to be closely tied
      * together. TODO: Ryan to investigate further to see if we can delete these.
      *
-     * In our generated snapshot test cases, without deleting the file, the main sourceSet would
+     * In our generated snapshot test cases, without deleting the file, the main source set would
      * need to include test dependencies, which is not ideal.
      *
      * To avoid this, we'll just write a placeholder file that will ensure Kotlin compilation
-     * succeeds and won't have any direct impact on the main sourceSet's build.
+     * succeeds and won't have any direct impact on the main source set's build.
      */
     path.writeText(
       """
