@@ -18,7 +18,7 @@ Add the Emerge Gradle plugin to your application's `build.gradle.kts` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc01"
+  id("com.emergetools.android") version "2.0.0-rc02"
 }
 
 emerge {
@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.0")
   // For Compose @Preview snapshot generation:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.4.1")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.5.0")
 }
 ```
 
@@ -78,7 +78,7 @@ Preview snapshots can be generated directly from Composable Previews in the `mai
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc01"
+  id("com.emergetools.android") version "2.0.0-rc02"
   id("com.google.devtools.ksp")
 }
 
@@ -86,14 +86,15 @@ emerge {
   // ..
 
   snapshots {
+    // Required for generating snapshots from main sourceSet
     includeFromMainSourceSet.set(true)
   }
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.4.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.0")
   // For Compose @Preview snapshot generation from main sourceSet:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.4.1")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.5.0")
 }
 ```
 
