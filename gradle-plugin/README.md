@@ -341,15 +341,15 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 
 ### Releasing a new version
 
-1. Update the version in `build.gradle.kts`
-2. Update the `CHANGELOG.md`
+1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
+2. Update the `/gradle-plugin/CHANGELOG.md`
 3. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub
 7. Tag version `gradle-plugin-vX.Y.Z`
 8. Release title `Gradle Plugin vX.Y.Z`
-9. Paste the content from `CHANGELOG.md` as the description
+9. Paste the content from `/gradle-plugin/CHANGELOG.md` as the description
 
 The `gradle-plugin-release` workflow will automatically publish the new version to the Gradle Plugin
 portal upon new release publish.
