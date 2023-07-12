@@ -25,7 +25,6 @@ include(
   ":performance:sample:app",
   ":performance:sample:perftesting",
   ":snapshots",
-  ":snapshots:shared",
   ":snapshots:snapshots",
   ":snapshots:snapshots-processor",
   ":snapshots:sample",

@@ -34,10 +34,9 @@ dependencies {
   implementation(libs.kotlin.reflect)
   implementation(libs.kotlinpoet)
   implementation(libs.kotlinpoet.ksp)
+  implementation(libs.kotlinx.serialization)
   implementation(libs.ksp.api)
-
   implementation(libs.junit)
-  implementation(projects.snapshots.shared)
 }
 
 tasks.register("generateMetaInfVersion") {
