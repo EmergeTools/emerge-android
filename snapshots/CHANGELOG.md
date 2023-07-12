@@ -10,5 +10,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - [Processor] Add support for generating `@Preview` snapshots from main
-  sourceSet. [#20](https://github.com/EmergeTools/emerge-android/pull/20)
+  source set. [#20](https://github.com/EmergeTools/emerge-android/pull/20)
 

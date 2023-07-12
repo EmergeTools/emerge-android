@@ -90,7 +90,7 @@ class EmergePlugin : Plugin<Project> {
 
         registerSizeTasks(appProject, emergeExtension, variant)
 
-        // Only register snapshot tasks for builds with androidTest sourceSet
+        // Only register snapshot tasks for builds with androidTest source set
         val androidTest = variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
           ?: return@onVariants
 
