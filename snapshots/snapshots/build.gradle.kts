@@ -53,7 +53,6 @@ dependencies {
 
   implementation(libs.kotlinx.serialization)
 
-  api(projects.snapshots.shared)
   api(libs.androidx.test.core)
   api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)

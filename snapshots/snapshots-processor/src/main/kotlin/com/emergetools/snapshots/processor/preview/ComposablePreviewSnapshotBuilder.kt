@@ -1,6 +1,6 @@
 package com.emergetools.snapshots.processor.preview
 
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.processor.shared.ComposePreviewSnapshotConfig
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
@@ -18,6 +18,8 @@ object ComposablePreviewSnapshotBuilder {
   )
   private val EMERGE_SNAPSHOTS_RULE_CLASSNAME =
     ClassName("com.emergetools.snapshots", "EmergeSnapshots")
+  private val EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME =
+    ClassName("com.emergetools.snapshots.shared", "ComposePreviewSnapshotConfig")
 
   private val COMPOSE_CONTENT_TEST_RULE_CLASSNAME =
     ClassName("androidx.compose.ui.test.junit4", "ComposeContentTestRule")
@@ -41,10 +43,11 @@ object ComposablePreviewSnapshotBuilder {
       config.fontScale?.let { add("fontScale = ${it}f") }
     }.joinToString(",\n")
 
-    val property =
-      PropertySpec.builder(PREVIEW_CONFIG_PROPERTY_NAME, ComposePreviewSnapshotConfig::class.java)
-        .initializer("%T($configInitializer)", ComposePreviewSnapshotConfig::class.java)
-        .build()
+    val property = PropertySpec.builder(
+      name = PREVIEW_CONFIG_PROPERTY_NAME,
+      type = EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME
+    ).initializer("%T($configInitializer)", EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME)
+      .build()
 
     addProperty(property)
   }
