@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.1")
   // For Compose @Preview snapshot generation:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.5.0")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.5.1")
 }
 ```
 
@@ -92,9 +92,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.1")
   // For Compose @Preview snapshot generation from main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.5.0")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.5.1")
 }
 ```
 
@@ -143,7 +143,7 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc01"
+  id("com.emergetools.android") version "2.0.0-rc02"
 }
 
 emerge {
@@ -156,7 +156,8 @@ emerge {
 }
 ```
 
-_Snapshot support was added in 2.0.0, versions below 2.X do not support snapshots._
+_Snapshot support was added in Emerge gradle plugin v2.0.0, versions below 2.X do not support
+snapshots._
 
 Then, run the `emergeLocalSnapshots<variant>` task to generate snapshots. You'll need a connected
 device or emulator actively running.
@@ -199,7 +200,7 @@ class ExampleMainActivityTest {
 
   @Test
   fun basicActivityView() {
-    ..
+    // ..
 
     // The primary key for saving/diffing this snapshot is the "Main Activity" string.
     snapshots.take("Main Activity", activity)
