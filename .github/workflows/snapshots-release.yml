@@ -32,6 +32,6 @@ jobs:
       - name: Sanity check snapshots-processor test
         run: ./gradlew :snapshots:snapshots-processor:test
       - name: Deploy snapshots
-        run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository
+        run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
       - name: Deploy snapshots-processor
         run: ./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository
