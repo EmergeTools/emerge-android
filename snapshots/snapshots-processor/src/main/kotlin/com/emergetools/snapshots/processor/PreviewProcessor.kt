@@ -6,6 +6,7 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
 import com.emergetools.snapshots.processor.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.isPrivate
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
 import com.google.devtools.ksp.processing.Resolver
@@ -49,6 +50,12 @@ class PreviewProcessor(
         logger.info("Skipping ${previewFunction.simpleName.asString()} because it has parameters")
         return@forEach
       }
+
+      if (previewFunction.isPrivate()) {
+        logger.info("Skipping ${previewFunction.simpleName.asString()} as it is private")
+        return@forEach
+      }
+
       generateEmergeSnapshotTest(
         codeGenerator = codeGenerator,
         previewFunction = previewFunction,
