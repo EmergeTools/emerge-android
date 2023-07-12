@@ -44,7 +44,8 @@ object ComposablePreviewSnapshotBuilder {
     }.joinToString(",\n")
 
     val property = PropertySpec.builder(
-      PREVIEW_CONFIG_PROPERTY_NAME, EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME
+      name = PREVIEW_CONFIG_PROPERTY_NAME,
+      type = EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME
     ).initializer("%T($configInitializer)", EMERGE_COMPOSE_PREVIEW_SNAPSHOT_CONFIG_CLASSNAME)
       .build()
 
