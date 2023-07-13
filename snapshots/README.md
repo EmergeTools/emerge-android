@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.2")
   // For Compose @Preview snapshot generation:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.5.1")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.5.2")
 }
 ```
 
@@ -68,8 +68,7 @@ all `@Preview` annotated functions in the `androidTest` source set.
 We recommend creating `@Preview` functions in the `androidTest` source set that depend directly on
 composables located in your `main` source set.
 
-_⚠️ Currently only no-arg `@Preview` annotated composables with a default configuration are
-supported. Let us know if there's specific configurations or variants you'd like to see supported!_
+_⚠️ Currently only no-arg, public `@Preview` annotated composable functions are supported._
 
 #### Generating Preview snapshots from the main source set
 
@@ -92,9 +91,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.5.2")
   // For Compose @Preview snapshot generation from main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.5.1")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.5.2")
 }
 ```
 

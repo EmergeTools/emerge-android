@@ -5,6 +5,13 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.5.2 - 2023-07-12
+
+### Changed
+
+- [Processor] Skip private Preview composable test generation as Kotlin compilation will fail and we
+  don't support private previews yet. [#30](https://github.com/EmergeTools/emerge-android/pull/30)
+
 ## 0.5.1 - 2023-07-12
 
 ### Fixed
