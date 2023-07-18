@@ -1,6 +1,7 @@
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.ksp)
 }
 
 android {
@@ -37,6 +38,9 @@ dependencies {
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
+
+  ksp(projects.snapshots.snapshotsProcessor)
+  kspAndroidTest(projects.snapshots.snapshotsProcessor)
 
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.junit)
