@@ -9,6 +9,7 @@ import com.android.build.api.variant.TestAndroidComponentsExtension
 import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
+import com.android.build.gradle.internal.utils.KOTLIN_ANDROID_PLUGIN_ID
 import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
 import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
 import com.emergetools.android.gradle.tasks.perf.UploadPerfBundle
@@ -22,9 +23,9 @@ import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
 import com.google.devtools.ksp.gradle.KspExtension
-import org.gradle.api.GradleException
 import org.gradle.api.Plugin
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.TaskProvider
@@ -77,7 +78,7 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.afterEvaluate {
-      configureAppProjectSnapshots(it, emergeExtension)
+      configureAppProjectSnapshots(appProject)
     }
 
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
@@ -333,34 +334,60 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
-  private fun configureAppProjectSnapshots(
-    appProject: Project,
-    emergeExtension: EmergePluginExtension,
-  ) {
-    // Currently we only configure snapshot-specific options on the appProject when
-    // the includeFromMainSourceSet flag is set. So just return early if it's not set.
-    if (!emergeExtension.snapshotOptions.includeFromMainSourceSet.getOrElse(false)) {
-      appProject.logger.info("includeFromMainSourceSet not set. Skipping appProject configuration.")
-      return
-    }
+  private fun configureAppProjectSnapshots(appProject: Project) {
+    applyMainSourceSetConfig(appProject, appProject)
 
-    if (!appProject.plugins.hasPlugin(KSP_PLUGIN_ID)) {
-      throw GradleException(
-        "The Emerge plugin requires the KSP plugin to be applied to the" +
-          " app module for snapshot testing. Please apply the KSP plugin to the app module."
+    // Configure all dependent modules to apply the same configuration as the appProject so
+    // generated snapshots don't run into compilation issues.
+    appProject.configurations
+      .flatMap { it.dependencies }
+      .filterIsInstance<ProjectDependency>()
+      .map { it.dependencyProject }
+      .distinct()
+      .filter { !it.state.executed }
+      .forEach { subproject ->
+        subproject.afterEvaluate { applyMainSourceSetConfig(it, appProject) }
+      }
+  }
+
+  private fun applyMainSourceSetConfig(
+    project: Project,
+    appProject: Project,
+  ) {
+    val errorMessages = mutableListOf<String>()
+    if (!project.plugins.hasPlugin(KSP_PLUGIN_ID)) {
+      errorMessages.add(
+        "${project.name} does not have the KSP plugin applied. " +
+          "Please apply the KSP plugin to the ${project.name} module " +
+          "for Emerge snapshot test generation of composables in this module."
       )
     }
 
-    // TODO: Ryan: See if we can configure this by variant rather than hardcoding debugAndroidTest
-    val emergeSrcDir = "${appProject.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+    if (!project.plugins.hasPlugin(KOTLIN_ANDROID_PLUGIN_ID)) {
+      errorMessages.add(
+        "${project.name} does not have the Kotlin Android plugin applied. " +
+          "Please apply the Kotlin Android plugin to the ${project.name} module " +
+          "for Emerge snapshot test generation of composables in this module."
+      )
+    }
 
-    val kspExtension = appProject.extensions.getByType(KspExtension::class.java)
-    kspExtension.apply {
+    // Return early with an info-level log if the KSP/Kotlin Android plugin isn't applied.
+    if (errorMessages.isNotEmpty()) {
+      errorMessages.forEach(appProject.logger::info)
+      return
+    }
+
+    // TODO: Ryan: Explore using variants API for finding proper ourput dir.
+    val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+
+    appProject.logger.info(
+      "Configuring ${project.name} for Emerge snapshot testing, outputting to $emergeSrcDir"
+    )
+    project.extensions.getByType(KspExtension::class.java).apply {
       arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
     }
 
-    val appExtension = appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java)
-    appExtension.apply {
+    appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
       sourceSets.getByName("androidTest").kotlin.srcDir(emergeSrcDir)
     }
   }
@@ -432,7 +459,6 @@ class EmergePlugin : Plugin<Project> {
           └── buildType (optional):      ${extension.perfOptions.buildType.orEmpty()}
           snapshots
           ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          ├── includeFromMainSourceSet:  ${extension.snapshotOptions.includeFromMainSourceSet.orEmpty()}
           └── buildType (optional):      ${extension.snapshotOptions.buildType.orEmpty()}
           vcsOptions (optional, defaults to Git values)
           ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}

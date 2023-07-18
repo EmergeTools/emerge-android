@@ -7,10 +7,6 @@ plugins {
 
 emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
-
-  snapshots {
-    includeFromMainSourceSet.set(true)
-  }
 }
 
 android {
@@ -41,13 +37,7 @@ android {
   }
 
   sourceSets {
-    getByName("main") {
-      // Adds sources from submodules for generating snapshot tests
-      // ksp(..) with the snapshots-processor dependency must be used for test generation
-      // Additionally for main source set Preview generation, the snapshot.includeFromMainSourceSet
-      // Emerge Gradle plugin property must be set to true
-      kotlin.srcDir("../ui-module/src/main/kotlin")
-    }
+    // TODO: Ryan: See if we can workaround having to specify the sourceSets for submodule tests
     getByName("androidTest") {
       // Adds sources from submodules for including snapshot tests
       // kspAndroidTest(..) with the snapshots-processor dependency must be used for test generation
@@ -85,8 +75,7 @@ dependencies {
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
 
-  // This will generate snapshots from Composable Previews in the main source set, with
-  // snapshots.includeFromMainSourceSet set to true from the Emerge Gradle plugin configuration block
+  // This will generate snapshots from Composable Previews in the main source set
   ksp(projects.snapshots.snapshotsProcessor)
   // This will generate snapshots from Composable Previews in the androidTest source set.
   kspAndroidTest(projects.snapshots.snapshotsProcessor)
