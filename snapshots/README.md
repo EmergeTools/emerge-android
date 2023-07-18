@@ -18,7 +18,7 @@ Add the Emerge Gradle plugin to your application's `build.gradle.kts` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc02"
+  id("com.emergetools.android") version "2.0.0-rc03"
 }
 
 emerge {
@@ -77,7 +77,7 @@ Preview snapshots can be generated directly from Composable Previews in the `mai
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc02"
+  id("com.emergetools.android") version "2.0.0-rc03"
   id("com.google.devtools.ksp")
 }
 
@@ -134,7 +134,7 @@ Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc02"
+  id("com.emergetools.android") version "2.0.0-rc03"
 }
 
 emerge {
