@@ -36,6 +36,7 @@ object ComposablePreviewSnapshotBuilder {
 
   fun TypeSpec.Builder.addPreviewConfigProperty(config: ComposePreviewSnapshotConfig) {
     val configInitializer = mutableListOf<String>().apply {
+      config.originalComposableName?.let { add("originalComposableName = \"$it\"") }
       config.name?.let { add("name = \"$it\"") }
       config.group?.let { add("group = \"$it\"") }
       config.uiMode?.let { add("uiMode = $it") }
