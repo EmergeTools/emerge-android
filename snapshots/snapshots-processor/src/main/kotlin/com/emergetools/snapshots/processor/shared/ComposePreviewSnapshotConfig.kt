@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 // Keep in sync with snapshots/src/main/kotlin/com/emergetools/snapshots/shared/ComposePreviewSnapshotConfig.kt
 @Serializable
 data class ComposePreviewSnapshotConfig(
-  val originalComposableName: String? = null,
+  val originalFqn: String? = null,
   val name: String? = null,
   val group: String? = null,
   val uiMode: Int? = null,

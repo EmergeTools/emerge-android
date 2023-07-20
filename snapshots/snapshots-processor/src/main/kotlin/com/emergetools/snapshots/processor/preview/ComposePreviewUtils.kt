@@ -54,8 +54,11 @@ object ComposePreviewUtils {
     val uiModeArgument = previewAnnotation.argumentForName(PREVIEW_UI_MODE_ARGUMENT_NAME)
     val uiModeValue = uiModeArgument?.value?.takeIf { (it as? Int) != 0 }?.let { it as Int }
 
+    val originalFqn = previewFunction.qualifiedName?.asString()
+      ?: "${previewFunction.packageName.asString()}.${previewFunction.simpleName.asString()}}"
+
     return ComposePreviewSnapshotConfig(
-      originalComposableName = previewFunction.simpleName.asString(),
+      originalFqn = originalFqn,
       name = nameValue,
       group = groupValue,
       locale = localeValue,
