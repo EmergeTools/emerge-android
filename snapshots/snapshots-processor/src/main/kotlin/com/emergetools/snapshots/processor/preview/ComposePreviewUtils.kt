@@ -24,10 +24,12 @@ object ComposePreviewUtils {
     previewFunction: KSFunctionDeclaration,
   ): Sequence<ComposePreviewSnapshotConfig> = previewFunction.annotations.filter {
     it.shortName.asString() == PREVIEW_ANNOTATION_SIMPLE_NAME
-  }.map(::composePreviewShapshotConfigFromPreviewAnnotation)
-    .distinct()
+  }.map {
+    composePreviewShapshotConfigFromPreviewAnnotation(previewFunction, it)
+  }.distinct()
 
   private fun composePreviewShapshotConfigFromPreviewAnnotation(
+    previewFunction: KSFunctionDeclaration,
     previewAnnotation: KSAnnotation,
   ): ComposePreviewSnapshotConfig {
     // We need to explicitly check for nulls here so we don't set a default unintentionally and
@@ -52,7 +54,11 @@ object ComposePreviewUtils {
     val uiModeArgument = previewAnnotation.argumentForName(PREVIEW_UI_MODE_ARGUMENT_NAME)
     val uiModeValue = uiModeArgument?.value?.takeIf { (it as? Int) != 0 }?.let { it as Int }
 
+    val originalFqn = previewFunction.qualifiedName?.asString()
+      ?: "${previewFunction.packageName.asString()}.${previewFunction.simpleName.asString()}}"
+
     return ComposePreviewSnapshotConfig(
+      originalFqn = originalFqn,
       name = nameValue,
       group = groupValue,
       locale = localeValue,
