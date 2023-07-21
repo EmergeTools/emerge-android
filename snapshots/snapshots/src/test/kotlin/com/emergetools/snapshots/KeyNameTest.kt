@@ -23,14 +23,14 @@ class KeyNameTest {
   }
 
   @Test
-  fun `keyName for COMPOSABLE snapshot with default ComposePreviewSnapshotConfig returns originalFqn`() {
+  fun `keyName for default COMPOSABLE snapshot with returns originalFqn`() {
     val config = ComposePreviewSnapshotConfig("com.example.test.Composable")
     val result = keyName(SnapshotType.COMPOSABLE, null, config)
     assertEquals("com.example.test.Composable", result)
   }
 
   @Test
-  fun `keyName for COMPOSABLE snapshot with non-default ComposePreviewSnapshotConfig returns concatenated name`() {
+  fun `keyName for variant COMPOSABLE snapshot returns concatenated name`() {
     val config = ComposePreviewSnapshotConfig(
       "com.example.test.Composable",
       uiMode = 1,
@@ -44,7 +44,6 @@ class KeyNameTest {
   @Test
   fun `keyName for non-COMPOSABLE snapshot returns normalized displayName`() {
     val result = keyName(SnapshotType.VIEW, "testDisplayName")
-    // Assuming normalization doesn't alter "testDisplayName" and MAX_KEY_NAME_LENGTH is large enough
     assertEquals("testdisplayname", result)
   }
 }

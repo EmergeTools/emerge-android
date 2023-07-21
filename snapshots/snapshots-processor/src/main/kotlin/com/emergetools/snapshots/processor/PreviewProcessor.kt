@@ -163,8 +163,9 @@ class PreviewProcessor(
     previewConfig: ComposePreviewSnapshotConfig,
   ): String {
     var testFunctionName = composableFunctionName
-    if (previewConfig.hashCode() != ComposePreviewSnapshotConfig.DEFAULT.hashCode()) {
-      testFunctionName += "_${previewConfig.hashCode()}"
+    if (!previewConfig.isDefault()) {
+      // Function name can use hashcode and the saved image key will be the same.
+      testFunctionName = "${testFunctionName}_${previewConfig.hashCode()}"
     }
     return "${testFunctionName}_GenSnapshot"
   }

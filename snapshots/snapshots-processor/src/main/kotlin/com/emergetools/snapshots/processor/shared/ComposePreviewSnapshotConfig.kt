@@ -8,7 +8,7 @@ import kotlinx.serialization.Serializable
 // Keep in sync with snapshots/src/main/kotlin/com/emergetools/snapshots/shared/ComposePreviewSnapshotConfig.kt
 @Serializable
 data class ComposePreviewSnapshotConfig(
-  val originalFqn: String? = null,
+  val originalFqn: String,
   val name: String? = null,
   val group: String? = null,
   val uiMode: Int? = null,
@@ -16,7 +16,21 @@ data class ComposePreviewSnapshotConfig(
   val fontScale: Float? = null,
 ) {
 
-  companion object {
-    val DEFAULT = ComposePreviewSnapshotConfig()
+  fun isDefault(): Boolean {
+    return uiMode == null &&
+      locale == null &&
+      fontScale == null
+  }
+  fun keyName(): String {
+    if (isDefault()) {
+      return originalFqn
+    }
+
+    return buildString {
+      append(originalFqn)
+      uiMode?.let { append("_uim_$it") }
+      locale?.let { append("_loc_$it") }
+      fontScale?.let { append("_fsc_$it") }
+    }
   }
 }

@@ -23,9 +23,9 @@ data class ComposePreviewSnapshotConfig(
    */
   @VisibleForTesting
   fun isDefault(): Boolean {
-    return uiMode == null
-      && locale == null
-      && fontScale == null
+    return uiMode == null &&
+      locale == null &&
+      fontScale == null
   }
 
   /**
