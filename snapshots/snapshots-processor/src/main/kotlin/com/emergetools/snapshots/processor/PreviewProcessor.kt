@@ -164,7 +164,8 @@ class PreviewProcessor(
   ): String {
     var testFunctionName = composableFunctionName
     if (!previewConfig.isDefault()) {
-      // Function name can use hashcode and the saved image key will be the same.
+      // Function name can use hashcode as the saved image key will be
+      // the same regardless of test name.
       testFunctionName = "${testFunctionName}_${previewConfig.hashCode()}"
     }
     return "${testFunctionName}_GenSnapshot"
