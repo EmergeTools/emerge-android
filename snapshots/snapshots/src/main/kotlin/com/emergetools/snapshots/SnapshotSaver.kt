@@ -7,7 +7,8 @@ import android.util.Log
 import androidx.annotation.VisibleForTesting
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig.Companion.DEFAULT
+import com.emergetools.snapshots.shared.MAX_KEY_NAME_LENGTH
+import com.emergetools.snapshots.shared.normalize
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -31,7 +32,7 @@ internal object SnapshotSaver {
     get() = InstrumentationRegistry.getArguments()
 
   fun save(
-    displayName: String,
+    displayName: String?,
     bitmap: Bitmap,
     fqn: String,
     type: SnapshotType,
@@ -42,7 +43,14 @@ internal object SnapshotSaver {
       error("Unable to create snapshots storage directory.")
     }
 
-    val keyName = keyName(displayName, composePreviewSnapshotConfig)
+    // We need a stable key to use for the filename and comparison
+    // For composables, see [ComposePreviewSnapshotConfig.keyName]
+    // For non-composables, we use the normalized displayName
+    val keyName = keyName(
+      type = type,
+      displayName = displayName,
+      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
+    )
     saveImage(
       snapshotsDir = snapshotsDir,
       keyName = keyName,
@@ -75,15 +83,17 @@ internal object SnapshotSaver {
 
   private fun saveMetadata(
     snapshotsDir: File,
-    displayName: String,
     keyName: String,
+    displayName: String?,
     fqn: String,
     type: SnapshotType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     val metadata = SnapshotImageMetadata(
-      displayName = displayName,
+      name = keyName,
+      // TODO: Ryan remove in future
       keyName = keyName,
+      displayName = displayName,
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,
       type = type,
@@ -94,6 +104,25 @@ internal object SnapshotSaver {
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
+    }
+  }
+
+  @VisibleForTesting
+  fun keyName(
+    type: SnapshotType,
+    displayName: String?,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+  ): String {
+    return if (type == SnapshotType.COMPOSABLE) {
+      checkNotNull(composePreviewSnapshotConfig) {
+        "composePreviewSnapshotConfig must be set for COMPOSABLE snapshots"
+      }
+      composePreviewSnapshotConfig.keyName()
+    } else {
+      checkNotNull(displayName) {
+        "displayName must be set for non-COMPOSABLE snapshots"
+      }
+      displayName.normalize().take(MAX_KEY_NAME_LENGTH)
     }
   }
 
@@ -110,41 +139,6 @@ internal object SnapshotSaver {
     outputFile.outputStream().use { writer(it) }
   }
 
-  /**
-   * Normalize the user defined name to be used as a filename/key for comparisons.
-   * This ensures uniqueness across test classes and methods & user-defined names.
-   *
-   * We intentionally don't account for FQN here as we still want to diff an image if
-   * the test might move packages, which user-defined name ensures.
-   */
-  @VisibleForTesting
-  fun keyName(
-    displayName: String,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
-  ): String {
-    val normalizedDisplayName = displayName.normalize()
-      .take(MAX_NAME_LENGTH)
-
-    return composePreviewSnapshotConfig?.let {
-      // If not default, we'll append the hashcode to the name to ensure uniqueness based on config
-      // Hashcode should preserve equality across field additions/removals in the future.
-      if (it.hashCode() != DEFAULT.hashCode()) {
-        "${normalizedDisplayName}_${it.hashCode()}"
-      } else {
-        normalizedDisplayName
-      }
-    } ?: normalizedDisplayName
-  }
-
-  @VisibleForTesting
-  fun String.normalize(): String {
-    return replace(Regex("[ .-]"), "_")
-      //  lowercase the string
-      .lowercase()
-  }
-
-  @VisibleForTesting
-  const val MAX_NAME_LENGTH = 128
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
 }
