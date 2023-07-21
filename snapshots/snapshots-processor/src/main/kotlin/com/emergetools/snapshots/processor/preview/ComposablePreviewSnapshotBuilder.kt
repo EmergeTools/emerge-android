@@ -76,20 +76,14 @@ object ComposablePreviewSnapshotBuilder {
    * Builds a compositionLocal that sets the Preview configuration for the passed snapshot as well
    * as the snapshotting code.
    */
-  fun FunSpec.Builder.addComposableSnapshotBlock(
-    functionName: String,
-    snapshotName: String,
-  ) {
+  fun FunSpec.Builder.addComposableSnapshotBlock(functionName: String) {
     val codeBlock = CodeBlock.builder().apply {
       addStatement("$COMPOSE_RULE_PROPERTY_NAME.setContent {")
       addStatement("  %T($PREVIEW_CONFIG_PROPERTY_NAME) {", SNAPSHOT_VARIANT_PROVIDER_CLASSNAME)
       addStatement("    $functionName()")
       addStatement("  }")
       addStatement("}")
-      addStatement(
-        "$SNAPSHOT_RULE_PROPERTY_NAME.take(\"$snapshotName\"," +
-          " composeRule, $PREVIEW_CONFIG_PROPERTY_NAME)"
-      )
+      addStatement("$SNAPSHOT_RULE_PROPERTY_NAME.take(composeRule, $PREVIEW_CONFIG_PROPERTY_NAME)")
     }.build()
 
     addCode(codeBlock)

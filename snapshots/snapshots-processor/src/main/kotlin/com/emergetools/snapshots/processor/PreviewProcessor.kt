@@ -95,15 +95,9 @@ class PreviewProcessor(
       val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
         .build()
 
-      var snapshotName = functionName
-      val previewName = previewConfig.name
-      if (!previewName.isNullOrBlank()) {
-        snapshotName += " - $previewName"
-      }
-
       val testFunctionSpec = FunSpec.builder("${functionName}_GenSnapshot").apply {
         addAnnotation(testAnnotation)
-        addComposableSnapshotBlock(functionName, snapshotName)
+        addComposableSnapshotBlock(functionName)
       }.build()
 
       val testRunnerAnnotation = AnnotationSpec.builder(ClassName("org.junit.runner", "RunWith"))

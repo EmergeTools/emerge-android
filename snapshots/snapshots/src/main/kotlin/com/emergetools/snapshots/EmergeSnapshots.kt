@@ -45,13 +45,13 @@ class EmergeSnapshots : TestRule {
   )
 
   fun take(
-    name: String,
     composeTestRule: ComposeTestRule,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     composeTestRule.waitForIdle()
     SnapshotSaver.save(
-      displayName = name,
+      // DisplayName not used for composables
+      displayName = null,
       bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
       fqn = fqn,
       type = SnapshotType.COMPOSABLE,
