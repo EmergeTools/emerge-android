@@ -91,6 +91,8 @@ internal object SnapshotSaver {
   ) {
     val metadata = SnapshotImageMetadata(
       name = keyName,
+      // TODO: Ryan remove in future
+      keyName = keyName,
       displayName = displayName,
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,

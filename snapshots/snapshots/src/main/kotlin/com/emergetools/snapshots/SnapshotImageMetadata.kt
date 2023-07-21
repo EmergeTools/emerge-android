@@ -13,6 +13,8 @@ enum class SnapshotType {
 internal data class SnapshotImageMetadata(
   // Used as the primary key
   val name: String,
+  @Deprecated("Use name instead")
+  val keyName: String,
   // User defined name, or set to defaults by our backend
   val displayName: String?,
   // Filename of the outputted image
