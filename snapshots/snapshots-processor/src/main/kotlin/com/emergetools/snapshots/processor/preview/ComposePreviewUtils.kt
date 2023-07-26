@@ -1,6 +1,6 @@
 package com.emergetools.snapshots.processor.preview
 
-import com.emergetools.snapshots.processor.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSValueArgument

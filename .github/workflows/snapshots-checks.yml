@@ -10,6 +10,7 @@ on:
     paths:
       - snapshots/**
       - snapshots-processor/**
+      - snapshots-shared/**
 
 jobs:
 

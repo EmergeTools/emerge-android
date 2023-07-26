@@ -1,11 +1,12 @@
+import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.text.SimpleDateFormat
 import java.util.Date
 
 plugins {
-  alias(libs.plugins.android.library)
-  alias(libs.plugins.grgit)
-  alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.grgit)
+  `java-library`
   `maven-publish`
   signing
 }
@@ -16,51 +17,22 @@ version = libs.versions.emerge.snapshots.get()
 var metaInfResDir = File(buildDir, "generated/emerge/")
 var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
 
-android {
-  namespace = "com.emergetools.snapshots"
-  compileSdk = 33
+java {
+  withJavadocJar()
+  withSourcesJar()
 
-  compileOptions {
-    sourceCompatibility = JavaVersion.VERSION_11
-    targetCompatibility = JavaVersion.VERSION_11
-  }
+  sourceCompatibility = JavaVersion.VERSION_11
+  targetCompatibility = JavaVersion.VERSION_11
+}
 
+tasks.withType<KotlinCompile> {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_11.toString()
-  }
-
-  defaultConfig {
-    minSdk = 23
-  }
-
-  buildFeatures {
-    compose = true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion = "1.4.8"
   }
 }
 
 dependencies {
-
-  implementation(libs.junit)
-  implementation(libs.androidx.test.runner)
-  implementation(libs.androidx.test.rules)
-
-  implementation(platform(libs.compose.bom))
-  implementation(libs.compose.runtime)
-  implementation(libs.compose.ui)
-
   implementation(libs.kotlinx.serialization)
-
-  api(projects.snapshots.snapshotsShared)
-  api(libs.androidx.test.core)
-  api(libs.androidx.test.core.ktx)
-  api(libs.androidx.test.ext.junit)
-  api(libs.compose.ui.test.junit)
-
-  testImplementation(libs.junit)
 }
 
 tasks.register("generateMetaInfVersion") {
@@ -104,16 +76,16 @@ publishing {
   }
 
   publications {
-    register<MavenPublication>("release") {
-      artifactId = "snapshots"
+    create<MavenPublication>("release") {
+      artifactId = "snapshots-shared"
 
       afterEvaluate {
-        from(components["release"])
+        from(components["java"])
       }
 
       pom {
-        name.set("Emerge Tools Snapshots SDK")
-        description.set("Snapshot Composables, views and activities.")
+        name.set("Emerge Tools Snapshots shared dependencies")
+        description.set("Shared dependencies for Emerge Composable Preview snapshots.")
         url.set("https://www.emergetools.com")
         licenses {
           license {

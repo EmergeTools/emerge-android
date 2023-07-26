@@ -37,6 +37,8 @@ dependencies {
   implementation(libs.kotlinx.serialization)
   implementation(libs.ksp.api)
   implementation(libs.junit)
+
+  api(projects.snapshots.snapshotsShared)
 }
 
 tasks.register("generateMetaInfVersion") {

@@ -27,6 +27,7 @@ include(
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-processor",
+  ":snapshots:snapshots-shared",
   ":snapshots:sample",
   ":snapshots:sample:app",
   ":snapshots:sample:ui-module",

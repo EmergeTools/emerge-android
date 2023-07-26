@@ -1,6 +1,6 @@
 package com.emergetools.snapshots.processor.preview
 
-import com.emergetools.snapshots.processor.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
 import com.squareup.kotlinpoet.CodeBlock
