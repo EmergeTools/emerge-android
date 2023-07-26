@@ -14,7 +14,7 @@ junit-jupiter = "5.8.2"
 # internal
 emerge-gradle-plugin = "2.0.0-rc03"
 emerge-peformance = "2.0.0-beta01"
-emerge-snapshots = "0.7.1"
+emerge-snapshots = "0.7.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

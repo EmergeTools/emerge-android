@@ -1,6 +1,7 @@
 package com.emergetools.snapshots
 
 import com.emergetools.snapshots.SnapshotSaver.keyName
+import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertThrows
 import org.junit.Test
