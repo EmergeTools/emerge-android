@@ -1,11 +1,9 @@
-package com.emergetools.snapshots.processor.shared
+package com.emergetools.snapshots.shared
 
 import kotlinx.serialization.Serializable
 
 // Keep parity with
 // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Preview.kt
-
-// Keep in sync with snapshots/src/main/kotlin/com/emergetools/snapshots/shared/ComposePreviewSnapshotConfig.kt
 @Serializable
 data class ComposePreviewSnapshotConfig(
   val originalFqn: String,
@@ -16,11 +14,18 @@ data class ComposePreviewSnapshotConfig(
   val fontScale: Float? = null,
 ) {
 
+  /**
+   * We consider the "default" config to be one where no variants are set.
+   */
   fun isDefault(): Boolean {
     return uiMode == null &&
       locale == null &&
       fontScale == null
   }
+
+  /**
+   * Stable key name generation that takes into account all diff-relevant variants.
+   */
   fun keyName(): String {
     if (isDefault()) {
       return originalFqn

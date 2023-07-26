@@ -33,6 +33,10 @@ jobs:
         run: ./gradlew :snapshots:snapshots:test -Pandroid.useAndroidX=true
       - name: Sanity check snapshots-processor test
         run: ./gradlew :snapshots:snapshots-processor:test
+      - name: Sanity check snapshots-shared test
+        run: ./gradlew :snapshots:snapshots-shared:test
+      - name: Deploy snapshots-shared
+        run: ./gradlew :snapshots:snapshots-shared:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
       - name: Deploy snapshots
         run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
       - name: Deploy snapshots-processor
