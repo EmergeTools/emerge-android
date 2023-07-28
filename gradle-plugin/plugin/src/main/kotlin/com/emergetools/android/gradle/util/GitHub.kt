@@ -7,10 +7,8 @@ import java.io.File
 
 internal object GitHub {
 
-  private val json by lazy {
-    Json {
-      ignoreUnknownKeys = true
-    }
+  private val json = Json {
+    ignoreUnknownKeys = true
   }
 
   private fun repoId(): String? {
