@@ -10,6 +10,9 @@ on:
     paths:
       - gradle-plugin/**
 
+permissions:
+  checks: write
+
 jobs:
 
   build:
