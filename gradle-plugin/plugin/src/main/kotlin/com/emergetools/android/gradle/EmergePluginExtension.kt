@@ -66,15 +66,30 @@ abstract class VCSOptions @Inject constructor(
 ) {
 
   val sha: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { Git.currentSha() })
+    .convention(providers.provider {
+      var sha = Git.currentSha()
+      // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
+      if (GitHub.isSupportedGitHubEvent()) {
+        GitHub.sha()?.let { sha = it }
+      }
+      return@provider sha
+    })
 
   val baseSha: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { Git.baseSha() })
+    .convention(providers.provider {
+      var baseSha = Git.baseSha()
+      // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
+      if (GitHub.isSupportedGitHubEvent()) {
+        GitHub.baseSha()?.let { baseSha = it }
+      }
+      return@provider baseSha
+    })
 
   val branchName: Property<String> = objects.property(String::class.java)
     .convention(providers.provider { Git.currentBranch() })
 
   val prNumber: Property<String> = objects.property(String::class.java)
+    .convention(providers.provider { GitHub.prNumber()?.toString() })
 
   @get:Nested
   abstract val gitHubOptions: GitHubOptions
