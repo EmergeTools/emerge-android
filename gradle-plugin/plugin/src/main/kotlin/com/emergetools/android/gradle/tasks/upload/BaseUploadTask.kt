@@ -62,7 +62,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
   @get:Input
   @get:Optional
-  abstract val prNumber: Property<String>
+  abstract val prNumber: Property<Int>
 
   @get:Input
   @get:Optional
@@ -142,7 +142,7 @@ abstract class BaseUploadTask : DefaultTask() {
       baseSha = baseSha.get(),
       branch = branchName.get(),
       repoName = repoName,
-      prNumber = prNumber.orNull,
+      prNumber = prNumber.orNull?.toString(),
       buildType = buildType.orNull,
       gitlabProjectId = gitLabProjectId.orNull,
       androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),

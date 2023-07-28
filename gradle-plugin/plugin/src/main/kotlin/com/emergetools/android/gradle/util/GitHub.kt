@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.util
 
+import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -80,6 +81,7 @@ internal object GitHub {
 
   @Serializable
   data class GitHubPullRequestEvent(
+    @SerialName("pull_request")
     val pr: GitHubPullRequest,
     val number: Int,
   )
