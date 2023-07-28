@@ -51,10 +51,10 @@ jobs:
             11
             17
       - name: Run functional tests
-        run: ./gradlew :gradle-plugin:plugin:functionalTest --stacktrace
+        run: ./gradlew :gradle-plugin:plugin:functionalTest
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3.4.0
         if: always() # always run even if the previous step fails
         with:
-          report_paths: '**/build/reports/tests/functionalTest/*.xml'
+          report_paths: '**/build/reports/tests/functionalTest/*.html'
 
