@@ -52,13 +52,10 @@ jobs:
             17
       - name: Run functional tests
         run: ./gradlew :gradle-plugin:plugin:functionalTest
-      - name: Manually print test report
-        if: always() # always run even if the previous step fails
-        run: cat /home/runner/work/emerge-android/emerge-android/gradle-plugin/plugin/build/reports/tests/functionalTest/index.html
-      - name: Archive Test Report
+      - name: Archive test reports
         uses: actions/upload-artifact@v2
         if: always()
         with:
-          name: Test Reports
+          name: Functional test reports
           path: '**/build/reports/tests/functionalTest'
 
