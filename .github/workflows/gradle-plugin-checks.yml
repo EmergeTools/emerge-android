@@ -10,9 +10,6 @@ on:
     paths:
       - gradle-plugin/**
 
-permissions:
-  checks: write
-
 jobs:
 
   build:
@@ -54,7 +51,7 @@ jobs:
             11
             17
       - name: Run functional tests
-        run: ./gradlew :gradle-plugin:plugin:functionalTest
+        run: ./gradlew :gradle-plugin:plugin:functionalTest --info
       - name: Publish Test Report
         uses: mikepenz/action-junit-report@v3.4.0
         if: always() # always run even if the previous step fails

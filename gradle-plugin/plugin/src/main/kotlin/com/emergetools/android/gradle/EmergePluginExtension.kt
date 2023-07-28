@@ -72,7 +72,7 @@ abstract class VCSOptions @Inject constructor(
       if (GitHub.isSupportedGitHubEvent()) {
         GitHub.sha()?.let { sha = it }
       }
-      return@provider sha
+      sha
     })
 
   val baseSha: Property<String> = objects.property(String::class.java)
@@ -82,7 +82,7 @@ abstract class VCSOptions @Inject constructor(
       if (GitHub.isSupportedGitHubEvent()) {
         GitHub.baseSha()?.let { baseSha = it }
       }
-      return@provider baseSha
+      baseSha
     })
 
   val branchName: Property<String> = objects.property(String::class.java)
