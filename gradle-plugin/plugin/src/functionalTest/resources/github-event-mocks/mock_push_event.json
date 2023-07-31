@@ -1,0 +1,5 @@
+{
+  "push": {
+    "before": "github_before_sha"
+  }
+}

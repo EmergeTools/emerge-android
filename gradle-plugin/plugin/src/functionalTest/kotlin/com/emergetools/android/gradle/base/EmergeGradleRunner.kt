@@ -1,13 +1,13 @@
 package com.emergetools.android.gradle.base
 
 import com.emergetools.android.gradle.EmergePluginTest
-import java.io.File
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.gradle.internal.impldep.com.google.common.io.Files
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.util.internal.VersionNumber
+import java.io.File
 
 /**
  * One instance per build.
@@ -45,14 +45,20 @@ class EmergeGradleRunner private constructor(
   private var kotlinAndroidGradlePluginVersion =
     SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
 
-  private var tempProjectDir: File? = null
+  var tempProjectDir: File? = null
 
   private var arguments: List<String> = emptyList()
 
   private var assertions: ((BuildResult, MockWebServer) -> Unit)? = null
 
+  private var environment: Map<String, String> = emptyMap()
+
   fun withArguments(vararg arguments: String) = apply {
     this.arguments = arguments.toList()
+  }
+
+  fun withDebugTasks() = apply {
+    arguments = arguments + "-PemergeDebug"
   }
 
   fun withGradleVersion(version: String) = apply {
@@ -87,6 +93,10 @@ class EmergeGradleRunner private constructor(
     this.assertions = assertions
   }
 
+  fun withEnvironment(vararg pairs: Pair<String, String>) = apply {
+    this.environment = mapOf(*pairs)
+  }
+
   private fun preBuild() {
     @Suppress("DEPRECATION")
     tempProjectDir = Files.createTempDir()
@@ -104,8 +114,9 @@ class EmergeGradleRunner private constructor(
     }
 
     val customEnvironment = mapOf(
+      *environment.toList().toTypedArray(),
       // Turns off repository discovery to test projects that don't use Git
-      "GIT_DIR" to tempProjectDir!!.path
+      "GIT_DIR" to tempProjectDir!!.path,
     )
     gradleRunner
       .withProjectDir(tempProjectDir)

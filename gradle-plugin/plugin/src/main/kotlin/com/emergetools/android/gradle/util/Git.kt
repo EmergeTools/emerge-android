@@ -11,7 +11,10 @@ internal object Git {
   }
 
   fun baseSha(): String? {
-    return "git merge-base ${remoteHeadBranch()} ${currentBranch()}".execute().trimmedText
+    val baseSha = "git merge-base ${remoteHeadBranch()} ${currentBranch()}".execute().trimmedText
+    // Consider blank (empty or whitespace) base sha as null
+    if (baseSha?.isBlank() == true) return null
+    return baseSha
   }
 
   fun remoteUrl(remote: String? = primaryRemote()): String? {

@@ -2,7 +2,13 @@ package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
+import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
+import junit.framework.TestCase.assertEquals
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class SimpleEmergePluginTest : EmergePluginTest() {
 
@@ -101,5 +107,27 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       .withArguments("packageRelease")
       .build()
     result.assertSuccessfulTask(":packageRelease")
+  }
+
+  @Test
+  fun `Assert explicit sha overwrites GitHub convention sha`() {
+    val runner = EmergeGradleRunner.create("simple")
+    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
+
+    runner
+      .withArguments("saveExtensionConfig", "--outputPath", configurationJson.path)
+      .withDebugTasks()
+      .withGitHubPREvent()
+      .assert { result, _ ->
+        result.assertSuccessfulTask(":saveExtensionConfig")
+      }
+      .build()
+
+    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
+      configurationJson.inputStream()
+    )
+
+    assertEquals("testSha", configuration.vcsOptions!!.sha)
+    assertEquals("testBaseSha", configuration.vcsOptions!!.baseSha)
   }
 }

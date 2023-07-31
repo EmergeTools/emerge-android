@@ -2,7 +2,15 @@ package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
+import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
+import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPushEvent
+import kotlinx.serialization.json.Json
+import kotlinx.serialization.json.decodeFromStream
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNull
 import org.junit.jupiter.api.Test
+import java.io.File
 
 class NoVcsEmergePluginTest : EmergePluginTest() {
 
@@ -65,5 +73,59 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
       .withArguments("packageRelease")
       .build()
     result.assertSuccessfulTask(":packageRelease")
+  }
+
+  @Test
+  fun `Assert GitHub PR sha overwrites sha`() {
+    val runner = EmergeGradleRunner.create("no-vcs-params")
+    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
+
+    runner
+      .withArguments(
+        "saveExtensionConfig",
+        "--outputPath",
+        configurationJson.path,
+      )
+      .withDebugTasks()
+      .withGitHubPREvent()
+      .assert { result, _ ->
+        result.assertSuccessfulTask(":saveExtensionConfig")
+      }
+      .build()
+
+    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
+      configurationJson.inputStream()
+    )
+
+    assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
+    assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
+    assertEquals("123", configuration.vcsOptions!!.prNumber)
+  }
+
+  @Test
+  fun `Assert GitHub push env sha overwrites sha`() {
+    val runner = EmergeGradleRunner.create("no-vcs-params")
+    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
+
+    runner
+      .withArguments(
+        "saveExtensionConfig",
+        "--outputPath",
+        configurationJson.path,
+      )
+      .withDebugTasks()
+      .withGitHubPushEvent()
+      .assert { result, _ ->
+        result.assertSuccessfulTask(":saveExtensionConfig")
+      }
+      .build()
+
+    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
+      configurationJson.inputStream()
+    )
+
+    assertEquals("github_env_sha", configuration.vcsOptions!!.sha)
+    // BaseSha not set by default
+    assertNull(configuration.vcsOptions!!.baseSha)
   }
 }

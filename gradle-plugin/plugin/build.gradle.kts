@@ -138,8 +138,10 @@ dependencies {
 	testImplementation(libs.google.truth)
 	testRuntimeOnly(libs.junit.jupiter.engine)
 
+  "functionalTestImplementation"(projects.gradlePlugin.plugin)
 	"functionalTestImplementation"(libs.junit.jupiter.api)
 	"functionalTestImplementation"(libs.okhttp.mockwebserver)
+  "functionalTestImplementation"(libs.kotlinx.serialization)
 	"functionalTestRuntimeOnly"(libs.junit.jupiter.engine)
 
 	detektPlugins(libs.detekt.formatting)
