@@ -99,6 +99,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
 
     assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
     assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
+    assertEquals("123", configuration.vcsOptions!!.prNumber)
   }
 
   @Test
