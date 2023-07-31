@@ -1,0 +1,13 @@
+{
+  "number": 123,
+  "pull_request": {
+    "head": {
+      "ref": "feature",
+      "sha": "github_head_sha"
+    },
+    "base": {
+      "ref": "main",
+      "sha": "github_base_sha"
+    }
+  }
+}

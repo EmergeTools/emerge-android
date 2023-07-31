@@ -2,7 +2,6 @@ package com.emergetools.android.gradle.tasks.upload
 
 import com.emergetools.android.gradle.BuildConfig
 import com.emergetools.android.gradle.EmergePlugin
-import com.emergetools.android.gradle.EmergePlugin.Companion
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData

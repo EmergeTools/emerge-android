@@ -78,6 +78,7 @@ abstract class VCSOptions @Inject constructor(
   val baseSha: Property<String> = objects.property(String::class.java)
     .convention(providers.provider {
       var baseSha = Git.baseSha()
+      println("baseSha: $baseSha")
       // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
       if (GitHub.isSupportedGitHubEvent()) {
         GitHub.baseSha()?.let { baseSha = it }

@@ -10,6 +10,7 @@ import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.android.build.gradle.internal.utils.KOTLIN_ANDROID_PLUGIN_ID
+import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
 import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
 import com.emergetools.android.gradle.tasks.perf.UploadPerfBundle
@@ -96,6 +97,10 @@ class EmergePlugin : Plugin<Project> {
           ?: return@onVariants
 
         registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
+
+        if (appProject.hasProperty(EMERGE_DEBUG_TASK_PROPERTY)) {
+          registerDebugTasks(appProject, emergeExtension)
+        }
       }
     }
   }
@@ -438,6 +443,24 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
+  private fun registerDebugTasks(
+    project: Project,
+    extension: EmergePluginExtension,
+  ) {
+    registerSaveExtensionConfigTask(project, extension)
+  }
+
+  private fun registerSaveExtensionConfigTask(
+    project: Project,
+    extension: EmergePluginExtension,
+  ) {
+    project.tasks.register("saveExtensionConfig", SaveExtensionConfigTask::class.java) {
+      it.group = EMERGE_TASK_GROUP
+      it.description = "Saves the Emerge extension configuration to a local file for debugging."
+      it.emergePluginExtension.set(extension)
+    }
+  }
+
   private fun logExtension(
     project: Project,
     extension: EmergePluginExtension,
@@ -480,6 +503,8 @@ class EmergePlugin : Plugin<Project> {
     private const val EMERGE_EXTENSION_NAME = "emerge"
     private const val EMERGE_TASK_PREFIX = "emerge"
     private const val EMERGE_TASK_GROUP = "Emerge"
+
+    private const val EMERGE_DEBUG_TASK_PROPERTY = "emergeDebug"
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
