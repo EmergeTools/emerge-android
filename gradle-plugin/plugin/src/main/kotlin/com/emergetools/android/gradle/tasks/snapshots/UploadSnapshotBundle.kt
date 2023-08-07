@@ -29,12 +29,13 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
    * included in upload bundle.
    */
   @get:Internal
-  private val artifactMetadata: ArtifactMetadata by lazy {
-
+  val artifactMetadata: ArtifactMetadata by lazy {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
       it.include(ArtifactMetadata.JSON_FILE_NAME)
     }
     check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
+
+    check(artifactMetadataFiles.singleFile.exists()) { "Artifact metadata file not found" }
 
     Json.decodeFromString(artifactMetadataFiles.singleFile.readText())
   }
