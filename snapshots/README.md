@@ -52,7 +52,7 @@ Emerge's KSP `snapshot-processor` automatically generates snapshot tests for com
 source set the KSP processor is applied to. No additional setup work needs to be done!
 
 ```kotlin
-// /src/main/com/myapp/MyComposable.kt
+// src/main/com/myapp/MyComposable.kt
 
 @Preview
 @Composable
@@ -64,6 +64,33 @@ fun MyComposablePreview() {
 ```
 
 _⚠️ Currently only no-arg, public `@Preview` annotated composable functions are supported._
+
+#### Variant support
+
+Emerge currently supports a subset of `@Preview` annotation parameters:
+
+- `fontScale`
+- `locale`
+- `uiMode` (dark/light mode)
+
+Emerge will automatically generate a snapshot test for each Preview annotation present. For example,
+for the following composable:
+
+```kotlin
+// src/main/com/myapp/MyComposable.kt
+
+@Preview
+@Preview(fontScale = 1.5f)
+@Composable
+fun MyComposablePreview() {
+  MyComposable(
+    text = "Hello, World!"
+  )
+}
+```
+
+Emerge will generate two snapshots, one default (no-arg `@Preview`), and one with `1.5f` font
+scale (`@Preview` with `fontScale` param).
 
 #### Generating Preview snapshots from the androidTest source set
 
@@ -93,7 +120,7 @@ dependencies {
 And as an example, assuming the following preview lives in the `androidTest` source set:
 
 ```kotlin
-// /src/androidTest/com/myapp/MyComposablePreviewTest.kt
+// src/androidTest/com/myapp/MyComposablePreviewTest.kt
 
 @Preview
 @Composable
@@ -192,6 +219,31 @@ configuration options.
 
 #### Image Keys
 
+##### Composable Preview snapshots
+
+For generated composable snapshots, the image key is the composable preview function's
+fully-qualified name.
+
+For example, given the following function:
+
+```kotlin
+// src/main/com/myapp/TextRowWithIcon.kt
+
+@Preview
+@Composable
+fun TextRowWithIconPreview() {
+  TextRowWithIcon(
+    titleText = "Title",
+    subtitleText = "Subtitle"
+  )
+}
+```
+
+The key used for snapshot diffing will be `com.myapp.TextRowWithIconPreview`. If any parameters are
+present in the `@Preview` annotation, a stable hash for the parameters will be appended to the key.
+
+##### Activity & View snapshots
+
 Emerge uses the `name` set in the `take()` block as the "key" for storage and diffing.
 
 ```kotlin
@@ -207,23 +259,6 @@ class ExampleMainActivityTest {
     // The primary key for saving/diffing this snapshot is the "Main Activity" string.
     snapshots.take("Main Activity", activity)
   }
-}
-```
-
-For generated composable snapshots, the name is the composable function's name.
-
-```kotlin
-/**
- * If Composable snapshot generation is enabled, Emerge will generate a snapshot test
- * for this composable with the name "TextRowWithIconPreview".
- */
-@Preview
-@Composable
-fun TextRowWithIconPreview() {
-  TextRowWithIcon(
-    titleText = "Title",
-    subtitleText = "Subtitle"
-  )
 }
 ```
 
