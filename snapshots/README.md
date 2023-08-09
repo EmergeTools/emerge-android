@@ -1,12 +1,11 @@
 # 🛰️ Emerge Snapshot Testing
 
-An all-in-one Android snapshot testing solution.
-
-**⚠️ Emerge snapshots are currently in beta and are subject to changes.**
+All-in-one Android snapshot testing.
 
 ## Features
 
-- Automatically generate snapshots of composable previews.
+- **Automatically generate** snapshots of composable previews, including previews in the main source
+  set.
 - Built-in support for Activity & View snapshotting.
 - Gradle plugin for easy setup & helper tasks (see below for full documentation).
 
@@ -31,7 +30,8 @@ See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
 ### Add Snapshot SDK(s)
 
-Add the Emerge snapshot SDK(s) as `androidTest` dependencies to your application module:
+Add the Emerge snapshot SDK as an `androidTest` dependency to your application module. For automatic
+compose `@Preview` snapshot generation, add the KSP processor as a `ksp` dependency.
 
 ```kotlin
 plugins {
@@ -40,19 +40,20 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.6.0")
-  // For Compose @Preview snapshot generation:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.6.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.1")
+  // For Compose @Preview snapshot generation from the main source set:
+  ksp("com.emergetools.snapshots:snapshots-processor:0.7.1")
 }
 ```
 
-A KSP compiler plugin is leveraged to automatically generate snapshot tests for compose previews.
-
 ### Compose snapshotting
 
-Add compose `@Preview` annotated methods directly to your `androidTest` source set.
+Emerge's KSP `snapshot-processor` automatically generates snapshot tests for compose previews in the
+source set the KSP processor is applied to. No additional setup work needs to be done!
 
 ```kotlin
+// src/main/com/myapp/MyComposable.kt
+
 @Preview
 @Composable
 fun MyComposablePreview() {
@@ -62,18 +63,42 @@ fun MyComposablePreview() {
 }
 ```
 
-That's it! Using KSP, `snapshot-processor` will automatically generate snapshot tests for
-all `@Preview` annotated functions in the `androidTest` source set.
-
-We recommend creating `@Preview` functions in the `androidTest` source set that depend directly on
-composables located in your `main` source set.
-
 _⚠️ Currently only no-arg, public `@Preview` annotated composable functions are supported._
 
-#### Generating Preview snapshots from the main source set
+#### Variant support
 
-While we recommend Previews intended for snapshot testing to live in the `androidTest` source set,
-Preview snapshots can be generated directly from Composable Previews in the `main` source set.
+Emerge currently supports a subset of `@Preview` annotation parameters:
+
+- `fontScale`
+- `locale`
+- `uiMode` (dark/light mode)
+
+Emerge will automatically generate a snapshot test for each Preview annotation present. For example,
+for the following composable:
+
+```kotlin
+// src/main/com/myapp/MyComposable.kt
+
+@Preview
+@Preview(fontScale = 1.5f)
+@Composable
+fun MyComposablePreview() {
+  MyComposable(
+    text = "Hello, World!"
+  )
+}
+```
+
+Emerge will generate two snapshots, one default (no-arg `@Preview`), and one with `1.5f` font
+scale (`@Preview` with `fontScale` param).
+
+#### Generating Preview snapshots from the androidTest source set
+
+Emerge can automatically generate snapshot tests for all composable previews in the `main` source
+set, but sometimes creating explicit previews for snapshot testing is more desired.
+
+Simply apply the Emerge KSP processor as a `kspAndroidTest` dependency instead of `ksp` to generate
+snapshot tests from the `androidTest` source set.
 
 ```kotlin
 plugins {
@@ -86,14 +111,27 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.6.0")
-  // For Compose @Preview snapshot generation from main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.6.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.1")
+  // For Compose @Preview snapshot generation from androidTest source set:
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.1")
 }
 ```
 
-Emerge relies on a custom source set that generated snapshot tests are moved to before
-compilation to get around KSP cross-source set generation restrictions.
+And as an example, assuming the following preview lives in the `androidTest` source set:
+
+```kotlin
+// src/androidTest/com/myapp/MyComposablePreviewTest.kt
+
+@Preview
+@Composable
+fun MyComposablePreviewTest() {
+  MyComposable(
+    text = "Hello, World!"
+  )
+}
+```
+
+Emerge will automatically generate a preview snapshot test for `MyComposablePreviewTest()`.
 
 ### Activities & View snapshotting
 
@@ -130,7 +168,7 @@ _Each `name` parameter must be unique as it's used as the primary key for saving
 ## Gradle plugin
 
 The Emerge Gradle plugin provides a task to generate snapshots locally for snapshot tests.
-Add the Emerge gradle plugin to your top-level build.gradle(.kts) file:
+Add the Emerge gradle plugin to your app-level `build.gradle(.kts)` file:
 
 ```kotlin
 plugins {
@@ -181,6 +219,31 @@ configuration options.
 
 #### Image Keys
 
+##### Composable Preview snapshots
+
+For generated composable snapshots, the image key is the composable preview function's
+fully-qualified name.
+
+For example, given the following function:
+
+```kotlin
+// src/main/com/myapp/TextRowWithIcon.kt
+
+@Preview
+@Composable
+fun TextRowWithIconPreview() {
+  TextRowWithIcon(
+    titleText = "Title",
+    subtitleText = "Subtitle"
+  )
+}
+```
+
+The key used for snapshot diffing will be `com.myapp.TextRowWithIconPreview`. If any parameters are
+present in the `@Preview` annotation, a stable hash for the parameters will be appended to the key.
+
+##### Activity & View snapshots
+
 Emerge uses the `name` set in the `take()` block as the "key" for storage and diffing.
 
 ```kotlin
@@ -196,23 +259,6 @@ class ExampleMainActivityTest {
     // The primary key for saving/diffing this snapshot is the "Main Activity" string.
     snapshots.take("Main Activity", activity)
   }
-}
-```
-
-For generated composable snapshots, the name is the composable function's name.
-
-```kotlin
-/**
- * If Composable snapshot generation is enabled, Emerge will generate a snapshot test
- * for this composable with the name "TextRowWithIconPreview".
- */
-@Preview
-@Composable
-fun TextRowWithIconPreview() {
-  TextRowWithIcon(
-    titleText = "Title",
-    subtitleText = "Subtitle"
-  )
 }
 ```
 

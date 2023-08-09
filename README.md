@@ -1,4 +1,4 @@
-# Emerge Android
+# 🛸 Emerge Android
 
 Emerge Android SDK & tooling.
 
@@ -33,8 +33,6 @@ more to ensure you get 99% accurate performance measurements.
 See [performance](./performance/README.md) for full documentation.
 
 ## 🛰 Snapshots
-
-**⚠️ Emerge snapshots are currently in beta and are subject to changes.**
 
 Emerge offers tooling to snapshot your Android UI components, including Compose previews, activities
 and legacy views.
