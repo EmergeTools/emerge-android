@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.2")
   // For Compose @Preview snapshot generation from the main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.7.1")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.7.2")
 }
 ```
 
@@ -92,6 +92,32 @@ fun MyComposablePreview() {
 Emerge will generate two snapshots, one default (no-arg `@Preview`), and one with `1.5f` font
 scale (`@Preview` with `fontScale` param).
 
+#### Ignoring previews from snapshotting
+
+Not all Previews might not want to be snapshot tested. To ignore a preview from snapshotting, add
+the `@IgnoreEmergeSnapshot` annotation to the preview function.
+
+```kotlin
+@Preview
+@EmergeIgnoreSnapshot
+@Composable
+fun MyComposablePreview() {
+  MyComposable(
+    text = "Hello, World!"
+  )
+}
+```
+
+You'll need to add a dependency on the `snapshots-annotations` artifact to use the
+`@IgnoreEmergeSnapshot` annotation. This is a lightweight dependency only containing annotations
+that the `snapshots-processor` leverages.
+
+```kotlin
+dependencies {
+  implementation("com.emergetools.snapshots:snapshots-annotations:0.7.2")
+}
+```
+
 #### Generating Preview snapshots from the androidTest source set
 
 Emerge can automatically generate snapshot tests for all composable previews in the `main` source
@@ -111,9 +137,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.2")
   // For Compose @Preview snapshot generation from androidTest source set:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.1")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.2")
 }
 ```
 
