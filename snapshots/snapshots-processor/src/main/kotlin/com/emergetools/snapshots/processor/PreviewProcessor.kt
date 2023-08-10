@@ -62,7 +62,7 @@ class PreviewProcessor(
 
       if (previewFunction.isAnnotationPresent(IgnoreEmergeSnapshot::class)) {
         logger.info(
-          "Skipping ${previewFunction.simpleName.asString()} as it is annotated with @IgnoreEmergeSnapshot"
+          "Skipping ${previewFunction.simpleName.asString()} as it's annotated with @IgnoreEmergeSnapshot"
         )
         return@forEach
       }
