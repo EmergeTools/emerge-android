@@ -19,7 +19,7 @@ formatting:
   FinalNewline:
     insertFinalNewLine: true
   MaximumLineLength:
-    maxLineLength: 100
+    maxLineLength: 120
 
 naming:
   FunctionNaming:

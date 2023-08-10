@@ -68,6 +68,7 @@ dependencies {
   implementation(libs.androidx.activity.compose)
 
   implementation(projects.snapshots.sample.uiModule)
+  implementation(projects.snapshots.snapshotsAnnotations)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.ui)

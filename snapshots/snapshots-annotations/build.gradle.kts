@@ -31,15 +31,7 @@ tasks.withType<KotlinCompile> {
 }
 
 dependencies {
-  implementation(libs.kotlin.reflect)
-  implementation(libs.kotlinpoet)
-  implementation(libs.kotlinpoet.ksp)
   implementation(libs.kotlinx.serialization)
-  implementation(libs.ksp.api)
-  implementation(libs.junit)
-
-  api(projects.snapshots.snapshotsShared)
-  api(projects.snapshots.snapshotsAnnotations)
 }
 
 tasks.register("generateMetaInfVersion") {
@@ -84,15 +76,15 @@ publishing {
 
   publications {
     create<MavenPublication>("release") {
-      artifactId = "snapshots-processor"
+      artifactId = "snapshots-annotations"
 
       afterEvaluate {
         from(components["java"])
       }
 
       pom {
-        name.set("Emerge Tools Snapshots Annotation Processor")
-        description.set("Annotation processor for Emerge Composable Preview snapshots.")
+        name.set("Emerge Tools Snapshots annotations")
+        description.set("Annotations for Emerge Composable Preview snapshots.")
         url.set("https://www.emergetools.com")
         licenses {
           license {

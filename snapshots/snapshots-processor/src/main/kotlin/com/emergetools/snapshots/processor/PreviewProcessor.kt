@@ -1,11 +1,14 @@
 package com.emergetools.snapshots.processor
 
+import com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposableSnapshotBlock
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposeRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.KspExperimental
+import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.isPrivate
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
@@ -37,6 +40,7 @@ class PreviewProcessor(
 
   private val logger = environment.logger
 
+  @OptIn(KspExperimental::class)
   override fun process(resolver: Resolver): List<KSAnnotated> {
     val previewFunctions = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
@@ -53,6 +57,13 @@ class PreviewProcessor(
 
       if (previewFunction.isPrivate()) {
         logger.info("Skipping ${previewFunction.simpleName.asString()} as it is private")
+        return@forEach
+      }
+
+      if (previewFunction.isAnnotationPresent(IgnoreEmergeSnapshot::class)) {
+        logger.info(
+          "Skipping ${previewFunction.simpleName.asString()} as it's annotated with @IgnoreEmergeSnapshot"
+        )
         return@forEach
       }
 
