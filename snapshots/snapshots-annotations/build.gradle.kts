@@ -83,8 +83,8 @@ publishing {
       }
 
       pom {
-        name.set("Emerge Tools Snapshots shared dependencies")
-        description.set("Shared dependencies for Emerge Composable Preview snapshots.")
+        name.set("Emerge Tools Snapshots annotations")
+        description.set("Annotations for Emerge Composable Preview snapshots.")
         url.set("https://www.emergetools.com")
         licenses {
           license {
