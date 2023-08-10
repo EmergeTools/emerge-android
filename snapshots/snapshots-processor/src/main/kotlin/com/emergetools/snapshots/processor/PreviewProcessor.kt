@@ -188,9 +188,6 @@ class PreviewProcessor(
     private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
       "androidx.compose.ui.tooling.preview.Preview"
 
-    private const val IGNORE_EMERGE_SNAPSHOT_ANNOTATION_NAME =
-      "com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot"
-
     private val ANDROID_JUNIT_RUNNER_CLASSNAME =
       ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
     private val JUNIT_TEST_ANNOTATION_CLASSNAME = ClassName("org.junit", "Test")
