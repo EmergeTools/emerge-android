@@ -26,6 +26,7 @@ include(
   ":performance:sample:perftesting",
   ":snapshots",
   ":snapshots:snapshots",
+  ":snapshots:snapshots-annotations",
   ":snapshots:snapshots-processor",
   ":snapshots:snapshots-shared",
   ":snapshots:sample",
