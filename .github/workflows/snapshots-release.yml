@@ -37,6 +37,8 @@ jobs:
         run: ./gradlew :snapshots:snapshots-shared:test
       - name: Deploy snapshots-shared
         run: ./gradlew :snapshots:snapshots-shared:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
+      - name: Deploy snapshots-annotations
+        run: ./gradlew :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository
       - name: Deploy snapshots
         run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
       - name: Deploy snapshots-processor
