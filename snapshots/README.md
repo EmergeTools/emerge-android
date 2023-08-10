@@ -94,7 +94,7 @@ scale (`@Preview` with `fontScale` param).
 
 #### Ignoring previews from snapshotting
 
-Not all Previews might not want to be snapshot tested. To ignore a preview from snapshotting, add
+Not all Previews might need to be snapshot tested. To ignore a preview from snapshotting, add
 the `@IgnoreEmergeSnapshot` annotation to the preview function.
 
 ```kotlin
@@ -110,7 +110,7 @@ fun MyComposablePreview() {
 
 You'll need to add a dependency on the `snapshots-annotations` artifact to use the
 `@IgnoreEmergeSnapshot` annotation. This is a lightweight dependency only containing annotations
-that the `snapshots-processor` leverages.
+the `snapshots-processor` leverages.
 
 ```kotlin
 dependencies {
