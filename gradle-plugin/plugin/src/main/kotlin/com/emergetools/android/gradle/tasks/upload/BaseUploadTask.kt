@@ -113,7 +113,15 @@ abstract class BaseUploadTask : DefaultTask() {
       }
     }
 
-    return uploadFile(zipFile, outputDir)
+    // Write the upload response to a file so it can be read by clients should they want to ingest
+    // the buildId or url
+    val response = uploadFile(zipFile, outputDir)
+    File(outputDir, UPLOAD_RESPONSE_FILE_NAME).also {
+      it.createNewFile()
+      it.writeText(Json.encodeToString(response))
+    }
+
+    return response
   }
 
   /**
@@ -183,6 +191,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
   companion object {
     const val OUTPUT_FILE_NAME = "emerge.zip"
+    const val UPLOAD_RESPONSE_FILE_NAME = "upload_response.json"
     const val DEFAULT_API_TOKEN_ENV_KEY = "EMERGE_API_TOKEN"
     private const val ARTIFACT_OUTPUT_DIR = "${EmergePlugin.BUILD_OUTPUT_DIR_NAME}/artifacts"
 
