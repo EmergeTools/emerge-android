@@ -28,7 +28,7 @@ In your application-level `build.gradle(.kts)`:
 
 ```kotlin build.gradle.kts (app)
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc03"
+  id("com.emergetools.android") version "2.0.0"
 }
 
 emerge {

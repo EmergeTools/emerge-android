@@ -5,6 +5,18 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.0.0 - 2023-08-14
+
+### Added
+
+- Support for outputting upload response info to build
+  folder. [#48](https://github.com/EmergeTools/emerge-android/pull/48)
+
+### Fixed
+
+- Configuration cache issue due to not
+  using `@Internal` [#44](https://github.com/EmergeTools/emerge-android/pull/44)
+
 ## 2.0.0-rc03 - 2023-07-18
 
 ### Added
