@@ -15,7 +15,7 @@ If you haven't already, add the Emerge Gradle plugin to your root-level `build.g
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc01"
+  id("com.emergetools.android") version "2.0.0"
 }
 
 emerge {
@@ -28,7 +28,7 @@ See [gradle-plugin](../gradle-plugin/README.md) for more information.
 ### Generate performance project
 
 The Emerge Gradle plugin automatically generates the full performance project for you. To generate
-the performance project manually, first add a the performance extension block and define the module
+the performance project manually, first add the performance extension block and define the module
 path you'd like to create the performance project at:
 
 ```kotlin
@@ -77,10 +77,10 @@ that work similarly to the JUnit annotations you may be used to:
 
 ### Verify perf tests locally
 
-Emerge goes through great lengths to make performance tests reliable, like using one real device for
+Emerge goes to great lengths to make performance tests reliable, like using one real device for
 each test, running every test dozens of times, etc.
 
-As such it is not possible to run a true performance test on your local machine. However it is
+As such it is not possible to run a true performance test on your local machine. However, it is
 possible to run your performance tests locally to ensure that they are set up correctly and can
 complete successfully:
 
@@ -101,7 +101,7 @@ This will build the specific variant of your target app as well as the `performa
 test APK. It will then upload both to Emerge, where Emerge will run your performance tests on real,
 physical devices with 99% accuracy.
 
-A link will be outputted in the console to the view the test upon a successful upload:
+A link will be outputted in the console to view the test upon a successful upload:
 
 ```shell
 Performance bundle Upload successful! View Emerge's analysis analysis at the following url:
@@ -111,7 +111,7 @@ https://emergetools.com/build/{build_id}?buildContent=comparison
 ### View performance results
 
 Performance tests run numerous iterations of base & head to ensure accuracy and statistical
-significance. Typically, tests will complete in about 10-15 minutes, but can take longer depending
+significance. Typically, tests will complete in about 10-15 minutes but can take longer depending
 on test duration & required samples.
 
 Once complete, you can view the results in the Emerge dashboard:
