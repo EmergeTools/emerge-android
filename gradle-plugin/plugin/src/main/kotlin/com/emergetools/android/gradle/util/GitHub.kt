@@ -3,16 +3,21 @@ package com.emergetools.android.gradle.util
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
+import org.gradle.process.ExecOperations
 import java.io.File
 
-internal object GitHub {
+internal class GitHub(private val execOperations: ExecOperations) {
+
+  private val git by lazy {
+    Git(execOperations)
+  }
 
   private val json = Json {
     ignoreUnknownKeys = true
   }
 
   private fun repoId(): String? {
-    val remoteUrl = Git.remoteUrl() ?: return null
+    val remoteUrl = git.remoteUrl() ?: return null
     val result = Regex("[/:]([^/]+/[^/.]+)\\.git$").find(remoteUrl) ?: return null
     return result.groupValues[1]
   }
@@ -76,9 +81,6 @@ internal object GitHub {
     return json.decodeFromString(fileContent)
   }
 
-  private const val GITHUB_EVENT_PR = "pull_request"
-  private const val GITHUB_EVENT_PUSH = "push"
-
   @Serializable
   data class GitHubPullRequestEvent(
     @SerialName("pull_request")
@@ -96,4 +98,9 @@ internal object GitHub {
   data class GitHubPullRequestCommit(
     val sha: String,
   )
+
+  companion object {
+    private const val GITHUB_EVENT_PR = "pull_request"
+    private const val GITHUB_EVENT_PUSH = "push"
+  }
 }

@@ -1,12 +1,13 @@
 package com.emergetools.android.gradle.util.adb
 
 import com.emergetools.android.gradle.util.execute
-import com.emergetools.android.gradle.util.trimmedText
 import org.gradle.api.logging.Logger
+import org.gradle.process.ExecOperations
 import java.nio.file.Files
 import java.nio.file.Path
 
 class AdbHelper(
+  private val execOperations: ExecOperations,
   private val logger: Logger,
   private val path: Path = Path.of("${System.getenv("ANDROID_HOME")}/platform-tools/adb"),
 ) {
@@ -44,6 +45,6 @@ class AdbHelper(
 
   fun exec(args: List<String>): String? {
     val command = "$path ${args.joinToString(" ")}"
-    return command.execute().trimmedText
+    return execOperations.execute(command)
   }
 }

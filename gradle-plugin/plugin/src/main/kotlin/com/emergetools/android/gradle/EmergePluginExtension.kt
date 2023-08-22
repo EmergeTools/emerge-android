@@ -1,9 +1,13 @@
 package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
-import com.emergetools.android.gradle.util.Git
-import com.emergetools.android.gradle.util.GitHub
 import com.emergetools.android.gradle.util.property
+import com.emergetools.android.gradle.util.providers.GitBaseShaValueSource
+import com.emergetools.android.gradle.util.providers.GitCurrentBranchValueSource
+import com.emergetools.android.gradle.util.providers.GitHubPrNumberValueSource
+import com.emergetools.android.gradle.util.providers.GitHubRepoNameValueSource
+import com.emergetools.android.gradle.util.providers.GitHubRepoOwnerValueSource
+import com.emergetools.android.gradle.util.providers.GitShaValueSource
 import org.gradle.api.Action
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.model.ObjectFactory
@@ -66,30 +70,16 @@ abstract class VCSOptions @Inject constructor(
 ) {
 
   val sha: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider {
-      var sha = Git.currentSha()
-      // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
-      if (GitHub.isSupportedGitHubEvent()) {
-        GitHub.sha()?.let { sha = it }
-      }
-      sha
-    })
+    .convention(providers.of(GitShaValueSource::class.java) {})
 
   val baseSha: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider {
-      var baseSha = Git.baseSha()
-      // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
-      if (GitHub.isSupportedGitHubEvent()) {
-        GitHub.baseSha()?.let { baseSha = it }
-      }
-      baseSha
-    })
+    .convention(providers.of(GitBaseShaValueSource::class.java) {})
 
   val branchName: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { Git.currentBranch() })
+    .convention(providers.of(GitCurrentBranchValueSource::class.java) {})
 
   val prNumber: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { GitHub.prNumber()?.toString() })
+    .convention(providers.of(GitHubPrNumberValueSource::class.java) {})
 
   @get:Nested
   abstract val gitHubOptions: GitHubOptions
@@ -112,10 +102,10 @@ abstract class GitHubOptions @Inject constructor(
 ) {
 
   val repoOwner: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { GitHub.repoOwner() })
+    .convention(providers.of(GitHubRepoOwnerValueSource::class.java) {})
 
   val repoName: Property<String> = objects.property(String::class.java)
-    .convention(providers.provider { GitHub.repoName() })
+    .convention(providers.of(GitHubRepoNameValueSource::class.java) {})
 }
 
 abstract class GitLabOptions {

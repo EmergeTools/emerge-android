@@ -2,7 +2,6 @@ package com.emergetools.android.gradle.tasks.snapshots
 
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.util.adb.AdbHelper
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
@@ -13,83 +12,86 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
-import org.jetbrains.kotlin.com.google.common.io.Files
-import java.nio.file.Path
+import org.gradle.process.ExecOperations
+import javax.inject.Inject
 
 abstract class LocalSnapshots : DefaultTask() {
 
-	@get:InputDirectory
-	@get:PathSensitive(PathSensitivity.NAME_ONLY)
-	abstract val packageDir: DirectoryProperty
+  @get:Inject
+  abstract val execOperations: ExecOperations
 
-	@get:OutputDirectory
-	abstract val snapshotStorageDirectory: DirectoryProperty
+  @get:InputDirectory
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val packageDir: DirectoryProperty
 
-	@get:Input
-	abstract val targetAppId: Property<String>
+  @get:OutputDirectory
+  abstract val snapshotStorageDirectory: DirectoryProperty
 
-	@get:Input
-	abstract val testAppId: Property<String>
+  @get:Input
+  abstract val targetAppId: Property<String>
 
-	@get:Input
-	abstract val testInstrumentationRunner: Property<String>
+  @get:Input
+  abstract val testAppId: Property<String>
 
-	@TaskAction
-	fun execute() {
-		val artifactMetadataFiles = packageDir.asFileTree.matching {
-			it.include(ArtifactMetadata.JSON_FILE_NAME)
-		}
-		check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
-		val artifactMetadataFile = artifactMetadataFiles.singleFile
+  @get:Input
+  abstract val testInstrumentationRunner: Property<String>
 
-		val artifactMetadata = Json.decodeFromString<ArtifactMetadata>(artifactMetadataFile.readText())
+  @TaskAction
+  fun execute() {
+    val artifactMetadataFiles = packageDir.asFileTree.matching {
+      it.include(ArtifactMetadata.JSON_FILE_NAME)
+    }
+    check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
+    val artifactMetadataFile = artifactMetadataFiles.singleFile
 
-		val targetApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-			.first { it.name == artifactMetadata.targetArtifactZipPath }
-		val targetAppId = targetAppId.get()
+    val artifactMetadata = Json.decodeFromString<ArtifactMetadata>(artifactMetadataFile.readText())
 
-		val testApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-			.first { it.name == artifactMetadata.testArtifactZipPath }
-		val testAppId = testAppId.get()
+    val targetApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
+      .first { it.name == artifactMetadata.targetArtifactZipPath }
+    val targetAppId = targetAppId.get()
 
-		snapshotStorageDirectory.get().asFile.mkdirs()
+    val testApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
+      .first { it.name == artifactMetadata.testArtifactZipPath }
+    val testAppId = testAppId.get()
 
-		val adbHelper = AdbHelper(logger)
+    snapshotStorageDirectory.get().asFile.mkdirs()
 
-		adbHelper.apply {
-			val deviceCount = devices().size
-			check(deviceCount < 2) { "More than one device connected." }
-			check(deviceCount > 0) { "No devices connected." }
+    val adbHelper = AdbHelper(execOperations, logger)
 
-			uninstall(targetAppId)
-			install(targetApk.absolutePath)
+    adbHelper.apply {
+      val deviceCount = devices().size
+      check(deviceCount < 2) { "More than one device connected." }
+      check(deviceCount > 0) { "No devices connected." }
 
-			uninstall(testAppId)
-			install(testApk.absolutePath)
+      uninstall(targetAppId)
+      install(targetApk.absolutePath)
 
-			shell(
-				"am",
-				"instrument",
-				"-w",
-				"-e",
-				"debug",
-				"false",
-				"-e",
-				"runnerBuilder",
-				"com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
-				"${testAppId}/${testInstrumentationRunner.get()}"
-			)
+      uninstall(testAppId)
+      install(testApk.absolutePath)
 
-			pull(
-				deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
-				localDir = snapshotStorageDirectory.get().asFile.absolutePath,
-			)
+      shell(
+        "am",
+        "instrument",
+        "-w",
+        "-e",
+        "debug",
+        "false",
+        "-e",
+        "runnerBuilder",
+        "com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
+        "${testAppId}/${testInstrumentationRunner.get()}"
+      )
 
-			val count = snapshotStorageDirectory.get().asFile.listFiles()?.size ?: 0
-			logger.lifecycle("Snapshots successful!")
-			logger.lifecycle(
-				"$count files saved to ${snapshotStorageDirectory.get().asFile.absolutePath}"
-			)
-		}
-	}
+      pull(
+        deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
+        localDir = snapshotStorageDirectory.get().asFile.absolutePath,
+      )
+
+      val count = snapshotStorageDirectory.get().asFile.listFiles()?.size ?: 0
+      logger.lifecycle("Snapshots successful!")
+      logger.lifecycle(
+        "$count files saved to ${snapshotStorageDirectory.get().asFile.absolutePath}"
+      )
+    }
+  }
 }

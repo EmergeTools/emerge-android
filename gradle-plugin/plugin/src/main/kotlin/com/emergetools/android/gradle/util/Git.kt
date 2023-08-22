@@ -1,17 +1,19 @@
 package com.emergetools.android.gradle.util
 
-internal object Git {
+import org.gradle.process.ExecOperations
+
+internal class Git(private val execOperations: ExecOperations) {
 
   fun currentBranch(): String? {
-    return "git rev-parse --abbrev-ref HEAD".execute().trimmedText
+    return execOperations.execute("git rev-parse --abbrev-ref HEAD")
   }
 
   fun currentSha(): String? {
-    return "git rev-parse HEAD".execute().trimmedText
+    return execOperations.execute("git rev-parse HEAD")
   }
 
   fun baseSha(): String? {
-    val baseSha = "git merge-base ${remoteHeadBranch()} ${currentBranch()}".execute().trimmedText
+    val baseSha = execOperations.execute("git merge-base ${remoteHeadBranch()} ${currentBranch()}")
     // Consider blank (empty or whitespace) base sha as null
     if (baseSha?.isBlank() == true) return null
     return baseSha
@@ -19,11 +21,11 @@ internal object Git {
 
   fun remoteUrl(remote: String? = primaryRemote()): String? {
     if (remote == null) return null
-    return "git config --get remote.$remote.url".execute().trimmedText
+    return execOperations.execute("git config --get remote.$remote.url")
   }
 
   private fun remote(): List<String>? {
-    return "git remote".execute().trimmedText?.split("\n")
+    return execOperations.execute("git remote")?.split("\n")
   }
 
   private fun primaryRemote(): String? {
@@ -37,7 +39,7 @@ internal object Git {
 
   private fun remoteHeadBranch(remote: String? = primaryRemote()): String? {
     if (remote == null) return null
-    val show = "git remote show $remote".execute().trimmedText ?: return null
+    val show = execOperations.execute("git remote show $remote") ?: return null
     return show.split("\n").asSequence()
       .map { it.trim() }
       .firstOrNull { it.startsWith("HEAD branch: ") }

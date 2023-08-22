@@ -1,7 +1,18 @@
 package com.emergetools.android.gradle.util
 
-import org.codehaus.groovy.runtime.ProcessGroovyMethods
+import org.gradle.process.ExecOperations
+import java.io.ByteArrayOutputStream
 
-internal fun String.execute() = ProcessGroovyMethods.execute(this)
+fun ExecOperations.execute(command: String): String? {
+  val outputStream = ByteArrayOutputStream()
+  exec {
+    it.commandLine(command.split(" "))
+    it.standardOutput = outputStream
+  }
 
-internal val Process.trimmedText: String? get() = ProcessGroovyMethods.getText(this)?.trimEnd()
+  val output = String(outputStream.toByteArray(), Charsets.UTF_8).trimEnd()
+  if (output.isEmpty()) {
+    return null
+  }
+  return output
+}
