@@ -22,11 +22,11 @@ object ComposePreviewUtils {
    */
   fun getUniqueSnapshotConfigsFromPreviewAnnotations(
     previewFunction: KSFunctionDeclaration,
-  ): Sequence<ComposePreviewSnapshotConfig> = previewFunction.annotations.filter {
+  ): List<ComposePreviewSnapshotConfig> = previewFunction.annotations.filter {
     it.shortName.asString() == PREVIEW_ANNOTATION_SIMPLE_NAME
-  }.map {
-    composePreviewShapshotConfigFromPreviewAnnotation(previewFunction, it)
-  }.distinct()
+  }.map { composePreviewShapshotConfigFromPreviewAnnotation(previewFunction, it) }
+    .distinct()
+    .toList()
 
   private fun composePreviewShapshotConfigFromPreviewAnnotation(
     previewFunction: KSFunctionDeclaration,
