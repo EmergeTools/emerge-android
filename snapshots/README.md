@@ -17,7 +17,7 @@ Add the Emerge Gradle plugin to your application's `build.gradle.kts` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc03"
+  id("com.emergetools.android") version "2.0.0"
 }
 
 emerge {
@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.2")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.3")
   // For Compose @Preview snapshot generation from the main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.7.2")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.7.3")
 }
 ```
 
@@ -128,7 +128,7 @@ snapshot tests from the `androidTest` source set.
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc03"
+  id("com.emergetools.android") version "2.0.0"
   id("com.google.devtools.ksp")
 }
 
@@ -137,9 +137,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.2")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.3")
   // For Compose @Preview snapshot generation from androidTest source set:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.2")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.3")
 }
 ```
 
@@ -198,7 +198,7 @@ Add the Emerge gradle plugin to your app-level `build.gradle(.kts)` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0-rc03"
+  id("com.emergetools.android") version "2.0.0"
 }
 
 emerge {
@@ -211,7 +211,7 @@ emerge {
 }
 ```
 
-_Snapshot support was added in Emerge gradle plugin v2.0.0, versions below 2.X do not support
+_Snapshot support was added in Emerge gradle plugin v2.0.0, versions below 2.0.0 do not support
 snapshots._
 
 Then, run the `emergeLocalSnapshots<variant>` task to generate snapshots. You'll need a connected
