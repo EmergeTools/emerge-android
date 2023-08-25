@@ -5,7 +5,9 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposeRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
-import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
+import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotation
+import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
+import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.isAnnotationPresent
@@ -43,40 +45,52 @@ class PreviewProcessor(
 
   @OptIn(KspExperimental::class)
   override fun process(resolver: Resolver): List<KSAnnotated> {
-    val previewFunctions = resolver
+    val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
-      .filterIsInstance<KSFunctionDeclaration>()
       .toList()
+
+    val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
+      .functionsWithPreviewAnnotation()
+    val multiPreviewAnnotatedFunctions = symbolsWithPreviewAnnotations
+      .functionsWithMultiPreviewAnnotation(resolver)
+
+    val previewFunctionMap = buildMap {
+      putOrAppend(previewAnnotatedFunctions)
+      putOrAppend(multiPreviewAnnotatedFunctions)
+    }
 
     val codeGenerator = environment.codeGenerator
 
-    val generatedPreviews = previewFunctions.flatMap { previewFunction ->
+    val generatedPreviews = previewFunctionMap.entries.flatMap { previewFunction ->
+      val function = previewFunction.key
+      val previewConfigs = previewFunction.value
       // Intentionally skipping functions with parameters for now.
-      if (previewFunction.parameters.isNotEmpty()) {
-        logger.info("Skipping ${previewFunction.simpleName.asString()} because it has parameters")
+      if (function.parameters.isNotEmpty()) {
+        logger.info("Skipping ${function.simpleName.asString()} because it has parameters")
         return@flatMap emptyList()
       }
 
-      if (previewFunction.isPrivate()) {
-        logger.info("Skipping ${previewFunction.simpleName.asString()} as it is private")
+      if (function.isPrivate()) {
+        logger.info("Skipping ${function.simpleName.asString()} as it is private")
         return@flatMap emptyList()
       }
 
-      if (previewFunction.isInternal()) {
-        logger.info("Skipping ${previewFunction.simpleName.asString()} as it is internal")
+      if (function.isInternal()) {
+        logger.info("Skipping ${function.simpleName.asString()} as it is internal")
         return@flatMap emptyList()
       }
 
-      if (previewFunction.isAnnotationPresent(IgnoreEmergeSnapshot::class)) {
+      if (function.isAnnotationPresent(IgnoreEmergeSnapshot::class)) {
         logger.info(
-          "Skipping ${previewFunction.simpleName.asString()} as it's annotated with @IgnoreEmergeSnapshot"
+          "Skipping ${function.simpleName.asString()} as it's annotated with @IgnoreEmergeSnapshot"
         )
         return@flatMap emptyList()
       }
 
       generateEmergeSnapshotTest(
         codeGenerator = codeGenerator,
-        previewFunction = previewFunction,
+        previewFunction = function,
+        previewConfigs = previewConfigs,
       )
     }
 
@@ -109,15 +123,14 @@ class PreviewProcessor(
   private fun generateEmergeSnapshotTest(
     codeGenerator: CodeGenerator,
     previewFunction: KSFunctionDeclaration,
+    previewConfigs: List<ComposePreviewSnapshotConfig>,
   ): List<String> {
-    val previewConfigs = getUniqueSnapshotConfigsFromPreviewAnnotations(previewFunction).toList()
     return previewConfigs.map { previewConfig ->
       val packageName = previewFunction.containingFile!!.packageName.asString()
       val functionName = previewFunction.simpleName.asString()
 
       val testClassName = getTestClassName(functionName, previewConfig)
-      val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME)
-        .build()
+      val testAnnotation = AnnotationSpec.builder(JUNIT_TEST_ANNOTATION_CLASSNAME).build()
 
       val testFunctionSpec = FunSpec.builder("${functionName}_GenSnapshot").apply {
         addAnnotation(testAnnotation)
