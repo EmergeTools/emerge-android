@@ -5,6 +5,7 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposeRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
+import com.emergetools.snapshots.processor.utils.COMPOSE_PREVIEW_ANNOTATION_NAME
 import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
 import com.emergetools.snapshots.processor.utils.putOrAppend
@@ -211,9 +212,6 @@ class PreviewProcessor(
 
   companion object {
     private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
-
-    private const val COMPOSE_PREVIEW_ANNOTATION_NAME =
-      "androidx.compose.ui.tooling.preview.Preview"
 
     private val ANDROID_JUNIT_RUNNER_CLASSNAME =
       ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")

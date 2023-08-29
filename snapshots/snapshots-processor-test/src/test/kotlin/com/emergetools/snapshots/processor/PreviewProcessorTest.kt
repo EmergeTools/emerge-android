@@ -39,6 +39,11 @@ class PreviewProcessorTest {
     compileInputsAndVerifyOutputs()
   }
 
+  @Test
+  fun `multipreview function with two previews produces two snapshots`() {
+    compileInputsAndVerifyOutputs()
+  }
+
   private fun compileInputs(
     options: MutableMap<String, String> = mutableMapOf(),
     onCompilation: (compilation: KotlinCompilation, result: KotlinCompilation.Result) -> Unit,
