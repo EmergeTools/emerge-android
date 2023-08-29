@@ -60,6 +60,7 @@ class PreviewProcessorTest {
     onCompilation(compilation, result)
   }
 
+  @Suppress("UnusedPrivateMember")
   private fun assertCompilationFails(errorMessage: String) {
     compileInputs { _, result ->
       assertEquals(KotlinCompilation.ExitCode.COMPILATION_ERROR, result.exitCode)
@@ -124,7 +125,7 @@ class PreviewProcessorTest {
       .replace(" ", "_")
 
     val className = testNameRule.className.substringAfterLast(".")
-    return File(rootResourcesDir, "$className/${methodName}")
+    return File(rootResourcesDir, "$className/$methodName")
   }
 
   companion object {
