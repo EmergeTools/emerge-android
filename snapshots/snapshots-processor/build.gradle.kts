@@ -36,7 +36,6 @@ dependencies {
   implementation(libs.kotlinpoet.ksp)
   implementation(libs.kotlinx.serialization)
   implementation(libs.ksp.api)
-  implementation(libs.junit)
 
   api(projects.snapshots.snapshotsShared)
   api(projects.snapshots.snapshotsAnnotations)

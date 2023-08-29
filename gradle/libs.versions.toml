@@ -8,6 +8,7 @@ compose-compiler-extension = "1.5.1"
 detekt = "1.22.0"
 kotlin = "1.9.0"
 kotlinpoet = "1.14.2"
+kotlin-compile-testing = "1.5.0"
 ksp = "1.9.0-1.0.13"
 okhttp = "4.10.0"
 junit-jupiter = "5.8.2"
@@ -45,6 +46,11 @@ androidx-test-runner = { module = "androidx.test:runner", version.ref = "android
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.2.0" }
 androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version = "1.1.0" }
 
+assertj = "org.assertj:assertj-core:3.21.0"
+
+compile-testing = { module = "com.github.tschuchortdev:kotlin-compile-testing", version.ref = "kotlin-compile-testing" }
+compile-testing-ksp = { module = "com.github.tschuchortdev:kotlin-compile-testing-ksp", version.ref = "kotlin-compile-testing" }
+
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-runtime = { group = "androidx.compose.runtime", name = "runtime" }
 compose-material = { group = "androidx.compose.material3", name = "material3" }
@@ -58,6 +64,8 @@ compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 google-truth = "com.google.truth:truth:1.1.3"
+
+guava = "com.google.guava:guava:30.1.1-jre"
 
 junit = "junit:junit:4.13.2"
 junit-jupiter-api = { module = "org.junit.jupiter:junit-jupiter-api", version.ref = "junit-jupiter" }
