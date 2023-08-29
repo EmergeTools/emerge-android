@@ -28,6 +28,7 @@ include(
   ":snapshots:snapshots",
   ":snapshots:snapshots-annotations",
   ":snapshots:snapshots-processor",
+  ":snapshots:snapshots-processor-test",
   ":snapshots:snapshots-shared",
   ":snapshots:sample",
   ":snapshots:sample:app",
