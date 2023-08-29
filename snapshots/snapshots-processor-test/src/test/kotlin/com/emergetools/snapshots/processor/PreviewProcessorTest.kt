@@ -20,22 +20,22 @@ class PreviewProcessorTest {
   val testNameRule = TestNameRule()
 
   @Test
-  fun `standalone preview function compiles ok`() {
+  fun `standalone preview function produces one snapshot test`() {
     compileInputsAndVerifyOutputs()
   }
 
   @Test
-  fun `standalone preview function with two previews compiles ok`() {
+  fun `standalone preview function with two previews produces two snapshot tests`() {
     compileInputsAndVerifyOutputs()
   }
 
   @Test
-  fun `two preview functions compiles ok`() {
+  fun `two preview functions produces two snapshot tests`() {
     compileInputsAndVerifyOutputs()
   }
 
   @Test
-  fun `standalone preview function with private preview produces no output`() {
+  fun `standalone preview function with private preview produces no snapshot test`() {
     compileInputsAndVerifyOutputs()
   }
 
