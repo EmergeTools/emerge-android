@@ -129,6 +129,6 @@ class PreviewProcessorTest {
 
   companion object {
     // Set to true to overwrite the test outputs with those generated from tests above.
-    const val UPDATE_TEST_OUTPUTS = true
+    const val UPDATE_TEST_OUTPUTS = false
   }
 }
