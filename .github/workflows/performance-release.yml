@@ -5,7 +5,7 @@ on:
     types: [ published ]
 
 jobs:
-  deploy-gradle-plugin:
+  deploy-performance:
 
     runs-on: ubuntu-latest
 
