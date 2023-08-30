@@ -19,8 +19,6 @@ object ComposePreviewUtils {
    * A unique preview annotation is one that has a unique combination of name, group, locale,
    * fontScale and uiMode, the current supported arguments for Emerge snapshots of the @Preview
    * annotation.
-   *
-   * TODO: Also needs to find multipreviews
    */
   fun getUniqueSnapshotConfigsFromPreviewAnnotations(
     previewFunction: KSFunctionDeclaration,

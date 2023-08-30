@@ -35,7 +35,8 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotation(
         .filterIsInstance<KSFunctionDeclaration>()
         .map { function ->
           function to getUniqueSnapshotConfigsFromMultiPreviewAnnotation(
-            multiPreviewAnnotationPreviewAnnotations, function
+            annotations = multiPreviewAnnotationPreviewAnnotations,
+            previewFunction = function
           )
         }
     }

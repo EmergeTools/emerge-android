@@ -12,7 +12,6 @@ data class ComposePreviewSnapshotConfig(
   val uiMode: Int? = null,
   val locale: String? = null,
   val fontScale: Float? = null,
-  // TODO: Multipreview metadata
 ) {
 
   /**
