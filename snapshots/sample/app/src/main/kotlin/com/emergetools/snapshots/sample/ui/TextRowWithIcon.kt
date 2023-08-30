@@ -24,11 +24,18 @@ fun TextRowWithIcon(
 }
 
 @Preview
-@Preview(
-  fontScale = 1.5f
-)
+@FontScalePreviews
 @Composable
 fun TextRowWithIconPreviewFromMain() {
+  TextRowWithIcon(
+    titleText = "Title",
+    subtitleText = "Subtitle"
+  )
+}
+
+@FontScalePreviews
+@Composable
+fun TextRowWithIconPreviewFromMainJustMultiPreview() {
   TextRowWithIcon(
     titleText = "Title",
     subtitleText = "Subtitle"

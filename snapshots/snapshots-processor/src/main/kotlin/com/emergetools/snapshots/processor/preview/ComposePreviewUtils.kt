@@ -28,6 +28,16 @@ object ComposePreviewUtils {
     .distinct()
     .toList()
 
+  fun getUniqueSnapshotConfigsFromMultiPreviewAnnotation(
+    annotations: List<KSAnnotation>,
+    previewFunction: KSFunctionDeclaration,
+  ): List<ComposePreviewSnapshotConfig> {
+    return annotations.map {
+      composePreviewShapshotConfigFromPreviewAnnotation(previewFunction, it)
+    }.distinct()
+      .toList()
+  }
+
   private fun composePreviewShapshotConfigFromPreviewAnnotation(
     previewFunction: KSFunctionDeclaration,
     previewAnnotation: KSAnnotation,
