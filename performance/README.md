@@ -229,3 +229,22 @@ class MainActivityInitTest {
 
 That's it! Emerge will automatically measure any specified spans measured from your UI test.
 
+## Releasing
+
+### Releasing a new version
+
+1. Update the `emerge-performance` version in `/gradle/libs.versions.toml`
+2. Update the `/performance/CHANGELOG.md`
+3. `gt bc -a -m "Prepare for Performance X.Y.Z"` (where X.Y.Z is the version set in step 1)
+4. `gt ss`
+5. Get PR approved and merge
+6. Create a new release on GitHub
+7. Tag version `performance-vX.Y.Z`
+8. Release title `Performance vX.Y.Z`
+9. Paste the content from `/performance/CHANGELOG.md` as the description
+
+The `performance-release` workflow will automatically publish the new version to Sonatype upon new
+release publish.
+
+From there, the release will need to be promoted to the main repository from the Sonatype UI.
+
