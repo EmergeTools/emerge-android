@@ -28,6 +28,6 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Sanity check performance test
-        run: ./gradlew :performance:performance:test
+        run: ./gradlew :performance:performance:test -Pandroid.useAndroidX=true
       - name: Deploy performance
-        run: ./gradlew :performance:performance:publishReleasePublicationToSonatypeStagingRepository
+        run: ./gradlew :performance:performance:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
