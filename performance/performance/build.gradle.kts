@@ -86,17 +86,14 @@ afterEvaluate {
   }
 }
 
-val ossrhUsername: String? by project
-val ossrhPassword: String? by project
-
 publishing {
   repositories {
     maven {
       name = "SonatypeStaging"
       url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
       credentials {
-        username = ossrhUsername
-        password = ossrhPassword
+        username = System.getenv("OSSRH_USERNAME")
+        password = System.getenv("OSSRH_PASSWORD")
       }
     }
 
@@ -104,8 +101,8 @@ publishing {
       name = "SonatypeSnapshots"
       url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
       credentials {
-        username = ossrhUsername
-        password = ossrhPassword
+        username = System.getenv("OSSRH_USERNAME")
+        password = System.getenv("OSSRH_PASSWORD")
       }
     }
   }
@@ -144,5 +141,8 @@ publishing {
 }
 
 signing {
+  val signingKey: String? by project
+  val signingPassword: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassword)
   sign(publishing.publications["release"])
 }
