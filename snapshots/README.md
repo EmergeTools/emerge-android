@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.3")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.8.0")
   // For Compose @Preview snapshot generation from the main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.7.3")
+  ksp("com.emergetools.snapshots:snapshots-processor:0.8.0")
 }
 ```
 
@@ -137,9 +137,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.7.3")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:0.8.0")
   // For Compose @Preview snapshot generation from androidTest source set:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.7.3")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.8.0")
 }
 ```
 

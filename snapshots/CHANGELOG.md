@@ -5,6 +5,17 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.0 - 2023-08-31
+
+### Added
+
+- Multipreview support. [#56](https://github.com/EmergeTools/emerge-android/pull/56)
+
+### Changed
+
+- Adds numerous tests for KSP
+  processor. [#55](https://github.com/EmergeTools/emerge-android/pull/55)
+
 ## 0.7.3 - 2023-08-22
 
 ### Changed
