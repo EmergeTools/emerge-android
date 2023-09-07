@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.upload
 
+import com.emergetools.android.gradle.util.dependencies.Dependencies
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
@@ -15,7 +16,7 @@ data class ArtifactMetadata(
   val targetArtifactZipPath: String,
   val testArtifactZipPath: String? = null,
   val proguardMappingsZipPath: String? = null,
-  // TODO: Source
+  val dependencyMetadataZipPath: String = Dependencies.JSON_FILE_NAME,
 ) {
 
   companion object {
