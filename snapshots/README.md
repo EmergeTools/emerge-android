@@ -17,7 +17,7 @@ Add the Emerge Gradle plugin to your application's `build.gradle.kts` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0"
+  id("com.emergetools.android") version "2.0.1"
 }
 
 emerge {
@@ -128,7 +128,7 @@ snapshot tests from the `androidTest` source set.
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0"
+  id("com.emergetools.android") version "2.0.1"
   id("com.google.devtools.ksp")
 }
 
@@ -198,7 +198,7 @@ Add the Emerge gradle plugin to your app-level `build.gradle(.kts)` file:
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0"
+  id("com.emergetools.android") version "2.0.1"
 }
 
 emerge {

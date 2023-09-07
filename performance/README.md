@@ -15,7 +15,7 @@ If you haven't already, add the Emerge Gradle plugin to your root-level `build.g
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.0"
+  id("com.emergetools.android") version "2.0.1"
 }
 
 emerge {
