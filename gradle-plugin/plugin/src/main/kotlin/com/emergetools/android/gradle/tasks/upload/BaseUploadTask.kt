@@ -145,9 +145,9 @@ abstract class BaseUploadTask : DefaultTask() {
     val uploadRequestData = EmergeUploadRequestData(
       apiToken = apiToken.get(),
       filename = file.name,
-      sha = sha.get(),
-      baseSha = baseSha.get(),
-      branch = branchName.get(),
+      sha = sha.orNull,
+      baseSha = baseSha.orNull,
+      branch = branchName.orNull,
       repoName = repoName,
       prNumber = prNumber.orNull,
       buildType = buildType.orNull,
