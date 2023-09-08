@@ -4,6 +4,7 @@ import java.util.Date
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
+  alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.grgit)
   `maven-publish`
   signing
@@ -18,7 +19,7 @@ var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
 android {
   namespace = "com.emergetools.test"
 
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     minSdk = 23
@@ -56,6 +57,10 @@ android {
 
 dependencies {
   implementation(libs.junit)
+
+  // Only use for local debugging & testing leveraging their Perfetto utils
+  implementation(libs.androidx.benchmark.common)
+  implementation(libs.androidx.benchmark.macro)
 
   implementation(libs.androidx.test.ext.junit)
   implementation(libs.androidx.test.runner)

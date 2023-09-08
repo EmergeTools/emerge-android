@@ -38,6 +38,8 @@ android-gradle-plugin = "com.android.tools.build:gradle:7.3.1"
 
 androidx-activity-activity = { module = "androidx.activity:activity", version.ref = "androidxactivity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
+androidx-benchmark-common = { module = "androidx.benchmark:benchmark-common", version = "1.2.0-beta05" }
+androidx-benchmark-macro = { module = "androidx.benchmark:benchmark-macro", version = "1.2.0-beta05" }
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
 androidx-test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-ext" }
