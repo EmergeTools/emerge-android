@@ -1,5 +1,11 @@
+@file:OptIn(ExperimentalPerfettoCaptureApi::class, ExperimentalPerfettoTraceProcessorApi::class)
+
 package com.emergetools.test
 
+import androidx.benchmark.perfetto.ExperimentalPerfettoCaptureApi
+import androidx.benchmark.perfetto.ExperimentalPerfettoTraceProcessorApi
+import androidx.benchmark.perfetto.PerfettoTrace
+import androidx.benchmark.perfetto.PerfettoTraceProcessor
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.uiautomator.UiDevice
@@ -9,6 +15,7 @@ import com.emergetools.test.annotations.EmergeStartupTest
 import com.emergetools.test.annotations.EmergeTest
 import com.emergetools.test.utils.clearTargetAppData
 import com.emergetools.test.utils.maybeForceStopApp
+import com.emergetools.test.utils.perfetto.querySpans
 import hu.webarticum.treeprinter.Insets
 import hu.webarticum.treeprinter.SimpleTreeNode
 import hu.webarticum.treeprinter.decorator.BorderTreeNodeDecorator
@@ -25,6 +32,10 @@ import org.junit.runners.model.Statement
 /**
  * Runs tests annotated with @EmergeTest as well as related @EmergeInit and @EmergeSetup functions.
  */
+@OptIn(
+  ExperimentalPerfettoTraceProcessorApi::class,
+  ExperimentalPerfettoCaptureApi::class
+)
 class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunner(testClass) {
 
   private val initMethods = this.testClass.getAnnotatedMethods(EmergeInit::class.java)
@@ -34,6 +45,12 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
 
   private val summaries = mutableListOf<MethodSummary>()
   private var initCalled = false
+
+  private val targetPackageName by lazy {
+    checkNotNull(InstrumentationRegistry.getArguments().getString(ARG_PACKAGE_NAME)) {
+      "Missing argument: $ARG_PACKAGE_NAME"
+    }
+  }
 
   override fun run(notifier: RunNotifier?) {
     super.run(notifier)
@@ -202,7 +219,8 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
   ): Statement {
     val superMethodInvoker = super.methodInvoker(method, test)
 
-    val hasEmergeTestAnnotation = method.getAnnotation(EmergeTest::class.java) != null
+    val emergeTestAnnotation = method.getAnnotation(EmergeTest::class.java)
+    val hasEmergeTestAnnotation = emergeTestAnnotation != null
     val hasEmergeStartupTestAnnotation = method.getAnnotation(EmergeStartupTest::class.java) != null
 
     val annotationSummary = if (hasEmergeTestAnnotation && hasEmergeStartupTestAnnotation) {
@@ -223,7 +241,10 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
       }
     } else {
       val summary = if (hasEmergeTestAnnotation) {
-        addSummary(EmergeTest::class.java, method)
+        addSummary(EmergeTest::class.java, method).also { methodSummary ->
+          emergeTestAnnotation.spans.map { ExpectedSpan(it) }
+            .let(methodSummary.expectedSpans::addAll)
+        }
       } else {
         addSummary(EmergeStartupTest::class.java, method)
       }
@@ -247,7 +268,44 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
     return object : Statement() {
       override fun evaluate() {
         try {
-          superMethodInvoker.evaluate()
+          // Only profile over the test if expected spans are present
+          if (annotationSummary.expectedSpans.isNotEmpty()) {
+            PerfettoTrace.record(
+              method.name,
+              appTagPackages = listOf(targetPackageName),
+              traceCallback = { trace ->
+                val foundSpans = PerfettoTraceProcessor.runServer {
+                  loadTrace(trace) {
+                    querySpans(
+                      spanNames = annotationSummary.expectedSpans.map(ExpectedSpan::name),
+                      packageName = targetPackageName,
+                    )
+                  }
+                }
+
+                annotationSummary.expectedSpans.forEach { expectedSpan ->
+                  val foundSpan = foundSpans.find { it.name == expectedSpan.name }
+                  expectedSpan.wasFound = foundSpan != null
+                  if (foundSpan != null) {
+                    expectedSpan.durationMs = foundSpan.durMs
+                    val message = if (foundSpan.durMs < SHORT_SPAN_DURATION_MS) {
+                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms, short spans can lead to inconclusive results $WARN_CHAR"
+                    } else {
+                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms $SUCCESS_CHAR"
+                    }
+                    annotationSummary.messages.add(message)
+                  } else {
+                    annotationSummary.result = MethodResult.FAILURE
+                    annotationSummary.messages.add(
+                      "Did not find expected span \'${expectedSpan.name}\' $ERROR_CHAR"
+                    )
+                  }
+                }
+              }
+            ) { superMethodInvoker.evaluate() }
+          } else {
+            superMethodInvoker.evaluate()
+          }
           // Don't mark method as success if it's already marked as failure
           if (annotationSummary.result !== MethodResult.FAILURE) {
             annotationSummary.result = MethodResult.SUCCESS
@@ -367,7 +425,10 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
   }
 
   companion object {
+    private const val ARG_PACKAGE_NAME = "packageName"
+
     private const val SUCCESS_CHAR = "✅"
+    private const val WARN_CHAR = "⚠️"
     private const val ERROR_CHAR = "❌"
     private const val SKIPPED_CHAR = "⏭️"
 
@@ -378,6 +439,12 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
 
     private const val DUPLICATE_TEST_ANNOTATION_MESSAGE =
       "Method cannot have both @EmergeTest and @EmergeStartupTest annotations"
+
+    /**
+     * Relatively arbitrary, taken from observations we've seen around short spans and inconclusive
+     * perf results.
+     */
+    private const val SHORT_SPAN_DURATION_MS = 200L
 
     val EMPTY_STATEMENT = object : Statement() {
       override fun evaluate() {
@@ -391,11 +458,18 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
       SKIPPED(SKIPPED_CHAR),
     }
 
+    data class ExpectedSpan(
+      val name: String,
+      var wasFound: Boolean = false,
+      var durationMs: Long? = null,
+    )
+
     data class MethodSummary(
       val annotation: List<Class<*>>,
       val method: FrameworkMethod,
       var result: MethodResult,
       val messages: MutableList<String> = mutableListOf(),
+      val expectedSpans: MutableList<ExpectedSpan> = mutableListOf(),
     ) {
       val suffix: String
         get() = " " + result.suffix
