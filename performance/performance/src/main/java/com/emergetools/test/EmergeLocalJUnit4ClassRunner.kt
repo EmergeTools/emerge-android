@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalPerfettoCaptureApi::class, ExperimentalPerfettoTraceProcessorApi::class)
-
 package com.emergetools.test
 
 import androidx.benchmark.perfetto.ExperimentalPerfettoCaptureApi

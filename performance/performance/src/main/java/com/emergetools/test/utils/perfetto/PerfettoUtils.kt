@@ -60,10 +60,6 @@ data class Slice(
   }
 }
 
-/**
- * Convenient function to immediately retrieve a list of slices.
- * Note that this method is provided for convenience.
- */
 @OptIn(ExperimentalPerfettoTraceProcessorApi::class)
 internal fun Sequence<Row>.toSlices(): List<Slice> = map {
   Slice(name = it.string("name"), ts = it.long("ts"), dur = it.long("dur"))
