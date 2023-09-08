@@ -289,9 +289,11 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
                   if (foundSpan != null) {
                     expectedSpan.durationMs = foundSpan.durMs
                     val message = if (foundSpan.durMs < SHORT_SPAN_DURATION_MS) {
-                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms, short spans can lead to inconclusive results $WARN_CHAR"
+                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms, " +
+                        "short spans can lead to inconclusive results $WARN_CHAR"
                     } else {
-                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms $SUCCESS_CHAR"
+                      "Found span \'${foundSpan.name}\' with duration ${foundSpan.durMs}ms " +
+                        SUCCESS_CHAR
                     }
                     annotationSummary.messages.add(message)
                   } else {
