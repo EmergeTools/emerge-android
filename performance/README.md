@@ -15,7 +15,7 @@ If you haven't already, add the Emerge Gradle plugin to your root-level `build.g
 
 ```kotlin
 plugins {
-  id("com.emergetools.android") version "2.0.1"
+  id("com.emergetools.android")
 }
 
 emerge {
@@ -235,7 +235,7 @@ That's it! Emerge will automatically measure any specified spans measured from y
 
 1. Update the `emerge-performance` version in `/gradle/libs.versions.toml`
 2. Update the `/performance/CHANGELOG.md`
-3. `gt bc -a -m "Prepare for Performance X.Y.Z"` (where X.Y.Z is the version set in step 1)
+3. `gt bc -a -m "Prepare for performance X.Y.Z"` (where X.Y.Z is the version set in step 1)
 4. `gt ss`
 5. Get PR approved and merge
 6. Create a new release on GitHub

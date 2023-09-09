@@ -12,7 +12,7 @@ plugins {
 
 dependencies {
     // Emerge's Performance Testing SDK (Required):
-    implementation("com.emergetools.test:performance:2.0.0")
+    implementation("com.emergetools.test:performance:2.1.0")
     // Emerge's UIAutomator helper library (Optional): https://github.com/EmergeTools/relax
     implementation("com.emergetools.test:relax:0.1.0")
 
