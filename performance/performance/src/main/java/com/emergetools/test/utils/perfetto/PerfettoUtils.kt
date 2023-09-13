@@ -7,7 +7,8 @@ import androidx.benchmark.perfetto.Row
 /**
  * While these are available in PerfettoTraceProcessor, they're marked as internal to the library
  * group, preventing us from leveraging them.
- * These are simply a copy of those at 1.2.0-beta05, very slightly modified to avoid naming confusion:
+ * These are simply a copy of those at 1.2.0-beta05, slightly modified to avoid naming confusion and
+ * for a few custom helpers. Original source:
  * https://github.com/androidx/androidx/blob/f6df7df4bb215d31187a32dea874edd43eb9506f/benchmark/benchmark-macro/src/main/java/androidx/benchmark/perfetto/PerfettoTraceProcessor.kt#L241
  */
 @OptIn(ExperimentalPerfettoTraceProcessorApi::class)
@@ -15,7 +16,7 @@ fun PerfettoTraceProcessor.Session.querySpans(
   spanNames: List<String>,
   packageName: String?,
 ): List<Slice> {
-  val whereClause = spanNames
+  val spansWhereClause = spanNames
     .joinToString(
       separator = " OR ",
       prefix = if (packageName == null) {
@@ -27,10 +28,22 @@ fun PerfettoTraceProcessor.Session.querySpans(
     ) {
       "slice.name LIKE \"$it\""
     }
-  val innerJoins = if (packageName != null) {
+
+  val syncSpanInnerJoins = if (packageName != null) {
     """
       INNER JOIN thread_track on slice.track_id = thread_track.id
       INNER JOIN thread USING(utid)
+      INNER JOIN process USING(upid)
+    """.trimMargin()
+  } else {
+    ""
+  }
+
+  // Async spans are written to a different "track" (process_track)
+  // than standard Trace spans (thread_track).
+  val asyncSpanInnerJoins = if (packageName != null) {
+    """
+      INNER JOIN process_track on slice.track_id = process_track.id
       INNER JOIN process USING(upid)
     """.trimMargin()
   } else {
@@ -41,9 +54,15 @@ fun PerfettoTraceProcessor.Session.querySpans(
     query = """
       SELECT slice.name,ts,dur
       FROM slice
-      $innerJoins
-      WHERE $whereClause
-      ORDER BY ts
+      $syncSpanInnerJoins
+      WHERE $spansWhereClause
+
+      UNION
+
+      SELECT slice.name,ts,dur
+      FROM slice
+      $asyncSpanInnerJoins
+      WHERE $spansWhereClause
     """.trimMargin()
   ).toSlices()
 }

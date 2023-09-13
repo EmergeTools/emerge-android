@@ -31,7 +31,7 @@ class ExamplePerformanceTest {
    * app during the test. Each span will have a separate conclusion & flamegraph comparison
    * available in the Emerge UI.
    */
-  @EmergeTest(spans = ["MainActivity.onCreate"])
+  @EmergeTest(spans = ["MainActivity.onCreate", "MainActivity.onCreateAsync"])
   fun myDeeplinkStartupTest() {
     Relax(APP_PACKAGE_NAME) {
       launchWithLink("emg://emergetools.com/")
