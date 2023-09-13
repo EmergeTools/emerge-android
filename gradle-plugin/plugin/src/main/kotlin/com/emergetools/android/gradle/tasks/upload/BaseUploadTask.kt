@@ -7,21 +7,18 @@ import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.ProductOptions
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.dependencies.Dependencies
-import com.emergetools.android.gradle.util.dependencies.Library
-import com.emergetools.android.gradle.util.dependencies.Module
+import com.emergetools.android.gradle.util.dependencies.buildDependencies
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import com.emergetools.android.gradle.util.network.EmergeUploadResponse
 import com.emergetools.android.gradle.util.network.SOURCE_GRADLE_PLUGIN
 import com.emergetools.android.gradle.util.network.fetchSignedUrl
 import com.emergetools.android.gradle.util.network.postFile
-import com.emergetools.android.gradle.util.putOrAppend
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
-import org.gradle.api.attributes.Attribute
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
@@ -30,8 +27,6 @@ import org.gradle.api.tasks.OutputDirectory
 import java.io.BufferedOutputStream
 import java.io.File
 import java.util.concurrent.TimeUnit
-import java.util.jar.JarEntry
-import java.util.jar.JarFile
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 import kotlin.io.path.absolutePathString
@@ -105,6 +100,7 @@ abstract class BaseUploadTask : DefaultTask() {
     outputDir.mkdirs()
 
     val zipFile = File(createTempDirectory("").absolutePathString(), OUTPUT_FILE_NAME)
+    logger.debug("Creating Emerge upload zip: ${zipFile.path}")
 
     ZipOutputStream(BufferedOutputStream(zipFile.outputStream())).use { zos ->
       includeFilesInUpload(zos)
@@ -120,7 +116,7 @@ abstract class BaseUploadTask : DefaultTask() {
         zos.closeEntry()
       }
 
-      val dependenciesJson = Json.encodeToString(dependencies())
+      val dependenciesJson = Json.encodeToString(project.buildDependencies(variantName.get()))
       val dependenciesFile = File(outputDir, Dependencies.JSON_FILE_NAME).also {
         it.createNewFile()
         it.writeText(dependenciesJson)
@@ -141,96 +137,6 @@ abstract class BaseUploadTask : DefaultTask() {
     }
 
     return response
-  }
-
-  private fun dependencies(): Dependencies {
-    val dependencies = mutableMapOf<String, List<String>>()
-
-    val runtimeClasspathConfig =
-      project.configurations.getByName("${variantName.get()}RuntimeClasspath")
-    listOf(
-      ARTIFACT_RESOURCES,
-      ARTIFACT_CLASSES,
-      ARTIFACT_ASSETS,
-      ARTIFACT_JNI,
-    ).forEach { artifactType ->
-      runtimeClasspathConfig.incoming.artifactView { viewConfiguration ->
-        viewConfiguration.attributes { attributeContainer ->
-          attributeContainer.attribute(
-            Attribute.of("artifactType", String::class.java), artifactType
-          )
-        }
-      }.artifacts.artifacts.forEach { resolvedArtifact ->
-        val id = resolvedArtifact.id.componentIdentifier
-        val dependencyEntries = resolvedArtifact.file
-          .walkTopDown()
-          .filter(File::isFile)
-          .flatMap { artifactFile ->
-            // Normalize the name to remove the leading path, so it's relative to the module root.
-            val name = artifactFile.absolutePath.removePrefix(resolvedArtifact.file.absolutePath)
-            when (artifactFile.extension) {
-              // If the artifact is a jar, we want to include all the entries in the jar
-              "jar" -> JarFile(artifactFile).use { jarFile ->
-                jarFile.entries()
-                  .asSequence()
-                  .filterNot(JarEntry::isDirectory)
-                  .map(JarEntry::getName)
-                  .toList()
-              }
-
-              else -> listOf(name)
-            }
-          }.toList()
-
-        if (dependencyEntries.isNotEmpty()) {
-          dependencies.putOrAppend(id.displayName, dependencyEntries)
-        }
-      }
-    }
-
-    val libraries = mutableListOf<Library>()
-    val modules = mutableListOf(
-      Module(
-        name = project.name,
-        path = project.path,
-        entries = emptyList(),
-        isRoot = true,
-      )
-    )
-    dependencies.entries.mapNotNull {
-      val keySplits = it.key.split(":")
-      if (it.key.startsWith("project ")) {
-        modules.add(
-          Module(
-            name = keySplits.last(),
-            path = it.key.substringAfter("project "),
-            entries = it.value,
-          )
-        )
-      } else {
-        // Check to ensure the dependency is in the format group:name:version
-        if (keySplits.size != 3) {
-          logger.warn(
-            "Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!"
-          )
-          return@mapNotNull null
-        }
-
-        libraries.add(
-          Library(
-            groupId = keySplits[0],
-            artifactId = keySplits[1],
-            version = keySplits[2],
-            entries = it.value
-          )
-        )
-      }
-    }
-
-    return Dependencies(
-      libraries = libraries,
-      modules = modules,
-    )
   }
 
   /**
@@ -303,13 +209,6 @@ abstract class BaseUploadTask : DefaultTask() {
     private const val ARTIFACT_OUTPUT_DIR = "${EmergePlugin.BUILD_OUTPUT_DIR_NAME}/artifacts"
 
     private const val BASE_URL_ARG_KEY = "baseUrl"
-
-    // Taken from com.android.build.gradle.internal.publishing.AndroidArtifacts
-    const val ARTIFACT_CLASSES = "android-classes"
-    const val ARTIFACT_RESOURCES = "android-res"
-    const val ARTIFACT_ASSETS = "android-assets"
-    const val ARTIFACT_JNI = "android-jni"
-    // Intentionally skipping aidl, renderscript and other minors as we haven't seen occurrences yet
 
     fun BaseUploadTask.setUploadTaskInputs(
       extension: EmergePluginExtension,
