@@ -8,12 +8,10 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.utils.COMPOSE_PREVIEW_ANNOTATION_NAME
 import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
-import com.emergetools.snapshots.processor.utils.getCustomMultiPreviewAnnotations
+import com.emergetools.snapshots.processor.utils.getMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
-import com.google.devtools.ksp.containingFile
-import com.google.devtools.ksp.getClassDeclarationByName
 import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.isInternal
 import com.google.devtools.ksp.isPrivate
@@ -24,7 +22,6 @@ import com.google.devtools.ksp.processing.SymbolProcessor
 import com.google.devtools.ksp.processing.SymbolProcessorEnvironment
 import com.google.devtools.ksp.processing.SymbolProcessorProvider
 import com.google.devtools.ksp.symbol.KSAnnotated
-import com.google.devtools.ksp.symbol.KSClassDeclaration
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.squareup.kotlinpoet.AnnotationSpec
 import com.squareup.kotlinpoet.ClassName
@@ -50,24 +47,20 @@ class PreviewProcessor(
 
   @OptIn(KspExperimental::class)
   override fun process(resolver: Resolver): List<KSAnnotated> {
-    val customPreviewAnnotations = resolver.getCustomMultiPreviewAnnotations()
-    customPreviewAnnotations.forEach { logger.info("telkins found custom annotation ${it}")}
+    val multiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
+    multiPreviewAnnotations.forEach { logger.info("telkins found custom annotation ${it}")}
 
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
 
-    val symbolsWithCustomPreviewAnnotations = customPreviewAnnotations
-      .mapNotNull { it.qualifiedName?.asString() }
-      .flatMap { resolver.getSymbolsWithAnnotation(it) }
-    symbolsWithCustomPreviewAnnotations.forEach { logger.info("telkins found symbol with custom annotation ${it}")}
-
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
     val multiPreviewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
-    val customMultiPreviewAnnotatedFunctions = symbolsWithCustomPreviewAnnotations
+    val customMultiPreviewAnnotatedFunctions = multiPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
+    customMultiPreviewAnnotatedFunctions.forEach { logger.info("telkins found custom functions ${it}")}
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
