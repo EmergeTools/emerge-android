@@ -8,6 +8,7 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.utils.COMPOSE_PREVIEW_ANNOTATION_NAME
 import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
+import com.emergetools.snapshots.processor.utils.getMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
@@ -49,10 +50,11 @@ class PreviewProcessor(
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
+    val symbolsWithMultiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
-    val multiPreviewAnnotatedFunctions = symbolsWithPreviewAnnotations
+    val multiPreviewAnnotatedFunctions = symbolsWithMultiPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
 
     val previewFunctionMap = buildMap {
