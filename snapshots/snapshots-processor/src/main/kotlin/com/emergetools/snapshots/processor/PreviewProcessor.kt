@@ -55,15 +55,12 @@ class PreviewProcessor(
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
-    val multiPreviewAnnotatedFunctions = symbolsWithPreviewAnnotations
-      .functionsWithMultiPreviewAnnotation(resolver)
-    val customMultiPreviewAnnotatedFunctions = multiPreviewAnnotations
+    val multiPreviewAnnotatedFunctions = multiPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
       putOrAppend(multiPreviewAnnotatedFunctions)
-      putOrAppend(customMultiPreviewAnnotatedFunctions)
     }
 
     val codeGenerator = environment.codeGenerator
