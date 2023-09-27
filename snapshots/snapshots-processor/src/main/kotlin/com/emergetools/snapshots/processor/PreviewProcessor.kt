@@ -48,7 +48,6 @@ class PreviewProcessor(
   @OptIn(KspExperimental::class)
   override fun process(resolver: Resolver): List<KSAnnotated> {
     val multiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
-    multiPreviewAnnotations.forEach { logger.info("telkins found custom annotation ${it}")}
 
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
@@ -60,7 +59,6 @@ class PreviewProcessor(
       .functionsWithMultiPreviewAnnotation(resolver)
     val customMultiPreviewAnnotatedFunctions = multiPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
-    customMultiPreviewAnnotatedFunctions.forEach { logger.info("telkins found custom functions ${it}")}
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
