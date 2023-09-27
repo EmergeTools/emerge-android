@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Emerge snapshots sample</string>
+  <string name="sample_title">Testtitel</string>
+  <string name="sample_subtitle">Test-Untertitel</string>
+</resources>
