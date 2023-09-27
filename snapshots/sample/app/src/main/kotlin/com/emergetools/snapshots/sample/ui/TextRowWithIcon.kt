@@ -40,8 +40,8 @@ fun TextRowWithIconPreviewFromMain() {
 @Composable
 fun TextRowWithIconPreviewFromMainJustMultiPreview() {
   TextRowWithIcon(
-    titleText = "Title",
-    subtitleText = "Subtitle"
+    titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
+    subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
   )
 }
 
