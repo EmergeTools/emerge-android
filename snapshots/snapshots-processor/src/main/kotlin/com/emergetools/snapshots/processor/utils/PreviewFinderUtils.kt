@@ -41,6 +41,7 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotation(
         }
     }
 
+  // The same function declaration can show up multiple times, so ensure the values are merged together
   val mergedConfigs = mutableMapOf<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>>()
   uniqueSnapshotConfigs.forEach {
     mergedConfigs.putOrAppend(it.first, it.second)
