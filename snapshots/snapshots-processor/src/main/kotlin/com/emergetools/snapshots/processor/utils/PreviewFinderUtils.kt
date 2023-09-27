@@ -3,6 +3,7 @@ package com.emergetools.snapshots.processor.utils
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSAnnotated
@@ -41,4 +42,32 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotation(
         }
     }
     .toMap()
+}
+
+fun Resolver.getCustomMultiPreviewAnnotations(): List<KSClassDeclaration> {
+  // Find all symbols with annotations and map to the annotation class declarations
+  val annotationClassDecls = getAllFiles()
+    .flatMap { it.declarations }
+    .filter { it.annotations.count() > 0 }
+    .flatMap { symbol ->
+      symbol.annotations.mapNotNull { annotation ->
+        val annotationQN = annotation.annotationType.resolve().declaration.qualifiedName
+        annotationQN?.let { qualifiedName ->
+          getClassDeclarationByName(qualifiedName)
+        }
+      }
+    }
+    .filter { it.classKind == ClassKind.ANNOTATION_CLASS }
+    .toSet()
+
+  // Of the annotation classes we found, take those that have a preview annotation.
+  // We can assume these are multi-preview annotations.
+  return annotationClassDecls
+    .filter {
+      it.annotations.any { annotation ->
+        annotation.annotationType.resolve().declaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
+      }
+    }
+    .toList()
+    .sortedBy { it.simpleName.asString() }
 }
