@@ -25,8 +25,7 @@ fun TextRowWithIcon(
 }
 
 @Preview
-@FontScalePreviews
-@LocalePreviews
+@SnapshotTestingPreview
 @Composable
 fun TextRowWithIconPreviewFromMain() {
   TextRowWithIcon(
@@ -35,8 +34,7 @@ fun TextRowWithIconPreviewFromMain() {
   )
 }
 
-@FontScalePreviews
-@LocalePreviews
+@SnapshotTestingPreview
 @Composable
 fun TextRowWithIconPreviewFromMainJustMultiPreview() {
   TextRowWithIcon(

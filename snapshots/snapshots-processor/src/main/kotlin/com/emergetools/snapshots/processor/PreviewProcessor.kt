@@ -50,7 +50,8 @@ class PreviewProcessor(
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
-    val symbolsWithMultiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
+    val symbolsWithMultiPreviewAnnotations = resolver.getMultiPreviewAnnotations(logger)
+    symbolsWithMultiPreviewAnnotations.forEach { logger.info("telkins found multipreview annotation ${it.qualifiedName?.asString()}")}
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()

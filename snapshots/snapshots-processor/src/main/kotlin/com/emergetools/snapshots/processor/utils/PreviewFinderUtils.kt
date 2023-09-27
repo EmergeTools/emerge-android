@@ -3,6 +3,7 @@ package com.emergetools.snapshots.processor.utils
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.ClassKind
 import com.google.devtools.ksp.symbol.KSAnnotated
@@ -49,7 +50,7 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotation(
   return mergedConfigs
 }
 
-fun Resolver.getMultiPreviewAnnotations(): List<KSClassDeclaration> {
+fun Resolver.getMultiPreviewAnnotations(logger: KSPLogger): List<KSClassDeclaration> {
   // Find all symbols with annotations and map to the annotation class declarations
   val annotationClassDecls = getAllFiles()
     .flatMap { it.declarations }
@@ -68,11 +69,28 @@ fun Resolver.getMultiPreviewAnnotations(): List<KSClassDeclaration> {
   // Of the annotation classes we found, take those that themselves have a preview annotation.
   // We can assume these are multi-preview annotations.
   return annotationClassDecls
-    .filter {
-      it.annotations.any { annotation ->
-        annotation.annotationType.resolve().declaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
-      }
-    }
+    .filter { hasDirectOrTransitivePreviewAnnotation(logger, it) }
     .toList()
     .sortedBy { it.simpleName.asString() }
+}
+
+fun Resolver.hasDirectOrTransitivePreviewAnnotation(logger: KSPLogger, declaration: KSClassDeclaration, seenAnnotations: MutableSet<KSClassDeclaration> = mutableSetOf()): Boolean {
+  if (declaration in seenAnnotations) {
+    logger.info("telkins found declaration ${declaration.qualifiedName?.asString()} in seen")
+    return false
+  }
+
+  if (declaration.annotations.any { it.annotationType.resolve().declaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME }) {
+    logger.info("telkins declaration ${declaration.qualifiedName?.asString()} has @Preview annotation!")
+    return true
+  }
+
+  seenAnnotations.add(declaration)
+
+  logger.info("telkins recursing for ${declaration.qualifiedName?.asString()}")
+  return declaration.annotations.any { annotation ->
+    val annotationQualifiedName = annotation.annotationType.resolve().declaration.qualifiedName
+    val classDeclaration = annotationQualifiedName?.let { getClassDeclarationByName(it) }
+    classDeclaration?.let { hasDirectOrTransitivePreviewAnnotation(logger, classDeclaration, seenAnnotations) } ?: false
+  }
 }
