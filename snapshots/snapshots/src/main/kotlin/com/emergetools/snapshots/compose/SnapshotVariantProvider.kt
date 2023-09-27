@@ -4,6 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
@@ -19,11 +20,12 @@ fun SnapshotVariantProvider(
 
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
-    config.locale?.let { setLocale(Locale(it)) }
+    val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
+    setLocale(locale)
   }
 
   val providedValues = arrayOf(
-    LocalConfiguration provides localConfiguration,
+    LocalContext provides LocalContext.current.createConfigurationContext(localConfiguration),
     config.fontScale?.let { LocalDensity provides fontScaleDensity }
   )
   CompositionLocalProvider(
