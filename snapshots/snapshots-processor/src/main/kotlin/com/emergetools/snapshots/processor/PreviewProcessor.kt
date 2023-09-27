@@ -47,15 +47,14 @@ class PreviewProcessor(
 
   @OptIn(KspExperimental::class)
   override fun process(resolver: Resolver): List<KSAnnotated> {
-    val multiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
-
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
+    val symbolsWithMultiPreviewAnnotations = resolver.getMultiPreviewAnnotations()
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
-    val multiPreviewAnnotatedFunctions = multiPreviewAnnotations
+    val multiPreviewAnnotatedFunctions = symbolsWithMultiPreviewAnnotations
       .functionsWithMultiPreviewAnnotation(resolver)
 
     val previewFunctionMap = buildMap {
