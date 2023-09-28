@@ -80,7 +80,7 @@ fun Resolver.hasDirectOrTransitivePreviewAnnotation(declaration: KSAnnotated, se
 
 fun Resolver.findPreviewAnnotations(annotation: KSAnnotation, seenAnnotations: MutableSet<KSClassDeclaration> = mutableSetOf()): List<KSAnnotation> {
   val classDeclaration = annotation.annotationType.resolve().declaration.qualifiedName?.let { getClassDeclarationByName(it) }
-  val isPreviewAnnotation = classDeclaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
+  val isPreviewAnnotation = classDeclaration?.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
 
   // Annotations can recursively reference each other so be sure to have a base recursion case
   // @Preview itself can't have a recursive relation so we can exclude them from our check
