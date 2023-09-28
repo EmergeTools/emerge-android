@@ -18,11 +18,10 @@ fun List<KSAnnotated>.functionsWithPreviewAnnotation(): Map<KSFunctionDeclaratio
     .associateWith { getUniqueSnapshotConfigsFromPreviewAnnotations(it) }
 }
 
-fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(resolver: Resolver, logger: KSPLogger): Map<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>> {
+fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(resolver: Resolver): Map<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>> {
   val uniqueSnapshotConfigs = filterIsInstance<KSFunctionDeclaration>()
     .map { function ->
-      val allPreviewAnnotations = function.annotations.flatMap { resolver.findPreviewAnnotations(logger, it) }.toList()
-      logger.info("telkins function annotations ${allPreviewAnnotations}")
+      val allPreviewAnnotations = function.annotations.flatMap { resolver.findPreviewAnnotations(it) }.toList()
       function to getUniqueSnapshotConfigsFromMultiPreviewAnnotation(
         annotations = allPreviewAnnotations,
         previewFunction = function,
@@ -38,17 +37,16 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(resolver: Resolver, l
   return mergedConfigs
 }
 
-fun Resolver.getSymbolsWithMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotated> {
-  return getMultiPreviewAnnotations(logger)
+fun Resolver.getSymbolsWithMultiPreviewAnnotations(): List<KSAnnotated> {
+  return getMultiPreviewAnnotations()
     .mapNotNull { annotation ->
       val annotationQN = annotation.annotationType.resolve().declaration.qualifiedName
-      logger.info("telkins found multipreview annotation ${annotationQN?.asString()} ")
       annotationQN?.let { getSymbolsWithAnnotation(it.asString()) }
     }
     .flatMap { it }
 }
 
-fun Resolver.getMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotation> {
+fun Resolver.getMultiPreviewAnnotations(): List<KSAnnotation> {
   return getAllFiles()
     .flatMap { it.declarations }
     .flatMap { it.annotations }
@@ -56,13 +54,13 @@ fun Resolver.getMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotation> {
     .filter {
       val annotationQN = it.annotationType.resolve().declaration.qualifiedName
       val annotationClassDecl = annotationQN?.let { qualifiedName -> getClassDeclarationByName(qualifiedName) }
-      annotationClassDecl?.let { classDecl -> hasDirectOrTransitivePreviewAnnotation(logger, classDecl) } ?: false
+      annotationClassDecl?.let { classDecl -> hasDirectOrTransitivePreviewAnnotation(classDecl) } ?: false
     }
     .toList()
     .sortedBy { it.shortName.asString() }
 }
 
-fun Resolver.hasDirectOrTransitivePreviewAnnotation(logger: KSPLogger, declaration: KSAnnotated, seenAnnotations: MutableSet<KSAnnotated> = mutableSetOf()): Boolean {
+fun Resolver.hasDirectOrTransitivePreviewAnnotation(declaration: KSAnnotated, seenAnnotations: MutableSet<KSAnnotated> = mutableSetOf()): Boolean {
   if (declaration in seenAnnotations) {
     return false
   }
@@ -76,7 +74,7 @@ fun Resolver.hasDirectOrTransitivePreviewAnnotation(logger: KSPLogger, declarati
   return declaration.annotations.any { annotation ->
     val annotationQualifiedName = annotation.annotationType.resolve().declaration.qualifiedName
     val classDeclaration = annotationQualifiedName?.let { getClassDeclarationByName(it) }
-    classDeclaration?.let { hasDirectOrTransitivePreviewAnnotation(logger, classDeclaration, seenAnnotations) } ?: false
+    classDeclaration?.let { hasDirectOrTransitivePreviewAnnotation(classDeclaration, seenAnnotations) } ?: false
   }
 }
 

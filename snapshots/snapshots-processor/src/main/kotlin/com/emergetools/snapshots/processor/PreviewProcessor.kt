@@ -51,14 +51,12 @@ class PreviewProcessor(
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
 
-    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations(logger)
-    symbolsWithMultiPreviewAnnotations.forEach { logger.info("telkins found multipreview symbols ${it}")}
+    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations()
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
     val multiPreviewAnnotatedFunctions = symbolsWithMultiPreviewAnnotations
-      .functionsWithMultiPreviewAnnotations(resolver, logger)
-    multiPreviewAnnotatedFunctions.forEach { logger.info("telkins found multipreview functions ${it}")}
+      .functionsWithMultiPreviewAnnotations(resolver)
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
