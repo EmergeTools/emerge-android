@@ -6,9 +6,9 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
 import com.emergetools.snapshots.processor.utils.COMPOSE_PREVIEW_ANNOTATION_NAME
-import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotation
+import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
-import com.emergetools.snapshots.processor.utils.getMultiPreviewAnnotations
+import com.emergetools.snapshots.processor.utils.getSymbolsWithMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
@@ -50,13 +50,15 @@ class PreviewProcessor(
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
-    val symbolsWithMultiPreviewAnnotations = resolver.getMultiPreviewAnnotations(logger)
-    symbolsWithMultiPreviewAnnotations.forEach { logger.info("telkins found multipreview annotation ${it.qualifiedName?.asString()}")}
+
+    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations(logger)
+    symbolsWithMultiPreviewAnnotations.forEach { logger.info("telkins found multipreview symbols ${it}")}
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
     val multiPreviewAnnotatedFunctions = symbolsWithMultiPreviewAnnotations
-      .functionsWithMultiPreviewAnnotation(resolver)
+      .functionsWithMultiPreviewAnnotations(resolver, logger)
+    multiPreviewAnnotatedFunctions.forEach { logger.info("telkins found multipreview functions ${it}")}
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
