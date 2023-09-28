@@ -21,7 +21,7 @@ fun List<KSAnnotated>.functionsWithPreviewAnnotation(): Map<KSFunctionDeclaratio
 fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(resolver: Resolver, logger: KSPLogger): Map<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>> {
   val uniqueSnapshotConfigs = filterIsInstance<KSFunctionDeclaration>()
     .map { function ->
-      val allPreviewAnnotations = function.annotations.flatMap { resolver.findPreviewAnnotations(it) }.toList()
+      val allPreviewAnnotations = function.annotations.flatMap { resolver.findPreviewAnnotations(logger, it) }.toList()
       logger.info("telkins function annotations ${allPreviewAnnotations}")
       function to getUniqueSnapshotConfigsFromMultiPreviewAnnotation(
         annotations = allPreviewAnnotations,
@@ -80,37 +80,27 @@ fun Resolver.hasDirectOrTransitivePreviewAnnotation(logger: KSPLogger, declarati
   }
 }
 
-fun Resolver.findPreviewAnnotations2(annotation: KSAnnotation, seenAnnotations: MutableSet<KSClassDeclaration> = mutableSetOf()): List<KSAnnotation> {
-  val classDeclaration = annotation.annotationType.resolve().declaration.qualifiedName?.let { getClassDeclarationByName(it) }
-  if (classDeclaration == null) {
-    return emptyList()
-  }
-
-  val hasDirectAnnotation = annotation
-  return emptyList()
-}
-
 fun Resolver.findPreviewAnnotations(annotation: KSAnnotation, seenAnnotations: MutableSet<KSClassDeclaration> = mutableSetOf()): List<KSAnnotation> {
   val classDeclaration = annotation.annotationType.resolve().declaration.qualifiedName?.let { getClassDeclarationByName(it) }
+  val isPreviewAnnotation = classDeclaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
 
-  if (classDeclaration == null || classDeclaration in seenAnnotations) {
+  // Annotations can recursively reference each other so be sure to have a base recursion case
+  // @Preview itself can't have a recursive relation so we can exclude them from our check
+  if (classDeclaration == null || (classDeclaration in seenAnnotations && !isPreviewAnnotation)) {
     return emptyList()
   }
 
-  seenAnnotations.add(classDeclaration) // mark the current declaration as seen
+  seenAnnotations.add(classDeclaration)
 
-  // Check if the current annotation declaration has a @Preview annotation
-  val hasPreview = classDeclaration.annotations.any {
-    it.annotationType.resolve().declaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
-  }
-  if (hasPreview) {
-    return listOf(annotation) // return the parent annotation
+  val currentPreviewAnnotations = if (classDeclaration.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME) {
+    listOf(annotation)
+  } else {
+    emptyList()
   }
 
-  // Recursively check annotations of the current annotation
-  val nestedAnnotationsWithPreview = classDeclaration.annotations.flatMap {
+  val nestedPreviewAnnotations = classDeclaration.annotations.flatMap {
     findPreviewAnnotations(it, seenAnnotations)
   }
 
-  return nestedAnnotationsWithPreview.toList()
+  return currentPreviewAnnotations + nestedPreviewAnnotations
 }
