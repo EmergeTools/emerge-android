@@ -25,7 +25,8 @@ fun TextRowWithIcon(
 }
 
 @Preview
-@SnapshotTestingPreview
+@LocalePreviews
+@FontScalePreviews
 @Composable
 fun TextRowWithIconPreviewFromMain() {
   TextRowWithIcon(
@@ -34,12 +35,22 @@ fun TextRowWithIconPreviewFromMain() {
   )
 }
 
-@SnapshotTestingPreview
+@LocalePreviews
+@FontScalePreviews
 @Composable
-fun TextRowWithIconPreviewFromMainJustMultiPreview() {
+fun TextRowWithIconPreviewFromMainJustStackedMultiPreview() {
   TextRowWithIcon(
     titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
     subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
+  )
+}
+
+@SnapshotTestingPreview
+@Composable
+fun TextRowWithIconPreviewFromMainJustSnapshotTestingPreview() {
+  TextRowWithIcon(
+    titleText = "Title SnapshotTestingPreview",
+    subtitleText = "Subtitle SnapshotTestingPreview"
   )
 }
 
