@@ -5,6 +5,19 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.1 - 2023-09-28
+
+### Added
+
+- Multipreview support from multipreviews that live in
+  submodules. [#69](https://github.com/EmergeTools/emerge-android/pull/69)
+- Stacked multipreview support. [#71](https://github.com/EmergeTools/emerge-android/pull/71)
+
+### Fixed
+
+- Bug in locale varaints not reflecting locale due to resources not
+  updating. [#70](https://github.com/EmergeTools/emerge-android/pull/70)
+
 ## 0.8.0 - 2023-08-31
 
 ### Added
