@@ -1,0 +1,5 @@
+package PreviewProcessorTest.stacked_multipreview_five_total_previews_produces_five_snapshots.input
+
+@FontScaleVariants
+@UIModeVariants
+annotation class PreviewVariants
