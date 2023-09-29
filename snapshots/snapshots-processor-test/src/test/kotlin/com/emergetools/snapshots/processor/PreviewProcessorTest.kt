@@ -15,6 +15,11 @@ import java.io.File
 
 class PreviewProcessorTest {
 
+  companion object {
+    // Set to true to overwrite the test outputs with those generated from tests above.
+    const val UPDATE_TEST_OUTPUTS = false
+  }
+
   @Rule
   @JvmField
   val testNameRule = TestNameRule()
@@ -51,6 +56,11 @@ class PreviewProcessorTest {
 
   @Test
   fun `multipreview with three previews and normal preview produces four snapshots`() {
+    compileInputsAndVerifyOutputs()
+  }
+
+  @Test
+  fun `stacked multipreview five total previews produces five snapshots`() {
     compileInputsAndVerifyOutputs()
   }
 
@@ -141,10 +151,5 @@ class PreviewProcessorTest {
 
     val className = testNameRule.className.substringAfterLast(".")
     return File(rootResourcesDir, "$className/$methodName")
-  }
-
-  companion object {
-    // Set to true to overwrite the test outputs with those generated from tests above.
-    const val UPDATE_TEST_OUTPUTS = false
   }
 }
