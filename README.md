@@ -16,7 +16,7 @@ repository contains all publicly available Emerge Android products and integrati
 | `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 26      |
 | `com.emergetools.snapshots:snapshots-processor` | Snapshot KSP processor for Composable snapshots | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-processor/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots) | N/A     |
 
-## Emerge Gradle Plugin
+## 🐘 Emerge Gradle Plugin
 
 The Emerge Gradle Plugin provides many helper tasks and functionality for integrating Emerge into
 your Android project.
@@ -32,7 +32,7 @@ more to ensure you get 99% accurate performance measurements.
 
 See [performance](./performance/README.md) for full documentation.
 
-## 🛰 Snapshots
+## 📸 Snapshots
 
 Emerge offers tooling to snapshot your Android UI components, including Compose previews, activities
 and legacy views.
