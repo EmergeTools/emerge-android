@@ -58,6 +58,9 @@ class EmergePlugin : Plugin<Project> {
       val rootProject = appProject.rootProject
       val perfProjectPath = emergeExtension.perfOptions.projectPath
       val performanceProject = rootProject.subprojects.find { subProject ->
+        appProject.logger.debug(
+          "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
+        )
         rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
       }
       performanceProject?.let { perfProject ->
@@ -233,7 +236,7 @@ class EmergePlugin : Plugin<Project> {
     val perfVariantName = performanceVariant.name.capitalize()
 
     val taskName = "emergeLocal${perfVariantName}Test"
-    val task = performanceProject.tasks.register(taskName, LocalPerfTest::class.java) {
+    val task = appProject.tasks.register(taskName, LocalPerfTest::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Installs and runs tests for ${performanceVariant.name} on" +
         " connected devices. For testing and debugging."
