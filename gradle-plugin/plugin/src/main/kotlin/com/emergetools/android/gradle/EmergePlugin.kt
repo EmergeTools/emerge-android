@@ -62,7 +62,11 @@ class EmergePlugin : Plugin<Project> {
           "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
         )
         appProject.logger.debug(
-          "Checking absoluteProjectPath ${rootProject.absoluteProjectPath(subProject.path)} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
+          "Checking absoluteProjectPath ${
+            rootProject.absoluteProjectPath(
+              subProject.path
+            )
+          } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
         )
         rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
       }
@@ -120,7 +124,13 @@ class EmergePlugin : Plugin<Project> {
 
     configurePerformanceProject(performanceProject, appProject)
 
+    appProject.logger.debug(
+      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path}"
+    )
     performanceProject.pluginManager.withPlugin(ANDROID_TEST_PLUGIN_ID) { _ ->
+      appProject.logger.debug(
+        "Configuring performance project ${performanceProject.path} from appProject ${appProject.path} with android test plugin"
+      )
       val androidTestComponents = performanceProject.extensions.getByType(
         TestAndroidComponentsExtension::class.java
       )
