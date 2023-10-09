@@ -61,6 +61,9 @@ class EmergePlugin : Plugin<Project> {
         appProject.logger.debug(
           "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
         )
+        appProject.logger.debug(
+          "Checking absoluteProjectPath ${rootProject.absoluteProjectPath(subProject.path)} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
+        )
         rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
       }
       performanceProject?.let { perfProject ->
