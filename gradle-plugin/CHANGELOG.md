@@ -5,16 +5,21 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 2.1.2 - 2023-10-06
+## 2.1.3 - 2023-10-09
 
-### Changed
+### Added
+
+- Additional debug logging. [#83](https://github.com/EmergeTools/emerge-android/pull/83)
+
+## 2.1.2 - 2023-10-09
+
+### Added
 
 - Additional debug logging. [#80](https://github.com/EmergeTools/emerge-android/pull/80)
 
-
 ## 2.1.1 - 2023-10-06
 
-### Changed
+### Added
 
 - Additional debug logging. [#78](https://github.com/EmergeTools/emerge-android/pull/78)
 
