@@ -62,7 +62,11 @@ class EmergePlugin : Plugin<Project> {
           "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
         )
         appProject.logger.debug(
-          "Checking absoluteProjectPath ${rootProject.absoluteProjectPath(subProject.path)} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
+          "Checking absoluteProjectPath ${
+            rootProject.absoluteProjectPath(
+              subProject.path
+            )
+          } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
         )
         rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
       }
@@ -118,14 +122,26 @@ class EmergePlugin : Plugin<Project> {
   ) {
     performanceProject.pluginManager.apply(ANDROID_TEST_PLUGIN_ID)
 
+    appProject.logger.debug(
+      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path}"
+    )
     configurePerformanceProject(performanceProject, appProject)
+    appProject.logger.debug(
+      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path} complete"
+    )
 
     performanceProject.pluginManager.withPlugin(ANDROID_TEST_PLUGIN_ID) { _ ->
+      appProject.logger.debug(
+        "Registering performance project tasks for ${performanceProject.path} from appProject ${appProject.path} with android test plugin"
+      )
       val androidTestComponents = performanceProject.extensions.getByType(
         TestAndroidComponentsExtension::class.java
       )
 
       androidTestComponents.onVariants { perfVariant ->
+        appProject.logger.debug(
+          "Registering performance project tasks for ${performanceProject.path} from appProject ${appProject.path} with android test plugin for variant ${perfVariant.name}"
+        )
         registerPerformanceTasks(
           appProject,
           performanceProject,
