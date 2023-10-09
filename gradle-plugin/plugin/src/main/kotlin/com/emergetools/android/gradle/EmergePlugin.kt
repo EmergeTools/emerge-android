@@ -449,6 +449,7 @@ class EmergePlugin : Plugin<Project> {
       buildTypes {
         val debugSigningConfig = getByName("debug").signingConfig
         appExtension.buildTypes.forEach { appBuildType ->
+          appProject.logger.debug("Configuring build type ${appBuildType.name} for performance project")
           maybeCreate(appBuildType.name).apply {
             isDebuggable = false
             signingConfig = debugSigningConfig
