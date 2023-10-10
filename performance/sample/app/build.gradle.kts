@@ -40,6 +40,21 @@ android {
     }
   }
 
+  flavorDimensions.add("store")
+  flavorDimensions.add("distribution")
+
+  productFlavors {
+    create("play") {
+      dimension = "store"
+      signingConfig = signingConfigs.getByName("debug")
+      isDefault = true
+    }
+    create("playstore") {
+      dimension = "distribution"
+      signingConfig = signingConfigs.getByName("debug")
+    }
+  }
+
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17

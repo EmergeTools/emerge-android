@@ -446,14 +446,28 @@ class EmergePlugin : Plugin<Project> {
         testInstrumentationRunner = EMERGE_JUNIT_RUNNER
       }
 
+      val debugSigningConfig = appExtension.signingConfigs.getByName("debug")
+
       buildTypes {
-        val debugSigningConfig = getByName("debug").signingConfig
         appExtension.buildTypes.forEach { appBuildType ->
           appProject.logger.debug("Configuring build type ${appBuildType.name} for performance project")
           maybeCreate(appBuildType.name).apply {
             isDebuggable = false
             signingConfig = debugSigningConfig
           }
+        }
+      }
+
+      appExtension.productFlavors.forEach { appFlavor ->
+        appProject.logger.debug("Configuring flavor ${appFlavor.name} for performance project")
+        appFlavor.dimension?.let {
+          if (!flavorDimensions.contains(it)) {
+            flavorDimensions.add(it)
+          }
+        }
+        productFlavors.maybeCreate(appFlavor.name).apply {
+          dimension = appFlavor.dimension
+          signingConfig = debugSigningConfig
         }
       }
 
