@@ -35,6 +35,24 @@ fun TextRowWithIconPreviewFromMain() {
   )
 }
 
+@Preview
+@Composable
+internal fun TextRowWithIconPreviewFromMainInternalFunction() {
+  TextRowWithIcon(
+    titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
+    subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
+  )
+}
+
+@SnapshotTestingPreview
+@Composable
+internal fun TextRowWithIconPreviewFromMainInternalFunctionMultiPreview() {
+  TextRowWithIcon(
+    titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
+    subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
+  )
+}
+
 @LocalePreviews
 @FontScalePreviews
 @Composable

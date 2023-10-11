@@ -13,7 +13,6 @@ import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.isAnnotationPresent
-import com.google.devtools.ksp.isInternal
 import com.google.devtools.ksp.isPrivate
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
@@ -75,11 +74,6 @@ class PreviewProcessor(
 
       if (function.isPrivate()) {
         logger.info("Skipping ${function.simpleName.asString()} as it is private")
-        return@flatMap emptyList()
-      }
-
-      if (function.isInternal()) {
-        logger.info("Skipping ${function.simpleName.asString()} as it is internal")
         return@flatMap emptyList()
       }
 
