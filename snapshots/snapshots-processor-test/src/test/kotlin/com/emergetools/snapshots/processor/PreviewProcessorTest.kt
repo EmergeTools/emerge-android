@@ -55,6 +55,11 @@ class PreviewProcessorTest {
   }
 
   @Test
+  fun `multipreview internal function with two previews produces two snapshots`() {
+    compileInputsAndVerifyOutputs()
+  }
+
+  @Test
   fun `multipreview function with two previews and additional preview produces three snapshots`() {
     compileInputsAndVerifyOutputs()
   }

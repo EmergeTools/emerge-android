@@ -1,0 +1,9 @@
+package com.emergetools.android.standalone_preview_function_compiles_ok
+
+import PreviewProcessorTest.multipreview_internal_function_with_two_previews_produces_two_snapshots.input.FontScalePreviews
+import androidx.compose.runtime.Composable
+
+@FontScalePreviews
+@Composable
+internal fun MultiPreviewComposable() {
+}
