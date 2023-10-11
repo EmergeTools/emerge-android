@@ -78,11 +78,6 @@ class PreviewProcessor(
         return@flatMap emptyList()
       }
 
-      if (function.isInternal()) {
-        logger.info("Skipping ${function.simpleName.asString()} as it is internal")
-        return@flatMap emptyList()
-      }
-
       if (function.isAnnotationPresent(IgnoreEmergeSnapshot::class)) {
         logger.info(
           "Skipping ${function.simpleName.asString()} as it's annotated with @IgnoreEmergeSnapshot"
