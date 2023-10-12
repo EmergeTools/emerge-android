@@ -257,7 +257,7 @@ class EmergePlugin : Plugin<Project> {
     performanceVariant: TestVariant,
   ) {
     val appVariantName = appVariant.name.capitalize()
-    val perfVariantName = appVariant.name.capitalize()
+    val perfVariantName = performanceVariant.name.capitalize()
 
     val taskName = "emergeLocal${appVariantName}Test"
     val task = appProject.tasks.register(taskName, LocalPerfTest::class.java) {
@@ -450,12 +450,10 @@ class EmergePlugin : Plugin<Project> {
         testInstrumentationRunner = EMERGE_JUNIT_RUNNER
       }
 
-      val debugSigningConfig = appExtension.signingConfigs.getByName("debug")
-
       buildTypes {
         debug {
           isDebuggable = true
-          signingConfig = debugSigningConfig
+          signingConfig = appExtension.signingConfigs.getByName("debug")
         }
       }
 
