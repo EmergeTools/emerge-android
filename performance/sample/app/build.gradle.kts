@@ -36,7 +36,35 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
     debug {
+      isDefault = true
       applicationIdSuffix = ".debug"
+    }
+  }
+
+  flavorDimensions.add("api")
+  flavorDimensions.add("mode")
+
+  productFlavors {
+    create("demo") {
+      dimension = "mode"
+      applicationIdSuffix = ".demo"
+      versionNameSuffix = "-demo"
+    }
+
+    create("full") {
+      dimension = "mode"
+      applicationIdSuffix = ".full"
+      versionNameSuffix = "-full"
+    }
+
+    create("minApi24") {
+      dimension = "api"
+      minSdk = 24
+    }
+
+    create("minApi21") {
+      dimension = "api"
+      minSdk = 21
     }
   }
 
