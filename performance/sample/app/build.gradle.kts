@@ -36,7 +36,50 @@ android {
       signingConfig = signingConfigs.getByName("debug")
     }
     debug {
+      isDefault = true
       applicationIdSuffix = ".debug"
+    }
+  }
+
+  flavorDimensions.add("api")
+  flavorDimensions.add("mode")
+
+  productFlavors {
+    create("demo") {
+      dimension = "mode"
+      applicationIdSuffix = ".demo"
+      versionNameSuffix = "-demo"
+    }
+
+    create("full") {
+      dimension = "mode"
+      applicationIdSuffix = ".full"
+      versionNameSuffix = "-full"
+    }
+
+    create("minApi24") {
+      dimension = "api"
+      minSdk = 24
+    }
+
+    create("minApi21") {
+      dimension = "api"
+      minSdk = 21
+    }
+  }
+
+  flavorDimensions.add("store")
+  flavorDimensions.add("distribution")
+
+  productFlavors {
+    create("play") {
+      dimension = "store"
+      signingConfig = signingConfigs.getByName("debug")
+      isDefault = true
+    }
+    create("playstore") {
+      dimension = "distribution"
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
 

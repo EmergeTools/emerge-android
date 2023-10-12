@@ -6,6 +6,7 @@ import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.TestAndroidComponentsExtension
+import com.android.build.api.variant.TestVariant
 import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
@@ -138,6 +139,7 @@ class EmergePlugin : Plugin<Project> {
         TestAndroidComponentsExtension::class.java
       )
 
+      // In practice, we configure only one variant (debug) for the perf project, so this should only run for that single variant
       androidTestComponents.onVariants { perfVariant ->
         appProject.logger.debug(
           "Registering performance project tasks for ${performanceProject.path} from appProject ${appProject.path} with android test plugin for variant ${perfVariant.name}"
@@ -198,24 +200,26 @@ class EmergePlugin : Plugin<Project> {
     appProject: Project,
     performanceProject: Project,
     extension: EmergePluginExtension,
-    perfVariant: Variant,
+    perfVariant: TestVariant,
   ) {
-    registerEmergeLocalTestTask(appProject, performanceProject, perfVariant)
-    registerUploadPerfBundleTask(appProject, performanceProject, perfVariant, extension)
+    // We're not concerned with the variants of the performance project, rather the app variants,
+    // generate a perf task for each app variant for the single debug variant of the perf project.
+    appVariants.forEach { appVariant ->
+      registerEmergeLocalTestTask(appProject, performanceProject, appVariant, perfVariant)
+      registerUploadPerfBundleTask(
+        appProject, performanceProject, appVariant, perfVariant, extension
+      )
+    }
   }
 
   private fun registerUploadPerfBundleTask(
     appProject: Project,
     performanceProject: Project,
-    performanceVariant: Variant,
+    appVariant: Variant,
+    performanceVariant: TestVariant,
     extension: EmergePluginExtension,
   ) {
-    val taskName = "${EMERGE_TASK_PREFIX}Upload${performanceVariant.name.capitalize()}PerfBundle"
-    val appVariant = appVariants.find { it.name == performanceVariant.name }
-    checkNotNull(appVariant) {
-      "Could not find app variant matching performance variant ${performanceVariant.name}"
-    }
-
+    val taskName = "${EMERGE_TASK_PREFIX}Upload${appVariant.name.capitalize()}PerfBundle"
     appProject.tasks.register(taskName, UploadPerfBundle::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds & uploads an AAB for variant ${appVariant.name} to " +
@@ -249,23 +253,23 @@ class EmergePlugin : Plugin<Project> {
   private fun registerEmergeLocalTestTask(
     appProject: Project,
     performanceProject: Project,
-    performanceVariant: Variant,
+    appVariant: ApplicationVariant,
+    performanceVariant: TestVariant,
   ) {
-    val appVariant = appVariants.find { it.name == performanceVariant.name }
+    val appVariantName = appVariant.name.capitalize()
     val perfVariantName = performanceVariant.name.capitalize()
 
-    val taskName = "emergeLocal${perfVariantName}Test"
+    val taskName = "emergeLocal${appVariantName}Test"
     val task = appProject.tasks.register(taskName, LocalPerfTest::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Installs and runs tests for ${performanceVariant.name} on" +
         " connected devices. For testing and debugging."
-      // If possible get the application ID from the variant of the same name
-      appVariant?.let { appVariant -> it.appPackageName.set(appVariant.applicationId) }
+      it.appPackageName.set(appVariant.applicationId)
       it.testPackageName.set(performanceVariant.namespace)
     }
 
-    val uninstallAppTaskPath = "${appProject.path}:uninstall$perfVariantName"
-    val installAppTaskPath = "${appProject.path}:install$perfVariantName"
+    val uninstallAppTaskPath = "${appProject.path}:uninstall$appVariantName"
+    val installAppTaskPath = "${appProject.path}:install$appVariantName"
 
     // We need the uninstall task to run first but don't want to enforce that
     // order unless the local test task is actually being run
@@ -447,13 +451,9 @@ class EmergePlugin : Plugin<Project> {
       }
 
       buildTypes {
-        val debugSigningConfig = getByName("debug").signingConfig
-        appExtension.buildTypes.forEach { appBuildType ->
-          appProject.logger.debug("Configuring build type ${appBuildType.name} for performance project")
-          maybeCreate(appBuildType.name).apply {
-            isDebuggable = false
-            signingConfig = debugSigningConfig
-          }
+        debug {
+          isDebuggable = true
+          signingConfig = appExtension.signingConfigs.getByName("debug")
         }
       }
 

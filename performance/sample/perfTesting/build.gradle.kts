@@ -17,12 +17,3 @@ dependencies {
   // Emerge's UIAutomator helper library (Optional): https://github.com/EmergeTools/relax
   implementation("com.emergetools.test:relax:0.1.0")
 }
-
-/**
- * Example code to disable build types other than "release"
- */
-androidComponents {
-  beforeVariants(selector().all()) {
-    it.enable = it.buildType == "release"
-  }
-}

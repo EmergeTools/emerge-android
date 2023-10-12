@@ -19,13 +19,3 @@ dependencies {
     // Add additional dependencies here as needed.
     // Note Espresso is not supported as it degrades performance.
 }
-
-/*
- * Example code to disable build types other than "release"
-
-androidComponents {
-    beforeVariants(selector().all()) {
-        it.enable = it.buildType == "release"
-    }
-}
-*/
