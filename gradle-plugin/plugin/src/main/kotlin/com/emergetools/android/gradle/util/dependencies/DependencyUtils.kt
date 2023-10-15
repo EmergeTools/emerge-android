@@ -63,6 +63,8 @@ fun Project.buildDependencies(
 
   val libraries = mutableListOf<Library>()
   val modules = mutableListOf(
+    // Start with a single, root module for the project we're running on.
+    // This will be the fallback for any entries we can't attribute.
     Module(
       name = project.name,
       path = project.path,
