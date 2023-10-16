@@ -33,5 +33,6 @@ include(
   ":snapshots:sample",
   ":snapshots:sample:app",
   ":snapshots:sample:ui-module",
+  ":snapshots:sample:feature-a-module",
 )
 includeBuild("gradle-plugin")

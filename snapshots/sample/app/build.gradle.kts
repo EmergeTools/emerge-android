@@ -42,6 +42,7 @@ android {
       // Adds sources from submodules for including snapshot tests
       // kspAndroidTest(..) with the snapshots-processor dependency must be used for test generation
       kotlin.srcDir("../ui-module/src/androidTest/kotlin")
+      kotlin.srcDir("../feature-a-module/src/androidTest/kotlin")
     }
   }
 
@@ -68,6 +69,7 @@ dependencies {
   implementation(libs.androidx.activity.compose)
 
   implementation(projects.snapshots.sample.uiModule)
+  implementation(projects.snapshots.sample.featureAModule)
   implementation(projects.snapshots.snapshotsAnnotations)
 
   implementation(platform(libs.compose.bom))

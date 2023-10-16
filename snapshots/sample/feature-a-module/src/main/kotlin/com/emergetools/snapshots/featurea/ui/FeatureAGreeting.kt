@@ -1,4 +1,4 @@
-package com.emergetools.snapshots.sample.ui
+package com.emergetools.snapshots.featurea.ui
 
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -6,7 +6,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun FeatureAGreeting(name: String, modifier: Modifier = Modifier) {
   Text(
     text = "Hello $name!",
     modifier = modifier
@@ -16,6 +16,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 // Will not be included in the snapshot since it's in main source set
 @Preview
 @Composable
-fun GreetingPreviewFromUIModuleMain() {
-  Greeting("UI Module Main")
+fun GreetingPreviewFromFeatureAModuleMain() {
+  FeatureAGreeting("Feature A Module Main")
 }
