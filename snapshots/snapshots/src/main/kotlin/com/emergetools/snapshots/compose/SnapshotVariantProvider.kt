@@ -1,12 +1,14 @@
 package com.emergetools.snapshots.compose
 
 import android.content.res.Configuration
+import android.os.LocaleList
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.core.os.LocaleListCompat
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
 
@@ -22,6 +24,7 @@ fun SnapshotVariantProvider(
     config.uiMode?.let { uiMode = it }
     val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
     setLocale(locale)
+    LocaleList.setDefault(locales)
   }
 
   val providedValues = arrayOf(
