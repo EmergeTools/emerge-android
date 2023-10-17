@@ -7,6 +7,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
+import androidx.core.os.LocaleListCompat
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
 
@@ -20,7 +21,7 @@ fun SnapshotVariantProvider(
 
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
-    val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
+    val locale = config.locale?.let { Locale(it) } ?: LocaleListCompat.getDefault().get(0)
     setLocale(locale)
   }
 
