@@ -7,11 +7,13 @@ import com.squareup.kotlinpoet.CodeBlock
 import com.squareup.kotlinpoet.FunSpec
 import com.squareup.kotlinpoet.PropertySpec
 import com.squareup.kotlinpoet.TypeSpec
+import com.squareup.kotlinpoet.jvm.jvmField
 
 object ComposablePreviewSnapshotBuilder {
   private const val PREVIEW_CONFIG_PROPERTY_NAME = "previewConfig"
   private const val SNAPSHOT_RULE_PROPERTY_NAME = "snapshotRule"
   private const val COMPOSE_RULE_PROPERTY_NAME = "composeRule"
+  private const val TIMEOUT_RULE_PROPERTY_NAME = "timeoutRule"
   private val SNAPSHOT_VARIANT_PROVIDER_CLASSNAME = ClassName(
     "com.emergetools.snapshots.compose",
     "SnapshotVariantProvider"
@@ -26,6 +28,8 @@ object ComposablePreviewSnapshotBuilder {
   private val COMPOSE_RULE_CREATOR_CLASSNAME =
     ClassName("androidx.compose.ui.test.junit4", "createComposeRule")
 
+  private val JUNIT_TIMEOUT_TEST_RULE_CLASSNAME =
+    ClassName("org.junit.rules", "Timeout")
   private val JUNIT_RULE_ANNOTATION_CLASSNAME = ClassName("org.junit", "Rule")
 
   private val ruleAnnotation by lazy {
@@ -51,6 +55,17 @@ object ComposablePreviewSnapshotBuilder {
       .build()
 
     addProperty(property)
+  }
+
+  fun TypeSpec.Builder.addTimeoutRuleProperty() {
+    val composeRuleProperty =
+      PropertySpec.builder(TIMEOUT_RULE_PROPERTY_NAME, JUNIT_TIMEOUT_TEST_RULE_CLASSNAME).apply {
+        initializer("%T.seconds(15)", JUNIT_TIMEOUT_TEST_RULE_CLASSNAME)
+        addAnnotation(ruleAnnotation)
+        jvmField()
+      }.build()
+
+    addProperty(composeRuleProperty)
   }
 
   fun TypeSpec.Builder.addComposeRuleProperty() {

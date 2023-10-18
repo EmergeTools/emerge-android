@@ -5,6 +5,7 @@ import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuil
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addComposeRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addEmergeSnapshotRuleProperty
 import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addPreviewConfigProperty
+import com.emergetools.snapshots.processor.preview.ComposablePreviewSnapshotBuilder.addTimeoutRuleProperty
 import com.emergetools.snapshots.processor.utils.COMPOSE_PREVIEW_ANNOTATION_NAME
 import com.emergetools.snapshots.processor.utils.functionsWithMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
@@ -141,6 +142,7 @@ class PreviewProcessor(
       val typeSpec = TypeSpec.classBuilder(testClassName).apply {
         addFunction(testFunctionSpec)
         addAnnotation(testRunnerAnnotation)
+        addTimeoutRuleProperty() // this needs to be first to wrap other rules
         addComposeRuleProperty()
         addPreviewConfigProperty(previewConfig)
         addEmergeSnapshotRuleProperty()
