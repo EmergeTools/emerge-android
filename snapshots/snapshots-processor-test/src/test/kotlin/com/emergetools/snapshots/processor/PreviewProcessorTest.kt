@@ -45,7 +45,11 @@ class PreviewProcessorTest {
   }
 
   @Test
-  fun `standalone preview function with internal preview produces one snapshot test`() {
+  fun `standalone preview function with internal preview produces no snapshot test without arg`() {
+    compileInputsAndVerifyOutputs()
+  }
+  @Test
+  fun `standalone preview function with internal preview produces one snapshot test with arg`() {
     compileInputsAndVerifyOutputs(
       mutableMapOf("emerge.experimentalInternalEnabled" to "true")
     )
@@ -57,7 +61,12 @@ class PreviewProcessorTest {
   }
 
   @Test
-  fun `multipreview internal function with two previews produces two snapshots`() {
+  fun `multipreview internal function with two previews produces no snapshots without arg`() {
+    compileInputsAndVerifyOutputs()
+  }
+
+  @Test
+  fun `multipreview internal function with two previews produces two snapshots with arg`() {
     compileInputsAndVerifyOutputs(
       mutableMapOf("emerge.experimentalInternalEnabled" to "true")
     )
