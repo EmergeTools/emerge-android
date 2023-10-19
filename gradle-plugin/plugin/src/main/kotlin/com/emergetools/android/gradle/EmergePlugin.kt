@@ -384,6 +384,7 @@ class EmergePlugin : Plugin<Project> {
   private fun applyMainSourceSetConfig(
     project: Project,
     appProject: Project,
+    extension: EmergePluginExtension,
   ) {
     val errorMessages = mutableListOf<String>()
     if (!project.plugins.hasPlugin(KSP_PLUGIN_ID)) {
@@ -411,11 +412,16 @@ class EmergePlugin : Plugin<Project> {
     // TODO: Ryan: Explore using variants API for finding proper ourput dir.
     val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
 
+    val internalSnapshotsEnabled =
+      extension.snapshotOptions.experimentalInternalSnapshotsEnabled.getOrElse(false)
+    val internalEnabledArg = if (internalSnapshotsEnabled) "true" else "false"
+
     appProject.logger.info(
       "Configuring ${project.name} for Emerge snapshot testing, outputting to $emergeSrcDir"
     )
     project.extensions.getByType(KspExtension::class.java).apply {
       arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
+      arg(INTERNAL_ENABLED_OPTION_NAME, internalEnabledArg)
     }
 
     appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
@@ -535,6 +541,7 @@ class EmergePlugin : Plugin<Project> {
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
 
     private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
+    private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 
