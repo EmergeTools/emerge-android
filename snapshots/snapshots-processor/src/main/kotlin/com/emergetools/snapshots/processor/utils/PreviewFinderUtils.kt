@@ -3,6 +3,7 @@ package com.emergetools.snapshots.processor.utils
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromMultiPreviewAnnotation
 import com.emergetools.snapshots.processor.preview.ComposePreviewUtils.getUniqueSnapshotConfigsFromPreviewAnnotations
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.processing.KSPLogger
 import com.google.devtools.ksp.processing.Resolver
 import com.google.devtools.ksp.symbol.KSAnnotated
 import com.google.devtools.ksp.symbol.KSAnnotation
@@ -19,12 +20,14 @@ fun List<KSAnnotated>.functionsWithPreviewAnnotation(): Map<KSFunctionDeclaratio
 
 fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(
   resolver: Resolver,
+  logger: KSPLogger,
 ): Map<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>> {
   val uniqueSnapshotConfigs = filterIsInstance<KSFunctionDeclaration>()
     .map { function ->
       val allPreviewAnnotations = function.annotations.flatMap {
         resolver.findAllDirectOrTransitivePreviewAnnotations(
-          it
+          annotation = it,
+          logger = logger,
         )
       }.toList()
       function to getUniqueSnapshotConfigsFromMultiPreviewAnnotation(
@@ -36,6 +39,9 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(
   // The same function declaration can show up multiple times, so ensure the values are merged together
   val mergedConfigs = mutableMapOf<KSFunctionDeclaration, List<ComposePreviewSnapshotConfig>>()
   uniqueSnapshotConfigs.forEach {
+    logger.info(
+      "Found multipreview function: ${it.first.simpleName.asString()} with configs: ${it.second.joinToString()}"
+    )
     mergedConfigs.putOrAppend(it.first, it.second)
   }
 
@@ -97,11 +103,10 @@ fun Resolver.hasDirectOrTransitivePreviewAnnotation(
 fun Resolver.findAllDirectOrTransitivePreviewAnnotations(
   annotation: KSAnnotation,
   seenAnnotations: MutableSet<KSClassDeclaration> = mutableSetOf(),
+  logger: KSPLogger,
 ): List<KSAnnotation> {
   val classDeclaration = annotation.annotationType.resolve().declaration.qualifiedName?.let {
-    getClassDeclarationByName(
-      it
-    )
+    getClassDeclarationByName(it)
   }
   val isPreviewAnnotation =
     classDeclaration?.qualifiedName?.asString() == COMPOSE_PREVIEW_ANNOTATION_NAME
@@ -112,6 +117,9 @@ fun Resolver.findAllDirectOrTransitivePreviewAnnotations(
     return emptyList()
   }
 
+  logger.info(
+    "Found preview or multipreview annotation: ${classDeclaration.qualifiedName?.asString()}"
+  )
   seenAnnotations.add(classDeclaration)
 
   val currentPreviewAnnotations =
@@ -122,7 +130,7 @@ fun Resolver.findAllDirectOrTransitivePreviewAnnotations(
     }
 
   val nestedPreviewAnnotations = classDeclaration.annotations.flatMap {
-    findAllDirectOrTransitivePreviewAnnotations(it, seenAnnotations)
+    findAllDirectOrTransitivePreviewAnnotations(it, seenAnnotations, logger)
   }
 
   return currentPreviewAnnotations + nestedPreviewAnnotations
