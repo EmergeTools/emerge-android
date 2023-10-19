@@ -78,7 +78,7 @@ class PreviewProcessor(
         return@flatMap emptyList()
       }
 
-      if (function.isInternal() && environment.options[INTERNAL_ENABLED_OPTION_NAME] != "true"){
+      if (function.isInternal() && environment.options[INTERNAL_ENABLED_OPTION_NAME] != "true") {
         logger.info("Skipping ${function.simpleName.asString()} as it is internal")
         return@flatMap emptyList()
       }
