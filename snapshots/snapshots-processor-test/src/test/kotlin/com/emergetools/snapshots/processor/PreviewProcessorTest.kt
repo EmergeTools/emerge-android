@@ -46,7 +46,9 @@ class PreviewProcessorTest {
 
   @Test
   fun `standalone preview function with internal preview produces one snapshot test`() {
-    compileInputsAndVerifyOutputs()
+    compileInputsAndVerifyOutputs(
+      mutableMapOf("emerge.experimentalInternalEnabled" to "true")
+    )
   }
 
   @Test
@@ -56,7 +58,9 @@ class PreviewProcessorTest {
 
   @Test
   fun `multipreview internal function with two previews produces two snapshots`() {
-    compileInputsAndVerifyOutputs()
+    compileInputsAndVerifyOutputs(
+      mutableMapOf("emerge.experimentalInternalEnabled" to "true")
+    )
   }
 
   @Test
