@@ -48,8 +48,8 @@ fun List<KSAnnotated>.functionsWithMultiPreviewAnnotations(
   return mergedConfigs
 }
 
-fun Resolver.getSymbolsWithMultiPreviewAnnotations(): List<KSAnnotated> {
-  return getMultiPreviewAnnotations()
+fun Resolver.getSymbolsWithMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotated> {
+  return getMultiPreviewAnnotations(logger)
     .mapNotNull { annotation ->
       val annotationQN = annotation.annotationType.resolve().declaration.qualifiedName
       annotationQN?.let { getSymbolsWithAnnotation(it.asString()) }
@@ -57,17 +57,23 @@ fun Resolver.getSymbolsWithMultiPreviewAnnotations(): List<KSAnnotated> {
     .flatMap { it }
 }
 
-fun Resolver.getMultiPreviewAnnotations(): List<KSAnnotation> {
+fun Resolver.getMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotation> {
   return getAllFiles()
     .flatMap { it.declarations }
     .flatMap { it.annotations }
     .toSet()
     .filter {
       val annotationQN = it.annotationType.resolve().declaration.qualifiedName
-      val annotationClassDecl =
-        annotationQN?.let { qualifiedName -> getClassDeclarationByName(qualifiedName) }
-      annotationClassDecl?.let { classDecl -> hasDirectOrTransitivePreviewAnnotation(classDecl) }
-        ?: false
+      val annotationClassDecl = annotationQN?.let { qualifiedName ->
+        getClassDeclarationByName(qualifiedName)
+      }
+      annotationClassDecl?.let { classDecl ->
+        val hasPreviewAnnotation = hasDirectOrTransitivePreviewAnnotation(classDecl)
+        logger.info(
+          "Checking annotation for preview annotation: ${classDecl.qualifiedName?.asString()}, ${hasPreviewAnnotation}"
+        )
+        hasPreviewAnnotation
+      } ?: false
     }
     .toList()
     .sortedBy { it.shortName.asString() }

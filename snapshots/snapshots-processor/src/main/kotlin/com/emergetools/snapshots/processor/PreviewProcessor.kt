@@ -49,7 +49,7 @@ class PreviewProcessor(
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
-    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations()
+    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations(logger)
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
