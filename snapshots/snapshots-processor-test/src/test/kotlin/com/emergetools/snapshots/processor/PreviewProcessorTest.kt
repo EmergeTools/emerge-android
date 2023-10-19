@@ -48,6 +48,7 @@ class PreviewProcessorTest {
   fun `standalone preview function with internal preview produces no snapshot test without arg`() {
     compileInputsAndVerifyOutputs()
   }
+
   @Test
   fun `standalone preview function with internal preview produces one snapshot test with arg`() {
     compileInputsAndVerifyOutputs(
