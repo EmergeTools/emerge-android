@@ -40,9 +40,9 @@ plugins {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.8.1")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
   // For Compose @Preview snapshot generation from the main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:0.8.1")
+  ksp("com.emergetools.snapshots:snapshots-processor:{latest_version}")
 }
 ```
 
@@ -114,7 +114,7 @@ the `snapshots-processor` leverages.
 
 ```kotlin
 dependencies {
-  implementation("com.emergetools.snapshots:snapshots-annotations:0.8.1")
+  implementation("com.emergetools.snapshots:snapshots-annotations:{latest_version}")
 }
 ```
 
@@ -137,9 +137,9 @@ emerge {
 }
 
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:0.8.0")
+  androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
   // For Compose @Preview snapshot generation from androidTest source set:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:0.8.0")
+  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:{latest_version}")
 }
 ```
 
