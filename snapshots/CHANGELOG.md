@@ -5,6 +5,14 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.2 - 2023-10-19
+
+### Added
+
+- Additional debug logging. [#93](https://github.com/EmergeTools/emerge-android/pull/93)
+- Gate internal previews with KSP argument from Gradle
+  plugin [#92](https://github.com/EmergeTools/emerge-android/pull/92)
+
 ## 0.8.1 - 2023-09-28
 
 ### Added
