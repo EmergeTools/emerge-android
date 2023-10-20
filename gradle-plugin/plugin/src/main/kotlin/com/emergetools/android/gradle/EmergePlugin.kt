@@ -77,6 +77,10 @@ class EmergePlugin : Plugin<Project> {
         // No perf project, but user has set the perfOptions.projectPath property
         // so register the generate task only
         if (perfProjectPath.isPresent) {
+          appProject.logger.debug(
+            "No performance project found for path ${perfProjectPath.get()}, " +
+              "registering generate task only"
+          )
           registerGeneratePerfProjectTask(project, perfProjectPath)
         }
       }
@@ -419,6 +423,10 @@ class EmergePlugin : Plugin<Project> {
     }
 
     appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
+      val androidTestSourceSet = sourceSets.getByName("androidTest")
+      appProject.logger.info(
+        "Configuring ${project.name} for Emerge snapshot testing, adding $emergeSrcDir to sourceSet ${androidTestSourceSet.name}"
+      )
       sourceSets.getByName("androidTest").kotlin.srcDir(emergeSrcDir)
     }
   }
