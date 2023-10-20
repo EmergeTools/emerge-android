@@ -135,4 +135,6 @@ abstract class PerfOptions : ProductOptions() {
 abstract class SnapshotOptions : ProductOptions() {
 
   abstract val snapshotsStorageDirectory: DirectoryProperty
+
+  abstract val experimentalInternalSnapshotsEnabled: Property<Boolean>
 }

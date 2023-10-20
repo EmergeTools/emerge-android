@@ -1,10 +1,10 @@
-package com.emergetools.android.standalone_preview_function_with_internal_preview_produces_one_snapshot_test
+package PreviewProcessorTest.standalone_preview_function_with_internal_preview_produces_one_snapshot_test_with_arg.input
 
+import PreviewProcessorTest.standalone_preview_function_with_internal_preview_produces_one_snapshot_test_with_arg.input.TestComposable
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
-import com.emergetools.android.standalone_preview_function_with_internal_preview_produces_one_snapshot_test.TestComposable
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.compose.SnapshotVariantProvider
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
@@ -19,7 +19,7 @@ public class TestComposable_GenSnapshot {
 
   public val previewConfig: ComposePreviewSnapshotConfig = ComposePreviewSnapshotConfig(originalFqn
       =
-      "com.emergetools.android.standalone_preview_function_with_internal_preview_produces_one_snapshot_test.TestComposable")
+      "PreviewProcessorTest.standalone_preview_function_with_internal_preview_produces_one_snapshot_test_with_arg.input.TestComposable")
 
   @get:Rule
   public val snapshotRule: EmergeSnapshots = EmergeSnapshots()

@@ -90,7 +90,10 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.afterEvaluate {
-      configureAppProjectSnapshots(appProject)
+      configureAppProjectSnapshots(
+        appProject = appProject,
+        emergeExtension = emergeExtension
+      )
     }
 
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
@@ -365,8 +368,15 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
-  private fun configureAppProjectSnapshots(appProject: Project) {
-    applyMainSourceSetConfig(appProject, appProject)
+  private fun configureAppProjectSnapshots(
+    appProject: Project,
+    emergeExtension: EmergePluginExtension,
+  ) {
+    applyMainSourceSetConfig(
+      project = appProject,
+      appProject = appProject,
+      emergeExtension = emergeExtension
+    )
 
     // Configure all dependent modules to apply the same configuration as the appProject so
     // generated snapshots don't run into compilation issues.
@@ -377,13 +387,20 @@ class EmergePlugin : Plugin<Project> {
       .distinct()
       .filter { !it.state.executed }
       .forEach { subproject ->
-        subproject.afterEvaluate { applyMainSourceSetConfig(it, appProject) }
+        subproject.afterEvaluate {
+          applyMainSourceSetConfig(
+            project = it,
+            appProject = appProject,
+            emergeExtension = emergeExtension
+          )
+        }
       }
   }
 
   private fun applyMainSourceSetConfig(
     project: Project,
     appProject: Project,
+    emergeExtension: EmergePluginExtension,
   ) {
     val errorMessages = mutableListOf<String>()
     if (!project.plugins.hasPlugin(KSP_PLUGIN_ID)) {
@@ -411,11 +428,16 @@ class EmergePlugin : Plugin<Project> {
     // TODO: Ryan: Explore using variants API for finding proper ourput dir.
     val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
 
+    val internalSnapshotsEnabled =
+      emergeExtension.snapshotOptions.experimentalInternalSnapshotsEnabled.getOrElse(false)
+    val internalEnabledArg = if (internalSnapshotsEnabled) "true" else "false"
+
     appProject.logger.info(
       "Configuring ${project.name} for Emerge snapshot testing, outputting to $emergeSrcDir"
     )
     project.extensions.getByType(KspExtension::class.java).apply {
       arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
+      arg(INTERNAL_ENABLED_OPTION_NAME, internalEnabledArg)
     }
 
     appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
@@ -535,6 +557,7 @@ class EmergePlugin : Plugin<Project> {
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
 
     private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
+    private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 

@@ -13,6 +13,7 @@ import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.isAnnotationPresent
+import com.google.devtools.ksp.isInternal
 import com.google.devtools.ksp.isPrivate
 import com.google.devtools.ksp.processing.CodeGenerator
 import com.google.devtools.ksp.processing.Dependencies
@@ -76,6 +77,11 @@ class PreviewProcessor(
 
       if (function.isPrivate()) {
         logger.info("Skipping ${function.simpleName.asString()} as it is private")
+        return@flatMap emptyList()
+      }
+
+      if (function.isInternal() && environment.options[INTERNAL_ENABLED_OPTION_NAME] != "true") {
+        logger.info("Skipping ${function.simpleName.asString()} as it is internal")
         return@flatMap emptyList()
       }
 
@@ -212,6 +218,7 @@ class PreviewProcessor(
 
   companion object {
     private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
+    private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
 
     private val ANDROID_JUNIT_RUNNER_CLASSNAME =
       ClassName("androidx.test.ext.junit.runners", "AndroidJUnit4")
