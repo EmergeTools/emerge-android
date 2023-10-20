@@ -70,7 +70,7 @@ fun Resolver.getMultiPreviewAnnotations(logger: KSPLogger): List<KSAnnotation> {
       annotationClassDecl?.let { classDecl ->
         val hasPreviewAnnotation = hasDirectOrTransitivePreviewAnnotation(classDecl)
         logger.info(
-          "Checking annotation for preview annotation: ${classDecl.qualifiedName?.asString()}, ${hasPreviewAnnotation}"
+          "Checking annotation for preview annotation: ${classDecl.qualifiedName?.asString()}, $hasPreviewAnnotation"
         )
         hasPreviewAnnotation
       } ?: false
