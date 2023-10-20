@@ -49,12 +49,12 @@ class PreviewProcessor(
     val symbolsWithPreviewAnnotations = resolver
       .getSymbolsWithAnnotation(COMPOSE_PREVIEW_ANNOTATION_NAME)
       .toList()
-    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations()
+    val symbolsWithMultiPreviewAnnotations = resolver.getSymbolsWithMultiPreviewAnnotations(logger)
 
     val previewAnnotatedFunctions = symbolsWithPreviewAnnotations
       .functionsWithPreviewAnnotation()
     val multiPreviewAnnotatedFunctions = symbolsWithMultiPreviewAnnotations
-      .functionsWithMultiPreviewAnnotations(resolver)
+      .functionsWithMultiPreviewAnnotations(resolver, logger)
 
     val previewFunctionMap = buildMap {
       putOrAppend(previewAnnotatedFunctions)
@@ -64,6 +64,8 @@ class PreviewProcessor(
     val codeGenerator = environment.codeGenerator
 
     val generatedPreviews = previewFunctionMap.entries.flatMap { previewFunction ->
+      logger.info("Generating snapshot tests for ${previewFunction.key.simpleName.asString()}")
+
       val function = previewFunction.key
       val previewConfigs = previewFunction.value
       // Intentionally skipping functions with parameters for now.
@@ -156,6 +158,8 @@ class PreviewProcessor(
       }.build()
 
       fileSpec.writeTo(codeGenerator, Dependencies(false))
+      val filename = fileSpec.name
+      logger.info("Generated snapshot test: $filename")
       fileSpec.name
     }
   }
