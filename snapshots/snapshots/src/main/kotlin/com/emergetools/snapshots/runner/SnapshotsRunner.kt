@@ -1,5 +1,6 @@
 package com.emergetools.snapshots.runner
 
+import android.util.Log
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.emergetools.snapshots.EmergeSnapshots
 import org.junit.Rule
@@ -16,16 +17,26 @@ internal class SnapshotsRunner(private val testClass: Class<*>) : AndroidJUnit4C
 
   override fun run(notifier: RunNotifier) {
     if (hasEmergeSnapshotRule(testClass)) {
+      Log.d(TAG, "Running test class: ${testClass.simpleName}")
       super.run(notifier)
     } else {
+      Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
       notifier.fireTestIgnored(description)
     }
   }
 
   companion object {
+    const val TAG = "SnapshotsRunner"
+
     private fun hasEmergeSnapshotRule(testClass: Class<*>): Boolean {
       return testClass.methods.any {
-        it.isAnnotationPresent(Rule::class.java) && it.returnType == EmergeSnapshots::class.java
+        val hasEmergeSnapshotRule = it.isAnnotationPresent(Rule::class.java)
+          && it.returnType == EmergeSnapshots::class.java
+        Log.d(
+          TAG,
+          "${testClass.simpleName} method  ${it.name} hasEmergeSnapshotRule: $hasEmergeSnapshotRule"
+        )
+        hasEmergeSnapshotRule
       }
     }
   }
