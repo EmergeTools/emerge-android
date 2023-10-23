@@ -30,11 +30,11 @@ internal class SnapshotsRunner(private val testClass: Class<*>) : AndroidJUnit4C
 
     private fun hasEmergeSnapshotRule(testClass: Class<*>): Boolean {
       return testClass.methods.any {
-        val hasEmergeSnapshotRule = it.isAnnotationPresent(Rule::class.java)
-          && it.returnType == EmergeSnapshots::class.java
+        val hasEmergeSnapshotRule =
+          it.isAnnotationPresent(Rule::class.java) && it.returnType == EmergeSnapshots::class.java
         Log.d(
           TAG,
-          "${testClass.simpleName} method  ${it.name} hasEmergeSnapshotRule: $hasEmergeSnapshotRule"
+          "${testClass.simpleName} method ${it.name} hasEmergeSnapshotRule: $hasEmergeSnapshotRule"
         )
         hasEmergeSnapshotRule
       }
