@@ -51,6 +51,7 @@ dependencies {
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.runtime)
   implementation(libs.compose.ui)
+  implementation(libs.activity.compose)
 
   implementation(libs.kotlinx.serialization)
 

@@ -1,6 +1,7 @@
 package com.emergetools.snapshots.compose
 
 import android.content.res.Configuration
+import androidx.activity.compose.LocalActivityResultRegistryOwner
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
@@ -24,8 +25,11 @@ fun SnapshotVariantProvider(
     setLocale(locale)
   }
 
+  val resultRegistryOwner = LocalActivityResultRegistryOwner.current
+
   val providedValues = arrayOf(
     LocalContext provides LocalContext.current.createConfigurationContext(localConfiguration),
+    resultRegistryOwner?.let { LocalActivityResultRegistryOwner provides resultRegistryOwner },
     config.fontScale?.let { LocalDensity provides fontScaleDensity }
   )
   CompositionLocalProvider(
