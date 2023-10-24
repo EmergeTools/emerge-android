@@ -41,6 +41,8 @@ fun SnapshotVariantProvider(
   }
 }
 
+// It's important that we use a context wrapper to override values, it's less destructive than
+// creating a new context from LocalContext which can unset some default values.
 class SnapshotVariantContextWrapper(
   base: Context,
   private val newLocale: Locale?,
