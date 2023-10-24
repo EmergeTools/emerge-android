@@ -1,6 +1,5 @@
 package com.emergetools.snapshots.sample
 
-import androidx.compose.runtime.Composable
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -12,8 +11,10 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 
+// This particular Composable was giving us trouble, so this is more an example of how we can
+// reproduce the issue in our sample project, copy the generated test case, and debug it here.
 @RunWith(AndroidJUnit4::class)
-public class MediaPickerTest {
+public class MediaPickerDemoTest {
   @get:Rule
   public val composeRule: ComposeContentTestRule = createComposeRule()
 
