@@ -21,7 +21,6 @@ import androidx.compose.ui.unit.dp
 
 @Preview
 @Composable
-// Shout-out to ChatGPT
 fun MediaPickerDemo() {
   var selectedMediaUri by remember { mutableStateOf<Uri?>(null) }
 
