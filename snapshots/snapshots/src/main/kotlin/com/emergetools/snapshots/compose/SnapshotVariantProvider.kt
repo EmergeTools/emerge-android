@@ -10,8 +10,8 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
-import com.emergetools.snapshots.google.AndroidStudioLocale
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.shared.EMGLocale
 import java.util.Locale
 
 @Composable
@@ -25,7 +25,7 @@ fun SnapshotVariantProvider(
   val wrappedContext = SnapshotVariantContextWrapper(
     LocalContext.current,
     config.locale?.let {
-      getLocale(it)
+      EMGLocale.forLanguageCode(it)
     } ?: Locale.getDefault(),
     config.uiMode,
   )
@@ -39,14 +39,6 @@ fun SnapshotVariantProvider(
   ) {
     content()
   }
-}
-
-fun getLocale(code: String): Locale {
-  val split = code.split("-")
-  if (split.size > 1) {
-    return Locale(split[0], split[1])
-  }
-  return Locale.forLanguageTag(code)
 }
 
 class SnapshotVariantContextWrapper(

@@ -98,30 +98,3 @@ fun TextRowWithIconPreviewFromMainIgnored() {
     subtitleText = "Subtitle (ignored)"
   )
 }
-
-@Preview
-@Composable
-// Shout-out to ChatGPT
-fun MediaPickerDemo() {
-  val context = LocalContext.current
-  var selectedMediaUri by remember { mutableStateOf<Uri?>(null) }
-
-  val pickMediaLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
-    uri?.let {
-      selectedMediaUri = it
-    }
-  }
-
-  Column(
-    modifier = Modifier.fillMaxSize().padding(16.dp),
-    horizontalAlignment = Alignment.CenterHorizontally
-  ) {
-    Button(onClick = { pickMediaLauncher.launch(null) }) {
-      Text("Pick Image/Video")
-    }
-
-    selectedMediaUri?.let { uri ->
-      Text(text = "Selected: $uri", modifier = Modifier.padding(top = 16.dp))
-    }
-  }
-}
