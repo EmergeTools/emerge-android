@@ -25,10 +25,12 @@ fun SnapshotVariantProvider(
     setLocale(locale)
   }
 
+  val localContext = LocalContext.current.createConfigurationContext(localConfiguration)
+
   val resultRegistryOwner = LocalActivityResultRegistryOwner.current
 
   val providedValues = arrayOf(
-    LocalContext provides LocalContext.current.createConfigurationContext(localConfiguration),
+    LocalContext provides localContext,
     resultRegistryOwner?.let { LocalActivityResultRegistryOwner provides resultRegistryOwner },
     config.fontScale?.let { LocalDensity provides fontScaleDensity }
   )

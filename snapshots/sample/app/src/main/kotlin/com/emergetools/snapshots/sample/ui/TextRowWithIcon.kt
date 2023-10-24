@@ -100,11 +100,11 @@ fun TextRowWithIconPreviewFromMainIgnored() {
 
 @Preview
 @Composable
+// Shout-out to ChatGPT
 fun MediaPickerDemo() {
   val context = LocalContext.current
   var selectedMediaUri by remember { mutableStateOf<Uri?>(null) }
 
-  // This will launch the gallery to select an image or video.
   val pickMediaLauncher = rememberLauncherForActivityResult(contract = ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
     uri?.let {
       selectedMediaUri = it
@@ -120,11 +120,7 @@ fun MediaPickerDemo() {
     }
 
     selectedMediaUri?.let { uri ->
-      // You can display the image or video here. For simplicity, we are just showing the image URI.
       Text(text = "Selected: $uri", modifier = Modifier.padding(top = 16.dp))
-
-      // You might also want to display the image using an Image component,
-      // but for this, you'll need to load the image from the URI into a painter or use an ImageLoader library.
     }
   }
 }
