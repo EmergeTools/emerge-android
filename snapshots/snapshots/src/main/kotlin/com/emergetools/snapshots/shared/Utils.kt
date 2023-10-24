@@ -25,4 +25,3 @@ object EMGLocale {
     return Locale.forLanguageTag(code)
   }
 }
-
