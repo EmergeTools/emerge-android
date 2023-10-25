@@ -25,6 +25,7 @@ fun TextRowWithIcon(
 }
 
 @Preview
+@Preview(locale = "es-rES")
 @LocalePreviews
 @FontScalePreviews
 @Composable
