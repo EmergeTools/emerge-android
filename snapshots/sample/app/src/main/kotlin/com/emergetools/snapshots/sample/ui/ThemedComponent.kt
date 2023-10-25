@@ -18,10 +18,12 @@ import androidx.compose.ui.tooling.preview.Preview
 @Composable
 fun ThemedComponent() {
   val backgroundColor = LocalContext.current.resources.getColor(
-    com.emergetools.snapshots.sample.R.color.background_color, null
+    com.emergetools.snapshots.sample.R.color.background_color,
+    null
   )
   val textColor = LocalContext.current.resources.getColor(
-    com.emergetools.snapshots.sample.R.color.text_color, null
+    com.emergetools.snapshots.sample.R.color.text_color,
+    null
   )
 
   Box(
