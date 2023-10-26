@@ -87,7 +87,7 @@ android {
 }
 
 dependencies {
-  implementation(libs.androidx.activity.activity)
+  implementation(libs.androidx.activity)
   implementation(libs.androidx.activity.compose)
 
   implementation(platform(libs.compose.bom))
