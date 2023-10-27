@@ -45,7 +45,6 @@ android {
 dependencies {
 
   implementation(libs.junit)
-  implementation(libs.androidx.test.rules)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.runtime)
@@ -58,6 +57,7 @@ dependencies {
   api(libs.androidx.test.core)
   api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)
+  api(libs.androidx.test.rules)
   api(libs.androidx.test.runner)
   api(libs.compose.ui.test.junit)
 
