@@ -5,6 +5,24 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.3 - 2023-10-27
+
+### Fixed
+
+- Provide result registry for
+  CompositionLocal. [#98](https://github.com/EmergeTools/emerge-android/pull/98)
+- Add api dependencies
+  for `androidx.activity` & `androidx.test.runner`. [#99](https://github.com/EmergeTools/emerge-android/pull/99)
+- Add additional logging to snapshots. [#97](https://github.com/EmergeTools/emerge-android/pull/97)
+- API dep for `androidx.test.rules`. [#100](https://github.com/EmergeTools/emerge-android/pull/100)
+
+### Changed
+
+- API dependency for
+  androidx.activity & . [#93](https://github.com/EmergeTools/emerge-android/pull/93)
+- Gate internal previews with KSP argument from Gradle
+  plugin [#92](https://github.com/EmergeTools/emerge-android/pull/92)
+
 ## 0.8.2 - 2023-10-19
 
 ### Added
