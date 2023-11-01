@@ -7,6 +7,13 @@ plugins {
 
 emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
+
+  vcs {
+    gitHub {
+      repoName.set("emerge-android")
+      repoOwner.set("EmergeTools")
+    }
+  }
 }
 
 android {
