@@ -68,7 +68,7 @@ fun TextRowWithIconPreviewFromMainJustStackedMultiPreview() {
 @Composable
 fun TextRowWithIconPreviewFromMainJustSnapshotTestingPreview() {
   TextRowWithIcon(
-    titleText = "Title SnapshotTestingPreview2",
+    titleText = "Title SnapshotTestingPreview22",
     subtitleText = "Subtitle SnapshotTestingPreview"
   )
 }
