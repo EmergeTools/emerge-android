@@ -1,4 +1,4 @@
-name: Generate Android Snapshots
+name: Sample App Snapshots
 
 on:
   push:
