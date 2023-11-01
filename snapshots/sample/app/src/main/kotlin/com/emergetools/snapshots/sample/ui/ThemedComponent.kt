@@ -5,6 +5,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -12,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview(uiMode = UI_MODE_NIGHT_NO)
@@ -36,5 +38,24 @@ fun ThemedComponent() {
       color = Color(textColor),
       modifier = Modifier.align(Alignment.Center)
     )
+  }
+}
+
+@Preview(uiMode = UI_MODE_NIGHT_YES)
+@Preview(uiMode = UI_MODE_NIGHT_NO)
+@Composable
+fun MaterialThemedComponent() {
+  SnapshotsSampleTheme {
+    Box(
+      modifier = Modifier
+        .fillMaxSize()
+        .background(color = MaterialTheme.colorScheme.background)
+    ) {
+      Text(
+        text = "This is a themed component",
+        color = MaterialTheme.colorScheme.primary,
+        modifier = Modifier.align(Alignment.Center)
+      )
+    }
   }
 }
