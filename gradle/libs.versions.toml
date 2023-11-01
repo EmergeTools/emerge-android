@@ -4,12 +4,12 @@ androidx-test-ext = "1.1.5"
 agp = "8.1.1"
 androidxactivity = "1.7.1"
 compose-bom = "2023.09.01"
-compose-compiler-extension = "1.4.8"
+compose-compiler-extension = "1.5.3"
 detekt = "1.22.0"
-kotlin = "1.8.22"
+kotlin = "1.9.10"
 kotlinpoet = "1.14.2"
 kotlin-compile-testing = "1.5.0"
-ksp = "1.8.22-1.0.11"
+ksp = "1.9.10-1.0.13"
 okhttp = "4.10.0"
 junit-jupiter = "5.8.2"
 
@@ -76,7 +76,7 @@ junit-jupiter-engine = { module = "org.junit.jupiter:junit-jupiter-engine", vers
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
-kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
+kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
 
 ktor-network = { module = "io.ktor:ktor-network", version = "2.1.1" }
 
