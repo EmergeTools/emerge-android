@@ -23,17 +23,16 @@ fun SnapshotVariantProvider(
   val fontScale = config.fontScale ?: 1.0f
   val fontScaleDensity = Density(fontScale = fontScale, density = LocalDensity.current.density)
 
+  val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
+
   val wrappedContext = SnapshotVariantContextWrapper(
     LocalContext.current,
-    newLocale = config.locale?.let {
-      EMGLocale.forLanguageCode(it)
-    } ?: Locale.getDefault(),
+    newLocale = locale,
     newUiMode = config.uiMode,
   )
 
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
-    val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
     setLocale(locale)
   }
 
