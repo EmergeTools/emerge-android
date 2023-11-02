@@ -49,12 +49,11 @@ android {
 dependencies {
 
   implementation(libs.junit)
+  implementation(libs.kotlinx.serialization)
 
   api(platform(libs.compose.bom))
   api(libs.compose.runtime)
   api(libs.compose.ui)
-
-  implementation(libs.kotlinx.serialization)
 
   api(projects.snapshots.snapshotsShared)
   api(libs.androidx.activity)
