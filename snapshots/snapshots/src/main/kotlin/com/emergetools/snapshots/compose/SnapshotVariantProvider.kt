@@ -57,9 +57,9 @@ class SnapshotVariantContextWrapper(
       newLocale?.let {
         newConfig.setLocale(it)
       }
-      newUiMode?.let {
-        newConfig.uiMode = it or (newConfig.uiMode and UI_MODE_NIGHT_MASK.inv())
-      }
+//      newUiMode?.let {
+//        newConfig.uiMode = it or (newConfig.uiMode and UI_MODE_NIGHT_MASK.inv())
+//      }
       customResources = super.createConfigurationContext(newConfig).resources
     }
     return customResources!!
