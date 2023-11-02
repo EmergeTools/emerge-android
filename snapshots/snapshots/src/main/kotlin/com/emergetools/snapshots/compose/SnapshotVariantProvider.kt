@@ -24,10 +24,10 @@ fun SnapshotVariantProvider(
 
   val wrappedContext = SnapshotVariantContextWrapper(
     LocalContext.current,
-    config.locale?.let {
+    newLocale = config.locale?.let {
       EMGLocale.forLanguageCode(it)
     } ?: Locale.getDefault(),
-    config.uiMode,
+    newUiMode = config.uiMode,
   )
 
   val providedValues = arrayOf(
@@ -48,28 +48,39 @@ class SnapshotVariantContextWrapper(
   private val newLocale: Locale?,
   private val newUiMode: Int?
 ) : ContextWrapper(base) {
-  private var customResources: Resources? = null
+
+  private var wrappedContext: Context? = null
 
   override fun getResources(): Resources {
-    if (customResources == null) {
-      val res = super.getResources()
-      val newConfig = Configuration(res.configuration)
-      newLocale?.let {
-        newConfig.setLocale(it)
-      }
-//      newUiMode?.let {
-//        newConfig.uiMode = it or (newConfig.uiMode and UI_MODE_NIGHT_MASK.inv())
-//      }
-      customResources = super.createConfigurationContext(newConfig).resources
+    if (wrappedContext == null) {
+      wrappedContext = updateContext()
     }
-    return customResources!!
+    return wrappedContext!!.resources
   }
 
   override fun createConfigurationContext(overrideConfiguration: Configuration): Context {
-    return SnapshotVariantContextWrapper(
-      super.createConfigurationContext(overrideConfiguration),
-      newLocale,
-      newUiMode
-    )
+    val context = super.createConfigurationContext(overrideConfiguration)
+    newLocale?.let {
+      overrideConfiguration.setLocale(it)
+    }
+    newUiMode?.let {
+      overrideConfiguration.uiMode = it or (overrideConfiguration.uiMode and UI_MODE_NIGHT_MASK.inv())
+    }
+    return context
+  }
+
+  private fun updateContext(): Context {
+    val res = super.getResources()
+    val config = Configuration(res.configuration)
+
+    newLocale?.let {
+      config.setLocale(it)
+    }
+
+    newUiMode?.let {
+      config.uiMode = it or (config.uiMode and UI_MODE_NIGHT_MASK.inv())
+    }
+
+    return createConfigurationContext(config)
   }
 }
