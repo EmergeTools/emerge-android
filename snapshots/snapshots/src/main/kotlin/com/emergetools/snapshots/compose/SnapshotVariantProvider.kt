@@ -7,6 +7,7 @@ import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Resources
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Density
@@ -30,8 +31,15 @@ fun SnapshotVariantProvider(
     newUiMode = config.uiMode,
   )
 
+  val localConfiguration = Configuration(LocalConfiguration.current).apply {
+    config.uiMode?.let { uiMode = it }
+    val locale = config.locale?.let { Locale(it) } ?: Locale.getDefault()
+    setLocale(locale)
+  }
+
   val providedValues = arrayOf(
     LocalContext provides wrappedContext,
+    LocalConfiguration provides localConfiguration,
     config.fontScale?.let { LocalDensity provides fontScaleDensity }
   )
   CompositionLocalProvider(
