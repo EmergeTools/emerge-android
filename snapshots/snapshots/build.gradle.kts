@@ -14,7 +14,7 @@ group = "com.emergetools.snapshots"
 version = libs.versions.emerge.snapshots.get()
 
 var metaInfResDir = File(buildDir, "generated/emerge/")
-var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
+var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/snapshots/")
 
 android {
   namespace = "com.emergetools.snapshots"
@@ -40,6 +40,10 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extension.get()
   }
+
+  // Ensures our version.txt is packaged in with release.
+  // Will be pulled in automatically to test APK upon build
+  sourceSets.getByName("main").resources.srcDir(metaInfResDir)
 }
 
 dependencies {
