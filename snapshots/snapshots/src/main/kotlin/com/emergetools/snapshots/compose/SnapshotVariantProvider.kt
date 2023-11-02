@@ -10,6 +10,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Density
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.EMGLocale
@@ -37,6 +38,7 @@ fun SnapshotVariantProvider(
   }
 
   val providedValues = arrayOf(
+    LocalInspectionMode provides true,
     LocalContext provides wrappedContext,
     LocalConfiguration provides localConfiguration,
     config.fontScale?.let { LocalDensity provides fontScaleDensity }
