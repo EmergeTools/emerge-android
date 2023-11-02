@@ -50,9 +50,9 @@ dependencies {
 
   implementation(libs.junit)
 
-  implementation(platform(libs.compose.bom))
-  implementation(libs.compose.runtime)
-  implementation(libs.compose.ui)
+  api(platform(libs.compose.bom))
+  api(libs.compose.runtime)
+  api(libs.compose.ui)
 
   implementation(libs.kotlinx.serialization)
 
