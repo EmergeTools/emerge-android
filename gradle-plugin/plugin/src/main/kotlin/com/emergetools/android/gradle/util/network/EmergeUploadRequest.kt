@@ -28,6 +28,7 @@ data class EmergeUploadRequestData(
   val gitlabProjectId: String?,
   val source: String,
 	val androidSnapshotsEnabled: Boolean,
+  val androidSnapshotsApiVersion: Int? = null,
 )
 
 @Serializable
@@ -44,6 +45,7 @@ fun fetchSignedUrl(
   val mediaType = "application/json".toMediaType()
   val json = Json {
     ignoreUnknownKeys = true
+    encodeDefaults = false
   }
   val body = json.encodeToString(uploadData).toRequestBody(mediaType)
   val url = baseUrl.resolve("/upload")

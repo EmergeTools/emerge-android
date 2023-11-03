@@ -367,6 +367,7 @@ class EmergePlugin : Plugin<Project> {
         " in the Emerge plugin extension."
       it.buildType.set(extension.snapshotOptions.buildType)
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
+      it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.setUploadTaskInputs(extension, appProject)
       it.dependsOn(packageTask)
     }
