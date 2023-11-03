@@ -215,9 +215,17 @@ emerge {
     snapshotsStorageDirectory.set(
       "/src/main/snapshots"
     ) // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
+
+    defaultApiVersion.set(33) // Android API version to run snapshots on, must be within 29-34
+
+    // Experimental flag to generate snapshots for internal previews
+    experimentalInternalSnapshotsEnabled.set("true")
   }
 }
 ```
+
+For `defaultApiVersion`, Emerge currently only supports API 29-34. For an easy mapping of API
+versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 ##### Fields
 
@@ -264,7 +272,7 @@ emerge {
     // Optional, snapshots use debug builds, we recommend using separate build type.
     buildType.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
-    defaultApiVersion.set(33) // Android API version to run snapshots on
+    defaultApiVersion.set(33) // Android API version to run snapshots on, must be within 29-
     // Experimental flag to generate snapshots for internal previews
     experimentalInternalSnapshotsEnabled.set("true")
   }
@@ -342,7 +350,8 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
 2. Update the plugin version in documentation.
 3. Update the `/gradle-plugin/CHANGELOG.md`
-4. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+4. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step
+  1)
 5. `gt ss`
 6. Get PR approved and merge
 7. Create a new release on GitHub
