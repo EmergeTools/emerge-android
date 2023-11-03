@@ -12,6 +12,7 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
+import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -46,8 +47,13 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
     if (defaultApiVersion.isPresent) {
       val apiVersion = defaultApiVersion.get()
-      check(apiVersion in MIN_SUPPORTED_API_VERSION..MAX_SUPPORTED_API_VERSION) {
-        "defaultApiVersion must be within $MIN_SUPPORTED_API_VERSION -> $MAX_SUPPORTED_API_VERSION"
+      val supportedVersions = (MIN_SUPPORTED_API_VERSION..MAX_SUPPORTED_API_VERSION)
+        .asIterable()
+        .toList()
+        .subtract(excludedVersions)
+
+      check(supportedVersions.contains(apiVersion)) {
+        "defaultApiVersion must be a supported version, use one of ${supportedVersions.joinToString()}"
       }
     }
 
@@ -80,6 +86,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
     )
   }
 
+  @TaskAction
   fun execute() {
     val response = upload(artifactMetadata)
     checkNotNull(response) {
@@ -96,5 +103,8 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   companion object {
     private const val MIN_SUPPORTED_API_VERSION = 29
     private const val MAX_SUPPORTED_API_VERSION = 34
+
+    // Excluded for various reasons, prevent uploading with these currently
+    val excludedVersions = listOf(30, 32)
   }
 }

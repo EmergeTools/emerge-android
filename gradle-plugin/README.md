@@ -224,17 +224,17 @@ emerge {
 }
 ```
 
-For `defaultApiVersion`, Emerge currently only supports API 29-34. For an easy mapping of API
-versions to releases & names, see [Android API levels](https://apilevels.com/).
+For `defaultApiVersion`, Emerge currently only supports API 29-34, excluding 30 & 32. For an easy
+mapping of API versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 ##### Fields
 
-| Field                                  | Type      | Default                           | Description                                                                                         |
-|----------------------------------------|-----------|-----------------------------------|-----------------------------------------------------------------------------------------------------|
-| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                  |
-| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                        |
-| `defaultApiVersion`                    | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in the range of 29-34. |
-| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                                 |
+| Field                                  | Type      | Default                           | Description                                                                                                            |
+|----------------------------------------|-----------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------|
+| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                                     |
+| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                                           |
+| `defaultApiVersion`                    | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in the range of 29-34, excluding 30 & 32. |
+| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                                                    |
 
 ## Full configuration
 
@@ -351,7 +351,9 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 2. Update the plugin version in documentation.
 3. Update the `/gradle-plugin/CHANGELOG.md`
 4. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step
-  1)
+
+1)
+
 5. `gt ss`
 6. Get PR approved and merge
 7. Create a new release on GitHub
