@@ -216,7 +216,7 @@ emerge {
       "/src/main/snapshots"
     ) // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
 
-    defaultApiVersion.set(33) // Android API version to run snapshots on, must be within 29-34
+    apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
 
     // Experimental flag to generate snapshots for internal previews
     experimentalInternalSnapshotsEnabled.set("true")
@@ -224,17 +224,17 @@ emerge {
 }
 ```
 
-For `defaultApiVersion`, Emerge currently only supports API 29-34, excluding 30 & 32. For an easy
-mapping of API versions to releases & names, see [Android API levels](https://apilevels.com/).
+For `apiVersion`, Emerge currently only supports APIs 29, 31, 33 & 34. For an easy mapping of API
+versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 ##### Fields
 
-| Field                                  | Type      | Default                           | Description                                                                                                            |
-|----------------------------------------|-----------|-----------------------------------|------------------------------------------------------------------------------------------------------------------------|
-| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                                     |
-| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                                           |
-| `defaultApiVersion`                    | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in the range of 29-34, excluding 30 & 32. |
-| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                                                    |
+| Field                                  | Type      | Default                           | Description                                                                                       |
+|----------------------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
+| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                |
+| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
+| `apiVersion`                           | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
+| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                               |
 
 ## Full configuration
 
@@ -272,7 +272,8 @@ emerge {
     // Optional, snapshots use debug builds, we recommend using separate build type.
     buildType.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
-    defaultApiVersion.set(33) // Android API version to run snapshots on, must be within 29-
+    apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+
     // Experimental flag to generate snapshots for internal previews
     experimentalInternalSnapshotsEnabled.set("true")
   }

@@ -138,5 +138,5 @@ abstract class SnapshotOptions : ProductOptions() {
 
   abstract val experimentalInternalSnapshotsEnabled: Property<Boolean>
 
-  abstract val defaultApiVersion: Property<Int>
+  abstract val apiVersion: Property<Int>
 }

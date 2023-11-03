@@ -25,7 +25,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
   @get:Input
   @get:Optional
-  abstract val defaultApiVersion: Property<Int>
+  abstract val apiVersion: Property<Int>
 
   @get:Internal
   override val snapshotsEnabled: Property<Boolean>
@@ -45,15 +45,10 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
     check(artifactMetadataFiles.singleFile.exists()) { "Artifact metadata file not found" }
 
-    if (defaultApiVersion.isPresent) {
-      val apiVersion = defaultApiVersion.get()
-      val supportedVersions = (MIN_SUPPORTED_API_VERSION..MAX_SUPPORTED_API_VERSION)
-        .asIterable()
-        .toList()
-        .subtract(excludedVersions)
-
-      check(supportedVersions.contains(apiVersion)) {
-        "defaultApiVersion must be a supported version, use one of ${supportedVersions.joinToString()}"
+    if (apiVersion.isPresent) {
+      val apiVersion = apiVersion.get()
+      check(supportedApiVersions.contains(apiVersion)) {
+        "apiVersion must be a supported version, use one of ${supportedApiVersions.joinToString()}"
       }
     }
 
@@ -82,7 +77,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
   override fun uploadRequestData(file: File): EmergeUploadRequestData {
     return super.uploadRequestData(file).copy(
-      androidSnapshotsApiVersion = defaultApiVersion.orNull
+      androidSnapshotsApiVersion = apiVersion.orNull
     )
   }
 
@@ -101,10 +96,6 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   }
 
   companion object {
-    private const val MIN_SUPPORTED_API_VERSION = 29
-    private const val MAX_SUPPORTED_API_VERSION = 34
-
-    // Excluded for various reasons, prevent uploading with these currently
-    val excludedVersions = listOf(30, 32)
+    val supportedApiVersions = listOf(29, 31, 33, 34)
   }
 }
