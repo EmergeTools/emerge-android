@@ -351,10 +351,7 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
 2. Update the plugin version in documentation.
 3. Update the `/gradle-plugin/CHANGELOG.md`
-4. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (where X.Y.Z is the version set in step
-
-1)
-
+4. `gt bc -a -m "Prepare for Gradle Plugin release X.Y.Z"` (X.Y.Z is the version set in step 1)
 5. `gt ss`
 6. Get PR approved and merge
 7. Create a new release on GitHub
