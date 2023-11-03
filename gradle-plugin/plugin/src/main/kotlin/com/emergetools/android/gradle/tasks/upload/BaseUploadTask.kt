@@ -129,10 +129,7 @@ abstract class BaseUploadTask : DefaultTask() {
    */
   abstract fun includeFilesInUpload(zos: ZipOutputStream)
 
-  private fun uploadFile(
-    file: File,
-    outputDir: File,
-  ): EmergeUploadResponse? {
+  open fun uploadRequestData(file: File): EmergeUploadRequestData {
     val repoName = if (
       gitHubRepoOwner.orNull.isNullOrEmpty() ||
       gitHubRepoName.orNull.isNullOrBlank()
@@ -142,7 +139,7 @@ abstract class BaseUploadTask : DefaultTask() {
       "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
     }
 
-    val uploadRequestData = EmergeUploadRequestData(
+    return EmergeUploadRequestData(
       apiToken = apiToken.get(),
       filename = file.name,
       sha = sha.orNull,
@@ -155,7 +152,12 @@ abstract class BaseUploadTask : DefaultTask() {
       androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),
       source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}"
     )
+  }
 
+  private fun uploadFile(
+    file: File,
+    outputDir: File,
+  ): EmergeUploadResponse? {
     if (dryRun.get()) {
       file.copyTo(File(outputDir, "/${file.name}"), overwrite = true)
       return null
@@ -172,7 +174,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
       val uploadResponse = fetchSignedUrl(
         client = okHttpClient,
-        uploadData = uploadRequestData,
+        uploadData = uploadRequestData(file),
         baseUrl = baseHttpUrl
       )
       val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()

@@ -221,10 +221,12 @@ emerge {
 
 ##### Fields
 
-| Field                       | Type      | Default                           | Description                                                                  |
-|-----------------------------|-----------|-----------------------------------|------------------------------------------------------------------------------|
-| `buildType`                 | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.           |
-| `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation. |
+| Field                                  | Type      | Default                           | Description                                                                                         |
+|----------------------------------------|-----------|-----------------------------------|-----------------------------------------------------------------------------------------------------|
+| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                  |
+| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                        |
+| `defaultApiVersion`                    | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in the range of 29-34. |
+| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                                 |
 
 ## Full configuration
 
@@ -262,6 +264,9 @@ emerge {
     // Optional, snapshots use debug builds, we recommend using separate build type.
     buildType.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
+    defaultApiVersion.set(33) // Android API version to run snapshots on
+    // Experimental flag to generate snapshots for internal previews
+    experimentalInternalSnapshotsEnabled.set("true")
   }
 }
 ```
