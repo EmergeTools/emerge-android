@@ -16,10 +16,12 @@ abstract class GitShaValueSource : ValueSource<String?, None> {
     val git = Git(execOperations)
     val gitHub = GitHub(execOperations)
 
-    var sha = git.currentSha()
+    var sha: String? = null
     // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
     if (gitHub.isSupportedGitHubEvent()) {
       gitHub.sha()?.let { sha = it }
+    } else {
+      sha = git.currentSha()
     }
 
     return sha
