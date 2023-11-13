@@ -5,6 +5,12 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.8.5 - 2023-11-13
+
+### Added
+
+- Language support for Kotlin 1.7 . [#112](https://github.com/EmergeTools/emerge-android/pull/112)
+
 ## 0.8.4 - 2023-11-03
 
 ### Fixed
@@ -15,7 +21,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - API dependency compose dependencies [#108](https://github.com/EmergeTools/emerge-android/pull/109)
 - Use LocalInspectionMode. [#107](https://github.com/EmergeTools/emerge-android/pull/107)
-
 
 ## 0.8.3 - 2023-10-27
 
