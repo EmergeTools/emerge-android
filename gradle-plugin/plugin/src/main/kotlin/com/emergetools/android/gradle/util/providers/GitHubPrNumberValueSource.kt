@@ -13,6 +13,6 @@ abstract class GitHubPrNumberValueSource : ValueSource<String?, None> {
 
   override fun obtain(): String? {
     val gitHub = GitHub(execOperations)
-    return gitHub.prNumber().toString()
+    return gitHub.prNumber()?.toString()
   }
 }
