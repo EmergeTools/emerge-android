@@ -431,7 +431,11 @@ class EmergePlugin : Plugin<Project> {
     }
 
     // TODO: Ryan: Explore using variants API for finding proper ourput dir.
-    val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+    val emergeSrcDir = project.layout.buildDirectory
+      .dir("$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin")
+      .get()
+      .asFile
+      .path
 
     val internalSnapshotsEnabled =
       emergeExtension.snapshotOptions.experimentalInternalSnapshotsEnabled.getOrElse(false)
