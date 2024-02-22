@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 2.2.0 - 2024-02-22
 
 - Uses `tag` in favor of deprecated `buildType` field. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
+- Set a custom user agent for uploads. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
 - Updates the generated snapshot URL. [#119](https://github.com/EmergeTools/emerge-android/pull/119)
 
 ## 2.1.6 - 2023-11-13
