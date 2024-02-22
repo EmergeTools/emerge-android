@@ -113,7 +113,7 @@ abstract class GitLabOptions {
 }
 
 abstract class ProductOptions {
-  abstract val buildType: Property<String>
+  abstract val tag: Property<String>
 }
 
 abstract class SizeOptions : ProductOptions()

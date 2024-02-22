@@ -206,7 +206,7 @@ emerge {
 
   // Optional
   snapshots {
-    buildType.set("snapshots") // To ensure Emerge size dashboard is not mixed with snapshot builds
+    tag.set("snapshots") // To ensure Emerge size dashboard is not mixed with snapshot builds
   }
 }
 ```

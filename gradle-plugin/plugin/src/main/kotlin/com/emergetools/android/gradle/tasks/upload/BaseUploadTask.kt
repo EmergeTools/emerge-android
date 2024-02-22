@@ -41,7 +41,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
   @get:Input
   @get:Optional
-  abstract val buildType: Property<String>
+  abstract val tag: Property<String>
 
   @get:Input
   @get:Optional
@@ -147,7 +147,7 @@ abstract class BaseUploadTask : DefaultTask() {
       branch = branchName.orNull,
       repoName = repoName,
       prNumber = prNumber.orNull,
-      buildType = buildType.orNull,
+      tag = tag.orNull,
       gitlabProjectId = gitLabProjectId.orNull,
       androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),
       source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}"
