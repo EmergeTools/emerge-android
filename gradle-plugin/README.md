@@ -144,16 +144,16 @@ emerge {
   // ..
 
   size {
-    buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
+    tag.set("release") // Build type to use for grouping builds in the Emerge dashboard
   }
 }
 ```
 
 ##### Fields
 
-| Field       | Type     | Default   | Description                                                        |
-|-------------|----------|-----------|--------------------------------------------------------------------|
-| `buildType` | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard. |
+| Field | Type     | Default   | Description                                                        |
+|-------|----------|-----------|--------------------------------------------------------------------|
+| `tag` | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard. |
 
 ### Performance
 
@@ -177,7 +177,7 @@ emerge {
   // ..
 
   performance {
-    buildType.set("release") // Build type to use for grouping builds in the Emerge dashboard
+    tag.set("release") // Build type to use for grouping builds in the Emerge dashboard
     projectPath.set(
       ":perf"
     ) // REQUIRED - Relative gradle path from root project to the Emerge performance module
@@ -190,7 +190,7 @@ emerge {
 | Field         | Type     | Default   | Description                                                          |
 |---------------|----------|-----------|----------------------------------------------------------------------|
 | `projectPath` | `String` |           | The relative gradle path from root to the Emerge performance module. |
-| `buildType`   | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard.   |
+| `tag`         | `String` | `release` | The build type to use for grouping builds in the Emerge dashboard.   |
 
 ### Snapshots
 
@@ -210,7 +210,7 @@ emerge {
   // ..
 
   snapshots {
-    buildType.set("snapshots") // Build type to use for grouping builds in the Emerge dashboard
+    tag.set("snapshots") // Build type to use for grouping builds in the Emerge dashboard
 
     snapshotsStorageDirectory.set(
       "/src/main/snapshots"
@@ -231,7 +231,7 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 | Field                                  | Type      | Default                           | Description                                                                                       |
 |----------------------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
-| `buildType`                            | `String`  | `release`                         | The build type to use for grouping builds in the Emerge dashboard.                                |
+| `tag`                                  | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
 | `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
 | `apiVersion`                           | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
 | `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                               |
@@ -260,17 +260,17 @@ emerge {
   }
 
   size {
-    buildType.set("release") // Optional, defaults to 'release'
+    tag.set("release") // Optional, defaults to 'release'
   }
 
   performance {
     projectPath.set(":perf") // Required for performance testing
-    buildType.set("release") // Optional, defaults to 'release'
+    tag.set("release") // Optional, defaults to 'release'
   }
 
   snapshots {
     // Optional, snapshots use debug builds, we recommend using separate build type.
-    buildType.set("snapshots")
+    tag.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
     apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
 
