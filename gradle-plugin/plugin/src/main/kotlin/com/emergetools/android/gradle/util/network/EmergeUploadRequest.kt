@@ -1,8 +1,8 @@
 package com.emergetools.android.gradle.util.network
 
+import com.emergetools.android.gradle.BuildConfig
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl
@@ -11,6 +11,7 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
+import okhttp3.internal.userAgent
 import java.io.File
 
 const val SOURCE_GRADLE_PLUGIN = "gradle_plugin"
@@ -24,10 +25,10 @@ data class EmergeUploadRequestData(
   val branch: String?,
   val repoName: String?,
   val prNumber: String?,
-  val buildType: String?,
+  val tag: String?,
   val gitlabProjectId: String?,
   val source: String,
-	val androidSnapshotsEnabled: Boolean,
+  val androidSnapshotsEnabled: Boolean,
   val androidSnapshotsApiVersion: Int? = null,
 )
 
@@ -53,6 +54,7 @@ fun fetchSignedUrl(
   val request: Request = Request.Builder().apply {
     url(url)
     post(body)
+    addHeader("User-Agent", "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}")
     addHeader("Accept", "application/json")
     addHeader("Content-Type", "application/json")
     addHeader("X-API-Token", uploadData.apiToken)

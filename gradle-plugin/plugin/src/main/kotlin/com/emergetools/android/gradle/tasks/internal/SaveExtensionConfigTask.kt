@@ -117,37 +117,37 @@ abstract class SaveExtensionConfigTask : DefaultTask() {
 
     @Serializable
     data class SizeOptionsData(
-      val buildType: String?,
+      val tag: String?,
     )
 
     private fun SizeOptions.dataFromExtension(): SizeOptionsData {
       return SizeOptionsData(
-        buildType = buildType.orNull,
+        tag = tag.orNull,
       )
     }
 
     @Serializable
     data class PerfOptionsData(
-      val buildType: String?,
+      val tag: String?,
       val projectPath: String?,
     )
 
     private fun PerfOptions.dataFromExtension(): PerfOptionsData {
       return PerfOptionsData(
-        buildType = buildType.orNull,
+        tag = tag.orNull,
         projectPath = projectPath.orNull,
       )
     }
 
     @Serializable
     data class SnapshotOptionsData(
-      val buildType: String?,
+      val tag: String?,
       val snapshotsStorageDirectory: String?,
     )
 
     private fun SnapshotOptions.dataFromExtension(): SnapshotOptionsData {
       return SnapshotOptionsData(
-        buildType = buildType.orNull,
+        tag = tag.orNull,
         snapshotsStorageDirectory = snapshotsStorageDirectory.orNull?.asFile?.path,
       )
     }
