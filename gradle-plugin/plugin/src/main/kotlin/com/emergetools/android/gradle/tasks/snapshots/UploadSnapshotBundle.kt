@@ -91,7 +91,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
     logger.lifecycle(
       "Snapshot bundle upload successful! View snapshots at the following url:"
     )
-    logger.lifecycle("https://emergetools.com/build/${response.uploadId}?buildContent=snapshots")
+    logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
     logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")
   }
 
