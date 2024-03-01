@@ -8,10 +8,11 @@ on:
     branches:
       - main
     paths:
+      - gradle/**
       - performance/**
 
 jobs:
-  
+
 #  TODO: Ryan: Re-enable when build hang issue can be resolved.
 #  build:
 #    runs-on: ubuntu-latest
