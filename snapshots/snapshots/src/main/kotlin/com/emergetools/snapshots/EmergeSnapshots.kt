@@ -49,6 +49,7 @@ class EmergeSnapshots : TestRule {
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     composeTestRule.waitForIdle()
+    composeTestRule.mainClock.autoAdvance = false
     SnapshotSaver.save(
       // DisplayName not used for composables
       displayName = null,
