@@ -3,6 +3,7 @@ package com.emergetools.snapshots.runner
 import android.util.Log
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.emergetools.snapshots.EmergeSnapshots
+import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveInvoker
 import org.junit.Rule
 import org.junit.runner.notification.RunNotifier
 
@@ -36,7 +37,7 @@ internal class SnapshotsRunner(private val testClass: Class<*>) : AndroidJUnit4C
           TAG,
           "${testClass.simpleName} method ${it.name} hasEmergeSnapshotRule: $hasEmergeSnapshotRule"
         )
-        hasEmergeSnapshotRule
+        hasEmergeSnapshotRule && testClass.name != EmergeComposeSnapshotReflectiveInvoker::class.java.name
       }
     }
   }
