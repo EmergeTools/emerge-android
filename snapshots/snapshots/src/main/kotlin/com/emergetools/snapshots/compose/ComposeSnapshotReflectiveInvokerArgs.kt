@@ -15,10 +15,10 @@ data class ComposeSnapshotReflectiveSnapshotBatch(
     const val ARG_INVOKE_DATA_PATH = "invoke_data_path"
 
 
-    fun fromArgs(context: Context, args: Bundle): ComposeSnapshotReflectiveSnapshotBatch {
+    fun fromArgs(args: Bundle): ComposeSnapshotReflectiveSnapshotBatch {
       val invokeDataPath = args.getString(ARG_INVOKE_DATA_PATH) ?: throw IllegalArgumentException("Missing invoke_data_path arg")
 
-      val invokeDataFile = File(context.getExternalFilesDir(null), invokeDataPath)
+      val invokeDataFile = File(invokeDataPath)
       if (!invokeDataFile.exists()) {
         error("Unable to find file at $invokeDataPath")
       }
