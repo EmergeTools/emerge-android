@@ -15,9 +15,8 @@ class EmergeComposeSnapshotReflectiveInvoker {
 
   private val args: ComposeSnapshotReflectiveSnapshotBatch
     get() {
-      val testContext = InstrumentationRegistry.getInstrumentation().context
       val args = InstrumentationRegistry.getArguments()
-      return ComposeSnapshotReflectiveSnapshotBatch.fromArgs(testContext, args)
+      return ComposeSnapshotReflectiveSnapshotBatch.fromArgs(args)
     }
 
   @get:Rule
