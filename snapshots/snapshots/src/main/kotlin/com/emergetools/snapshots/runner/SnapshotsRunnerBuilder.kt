@@ -1,17 +1,22 @@
 package com.emergetools.snapshots.runner
 
 import android.util.Log
+import androidx.test.platform.app.InstrumentationRegistry
+import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveParameterizedInvoker
 import org.junit.Test
 import org.junit.internal.builders.JUnit4Builder
 import org.junit.runner.Runner
 
 class SnapshotsRunnerBuilder : JUnit4Builder() {
   override fun runnerForClass(testClass: Class<*>): Runner? {
+    val args = InstrumentationRegistry.getArguments()
+    val invokeDataPath = args.getString(EmergeComposeSnapshotReflectiveParameterizedInvoker.ARG_REFLECTIVE_INVOKE_DATA_PATH)
+
     // If one method in the class has a @Test method, we can safely assume it's a test class
     // and the SnapshotRunner should handle.
     return if (isTestClass(testClass)) {
       Log.d(TAG, "Using SnapshotsRunner for class: ${testClass.simpleName}")
-      SnapshotsRunner(testClass)
+      SnapshotsRunner(testClass, invokeDataPath != null)
     } else {
       // Fallback to allow AndroidRunnerBuilder to handle the class.
       Log.d(TAG, "Using default runner for class: ${testClass.simpleName}")
