@@ -8,6 +8,10 @@ plugins {
 emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
+  snapshots {
+    experimentalReflectiveInvocationEnabled.set(true)
+  }
+
   vcs {
     gitHub {
       repoName.set("emerge-android")

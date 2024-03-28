@@ -41,6 +41,11 @@ class AdbHelper(
     localDir: String,
   ) = exec(listOf("pull", "$deviceDir/.", localDir))
 
+  fun push(
+    localDir: String,
+    deviceDir: String,
+  ) = exec(listOf("push", localDir, deviceDir))
+
   fun exec(vararg args: String) = exec(args.toList())
 
   fun exec(args: List<String>): String? {

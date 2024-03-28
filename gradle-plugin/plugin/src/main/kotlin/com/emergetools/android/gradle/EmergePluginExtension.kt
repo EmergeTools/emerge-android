@@ -128,5 +128,7 @@ abstract class SnapshotOptions : ProductOptions() {
 
   abstract val experimentalInternalSnapshotsEnabled: Property<Boolean>
 
+  abstract val experimentalReflectiveInvocationEnabled: Property<Boolean>
+
   abstract val apiVersion: Property<Int>
 }

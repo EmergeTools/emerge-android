@@ -347,6 +347,9 @@ class EmergePlugin : Plugin<Project> {
       it.targetAppId.set(targetAppId)
       it.testAppId.set(testAppId)
       it.testInstrumentationRunner.set(testInstrumentationRunner)
+      it.useReflectiveInvocation.set(
+        extension.snapshotOptions.experimentalReflectiveInvocationEnabled
+      )
       it.dependsOn(packageTask)
     }
   }
@@ -431,18 +434,24 @@ class EmergePlugin : Plugin<Project> {
     }
 
     // TODO: Ryan: Explore using variants API for finding proper ourput dir.
-    val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+    val reflectiveInvocationEnabled =
+      emergeExtension.snapshotOptions.experimentalReflectiveInvocationEnabled.getOrElse(false)
+    val emergeSrcDir = if (reflectiveInvocationEnabled) {
+      "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME"
+    } else {
+      "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
+    }
 
     val internalSnapshotsEnabled =
       emergeExtension.snapshotOptions.experimentalInternalSnapshotsEnabled.getOrElse(false)
-    val internalEnabledArg = if (internalSnapshotsEnabled) "true" else "false"
 
     appProject.logger.info(
       "Configuring ${project.name} for Emerge snapshot testing, outputting to $emergeSrcDir"
     )
     project.extensions.getByType(KspExtension::class.java).apply {
       arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
-      arg(INTERNAL_ENABLED_OPTION_NAME, internalEnabledArg)
+      arg(INTERNAL_ENABLED_OPTION_NAME, internalSnapshotsEnabled.toString())
+      arg(REFLECTIVE_INVOKE_OPTION_NAME, reflectiveInvocationEnabled.toString())
     }
 
     appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
@@ -567,6 +576,7 @@ class EmergePlugin : Plugin<Project> {
 
     private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
     private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
+    private const val REFLECTIVE_INVOKE_OPTION_NAME = "emerge.experimentalReflectiveInvoke"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 
