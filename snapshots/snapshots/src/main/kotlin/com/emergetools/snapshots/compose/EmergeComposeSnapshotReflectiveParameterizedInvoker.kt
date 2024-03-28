@@ -18,6 +18,7 @@ import java.io.File
 @RunWith(Parameterized::class)
 class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewConfig: ComposePreviewSnapshotConfig) {
   companion object {
+    const val TAG = "EmergeComposeSnapshotReflectiveParameterizedInvoker"
     const val ARG_REFLECTIVE_INVOKE_DATA_PATH = "invoke_data_path"
 
     @JvmStatic
@@ -52,21 +53,21 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
   fun reflectiveComposableInvoker() {
     composeRule.setContent {
 
-      val className = "${previewConfig.fullyQualifiedClassName}Kt"
-      val klass = Class.forName(className)
+      val klass = Class.forName(previewConfig.fullyQualifiedClassName)
       val composableMethod = klass.methods.find {
-        Log.d(
-          "EmergeComposeSnapshotReflectiveParameterizedInvoker",
-          "Checking ${it.name} against ${previewConfig.originalFqn.substringAfterLast(".")}"
-        )
         it.name == previewConfig.originalFqn.substringAfterLast(".")
       }
+
+      Log.d(TAG, "Invoking composable method: ${composableMethod}")
 
       composableMethod?.let {
         it.isAccessible = true
         SnapshotVariantProvider(previewConfig) {
           it.invoke(null, currentComposer, 0)
         }
+      } ?: run {
+        // TODO: Ryan look to write error to file for better debugging
+        error("Unable to find composable method: ${previewConfig.originalFqn}")
       }
     }
     snapshotRule.take(composeRule, previewConfig)
