@@ -6,15 +6,20 @@ import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveParamete
 import org.junit.Test
 import org.junit.internal.builders.JUnit4Builder
 import org.junit.runner.Runner
+import org.junit.runners.Parameterized
 
 class SnapshotsRunnerBuilder : JUnit4Builder() {
   override fun runnerForClass(testClass: Class<*>): Runner? {
     val args = InstrumentationRegistry.getArguments()
     val invokeDataPath = args.getString(EmergeComposeSnapshotReflectiveParameterizedInvoker.ARG_REFLECTIVE_INVOKE_DATA_PATH)
+    Log.d(TAG, "invokeDataPath: $invokeDataPath")
 
     // If one method in the class has a @Test method, we can safely assume it's a test class
     // and the SnapshotRunner should handle.
-    return if (isTestClass(testClass)) {
+    return if (testClass.name == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java.name) {
+      Log.d(TAG, "Using Parameterized for class: ${testClass.simpleName}")
+      Parameterized(testClass)
+    }else if (isTestClass(testClass)) {
       Log.d(TAG, "Using SnapshotsRunner for class: ${testClass.simpleName}")
       SnapshotsRunner(testClass, invokeDataPath != null)
     } else {
@@ -37,3 +42,4 @@ class SnapshotsRunnerBuilder : JUnit4Builder() {
     }
   }
 }
+
