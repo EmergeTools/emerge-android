@@ -1,6 +1,7 @@
 package com.emergetools.snapshots.processor.preview
 
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.symbol.KSAnnotation
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSValueArgument
@@ -67,7 +68,16 @@ object ComposePreviewUtils {
     val originalFqn = previewFunction.qualifiedName?.asString()
       ?: "${previewFunction.packageName.asString()}.${previewFunction.simpleName.asString()}}"
 
+    val containingFile = previewFunction.containingFile
+    if (containingFile == null) {
+      throw IllegalStateException("Preview function must have a containing file")
+    }
+
+    val fullyQualifiedClassName = previewFunction.closestClassDeclaration()?.qualifiedName?.asString()
+      ?: throw IllegalStateException("Preview function must be contained in a class")
+
     return ComposePreviewSnapshotConfig(
+      fullyQualifiedClassName = fullyQualifiedClassName,
       originalFqn = originalFqn,
       name = nameValue,
       group = groupValue,

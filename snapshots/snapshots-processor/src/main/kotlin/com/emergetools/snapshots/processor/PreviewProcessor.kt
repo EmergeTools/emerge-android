@@ -11,7 +11,6 @@ import com.emergetools.snapshots.processor.utils.functionsWithPreviewAnnotation
 import com.emergetools.snapshots.processor.utils.getSymbolsWithMultiPreviewAnnotations
 import com.emergetools.snapshots.processor.utils.putOrAppend
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import com.emergetools.snapshots.shared.ComposeSnapshots
 import com.google.devtools.ksp.KspExperimental
 import com.google.devtools.ksp.isAnnotationPresent
 import com.google.devtools.ksp.isInternal
@@ -32,10 +31,10 @@ import com.squareup.kotlinpoet.TypeSpec
 import com.squareup.kotlinpoet.ksp.writeTo
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
-import java.io.File
 import java.nio.file.Path
 import kotlin.io.path.absolutePathString
 import kotlin.io.path.createDirectories
+import kotlin.io.path.createParentDirectories
 import kotlin.io.path.moveTo
 import kotlin.io.path.writeText
 
@@ -128,12 +127,13 @@ class PreviewProcessor(
         }
       }
     } else {
-      val composeSnapshots = ComposeSnapshots(
-        snapshots = previewFunctionMap.values.flatten()
-      )
-
-      val jsonString = Json.encodeToString(composeSnapshots)
-      File(outputSrcDir, SNAPSHOTS_JSON_FILE_NAME).writeText(jsonString)
+      previewFunctionMap.values.flatten().flatMap {
+        val jsonString = Json.encodeToString(it)
+        Path.of(outputSrcDir, "${it.keyName()}.json").apply {
+          createParentDirectories()
+          writeText(jsonString)
+        }
+      }
     }
     return emptyList()
   }
