@@ -6,7 +6,8 @@ import kotlinx.serialization.Serializable
 // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Preview.kt
 @Serializable
 data class ComposePreviewSnapshotConfig(
-  val fullyQualifiedClassName: String,
+  // TODO: Make non-nullable when safe
+  val fullyQualifiedClassName: String? = null,
   val originalFqn: String,
   val name: String? = null,
   val group: String? = null,
