@@ -3,6 +3,7 @@ package com.emergetools.snapshots.processor.preview
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.google.devtools.ksp.closestClassDeclaration
 import com.google.devtools.ksp.symbol.KSAnnotation
+import com.google.devtools.ksp.symbol.KSFile
 import com.google.devtools.ksp.symbol.KSFunctionDeclaration
 import com.google.devtools.ksp.symbol.KSValueArgument
 
@@ -74,7 +75,8 @@ object ComposePreviewUtils {
     }
 
     val fullyQualifiedClassName = previewFunction.closestClassDeclaration()?.qualifiedName?.asString()
-      ?: throw IllegalStateException("Preview function must be contained in a class")
+      ?: previewFunction.containingFile?.fullyQualifiedClassName()
+      ?: throw IllegalStateException("Preview function must be contained in a class or file")
 
     return ComposePreviewSnapshotConfig(
       fullyQualifiedClassName = fullyQualifiedClassName,
@@ -90,4 +92,14 @@ object ComposePreviewUtils {
   private fun KSAnnotation.argumentForName(name: String): KSValueArgument? {
     return arguments.firstOrNull { it.name?.asString() == name }
   }
+
+  private fun KSFile.fullyQualifiedClassName(): String {
+    val fileNameAsKtClass = if (fileName.endsWith(".kt")) {
+      "${fileName.removeSuffix(".kt")}Kt"
+    } else {
+      fileName
+    }
+    return "${packageName.asString()}.${fileNameAsKtClass}"
+  }
 }
+
