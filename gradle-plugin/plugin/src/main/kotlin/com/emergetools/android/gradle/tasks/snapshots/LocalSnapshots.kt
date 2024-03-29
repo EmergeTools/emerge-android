@@ -72,8 +72,6 @@ abstract class LocalSnapshots : DefaultTask() {
 
     val adbHelper = AdbHelper(execOperations, logger)
 
-    // TODO: Reflective invocation
-
     adbHelper.apply {
       val deviceCount = devices().size
       check(deviceCount < 2) { "More than one device connected." }
