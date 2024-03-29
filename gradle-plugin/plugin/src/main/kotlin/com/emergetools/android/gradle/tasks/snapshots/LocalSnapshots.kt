@@ -85,7 +85,7 @@ abstract class LocalSnapshots : DefaultTask() {
       uninstall(testAppId)
       install(testApk.absolutePath)
       if (useReflectiveInvocation.getOrElse(false)) {
-        val outputFolder = Path.of("${project.buildDir}/emergetools")
+        val outputFolder = Path.of("${project.rootProject.buildDir}/emergetools")
         check(outputFolder.exists()) {
           "Reflective invocation enabled but no snapshots.json file found at ${outputFolder.pathString}"
         }

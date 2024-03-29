@@ -437,7 +437,7 @@ class EmergePlugin : Plugin<Project> {
     val reflectiveInvocationEnabled =
       emergeExtension.snapshotOptions.experimentalReflectiveInvocationEnabled.getOrElse(false)
     val emergeSrcDir = if (reflectiveInvocationEnabled) {
-      "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME"
+      "${project.rootProject.buildDir}/$BUILD_OUTPUT_DIR_NAME"
     } else {
       "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
     }
