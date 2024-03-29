@@ -299,13 +299,15 @@ class EmergePlugin : Plugin<Project> {
     variant: ApplicationVariant,
     androidTest: AndroidTest,
   ) {
-    val snapshotPackageTask = registerSnapshotPackageTask(appProject, variant, androidTest)
+    val snapshotPackageTask =
+      registerSnapshotPackageTask(appProject, extension, variant, androidTest)
     registerSnapshotLocalTask(appProject, extension, variant, androidTest, snapshotPackageTask)
     registerSnapshotUploadTask(appProject, extension, variant, snapshotPackageTask)
   }
 
   private fun registerSnapshotPackageTask(
     appProject: Project,
+    extension: EmergePluginExtension,
     variant: ApplicationVariant,
     androidTest: AndroidTest,
   ): TaskProvider<PackageSnapshotArtifacts> {
@@ -317,6 +319,9 @@ class EmergePlugin : Plugin<Project> {
       it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
       it.outputDirectory.set(appProject.layout.buildDirectory.dir("emerge/snapshots/artifacts"))
       it.agpVersion.set(AgpVersions.CURRENT.toString())
+      it.useReflectiveInvocation.set(
+        extension.snapshotOptions.experimentalReflectiveInvocationEnabled
+      )
     }
   }
 
@@ -372,6 +377,9 @@ class EmergePlugin : Plugin<Project> {
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.setUploadTaskInputs(extension, appProject)
+      it.useReflectiveInvocation.set(
+        extension.snapshotOptions.experimentalReflectiveInvocationEnabled
+      )
       it.dependsOn(packageTask)
     }
   }

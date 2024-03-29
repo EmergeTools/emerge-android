@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
+import com.emergetools.android.gradle.tasks.snapshots.utils.SnapshotDataUtils
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
@@ -30,6 +31,9 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:Internal
   override val snapshotsEnabled: Property<Boolean>
     get() = project.objects.property(Boolean::class.java).convention(true)
+
+  @get:Input
+  abstract val useReflectiveInvocation: Property<Boolean>
 
   /**
    * ArtifactMetadata has already been written as a part of [PackageSnapshotArtifacts].
@@ -72,6 +76,20 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
       zos.putNextEntry(ZipEntry(testApk.name))
       it.copyTo(zos)
       zos.closeEntry()
+    }
+
+    if (useReflectiveInvocation.getOrElse(false)) {
+      val snapshotsJson = packageDir.asFileTree.matching {
+        it.include(SnapshotDataUtils.SNAPSHOTS_FILE_NAME)
+      }
+      check(snapshotsJson.files.size < 2) { "Multiple snapshot data files found" }
+      check(snapshotsJson.singleFile.exists()) { "Snapshot data file not found" }
+
+      snapshotsJson.singleFile.inputStream().use {
+        zos.putNextEntry(ZipEntry(SnapshotDataUtils.SNAPSHOTS_FILE_NAME))
+        it.copyTo(zos)
+        zos.closeEntry()
+      }
     }
   }
 

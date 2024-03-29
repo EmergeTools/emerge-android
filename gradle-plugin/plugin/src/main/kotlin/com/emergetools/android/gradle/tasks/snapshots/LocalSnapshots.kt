@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
+import com.emergetools.android.gradle.tasks.snapshots.utils.SnapshotDataUtils
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.util.adb.AdbHelper
 import kotlinx.serialization.encodeToString
@@ -14,19 +15,12 @@ import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecOperations
-import java.nio.file.Files
 import java.nio.file.Path
 import javax.inject.Inject
-import kotlin.io.path.exists
 import kotlin.io.path.pathString
-import kotlin.io.path.readText
 import kotlin.io.path.writeText
 
 abstract class LocalSnapshots : DefaultTask() {
-
-  companion object {
-    const val SNAPSHOTS_FILE_NAME = "snapshots.json"
-  }
 
   @get:Inject
   abstract val execOperations: ExecOperations
@@ -82,31 +76,18 @@ abstract class LocalSnapshots : DefaultTask() {
 
       uninstall(testAppId)
       install(testApk.absolutePath)
+      val arguments = mutableMapOf<String, String>().apply {
+        put("debug", "false")
+        put("runnerBuilder", "com.emergetools.snapshots.runner.SnapshotsRunnerBuilder")
+      }
       if (useReflectiveInvocation.getOrElse(false)) {
         val outputFolder = Path.of("${project.rootProject.buildDir}/emergetools")
-        check(outputFolder.exists()) {
-          "Reflective invocation enabled but no snapshots.json file found at ${outputFolder.pathString}"
-        }
 
-        val json = Json {
-          ignoreUnknownKeys = true
-        }
+        val composeSnapshots = SnapshotDataUtils.getAllSnapshots(outputFolder)
+        logger.lifecycle("Found ${composeSnapshots.snapshots.size} snapshots")
 
-        val snapshots = Files.walk(outputFolder)
-          .filter { path ->
-            path.toString().endsWith(".json") && Files.isRegularFile(path)
-          }
-          .map {
-            val previewConfig = json.decodeFromString<ComposePreviewSnapshotConfig>(it.readText())
-            logger.lifecycle("Found snapshot: $previewConfig")
-            previewConfig
-          }.toList()
-
-        val composeSnapshots = ComposeSnapshots(snapshots = snapshots)
-        logger.lifecycle("Found ${snapshots.size} snapshots")
-
-        val jsonPath = Path.of(outputFolder.pathString, SNAPSHOTS_FILE_NAME)
-        jsonPath.writeText(json.encodeToString(composeSnapshots))
+        val jsonPath = Path.of(outputFolder.pathString, SnapshotDataUtils.SNAPSHOTS_FILE_NAME)
+        jsonPath.writeText(SnapshotDataUtils.json.encodeToString(composeSnapshots))
 
         val deviceDir = "/data/local/tmp"
         push(
@@ -114,35 +95,16 @@ abstract class LocalSnapshots : DefaultTask() {
           deviceDir = deviceDir
         )
 
-        shell(
-          "am",
-          "instrument",
-          "-w",
-          "-e",
-          "debug",
-          "false",
-          "-e",
-          "invoke_data_path",
-          "${deviceDir}/${SNAPSHOTS_FILE_NAME}",
-          "-e",
-          "runnerBuilder",
-          "com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
-          "${testAppId}/${testInstrumentationRunner.get()}",
-        )
-      } else {
-        shell(
-          "am",
-          "instrument",
-          "-w",
-          "-e",
-          "debug",
-          "false",
-          "-e",
-          "runnerBuilder",
-          "com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
-          "${testAppId}/${testInstrumentationRunner.get()}"
-        )
+        arguments["invoke_data_path"] = "${deviceDir}/${SnapshotDataUtils.SNAPSHOTS_FILE_NAME}"
       }
+
+      shell(
+        "am",
+        "instrument",
+        "-w",
+        *arguments.entries.flatMap { listOf("-e", it.key, it.value) }.toTypedArray(),
+        "${testAppId}/${testInstrumentationRunner.get()}"
+      )
 
       pull(
         deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
