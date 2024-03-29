@@ -24,7 +24,7 @@ object SnapshotDataUtils {
 
     val snapshots = Files.walk(outputFolder)
       .filter { path ->
-        path.toString().endsWith(".json") && Files.isRegularFile(path)
+        path.pathString.endsWith(".json") && Files.isRegularFile(path)
       }
       .map {
         val previewConfig = json.decodeFromString<ComposePreviewSnapshotConfig>(it.readText())

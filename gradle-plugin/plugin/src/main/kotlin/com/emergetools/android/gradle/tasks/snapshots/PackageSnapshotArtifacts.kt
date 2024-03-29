@@ -64,7 +64,7 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
     outputDirectory.get().asFile.resolve(ArtifactMetadata.JSON_FILE_NAME).writeText(metadataString)
 
     if (useReflectiveInvocation.getOrElse(false)) {
-      val outputFolder = Path.of("${project.buildDir}/emergetools")
+      val outputFolder = Path.of("${project.rootProject.buildDir}/emergetools")
       val composeSnapshots = SnapshotDataUtils.getAllSnapshots(outputFolder)
       outputDirectory.get().asFile.resolve(SnapshotDataUtils.SNAPSHOTS_FILE_NAME)
         .writeText(SnapshotDataUtils.json.encodeToString(composeSnapshots))
