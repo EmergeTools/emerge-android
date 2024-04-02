@@ -91,7 +91,12 @@ abstract class VCSOptions @Inject constructor(
   @get:Nested
   abstract val gitLabOptions: GitLabOptions
 
+  // TODO: Remove in future major version release
   fun gitLabOptions(action: Action<GitLabOptions>) {
+    action.execute(gitLabOptions)
+  }
+  
+  fun gitLab(action: Action<GitLabOptions>) {
     action.execute(gitLabOptions)
   }
 }

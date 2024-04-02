@@ -107,7 +107,7 @@ emerge {
   vcs {
     // ..
 
-    gitLabOptions {
+    gitLab {
       projectId.set("..")
     }
   }
@@ -116,15 +116,15 @@ emerge {
 
 ##### Properties
 
-| Field                     | Type     | Default                | Description                                       |
-|---------------------------|----------|------------------------|---------------------------------------------------|
-| `sha`                     | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                    |
-| `baseSha`                 | `String` | base branch commit sha | The Git sha of the base build to compare against. |
-| `branchName`              | `String` | Current branch name    | The name of the branch being built.               |
-| `prNumber`                | `String` |                        | The number of the pull request being built.       |
-| `gitHub.repoOwner`        | `String` | Repo ID before '/'     | The owner of the GitHub repository.               |
-| `gitHub.repoName`         | `String` | Repo ID after '/'      | The name of the GitHub repository.                |
-| `gitLabOptions.projectId` | `String` |                        | The ID of the GitLab repository.                  |
+| Field              | Type     | Default                | Description                                       |
+|--------------------|----------|------------------------|---------------------------------------------------|
+| `sha`              | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                    |
+| `baseSha`          | `String` | base branch commit sha | The Git sha of the base build to compare against. |
+| `branchName`       | `String` | Current branch name    | The name of the branch being built.               |
+| `prNumber`         | `String` |                        | The number of the pull request being built.       |
+| `gitHub.repoOwner` | `String` | Repo ID before '/'     | The owner of the GitHub repository.               |
+| `gitHub.repoName`  | `String` | Repo ID after '/'      | The name of the GitHub repository.                |
+| `gitLab.projectId` | `String` |                        | The ID of the GitLab repository.                  |
 
 ## App size
 
@@ -254,7 +254,7 @@ emerge {
       repoName.set("..") // Required for CI status checks (only if using GitHub)
     }
 
-    gitLabOptions {
+    gitLab {
       projectId.set("..") // Required for CI status checks (only if using GitLab)
     }
   }
@@ -301,7 +301,7 @@ Breaking changes:
 
 - `vcsOptions` has become `vcs`.
 - `vcsOptions.gitHubOptions` has become `vcs.gitHub`.
-- `vcsOptions.gitLabOptions` has become `vcs.gitLabOptions`.
+- `vcsOptions.gitLabOptions` has become `vcs.gitLab`.
 
 #### Performance
 
