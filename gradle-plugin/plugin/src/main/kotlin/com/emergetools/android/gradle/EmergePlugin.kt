@@ -20,6 +20,7 @@ import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots
 import com.emergetools.android.gradle.tasks.snapshots.PackageSnapshotArtifacts
 import com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle
+import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
@@ -180,10 +181,10 @@ class EmergePlugin : Plugin<Project> {
     appProject.tasks.register(taskName, UploadAPK::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an APK for variant ${variant.name} to Emerge."
-      it.tag.set(extension.sizeOptions.tag)
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.proguardMapping.set(variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE))
       it.setUploadTaskInputs(extension, appProject)
+      it.setTagFromProductOptions(extension.sizeOptions, variant)
     }
   }
 
@@ -197,9 +198,9 @@ class EmergePlugin : Plugin<Project> {
     appProject.tasks.register(taskName, UploadAAB::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an AAB for variant ${variant.name} to Emerge."
-      it.tag.set(extension.sizeOptions.tag)
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.setUploadTaskInputs(extension, appProject)
+      it.setTagFromProductOptions(extension.sizeOptions, variant)
     }
   }
 
@@ -231,10 +232,10 @@ class EmergePlugin : Plugin<Project> {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds & uploads an AAB for variant ${appVariant.name} to " +
         "Emerge with ${performanceProject.name} test APK."
-      it.tag.set(extension.perfOptions.tag)
       it.artifact.set(appVariant.artifacts.get(SingleArtifact.BUNDLE))
       it.perfArtifactDir.set(performanceVariant.artifacts.get(SingleArtifact.APK))
       it.setUploadTaskInputs(extension, appProject)
+      it.setTagFromProductOptions(extension.perfOptions, appVariant)
     }
   }
 
@@ -365,10 +366,10 @@ class EmergePlugin : Plugin<Project> {
       it.description = "Builds and uploads a snapshot bundle to Emerge. Snapshots will be" +
         " generated on Emerge's cloud infrastructure and diffed based on the vcs params set" +
         " in the Emerge plugin extension."
-      it.tag.set(extension.snapshotOptions.tag)
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.setUploadTaskInputs(extension, appProject)
+      it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)
     }
   }

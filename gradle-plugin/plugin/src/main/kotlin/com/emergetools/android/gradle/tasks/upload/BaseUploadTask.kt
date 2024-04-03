@@ -1,8 +1,10 @@
 package com.emergetools.android.gradle.tasks.upload
 
+import com.android.build.api.variant.Variant
 import com.emergetools.android.gradle.BuildConfig
 import com.emergetools.android.gradle.EmergePlugin
 import com.emergetools.android.gradle.EmergePluginExtension
+import com.emergetools.android.gradle.ProductOptions
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import com.emergetools.android.gradle.util.network.EmergeUploadResponse
@@ -218,6 +220,17 @@ abstract class BaseUploadTask : DefaultTask() {
 
       if (project.hasProperty(BASE_URL_ARG_KEY)) {
         baseUrl.set(project.property(BASE_URL_ARG_KEY) as String)
+      }
+    }
+
+    fun BaseUploadTask.setTagFromProductOptions(
+      productOptions: ProductOptions,
+      variant: Variant,
+    ) {
+      if (productOptions.tagFromVariant.getOrElse(false)) {
+        tag.set(variant.name)
+      } else {
+        tag.set(productOptions.tag)
       }
     }
   }

@@ -95,7 +95,7 @@ abstract class VCSOptions @Inject constructor(
   fun gitLabOptions(action: Action<GitLabOptions>) {
     action.execute(gitLabOptions)
   }
-  
+
   fun gitLab(action: Action<GitLabOptions>) {
     action.execute(gitLabOptions)
   }
@@ -119,6 +119,13 @@ abstract class GitLabOptions {
 
 abstract class ProductOptions {
   abstract val tag: Property<String>
+
+  internal abstract val tagFromVariant: Property<Boolean>
+
+  @Suppress("UnusedReceiverParameter")
+  fun Property<String>.setFromVariant() {
+    tagFromVariant.set(true)
+  }
 }
 
 abstract class SizeOptions : ProductOptions()

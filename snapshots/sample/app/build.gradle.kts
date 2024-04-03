@@ -14,6 +14,10 @@ emerge {
       repoOwner.set("EmergeTools")
     }
   }
+
+  snapshots {
+    tag.setFromVariant()
+  }
 }
 
 android {
