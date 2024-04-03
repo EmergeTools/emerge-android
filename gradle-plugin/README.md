@@ -145,6 +145,8 @@ emerge {
 
   size {
     tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 }
 ```
@@ -177,10 +179,12 @@ emerge {
   // ..
 
   performance {
-    tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
     projectPath.set(
       ":perf"
     ) // REQUIRED - Relative gradle path from root project to the Emerge performance module
+    tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 }
 ```
@@ -210,8 +214,6 @@ emerge {
   // ..
 
   snapshots {
-    tag.set("snapshots") // Tag to use for grouping builds in the Emerge dashboard
-
     snapshotsStorageDirectory.set(
       "/src/main/snapshots"
     ) // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
@@ -220,6 +222,10 @@ emerge {
 
     // Experimental flag to generate snapshots for internal previews
     experimentalInternalSnapshotsEnabled.set("true")
+
+    tag.set("snapshots") // Tag to use for grouping builds in the Emerge dashboard
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 }
 ```
@@ -261,21 +267,28 @@ emerge {
 
   size {
     tag.set("release") // Optional, defaults to 'release'
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 
   performance {
     projectPath.set(":perf") // Required for performance testing
     tag.set("release") // Optional, defaults to 'release'
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 
   snapshots {
-    // Optional, snapshots use debug builds, we recommend using a separate tag.
-    tag.set("snapshots")
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
     apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
 
     // Experimental flag to generate snapshots for internal previews
     experimentalInternalSnapshotsEnabled.set("true")
+
+    // Optional, snapshots use debug builds, we recommend using a separate tag.
+    tag.set("snapshots")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
   }
 }
 ```
