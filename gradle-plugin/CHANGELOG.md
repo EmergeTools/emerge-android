@@ -5,15 +5,25 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 2.2.1 - 2024-04-03
+
+- Add `tag.setFromVariant()` helper function to set the tag from the Android build
+  variant. [#128](https://github.com/EmergeTools/emerge-android/pull/128)
+- Add `gitLab` configration block to match docs & long-term plugin
+  plans. [#127](https://github.com/EmergeTools/emerge-android/pull/127)
+
 ## 2.2.0 - 2024-02-22
 
-- Uses `tag` in favor of deprecated `buildType` field. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
-- Set a custom user agent for uploads. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
+- Uses `tag` in favor of deprecated `buildType`
+  field. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
+- Set a custom user agent for
+  uploads. [#118](https://github.com/EmergeTools/emerge-android/pull/118)
 - Updates the generated snapshot URL. [#119](https://github.com/EmergeTools/emerge-android/pull/119)
 
 ## 2.1.6 - 2023-11-13
 
-- Fix for Git configuration cache issues. [#52](https://github.com/EmergeTools/emerge-android/pull/52)
+- Fix for Git configuration cache
+  issues. [#52](https://github.com/EmergeTools/emerge-android/pull/52)
 
 ## 2.1.5 - 2023-11-03
 
