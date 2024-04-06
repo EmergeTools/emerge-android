@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
+import com.emergetools.android.gradle.EmergePlugin
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.util.adb.AdbHelper
 import kotlinx.serialization.json.Json
@@ -12,10 +13,21 @@ import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.api.tasks.options.Option
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
 abstract class LocalSnapshots : DefaultTask() {
+
+  private val arguments = mutableMapOf<String, String>()
+
+  @Option(
+    option = "class",
+    description = "A single class, a single method or a comma-separated list of classes"
+  )
+  fun setClazz(clazz: String) {
+    arguments["class"] = clazz
+  }
 
   @get:Inject
   abstract val execOperations: ExecOperations
@@ -69,18 +81,21 @@ abstract class LocalSnapshots : DefaultTask() {
       uninstall(testAppId)
       install(testApk.absolutePath)
 
-      shell(
-        "am",
-        "instrument",
-        "-w",
-        "-e",
-        "debug",
-        "false",
-        "-e",
-        "runnerBuilder",
-        "com.emergetools.snapshots.runner.SnapshotsRunnerBuilder",
-        "${testAppId}/${testInstrumentationRunner.get()}"
-      )
+      val instrumentationArgs = mutableListOf("am", "instrument", "-w", "-e", "debug", "false").also {
+        arguments.forEach { (key, value) ->
+          it.add("-e")
+          it.add(key)
+          it.add(value)
+        }
+        it.add("-e")
+        it.add("runnerBuilder")
+        it.add("com.emergetools.snapshots.runner.SnapshotsRunnerBuilder")
+        it.add("${testAppId}/${testInstrumentationRunner.get()}")
+      }
+
+      logger.lifecycle("Command: ${instrumentationArgs.joinToString(" ")}")
+      val output = shell(instrumentationArgs)
+      logger.lifecycle(output)
 
       pull(
         deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
