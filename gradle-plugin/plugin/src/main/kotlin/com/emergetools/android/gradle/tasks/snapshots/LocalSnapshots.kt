@@ -93,7 +93,6 @@ abstract class LocalSnapshots : DefaultTask() {
         it.add("${testAppId}/${testInstrumentationRunner.get()}")
       }
 
-      logger.lifecycle("Command: ${instrumentationArgs.joinToString(" ")}")
       val output = shell(instrumentationArgs)
       logger.lifecycle(output)
 
