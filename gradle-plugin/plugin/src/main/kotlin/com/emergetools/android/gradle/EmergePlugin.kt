@@ -316,7 +316,7 @@ class EmergePlugin : Plugin<Project> {
     return appProject.tasks.register(taskName, PackageSnapshotArtifacts::class.java) {
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
-      it.outputDirectory.set(appProject.layout.buildDirectory.dir("emerge/snapshots/artifacts"))
+      it.outputDirectory.set(appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts"))
       it.agpVersion.set(AgpVersions.CURRENT.toString())
     }
   }
@@ -331,7 +331,7 @@ class EmergePlugin : Plugin<Project> {
     val variantName = variant.name.capitalize()
 
     val snapshotStorageDirectory = extension.snapshotOptions.snapshotsStorageDirectory.orElse(
-      appProject.layout.buildDirectory.dir("emerge/snapshots/outputs")
+      appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/outputs")
     )
 
     val targetAppId = variant.applicationId
