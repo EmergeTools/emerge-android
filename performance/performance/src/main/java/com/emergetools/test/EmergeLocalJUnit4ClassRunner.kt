@@ -170,7 +170,7 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
           }
         } catch (e: Throwable) {
           summary.result = MethodResult.FAILURE
-          summary.messages.add("Failed with an exception: $e")
+          summary.messages.add("Failed with an exception: ${e.stackTraceToString()}")
           throw e
         }
       }
@@ -204,7 +204,7 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
           }
         } catch (e: Throwable) {
           summary.result = MethodResult.FAILURE
-          summary.messages.add("Failed with an exception: $e")
+          summary.messages.add("Failed with an exception: ${e.stackTraceToString()}")
           throw e
         }
       }
@@ -312,7 +312,7 @@ class EmergeLocalJUnit4ClassRunner(testClass: Class<*>) : AndroidJUnit4ClassRunn
           }
         } catch (e: Throwable) {
           annotationSummary.result = MethodResult.FAILURE
-          annotationSummary.messages.add("Failed with an exception: $e")
+          annotationSummary.messages.add("Failed with an exception: ${e.stackTraceToString()}")
         }
       }
     }

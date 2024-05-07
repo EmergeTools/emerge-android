@@ -15,7 +15,7 @@ junit-jupiter = "5.8.2"
 
 # internal
 emerge-gradle-plugin = "2.2.2"
-emerge-peformance = "2.1.1"
+emerge-peformance = "2.1.2"
 emerge-snapshots = "0.8.5"
 
 [plugins]
