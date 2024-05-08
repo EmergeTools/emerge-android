@@ -5,7 +5,7 @@ plugins {
 
 android {
   namespace = "com.emergetools.snapshots.snapshots_processor_test"
-  compileSdk = 33
+  compileSdk = 34
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
