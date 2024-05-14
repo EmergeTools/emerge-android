@@ -6,7 +6,7 @@ plugins {
 
 android {
   namespace = "com.emergetools.snapshots.sample.ui"
-  compileSdk = 33
+  compileSdk = 34
 
   defaultConfig {
     minSdk = 23
