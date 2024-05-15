@@ -17,6 +17,7 @@ emerge {
 
   snapshots {
     tag.setFromVariant()
+    experimentalInternalSnapshotsEnabled.set(true)
   }
 }
 
@@ -88,11 +89,9 @@ dependencies {
   implementation(libs.compose.material)
 
   // This will generate snapshots from Composable Previews in the main source set
-  ksp(projects.snapshots.snapshotsProcessor)
-  // This will generate snapshots from Composable Previews in the androidTest source set.
-  kspAndroidTest(projects.snapshots.snapshotsProcessor)
+  // ksp(projects.snapshots.snapshotsProcessor)
 
-  androidTestImplementation(projects.snapshots.snapshots)
+  debugImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
