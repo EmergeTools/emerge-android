@@ -50,8 +50,8 @@ class SnapshotRuntimePreviewClassVisitor(
     const val PREVIEW_CONTAINER_DESC = "Landroidx/compose/ui/tooling/preview/Preview\$Container;"
     const val PREVIEW_DESC = "Landroidx/compose/ui/tooling/preview/Preview;"
     const val RUNTIME_PREVIEW_CONTAINER_DESC =
-      "Lcom/emergetools/snapshots/compose/RuntimePreview\$Container;"
-    const val RUNTIME_PREVIEW_DESC = "Lcom/emergetools/snapshots/compose/RuntimePreview;"
+      "Lcom/emergetools/snapshots/annotations/compose/RuntimePreview\$Container;"
+    const val RUNTIME_PREVIEW_DESC = "Lcom/emergetools/snapshots/annotations/compose/RuntimePreview;"
   }
 
   override fun visitAnnotation(
@@ -234,7 +234,7 @@ private fun handlePreviewContainerMethodAnnotation(
               null,
               SnapshotRuntimePreviewClassVisitor.RUNTIME_PREVIEW_DESC
             )
-          // TODO: Cases where not preview annotation? Likely not but should check
+          // TODO: (ryan) Handle cases where not preview annotation? Likely not but should check
           val originalPreviewVisitor = super.visitAnnotation(name, descriptor)
 
           return object : AnnotationVisitor(api, originalPreviewVisitor) {

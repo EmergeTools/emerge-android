@@ -98,10 +98,13 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.afterEvaluate {
-      configureAppProjectSnapshots(
-        appProject = appProject,
-        emergeExtension = emergeExtension
-      )
+      // Only configure modules when KSP is applied
+      if (!emergeExtension.snapshotOptions.experimentalTransformEnabled.getOrElse(false)) {
+        configureAppProjectSnapshots(
+          appProject = appProject,
+          emergeExtension = emergeExtension
+        )
+      }
     }
 
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
