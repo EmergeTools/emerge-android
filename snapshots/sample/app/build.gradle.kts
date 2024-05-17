@@ -1,7 +1,6 @@
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.ksp)
   id("com.emergetools.android")
 }
 
@@ -17,6 +16,7 @@ emerge {
 
   snapshots {
     tag.setFromVariant()
+    experimentalTransformEnabled.set(true)
   }
 }
 
@@ -87,11 +87,7 @@ dependencies {
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
 
-  // This will generate snapshots from Composable Previews in the main source set
-  ksp(projects.snapshots.snapshotsProcessor)
-  // This will generate snapshots from Composable Previews in the androidTest source set.
-  kspAndroidTest(projects.snapshots.snapshotsProcessor)
-
+  // Important!
   androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
