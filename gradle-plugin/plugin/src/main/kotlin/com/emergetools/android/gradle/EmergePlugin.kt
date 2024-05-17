@@ -2,6 +2,7 @@ package com.emergetools.android.gradle
 
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.dsl.TestExtension
+import com.android.build.api.instrumentation.InstrumentationScope
 import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
@@ -11,6 +12,7 @@ import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.android.build.gradle.internal.utils.KOTLIN_ANDROID_PLUGIN_ID
+import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
 import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
@@ -94,11 +96,14 @@ class EmergePlugin : Plugin<Project> {
     appProject: Project,
     emergeExtension: EmergePluginExtension,
   ) {
-    appProject.afterEvaluate {
-      configureAppProjectSnapshots(
-        appProject = appProject,
-        emergeExtension = emergeExtension
-      )
+    // Only configure KSP for snapshot generation if the experimental transform is disabled
+    if (!emergeExtension.snapshotOptions.experimentalTransformEnabled.getOrElse(false)) {
+      appProject.afterEvaluate {
+        configureAppProjectSnapshots(
+          appProject = appProject,
+          emergeExtension = emergeExtension
+        )
+      }
     }
 
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
@@ -300,6 +305,20 @@ class EmergePlugin : Plugin<Project> {
     variant: ApplicationVariant,
     androidTest: AndroidTest,
   ) {
+    if (extension.snapshotOptions.experimentalTransformEnabled.getOrElse(false)) {
+      variant.instrumentation.let { instrumentation ->
+        instrumentation.transformClassesWith(
+          SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
+          InstrumentationScope.ALL,
+        ) { params ->
+          // Force invalidate/reinstrument classes if debug option is set
+          if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
+            params.invalidate.set(System.currentTimeMillis())
+          }
+        }
+      }
+    }
+
     val snapshotPackageTask = registerSnapshotPackageTask(appProject, variant, androidTest)
     registerSnapshotLocalTask(appProject, extension, variant, androidTest, snapshotPackageTask)
     registerSnapshotUploadTask(appProject, extension, variant, snapshotPackageTask)
