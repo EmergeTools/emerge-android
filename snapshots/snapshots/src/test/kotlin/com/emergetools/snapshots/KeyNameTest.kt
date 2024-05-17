@@ -24,7 +24,10 @@ class KeyNameTest {
 
   @Test
   fun `keyName for default COMPOSABLE snapshot with returns originalFqn`() {
-    val config = ComposePreviewSnapshotConfig("com.example.test.Composable")
+    val config = ComposePreviewSnapshotConfig(
+      fullyQualifiedClassName = "com.example.test.Composable",
+      originalFqn = "com.example.test.Composable"
+    )
     val result = keyName(SnapshotType.COMPOSABLE, null, config)
     assertEquals("com.example.test.Composable", result)
   }
@@ -32,7 +35,8 @@ class KeyNameTest {
   @Test
   fun `keyName for variant COMPOSABLE snapshot returns concatenated name`() {
     val config = ComposePreviewSnapshotConfig(
-      "com.example.test.Composable",
+      fullyQualifiedClassName = "com.example.test.Composable",
+      originalFqn = "com.example.test.Composable",
       uiMode = 1,
       locale = "en_US",
       fontScale = 1.5f

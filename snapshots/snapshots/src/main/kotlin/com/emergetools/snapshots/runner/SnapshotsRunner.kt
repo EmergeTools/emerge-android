@@ -3,6 +3,7 @@ package com.emergetools.snapshots.runner
 import android.util.Log
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
 import com.emergetools.snapshots.EmergeSnapshots
+import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveParameterizedInvoker
 import org.junit.Rule
 import org.junit.runner.notification.RunNotifier
 
@@ -11,12 +12,17 @@ import org.junit.runner.notification.RunNotifier
  * Otherwise it will skip the test as we're only interested in running Snapshot tests and not
  * unrelated instrumentation tests.
  */
-internal class SnapshotsRunner(private val testClass: Class<*>) : AndroidJUnit4ClassRunner(
-  testClass
-) {
+internal class SnapshotsRunner(
+  private val testClass: Class<*>,
+  private val useReflectiveInvoke: Boolean,
+) : AndroidJUnit4ClassRunner(testClass) {
 
   override fun run(notifier: RunNotifier) {
-    if (hasEmergeSnapshotRule(testClass)) {
+    val hasEmergeSnapshotRule = hasEmergeSnapshotRule(testClass)
+    val isReflectiveInvoker =
+      testClass == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java
+
+    if (hasEmergeSnapshotRule || (useReflectiveInvoke && isReflectiveInvoker)) {
       Log.d(TAG, "Running test class: ${testClass.simpleName}")
       super.run(notifier)
     } else {
