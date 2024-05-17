@@ -53,6 +53,13 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
     action.execute(vcsOptions)
   }
 
+  @get:Nested
+  abstract val debugOptions: DebugOptions
+
+  fun debug(action: Action<DebugOptions>) {
+    action.execute(debugOptions)
+  }
+
   /**
    * Optional inputs.
    */
@@ -140,5 +147,11 @@ abstract class SnapshotOptions : ProductOptions() {
 
   abstract val experimentalInternalSnapshotsEnabled: Property<Boolean>
 
+  abstract val experimentalTransformEnabled: Property<Boolean>
+
   abstract val apiVersion: Property<Int>
+}
+
+abstract class DebugOptions : ProductOptions() {
+  abstract val forceInstrumentation: Property<Boolean>
 }
