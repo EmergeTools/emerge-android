@@ -11,15 +11,19 @@ import org.junit.runners.Parameterized
 class SnapshotsRunnerBuilder : JUnit4Builder() {
   override fun runnerForClass(testClass: Class<*>): Runner? {
     val args = InstrumentationRegistry.getArguments()
-    val invokeDataPath = args.getString(EmergeComposeSnapshotReflectiveParameterizedInvoker.ARG_REFLECTIVE_INVOKE_DATA_PATH)
+    val invokeDataPath = args.getString(
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.ARG_REFLECTIVE_INVOKE_DATA_PATH
+    )
     Log.d(TAG, "invokeDataPath: $invokeDataPath")
 
     // If one method in the class has a @Test method, we can safely assume it's a test class
     // and the SnapshotRunner should handle.
-    return if (testClass.name == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java.name) {
+    return if (
+      testClass.name == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java.name
+    ) {
       Log.d(TAG, "Using Parameterized for class: ${testClass.simpleName}")
       Parameterized(testClass)
-    }else if (isTestClass(testClass)) {
+    } else if (isTestClass(testClass)) {
       Log.d(TAG, "Using SnapshotsRunner for class: ${testClass.simpleName}")
       SnapshotsRunner(testClass, invokeDataPath != null)
     } else {
@@ -36,10 +40,12 @@ class SnapshotsRunnerBuilder : JUnit4Builder() {
       // Check if the class has a method annotated with @Test
       return testClass.methods.any {
         val annotatedWithTest = it.isAnnotationPresent(Test::class.java)
-        Log.d(TAG, "${testClass.simpleName} method ${it.name} annotated with test: $annotatedWithTest")
+        Log.d(
+          TAG,
+          "${testClass.simpleName} method ${it.name} annotated with test: $annotatedWithTest"
+        )
         annotatedWithTest
       }
     }
   }
 }
-

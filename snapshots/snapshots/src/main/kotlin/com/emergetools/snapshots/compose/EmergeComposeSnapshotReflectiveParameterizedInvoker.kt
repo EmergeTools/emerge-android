@@ -52,13 +52,12 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
   @Test
   fun reflectiveComposableInvoker() {
     composeRule.setContent {
-
       val klass = Class.forName(previewConfig.fullyQualifiedClassName)
       val composableMethod = klass.methods.find {
         it.name == previewConfig.originalFqn.substringAfterLast(".")
       }
 
-      Log.d(TAG, "Invoking composable method: ${composableMethod}")
+      Log.d(TAG, "Invoking composable method: $composableMethod")
 
       composableMethod?.let {
         it.isAccessible = true
