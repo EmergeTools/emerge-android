@@ -504,11 +504,7 @@ class EmergePlugin : Plugin<Project> {
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
-    private const val KSP_PLUGIN_ID = "com.google.devtools.ksp"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
-
-    private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
-    private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 
