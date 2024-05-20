@@ -248,6 +248,7 @@ class EmergePlugin : Plugin<Project> {
     appProject: Project,
     performanceProjectPath: Property<String>,
   ) {
+    val rootDir = appProject.rootDir
     appProject.tasks.register(GENERATE_PERF_PROJECT_TASK_NAME, GeneratePerfProject::class.java) {
       it.group = EMERGE_TASK_GROUP
       it.description = "Generates a new performance testing project."
@@ -260,6 +261,17 @@ class EmergePlugin : Plugin<Project> {
         }
       )
       it.performanceProjectPath.set(performanceProjectPath)
+      it.rootDir.set(rootDir)
+      rootDir.resolve("settings.gradle.kts").let {settingsKtsFile ->
+        if (settingsKtsFile.exists()) {
+          it.gradleSettingsFile.set(settingsKtsFile)
+        }
+      }
+      rootDir.resolve("settings.gradle").let {settingsFile ->
+        if (settingsFile.exists()) {
+          it.gradleSettingsFile.set(settingsFile)
+        }
+      }
     }
   }
 
