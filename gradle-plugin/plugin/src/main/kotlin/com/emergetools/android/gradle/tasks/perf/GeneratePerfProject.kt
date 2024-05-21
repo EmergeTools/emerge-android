@@ -2,8 +2,12 @@ package com.emergetools.android.gradle.tasks.perf
 
 import com.emergetools.android.gradle.util.property
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
@@ -29,6 +33,12 @@ abstract class GeneratePerfProject : DefaultTask() {
   @get:Input
   abstract val performanceProjectPath: Property<String>
 
+  @get:InputDirectory
+  abstract val rootDir: DirectoryProperty
+
+  @get:InputFile
+  abstract val gradleSettingsFile: RegularFileProperty
+
   @TaskAction
   fun execute() {
     val projectName = performanceProjectPath.get().removePrefix(":")
@@ -44,7 +54,7 @@ abstract class GeneratePerfProject : DefaultTask() {
     projectName: String,
     packageName: String,
   ) {
-    val projectDir = project.rootDir.resolve(projectName)
+    val projectDir = rootDir.asFile.get().resolve(projectName)
     check(!projectDir.exists()) {
       "Project $projectName already exists at location $projectDir"
     }
@@ -77,15 +87,16 @@ abstract class GeneratePerfProject : DefaultTask() {
   }
 
   private fun addProjectToRootProject(projectName: String) {
-    val groovySettings = project.rootDir.resolve("settings.gradle")
-    val kotlinSettings = project.rootDir.resolve("settings.gradle.kts")
+    val settingsFile = gradleSettingsFile.asFile.get()
 
-    if (groovySettings.exists()) {
-      groovySettings.appendText("\ninclude '$projectName'\n")
-    } else if (kotlinSettings.exists()) {
-      kotlinSettings.appendText("\ninclude(\":$projectName\")\n")
+    if (!settingsFile.exists()) {
+      logger.warn("Could not find ${settingsFile.name} file to add performance project")
+    }
+
+    if (settingsFile.extension == "kts") {
+      settingsFile.appendText("\ninclude(\":$projectName\")\n")
     } else {
-      logger.warn("Could not find setting.gradle(.kts) file to add performance project")
+      settingsFile.appendText("\ninclude '$projectName'\n")
     }
   }
 }
