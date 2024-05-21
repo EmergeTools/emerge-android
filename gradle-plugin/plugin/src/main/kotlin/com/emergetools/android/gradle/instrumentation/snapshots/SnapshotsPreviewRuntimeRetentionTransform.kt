@@ -6,6 +6,7 @@ import com.android.build.api.instrumentation.ClassData
 import com.android.build.api.instrumentation.InstrumentationParameters
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Optional
 import org.objectweb.asm.AnnotationVisitor
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
@@ -16,6 +17,7 @@ abstract class SnapshotsPreviewRuntimeRetentionTransformFactory : AsmClassVisito
 
   interface Params : InstrumentationParameters {
     @get:Input
+    @get:Optional
     val invalidate: Property<Long>
   }
 
