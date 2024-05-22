@@ -47,15 +47,6 @@ android {
     }
   }
 
-  sourceSets {
-    // TODO: Ryan: See if we can workaround having to specify the sourceSets for submodule tests
-    getByName("androidTest") {
-      // Adds sources from submodules for including snapshot tests
-      // kspAndroidTest(..) with the snapshots-processor dependency must be used for test generation
-      kotlin.srcDir("../ui-module/src/androidTest/kotlin")
-    }
-  }
-
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_17
     targetCompatibility = JavaVersion.VERSION_17
