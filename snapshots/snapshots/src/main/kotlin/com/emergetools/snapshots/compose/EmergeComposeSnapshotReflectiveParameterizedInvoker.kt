@@ -26,9 +26,10 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
     fun data(): Iterable<ComposePreviewSnapshotConfig> {
       val args = InstrumentationRegistry.getArguments()
 
-      val invokeDataPath = args.getString(ARG_REFLECTIVE_INVOKE_DATA_PATH) ?: throw IllegalArgumentException(
-        "Missing invoke_data_path arg"
-      )
+      val invokeDataPath = args.getString(ARG_REFLECTIVE_INVOKE_DATA_PATH) ?: run {
+        Log.w(TAG, "Missing invoke_data_path arg")
+        return emptyList()
+      }
 
       val invokeDataFile = File(invokeDataPath)
       if (!invokeDataFile.exists()) {
