@@ -126,6 +126,7 @@ dependencies {
 	compileOnly(libs.android.gradle.plugin)
 	compileOnly(libs.kotlin.gradle.plugin)
 
+  implementation(libs.dexlib2)
 	implementation(libs.okhttp)
 	implementation(libs.kotlinx.datetime)
 	implementation(libs.kotlinx.serialization)

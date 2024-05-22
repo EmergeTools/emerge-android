@@ -376,6 +376,7 @@ class EmergePlugin : Plugin<Project> {
         " Requires a device or emulator connected."
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
       it.snapshotStorageDirectory.set(snapshotStorageDirectory)
+      it.previewExtractDir.set(appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/previews"))
       it.targetAppId.set(targetAppId)
       it.testAppId.set(testAppId)
       it.testInstrumentationRunner.set(testInstrumentationRunner)
