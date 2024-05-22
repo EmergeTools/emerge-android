@@ -87,7 +87,7 @@ dependencies {
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
 
-  // Important!
+  // The only required snapshots dependency
   androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
