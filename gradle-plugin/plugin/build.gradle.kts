@@ -85,6 +85,8 @@ val functionalTest: SourceSet by sourceSets.creating {
 		srcDir(agpClasspathDir)
 		srcDir(kgpClasspathDir)
 	}
+  compileClasspath += sourceSets.main.get().output + configurations.testRuntimeClasspath.get()
+  runtimeClasspath += output + compileClasspath
 }
 
 val functionalTestTask = tasks.register<Test>("functionalTest") {
@@ -127,9 +129,12 @@ dependencies {
 	compileOnly(libs.kotlin.gradle.plugin)
 
   implementation(libs.dexlib2)
-	implementation(libs.okhttp)
 	implementation(libs.kotlinx.datetime)
 	implementation(libs.kotlinx.serialization)
+	implementation(libs.okhttp)
+  // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
+  // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
+  implementation(libs.guava)
 
   // Needs to be impl as users might not always have the plugin applied, which compileOnly
   // would require.

@@ -1,6 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
-import com.emergetools.android.gradle.tasks.snapshots.utils.findPreviews
+import com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.util.adb.AdbHelper
 import kotlinx.serialization.encodeToString
@@ -36,15 +36,15 @@ abstract class LocalSnapshots : DefaultTask() {
     arguments["class"] = clazz
   }
 
-  @get:OutputDirectory
-  abstract val previewExtractDir: DirectoryProperty
-
   @get:Inject
   abstract val execOperations: ExecOperations
 
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val packageDir: DirectoryProperty
+
+  @get:OutputDirectory
+  abstract val previewExtractDir: DirectoryProperty
 
   @get:OutputDirectory
   abstract val snapshotStorageDirectory: DirectoryProperty
@@ -94,7 +94,7 @@ abstract class LocalSnapshots : DefaultTask() {
       outputDir = extractedApkDir
     )
 
-    val composeSnapshots = findPreviews(extractedApkDir, logger)
+    val composeSnapshots = PreviewUtils.findPreviews(extractedApkDir, logger)
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
     val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
     composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))
