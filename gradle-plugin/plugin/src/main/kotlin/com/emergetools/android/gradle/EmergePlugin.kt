@@ -361,8 +361,9 @@ class EmergePlugin : Plugin<Project> {
   ) {
     val variantName = variant.name.capitalize()
 
+    val buildDirectory = appProject.layout.buildDirectory
     val snapshotStorageDirectory = extension.snapshotOptions.snapshotsStorageDirectory.orElse(
-      appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/outputs")
+      buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/outputs")
     )
 
     val targetAppId = variant.applicationId
@@ -376,6 +377,7 @@ class EmergePlugin : Plugin<Project> {
         " Requires a device or emulator connected."
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
       it.snapshotStorageDirectory.set(snapshotStorageDirectory)
+      it.previewExtractDir.set(buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/previews"))
       it.targetAppId.set(targetAppId)
       it.testAppId.set(testAppId)
       it.testInstrumentationRunner.set(testInstrumentationRunner)

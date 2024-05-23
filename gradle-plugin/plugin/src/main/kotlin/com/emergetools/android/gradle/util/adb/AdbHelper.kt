@@ -36,6 +36,11 @@ class AdbHelper(
 
   fun shell(arguments: List<String>) = exec(listOf("shell") + arguments)
 
+  fun push(
+    localFile: String,
+    deviceDir: String,
+  ) = exec(listOf("push", localFile, deviceDir))
+
   fun pull(
     deviceDir: String,
     localDir: String,

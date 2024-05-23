@@ -21,3 +21,6 @@ captures/
 
 # Any perfetto traces left around
 *.perfetto-trace
+
+# Metadata used for plugin testing
+**/emerge_config.json
