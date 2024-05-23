@@ -349,7 +349,7 @@ class EmergePlugin : Plugin<Project> {
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
       it.outputDirectory.set(appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts"))
-      it.artifactMetadataPath.set(appProject.layout.buildDirectory.file("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/$ArtifactMetadata.JSON_FILE_NAME"))
+      it.artifactMetadataPath.set(appProject.layout.buildDirectory.file("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"))
       it.agpVersion.set(AgpVersions.CURRENT.toString())
     }
   }

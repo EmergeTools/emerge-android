@@ -63,6 +63,7 @@ abstract class LocalSnapshots : DefaultTask() {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
       it.include(ArtifactMetadata.JSON_FILE_NAME)
     }
+    check(artifactMetadataFiles.files.size > 0) { "No artifact metadata files found" }
     check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
     val artifactMetadataFile = artifactMetadataFiles.singleFile
 
