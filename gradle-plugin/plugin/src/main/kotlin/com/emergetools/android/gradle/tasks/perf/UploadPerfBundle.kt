@@ -5,6 +5,7 @@ import com.emergetools.android.gradle.tasks.size.UploadAAB
 import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
+import kotlinx.datetime.Clock
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.tasks.InputDirectory
@@ -55,6 +56,7 @@ abstract class UploadPerfBundle : BaseUploadTask() {
   fun execute() {
     val artifactName = artifact.get().asFile.name
     val artifactMetadata = ArtifactMetadata(
+      created = Clock.System.now(),
       emergeGradlePluginVersion = BuildConfig.VERSION,
       androidGradlePluginVersion = agpVersion.get(),
       targetArtifactZipPath = artifactName,

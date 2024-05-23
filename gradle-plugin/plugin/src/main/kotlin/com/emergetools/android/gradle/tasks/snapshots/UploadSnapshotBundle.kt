@@ -3,11 +3,16 @@ package com.emergetools.android.gradle.tasks.snapshots
 import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
+import kotlinx.datetime.Clock
+import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.PathSensitive
@@ -16,6 +21,7 @@ import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
+import javax.inject.Inject
 
 abstract class UploadSnapshotBundle : BaseUploadTask() {
 
@@ -27,35 +33,18 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:Optional
   abstract val apiVersion: Property<Int>
 
-  @get:Internal
-  override val snapshotsEnabled: Property<Boolean>
-    get() = project.objects.property(Boolean::class.java).convention(true)
-
-  /**
-   * ArtifactMetadata has already been written as a part of [PackageSnapshotArtifacts].
-   * Therefore just parse the file upon first need to use it, and pass to upload to be
-   * included in upload bundle.
-   */
-  @get:Internal
-  val artifactMetadata: ArtifactMetadata by lazy {
-    val artifactMetadataFiles = packageDir.asFileTree.matching {
-      it.include(ArtifactMetadata.JSON_FILE_NAME)
-    }
-    check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
-
-    check(artifactMetadataFiles.singleFile.exists()) { "Artifact metadata file not found" }
-
-    if (apiVersion.isPresent) {
-      val apiVersion = apiVersion.get()
-      check(supportedApiVersions.contains(apiVersion)) {
-        "apiVersion must be a supported version, use one of ${supportedApiVersions.joinToString()}"
-      }
-    }
-
-    Json.decodeFromString(artifactMetadataFiles.singleFile.readText())
-  }
+  @get:InputFile
+  abstract val artifactMetadataPath: RegularFileProperty
 
   override fun includeFilesInUpload(zos: ZipOutputStream) {
+    val artifactMetadataFilePath = checkNotNull(artifactMetadataPath.asFile.orNull) {
+      "Artifact metadata file must be provided to upload snapshot bundle."
+    }
+    check(artifactMetadataFilePath.exists()) {
+      "Artifact metadata file does not exist: ${artifactMetadataFilePath.absolutePath}"
+    }
+    val artifactMetadata: ArtifactMetadata = Json.decodeFromString(artifactMetadataFilePath.readText())
+
     val targetApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
       .first { it.name == artifactMetadata.targetArtifactZipPath }
 
@@ -77,13 +66,26 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
   override fun uploadRequestData(file: File): EmergeUploadRequestData {
     return super.uploadRequestData(file).copy(
-      androidSnapshotsApiVersion = apiVersion.orNull
+      androidSnapshotsEnabled = true,
+      androidSnapshotsApiVersion = apiVersion.orNull,
     )
   }
 
   @TaskAction
   fun execute() {
-    val response = upload(artifactMetadata)
+    val artifactMetadataFilePath = checkNotNull(artifactMetadataPath.asFile.orNull) {
+      "Artifact metadata file must be provided to upload snapshot bundle."
+    }
+    check(artifactMetadataFilePath.exists()) {
+      "Artifact metadata file does not exist: ${artifactMetadataFilePath.absolutePath}"
+    }
+    val artifactMetadata: ArtifactMetadata = Json.decodeFromString(artifactMetadataFilePath.readText())
+
+    val response = upload(
+      artifactMetadata = artifactMetadata.copy(
+        created = Clock.System.now()
+      )
+    )
     checkNotNull(response) {
       "Upload failed, please check your network connection and try again."
     }
