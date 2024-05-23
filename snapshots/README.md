@@ -28,21 +28,14 @@ emerge {
 
 See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
-### Add Snapshot SDK(s)
+### Add Snapshot SDK
 
 Add the Emerge snapshot SDK as an `androidTest` dependency to your application module. For automatic
 compose `@Preview` snapshot generation, add the KSP processor as a `ksp` dependency.
 
 ```kotlin
-plugins {
-  // For Compose @Preview snapshot generation:
-  id("com.google.devtools.ksp")
-}
-
 dependencies {
   androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
-  // For Compose @Preview snapshot generation from the main source set:
-  ksp("com.emergetools.snapshots:snapshots-processor:{latest_version}")
 }
 ```
 
@@ -129,7 +122,6 @@ snapshot tests from the `androidTest` source set.
 ```kotlin
 plugins {
   id("com.emergetools.android")
-  id("com.google.devtools.ksp")
 }
 
 emerge {
@@ -138,8 +130,6 @@ emerge {
 
 dependencies {
   androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
-  // For Compose @Preview snapshot generation from androidTest source set:
-  kspAndroidTest("com.emergetools.snapshots:snapshots-processor:{latest_version}")
 }
 ```
 
