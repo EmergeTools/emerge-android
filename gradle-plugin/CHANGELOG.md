@@ -5,9 +5,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.0.0-rc01 - 2024-05-23
+
+- Adds transform for marking preview annotations as runtime
+  retention [#139](https://github.com/EmergeTools/emerge-android/pull/139).
+- Adds support for using new snapshot invoking using `LocalSnapshots`
+  task [#147](https://github.com/EmergeTools/emerge-android/pull/147).
+- Fix configuration cache
+  violations. [#143](https://github.com/EmergeTools/emerge-android/pull/143), [#149](https://github.com/EmergeTools/emerge-android/pull/149)
+- Consistent build directory [#133](https://github.com/EmergeTools/emerge-android/pull/133)
+
 ## 2.2.2 - 2024-04-08
 
-- Add `--class` argument to local snapshots task to allow for specifying specific test classes. [#131](https://github.com/EmergeTools/emerge-android/pull/131)
+- Add `--class` argument to local snapshots task to allow for specifying specific test
+  classes. [#131](https://github.com/EmergeTools/emerge-android/pull/131)
 
 ## 2.2.1 - 2024-04-03
 
