@@ -560,6 +560,7 @@ class EmergePlugin : Plugin<Project> {
           = Emerge configuration =
           ========================
           apiToken:                      ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
+          includeDependencyInformation:  ${extension.includeDependencyInformation.orElse(true)}
           dryRun (optional):             ${extension.dryRun.orEmpty()}
           verbose (optional):            ${extension.verbose.orEmpty()}
           size
