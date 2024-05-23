@@ -10,7 +10,6 @@ import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
-import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
@@ -64,7 +63,6 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
 		val metadataString = Json.encodeToString(metadata)
     artifactMetadataPath.asFile.get().let {
       if (!it.exists()) {
-        // it.mkdirs()
         it.createNewFile()
       }
       it.writeText(metadataString)
