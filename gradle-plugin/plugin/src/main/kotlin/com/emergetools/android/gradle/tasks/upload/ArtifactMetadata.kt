@@ -1,6 +1,5 @@
 package com.emergetools.android.gradle.tasks.upload
 
-import kotlinx.datetime.Clock
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 
@@ -10,7 +9,7 @@ import kotlinx.serialization.Serializable
  */
 @Serializable
 data class ArtifactMetadata(
-  val created: Instant = Clock.System.now(),
+  var created: Instant? = null,
   val emergeGradlePluginVersion: String,
   val androidGradlePluginVersion: String,
   val targetArtifactZipPath: String,

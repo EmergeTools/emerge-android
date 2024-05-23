@@ -22,6 +22,7 @@ import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots
 import com.emergetools.android.gradle.tasks.snapshots.PackageSnapshotArtifacts
 import com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle
+import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.AgpVersions
@@ -348,6 +349,7 @@ class EmergePlugin : Plugin<Project> {
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
       it.outputDirectory.set(appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts"))
+      it.artifactMetadataPath.set(appProject.layout.buildDirectory.file("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/$ArtifactMetadata.JSON_FILE_NAME"))
       it.agpVersion.set(AgpVersions.CURRENT.toString())
     }
   }
@@ -398,6 +400,7 @@ class EmergePlugin : Plugin<Project> {
         " generated on Emerge's cloud infrastructure and diffed based on the vcs params set" +
         " in the Emerge plugin extension."
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
+      it.artifactMetadataPath.set(packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)

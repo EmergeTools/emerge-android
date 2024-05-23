@@ -6,10 +6,13 @@ import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
@@ -35,6 +38,9 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
 	@get:OutputDirectory
 	abstract val outputDirectory: DirectoryProperty
 
+  @get:OutputFile
+  abstract val artifactMetadataPath: RegularFileProperty
+
 	@TaskAction
 	fun execute() {
 		val targetApks = artifactDir.asFileTree.matching { it.include(APK_GLOB) }
@@ -56,7 +62,13 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
 			testArtifactZipPath = testApk.name,
 		)
 		val metadataString = Json.encodeToString(metadata)
-		outputDirectory.get().asFile.resolve(ArtifactMetadata.JSON_FILE_NAME).writeText(metadataString)
+    artifactMetadataPath.asFile.get().let {
+      if (!it.exists()) {
+        // it.mkdirs()
+        it.createNewFile()
+      }
+      it.writeText(metadataString)
+    }
 	}
 
 	companion object {

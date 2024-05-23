@@ -77,10 +77,6 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val gitLabProjectId: Property<String>
 
-  @get:Input
-  @get:Optional
-  abstract val snapshotsEnabled: Property<Boolean>
-
   /**
    * Internal only for testing.
    */
@@ -151,7 +147,7 @@ abstract class BaseUploadTask : DefaultTask() {
       prNumber = prNumber.orNull,
       tag = tag.orNull,
       gitlabProjectId = gitLabProjectId.orNull,
-      androidSnapshotsEnabled = snapshotsEnabled.getOrElse(false),
+      androidSnapshotsEnabled = false,
       source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}"
     )
   }
