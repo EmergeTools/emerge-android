@@ -41,5 +41,6 @@ jobs:
         run: ./gradlew :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository
       - name: Deploy snapshots
         run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
-      - name: Deploy snapshots-processor
-        run: ./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository
+#        Temporarily disabled for 1.0 release, TODO (ryan) fully remove once 1.0 stable is released
+#      - name: Deploy snapshots-processor
+#        run: ./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository
