@@ -11,7 +11,6 @@ import com.android.build.api.variant.TestVariant
 import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
-import com.android.build.gradle.internal.utils.KOTLIN_ANDROID_PLUGIN_ID
 import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
@@ -28,14 +27,11 @@ import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setU
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
-import com.google.devtools.ksp.gradle.KspExtension
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.artifacts.ProjectDependency
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.TaskProvider
-import org.jetbrains.kotlin.gradle.dsl.KotlinAndroidProjectExtension
 
 class EmergePlugin : Plugin<Project> {
 
@@ -97,16 +93,6 @@ class EmergePlugin : Plugin<Project> {
     appProject: Project,
     emergeExtension: EmergePluginExtension,
   ) {
-    // Only configure KSP for snapshot generation if the experimental transform is disabled
-    if (!emergeExtension.snapshotOptions.experimentalTransformEnabled.getOrElse(false)) {
-      appProject.afterEvaluate {
-        configureAppProjectSnapshots(
-          appProject = appProject,
-          emergeExtension = emergeExtension
-        )
-      }
-    }
-
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
       val androidComponents = appProject.extensions.getByType(
         ApplicationAndroidComponentsExtension::class.java
@@ -318,16 +304,14 @@ class EmergePlugin : Plugin<Project> {
     variant: ApplicationVariant,
     androidTest: AndroidTest,
   ) {
-    if (extension.snapshotOptions.experimentalTransformEnabled.getOrElse(false)) {
-      variant.instrumentation.let { instrumentation ->
-        instrumentation.transformClassesWith(
-          SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
-          InstrumentationScope.ALL,
-        ) { params ->
-          // Force invalidate/reinstrument classes if debug option is set
-          if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
-            params.invalidate.set(System.currentTimeMillis())
-          }
+    variant.instrumentation.let { instrumentation ->
+      instrumentation.transformClassesWith(
+        SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
+        InstrumentationScope.ALL,
+      ) { params ->
+        // Force invalidate/reinstrument classes if debug option is set
+        if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
+          params.invalidate.set(System.currentTimeMillis())
         }
       }
     }
@@ -348,7 +332,9 @@ class EmergePlugin : Plugin<Project> {
     return appProject.tasks.register(taskName, PackageSnapshotArtifacts::class.java) {
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
-      it.outputDirectory.set(appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts"))
+      it.outputDirectory.set(
+        appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts")
+      )
       it.artifactMetadataPath.set(appProject.layout.buildDirectory.file("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"))
       it.agpVersion.set(AgpVersions.CURRENT.toString())
     }
@@ -407,87 +393,6 @@ class EmergePlugin : Plugin<Project> {
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)
-    }
-  }
-
-  private fun configureAppProjectSnapshots(
-    appProject: Project,
-    emergeExtension: EmergePluginExtension,
-  ) {
-    applyMainSourceSetConfig(
-      project = appProject,
-      appProject = appProject,
-      emergeExtension = emergeExtension
-    )
-
-    // Configure all dependent modules to apply the same configuration as the appProject so
-    // generated snapshots don't run into compilation issues.
-    appProject.configurations
-      .flatMap { it.dependencies }
-      .filterIsInstance<ProjectDependency>()
-      .map { it.dependencyProject }
-      .distinct()
-      .filter { !it.state.executed }
-      .forEach { subproject ->
-        subproject.afterEvaluate {
-          applyMainSourceSetConfig(
-            project = it,
-            appProject = appProject,
-            emergeExtension = emergeExtension
-          )
-        }
-      }
-  }
-
-  private fun applyMainSourceSetConfig(
-    project: Project,
-    appProject: Project,
-    emergeExtension: EmergePluginExtension,
-  ) {
-    val errorMessages = mutableListOf<String>()
-    if (!project.plugins.hasPlugin(KSP_PLUGIN_ID)) {
-      errorMessages.add(
-        "${project.name} does not have the KSP plugin applied. " +
-          "Please apply the KSP plugin to the ${project.name} module " +
-          "for Emerge snapshot test generation of composables in this module."
-      )
-    }
-
-    if (!project.plugins.hasPlugin(KOTLIN_ANDROID_PLUGIN_ID)) {
-      errorMessages.add(
-        "${project.name} does not have the Kotlin Android plugin applied. " +
-          "Please apply the Kotlin Android plugin to the ${project.name} module " +
-          "for Emerge snapshot test generation of composables in this module."
-      )
-    }
-
-    // Return early with an info-level log if the KSP/Kotlin Android plugin isn't applied.
-    if (errorMessages.isNotEmpty()) {
-      errorMessages.forEach(appProject.logger::info)
-      return
-    }
-
-    // TODO: Ryan: Explore using variants API for finding proper ourput dir.
-    val emergeSrcDir = "${project.buildDir}/$BUILD_OUTPUT_DIR_NAME/ksp/debugAndroidTest/kotlin"
-
-    val internalSnapshotsEnabled =
-      emergeExtension.snapshotOptions.experimentalInternalSnapshotsEnabled.getOrElse(false)
-    val internalEnabledArg = if (internalSnapshotsEnabled) "true" else "false"
-
-    appProject.logger.info(
-      "Configuring ${project.name} for Emerge snapshot testing, outputting to $emergeSrcDir"
-    )
-    project.extensions.getByType(KspExtension::class.java).apply {
-      arg(OUTPUT_SRC_DIR_OPTION_NAME, emergeSrcDir)
-      arg(INTERNAL_ENABLED_OPTION_NAME, internalEnabledArg)
-    }
-
-    appProject.extensions.getByType(KotlinAndroidProjectExtension::class.java).apply {
-      val androidTestSourceSet = sourceSets.getByName("androidTest")
-      appProject.logger.info(
-        "Configuring ${project.name} for Emerge snapshot testing, adding $emergeSrcDir to sourceSet ${androidTestSourceSet.name}"
-      )
-      sourceSets.getByName("androidTest").kotlin.srcDir(emergeSrcDir)
     }
   }
 
@@ -599,11 +504,7 @@ class EmergePlugin : Plugin<Project> {
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
-    private const val KSP_PLUGIN_ID = "com.google.devtools.ksp"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
-
-    private const val OUTPUT_SRC_DIR_OPTION_NAME = "emerge.outputDir"
-    private const val INTERNAL_ENABLED_OPTION_NAME = "emerge.experimentalInternalEnabled"
 
     private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 
