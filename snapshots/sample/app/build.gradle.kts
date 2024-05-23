@@ -16,7 +16,6 @@ emerge {
 
   snapshots {
     tag.setFromVariant()
-    experimentalTransformEnabled.set(true)
   }
 }
 
