@@ -21,8 +21,6 @@ sealed class SnapshotMetadata {
 internal data class SnapshotImageMetadata(
   // Used as the primary key
   override val name: String,
-  @Deprecated("Use name instead")
-  val keyName: String,
   // User defined name, or set to defaults by our backend
   override val displayName: String?,
   // Filename of the outputted image
@@ -32,7 +30,7 @@ internal data class SnapshotImageMetadata(
   override val type: SnapshotType,
   // Compose-specific metadata, only set if type == COMPOSABLE
   override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
-): SnapshotMetadata()
+) : SnapshotMetadata()
 
 @Serializable
 internal data class SnapshotErrorMetadata(
@@ -45,4 +43,4 @@ internal data class SnapshotErrorMetadata(
   override val type: SnapshotType,
   // Compose-specific metadata, only set if type == COMPOSABLE
   override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
-): SnapshotMetadata()
+) : SnapshotMetadata()

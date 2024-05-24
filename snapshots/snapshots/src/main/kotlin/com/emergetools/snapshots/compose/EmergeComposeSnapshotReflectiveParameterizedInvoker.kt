@@ -6,8 +6,6 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
-import com.emergetools.snapshots.SnapshotSaver
-import com.emergetools.snapshots.SnapshotType
 import com.emergetools.snapshots.SnapshotType.COMPOSABLE
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposeSnapshots
@@ -54,6 +52,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
 
   @Test
+  @Suppress("TooGenericExceptionCaught")
   fun reflectiveComposableInvoker() {
     try {
       composeRule.setContent {
@@ -69,10 +68,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
           SnapshotVariantProvider(previewConfig) {
             it.invoke(null, currentComposer, 0)
           }
-        } ?: run {
-          // TODO: Ryan look to write error to file for better debugging
-          error("Unable to find composable method: ${previewConfig.originalFqn}")
-        }
+        } ?: error("Unable to find composable method: ${previewConfig.originalFqn}")
       }
       snapshotRule.take(composeRule, previewConfig)
     } catch (e: Exception) {
