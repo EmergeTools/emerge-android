@@ -31,8 +31,6 @@ jobs:
           distribution: 'adopt'
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test -Pandroid.useAndroidX=true
-      - name: Sanity check snapshots-processor test
-        run: ./gradlew :snapshots:snapshots-processor:test
       - name: Sanity check snapshots-shared test
         run: ./gradlew :snapshots:snapshots-shared:test
       - name: Deploy snapshots-shared
@@ -41,6 +39,3 @@ jobs:
         run: ./gradlew :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository
       - name: Deploy snapshots
         run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
-#        Temporarily disabled for 1.0 release, TODO (ryan) fully remove once 1.0 stable is released
-#      - name: Deploy snapshots-processor
-#        run: ./gradlew :snapshots:snapshots-processor:publishReleasePublicationToSonatypeStagingRepository
