@@ -30,7 +30,6 @@ fun TextRowWithIcon(
 @FontScalePreviews
 @Composable
 fun TextRowWithIconPreviewFromMain() {
-  error("This should not be called")
   TextRowWithIcon(
     titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
     subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
