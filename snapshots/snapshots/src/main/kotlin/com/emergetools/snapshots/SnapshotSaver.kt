@@ -31,6 +31,10 @@ internal object SnapshotSaver {
   private val args: Bundle
     get() = InstrumentationRegistry.getArguments()
 
+  private val saveMetadata: Boolean
+    get() = args.getBoolean(ARG_KEY_SAVE_METADATA, false) ||
+      args.getString(ARG_KEY_SAVE_METADATA, "false").toBoolean()
+
   fun save(
     displayName: String?,
     bitmap: Bitmap,
@@ -56,11 +60,39 @@ internal object SnapshotSaver {
       keyName = keyName,
       bitmap = bitmap
     )
-    if (
-      args.getBoolean(ARG_KEY_SAVE_METADATA, false) ||
-      args.getString(ARG_KEY_SAVE_METADATA, "false").toBoolean()
-    ) {
+    if (saveMetadata) {
       saveMetadata(
+        snapshotsDir = snapshotsDir,
+        displayName = displayName,
+        keyName = keyName,
+        type = type,
+        fqn = fqn,
+        composePreviewSnapshotConfig = composePreviewSnapshotConfig,
+      )
+    }
+  }
+
+  fun saveError(
+    displayName: String?,
+    fqn: String,
+    type: SnapshotType,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+  ) {
+    val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
+    if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
+      error("Unable to create snapshots storage directory.")
+    }
+
+    // We need a stable key to use for the filename and comparison
+    // For composables, see [ComposePreviewSnapshotConfig.keyName]
+    // For non-composables, we use the normalized displayName
+    val keyName = keyName(
+      type = type,
+      displayName = displayName,
+      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
+    )
+    if (saveMetadata) {
+      saveErrorMetadata(
         snapshotsDir = snapshotsDir,
         displayName = displayName,
         keyName = keyName,
@@ -89,10 +121,8 @@ internal object SnapshotSaver {
     type: SnapshotType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
-    val metadata = SnapshotImageMetadata(
+    val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
       name = keyName,
-      // TODO: Ryan remove in future
-      keyName = keyName,
       displayName = displayName,
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,
@@ -100,6 +130,31 @@ internal object SnapshotSaver {
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
 
+    Log.d(TAG, "Saving error metadata for $keyName")
+    val jsonString = Json.encodeToString(metadata)
+
+    saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
+      write(jsonString.toByteArray(Charset.defaultCharset()))
+    }
+  }
+
+  private fun saveErrorMetadata(
+    snapshotsDir: File,
+    keyName: String,
+    displayName: String?,
+    fqn: String,
+    type: SnapshotType,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+  ) {
+    val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
+      name = keyName,
+      displayName = displayName,
+      fqn = fqn,
+      type = type,
+      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
+    )
+
+    Log.d(TAG, "Saving error metadata for $keyName")
     val jsonString = Json.encodeToString(metadata)
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {

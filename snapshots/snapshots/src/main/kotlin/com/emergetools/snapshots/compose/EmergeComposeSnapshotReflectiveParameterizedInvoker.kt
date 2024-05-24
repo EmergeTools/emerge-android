@@ -6,6 +6,7 @@ import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
+import com.emergetools.snapshots.SnapshotType.COMPOSABLE
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposeSnapshots
 import kotlinx.serialization.json.Json
@@ -51,25 +52,30 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
 
   @Test
+  @Suppress("TooGenericExceptionCaught")
   fun reflectiveComposableInvoker() {
-    composeRule.setContent {
-      val klass = Class.forName(previewConfig.fullyQualifiedClassName)
-      val composableMethod = klass.methods.find {
-        it.name == previewConfig.originalFqn.substringAfterLast(".")
-      }
-
-      Log.d(TAG, "Invoking composable method: $composableMethod")
-
-      composableMethod?.let {
-        it.isAccessible = true
-        SnapshotVariantProvider(previewConfig) {
-          it.invoke(null, currentComposer, 0)
+    try {
+      composeRule.setContent {
+        val klass = Class.forName(previewConfig.fullyQualifiedClassName)
+        val composableMethod = klass.methods.find {
+          it.name == previewConfig.originalFqn.substringAfterLast(".")
         }
-      } ?: run {
-        // TODO: Ryan look to write error to file for better debugging
-        error("Unable to find composable method: ${previewConfig.originalFqn}")
+
+        Log.d(TAG, "Invoking composable method: $composableMethod")
+
+        composableMethod?.let {
+          it.isAccessible = true
+          SnapshotVariantProvider(previewConfig) {
+            it.invoke(null, currentComposer, 0)
+          }
+        } ?: error("Unable to find composable method: ${previewConfig.originalFqn}")
       }
+      snapshotRule.take(composeRule, previewConfig)
+    } catch (e: Exception) {
+      Log.e(TAG, "Error invoking composable method", e)
+      snapshotRule.saveError(COMPOSABLE, previewConfig)
+      // Re-throw to fail the test
+      throw e
     }
-    snapshotRule.take(composeRule, previewConfig)
   }
 }
