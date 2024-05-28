@@ -80,7 +80,7 @@ class SnapshotsPreviewRuntimeRetentionTransformTest {
 
     val transformedClassBytes = applyTransform(originalClassBytes)
 
-    assertFalse(
+    assertTrue(
       isClassAnnotationRuntimeVisible(
         transformedClassBytes,
         "Landroidx/compose/ui/tooling/preview/Preview;",
