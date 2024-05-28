@@ -135,13 +135,19 @@ abstract class ProductOptions {
   }
 }
 
-abstract class SizeOptions : ProductOptions()
+abstract class SizeOptions : ProductOptions() {
+
+  abstract val enabled: Property<Boolean>
+}
 
 abstract class PerfOptions : ProductOptions() {
+  abstract val enabled: Property<Boolean>
+
   abstract val projectPath: Property<String>
 }
 
 abstract class SnapshotOptions : ProductOptions() {
+  abstract val enabled: Property<Boolean>
 
   abstract val snapshotsStorageDirectory: DirectoryProperty
 

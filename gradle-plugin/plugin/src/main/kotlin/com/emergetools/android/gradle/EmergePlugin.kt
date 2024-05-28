@@ -53,39 +53,41 @@ class EmergePlugin : Plugin<Project> {
 
     applyToAppProject(project, emergeExtension)
 
-    // Perf project must be configured after application as the configuration is reliant on
-    // property values set from appProject.
-    project.afterEvaluate { appProject ->
-      val rootProject = appProject.rootProject
-      val perfProjectPath = emergeExtension.perfOptions.projectPath
-      val performanceProject = rootProject.subprojects.find { subProject ->
-        appProject.logger.debug(
-          "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
-        )
-        appProject.logger.debug(
-          "Checking absoluteProjectPath ${
-            rootProject.absoluteProjectPath(
-              subProject.path
-            )
-          } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
-        )
-        rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
-      }
-      performanceProject?.let { perfProject ->
-        applyToPerformanceProject(appProject, perfProject, emergeExtension)
-      } ?: run {
-        // No perf project, but user has set the perfOptions.projectPath property
-        // so register the generate task only
-        if (perfProjectPath.isPresent) {
+    if (emergeExtension.perfOptions.enabled.getOrElse(true)) {
+      // Perf project must be configured after application as the configuration is reliant on
+      // property values set from appProject.
+      project.afterEvaluate { appProject ->
+        val rootProject = appProject.rootProject
+        val perfProjectPath = emergeExtension.perfOptions.projectPath
+        val performanceProject = rootProject.subprojects.find { subProject ->
           appProject.logger.debug(
-            "No performance project found for path ${perfProjectPath.get()}, " +
-              "registering generate task only"
+            "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
           )
-          registerGeneratePerfProjectTask(project, perfProjectPath)
+          appProject.logger.debug(
+            "Checking absoluteProjectPath ${
+              rootProject.absoluteProjectPath(
+                subProject.path
+              )
+            } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
+          )
+          rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
         }
-      }
+        performanceProject?.let { perfProject ->
+          applyToPerformanceProject(appProject, perfProject, emergeExtension)
+        } ?: run {
+          // No perf project, but user has set the perfOptions.projectPath property
+          // so register the generate task only
+          if (perfProjectPath.isPresent) {
+            appProject.logger.debug(
+              "No performance project found for path ${perfProjectPath.get()}, " +
+                "registering generate task only"
+            )
+            registerGeneratePerfProjectTask(project, perfProjectPath)
+          }
+        }
 
-      logExtension(project, emergeExtension)
+        logExtension(project, emergeExtension)
+      }
     }
   }
 
@@ -101,13 +103,21 @@ class EmergePlugin : Plugin<Project> {
       androidComponents.onVariants { variant ->
         appVariants.add(variant)
 
-        registerSizeTasks(appProject, emergeExtension, variant)
+        if (emergeExtension.sizeOptions.enabled.getOrElse(true)) {
+          appProject.logger.debug(
+            "Registering size tasks for variant ${variant.name} in project ${appProject.path}"
+          )
+          registerSizeTasks(appProject, emergeExtension, variant)
+        }
 
         // Only register snapshot tasks for builds with androidTest source set
         val androidTest = variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
           ?: return@onVariants
 
-        registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
+
+        if (emergeExtension.snapshotOptions.enabled.getOrElse(true)) {
+          registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
+        }
 
         if (appProject.hasProperty(EMERGE_DEBUG_TASK_PROPERTY)) {
           registerDebugTasks(appProject, emergeExtension)
@@ -249,12 +259,12 @@ class EmergePlugin : Plugin<Project> {
       )
       it.performanceProjectPath.set(performanceProjectPath)
       it.rootDir.set(rootDir)
-      rootDir.resolve("settings.gradle.kts").let {settingsKtsFile ->
+      rootDir.resolve("settings.gradle.kts").let { settingsKtsFile ->
         if (settingsKtsFile.exists()) {
           it.gradleSettingsFile.set(settingsKtsFile)
         }
       }
-      rootDir.resolve("settings.gradle").let {settingsFile ->
+      rootDir.resolve("settings.gradle").let { settingsFile ->
         if (settingsFile.exists()) {
           it.gradleSettingsFile.set(settingsFile)
         }
@@ -335,7 +345,11 @@ class EmergePlugin : Plugin<Project> {
       it.outputDirectory.set(
         appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts")
       )
-      it.artifactMetadataPath.set(appProject.layout.buildDirectory.file("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"))
+      it.artifactMetadataPath.set(
+        appProject.layout.buildDirectory.file(
+          "${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"
+        )
+      )
       it.agpVersion.set(AgpVersions.CURRENT.toString())
     }
   }
@@ -388,7 +402,8 @@ class EmergePlugin : Plugin<Project> {
         " generated on Emerge's cloud infrastructure and diffed based on the vcs params set" +
         " in the Emerge plugin extension."
       it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
-      it.artifactMetadataPath.set(packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
+      it.artifactMetadataPath.set(
+        packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
@@ -472,13 +487,16 @@ class EmergePlugin : Plugin<Project> {
           dryRun (optional):             ${extension.dryRun.orEmpty()}
           verbose (optional):            ${extension.verbose.orEmpty()}
           size
-          └── tag (optional):            ${extension.sizeOptions.tag.orEmpty()}
+          ├── tag (optional):            ${extension.sizeOptions.tag.orEmpty()}
+          └── enabled:                   ${extension.sizeOptions.enabled.getOrElse(true)}
           performance
           ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
-          └── tag (optional):            ${extension.perfOptions.tag.orEmpty()}
+          ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}
+          └── enabled:                   ${extension.perfOptions.enabled.getOrElse(true)}
           snapshots
           ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          └── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
+          ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
+          └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
           vcsOptions (optional, defaults to Git values)
           ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}
           ├── baseSha:                   ${extension.vcsOptions.baseSha.orEmpty()}
