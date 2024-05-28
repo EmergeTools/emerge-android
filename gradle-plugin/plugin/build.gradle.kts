@@ -27,6 +27,9 @@ java {
 				srcDir(perfProjectTemplateResDir)
 			}
 		}
+    test {
+      java.srcDir("src/test/kotlin")
+    }
 	}
 }
 
@@ -99,10 +102,6 @@ tasks.check {
 	dependsOn(functionalTestTask)
 }
 
-tasks.withType<Test> {
-	useJUnitPlatform()
-}
-
 val packagePerformanceProjectTemplateTask =
 	tasks.register<Zip>("packagePerformanceProjectTemplate") {
 		archiveFileName.set("performance-project-template.zip")
@@ -134,6 +133,7 @@ dependencies {
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   implementation(libs.guava)
 
+  testImplementation(libs.junit)
 	testImplementation(libs.junit.jupiter.api)
 	testImplementation(libs.google.truth)
 	testRuntimeOnly(libs.junit.jupiter.engine)
