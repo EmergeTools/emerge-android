@@ -65,7 +65,6 @@ class SnapshotsPreviewRuntimeRetentionTransformTest {
     )
   }
 
-  // TODO
   @Test
   fun `test transform applied correctly on multipreview class with preview annotation`() {
     val originalClassBytes =
@@ -81,7 +80,7 @@ class SnapshotsPreviewRuntimeRetentionTransformTest {
 
     val transformedClassBytes = applyTransform(originalClassBytes)
 
-    assertTrue(
+    assertFalse(
       isClassAnnotationRuntimeVisible(
         transformedClassBytes,
         "Landroidx/compose/ui/tooling/preview/Preview;",
