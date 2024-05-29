@@ -4,12 +4,23 @@ All-in-one Android snapshot testing.
 
 ## Features
 
-- **Automatically generate** snapshots of composable previews, including previews in the main source
-  set.
-- Built-in support for Activity & View snapshotting.
-- Gradle plugin for easy setup & helper tasks (see below for full documentation).
+Emerge offers a full-suite snapshotting solution on Android, allowing for snapshotting of
+Composables, Activities, and Views. Emerge handles **everything** for you, including:
 
-## Quickstart
+- Automatic snapshot testing of Compose Previews
+- Fully managed snapshot generation in CI
+- Hosted UI for comparing diffs, sharing snapshots, and approving changes
+- Snapshot image file storage
+- Image comparisons & diffs
+- Posting status checks & comments to pull requests in GitHub or GitLab
+
+And many more features!
+
+## Quickstart (~10 minutes)
+
+This is a quick setup guide to get end-to-end snapshots set up as quickly as possible. For a full
+guide on setting up Emerge snapshots, see
+the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
 
 ### Setup Emerge Gradle plugin
 
@@ -41,8 +52,10 @@ dependencies {
 
 ### Compose snapshotting
 
-Emerge's KSP `snapshot-processor` automatically generates snapshot tests for compose previews in the
-source set the KSP processor is applied to. No additional setup work needs to be done!
+Emerge's Gradle plugin (3.0+) automatically generates snapshot tests for all `@Preview` annotated
+composables in your `main` source set.
+
+No additional setup is required!
 
 ```kotlin
 // src/main/com/myapp/MyComposable.kt
@@ -56,7 +69,7 @@ fun MyComposablePreview() {
 }
 ```
 
-_⚠️ Currently only no-arg, public `@Preview` annotated composable functions are supported._
+_⚠️ Currently only no-arg `@Preview` annotated composable functions are supported._
 
 #### Variant support
 
@@ -102,52 +115,14 @@ fun MyComposablePreview() {
 ```
 
 You'll need to add a dependency on the `snapshots-annotations` artifact to use the
-`@IgnoreEmergeSnapshot` annotation. This is a lightweight dependency only containing annotations
+`@IgnoreEmergeSnapshot` annotation. This is a lightweight library only containing annotations
 the `snapshots-processor` leverages.
 
 ```kotlin
 dependencies {
-  implementation("com.emergetools.snapshots:snapshots-annotations:{latest_version}")
+  debugImplementation("com.emergetools.snapshots:snapshots-annotations:{latest_version}")
 }
 ```
-
-#### Generating Preview snapshots from the androidTest source set
-
-Emerge can automatically generate snapshot tests for all composable previews in the `main` source
-set, but sometimes creating explicit previews for snapshot testing is more desired.
-
-Simply apply the Emerge KSP processor as a `kspAndroidTest` dependency instead of `ksp` to generate
-snapshot tests from the `androidTest` source set.
-
-```kotlin
-plugins {
-  id("com.emergetools.android")
-}
-
-emerge {
-  // ..
-}
-
-dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
-}
-```
-
-And as an example, assuming the following preview lives in the `androidTest` source set:
-
-```kotlin
-// src/androidTest/com/myapp/MyComposablePreviewTest.kt
-
-@Preview
-@Composable
-fun MyComposablePreviewTest() {
-  MyComposable(
-    text = "Hello, World!"
-  )
-}
-```
-
-Emerge will automatically generate a preview snapshot test for `MyComposablePreviewTest()`.
 
 ### Activities & View snapshotting
 
@@ -192,7 +167,6 @@ plugins {
 }
 
 emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   // Optional
   snapshots {
@@ -233,50 +207,10 @@ using Git information, which is set automatically for you.
 See [gradle-plugin](../gradle-plugin) documentation for a full list of configuration VCS
 configuration options.
 
-#### Image Keys
+## Full documentation
 
-##### Composable Preview snapshots
-
-For generated composable snapshots, the image key is the composable preview function's
-fully-qualified name.
-
-For example, given the following function:
-
-```kotlin
-// src/main/com/myapp/TextRowWithIcon.kt
-
-@Preview
-@Composable
-fun TextRowWithIconPreview() {
-  TextRowWithIcon(
-    titleText = "Title",
-    subtitleText = "Subtitle"
-  )
-}
-```
-
-The key used for snapshot diffing will be `com.myapp.TextRowWithIconPreview`. If any parameters are
-present in the `@Preview` annotation, a stable hash for the parameters will be appended to the key.
-
-##### Activity & View snapshots
-
-Emerge uses the `name` set in the `take()` block as the "key" for storage and diffing.
-
-```kotlin
-class ExampleMainActivityTest {
-
-  @get:Rule
-  val snapshots = EmergeSnapshots()
-
-  @Test
-  fun basicActivityView() {
-    // ..
-
-    // The primary key for saving/diffing this snapshot is the "Main Activity" string.
-    snapshots.take("Main Activity", activity)
-  }
-}
-```
+For more details on Emerge's snapshotting service, see
+the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
 
 ## Releasing
 
