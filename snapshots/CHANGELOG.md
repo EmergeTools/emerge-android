@@ -11,6 +11,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   reporting. [#155](https://github.com/EmergeTools/emerge-android/pull/155)
 - Adds support for direct compose preview invoking without needing
   KSP. [#123](https://github.com/EmergeTools/emerge-android/pull/123)
+- Handle snapshotting private previews and improve parameterized test
+  naming [#165](https://github.com/EmergeTools/emerge-android/pull/165)
+- Update readme for 1.0.0 release. [#163](https://github.com/EmergeTools/emerge-android/pull/163)
 
 ## 1.0.0-rc02 - 2024-05-24
 
