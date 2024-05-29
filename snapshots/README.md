@@ -218,8 +218,14 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 
 1. Update the `emerge-snapshots` version in `/gradle/libs.versions.toml`
 2. Update the `/snapshots/CHANGELOG.md`
-3. `gt bc -a -m "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+3. `gt c -am "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+   1. Alt
+      1. `git add *`
+      2. `git commit -m "Prepare for Android perf testing deploy X.Y.Z"`
 4. `gt ss`
+   1. Alt:
+      1. `git push`
+      2. Open PR
 5. Get PR approved and merge
 6. Create a new release on GitHub
 7. Tag version `snapshots-vX.Y.Z`
