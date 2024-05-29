@@ -22,6 +22,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Fix configuration cache
   violations. [#143](https://github.com/EmergeTools/emerge-android/pull/143), [#149](https://github.com/EmergeTools/emerge-android/pull/149)
 - Consistent build directory [#133](https://github.com/EmergeTools/emerge-android/pull/133)
+- Don't skip private previews for `LocalSnapshots`
+  task [#164](https://github.com/EmergeTools/emerge-android/pull/164)
+- Update readme for 3.0.0 release. [#162](https://github.com/EmergeTools/emerge-android/pull/162)
 
 ## 3.0.0-rc03 - 2024-05-24
 
