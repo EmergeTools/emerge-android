@@ -54,7 +54,6 @@ internal fun TextRowWithIconPreviewFromMainInternalFunctionMultiPreview() {
   )
 }
 
-
 @SnapshotTestingPreview
 @Composable
 private fun TextRowWithIconPreviewFromMainPrivateFunctionMultiPreview() {
