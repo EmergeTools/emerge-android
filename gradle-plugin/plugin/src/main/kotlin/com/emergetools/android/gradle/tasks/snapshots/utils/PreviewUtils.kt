@@ -1,6 +1,5 @@
 package com.emergetools.android.gradle.tasks.snapshots.utils
 
-import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.dexbacked.DexBackedClassDef
 import org.jf.dexlib2.dexbacked.DexBackedMethod
@@ -69,11 +68,6 @@ object PreviewUtils {
           logger.info(
             "Ignoring snapshot for method: $methodKey as it does not have a no-arg signature"
           )
-          return@forEach
-        }
-
-        if ((method.accessFlags and AccessFlags.PRIVATE.value) != 0) {
-          logger.info("Ignoring snapshot for method: $methodKey as it is private")
           return@forEach
         }
 
