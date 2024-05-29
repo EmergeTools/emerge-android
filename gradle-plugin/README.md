@@ -38,7 +38,7 @@ emerge {
 ```
 
 Only the `apiToken` property is required. By default, without any property set, `apiToken` will
-attempt to use the `EMERGE_API_TOKEN` EMERGE_API_TOKEN. Other configuration properties are
+attempt to use the `EMERGE_API_TOKEN` env variable. Other configuration properties are
 documented below.
 
 ### Obtain an API key
@@ -147,15 +147,17 @@ emerge {
     tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+    enabled.set(true) // If size tasks/project configuration are enabled.
   }
 }
 ```
 
 ##### Fields
 
-| Field | Type     | Default   | Description                                                 |
-|-------|----------|-----------|-------------------------------------------------------------|
-| `tag` | `String` | `release` | The tag to use for grouping builds in the Emerge dashboard. |
+| Field     | Type      | Default   | Description                                                 |
+|-----------|-----------|-----------|-------------------------------------------------------------|
+| `tag`     | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard. |
+| `enabled` | `boolean` | `true`    | If size tasks/project configuration are enabled.            |
 
 ### Performance
 
@@ -185,16 +187,18 @@ emerge {
     tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+    enabled.set(true) // If performance tasks/project configuration are enabled.
   }
 }
 ```
 
 ##### Fields
 
-| Field         | Type     | Default   | Description                                                          |
-|---------------|----------|-----------|----------------------------------------------------------------------|
-| `projectPath` | `String` |           | The relative gradle path from root to the Emerge performance module. |
-| `tag`         | `String` | `release` | The tag to use for grouping builds in the Emerge dashboard.          |
+| Field         | Type      | Default   | Description                                                          |
+|---------------|-----------|-----------|----------------------------------------------------------------------|
+| `projectPath` | `String`  |           | The relative gradle path from root to the Emerge performance module. |
+| `tag`         | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard.          |
+| `enabled`     | `boolean` | `true`    | If performance tasks/project configuration are enabled.              |
 
 ### Snapshots
 
@@ -220,12 +224,11 @@ emerge {
 
     apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
 
-    // Experimental flag to generate snapshots for internal previews
-    experimentalInternalSnapshotsEnabled.set("true")
-
     tag.set("snapshots") // Tag to use for grouping builds in the Emerge dashboard
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+
+    enabled.set(true) // If performance tasks/project configuration are enabled.
   }
 }
 ```
@@ -235,12 +238,12 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 ##### Fields
 
-| Field                                  | Type      | Default                           | Description                                                                                       |
-|----------------------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
-| `tag`                                  | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
-| `snapshotsStorageDirectory`            | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
-| `apiVersion`                           | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
-| `experimentalInternalSnapshotsEnabled` | `Boolean` | `false`                           | [Experimental] Generate snapshots for internal `@Preview` functions                               |
+| Field                       | Type      | Default                           | Description                                                                                       |
+|-----------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
+| `tag`                       | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
+| `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
+| `apiVersion`                | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
+| `enabled`                   | `boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
 
 ## Full configuration
 
@@ -269,6 +272,8 @@ emerge {
     tag.set("release") // Optional, defaults to 'release'
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+
+    enabled.set(true) // If size tasks/project configuration are enabled.
   }
 
   performance {
@@ -276,19 +281,20 @@ emerge {
     tag.set("release") // Optional, defaults to 'release'
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+
+    enabled.set(true) // If performance tasks/project configuration are enabled.
   }
 
   snapshots {
     snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
     apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
 
-    // Experimental flag to generate snapshots for internal previews
-    experimentalInternalSnapshotsEnabled.set("true")
-
     // Optional, snapshots use debug builds, we recommend using a separate tag.
     tag.set("snapshots")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
+
+    enabled.set(true) // If snapshot tasks/project configuration are enabled.
   }
 }
 ```
