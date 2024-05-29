@@ -1,6 +1,7 @@
 package com.emergetools.snapshots.compose
 
 import android.util.Log
+import androidx.compose.runtime.Composer
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.test.junit4.ComposeContentTestRule
 import androidx.compose.ui.test.junit4.createComposeRule
@@ -17,14 +18,24 @@ import org.junit.runners.Parameterized
 import java.io.File
 
 @RunWith(Parameterized::class)
-class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewConfig: ComposePreviewSnapshotConfig) {
+class EmergeComposeSnapshotReflectiveParameterizedInvoker(
+  private val parameter: EmergeComposeSnapshotReflectiveParameters
+) {
+
+  // Wrapper class to give us better parameterized test naming
+  data class EmergeComposeSnapshotReflectiveParameters(
+    val previewConfig: ComposePreviewSnapshotConfig
+  ) {
+    override fun toString(): String = previewConfig.keyName()
+  }
+
   companion object {
     const val TAG = "EmergeComposeSnapshotReflectiveParameterizedInvoker"
     const val ARG_REFLECTIVE_INVOKE_DATA_PATH = "invoke_data_path"
 
     @JvmStatic
-    @Parameterized.Parameters
-    fun data(): Iterable<ComposePreviewSnapshotConfig> {
+    @Parameterized.Parameters(name = "{index} {0}")
+    fun data(): Iterable<EmergeComposeSnapshotReflectiveParameters> {
       val args = InstrumentationRegistry.getArguments()
 
       val invokeDataPath = args.getString(ARG_REFLECTIVE_INVOKE_DATA_PATH) ?: run {
@@ -41,7 +52,9 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
         ignoreUnknownKeys = true
       }
 
-      return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots
+      return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots.map {
+        EmergeComposeSnapshotReflectiveParameters(it)
+      }
     }
   }
 
@@ -54,14 +67,23 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val previewCon
   @Test
   @Suppress("TooGenericExceptionCaught")
   fun reflectiveComposableInvoker() {
+    val previewConfig = parameter.previewConfig
     try {
       composeRule.setContent {
         val klass = Class.forName(previewConfig.fullyQualifiedClassName)
+        Log.d(TAG, "Found class for ${previewConfig.fullyQualifiedClassName}: ${klass.name}")
+        val methodName = previewConfig.originalFqn.substringAfterLast(".")
         val composableMethod = klass.methods.find {
-          it.name == previewConfig.originalFqn.substringAfterLast(".")
+          Log.d(TAG, "Checking method in class ${klass.name}: ${it.name}")
+          it.name == methodName
+        } ?: klass.getDeclaredMethod(methodName, Composer::class.java, Int::class.javaPrimitiveType)
+
+        if (composableMethod != null && !composableMethod.isAccessible) {
+          Log.e(TAG, "Marking composable method as accessible: ${previewConfig.originalFqn}")
+          composableMethod.isAccessible = true
         }
 
-        Log.d(TAG, "Invoking composable method: $composableMethod")
+        Log.d(TAG, "Invoking composable method: ${composableMethod?.name}")
 
         composableMethod?.let {
           it.isAccessible = true

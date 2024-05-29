@@ -54,6 +54,16 @@ internal fun TextRowWithIconPreviewFromMainInternalFunctionMultiPreview() {
   )
 }
 
+@Suppress("UnusedPrivateMember")
+@SnapshotTestingPreview
+@Composable
+private fun TextRowWithIconPreviewFromMainPrivateFunctionMultiPreview() {
+  TextRowWithIcon(
+    titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
+    subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
+  )
+}
+
 @LocalePreviews
 @FontScalePreviews
 @Composable
@@ -61,15 +71,6 @@ fun TextRowWithIconPreviewFromMainJustStackedMultiPreview() {
   TextRowWithIcon(
     titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
     subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
-  )
-}
-
-@SnapshotTestingPreview
-@Composable
-fun TextRowWithIconPreviewFromMainJustSnapshotTestingPreview() {
-  TextRowWithIcon(
-    titleText = "Title SnapshotTestingPreview2",
-    subtitleText = "Subtitle SnapshotTestingPreview"
   )
 }
 
