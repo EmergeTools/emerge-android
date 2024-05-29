@@ -18,7 +18,9 @@ import org.junit.runners.Parameterized
 import java.io.File
 
 @RunWith(Parameterized::class)
-class EmergeComposeSnapshotReflectiveParameterizedInvoker(private val parameter: EmergeComposeSnapshotReflectiveParameters) {
+class EmergeComposeSnapshotReflectiveParameterizedInvoker(
+  private val parameter: EmergeComposeSnapshotReflectiveParameters
+) {
 
   // Wrapper class to give us better parameterized test naming
   data class EmergeComposeSnapshotReflectiveParameters(
