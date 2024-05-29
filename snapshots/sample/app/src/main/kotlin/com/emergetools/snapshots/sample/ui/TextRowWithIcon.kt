@@ -54,6 +54,7 @@ internal fun TextRowWithIconPreviewFromMainInternalFunctionMultiPreview() {
   )
 }
 
+@Suppress("UnusedPrivateMember")
 @SnapshotTestingPreview
 @Composable
 private fun TextRowWithIconPreviewFromMainPrivateFunctionMultiPreview() {
