@@ -5,6 +5,24 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.0.0 - 2024-05-29
+
+- Add enabled field to each product configuration
+  options. [#158](https://github.com/EmergeTools/emerge-android/pull/158)
+- Add unit tests for
+  SnapshotsPreviewRuntimeRetentionTransform. [#159](https://github.com/EmergeTools/emerge-android/pull/159)
+- Remove plugin KSP setup & make runtime preview transform default
+  behavior. [#141](https://github.com/EmergeTools/emerge-android/pull/141)
+- Fix issue with ArtifactMetadata
+  filename. [#152](https://github.com/EmergeTools/emerge-android/pull/152)
+- Adds transform for marking preview annotations as runtime
+  retention [#139](https://github.com/EmergeTools/emerge-android/pull/139).
+- Adds support for using new snapshot invoking using `LocalSnapshots`
+  task [#147](https://github.com/EmergeTools/emerge-android/pull/147).
+- Fix configuration cache
+  violations. [#143](https://github.com/EmergeTools/emerge-android/pull/143), [#149](https://github.com/EmergeTools/emerge-android/pull/149)
+- Consistent build directory [#133](https://github.com/EmergeTools/emerge-android/pull/133)
+
 ## 3.0.0-rc03 - 2024-05-24
 
 - Remove plugin KSP setup & make runtime preview transform default
