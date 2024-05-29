@@ -72,11 +72,6 @@ object PreviewUtils {
           return@forEach
         }
 
-        if ((method.accessFlags and AccessFlags.PRIVATE.value) != 0) {
-          logger.info("Ignoring snapshot for method: $methodKey as it is private")
-          return@forEach
-        }
-
         val configs = previewAnnotations.flatMap { previewAnnotation ->
           composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation)
         }
