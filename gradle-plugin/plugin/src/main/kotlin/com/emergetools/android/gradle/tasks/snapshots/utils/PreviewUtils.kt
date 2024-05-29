@@ -1,6 +1,5 @@
 package com.emergetools.android.gradle.tasks.snapshots.utils
 
-import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.dexbacked.DexBackedClassDef
 import org.jf.dexlib2.dexbacked.DexBackedMethod
