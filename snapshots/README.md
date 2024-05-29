@@ -221,7 +221,7 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 3. `gt c -am "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
    1. Alt
       1. `git add *`
-      2. `git commit -m "Prepare for Android perf testing deploy X.Y.Z"`
+      2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
 4. `gt ss`
    1. Alt:
       1. `git push`
