@@ -10,6 +10,9 @@ on:
       - gradle-plugin/**
       - snapshots/**
 
+env:
+  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx6g -Dorg.gradle.daemon=false -Dorg.gradle.vfs.watch=false -Dkotlin.incremental=false"
+
 jobs:
   build:
     runs-on: ubuntu-latest
