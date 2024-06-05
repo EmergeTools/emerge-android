@@ -16,6 +16,13 @@ Composables, Activities, and Views. Emerge handles **everything** for you, inclu
 
 And many more features!
 
+## Artifacts & versions
+| Artifact                                        | Description                                     | Latest                                                                                                                                                                                                             | Min SDK |
+|-------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 23      |
+| `com.emergetools.snapshots:snapshots-annotations`           | Annotations to ignore snapshots                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)           | 23      |
+
+
 ## Quickstart (~10 minutes)
 
 This is a quick setup guide to get end-to-end snapshots set up as quickly as possible. For a full
