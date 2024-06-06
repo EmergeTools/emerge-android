@@ -6,6 +6,10 @@ import com.emergetools.android.gradle.EmergePlugin
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.ProductOptions
 import com.emergetools.android.gradle.util.AgpVersions
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_ASSETS
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_CLASSES
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_JNI
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_RESOURCES
 import com.emergetools.android.gradle.util.dependencies.Dependencies
 import com.emergetools.android.gradle.util.dependencies.buildDependencies
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
@@ -19,11 +23,13 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ArtifactCollection
+import org.gradle.api.attributes.Attribute
+import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.DirectoryProperty
-import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import java.io.BufferedOutputStream
@@ -42,15 +48,8 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:OutputDirectory
   abstract val outputDir: DirectoryProperty
 
-  @get:InputFile
-  @get:Optional
-  abstract val dependencies: RegularFileProperty
-
   @get:Input
   abstract val agpVersion: Property<String>
-
-  @get:Input
-  abstract val variantName: Property<String>
 
   @get:Input
   @get:Optional
@@ -88,6 +87,23 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val gitLabProjectId: Property<String>
 
+  @get:Input
+  abstract val includeDependencyInformation: Property<Boolean>
+
+  @get:Input
+  @get:Optional
+  abstract val appModuleName: Property<String>
+
+  @get:Input
+  @get:Optional
+  abstract val appModulePath: Property<String>
+
+  private lateinit var artifacts: List<ArtifactCollection>
+
+  fun setArtifacts(artifacts: List<ArtifactCollection>) {
+    this.artifacts = artifacts
+  }
+
   /**
    * Internal only for testing.
    */
@@ -113,15 +129,36 @@ abstract class BaseUploadTask : DefaultTask() {
 
       var finalArtifactMetadata = artifactMetadata
 
-      val dependenciesFile = dependencies.asFile.get()
-      if (dependenciesFile.exists()) {
-        dependencies.get().asFile.inputStream().use { inputStream ->
-          zos.putNextEntry(ZipEntry(dependenciesFile.name))
-          inputStream.copyTo(zos)
-          zos.closeEntry()
+      if (includeDependencyInformation.get()) {
+        checkNotNull(appModuleName.orNull) {
+          "appModuleName must be set when includeDependencyInformation is true"
         }
-        finalArtifactMetadata =
-          artifactMetadata.copy(dependencyMetadataZipPath = dependenciesFile.name)
+        checkNotNull(appModulePath.orNull) {
+          "appModulePath must be set when includeDependencyInformation is true"
+        }
+
+        val dependencies = buildDependencies(
+          artifacts = artifacts,
+          defaultModuleName = appModuleName.get(),
+          defaultModulePath = appModulePath.get(),
+          logger = logger,
+        )
+        val dependenciesJson = Json.encodeToString(dependencies)
+        val dependenciesFile = File(outputDir, Dependencies.JSON_FILE_NAME).also {
+          it.createNewFile()
+          it.writeText(dependenciesJson)
+        }
+
+        if (dependenciesFile.exists()) {
+          dependenciesFile.inputStream().use { inputStream ->
+            zos.putNextEntry(ZipEntry(dependenciesFile.name))
+            inputStream.copyTo(zos)
+            zos.closeEntry()
+          }
+          finalArtifactMetadata = artifactMetadata.copy(
+            dependencyMetadataZipPath = dependenciesFile.name,
+          )
+        }
       }
 
       val json = Json.encodeToString(finalArtifactMetadata)
@@ -228,7 +265,6 @@ abstract class BaseUploadTask : DefaultTask() {
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
       outputDir.set(emergeOutputDir)
-      variantName.set(variant.name)
 
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
@@ -242,13 +278,30 @@ abstract class BaseUploadTask : DefaultTask() {
         baseUrl.set(project.property(BASE_URL_ARG_KEY) as String)
       }
 
+      includeDependencyInformation.set(extension.includeDependencyInformation.get())
       if (extension.includeDependencyInformation.get()) {
-        val dependenciesJson = Json.encodeToString(project.buildDependencies(variantName.get()))
-        val dependenciesFile = File(emergeOutputDir, Dependencies.JSON_FILE_NAME).also {
-          it.createNewFile()
-          it.writeText(dependenciesJson)
+        appModuleName.set(project.name)
+        appModulePath.set(project.path)
+
+        val runtimeClasspathConfiguration =
+          project.configurations.getByName("${variant.name}RuntimeClasspath")
+
+        val artifacts = listOf(
+          ARTIFACT_RESOURCES,
+          ARTIFACT_CLASSES,
+          ARTIFACT_ASSETS,
+          ARTIFACT_JNI,
+        ).map { artifactType ->
+          runtimeClasspathConfiguration.incoming.artifactView { viewConfiguration ->
+            viewConfiguration.attributes { attributeContainer ->
+              attributeContainer.attribute(
+                Attribute.of("artifactType", String::class.java),
+                artifactType
+              )
+            }
+          }.artifacts
         }
-        dependencies.set(dependenciesFile)
+        setArtifacts(artifacts)
       }
     }
 

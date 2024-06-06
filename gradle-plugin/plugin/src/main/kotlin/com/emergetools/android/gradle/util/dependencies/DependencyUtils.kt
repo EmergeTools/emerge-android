@@ -1,8 +1,8 @@
 package com.emergetools.android.gradle.util.dependencies
 
 import com.emergetools.android.gradle.util.putOrAppend
-import org.gradle.api.Project
-import org.gradle.api.attributes.Attribute
+import org.gradle.api.artifacts.ArtifactCollection
+import org.gradle.api.logging.Logger
 import java.io.File
 import java.util.jar.JarEntry
 import java.util.jar.JarFile
@@ -16,24 +16,16 @@ const val ARTIFACT_ASSETS = "android-assets"
 const val ARTIFACT_JNI = "android-jni"
 // Intentionally skipping aidl, renderscript and other minors as we haven't seen occurrences yet
 
-fun Project.buildDependencies(
-  variantName: String,
+fun buildDependencies(
+  artifacts: List<ArtifactCollection>,
+  defaultModuleName: String,
+  defaultModulePath: String,
+  logger: Logger,
 ): Dependencies {
-  val dependencies = mutableMapOf<String, List<String>>()
+  val dependencyEntryMap = mutableMapOf<String, List<String>>()
 
-  val runtimeClasspathConfig =
-    configurations.getByName("${variantName}RuntimeClasspath")
-  listOf(
-    ARTIFACT_RESOURCES, ARTIFACT_CLASSES, ARTIFACT_ASSETS, ARTIFACT_JNI
-  ).forEach { artifactType ->
-    runtimeClasspathConfig.incoming.artifactView { viewConfiguration ->
-      viewConfiguration.attributes { attributeContainer ->
-        attributeContainer.attribute(
-          Attribute.of("artifactType", String::class.java),
-          artifactType
-        )
-      }
-    }.artifacts.artifacts.forEach { resolvedArtifact ->
+  artifacts.forEach { artifactCollection ->
+    artifactCollection.artifacts.forEach { resolvedArtifact ->
       val id = resolvedArtifact.id.componentIdentifier
       val dependencyEntries = resolvedArtifact.file
         .walkTopDown()
@@ -56,31 +48,26 @@ fun Project.buildDependencies(
         }.toList()
 
       if (dependencyEntries.isNotEmpty()) {
-        dependencies.putOrAppend(id.displayName, dependencyEntries)
+        dependencyEntryMap.putOrAppend(id.displayName, dependencyEntries)
       }
     }
   }
 
-  val libraries = mutableListOf<Library>()
-  val modules = mutableListOf(
-    // Start with a single, root module for the project we're running on.
-    // This will be the fallback for any entries we can't attribute.
+  val dependencies = mutableListOf<Dependency>(
     Module(
-      name = project.name,
-      path = project.path,
+      name = defaultModuleName,
+      path = defaultModulePath,
       entries = emptyList(),
       isRoot = true,
     )
   )
-  dependencies.entries.mapNotNull {
+  dependencies += dependencyEntryMap.entries.mapNotNull {
     val keySplits = it.key.split(":")
     if (it.key.startsWith(PROJECT_PREFIX)) {
-      modules.add(
-        Module(
-          name = keySplits.last(),
-          path = it.key.substringAfter(PROJECT_PREFIX),
-          entries = it.value,
-        )
+      Module(
+        name = keySplits.last(),
+        path = it.key.substringAfter(PROJECT_PREFIX),
+        entries = it.value,
       )
     } else {
       // Check to ensure the dependency is in the format group:name:version
@@ -91,19 +78,16 @@ fun Project.buildDependencies(
         return@mapNotNull null
       }
 
-      libraries.add(
-        Library(
-          groupId = keySplits[0],
-          artifactId = keySplits[1],
-          version = keySplits[2],
-          entries = it.value
-        )
+      Library(
+        groupId = keySplits[0],
+        artifactId = keySplits[1],
+        version = keySplits[2],
+        entries = it.value
       )
     }
   }
 
   return Dependencies(
-    libraries = libraries,
-    modules = modules,
+    dependencies = dependencies,
   )
 }
