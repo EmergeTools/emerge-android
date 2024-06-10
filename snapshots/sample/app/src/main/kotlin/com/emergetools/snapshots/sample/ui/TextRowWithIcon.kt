@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot
+import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Composable
 fun TextRowWithIcon(
@@ -83,4 +84,26 @@ fun TextRowWithIconPreviewFromMainIgnored() {
     titleText = "Title (ignored)",
     subtitleText = "Subtitle (ignored)"
   )
+}
+
+@Preview(
+  backgroundColor = 0xFF00FF00,
+  showBackground = true,
+)
+@Preview(
+  name = "No showBackground set",
+  backgroundColor = 0xFF00FF00,
+)
+@Preview(
+  name = "No bg color set",
+  showBackground = true,
+)
+@Composable
+fun TextRowWithIconPreviewFromMainBg() {
+  SnapshotsSampleTheme {
+    TextRowWithIcon(
+      titleText = "Title",
+      subtitleText = "Subtitle"
+    )
+  }
 }

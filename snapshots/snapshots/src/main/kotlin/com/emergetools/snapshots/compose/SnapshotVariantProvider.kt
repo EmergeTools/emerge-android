@@ -5,13 +5,20 @@ import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Resources
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.dp
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.EMGLocale
 import java.util.Locale
@@ -46,7 +53,21 @@ fun SnapshotVariantProvider(
   CompositionLocalProvider(
     values = providedValues.filterNotNull().toTypedArray(),
   ) {
-    content()
+
+    val modifier = Modifier
+      .then(config.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
+      .then(config.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
+      .then(
+        config.showBackground?.let {
+          // By default, previews use White as the background color, so preserve behavior.
+          val color = config.backgroundColor?.let { Color(it) } ?: Color.White
+          Modifier.background(color)
+        } ?: Modifier
+      )
+
+    Box(modifier = modifier) {
+      content()
+    }
   }
 }
 
@@ -55,7 +76,7 @@ fun SnapshotVariantProvider(
 class SnapshotVariantContextWrapper(
   base: Context,
   private val newLocale: Locale?,
-  private val newUiMode: Int?
+  private val newUiMode: Int?,
 ) : ContextWrapper(base) {
 
   private var wrappedContext: Context? = null

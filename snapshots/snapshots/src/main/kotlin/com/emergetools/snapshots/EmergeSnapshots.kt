@@ -1,11 +1,19 @@
 package com.emergetools.snapshots
 
 import android.app.Activity
+import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.Canvas
 import android.view.View
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.asAndroidBitmap
 import androidx.compose.ui.test.captureToImage
 import androidx.compose.ui.test.junit4.ComposeTestRule
 import androidx.compose.ui.test.onRoot
+import androidx.compose.ui.unit.Constraints
 import androidx.test.runner.screenshot.Screenshot
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import org.junit.rules.TestRule
@@ -45,14 +53,13 @@ class EmergeSnapshots : TestRule {
   )
 
   fun take(
-    composeTestRule: ComposeTestRule,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
+    bitmap: Bitmap,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig
   ) {
-    composeTestRule.waitForIdle()
     SnapshotSaver.save(
       // DisplayName not used for composables
       displayName = null,
-      bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
+      bitmap = bitmap,
       fqn = fqn,
       type = SnapshotType.COMPOSABLE,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,

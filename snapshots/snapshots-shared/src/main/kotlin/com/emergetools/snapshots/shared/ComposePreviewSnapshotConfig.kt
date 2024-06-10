@@ -8,11 +8,16 @@ import kotlinx.serialization.Serializable
 data class ComposePreviewSnapshotConfig(
   val fullyQualifiedClassName: String,
   val originalFqn: String,
+  // Preview annotation params:
   val name: String? = null,
   val group: String? = null,
   val uiMode: Int? = null,
   val locale: String? = null,
   val fontScale: Float? = null,
+  val widthDp: Int? = null,
+  val heightDp: Int? = null,
+  val showBackground: Boolean? = null,
+  val backgroundColor: Long? = null,
 ) {
 
   /**
@@ -21,7 +26,11 @@ data class ComposePreviewSnapshotConfig(
   fun isDefault(): Boolean {
     return uiMode == null &&
       locale == null &&
-      fontScale == null
+      fontScale == null &&
+      widthDp == null &&
+      heightDp == null &&
+      showBackground == null &&
+      backgroundColor == null
   }
 
   /**
@@ -37,6 +46,10 @@ data class ComposePreviewSnapshotConfig(
       uiMode?.let { append("_uim_$it") }
       locale?.let { append("_loc_$it") }
       fontScale?.let { append("_fsc_$it") }
+      widthDp?.let { append("_wdp_$it") }
+      heightDp?.let { append("_hdp_$it") }
+      showBackground?.let { append("_bg_$it") }
+      backgroundColor?.let { append("_bgc_$it") }
     }
   }
 }

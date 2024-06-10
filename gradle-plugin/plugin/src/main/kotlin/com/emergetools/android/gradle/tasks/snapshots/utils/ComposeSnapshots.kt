@@ -12,9 +12,14 @@ data class ComposeSnapshots(
 data class ComposePreviewSnapshotConfig(
   val originalFqn: String,
   val fullyQualifiedClassName: String,
+  // Preview annotation params:
   val name: String?,
   val group: String?,
   val uiMode: Int?,
   val locale: String?,
   val fontScale: Float?,
+  val heightDp: Int?,
+  val widthDp: Int?,
+  val showBackground: Boolean?,
+  val backgroundColor: Long?,
 )
