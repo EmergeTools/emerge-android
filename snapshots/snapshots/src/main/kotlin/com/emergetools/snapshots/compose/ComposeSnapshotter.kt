@@ -77,6 +77,18 @@ fun snapshotComposable(
   }
 }
 
+private fun captureComposableBitmap(
+  view: ComposeView,
+  previewConfig: ComposePreviewSnapshotConfig,
+): Bitmap {
+  val size = measureComposableSize(view, previewConfig)
+  val bitmap = Bitmap.createBitmap(size.width, size.height, Bitmap.Config.ARGB_8888)
+  val canvas = Canvas(bitmap)
+  view.layout(0, 0, size.width, size.height)
+  view.draw(canvas)
+  return bitmap
+}
+
 private fun measureComposableSize(
   view: ComposeView,
   previewConfig: ComposePreviewSnapshotConfig,
@@ -101,16 +113,4 @@ private fun measureComposableSize(
     View.MeasureSpec.makeMeasureSpec(max(view.height, heightDpPx), heightMeasureSpec),
   )
   return IntSize(view.measuredWidth, view.measuredHeight)
-}
-
-private fun captureComposableBitmap(
-  view: ComposeView,
-  previewConfig: ComposePreviewSnapshotConfig,
-): Bitmap {
-  val size = measureComposableSize(view, previewConfig)
-  val bitmap = Bitmap.createBitmap(size.width, size.height, Bitmap.Config.ARGB_8888)
-  val canvas = Canvas(bitmap)
-  view.layout(0, 0, size.width, size.height)
-  view.draw(canvas)
-  return bitmap
 }

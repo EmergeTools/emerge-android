@@ -74,7 +74,7 @@ object PreviewUtils {
         }
 
         val configs = previewAnnotations.flatMap { previewAnnotation ->
-          composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation, logger)
+          composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation)
         }
 
         methodsWithConfigs[methodKey] = configs
@@ -140,7 +140,6 @@ object PreviewUtils {
   private fun composePreviewSnapshotConfigsFromPreviewAnnotation(
     method: DexBackedMethod,
     annotation: Annotation,
-    logger: Logger,
   ): List<ComposePreviewSnapshotConfig> {
     val className = classSignatureToFqn(method.definingClass)
     val originalFqn = fqnForPreviewMethod(method)
