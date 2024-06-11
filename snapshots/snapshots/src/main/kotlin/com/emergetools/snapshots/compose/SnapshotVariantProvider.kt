@@ -53,7 +53,6 @@ fun SnapshotVariantProvider(
   CompositionLocalProvider(
     values = providedValues.filterNotNull().toTypedArray(),
   ) {
-
     val modifier = Modifier
       .then(config.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
       .then(config.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)

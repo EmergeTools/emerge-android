@@ -15,6 +15,7 @@ import com.emergetools.snapshots.SnapshotType.COMPOSABLE
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.max
 
+@Suppress("TooGenericExceptionCaught")
 fun snapshotComposable(
   snapshotRule: EmergeSnapshots,
   activity: Activity,
@@ -69,7 +70,9 @@ fun snapshotComposable(
     }
   } catch (e: Exception) {
     Log.e(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG, "Error invoking composable method", e
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+      "Error invoking composable method",
+      e,
     )
     snapshotRule.saveError(COMPOSABLE, previewConfig)
     // Re-throw to fail the test

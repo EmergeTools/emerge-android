@@ -62,7 +62,6 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
 
   @Test
-  @Suppress("TooGenericExceptionCaught")
   fun reflectiveComposableInvoker() {
     val previewConfig = parameter.previewConfig
     scenarioRule.scenario.onActivity { activity ->
