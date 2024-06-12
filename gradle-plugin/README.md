@@ -144,10 +144,13 @@ emerge {
   // ..
 
   size {
-    tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
+    // Tag to use for grouping builds in the Emerge dashboard
+    tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
-    enabled.set(true) // If size tasks/project configuration are enabled.
+
+    // If size tasks/project configuration are enabled.
+    enabled.set(true)
   }
 }
 ```
@@ -181,13 +184,16 @@ emerge {
   // ..
 
   performance {
-    projectPath.set(
-      ":perf"
-    ) // REQUIRED - Relative gradle path from root project to the Emerge performance module
-    tag.set("release") // Tag to use for grouping builds in the Emerge dashboard
+    // REQUIRED - Relative gradle path from root project to the Emerge performance module
+    projectPath.set(":perf")
+
+    // Tag to use for grouping builds in the Emerge dashboard
+    tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
-    enabled.set(true) // If performance tasks/project configuration are enabled.
+
+    // If performance tasks/project configuration are enabled.
+    enabled.set(true)
   }
 }
 ```
@@ -218,17 +224,22 @@ emerge {
   // ..
 
   snapshots {
-    snapshotsStorageDirectory.set(
-      "/src/main/snapshots"
-    ) // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
+    // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
+    snapshotsStorageDirectory.set("/src/main/snapshots")
 
-    apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+    // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+    apiVersion.set(33)
 
-    tag.set("snapshots") // Tag to use for grouping builds in the Emerge dashboard
+    // Include private previews in snapshot generation - defaults to true
+    includePrivatePreviews.set(false)
+
+    // Tag to use for grouping builds in the Emerge dashboard
+    tag.set("snapshots")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
 
-    enabled.set(true) // If performance tasks/project configuration are enabled.
+    // If performance tasks/project configuration are enabled.
+    enabled.set(true)
   }
 }
 ```
@@ -244,6 +255,7 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 | `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
 | `apiVersion`                | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
 | `enabled`                   | `boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
+| `includePrivatePreviews`    | `boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
 
 ## Full configuration
 
@@ -253,48 +265,65 @@ emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   vcs {
-    sha.set("..") // Optional, will be set automatically using Git information.
-    baseSha.set("..") // Optional, will be set automatically using Git information.
-    branchName.set("my-feature") // Optional, will be set automatically using Git information.
+    // Optional, will be set automatically using Git information.
+    sha.set("..")
+    // Optional, will be set automatically using Git information.
+    baseSha.set("..")
+    // Optional, will be set automatically using Git information.
+    branchName.set("my-feature")
     prNumber.set("123")
 
     gitHub {
-      repoOwner.set("..") // Required for CI status checks (only if using GitHub)
-      repoName.set("..") // Required for CI status checks (only if using GitHub)
+      // Required for CI status checks (only if using GitHub)
+      repoOwner.set("..")
+      // Required for CI status checks (only if using GitHub)
+      repoName.set("..")
     }
 
     gitLab {
-      projectId.set("..") // Required for CI status checks (only if using GitLab)
+      // Required for CI status checks (only if using GitLab)
+      projectId.set("..")
     }
   }
 
   size {
-    tag.set("release") // Optional, defaults to 'release'
-    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
 
-    enabled.set(true) // If size tasks/project configuration are enabled.
+    // If size tasks/project configuration are enabled.
+    enabled.set(true)
   }
 
   performance {
-    projectPath.set(":perf") // Required for performance testing
-    tag.set("release") // Optional, defaults to 'release'
+    // Required for performance testing
+    projectPath.set(":perf")
+
+    // Optional, defaults to 'release'
+    tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
     tag.setFromVariant()
 
-    enabled.set(true) // If performance tasks/project configuration are enabled.
+    // If performance tasks/project configuration are enabled.
+    enabled.set(true)
   }
 
   snapshots {
-    snapshotsStorageDirectory.set("/src/main/snapshots") // Storage of locally generated snapshots
-    apiVersion.set(33) // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+    // Storage of locally generated snapshots
+    snapshotsStorageDirectory.set("/src/main/snapshots")
+    // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+    apiVersion.set(33)
+    // Include private previews in snapshot generation - defaults to true
+    includePrivatePreviews.set(false)
 
     // Optional, snapshots use debug builds, we recommend using a separate tag.
     tag.set("snapshots")
-    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
 
-    enabled.set(true) // If snapshot tasks/project configuration are enabled.
+    // If snapshot tasks/project configuration are enabled.
+    enabled.set(true)
   }
 }
 ```
@@ -371,13 +400,13 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 2. Update the plugin version in documentation.
 3. Update the `/gradle-plugin/CHANGELOG.md`
 3. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
-   1. Alt
-      1. `git add *`
-      2. `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
+1. Alt
+1. `git add *`
+2. `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
 4. `gt ss`
-   1. Alt:
-      1. `git push`
-      2. Open PR
+1. Alt:
+1. `git push`
+2. Open PR
 6. Get PR approved and merge
 7. Create a new release on GitHub
 8. Tag version `gradle-plugin-vX.Y.Z`
