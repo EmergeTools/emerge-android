@@ -383,6 +383,7 @@ class EmergePlugin : Plugin<Project> {
       it.targetAppId.set(targetAppId)
       it.testAppId.set(testAppId)
       it.testInstrumentationRunner.set(testInstrumentationRunner)
+      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
       it.dependsOn(packageTask)
     }
   }
@@ -405,6 +406,7 @@ class EmergePlugin : Plugin<Project> {
       it.artifactMetadataPath.set(
         packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
+      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)

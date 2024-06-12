@@ -4,16 +4,13 @@ import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import kotlinx.datetime.Clock
-import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.model.ObjectFactory
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.InputFile
-import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
@@ -21,7 +18,6 @@ import org.gradle.api.tasks.TaskAction
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
-import javax.inject.Inject
 
 abstract class UploadSnapshotBundle : BaseUploadTask() {
 
@@ -33,8 +29,13 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:Optional
   abstract val apiVersion: Property<Int>
 
+  @get:Input
+  @get:Optional
+  abstract val includePrivatePreviews: Property<Boolean>
+
   @get:InputFile
   abstract val artifactMetadataPath: RegularFileProperty
+
 
   override fun includeFilesInUpload(zos: ZipOutputStream) {
     val artifactMetadataFilePath = checkNotNull(artifactMetadataPath.asFile.orNull) {
@@ -68,6 +69,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
     return super.uploadRequestData(file).copy(
       androidSnapshotsEnabled = true,
       androidSnapshotsApiVersion = apiVersion.orNull,
+      androidSnapshotsPrivateEnabled = includePrivatePreviews.getOrElse(true),
     )
   }
 

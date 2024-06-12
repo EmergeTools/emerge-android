@@ -10,6 +10,7 @@ import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
@@ -58,6 +59,10 @@ abstract class LocalSnapshots : DefaultTask() {
   @get:Input
   abstract val testInstrumentationRunner: Property<String>
 
+  @get:Input
+  @get:Optional
+  abstract val includePrivatePreviews: Property<Boolean>
+
   @TaskAction
   fun execute() {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
@@ -95,7 +100,11 @@ abstract class LocalSnapshots : DefaultTask() {
       outputDir = extractedApkDir
     )
 
-    val composeSnapshots = PreviewUtils.findPreviews(extractedApkDir, logger)
+    val composeSnapshots = PreviewUtils.findPreviews(
+      extractedApkDir,
+      includePrivatePreviews.getOrElse(true),
+      logger
+    )
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
     val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
     composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))

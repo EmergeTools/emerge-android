@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots.utils
 
+import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.dexbacked.DexBackedClassDef
 import org.jf.dexlib2.dexbacked.DexBackedMethod
@@ -29,6 +30,7 @@ object PreviewUtils {
 
   fun findPreviews(
     extractedApkDirectory: File,
+    includePrivatePreviews: Boolean,
     logger: Logger,
   ): ComposeSnapshots {
 
@@ -54,6 +56,13 @@ object PreviewUtils {
         }
 
         if (previewAnnotations.isEmpty()) {
+          return@forEach
+        }
+
+        if (!includePrivatePreviews && AccessFlags.PRIVATE.isSet(method.accessFlags)) {
+          logger.info(
+            "Ignoring snapshot for method: $methodKey as it is private and includePrivatePreviews is set to false"
+          )
           return@forEach
         }
 
