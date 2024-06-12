@@ -6,6 +6,8 @@ import com.emergetools.android.gradle.EmergePlugin
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.ProductOptions
 import com.emergetools.android.gradle.util.AgpVersions
+import com.emergetools.android.gradle.util.dependencies.Dependencies
+import com.emergetools.android.gradle.util.dependencies.buildDependencies
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import com.emergetools.android.gradle.util.network.EmergeUploadResponse
 import com.emergetools.android.gradle.util.network.SOURCE_GRADLE_PLUGIN
@@ -18,8 +20,10 @@ import okhttp3.OkHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import java.io.BufferedOutputStream
@@ -38,8 +42,15 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:OutputDirectory
   abstract val outputDir: DirectoryProperty
 
+  @get:InputFile
+  @get:Optional
+  abstract val dependencies: RegularFileProperty
+
   @get:Input
   abstract val agpVersion: Property<String>
+
+  @get:Input
+  abstract val variantName: Property<String>
 
   @get:Input
   @get:Optional
@@ -95,11 +106,25 @@ abstract class BaseUploadTask : DefaultTask() {
     outputDir.mkdirs()
 
     val zipFile = File(createTempDirectory("").absolutePathString(), OUTPUT_FILE_NAME)
+    logger.debug("Creating Emerge upload zip: ${zipFile.path}")
 
     ZipOutputStream(BufferedOutputStream(zipFile.outputStream())).use { zos ->
       includeFilesInUpload(zos)
 
-      val json = Json.encodeToString(artifactMetadata)
+      var finalArtifactMetadata = artifactMetadata
+
+      val dependenciesFile = dependencies.asFile.get()
+      if (dependenciesFile.exists()) {
+        dependencies.get().asFile.inputStream().use { inputStream ->
+          zos.putNextEntry(ZipEntry(dependenciesFile.name))
+          inputStream.copyTo(zos)
+          zos.closeEntry()
+        }
+        finalArtifactMetadata =
+          artifactMetadata.copy(dependencyMetadataZipPath = dependenciesFile.name)
+      }
+
+      val json = Json.encodeToString(finalArtifactMetadata)
       val appMetadataFile = File(outputDir, ArtifactMetadata.JSON_FILE_NAME).also {
         it.createNewFile()
         it.writeText(json)
@@ -131,11 +156,7 @@ abstract class BaseUploadTask : DefaultTask() {
     val repoName = if (
       gitHubRepoOwner.orNull.isNullOrEmpty() ||
       gitHubRepoName.orNull.isNullOrBlank()
-    ) {
-      null
-    } else {
-      "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
-    }
+    ) null else "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
 
     return EmergeUploadRequestData(
       apiToken = apiToken.get(),
@@ -159,34 +180,34 @@ abstract class BaseUploadTask : DefaultTask() {
     if (dryRun.get()) {
       file.copyTo(File(outputDir, "/${file.name}"), overwrite = true)
       return null
-    } else {
-      val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .build()
-
-      val baseUrl = baseUrl.getOrElse(BuildConfig.EMERGE_BASE_URL)
-      val baseHttpUrl = baseUrl.toHttpUrlOrNull()
-        ?: error("Invalid baseUrl provided: $baseUrl")
-
-      val uploadResponse = fetchSignedUrl(
-        client = okHttpClient,
-        uploadData = uploadRequestData(file),
-        baseUrl = baseHttpUrl
-      )
-      val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()
-        ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
-
-      logger.debug("Uploading file to Emerge: ${file.path}")
-
-      postFile(
-        client = okHttpClient,
-        file = file,
-        signedUrl = signedUrl
-      )
-      return uploadResponse
     }
+
+    val okHttpClient = OkHttpClient.Builder()
+      .connectTimeout(30, TimeUnit.SECONDS)
+      .readTimeout(30, TimeUnit.SECONDS)
+      .writeTimeout(30, TimeUnit.SECONDS)
+      .build()
+
+    val baseUrl = baseUrl.getOrElse(BuildConfig.EMERGE_BASE_URL)
+    val baseHttpUrl = baseUrl.toHttpUrlOrNull()
+      ?: error("Invalid baseUrl provided: $baseUrl")
+
+    val uploadResponse = fetchSignedUrl(
+      client = okHttpClient,
+      uploadData = uploadRequestData(file),
+      baseUrl = baseHttpUrl
+    )
+    val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()
+      ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
+
+    logger.debug("Uploading file to Emerge: ${file.path}")
+
+    postFile(
+      client = okHttpClient,
+      file = file,
+      signedUrl = signedUrl
+    )
+    return uploadResponse
   }
 
   companion object {
@@ -200,11 +221,14 @@ abstract class BaseUploadTask : DefaultTask() {
     fun BaseUploadTask.setUploadTaskInputs(
       extension: EmergePluginExtension,
       project: Project,
+      variant: Variant,
     ) {
+      val emergeOutputDir = File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
-      outputDir.set(File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs))
+      outputDir.set(emergeOutputDir)
+      variantName.set(variant.name)
 
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
@@ -216,6 +240,15 @@ abstract class BaseUploadTask : DefaultTask() {
 
       if (project.hasProperty(BASE_URL_ARG_KEY)) {
         baseUrl.set(project.property(BASE_URL_ARG_KEY) as String)
+      }
+
+      if (extension.includeDependencyInformation.get()) {
+        val dependenciesJson = Json.encodeToString(project.buildDependencies(variantName.get()))
+        val dependenciesFile = File(emergeOutputDir, Dependencies.JSON_FILE_NAME).also {
+          it.createNewFile()
+          it.writeText(dependenciesJson)
+        }
+        dependencies.set(dependenciesFile)
       }
     }
 
