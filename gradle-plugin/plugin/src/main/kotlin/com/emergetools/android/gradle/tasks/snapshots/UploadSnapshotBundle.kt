@@ -30,6 +30,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   abstract val apiVersion: Property<Int>
 
   @get:Input
+  @get:Optional
   abstract val includePrivatePreviews: Property<Boolean>
 
   @get:InputFile
