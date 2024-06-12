@@ -22,4 +22,5 @@ data class ComposePreviewSnapshotConfig(
   val widthDp: Int?,
   val showBackground: Boolean?,
   val backgroundColor: Long?,
+  val showSystemUi: Boolean?,
 )

@@ -12,7 +12,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.Wallpapers
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Preview(uiMode = UI_MODE_NIGHT_YES)
@@ -42,6 +44,7 @@ fun ThemedComponent() {
 }
 
 @Preview(name = "tall", heightDp = 1000)
+@Preview(name = "tall sysui", heightDp = 1000, showSystemUi = true)
 @Preview(name = "wide", widthDp = 1000)
 @Preview(
   name = "tall and wide",
