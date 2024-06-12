@@ -1,16 +1,16 @@
 # 🛸 Emerge Android
 
-Emerge Android tooling & Gradle plugin for using Emerge's suite of products:
+Emerge Android tooling & Gradle plugin for using Emerge's suite of developer tooling products:
 
 - ⚖️ Size analysis
-- 🏎 Performance testing
 - 📸 End-to-end snapshot testing
+- 🏎 Performance testing
 
 ## Getting started
 
 Using Emerge's Android tooling requires an Emerge account and Emerge offers generous trial & indie tiers to get started. 
 
-To sign up, visit [emergetools.com](https://www.emergetools.com/).
+Create an account for free at [emergetools.com](https://www.emergetools.com/).
 
 ## 🐘 Emerge Gradle Plugin
 
@@ -23,7 +23,7 @@ See [gradle-plugin](./gradle-plugin/README.md) for more information.
 
 Emerge offers a full end-to-end snapshot testing solution using compose `@Preview` functions with only about 10 minutes of setup.
 
-Emerge handles the heavy lifting of generating, diffing and hosting the snapshots for each build,
+Emerge handles the heavy lifting of generating, diffing, and hosting the snapshots for each build,
 allowing you to focus on building beautiful UI components.
 
 See [snapshots](./snapshots/README.md) for full documentation.
