@@ -68,7 +68,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
     return super.uploadRequestData(file).copy(
       androidSnapshotsEnabled = true,
       androidSnapshotsApiVersion = apiVersion.orNull,
-      androidSnapshotsPrivateEnabled = includePrivatePreviews.getOrElse(false),
+      androidSnapshotsPrivateEnabled = includePrivatePreviews.getOrElse(true),
     )
   }
 

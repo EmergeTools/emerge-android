@@ -58,6 +58,9 @@ abstract class LocalSnapshots : DefaultTask() {
   @get:Input
   abstract val testInstrumentationRunner: Property<String>
 
+  @get:Input
+  abstract val includePrivatePreviews: Property<Boolean>
+
   @TaskAction
   fun execute() {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
@@ -95,7 +98,11 @@ abstract class LocalSnapshots : DefaultTask() {
       outputDir = extractedApkDir
     )
 
-    val composeSnapshots = PreviewUtils.findPreviews(extractedApkDir, logger)
+    val composeSnapshots = PreviewUtils.findPreviews(
+      extractedApkDir,
+      includePrivatePreviews.getOrElse(true),
+      logger
+    )
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
     val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
     composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))
