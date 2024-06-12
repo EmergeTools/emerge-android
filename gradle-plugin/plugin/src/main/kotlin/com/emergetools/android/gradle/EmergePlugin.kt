@@ -383,6 +383,7 @@ class EmergePlugin : Plugin<Project> {
       it.targetAppId.set(targetAppId)
       it.testAppId.set(testAppId)
       it.testInstrumentationRunner.set(testInstrumentationRunner)
+      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
       it.dependsOn(packageTask)
     }
   }
