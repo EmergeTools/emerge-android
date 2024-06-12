@@ -41,6 +41,13 @@ fun ThemedComponent() {
   }
 }
 
+@Preview(name = "tall", heightDp = 1000)
+@Preview(name = "wide", widthDp = 1000)
+@Preview(
+  name = "tall and wide",
+  widthDp = 1000,
+  heightDp = 1000
+)
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview(uiMode = UI_MODE_NIGHT_NO)
 @Composable

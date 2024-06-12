@@ -7,8 +7,10 @@ import org.jf.dexlib2.iface.Annotation
 import org.jf.dexlib2.iface.DexFile
 import org.jf.dexlib2.iface.value.AnnotationEncodedValue
 import org.jf.dexlib2.iface.value.ArrayEncodedValue
+import org.jf.dexlib2.iface.value.BooleanEncodedValue
 import org.jf.dexlib2.iface.value.FloatEncodedValue
 import org.jf.dexlib2.iface.value.IntEncodedValue
+import org.jf.dexlib2.iface.value.LongEncodedValue
 import org.jf.dexlib2.iface.value.StringEncodedValue
 import org.slf4j.Logger
 import java.io.File
@@ -152,6 +154,10 @@ object PreviewUtils {
           uiMode = (annotation.elements.firstOrNull { it.name == "uiMode" }?.value as? IntEncodedValue)?.value,
           locale = (annotation.elements.firstOrNull { it.name == "locale" }?.value as? StringEncodedValue)?.value,
           fontScale = (annotation.elements.firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue)?.value,
+          heightDp = (annotation.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
+          widthDp = (annotation.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
+          showBackground = (annotation.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
+          backgroundColor = (annotation.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
         )
       )
 
@@ -167,6 +173,10 @@ object PreviewUtils {
             uiMode = (preview.elements.firstOrNull { it.name == "uiMode" }?.value as? IntEncodedValue)?.value,
             locale = (preview.elements.firstOrNull { it.name == "locale" }?.value as? StringEncodedValue)?.value,
             fontScale = (preview.elements.firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue)?.value,
+            heightDp = (preview.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
+            widthDp = (preview.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
+            showBackground = (preview.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
+            backgroundColor = (preview.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
           )
         }.orEmpty()
       }

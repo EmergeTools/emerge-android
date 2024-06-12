@@ -1,11 +1,8 @@
 package com.emergetools.snapshots
 
 import android.app.Activity
+import android.graphics.Bitmap
 import android.view.View
-import androidx.compose.ui.graphics.asAndroidBitmap
-import androidx.compose.ui.test.captureToImage
-import androidx.compose.ui.test.junit4.ComposeTestRule
-import androidx.compose.ui.test.onRoot
 import androidx.test.runner.screenshot.Screenshot
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import org.junit.rules.TestRule
@@ -45,14 +42,13 @@ class EmergeSnapshots : TestRule {
   )
 
   fun take(
-    composeTestRule: ComposeTestRule,
+    bitmap: Bitmap,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
-    composeTestRule.waitForIdle()
     SnapshotSaver.save(
       // DisplayName not used for composables
       displayName = null,
-      bitmap = composeTestRule.onRoot().captureToImage().asAndroidBitmap(),
+      bitmap = bitmap,
       fqn = fqn,
       type = SnapshotType.COMPOSABLE,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
