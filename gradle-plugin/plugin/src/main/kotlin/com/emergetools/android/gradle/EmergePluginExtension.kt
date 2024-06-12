@@ -152,6 +152,8 @@ abstract class SnapshotOptions : ProductOptions() {
   abstract val snapshotsStorageDirectory: DirectoryProperty
 
   abstract val apiVersion: Property<Int>
+
+  abstract val includePrivatePreviews: Property<Boolean>
 }
 
 abstract class DebugOptions : ProductOptions() {

@@ -405,6 +405,7 @@ class EmergePlugin : Plugin<Project> {
       it.artifactMetadataPath.set(
         packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
+      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)
