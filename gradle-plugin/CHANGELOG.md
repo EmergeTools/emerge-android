@@ -5,6 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.1.0 - 2024-06-13
+
+- Add `includePrivatePreviews` snapshot configuration argument. [#168](https://github.com/EmergeTools/emerge-android/pull/168)
+- Support `heightDp`, `widthDp`, `showBackground`, `backgroundColor` preview annotation
+  parameters. [#167](https://github.com/EmergeTools/emerge-android/pull/167)
+- Support `showSystemUi` preview annotation
+  parameter. [#169](https://github.com/EmergeTools/emerge-android/pull/169)
+- Minor updates to info output. [#170](https://github.com/EmergeTools/emerge-android/pull/170)
+
 ## 3.0.0 - 2024-05-29
 
 - Add enabled field to each product configuration
