@@ -491,14 +491,16 @@ class EmergePlugin : Plugin<Project> {
           size
           ├── tag (optional):            ${extension.sizeOptions.tag.orEmpty()}
           └── enabled:                   ${extension.sizeOptions.enabled.getOrElse(true)}
+          snapshots
+          ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
+          ├── apiVersion:                ${extension.snapshotOptions.apiVersion.orEmpty()}
+          ├── includePrivatePreviews:    ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}
+          ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
+          └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
           performance
           ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
           ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}
           └── enabled:                   ${extension.perfOptions.enabled.getOrElse(true)}
-          snapshots
-          ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
-          └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
           vcsOptions (optional, defaults to Git values)
           ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}
           ├── baseSha:                   ${extension.vcsOptions.baseSha.orEmpty()}
