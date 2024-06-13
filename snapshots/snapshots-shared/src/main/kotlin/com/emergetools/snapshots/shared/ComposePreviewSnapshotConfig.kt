@@ -18,6 +18,7 @@ data class ComposePreviewSnapshotConfig(
   val heightDp: Int? = null,
   val showBackground: Boolean? = null,
   val backgroundColor: Long? = null,
+  val showSystemUi: Boolean? = null,
 ) {
 
   /**
@@ -30,7 +31,8 @@ data class ComposePreviewSnapshotConfig(
       widthDp == null &&
       heightDp == null &&
       showBackground == null &&
-      backgroundColor == null
+      backgroundColor == null &&
+      showSystemUi == null
   }
 
   /**
@@ -50,6 +52,7 @@ data class ComposePreviewSnapshotConfig(
       heightDp?.let { append("_hdp_$it") }
       showBackground?.let { append("_bg_$it") }
       backgroundColor?.let { append("_bgc_$it") }
+      showSystemUi?.let { append("_sysui_$it") }
     }
   }
 }

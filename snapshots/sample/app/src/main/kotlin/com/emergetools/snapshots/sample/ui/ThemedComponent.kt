@@ -42,6 +42,7 @@ fun ThemedComponent() {
 }
 
 @Preview(name = "tall", heightDp = 1000)
+@Preview(name = "tall sysui", heightDp = 1000, showSystemUi = true)
 @Preview(name = "wide", widthDp = 1000)
 @Preview(
   name = "tall and wide",

@@ -65,7 +65,22 @@ fun snapshotComposable(
     activity.setContentView(composeView)
 
     composeView.post {
-      val bitmap = captureComposableBitmap(composeView, previewConfig)
+      // Measure the composable agnostic of the parent constraints to layout properly in activity
+      val composableSize = measureComposableSize(composeView, previewConfig)
+      val bitmap = if (previewConfig.showSystemUi == true) {
+        val rootView = activity.window.decorView.rootView
+        captureBitmap(
+          view = rootView,
+          width = rootView.width,
+          height = rootView.height,
+        )
+      } else {
+        captureBitmap(
+          view = composeView,
+          width = composableSize.width,
+          height = composableSize.height,
+        )
+      }
       snapshotRule.take(bitmap, previewConfig)
     }
   } catch (e: Exception) {
@@ -78,18 +93,6 @@ fun snapshotComposable(
     // Re-throw to fail the test
     throw e
   }
-}
-
-private fun captureComposableBitmap(
-  view: ComposeView,
-  previewConfig: ComposePreviewSnapshotConfig,
-): Bitmap {
-  val size = measureComposableSize(view, previewConfig)
-  val bitmap = Bitmap.createBitmap(size.width, size.height, Bitmap.Config.ARGB_8888)
-  val canvas = Canvas(bitmap)
-  view.layout(0, 0, size.width, size.height)
-  view.draw(canvas)
-  return bitmap
 }
 
 private fun measureComposableSize(
@@ -116,4 +119,16 @@ private fun measureComposableSize(
     View.MeasureSpec.makeMeasureSpec(max(view.height, heightDpPx), heightMeasureSpec),
   )
   return IntSize(view.measuredWidth, view.measuredHeight)
+}
+
+fun captureBitmap(
+  view: View,
+  width: Int,
+  height: Int,
+): Bitmap {
+  val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+  val canvas = Canvas(bitmap)
+  view.layout(0, 0, width, height)
+  view.draw(canvas)
+  return bitmap
 }

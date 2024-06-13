@@ -167,6 +167,7 @@ object PreviewUtils {
           widthDp = (annotation.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
           showBackground = (annotation.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
           backgroundColor = (annotation.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
+          showSystemUi = (annotation.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
         )
       )
 
@@ -186,6 +187,7 @@ object PreviewUtils {
             widthDp = (preview.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
             showBackground = (preview.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
             backgroundColor = (preview.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
+            showSystemUi = (preview.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
           )
         }.orEmpty()
       }
