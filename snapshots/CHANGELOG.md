@@ -5,6 +5,17 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.0 - 2024-06-13
+
+❗Note: This release removes a default white background previous versions of Emerge snapshots
+includes. This is to bring parity with default AS preview behavior. We recommend updating snapshots
+to 1.1 as part of a single PR and rebasing changes to avoid unexpected diffs.
+
+- Support `heightDp`, `widthDp`, `showBackground`, `backgroundColor` preview annotation
+  parameters. [#167](https://github.com/EmergeTools/emerge-android/pull/167)
+- Support `showSystemUi` preview annotation
+  parameter. [#169](https://github.com/EmergeTools/emerge-android/pull/169)
+
 ## 1.0.0 - 2024-05-29
 
 - Adds support for better compose preview error
