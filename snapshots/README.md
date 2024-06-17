@@ -1,6 +1,6 @@
 # 🛰️ Emerge Snapshot Testing
 
-All-in-one Android snapshot testing.
+All-in-one Android snapshot testing with 2 lines of code.
 
 ## Features
 
@@ -16,16 +16,9 @@ Composables, Activities, and Views. Emerge handles **everything** for you, inclu
 
 And many more features!
 
-## Artifacts & versions
-| Artifact                                        | Description                                     | Latest                                                                                                                                                                                                             | Min SDK |
-|-------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 23      |
-| `com.emergetools.snapshots:snapshots-annotations`           | Annotations to ignore snapshots                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)           | 23      |
-
-
 ## Quickstart (~10 minutes)
 
-This is a quick setup guide to get end-to-end snapshots set up as quickly as possible. For a full
+This is a quick setup guide to set up end-to-end snapshots as in about 10 minutes. For a full
 guide on setting up Emerge snapshots, see
 the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
 
@@ -59,7 +52,7 @@ dependencies {
 
 ### Compose snapshotting
 
-Emerge's Gradle plugin (3.0+) automatically generates snapshot tests for all `@Preview` annotated
+Emerge's Gradle plugin (3.0+) automatically snapshots all `@Preview` annotated
 composables in your `main` source set.
 
 No additional setup is required!
@@ -80,11 +73,7 @@ _⚠️ Currently only no-arg `@Preview` annotated composable functions are supp
 
 #### Variant support
 
-Emerge currently supports a subset of `@Preview` annotation parameters:
-
-- `fontScale`
-- `locale`
-- `uiMode` (dark/light mode)
+Emerge currently supports all `@Preview` annotation parameters except for `device`. `device` support is planned for a future snapshots release.
 
 Emerge will automatically generate a snapshot test for each Preview annotation present. For example,
 for the following composable:
@@ -107,7 +96,7 @@ scale (`@Preview` with `fontScale` param).
 
 #### Ignoring previews from snapshotting
 
-Not all Previews might need to be snapshot tested. To ignore a preview from snapshotting, add
+Not all Previews might need to be snapshotted. To ignore a preview from snapshotting, add
 the `@IgnoreEmergeSnapshot` annotation to the preview function.
 
 ```kotlin
@@ -128,6 +117,22 @@ the `snapshots-processor` leverages.
 ```kotlin
 dependencies {
   debugImplementation("com.emergetools.snapshots:snapshots-annotations:{latest_version}")
+}
+```
+
+##### Ignoring private previews
+
+Emerge can snapshot Compose previews with any visibility, like `private` or `internal`. But for some projects, you might not want to snapshot private previews for various reasons. 
+
+Emerge's gradle plugin has an option to include private previews, which can be set to false to disable snapshotting `private` visibility preview functions.
+
+```kotlin
+emerge {
+  // ...
+
+  snapshots {
+    includePrivatePreviews.set(false) // true by default - set to false to exclude private previews from snapshotting
+  }
 }
 ```
 
@@ -218,6 +223,12 @@ configuration options.
 
 For more details on Emerge's snapshotting service, see
 the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
+
+## Artifacts & versions
+| Artifact                                        | Description                                     | Latest                                                                                                                                                                                                             | Min SDK |
+|-------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 23      |
+| `com.emergetools.snapshots:snapshots-annotations`           | Annotations to ignore snapshots                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)           | 23      |
 
 ## Releasing
 
