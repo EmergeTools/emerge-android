@@ -137,7 +137,7 @@ fun captureBitmap(
     view.layout(0, 0, width, height)
     view.draw(canvas)
     return bitmap
-  } catch (e: Exception) {
+  } catch (e: IllegalArgumentException) {
     Log.e(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Error capturing bitmap",
