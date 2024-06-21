@@ -107,3 +107,10 @@ fun TextRowWithIconPreviewFromMainBg() {
     )
   }
 }
+
+// To ensure we properly handle a 0x0 snapshot
+@Suppress("EmptyFunctionBlock")
+@Preview
+@Composable
+fun EmptyPreview() {
+}
