@@ -81,7 +81,9 @@ fun snapshotComposable(
           height = composableSize.height,
         )
       }
-      snapshotRule.take(bitmap, previewConfig)
+      bitmap?.let {
+        snapshotRule.take(bitmap, previewConfig)
+      } ?: snapshotRule.saveError(COMPOSABLE, previewConfig)
     }
   } catch (e: Exception) {
     Log.e(
@@ -89,7 +91,10 @@ fun snapshotComposable(
       "Error invoking composable method",
       e,
     )
-    snapshotRule.saveError(COMPOSABLE, previewConfig)
+    snapshotRule.saveError(
+      COMPOSABLE,
+      previewConfig
+    )
     // Re-throw to fail the test
     throw e
   }
@@ -125,10 +130,19 @@ fun captureBitmap(
   view: View,
   width: Int,
   height: Int,
-): Bitmap {
-  val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-  val canvas = Canvas(bitmap)
-  view.layout(0, 0, width, height)
-  view.draw(canvas)
-  return bitmap
+): Bitmap? {
+  try {
+    val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+    val canvas = Canvas(bitmap)
+    view.layout(0, 0, width, height)
+    view.draw(canvas)
+    return bitmap
+  } catch (e: Exception) {
+    Log.e(
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+      "Error capturing bitmap",
+      e,
+    )
+    return null
+  }
 }

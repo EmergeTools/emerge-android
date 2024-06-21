@@ -107,3 +107,8 @@ fun TextRowWithIconPreviewFromMainBg() {
     )
   }
 }
+
+@Preview
+@Composable
+fun EmptyPreview() {
+}
