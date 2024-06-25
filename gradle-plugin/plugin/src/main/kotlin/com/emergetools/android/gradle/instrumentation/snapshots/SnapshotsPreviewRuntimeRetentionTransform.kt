@@ -56,6 +56,19 @@ class SnapshotsPreviewRuntimeRetentionTransform(
     const val PREVIEW_ANNOTATION_DESC = "Landroidx/compose/ui/tooling/preview/Preview;"
     const val PREVIEW_CONTAINER_ANNOTATION_DESC =
       "Landroidx/compose/ui/tooling/preview/Preview\$Container;"
+
+    // Supported default multipreview annotations
+    const val PREVIEW_LIGHT_DARK_ANNOTATION_DESC =
+      "Landroidx/compose/ui/tooling/preview/PreviewLightDark;"
+    const val PREVIEW_FONT_SCALE_ANNOTATION_DESC =
+      "Landroidx/compose/ui/tooling/preview/PreviewFontScale;"
+
+    val ANNOTATIONS_TO_TRANSFORM = arrayOf(
+      PREVIEW_ANNOTATION_DESC,
+      PREVIEW_CONTAINER_ANNOTATION_DESC,
+      PREVIEW_LIGHT_DARK_ANNOTATION_DESC,
+      PREVIEW_FONT_SCALE_ANNOTATION_DESC,
+    )
   }
 
   override fun visitMethod(
@@ -72,7 +85,7 @@ class SnapshotsPreviewRuntimeRetentionTransform(
         desc: String,
         visible: Boolean,
       ): AnnotationVisitor? {
-        if (desc == PREVIEW_ANNOTATION_DESC || desc == PREVIEW_CONTAINER_ANNOTATION_DESC) {
+        if (ANNOTATIONS_TO_TRANSFORM.contains(desc)) {
           logger.info(
             "$TAG: Modifying method annotation visible at runtime to true for annotation $desc $visible"
           )
@@ -90,7 +103,7 @@ class SnapshotsPreviewRuntimeRetentionTransform(
     desc: String,
     visible: Boolean,
   ): AnnotationVisitor? {
-    if (desc == PREVIEW_ANNOTATION_DESC || desc == PREVIEW_CONTAINER_ANNOTATION_DESC) {
+    if (ANNOTATIONS_TO_TRANSFORM.contains(desc)) {
       logger.info(
         "$TAG: Modifying class annotation visible at runtime to true for annotation $desc $visible"
       )

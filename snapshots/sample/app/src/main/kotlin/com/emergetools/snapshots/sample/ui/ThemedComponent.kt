@@ -13,10 +13,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.tooling.preview.PreviewLightDark
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
-@Preview(uiMode = UI_MODE_NIGHT_YES)
-@Preview(uiMode = UI_MODE_NIGHT_NO)
+@PreviewLightDark
 @Composable
 fun ThemedComponent() {
   val backgroundColor = LocalContext.current.resources.getColor(
