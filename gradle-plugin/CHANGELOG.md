@@ -5,9 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.1.1 - 2024-06-25
+
+- Fix issue where Multipreview templates weren't
+  retained. [#176](https://github.com/EmergeTools/emerge-android/pull/176)
+
 ## 3.1.0 - 2024-06-13
 
-- Add `includePrivatePreviews` snapshot configuration argument. [#168](https://github.com/EmergeTools/emerge-android/pull/168)
+- Add `includePrivatePreviews` snapshot configuration
+  argument. [#168](https://github.com/EmergeTools/emerge-android/pull/168)
 - Support `heightDp`, `widthDp`, `showBackground`, `backgroundColor` preview annotation
   parameters. [#167](https://github.com/EmergeTools/emerge-android/pull/167)
 - Support `showSystemUi` preview annotation
