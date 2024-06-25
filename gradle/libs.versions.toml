@@ -11,7 +11,7 @@ okhttp = "4.10.0"
 junit-jupiter = "5.8.2"
 
 # internal
-emerge-gradle-plugin = "3.1.0"
+emerge-gradle-plugin = "3.1.1"
 emerge-peformance = "2.1.2"
 emerge-snapshots = "1.1.1"
 
