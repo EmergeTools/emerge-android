@@ -5,6 +5,10 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.1 - 2024-06-25
+
+- Fix bug when snapshotting empty 0x0 previews. [#173](https://github.com/EmergeTools/emerge-android/pull/173)
+
 ## 1.1.0 - 2024-06-13
 
 ❗Note: This release removes a default white background previous versions of Emerge snapshots
