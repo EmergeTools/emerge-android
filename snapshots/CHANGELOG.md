@@ -5,9 +5,16 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.2 - 2024-06-27
+
+- Use `PreviewActivity`
+  over `ComponentActivity`. [#178](https://github.com/EmergeTools/emerge-android/pull/178)
+- Force target app to be debuggable. [#179](https://github.com/EmergeTools/emerge-android/pull/179)
+
 ## 1.1.1 - 2024-06-24
 
-- Fix bug when snapshotting empty 0x0 previews. [#173](https://github.com/EmergeTools/emerge-android/pull/173)
+- Fix bug when snapshotting empty 0x0
+  previews. [#173](https://github.com/EmergeTools/emerge-android/pull/173)
 
 ## 1.1.0 - 2024-06-13
 
