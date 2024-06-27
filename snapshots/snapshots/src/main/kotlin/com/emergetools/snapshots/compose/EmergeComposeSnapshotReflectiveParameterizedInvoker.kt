@@ -1,7 +1,7 @@
 package com.emergetools.snapshots.compose
 
 import android.util.Log
-import androidx.activity.ComponentActivity
+import androidx.compose.ui.tooling.PreviewActivity
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
@@ -56,7 +56,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   }
 
   @get:Rule
-  val scenarioRule = ActivityScenarioRule(ComponentActivity::class.java)
+  val scenarioRule = ActivityScenarioRule(PreviewActivity::class.java)
 
   @get:Rule
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()

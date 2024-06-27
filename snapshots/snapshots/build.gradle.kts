@@ -55,10 +55,10 @@ dependencies {
   api(platform(libs.compose.bom))
   api(libs.compose.runtime)
   api(libs.compose.ui)
+  api(libs.compose.ui.tooling)
   api(libs.compose.foundation.android)
 
   api(projects.snapshots.snapshotsShared)
-  api(libs.androidx.activity)
   api(libs.androidx.test.core)
   api(libs.androidx.test.core.ktx)
   api(libs.androidx.test.ext.junit)
