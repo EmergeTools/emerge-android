@@ -1,5 +1,6 @@
 package com.emergetools.snapshots.compose
 
+import android.content.pm.ApplicationInfo
 import android.util.Log
 import androidx.compose.ui.tooling.PreviewActivity
 import androidx.test.ext.junit.rules.ActivityScenarioRule
@@ -63,6 +64,10 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
 
   @Test
   fun reflectiveComposableInvoker() {
+    // Force application to be debuggable to ensure PreviewActivity doesn't early exit
+    val applicationInfo = InstrumentationRegistry.getInstrumentation().targetContext.applicationInfo
+    applicationInfo.flags = applicationInfo.flags or ApplicationInfo.FLAG_DEBUGGABLE
+
     val previewConfig = parameter.previewConfig
     scenarioRule.scenario.onActivity { activity ->
       snapshotComposable(snapshotRule, activity, previewConfig)
