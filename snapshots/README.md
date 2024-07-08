@@ -69,7 +69,19 @@ fun MyComposablePreview() {
 }
 ```
 
-_⚠️ Currently only no-arg `@Preview` annotated composable functions are supported._
+_⚠️ Currently only no-arg preview functions are supported. `@PreviewParameter` annotated arguments like the below example are not yet supported._
+
+```kotlin
+
+@Preview
+@Composable
+fun MyComposablePreview(
+  // NOT YET SUPPORTED
+  @PreviewParameter(UserPreviewParameterProvider::class) user: User
+) {
+  MyComposable(user)
+}
+```
 
 #### Variant support
 
