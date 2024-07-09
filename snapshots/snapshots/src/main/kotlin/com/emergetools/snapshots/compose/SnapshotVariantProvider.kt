@@ -28,8 +28,15 @@ fun SnapshotVariantProvider(
   config: ComposePreviewSnapshotConfig,
   content: @Composable () -> Unit,
 ) {
-  val fontScale = config.fontScale ?: 1.0f
-  val fontScaleDensity = Density(fontScale = fontScale, density = LocalDensity.current.density)
+  val dimensionSpec = configToDimensionSpec(
+    config.device,
+    config,
+  )
+
+  val localDensity = Density(
+    fontScale = dimensionSpec.fontScale ?: LocalDensity.current.fontScale,
+    density = dimensionSpec.density ?: LocalDensity.current.density,
+  )
 
   val locale = config.locale?.let { EMGLocale.forLanguageCode(it) } ?: Locale.getDefault()
 
@@ -48,21 +55,22 @@ fun SnapshotVariantProvider(
     LocalInspectionMode provides true,
     LocalContext provides wrappedContext,
     LocalConfiguration provides localConfiguration,
-    config.fontScale?.let { LocalDensity provides fontScaleDensity }
+    LocalDensity provides localDensity,
   )
+
   CompositionLocalProvider(
-    values = providedValues.filterNotNull().toTypedArray(),
+    values = providedValues.toList().toTypedArray(),
   ) {
     val modifier = Modifier
-      .then(config.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
-      .then(config.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
-      .then(
-        config.showBackground?.let {
-          // By default, previews use White as the background color, so preserve behavior.
-          val color = config.backgroundColor?.let { Color(it) } ?: Color.White
-          Modifier.background(color)
-        } ?: Modifier
-      )
+        .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
+        .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
+        .then(
+            config.showBackground?.let {
+                // By default, previews use White as the background color, so preserve behavior.
+                val color = config.backgroundColor?.let { Color(it) } ?: Color.White
+                Modifier.background(color)
+            } ?: Modifier
+        )
 
     Box(modifier = modifier) {
       content()
@@ -93,7 +101,8 @@ class SnapshotVariantContextWrapper(
       overrideConfiguration.setLocale(it)
     }
     newUiMode?.let {
-      overrideConfiguration.uiMode = it or (overrideConfiguration.uiMode and UI_MODE_NIGHT_MASK.inv())
+      overrideConfiguration.uiMode =
+        it or (overrideConfiguration.uiMode and UI_MODE_NIGHT_MASK.inv())
     }
     return context
   }

@@ -168,6 +168,7 @@ object PreviewUtils {
           showBackground = (annotation.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
           backgroundColor = (annotation.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
           showSystemUi = (annotation.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
+          device = (annotation.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
         )
       )
 
@@ -188,6 +189,7 @@ object PreviewUtils {
             showBackground = (preview.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
             backgroundColor = (preview.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
             showSystemUi = (preview.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
+            device = (preview.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
           )
         }.orEmpty()
       }

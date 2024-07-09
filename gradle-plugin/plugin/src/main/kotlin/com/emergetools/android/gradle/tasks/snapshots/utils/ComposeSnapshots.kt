@@ -23,4 +23,5 @@ data class ComposePreviewSnapshotConfig(
   val showBackground: Boolean?,
   val backgroundColor: Long?,
   val showSystemUi: Boolean?,
+  val device: String? = null,
 )
