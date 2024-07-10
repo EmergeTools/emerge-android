@@ -118,15 +118,15 @@ fun TextRowWithIconPreviewFromMainBg() {
 )
 @Preview(
   device = Devices.PIXEL_3,
-  heightDp = 1000,
-)
-@Preview(
-  device = Devices.PIXEL_3,
   widthDp = 1000,
 )
 @Preview(
   device = Devices.PIXEL_3,
   fontScale = 2f,
+  showSystemUi = true,
+)
+@Preview(
+  device = Devices.PIXEL_TABLET,
   showSystemUi = true,
 )
 @Composable
