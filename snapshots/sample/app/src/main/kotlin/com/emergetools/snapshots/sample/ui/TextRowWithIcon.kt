@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
@@ -100,6 +101,36 @@ fun TextRowWithIconPreviewFromMainIgnored() {
 )
 @Composable
 fun TextRowWithIconPreviewFromMainBg() {
+  SnapshotsSampleTheme {
+    TextRowWithIcon(
+      titleText = "Title",
+      subtitleText = "Subtitle"
+    )
+  }
+}
+
+@Preview(
+  device = Devices.PIXEL,
+)
+@Preview(
+  device = Devices.NEXUS_7_2013,
+  showSystemUi = true,
+)
+@Preview(
+  device = Devices.PIXEL_3,
+  widthDp = 1000,
+)
+@Preview(
+  device = Devices.PIXEL_3,
+  fontScale = 2f,
+  showSystemUi = true,
+)
+@Preview(
+  device = Devices.PIXEL_TABLET,
+  showSystemUi = true,
+)
+@Composable
+fun TextRowWithIconPreviewFromMainDevices() {
   SnapshotsSampleTheme {
     TextRowWithIcon(
       titleText = "Title",
