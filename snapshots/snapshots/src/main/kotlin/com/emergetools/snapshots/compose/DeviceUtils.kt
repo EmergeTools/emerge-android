@@ -1,7 +1,8 @@
+@file:Suppress("MaxLineLength", "MaximumLineLength")
+
 package com.emergetools.snapshots.compose
 
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.platform.LocalDensity
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.abs
 
@@ -20,7 +21,7 @@ data class DeviceSpec(
   // https://m3.material.io/blog/device-metrics
   val dimensionSpec: DimensionSpec
     get() {
-      val proportion = densityPpi / 160
+      val proportion = densityPpi / MDPI_THRESHOLD
       val widthDp = widthPixels * proportion
       val heightDp = heightPixels * proportion
       return DimensionSpec(
@@ -31,17 +32,31 @@ data class DeviceSpec(
     }
 
   companion object {
+    private const val LDPI_THRESHOLD = 120
+    private const val MDPI_THRESHOLD = 160
+    private const val HDPI_THRESHOLD = 240
+    private const val XHDPI_THRESHOLD = 320
+    private const val XXHDPI_THRESHOLD = 480
+    private const val XXXHDPI_THRESHOLD = 640
+    private const val LDPI_SCALE = 0.75f
+    private const val MDPI_SCALE = 1f
+    private const val HDPI_SCALE = 1.5f
+    private const val XHDPI_SCALE = 2f
+    private const val XXHDPI_SCALE = 3f
+    private const val XXXHDPI_SCALE = 4f
+
+    // https://m3.material.io/blog/device-metrics#finding-the-density-bucket
     fun getClosestDensityScalingFactor(dpi: Int): Float {
       val densityMap = mapOf(
-        120 to 0.75f,
-        160 to 1f,
-        240 to 1.5f,
-        320 to 2f,
-        480 to 3f,
-        640 to 4f,
+        LDPI_THRESHOLD to LDPI_SCALE,
+        MDPI_THRESHOLD to MDPI_SCALE,
+        HDPI_THRESHOLD to HDPI_SCALE,
+        XHDPI_THRESHOLD to XHDPI_SCALE,
+        XXHDPI_THRESHOLD to XXHDPI_SCALE,
+        XXXHDPI_THRESHOLD to XXXHDPI_SCALE,
       )
 
-      var closestDensityScaling = 1f
+      var closestDensityScaling = MDPI_SCALE
       var smallestDifference = Int.MAX_VALUE
 
       for ((key, value) in densityMap.entries) {
@@ -271,6 +286,8 @@ data class DevicePreviewString(
 fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
   if (deviceString.isNullOrEmpty()) return null
 
+  // All formats of this string can be found at:
+  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Device.android.kt;bpv=0
   val devicePattern = Regex(
     """(id:(?<id>[a-zA-Z0-9_ ]+))|(name:(?<name>[a-zA-Z0-9_ ]+))|(spec:id=(?<specId>[a-zA-Z0-9_]+),shape=(?<shape>[a-zA-Z0-9_]+),width=(?<width>\d+),height=(?<height>\d+),unit=(?<unit>[a-zA-Z]+),dpi=(?<dpi>\d+))"""
   )
@@ -280,7 +297,11 @@ fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
     val groups = result.groups
     when {
       groups["id"]?.value != null -> DevicePreviewString(type = "id", id = groups["id"]?.value)
-      groups["name"]?.value != null -> DevicePreviewString(type = "name", name = groups["name"]?.value)
+      groups["name"]?.value != null -> DevicePreviewString(
+        type = "name",
+        name = groups["name"]?.value
+      )
+
       groups["specId"]?.value != null -> DevicePreviewString(
         type = "spec",
         id = groups["specId"]?.value,
@@ -288,6 +309,7 @@ fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
         heightDp = groups["height"]?.value?.toInt(),
         dpi = groups["dpi"]?.value?.toInt(),
       )
+
       else -> null
     }
   }

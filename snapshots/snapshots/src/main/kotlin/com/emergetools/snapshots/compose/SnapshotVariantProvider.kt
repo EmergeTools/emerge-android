@@ -62,15 +62,15 @@ fun SnapshotVariantProvider(
     values = providedValues.toList().toTypedArray(),
   ) {
     val modifier = Modifier
-        .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
-        .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
-        .then(
-            config.showBackground?.let {
-                // By default, previews use White as the background color, so preserve behavior.
-                val color = config.backgroundColor?.let { Color(it) } ?: Color.White
-                Modifier.background(color)
-            } ?: Modifier
-        )
+      .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
+      .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
+      .then(
+        config.showBackground?.let {
+          // By default, previews use White as the background color, so preserve behavior.
+          val color = config.backgroundColor?.let { Color(it) } ?: Color.White
+          Modifier.background(color)
+        } ?: Modifier
+      )
 
     Box(modifier = modifier) {
       content()

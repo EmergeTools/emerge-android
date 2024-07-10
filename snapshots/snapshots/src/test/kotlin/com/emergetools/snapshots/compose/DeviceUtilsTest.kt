@@ -1,8 +1,5 @@
 package com.emergetools.snapshots.compose
 
-import com.emergetools.snapshots.compose.DevicePreviewString
-import com.emergetools.snapshots.compose.DeviceSpec
-import com.emergetools.snapshots.compose.parseDevicePreviewString
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
