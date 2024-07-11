@@ -2,11 +2,9 @@ package com.emergetools.android.gradle.instrumentation.snapshots
 
 import com.emergetools.android.gradle.instrumentation.testutils.isClassAnnotationRuntimeVisible
 import com.emergetools.android.gradle.instrumentation.testutils.isMethodAnnotationRuntimeVisible
-import org.junit.Assert.assertFalse
-import org.junit.Assert.assertTrue
-import org.junit.Test
-import org.junit.runner.RunWith
-import org.junit.runners.JUnit4
+import org.junit.jupiter.api.Assertions.assertFalse
+import org.junit.jupiter.api.Assertions.assertTrue
+import org.junit.jupiter.api.Test
 import org.objectweb.asm.ClassReader
 import org.objectweb.asm.ClassWriter
 import org.objectweb.asm.Opcodes
@@ -14,7 +12,6 @@ import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.InputStream
 
-@RunWith(JUnit4::class)
 class SnapshotsPreviewRuntimeRetentionTransformTest {
 
   @Test

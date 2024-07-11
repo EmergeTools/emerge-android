@@ -39,7 +39,7 @@ abstract class UploadAAB : BaseUploadTask() {
 
     val response = upload(artifactMetadata)
     checkNotNull(response) {
-      "Upload failed, please check your network connection and try again."
+      "Upload failed, please check your network connection and try again. ${response.toString()}"
     }
 
     logger.lifecycle("AAB Upload successful! View Emerge's size analysis at the following url:")

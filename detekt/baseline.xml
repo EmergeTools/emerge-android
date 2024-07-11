@@ -8,6 +8,7 @@
     <ID>ReturnCount:Git.kt$Git$private fun remoteHeadBranch(remote: String? = primaryRemote()): String?</ID>
     <ID>ReturnCount:GitHub.kt$GitHub$fun repoId(): String?</ID>
     <ID>TooManyFunctions:EmergePlugin.kt$EmergePlugin : Plugin</ID>
+    <ID>TooManyFunctions:ReaperInternal.kt$ReaperInternal</ID>
     <ID>UnnecessaryAbstractClass:EmergePluginExtension.kt$GitHubOptions$GitHubOptions</ID>
     <ID>UnnecessaryAbstractClass:EmergePluginExtension.kt$GitLabOptions$GitLabOptions</ID>
     <ID>UnnecessaryAbstractClass:EmergePluginExtension.kt$ProductOptions$ProductOptions</ID>

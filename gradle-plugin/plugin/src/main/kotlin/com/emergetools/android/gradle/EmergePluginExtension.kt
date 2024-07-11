@@ -47,6 +47,13 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
   }
 
   @get:Nested
+  abstract val reaperOptions: ReaperOptions
+
+  fun reaper(action: Action<ReaperOptions>) {
+    action.execute(reaperOptions)
+  }
+
+  @get:Nested
   abstract val vcsOptions: VCSOptions
 
   fun vcs(action: Action<VCSOptions>) {
@@ -158,4 +165,10 @@ abstract class SnapshotOptions : ProductOptions() {
 
 abstract class DebugOptions : ProductOptions() {
   abstract val forceInstrumentation: Property<Boolean>
+}
+
+abstract class ReaperOptions : ProductOptions() {
+  abstract val enabled: Property<Boolean>
+
+  abstract val publishableApiKey: Property<String>
 }
