@@ -2,6 +2,7 @@ package com.emergetools.android.gradle
 
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.dsl.TestExtension
+import com.android.build.api.instrumentation.FramesComputationMode
 import com.android.build.api.instrumentation.InstrumentationScope
 import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
@@ -11,11 +12,13 @@ import com.android.build.api.variant.TestVariant
 import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.android.build.gradle.internal.tasks.factory.dependsOn
+import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
 import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
 import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
 import com.emergetools.android.gradle.tasks.perf.UploadPerfBundle
+import com.emergetools.android.gradle.tasks.reaper.InitializeReaper
 import com.emergetools.android.gradle.tasks.size.UploadAAB
 import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots
@@ -110,6 +113,16 @@ class EmergePlugin : Plugin<Project> {
           registerSizeTasks(appProject, emergeExtension, variant)
         }
 
+        // Always register the Reaper initialization task even if Reaper is disabled since users use
+        // it to help get Reaper setup for the first time.
+        registerInitializeReaperTask(appProject, emergeExtension, variant)
+
+        registerReaperTransform(
+          project = appProject,
+          extension = emergeExtension,
+          variant = variant,
+        )
+
         // Only register snapshot tasks for builds with androidTest source set
         val androidTest = variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
           ?: return@onVariants
@@ -203,6 +216,24 @@ class EmergePlugin : Plugin<Project> {
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.sizeOptions, variant)
+    }
+  }
+
+  private fun registerInitializeReaperTask(
+    appProject: Project,
+    extension: EmergePluginExtension,
+    variant: Variant,
+  ) {
+    val taskName = "${EMERGE_TASK_PREFIX}InitializeReaper${variant.name.capitalize()}"
+
+    appProject.tasks.register(taskName, InitializeReaper::class.java) {
+      it.group = EMERGE_TASK_GROUP
+      it.description = "Confirms Reaper is initialized and uploads an AAB for variant ${variant.name} to Emerge."
+      it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
+      it.setUploadTaskInputs(extension, appProject)
+      it.setTagFromProductOptions(extension.reaperOptions, variant)
+      it.reaperEnabled.set(extension.reaperOptions.enabled)
+      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
     }
   }
 
@@ -474,6 +505,31 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
+  private fun registerReaperTransform(
+    project: Project,
+    extension: EmergePluginExtension,
+    variant: ApplicationVariant,
+  ) {
+    val enabled = extension.reaperOptions.enabled.getOrElse(false)
+    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (enabled) "true" else "false")
+    val publishableApiKey = extension.reaperOptions.publishableApiKey.orNull
+    if (enabled) {
+      if (publishableApiKey == null) {
+        throw StopExecutionException("If Reaper is enabled publishableApiKey must be set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
+      }
+      variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
+      project.logger.info("Registering reaper transform for variant ${variant.name}")
+      variant.instrumentation.let {
+        it.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
+        it.transformClassesWith(
+          ReaperClassLoadClassVisitorFactory::class.java,
+          InstrumentationScope.ALL,
+        ) { _ -> }
+      }
+    }
+
+  }
+
   private fun logExtension(
     project: Project,
     extension: EmergePluginExtension,
@@ -497,6 +553,10 @@ class EmergePlugin : Plugin<Project> {
           ├── includePrivatePreviews:    ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}
           ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
           └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
+          reaper
+          ├── publishableApiKey:         ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
+          ├── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
+          └── enabled:                   ${extension.reaperOptions.enabled.getOrElse(false)}
           performance
           ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
           ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}

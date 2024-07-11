@@ -3,12 +3,13 @@
 Emerge Android tooling & Gradle plugin for using Emerge's suite of developer tooling products:
 
 - ⚖️ Size analysis
-- 📸 End-to-end snapshot testing
+- 📸 Snapshots: End-to-end snapshot testing
+- 💀 Reaper: Dead code detection using production data
 - 🏎 Performance testing
 
 ## Getting started
 
-Using Emerge's Android tooling requires an Emerge account and Emerge offers generous trial & indie tiers to get started. 
+Using Emerge's Android tooling requires an Emerge account and Emerge offers generous trial & indie tiers to get started.
 
 Create an account for free at [emergetools.com](https://www.emergetools.com/).
 
@@ -28,6 +29,13 @@ allowing you to focus on building beautiful UI components.
 
 See [snapshots](./snapshots/README.md) for full documentation.
 
+## 💀 Reaper
+
+Reaper is an SDK you add to your app to detect dead code. In combination with Emerge's Gradle
+plugin, Reaper reports class load usages in production, which Emerge uses to detect dead code.
+
+See [reaper](./reaper/README.md) for full documentation.
+
 ## 🏎 Performance
 
 Emerge offers tooling for performance testing custom startup and UI tests.
@@ -43,5 +51,6 @@ See [performance](./performance/README.md) for full documentation.
 |-------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `com.emergetools.android`                       | Emerge Gradle Plugin                            | 3.1.2                                                                                                                                                                                                              | N/A     |
 | `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 23      |
+| `com.emergetools.reaper:reaper`                 | Reaper SDK                                      | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper)                       | 26      |
 | `com.emergetools.test:performance`              | Performance testing SDK                         | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance)                 | 23      |
 

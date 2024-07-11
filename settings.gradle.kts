@@ -1,4 +1,4 @@
-rootProject.name = "emerge-android"
+rootProject.name = "internal-emerge-android"
 
 pluginManagement {
   repositories {
@@ -24,6 +24,10 @@ include(
   ":performance:sample",
   ":performance:sample:app",
   ":performance:sample:perftesting",
+  ":reaper",
+  ":reaper:reaper",
+  ":reaper:sample",
+  ":reaper:sample:app",
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-annotations",
@@ -31,5 +35,6 @@ include(
   ":snapshots:sample",
   ":snapshots:sample:app",
   ":snapshots:sample:ui-module",
+  ":benchmark",
 )
 includeBuild("gradle-plugin")
