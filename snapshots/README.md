@@ -85,7 +85,7 @@ fun MyComposablePreview(
 
 #### Variant support
 
-Emerge currently supports all `@Preview` annotation parameters except for `device`. `device` support is planned for a future snapshots release.
+Emerge currently supports all `@Preview` annotation parameters except for `wallpaper`.
 
 Emerge will automatically generate a snapshot test for each Preview annotation present. For example,
 for the following composable:
