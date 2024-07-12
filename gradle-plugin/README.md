@@ -327,6 +327,20 @@ emerge {
     // If snapshot tasks/project configuration are enabled.
     enabled.set(true)
   }
+
+  reaper {
+    // The key used to identify Reaper reports for your organization.
+    publishableApiKey.set("<Reaper API key>")
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
+    tag.setFromVariant()
+
+    // If Reaper is enabled. When Reaper is enabled the application bytecode will be
+    // instrumented to support Reaper.
+    enabled.set(true)
+  }
 }
 ```
 
