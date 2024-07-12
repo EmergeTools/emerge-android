@@ -37,6 +37,8 @@ emerge {
 }
 ```
 
+Latest version: ![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/com.emergetools.android)
+
 Only the `apiToken` property is required. By default, without any property set, `apiToken` will
 attempt to use the `EMERGE_API_TOKEN` env variable. Other configuration properties are
 documented below.
