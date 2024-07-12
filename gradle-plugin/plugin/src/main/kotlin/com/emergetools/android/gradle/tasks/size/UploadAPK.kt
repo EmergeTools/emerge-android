@@ -18,64 +18,64 @@ import java.util.zip.ZipOutputStream
 
 abstract class UploadAPK : BaseUploadTask() {
 
-	@get:InputDirectory
-	@get:PathSensitive(PathSensitivity.NAME_ONLY)
-	abstract val artifactDir: DirectoryProperty
+  @get:InputDirectory
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val artifactDir: DirectoryProperty
 
-	@get:InputFile
-	@get:Optional
-	@get:PathSensitive(PathSensitivity.NAME_ONLY)
-	abstract val proguardMapping: RegularFileProperty
+  @get:InputFile
+  @get:Optional
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val proguardMapping: RegularFileProperty
 
-	private val primaryArtifact: File
-		get() {
-			val apks = artifactDir.get().asFileTree.filter { it.extension == APK_EXTENSION }
-			check(apks.files.size < 2) {
-				"Multiple APKs found in artifact directory: ${apks.files}, only one APK currently supported"
-			}
+  private val primaryArtifact: File
+    get() {
+      val apks = artifactDir.get().asFileTree.filter { it.extension == APK_EXTENSION }
+      check(apks.files.size < 2) {
+        "Multiple APKs found in artifact directory: ${apks.files}, only one APK currently supported"
+      }
 
-			return apks.singleFile
-		}
+      return apks.singleFile
+    }
 
-	override fun includeFilesInUpload(zos: ZipOutputStream) {
-		primaryArtifact.inputStream().use { inputStream ->
-			zos.putNextEntry(ZipEntry(primaryArtifact.name))
-			inputStream.copyTo(zos)
-			zos.closeEntry()
-		}
+  override fun includeFilesInUpload(zos: ZipOutputStream) {
+    primaryArtifact.inputStream().use { inputStream ->
+      zos.putNextEntry(ZipEntry(primaryArtifact.name))
+      inputStream.copyTo(zos)
+      zos.closeEntry()
+    }
 
-		proguardMapping.asFile.orNull?.let {
-			it.inputStream().use { inputStream ->
-				zos.putNextEntry(ZipEntry(it.name))
-				inputStream.copyTo(zos)
-				zos.closeEntry()
-			}
-		}
-	}
+    proguardMapping.asFile.orNull?.let {
+      it.inputStream().use { inputStream ->
+        zos.putNextEntry(ZipEntry(it.name))
+        inputStream.copyTo(zos)
+        zos.closeEntry()
+      }
+    }
+  }
 
-	@TaskAction
-	fun doExecute() {
-		val artifactName = primaryArtifact.name
-		val proguardMappingName = proguardMapping.asFile.orNull?.name
-		val artifactMetadata = ArtifactMetadata(
+  @TaskAction
+  fun doExecute() {
+    val artifactName = primaryArtifact.name
+    val proguardMappingName = proguardMapping.asFile.orNull?.name
+    val artifactMetadata = ArtifactMetadata(
       created = Clock.System.now(),
-			emergeGradlePluginVersion = BuildConfig.VERSION,
-			androidGradlePluginVersion = agpVersion.get(),
-			targetArtifactZipPath = artifactName,
-			proguardMappingsZipPath = proguardMappingName,
-		)
+      emergeGradlePluginVersion = BuildConfig.VERSION,
+      androidGradlePluginVersion = agpVersion.get(),
+      targetArtifactZipPath = artifactName,
+      proguardMappingsZipPath = proguardMappingName,
+    )
 
-		val response = upload(artifactMetadata)
-		checkNotNull(response) {
-			"Upload failed, please check your network connection and try again."
-		}
+    val response = upload(artifactMetadata)
+    checkNotNull(response) {
+      "Upload failed, please check your network connection and try again."
+    }
 
-		logger.lifecycle("APK Upload successful! View Emerge's size analysis at the following url:")
-		logger.lifecycle("https://emergetools.com/build/${response.uploadId}")
-		logger.lifecycle("Size processing can take up to 10 minutes.")
-	}
+    logger.lifecycle("APK Upload successful! View Emerge's size analysis at the following url:")
+    logger.lifecycle("https://emergetools.com/build/${response.uploadId}")
+    logger.lifecycle("Size processing can take up to 10 minutes.")
+  }
 
-	companion object {
-		const val APK_EXTENSION = "apk"
-	}
+  companion object {
+    const val APK_EXTENSION = "apk"
+  }
 }
