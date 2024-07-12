@@ -21,16 +21,16 @@ java {
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
 
-	sourceSets {
-		main {
-			resources {
-				srcDir(perfProjectTemplateResDir)
-			}
-		}
+  sourceSets {
+    main {
+      resources {
+        srcDir(perfProjectTemplateResDir)
+      }
+    }
     test {
       java.srcDir("src/test/kotlin")
     }
-	}
+  }
 }
 
 tasks.withType<KotlinCompile> {
@@ -126,9 +126,9 @@ dependencies {
   compileOnly(libs.kotlin.gradle.plugin)
 
   implementation(libs.dexlib2)
-	implementation(libs.kotlinx.datetime)
-	implementation(libs.kotlinx.serialization)
-	implementation(libs.okhttp)
+  implementation(libs.kotlinx.datetime)
+  implementation(libs.kotlinx.serialization)
+  implementation(libs.okhttp)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   implementation(libs.guava)

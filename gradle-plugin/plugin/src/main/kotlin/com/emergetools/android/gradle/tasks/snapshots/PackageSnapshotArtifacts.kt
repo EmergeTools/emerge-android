@@ -23,53 +23,53 @@ import org.gradle.api.tasks.TaskAction
  */
 abstract class PackageSnapshotArtifacts : DefaultTask() {
 
-	@get:Input
-	abstract val agpVersion: Property<String>
+  @get:Input
+  abstract val agpVersion: Property<String>
 
-	@get:InputDirectory
-	@get:PathSensitive(PathSensitivity.NAME_ONLY)
-	abstract val artifactDir: DirectoryProperty
+  @get:InputDirectory
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val artifactDir: DirectoryProperty
 
-	@get:InputDirectory
-	@get:PathSensitive(PathSensitivity.NAME_ONLY)
-	abstract val testArtifactDir: DirectoryProperty
+  @get:InputDirectory
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val testArtifactDir: DirectoryProperty
 
-	@get:OutputDirectory
-	abstract val outputDirectory: DirectoryProperty
+  @get:OutputDirectory
+  abstract val outputDirectory: DirectoryProperty
 
   @get:OutputFile
   abstract val artifactMetadataPath: RegularFileProperty
 
-	@TaskAction
-	fun execute() {
-		val targetApks = artifactDir.asFileTree.matching { it.include(APK_GLOB) }
-		check(targetApks.files.size < 2) { "Cannot run snapshots with more than one target APK" }
-		val targetApk = targetApks.singleFile
+  @TaskAction
+  fun execute() {
+    val targetApks = artifactDir.asFileTree.matching { it.include(APK_GLOB) }
+    check(targetApks.files.size < 2) { "Cannot run snapshots with more than one target APK" }
+    val targetApk = targetApks.singleFile
 
-		val testApks = testArtifactDir.asFileTree.matching { it.include(APK_GLOB) }
-		check(testApks.files.size < 2) { "Cannot run snapshots with more than one test APK" }
-		val testApk = testApks.singleFile
+    val testApks = testArtifactDir.asFileTree.matching { it.include(APK_GLOB) }
+    check(testApks.files.size < 2) { "Cannot run snapshots with more than one test APK" }
+    val testApk = testApks.singleFile
 
-		outputDirectory.get().asFile.mkdirs()
-		targetApk.copyTo(outputDirectory.get().asFile.resolve(targetApk.name), overwrite = true)
-		testApk.copyTo(outputDirectory.get().asFile.resolve(testApk.name), overwrite = true)
+    outputDirectory.get().asFile.mkdirs()
+    targetApk.copyTo(outputDirectory.get().asFile.resolve(targetApk.name), overwrite = true)
+    testApk.copyTo(outputDirectory.get().asFile.resolve(testApk.name), overwrite = true)
 
-		val metadata = ArtifactMetadata(
-			emergeGradlePluginVersion = BuildConfig.VERSION,
-			androidGradlePluginVersion = agpVersion.get(),
-			targetArtifactZipPath = targetApk.name,
-			testArtifactZipPath = testApk.name,
-		)
-		val metadataString = Json.encodeToString(metadata)
+    val metadata = ArtifactMetadata(
+      emergeGradlePluginVersion = BuildConfig.VERSION,
+      androidGradlePluginVersion = agpVersion.get(),
+      targetArtifactZipPath = targetApk.name,
+      testArtifactZipPath = testApk.name,
+    )
+    val metadataString = Json.encodeToString(metadata)
     artifactMetadataPath.asFile.get().let {
       if (!it.exists()) {
         it.createNewFile()
       }
       it.writeText(metadataString)
     }
-	}
+  }
 
-	companion object {
-		const val APK_GLOB = "**/*.apk"
-	}
+  companion object {
+    const val APK_GLOB = "**/*.apk"
+  }
 }
