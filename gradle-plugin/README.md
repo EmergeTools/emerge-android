@@ -162,7 +162,7 @@ emerge {
 | Field     | Type      | Default   | Description                                                 |
 |-----------|-----------|-----------|-------------------------------------------------------------|
 | `tag`     | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard. |
-| `enabled` | `boolean` | `true`    | If size tasks/project configuration are enabled.            |
+| `enabled` | `Boolean` | `true`    | If size tasks/project configuration are enabled.            |
 
 ### Performance
 
@@ -206,7 +206,7 @@ emerge {
 |---------------|-----------|-----------|----------------------------------------------------------------------|
 | `projectPath` | `String`  |           | The relative gradle path from root to the Emerge performance module. |
 | `tag`         | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard.          |
-| `enabled`     | `boolean` | `true`    | If performance tasks/project configuration are enabled.              |
+| `enabled`     | `Boolean` | `true`    | If performance tasks/project configuration are enabled.              |
 
 ### Snapshots
 
@@ -256,8 +256,48 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 | `tag`                       | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
 | `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
 | `apiVersion`                | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
-| `enabled`                   | `boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
-| `includePrivatePreviews`    | `boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
+| `enabled`                   | `Boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
+| `includePrivatePreviews`    | `Boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
+
+### Reaper
+
+#### Tasks
+
+| Task                                  | Description                                         |
+|---------------------------------------|-----------------------------------------------------|
+| `emergeInitializeReaper{Variant}`     | Upload an .aab to Emergetools to initialize Reaper. |
+
+#### Configuration
+
+The `reaper` extension allows you to configure Reaper-specific fields.
+
+```kotlin
+emerge {
+  // ..
+
+  reaper {
+    // The key used to identify Reaper reports for your organization.
+    publishableApiKey.set("<Reaper API key>")
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
+    tag.setFromVariant()
+
+    // If Reaper is enabled. When Reaper is enabled the application bytecode will be
+    // instrumented to support Reaper.
+    enabled.set(true)
+  }
+}
+```
+
+##### Fields
+
+| Field                       | Type      | Default    | Description                                                                                       |
+|-----------------------------|-----------|------------|---------------------------------------------------------------------------------------------------|
+| `publishableApiKey`         | `String`  |            | This key is used to identify Reaper reports sent from your application for your organization.     |
+| `tag`                       | `String`  | `release`  | The build tag to use for grouping builds in the Emerge dashboard.                                 |
+| `enabled`                   | `Boolean` | `false`    | If snapshot tasks/project configuration are enabled.                                              |
 
 ## Full configuration
 
@@ -413,21 +453,21 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 ### Releasing a new version
 
 1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
-2. Update the plugin version in documentation.
-3. Update the `/gradle-plugin/CHANGELOG.md`
-3. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
+1. Update the plugin version in documentation.
+1. Update the `/gradle-plugin/CHANGELOG.md`
+1. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 1. Alt
-1. `git add *`
-2. `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
-4. `gt ss`
+    - `git add *`
+    - `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
+1. `gt ss`
 1. Alt:
-1. `git push`
-2. Open PR
-6. Get PR approved and merge
-7. Create a new release on GitHub
-8. Tag version `gradle-plugin-vX.Y.Z`
-9. Release title `Gradle Plugin vX.Y.Z`
-10. Paste the content from `/gradle-plugin/CHANGELOG.md` as the description
+    - `git push`
+1. Open PR
+1. Get PR approved and merge
+1. Create a new release on GitHub
+1. Tag version `gradle-plugin-vX.Y.Z`
+1. Release title `Gradle Plugin vX.Y.Z`
+1. Paste the content from `/gradle-plugin/CHANGELOG.md` as the description
 
 The `gradle-plugin-release` workflow will automatically publish the new version to the Gradle Plugin
 portal upon new release publish.
