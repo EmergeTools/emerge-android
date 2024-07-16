@@ -25,6 +25,7 @@ emerge {
 
   reaper {
     enabled.set(true)
+    publishableApiKey.set(System.getenv("EMERGE_PUBLISHABLE_API_KEY"))
   }
 }
 ```
@@ -32,6 +33,9 @@ emerge {
 You must set `enabled` to be `true` for reaper to work properly. Behind the scenes, the Emerge
 Gradle plugin will instrument your code to drop breadcrumbs that Reaper can use to detect dead code
 when this property is set.
+
+`publishableApiKey` is a token included with reports uploaded from the field to Emergetools.
+The key can be found [here](https://emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled).
 
 **Emerge recommends enabling reaper on any release build run.**
 
