@@ -511,13 +511,12 @@ class EmergePlugin : Plugin<Project> {
     variant: ApplicationVariant,
   ) {
     val enabled = extension.reaperOptions.enabled.getOrElse(false)
-    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (enabled) "true" else "false")
-    val publishableApiKey = extension.reaperOptions.publishableApiKey.orNull
+
+    val publishableApiKey = extension.reaperOptions.publishableApiKey.orNull ?: ""
     if (enabled) {
-      if (publishableApiKey == null) {
+      if (publishableApiKey == "") {
         throw StopExecutionException("If Reaper is enabled publishableApiKey must be set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
       }
-      variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
       project.logger.info("Registering reaper transform for variant ${variant.name}")
       variant.instrumentation.let {
         it.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
@@ -528,6 +527,9 @@ class EmergePlugin : Plugin<Project> {
       }
     }
 
+    // We must always set these to something make the manifest merger happy:
+    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (enabled) "true" else "false")
+    variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
 
   private fun logExtension(
