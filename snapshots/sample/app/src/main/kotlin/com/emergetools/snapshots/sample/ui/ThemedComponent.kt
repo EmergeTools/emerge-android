@@ -76,6 +76,8 @@ fun MaterialThemedComponent() {
   }
 }
 
+private const val CIRCLE_RADIUS_DIVISOR = 4
+
 @Composable
 fun SampleShapeWithText() {
   Box(
@@ -86,7 +88,7 @@ fun SampleShapeWithText() {
     Canvas(modifier = Modifier.fillMaxSize()) {
       val centerX = size.width / 2
       val centerY = size.height / 2
-      val radius = size.width / 4
+      val radius = size.width / CIRCLE_RADIUS_DIVISOR
 
       drawCircle(
         color = Color.Blue,
