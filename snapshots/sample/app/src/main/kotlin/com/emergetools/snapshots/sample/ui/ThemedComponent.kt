@@ -116,9 +116,8 @@ fun SampleShapeWithText() {
   }
 }
 
-@Preview(showBackground = true, device = Devices.PIXEL, showSystemUi = true)
-@Preview(showBackground = true, device = Devices.TABLET, showSystemUi = true)
-@EmergeAppStoreSnapshot
+@OptIn(EmergeAppStoreSnapshot::class)
+@AppStoreScreenshotPreviews
 @Composable
 fun SampleShapeWithTextPreview() {
   SnapshotsSampleTheme {
