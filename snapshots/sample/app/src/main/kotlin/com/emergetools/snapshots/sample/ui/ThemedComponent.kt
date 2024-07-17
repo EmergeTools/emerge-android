@@ -2,18 +2,25 @@ package com.emergetools.snapshots.sample.ui
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
+import com.emergetools.snapshots.annotations.EmergeAppStoreSnapshot
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @PreviewLightDark
@@ -65,5 +72,54 @@ fun MaterialThemedComponent() {
         modifier = Modifier.align(Alignment.Center)
       )
     }
+  }
+}
+
+private const val CIRCLE_RADIUS_DIVISOR = 4
+
+@Composable
+fun SampleShapeWithText() {
+  Box(
+    modifier = Modifier
+      .fillMaxSize()
+      .background(Color.LightGray)
+  ) {
+    Canvas(modifier = Modifier.fillMaxSize()) {
+      val centerX = size.width / 2
+      val centerY = size.height / 2
+      val radius = size.width / CIRCLE_RADIUS_DIVISOR
+
+      drawCircle(
+        color = Color.Blue,
+        center = Offset(centerX, centerY),
+        radius = radius
+      )
+    }
+
+    Text(
+      text = "Welcome to My App!",
+      color = Color.Yellow,
+      fontSize = 24.sp,
+      fontWeight = FontWeight.Bold,
+      modifier = Modifier.align(Alignment.Center)
+    )
+
+    Text(
+      text = "Powered by Jetpack Compose",
+      color = Color.LightGray,
+      fontSize = 16.sp,
+      modifier = Modifier
+        .align(Alignment.BottomCenter)
+        .padding(bottom = 16.dp)
+    )
+  }
+}
+
+@OptIn(EmergeAppStoreSnapshot::class)
+@AppStoreScreenshotPreviews
+@Composable
+fun SampleShapeWithTextPreview() {
+  SnapshotsSampleTheme {
+    SampleShapeWithText()
   }
 }
