@@ -32,7 +32,7 @@ android {
   }
 
   defaultConfig {
-    minSdk = 26
+    minSdk = 24
   }
 
   // Ensures our version.txt is packaged in with release.
@@ -52,6 +52,8 @@ dependencies {
 
   testImplementation(libs.junit.jupiter.api)
   testImplementation(libs.junit.jupiter.params)
+  testImplementation(libs.mockito)
+  testImplementation(libs.mockito.kotlin)
   testRuntimeOnly(libs.junit.jupiter.engine)
 }
 
