@@ -1,0 +1,29 @@
+// To run this do:
+// gradle-profiler --benchmark --scenario-file build.scenarios
+
+reaper_sample_from_clean {
+  title = "Reaper Sample: Clean Build"
+  versions = ["8.7"]
+  tasks = [
+    ":reaper:sample:app:bundleRelease",
+  ]
+  gradle-args = [
+    "-Pandroid.useAndroidX=true",
+  ]
+  jvm-args = [
+    "-Xmx4096m",
+  ]
+  cleanup-tasks = ["clean"]
+
+  run-using = cli
+  daemon = none
+
+  clear-build-cache-before = BUILD
+  clear-transform-cache-before = BUILD
+  clear-project-cache-before = BUILD
+  clear-jars-cache-before = BUILD
+  clear-gradle-user-home-before = SCENARIO
+  show-build-cache-size = true
+
+  warm-ups = 1
+}
