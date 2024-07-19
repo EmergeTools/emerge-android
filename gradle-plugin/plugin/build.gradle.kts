@@ -125,23 +125,20 @@ dependencies {
   compileOnly(libs.android.gradle.plugin)
   compileOnly(libs.kotlin.gradle.plugin)
 
+  implementation(libs.asm)
+  implementation(libs.asm.commons)
   implementation(libs.dexlib2)
-  implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.serialization)
-  implementation(libs.okhttp)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   implementation(libs.guava)
-  implementation(libs.okhttp)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization)
-  implementation(libs.asm)
-  implementation(libs.asm.commons)
+  implementation(libs.okhttp)
 
+  testImplementation(libs.google.truth)
   testImplementation(libs.junit)
   testImplementation(libs.junit.jupiter)
   testImplementation(libs.junit.jupiter.api)
-  testImplementation(libs.google.truth)
   testRuntimeOnly(libs.junit.jupiter.engine)
   testRuntimeOnly(libs.junit.platform.launcher)
 
