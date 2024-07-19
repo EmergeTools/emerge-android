@@ -4,8 +4,7 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class Dependencies(
-  val libraries: List<Library>,
-  val modules: List<Module>,
+  val dependencies: List<Dependency>,
 ) {
 
   companion object {
@@ -14,17 +13,22 @@ data class Dependencies(
 }
 
 @Serializable
+sealed class Dependency {
+  // abstract val entries: List<String>
+}
+
+@Serializable
 data class Module(
   val name: String,
   val path: String,
   val isRoot: Boolean = false,
-  val entries: List<String>,
-)
+  // override val entries: List<String>,
+) : Dependency()
 
 @Serializable
 data class Library(
   val groupId: String,
   val artifactId: String,
   val version: String,
-  val entries: List<String>,
-)
+  // override val entries: List<String>,
+) : Dependency()
