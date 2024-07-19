@@ -5,6 +5,7 @@
 package com.emergetools.reaper
 
 import android.content.Context
+import android.util.Base64
 import android.util.Log
 import androidx.work.CoroutineWorker
 import androidx.work.WorkerParameters
@@ -27,7 +28,6 @@ import java.io.EOFException
 import java.io.File
 import java.io.FileInputStream
 import java.io.IOException
-import java.util.Base64
 import kotlin.coroutines.resumeWithException
 
 internal class ReaperReportUploadWorker(
@@ -201,6 +201,6 @@ fun longToBase64(hash: Long): String {
   for (i in 0..7) {
     buf[i] = ((hash shr i * 8) and 0xFFL).toByte()
   }
-  val hashAsBase64 = Base64.getEncoder().encode(buf).toString(Charsets.UTF_8)
+  val hashAsBase64 = Base64.encodeToString(buf, Base64.DEFAULT)
   return hashAsBase64
 }

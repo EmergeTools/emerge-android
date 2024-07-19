@@ -5,12 +5,16 @@ class ThreadLocalSetHashTracker(private var onFlush: (Collection<Long>) -> Unit)
 
   // TODO(chromy): Should be a weak ref?
   private val sets = mutableListOf<MutableSet<Long>>()
-  private val perThread = ThreadLocal.withInitial {
-    val set = mutableSetOf<Long>()
-    synchronized(sets) {
-      sets.add(set)
+
+  // withInitial which would be nicer here was added in API level 26.
+  private val perThread = object : ThreadLocal<MutableSet<Long>>() {
+    override fun initialValue(): MutableSet<Long> {
+      val seenPerThread = mutableSetOf<Long>()
+      synchronized(sets) {
+        sets.add(seenPerThread)
+      }
+      return seenPerThread
     }
-    set
   }
 
   override fun logMethodEntry(methodHash: Long) {

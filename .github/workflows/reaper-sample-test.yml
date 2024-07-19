@@ -60,5 +60,7 @@ jobs:
             --test reaper/sample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \
-            --device model=Nexus6P,version=26,locale=en,orientation=portrait
+            --device model=Nexus6P,version=26,locale=en,orientation=portrait \
+            --device model=HWMHA,version=24,locale=en,orientation=portrait \
+            --device model=Nexus6,version=25,locale=en,orientation=portrait \
 #            --device model=cactus,version=27,locale=en,orientation=portrait \ Temporarily disabled as issue with compose 2024.06.00
