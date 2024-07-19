@@ -14,7 +14,7 @@ data class Dependencies(
 
 @Serializable
 sealed class Dependency {
-  // abstract val entries: List<String>
+  abstract val entries: List<String>
 }
 
 @Serializable
@@ -22,7 +22,7 @@ data class Module(
   val name: String,
   val path: String,
   val isRoot: Boolean = false,
-  // override val entries: List<String>,
+  override val entries: List<String>,
 ) : Dependency()
 
 @Serializable
@@ -30,5 +30,5 @@ data class Library(
   val groupId: String,
   val artifactId: String,
   val version: String,
-  // override val entries: List<String>,
+  override val entries: List<String>,
 ) : Dependency()

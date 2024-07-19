@@ -133,6 +133,7 @@ dependencies {
   implementation(libs.guava)
   implementation(libs.kotlinx.datetime)
   implementation(libs.kotlinx.serialization)
+  implementation(libs.kotlinx.serialization)
   implementation(libs.okhttp)
 
   testImplementation(libs.google.truth)
