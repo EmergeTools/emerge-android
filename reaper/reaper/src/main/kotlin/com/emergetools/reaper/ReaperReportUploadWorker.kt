@@ -162,8 +162,14 @@ internal class ReaperReportUploadWorker(
     }.build()
 
     client.newCall(request).executeAsync().use { response ->
-      Log.d(TAG, "Reaper report response: $response")
-      if (!response.isSuccessful) {
+      if (response.isSuccessful) {
+        Log.d(TAG, "Reaper report response: $response")
+      } else if (response.code == 404) {
+        Log.e(
+          TAG,
+          "Upload failed, backend or apiKey unknown. backend=$baseUrl apiKey=$apiKey"
+        )
+      } else {
         reportError(applicationContext, baseUrl, apiKey, response.toString())
       }
     }
