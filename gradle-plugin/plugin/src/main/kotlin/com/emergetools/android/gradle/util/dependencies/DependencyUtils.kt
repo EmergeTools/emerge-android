@@ -53,7 +53,7 @@ fun buildDependencies(
     }
   }
 
-  val dependencies = mutableListOf<Dependency>(
+  val modules = mutableListOf(
     Module(
       name = defaultModuleName,
       path = defaultModulePath,
@@ -61,10 +61,11 @@ fun buildDependencies(
       isRoot = true,
     )
   )
-  dependencies += dependencyEntryMap.entries.mapNotNull {
+  val libraries = mutableListOf<Library>()
+  dependencyEntryMap.entries.forEach {
     val keySplits = it.key.split(":")
     if (it.key.startsWith(PROJECT_PREFIX)) {
-      Module(
+      modules += Module(
         name = keySplits.last(),
         path = it.key.substringAfter(PROJECT_PREFIX),
         entries = it.value,
@@ -75,10 +76,10 @@ fun buildDependencies(
         logger.warn(
           "Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!"
         )
-        return@mapNotNull null
+        return@forEach
       }
 
-      Library(
+      libraries += Library(
         groupId = keySplits[0],
         artifactId = keySplits[1],
         version = keySplits[2],
@@ -88,6 +89,7 @@ fun buildDependencies(
   }
 
   return Dependencies(
-    dependencies = dependencies,
+    modules = modules,
+    libraries = libraries,
   )
 }
