@@ -6,7 +6,6 @@ plugins {
 
 emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
-  dryRun.set(true)
 
   vcs {
     gitHub {

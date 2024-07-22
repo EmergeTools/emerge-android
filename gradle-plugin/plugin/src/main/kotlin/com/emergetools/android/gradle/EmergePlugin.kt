@@ -214,7 +214,7 @@ class EmergePlugin : Plugin<Project> {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an AAB for variant ${variant.name} to Emerge."
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, it.project, variant)
+      it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.sizeOptions, variant)
     }
   }
