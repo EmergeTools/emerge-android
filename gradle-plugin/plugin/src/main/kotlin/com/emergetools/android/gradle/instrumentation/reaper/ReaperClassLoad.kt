@@ -103,14 +103,6 @@ class ReaperClassLoadMethodVisitor(
   override fun visitCode() {
     super.visitCode()
     if (name == "<clinit>" || name == "<init>") {
-
-      mv.visitFieldInsn(
-        Opcodes.GETSTATIC,
-        "com/emergetools/reaper/ReaperInternal",
-        "INSTANCE",
-        "Lcom/emergetools/reaper/ReaperInternal;"
-      )
-
       val signature = "L" + className.replace(".", "/") + ";"
       val hashedSignature = topLong(toSha256(signature))
 
@@ -119,8 +111,8 @@ class ReaperClassLoadMethodVisitor(
 
       // Invoke instance (virtual) method logMethodEntry on Reaper INSTANCE
       mv.visitMethodInsn(
-        Opcodes.INVOKEVIRTUAL,
-        "com/emergetools/reaper/ReaperInternal",
+        Opcodes.INVOKESTATIC,
+        "com/emergetools/reaper/ReaperInternalKt",
         "logMethodEntry",
         "(J)V",
         false
