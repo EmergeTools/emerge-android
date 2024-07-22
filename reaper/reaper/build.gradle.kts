@@ -32,7 +32,7 @@ android {
   }
 
   defaultConfig {
-    minSdk = 24
+    minSdk = 21
   }
 
   // Ensures our version.txt is packaged in with release.
