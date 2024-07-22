@@ -5,10 +5,10 @@ import android.content.Context
 /**
  * The is the public SDK for Reaper, an Emergetools service which detects and deletes dead code in
  * production. Reaper works in three parts:
- * - A gradle plugin which instruments JVM bytecode to dected when code is used.
- * - An SDK (this code) which uploads reports based on that instrumention.
+ * - A gradle plugin which instruments JVM bytecode to detect when code is used.
+ * - An SDK (this code) which uploads reports based on that instrumentation.
  * - A server side component which aggregates those reports and compares the used code to the
- *   code in the app. Code which is not used by any user but exists in the app is decteded,
+ *   code in the app. Code which is not used by any user but exists in the app is detected,
  *   displayed and can be deleted.
  * See https://docs.emergetools.com/docs/reaper-setup-android for more
  * information.

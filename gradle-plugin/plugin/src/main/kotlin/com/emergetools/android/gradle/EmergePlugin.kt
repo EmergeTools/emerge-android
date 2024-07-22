@@ -19,6 +19,7 @@ import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
 import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
 import com.emergetools.android.gradle.tasks.perf.UploadPerfBundle
 import com.emergetools.android.gradle.tasks.reaper.InitializeReaper
+import com.emergetools.android.gradle.tasks.reaper.PreflightReaper
 import com.emergetools.android.gradle.tasks.size.UploadAAB
 import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots
@@ -127,7 +128,6 @@ class EmergePlugin : Plugin<Project> {
         val androidTest = variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
           ?: return@onVariants
 
-
         if (emergeExtension.snapshotOptions.enabled.getOrElse(true)) {
           registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
         }
@@ -224,7 +224,24 @@ class EmergePlugin : Plugin<Project> {
     extension: EmergePluginExtension,
     variant: Variant,
   ) {
+    val preflightTaskName = "${EMERGE_TASK_PREFIX}PreflightReaper${variant.name.capitalize()}"
     val taskName = "${EMERGE_TASK_PREFIX}InitializeReaper${variant.name.capitalize()}"
+
+    val preflightTask = appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
+      it.reaperEnabled.set(extension.reaperOptions.enabled)
+      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
+      it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
+
+      // We want preflight to happen pretty early so we can detect error conditions and give them
+      // nice messages. Specifically we need it to occur prior to 'linking' steps which we detect
+      // that the Reaper added instrumentation calls methods in the SDK to avoid confusing error
+      // messages.
+      val bundleTaskName = "minify${variant.name.capitalize()}WithR8"
+      val bundleTasks = appProject.getTasksByName(bundleTaskName, false)
+      if (bundleTasks.size != 0) {
+        bundleTasks.forEach { bundleTask -> bundleTask.dependsOn(it) }
+      }
+    }
 
     appProject.tasks.register(taskName, InitializeReaper::class.java) {
       it.group = EMERGE_TASK_GROUP
@@ -232,8 +249,7 @@ class EmergePlugin : Plugin<Project> {
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.setUploadTaskInputs(extension, appProject)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
-      it.reaperEnabled.set(extension.reaperOptions.enabled)
-      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
+      it.dependsOn(preflightTask)
     }
   }
 
