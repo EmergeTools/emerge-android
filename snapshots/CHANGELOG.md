@@ -5,6 +5,10 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.1.4 - 2024-07-23
+
+- Add experimental `EmergeAppStoreSnapshot` annotation. [#193](https://github.com/EmergeTools/emerge-android/pull/193)
+
 ## 1.1.3 - 2024-07-10
 
 - Support `device` Preview annotation parameter in local
