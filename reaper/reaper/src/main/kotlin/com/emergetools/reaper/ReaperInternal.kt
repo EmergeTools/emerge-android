@@ -55,6 +55,7 @@ internal object ReaperInternal {
   /**
    * The fast path where we see new hashes. This is called directly by the instrumentation bytecode.
    */
+  @JvmStatic
   fun logMethodEntry(methodHash: Long) {
     tracker.logMethodEntry(methodHash)
   }
