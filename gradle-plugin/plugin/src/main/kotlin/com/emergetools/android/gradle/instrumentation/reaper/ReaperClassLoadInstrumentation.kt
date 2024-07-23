@@ -109,7 +109,7 @@ class ReaperClassLoadMethodVisitor(
       // Push method argument onto the stack
       mv.visitLdcInsn(hashedSignature)
 
-      // Invoke instance (virtual) method logMethodEntry on Reaper INSTANCE
+      // Invoke static method logMethodEntry on ReaperInternal class
       mv.visitMethodInsn(
         Opcodes.INVOKESTATIC,
         "com/emergetools/reaper/ReaperInternal",
