@@ -112,7 +112,7 @@ class ReaperClassLoadMethodVisitor(
       // Invoke instance (virtual) method logMethodEntry on Reaper INSTANCE
       mv.visitMethodInsn(
         Opcodes.INVOKESTATIC,
-        "com/emergetools/reaper/ReaperInternalKt",
+        "com/emergetools/reaper/ReaperInternal",
         "logMethodEntry",
         "(J)V",
         false
