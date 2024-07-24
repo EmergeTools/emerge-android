@@ -35,7 +35,7 @@ fun SnapshotVariantProvider(
 
   val localDensity = Density(
     fontScale = dimensionSpec.fontScale ?: LocalDensity.current.fontScale,
-    density = dimensionSpec.density ?: LocalDensity.current.density,
+    density = dimensionSpec.scalingFactor ?: LocalDensity.current.density,
   )
 
   val locale = config.locale?.let { EMGLocale.forLanguageCode(it) } ?: Locale.getDefault()

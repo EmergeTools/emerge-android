@@ -106,10 +106,9 @@ private fun measureComposableSize(
 ): IntSize {
   // Default to 0 if not set which will allow parent to impose constraints on child when
   // AT_MOST set.
-  val heightDpPx: Int =
-    (previewConfig.heightDp ?: 0) * view.resources.displayMetrics.density.toInt()
-  val widthDpPx: Int =
-    (previewConfig.widthDp ?: 0) * view.resources.displayMetrics.density.toInt()
+  val density = view.resources.displayMetrics.density
+  val heightPx = (previewConfig.heightDp ?: 0) * density
+  val widthPx = (previewConfig.widthDp ?: 0) * density
 
   // If width or height is set in preview annotation, measure with unspecified to allow
   // stretching past bounds of parent.
@@ -120,8 +119,8 @@ private fun measureComposableSize(
     previewConfig.heightDp?.let { View.MeasureSpec.UNSPECIFIED } ?: View.MeasureSpec.AT_MOST
 
   view.measure(
-    View.MeasureSpec.makeMeasureSpec(max(view.width, widthDpPx), widthMeasureSpec),
-    View.MeasureSpec.makeMeasureSpec(max(view.height, heightDpPx), heightMeasureSpec),
+    View.MeasureSpec.makeMeasureSpec(max(view.width, widthPx.toInt()), widthMeasureSpec),
+    View.MeasureSpec.makeMeasureSpec(max(view.height, heightPx.toInt()), heightMeasureSpec),
   )
   return IntSize(view.measuredWidth, view.measuredHeight)
 }

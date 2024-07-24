@@ -9,7 +9,8 @@ import kotlin.math.abs
 data class DimensionSpec(
   val widthDp: Int? = null,
   val heightDp: Int? = null,
-  val density: Float? = null,
+  val densityPpi: Int? = null,
+  val scalingFactor: Float? = null,
   val fontScale: Float? = null,
 )
 
@@ -27,7 +28,8 @@ data class DeviceSpec(
       return DimensionSpec(
         widthDp = widthDp,
         heightDp = heightDp,
-        density = getClosestDensityScalingFactor(densityPpi),
+        densityPpi = densityPpi,
+        scalingFactor = getClosestDensityScalingFactor(densityPpi),
       )
     }
 
@@ -255,13 +257,15 @@ fun configToDimensionSpec(
   config: ComposePreviewSnapshotConfig,
 ): DimensionSpec {
   val devicePreviewString = parseDevicePreviewString(device)
+  val densityPpi = devicePreviewString?.dpi
   val dimensionSpec: DimensionSpec? = when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]?.dimensionSpec
     devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]?.dimensionSpec
     else -> DimensionSpec(
       widthDp = devicePreviewString?.widthDp,
       heightDp = devicePreviewString?.heightDp,
-      density = devicePreviewString?.dpi?.let(DeviceSpec::getClosestDensityScalingFactor)
+      densityPpi = densityPpi,
+      scalingFactor =  densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
     )
   }
 
@@ -270,7 +274,8 @@ fun configToDimensionSpec(
     widthDp = config.widthDp ?: dimensionSpec?.widthDp,
     heightDp = config.heightDp ?: dimensionSpec?.heightDp,
     fontScale = config.fontScale,
-    density = dimensionSpec?.density,
+    densityPpi = dimensionSpec?.densityPpi,
+    scalingFactor = dimensionSpec?.scalingFactor,
   )
 }
 
