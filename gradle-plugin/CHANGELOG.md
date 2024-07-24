@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.0-beta02 - 2024-07-24
+
+- Reaper instrumentation to use invoke-static rather than invoke-virtual. [#199](https://github.com/EmergeTools/emerge-android/pull/199)
+- Add preflight task for Reaper. [#197](https://github.com/EmergeTools/emerge-android/pull/197)
+- Set reaper manifest keys even when not enabled. [#192](https://github.com/EmergeTools/emerge-android/pull/192)
+
 ## 4.0.0-beta01 - 2024-07-10
 
 - Add Reaper instrumentation and tasks.
