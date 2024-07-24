@@ -1,0 +1,5 @@
+<resources>
+  <string name="app_name">Manual initialization Reaper sample</string>
+  <string name="sample_title">Test title</string>
+  <string name="sample_subtitle">Test subtitle</string>
+</resources>

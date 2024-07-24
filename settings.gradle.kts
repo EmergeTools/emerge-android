@@ -28,6 +28,7 @@ include(
   ":reaper:reaper",
   ":reaper:sample",
   ":reaper:sample:app",
+  ":reaper:sample:manuallyInitializedApp",
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-annotations",
