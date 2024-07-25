@@ -2,14 +2,14 @@
 
 package com.emergetools.snapshots.compose
 
-import androidx.compose.runtime.Composable
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.abs
 
 data class DimensionSpec(
   val widthDp: Int? = null,
   val heightDp: Int? = null,
-  val density: Float? = null,
+  val densityPpi: Int? = null,
+  val scalingFactor: Float? = null,
   val fontScale: Float? = null,
 )
 
@@ -22,12 +22,13 @@ data class DeviceSpec(
   val dimensionSpec: DimensionSpec
     get() {
       val proportion = densityPpi / MDPI_THRESHOLD
-      val widthDp = widthPixels * proportion
-      val heightDp = heightPixels * proportion
+      val widthDp = widthPixels / proportion
+      val heightDp = heightPixels / proportion
       return DimensionSpec(
         widthDp = widthDp,
         heightDp = heightDp,
-        density = getClosestDensityScalingFactor(densityPpi),
+        densityPpi = densityPpi,
+        scalingFactor = getClosestDensityScalingFactor(densityPpi),
       )
     }
 
@@ -249,19 +250,28 @@ val KNOWN_DEVICE_SPECS = mapOf<String, DeviceSpec>(
   ),
 )
 
-@Composable
+fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
+  val devicePreviewString = parseDevicePreviewString(config.device)
+  return when {
+    devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]
+    devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]
+    else -> null
+  }
+}
+
 fun configToDimensionSpec(
-  device: String?,
   config: ComposePreviewSnapshotConfig,
 ): DimensionSpec {
-  val devicePreviewString = parseDevicePreviewString(device)
+  val devicePreviewString = parseDevicePreviewString(config.device)
+  val densityPpi = devicePreviewString?.dpi
   val dimensionSpec: DimensionSpec? = when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]?.dimensionSpec
     devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]?.dimensionSpec
     else -> DimensionSpec(
       widthDp = devicePreviewString?.widthDp,
       heightDp = devicePreviewString?.heightDp,
-      density = devicePreviewString?.dpi?.let(DeviceSpec::getClosestDensityScalingFactor)
+      densityPpi = densityPpi,
+      scalingFactor = densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
     )
   }
 
@@ -270,7 +280,8 @@ fun configToDimensionSpec(
     widthDp = config.widthDp ?: dimensionSpec?.widthDp,
     heightDp = config.heightDp ?: dimensionSpec?.heightDp,
     fontScale = config.fontScale,
-    density = dimensionSpec?.density,
+    densityPpi = dimensionSpec?.densityPpi,
+    scalingFactor = dimensionSpec?.scalingFactor,
   )
 }
 

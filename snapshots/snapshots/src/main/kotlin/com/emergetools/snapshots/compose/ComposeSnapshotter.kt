@@ -67,7 +67,7 @@ fun snapshotComposable(
     composeView.post {
       // Measure the composable agnostic of the parent constraints to layout properly in activity
       val composableSize = measureComposableSize(composeView, previewConfig)
-      val bitmap = if (previewConfig.showSystemUi == true) {
+      val bitmap = if (previewConfig.showSystemUi == true && previewConfig.device == null) {
         val rootView = activity.window.decorView.rootView
         captureBitmap(
           view = rootView,
@@ -100,16 +100,42 @@ fun snapshotComposable(
   }
 }
 
+const val DEFAULT_DENSITY_PPI = 160
+
 private fun measureComposableSize(
   view: ComposeView,
   previewConfig: ComposePreviewSnapshotConfig,
 ): IntSize {
+  if (previewConfig.device != null) {
+    val deviceSpec = configToDeviceSpec(previewConfig)
+    if (deviceSpec != null) {
+      // Measure the composable with the device dimensions
+      // Override the width and height if set in preview annotation
+      val deviceDpScale = deviceSpec.densityPpi / DEFAULT_DENSITY_PPI
+      val widthPixels = previewConfig.widthDp?.let { it * deviceDpScale } ?: deviceSpec.widthPixels
+      val heightPixels = previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
+      Log.i(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Measuring composable with device dimensions: $widthPixels x $heightPixels"
+      )
+      view.measure(
+        View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
+        View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY),
+      )
+      return IntSize(view.measuredWidth, view.measuredHeight)
+    } else {
+      Log.e(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Device not found for preview annotation: ${previewConfig.device}"
+      )
+    }
+  }
+
   // Default to 0 if not set which will allow parent to impose constraints on child when
   // AT_MOST set.
-  val heightDpPx: Int =
-    (previewConfig.heightDp ?: 0) * view.resources.displayMetrics.density.toInt()
-  val widthDpPx: Int =
-    (previewConfig.widthDp ?: 0) * view.resources.displayMetrics.density.toInt()
+  val emulatorDensity = view.resources.displayMetrics.density
+  val heightPx = (previewConfig.heightDp ?: 0) * emulatorDensity
+  val widthPx = (previewConfig.widthDp ?: 0) * emulatorDensity
 
   // If width or height is set in preview annotation, measure with unspecified to allow
   // stretching past bounds of parent.
@@ -120,8 +146,8 @@ private fun measureComposableSize(
     previewConfig.heightDp?.let { View.MeasureSpec.UNSPECIFIED } ?: View.MeasureSpec.AT_MOST
 
   view.measure(
-    View.MeasureSpec.makeMeasureSpec(max(view.width, widthDpPx), widthMeasureSpec),
-    View.MeasureSpec.makeMeasureSpec(max(view.height, heightDpPx), heightMeasureSpec),
+    View.MeasureSpec.makeMeasureSpec(max(view.width, widthPx.toInt()), widthMeasureSpec),
+    View.MeasureSpec.makeMeasureSpec(max(view.height, heightPx.toInt()), heightMeasureSpec),
   )
   return IntSize(view.measuredWidth, view.measuredHeight)
 }

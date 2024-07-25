@@ -115,6 +115,8 @@ abstract class LocalSnapshots : DefaultTask() {
       check(deviceCount < 2) { "More than one device connected." }
       check(deviceCount > 0) { "No devices connected." }
 
+      shell("logcat -c")
+
       uninstall(targetAppId)
       install(targetApk.absolutePath)
 
@@ -146,6 +148,9 @@ abstract class LocalSnapshots : DefaultTask() {
 
       val output = shell(instrumentationArgs)
       logger.lifecycle(output)
+
+      val logcatFile = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/logcat.txt"
+      shell("logcat -d > $logcatFile")
 
       pull(
         deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
