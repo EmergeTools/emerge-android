@@ -1,12 +1,13 @@
-name: Gradle-plugin checks
+name: gradle plugin checks
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
+    paths:
+      - gradle/**
+      - gradle-plugin/**
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - gradle/**
       - gradle-plugin/**

@@ -4,6 +4,10 @@ on:
   push:
     branches:
       - main
+    paths:
+      - gradle/**
+      - snapshots/**
+      - snapshots-shared/**
   pull_request:
     branches:
       - main
