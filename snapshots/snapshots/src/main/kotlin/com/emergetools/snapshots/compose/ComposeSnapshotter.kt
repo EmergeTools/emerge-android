@@ -107,11 +107,24 @@ private fun measureComposableSize(
   if (previewConfig.device != null) {
     val deviceSpec = configToDeviceSpec(previewConfig)
     if (deviceSpec != null) {
+      // Measure the composable with the device dimensions
+      // Override the width and height if set in preview annotation
+      val deviceDpScale = deviceSpec.densityPpi / 160
+      val widthPixels = previewConfig.widthDp?.let { it * deviceDpScale } ?: deviceSpec.widthPixels
+      val heightPixels = previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
+      Log.i(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Measuring composable with device dimensions: $widthPixels x $heightPixels")
       view.measure(
-        View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.AT_MOST),
-        View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.AT_MOST),
+        View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
+        View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY),
       )
       return IntSize(view.measuredWidth, view.measuredHeight)
+    } else {
+      Log.e(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Device not found for preview annotation: ${previewConfig.device}"
+      )
     }
   }
 
