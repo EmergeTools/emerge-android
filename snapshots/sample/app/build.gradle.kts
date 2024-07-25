@@ -2,6 +2,7 @@ plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.kotlin.android)
   id("com.emergetools.android")
+  alias(libs.plugins.screenshot)
 }
 
 emerge {
@@ -62,6 +63,8 @@ android {
   composeOptions {
     kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extension.get()
   }
+
+  experimentalProperties["android.experimental.enableScreenshotTest"] = true
 }
 
 dependencies {
@@ -82,4 +85,6 @@ dependencies {
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
+
+  screenshotTestImplementation(libs.compose.ui.tooling)
 }
