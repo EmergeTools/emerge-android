@@ -149,7 +149,6 @@ abstract class LocalSnapshots : DefaultTask() {
       val output = shell(instrumentationArgs)
       logger.lifecycle(output)
 
-      logger.lifecycle("Dumping logcat logs to file")
       val logcatFile = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/logcat.txt"
       shell("logcat -d > $logcatFile")
 
