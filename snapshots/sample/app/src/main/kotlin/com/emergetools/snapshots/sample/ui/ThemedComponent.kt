@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -51,10 +52,18 @@ fun ThemedComponent() {
 @Preview(name = "tall", heightDp = 1000)
 @Preview(name = "tall sysui", heightDp = 1000, showSystemUi = true)
 @Preview(name = "wide", widthDp = 1000)
+@Preview(name = "wide - pixel6pro", widthDp = 1000, device = Devices.PIXEL_6_PRO)
+@Preview(name = "tall - pixel6pro", heightDp = 1000, device = Devices.PIXEL_6_PRO)
 @Preview(
   name = "tall and wide",
   widthDp = 1000,
   heightDp = 1000
+)
+@Preview(
+  name = "tall and wide - pixel6pro",
+  widthDp = 1000,
+  heightDp = 1000,
+  device = Devices.PIXEL_6_PRO
 )
 @Preview(uiMode = UI_MODE_NIGHT_YES)
 @Preview(uiMode = UI_MODE_NIGHT_NO)
