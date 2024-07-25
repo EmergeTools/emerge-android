@@ -154,6 +154,10 @@ fun SampleShapeWithTextPreview() {
 @Preview(showSystemUi = true, device = Devices.PIXEL_7A)
 @Preview(showSystemUi = true, device = Devices.PIXEL_FOLD)
 @Preview(showSystemUi = true, device = Devices.PIXEL_TABLET)
+@Preview(showSystemUi = true, device = Devices.PHONE)
+@Preview(showSystemUi = true, device = Devices.FOLDABLE)
+@Preview(showSystemUi = true, device = Devices.TABLET)
+@Preview(showSystemUi = true, device = Devices.DESKTOP)
 @Composable
 fun SampleShapeWithTextPreviewAllDevices() {
   SnapshotsSampleTheme {
