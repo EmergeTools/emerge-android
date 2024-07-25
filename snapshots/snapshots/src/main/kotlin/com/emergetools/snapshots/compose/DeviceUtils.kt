@@ -23,8 +23,8 @@ data class DeviceSpec(
   val dimensionSpec: DimensionSpec
     get() {
       val proportion = densityPpi / MDPI_THRESHOLD
-      val widthDp = widthPixels * proportion
-      val heightDp = heightPixels * proportion
+      val widthDp = widthPixels / proportion
+      val heightDp = heightPixels / proportion
       return DimensionSpec(
         widthDp = widthDp,
         heightDp = heightDp,
@@ -251,12 +251,19 @@ val KNOWN_DEVICE_SPECS = mapOf<String, DeviceSpec>(
   ),
 )
 
-@Composable
+fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
+  val devicePreviewString = parseDevicePreviewString(config.device)
+  return when {
+    devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]
+    devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]
+    else -> null
+  }
+}
+
 fun configToDimensionSpec(
-  device: String?,
   config: ComposePreviewSnapshotConfig,
 ): DimensionSpec {
-  val devicePreviewString = parseDevicePreviewString(device)
+  val devicePreviewString = parseDevicePreviewString(config.device)
   val densityPpi = devicePreviewString?.dpi
   val dimensionSpec: DimensionSpec? = when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]?.dimensionSpec
