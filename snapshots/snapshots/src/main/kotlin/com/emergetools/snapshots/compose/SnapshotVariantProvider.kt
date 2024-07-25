@@ -28,10 +28,7 @@ fun SnapshotVariantProvider(
   config: ComposePreviewSnapshotConfig,
   content: @Composable () -> Unit,
 ) {
-  val dimensionSpec = configToDimensionSpec(
-    config.device,
-    config,
-  )
+  val dimensionSpec = configToDimensionSpec(config)
 
   val localDensity = Density(
     fontScale = dimensionSpec.fontScale ?: LocalDensity.current.fontScale,
