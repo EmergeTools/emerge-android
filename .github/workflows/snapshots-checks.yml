@@ -2,19 +2,17 @@ name: snapshots checks
 
 on:
   push:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - gradle/**
+      - gradle-plugin/**
       - snapshots/**
-      - snapshots-shared/**
   pull_request:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - gradle/**
+      - gradle-plugin/**
       - snapshots/**
-      - snapshots-shared/**
 
 jobs:
 
