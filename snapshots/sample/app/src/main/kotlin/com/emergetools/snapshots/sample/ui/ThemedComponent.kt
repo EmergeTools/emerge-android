@@ -16,6 +16,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -119,6 +120,42 @@ fun SampleShapeWithText() {
 @AppStoreScreenshotPreviews
 @Composable
 fun SampleShapeWithTextPreview() {
+  SnapshotsSampleTheme {
+    SampleShapeWithText()
+  }
+}
+
+@Preview(showSystemUi = true, device = Devices.NEXUS_7)
+@Preview(showSystemUi = true, device = Devices.NEXUS_7_2013)
+@Preview(showSystemUi = true, device = Devices.NEXUS_5)
+@Preview(showSystemUi = true, device = Devices.NEXUS_6)
+@Preview(showSystemUi = true, device = Devices.NEXUS_9)
+@Preview(showSystemUi = true, device = Devices.NEXUS_10)
+@Preview(showSystemUi = true, device = Devices.NEXUS_5X)
+@Preview(showSystemUi = true, device = Devices.NEXUS_6P)
+@Preview(showSystemUi = true, device = Devices.PIXEL_C)
+@Preview(showSystemUi = true, device = Devices.PIXEL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_XL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_2)
+@Preview(showSystemUi = true, device = Devices.PIXEL_2_XL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_3)
+@Preview(showSystemUi = true, device = Devices.PIXEL_3_XL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_3A)
+@Preview(showSystemUi = true, device = Devices.PIXEL_3A_XL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_4)
+@Preview(showSystemUi = true, device = Devices.PIXEL_4_XL)
+@Preview(showSystemUi = true, device = Devices.PIXEL_4A)
+@Preview(showSystemUi = true, device = Devices.PIXEL_5)
+@Preview(showSystemUi = true, device = Devices.PIXEL_6)
+@Preview(showSystemUi = true, device = Devices.PIXEL_6_PRO)
+@Preview(showSystemUi = true, device = Devices.PIXEL_6A)
+@Preview(showSystemUi = true, device = Devices.PIXEL_7)
+@Preview(showSystemUi = true, device = Devices.PIXEL_7_PRO)
+@Preview(showSystemUi = true, device = Devices.PIXEL_7A)
+@Preview(showSystemUi = true, device = Devices.PIXEL_FOLD)
+@Preview(showSystemUi = true, device = Devices.PIXEL_TABLET)
+@Composable
+fun SampleShapeWithTextPreviewAllDevices() {
   SnapshotsSampleTheme {
     SampleShapeWithText()
   }
