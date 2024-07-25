@@ -100,6 +100,8 @@ fun snapshotComposable(
   }
 }
 
+const val DEFAULT_DENSITY_PPI = 160
+
 private fun measureComposableSize(
   view: ComposeView,
   previewConfig: ComposePreviewSnapshotConfig,
@@ -109,12 +111,13 @@ private fun measureComposableSize(
     if (deviceSpec != null) {
       // Measure the composable with the device dimensions
       // Override the width and height if set in preview annotation
-      val deviceDpScale = deviceSpec.densityPpi / 160
+      val deviceDpScale = deviceSpec.densityPpi / DEFAULT_DENSITY_PPI
       val widthPixels = previewConfig.widthDp?.let { it * deviceDpScale } ?: deviceSpec.widthPixels
       val heightPixels = previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
       Log.i(
         EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Measuring composable with device dimensions: $widthPixels x $heightPixels")
+        "Measuring composable with device dimensions: $widthPixels x $heightPixels"
+      )
       view.measure(
         View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
         View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY),

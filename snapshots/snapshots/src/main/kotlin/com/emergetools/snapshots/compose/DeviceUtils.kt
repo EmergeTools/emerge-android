@@ -2,7 +2,6 @@
 
 package com.emergetools.snapshots.compose
 
-import androidx.compose.runtime.Composable
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.abs
 
@@ -272,7 +271,7 @@ fun configToDimensionSpec(
       widthDp = devicePreviewString?.widthDp,
       heightDp = devicePreviewString?.heightDp,
       densityPpi = densityPpi,
-      scalingFactor =  densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
+      scalingFactor = densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
     )
   }
 
