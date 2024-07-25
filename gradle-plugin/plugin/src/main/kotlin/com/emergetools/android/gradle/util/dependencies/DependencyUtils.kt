@@ -32,14 +32,18 @@ fun buildDependencies(
         .filter(File::isFile)
         .flatMap { artifactFile ->
           // Normalize the name to remove the leading path, so it's relative to the module root.
-          val name = artifactFile.absolutePath.removePrefix(resolvedArtifact.file.absolutePath)
+          val name = artifactFile.absolutePath
+            .removePrefix(resolvedArtifact.file.absolutePath)
+            .removePrefix("/")
+
+          logger.info("Processing artifact: $name")
           when (artifactFile.extension) {
             // If the artifact is a jar, we want to include all the entries in the jar
             "jar" -> JarFile(artifactFile).use { jarFile ->
               jarFile.entries()
                 .asSequence()
                 .filterNot(JarEntry::isDirectory)
-                .map(JarEntry::getName)
+                .map { it.name.removePrefix("/") }
                 .toList()
             }
 
@@ -62,6 +66,7 @@ fun buildDependencies(
     )
   )
   val libraries = mutableListOf<Library>()
+
   dependencyEntryMap.entries.forEach {
     val keySplits = it.key.split(":")
     if (it.key.startsWith(PROJECT_PREFIX)) {
