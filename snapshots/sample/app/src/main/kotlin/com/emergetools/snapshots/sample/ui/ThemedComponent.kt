@@ -123,3 +123,11 @@ fun SampleShapeWithTextPreview() {
     SampleShapeWithText()
   }
 }
+
+@DevicePreviews
+@Composable
+fun SampleShapeWithTextPreviewAllDevices() {
+  SnapshotsSampleTheme {
+    SampleShapeWithText()
+  }
+}
