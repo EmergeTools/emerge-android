@@ -11,6 +11,11 @@ enum class SnapshotType {
   ACTIVITY,
 }
 
+enum class SnapshotErrorType {
+  EMPTY_SNAPSHOT,
+  GENERAL,
+}
+
 @OptIn(ExperimentalSerializationApi::class)
 @Serializable
 @JsonClassDiscriminator("metadataType")
@@ -45,6 +50,7 @@ sealed class SnapshotMetadata {
     // FQN of the test class
     override val fqn: String,
     override val type: SnapshotType,
+    val errorType: SnapshotErrorType,
     // Compose-specific metadata, only set if type == COMPOSABLE
     override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) : SnapshotMetadata()
