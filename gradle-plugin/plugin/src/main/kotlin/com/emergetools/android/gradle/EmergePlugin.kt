@@ -198,7 +198,7 @@ class EmergePlugin : Plugin<Project> {
       it.description = "Builds and uploads an APK for variant ${variant.name} to Emerge."
       it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
       it.proguardMapping.set(variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE))
-      it.setUploadTaskInputs(extension, appProject)
+      it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.sizeOptions, variant)
     }
   }
@@ -214,7 +214,7 @@ class EmergePlugin : Plugin<Project> {
       it.group = EMERGE_TASK_GROUP
       it.description = "Builds and uploads an AAB for variant ${variant.name} to Emerge."
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, appProject)
+      it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.sizeOptions, variant)
     }
   }
@@ -247,7 +247,7 @@ class EmergePlugin : Plugin<Project> {
       it.group = EMERGE_TASK_GROUP
       it.description = "Confirms Reaper is initialized and uploads an AAB for variant ${variant.name} to Emerge."
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, appProject)
+      it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
       it.dependsOn(preflightTask)
     }
@@ -283,7 +283,7 @@ class EmergePlugin : Plugin<Project> {
         "Emerge with ${performanceProject.name} test APK."
       it.artifact.set(appVariant.artifacts.get(SingleArtifact.BUNDLE))
       it.perfArtifactDir.set(performanceVariant.artifacts.get(SingleArtifact.APK))
-      it.setUploadTaskInputs(extension, appProject)
+      it.setUploadTaskInputs(extension, appProject, appVariant)
       it.setTagFromProductOptions(extension.perfOptions, appVariant)
     }
   }
@@ -454,7 +454,7 @@ class EmergePlugin : Plugin<Project> {
         packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
       it.apiVersion.set(extension.snapshotOptions.apiVersion)
       it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
-      it.setUploadTaskInputs(extension, appProject)
+      it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)
     }
@@ -560,6 +560,7 @@ class EmergePlugin : Plugin<Project> {
           = Emerge configuration =
           ========================
           apiToken:                      ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
+          includeDependencyInformation:  ${extension.includeDependencyInformation.orElse(true)}
           dryRun (optional):             ${extension.dryRun.orEmpty()}
           verbose (optional):            ${extension.verbose.orEmpty()}
           size

@@ -6,6 +6,12 @@ import com.emergetools.android.gradle.EmergePlugin
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.ProductOptions
 import com.emergetools.android.gradle.util.AgpVersions
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_ASSETS
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_CLASSES
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_JNI
+import com.emergetools.android.gradle.util.dependencies.ARTIFACT_RESOURCES
+import com.emergetools.android.gradle.util.dependencies.Dependencies
+import com.emergetools.android.gradle.util.dependencies.buildDependencies
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import com.emergetools.android.gradle.util.network.EmergeUploadResponse
 import com.emergetools.android.gradle.util.network.SOURCE_GRADLE_PLUGIN
@@ -17,6 +23,8 @@ import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
 import org.gradle.api.DefaultTask
 import org.gradle.api.Project
+import org.gradle.api.artifacts.ArtifactCollection
+import org.gradle.api.attributes.Attribute
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
@@ -77,6 +85,23 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val gitLabProjectId: Property<String>
 
+  @get:Input
+  abstract val includeDependencyInformation: Property<Boolean>
+
+  @get:Input
+  @get:Optional
+  abstract val appModuleName: Property<String>
+
+  @get:Input
+  @get:Optional
+  abstract val appModulePath: Property<String>
+
+  private lateinit var artifacts: List<ArtifactCollection>
+
+  fun setArtifacts(artifacts: List<ArtifactCollection>) {
+    this.artifacts = artifacts
+  }
+
   /**
    * Internal only for testing.
    */
@@ -95,11 +120,46 @@ abstract class BaseUploadTask : DefaultTask() {
     outputDir.mkdirs()
 
     val zipFile = File(createTempDirectory("").absolutePathString(), OUTPUT_FILE_NAME)
+    logger.debug("Creating Emerge upload zip: ${zipFile.path}")
 
     ZipOutputStream(BufferedOutputStream(zipFile.outputStream())).use { zos ->
       includeFilesInUpload(zos)
 
-      val json = Json.encodeToString(artifactMetadata)
+      var finalArtifactMetadata = artifactMetadata
+
+      if (includeDependencyInformation.get()) {
+        checkNotNull(appModuleName.orNull) {
+          "appModuleName must be set when includeDependencyInformation is true"
+        }
+        checkNotNull(appModulePath.orNull) {
+          "appModulePath must be set when includeDependencyInformation is true"
+        }
+
+        val dependencies = buildDependencies(
+          artifacts = artifacts,
+          defaultModuleName = appModuleName.get(),
+          defaultModulePath = appModulePath.get(),
+          logger = logger,
+        )
+        val dependenciesJson = Json.encodeToString(dependencies)
+        val dependenciesFile = File(outputDir, Dependencies.JSON_FILE_NAME).also {
+          it.createNewFile()
+          it.writeText(dependenciesJson)
+        }
+
+        if (dependenciesFile.exists()) {
+          dependenciesFile.inputStream().use { inputStream ->
+            zos.putNextEntry(ZipEntry(dependenciesFile.name))
+            inputStream.copyTo(zos)
+            zos.closeEntry()
+          }
+          finalArtifactMetadata = artifactMetadata.copy(
+            dependencyMetadataZipPath = dependenciesFile.name,
+          )
+        }
+      }
+
+      val json = Json.encodeToString(finalArtifactMetadata)
       val appMetadataFile = File(outputDir, ArtifactMetadata.JSON_FILE_NAME).also {
         it.createNewFile()
         it.writeText(json)
@@ -131,11 +191,7 @@ abstract class BaseUploadTask : DefaultTask() {
     val repoName = if (
       gitHubRepoOwner.orNull.isNullOrEmpty() ||
       gitHubRepoName.orNull.isNullOrBlank()
-    ) {
-      null
-    } else {
-      "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
-    }
+    ) null else "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
 
     return EmergeUploadRequestData(
       apiToken = apiToken.get(),
@@ -159,34 +215,34 @@ abstract class BaseUploadTask : DefaultTask() {
     if (dryRun.get()) {
       file.copyTo(File(outputDir, "/${file.name}"), overwrite = true)
       return null
-    } else {
-      val okHttpClient = OkHttpClient.Builder()
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
-        .build()
-
-      val baseUrl = baseUrl.getOrElse(BuildConfig.EMERGE_BASE_URL)
-      val baseHttpUrl = baseUrl.toHttpUrlOrNull()
-        ?: error("Invalid baseUrl provided: $baseUrl")
-
-      val uploadResponse = fetchSignedUrl(
-        client = okHttpClient,
-        uploadData = uploadRequestData(file),
-        baseUrl = baseHttpUrl
-      )
-      val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()
-        ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
-
-      logger.debug("Uploading file to Emerge: ${file.path}")
-
-      postFile(
-        client = okHttpClient,
-        file = file,
-        signedUrl = signedUrl
-      )
-      return uploadResponse
     }
+
+    val okHttpClient = OkHttpClient.Builder()
+      .connectTimeout(30, TimeUnit.SECONDS)
+      .readTimeout(30, TimeUnit.SECONDS)
+      .writeTimeout(30, TimeUnit.SECONDS)
+      .build()
+
+    val baseUrl = baseUrl.getOrElse(BuildConfig.EMERGE_BASE_URL)
+    val baseHttpUrl = baseUrl.toHttpUrlOrNull()
+      ?: error("Invalid baseUrl provided: $baseUrl")
+
+    val uploadResponse = fetchSignedUrl(
+      client = okHttpClient,
+      uploadData = uploadRequestData(file),
+      baseUrl = baseHttpUrl
+    )
+    val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()
+      ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
+
+    logger.debug("Uploading file to Emerge: ${file.path}")
+
+    postFile(
+      client = okHttpClient,
+      file = file,
+      signedUrl = signedUrl
+    )
+    return uploadResponse
   }
 
   companion object {
@@ -200,11 +256,13 @@ abstract class BaseUploadTask : DefaultTask() {
     fun BaseUploadTask.setUploadTaskInputs(
       extension: EmergePluginExtension,
       project: Project,
+      variant: Variant,
     ) {
+      val emergeOutputDir = File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
-      outputDir.set(File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs))
+      outputDir.set(emergeOutputDir)
 
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
@@ -216,6 +274,32 @@ abstract class BaseUploadTask : DefaultTask() {
 
       if (project.hasProperty(BASE_URL_ARG_KEY)) {
         baseUrl.set(project.property(BASE_URL_ARG_KEY) as String)
+      }
+
+      includeDependencyInformation.set(extension.includeDependencyInformation.get())
+      if (extension.includeDependencyInformation.get()) {
+        appModuleName.set(project.name)
+        appModulePath.set(project.path)
+
+        val runtimeClasspathConfiguration =
+          project.configurations.getByName("${variant.name}RuntimeClasspath")
+
+        val artifacts = listOf(
+          ARTIFACT_RESOURCES,
+          ARTIFACT_CLASSES,
+          ARTIFACT_ASSETS,
+          ARTIFACT_JNI,
+        ).map { artifactType ->
+          runtimeClasspathConfiguration.incoming.artifactView { viewConfiguration ->
+            viewConfiguration.attributes { attributeContainer ->
+              attributeContainer.attribute(
+                Attribute.of("artifactType", String::class.java),
+                artifactType
+              )
+            }
+          }.artifacts
+        }
+        setArtifacts(artifacts)
       }
     }
 

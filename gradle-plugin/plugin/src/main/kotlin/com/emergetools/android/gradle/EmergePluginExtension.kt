@@ -25,6 +25,9 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
   val apiToken: Property<String> = objects.property<String>()
     .convention(System.getenv(BaseUploadTask.DEFAULT_API_TOKEN_ENV_KEY))
 
+  val includeDependencyInformation: Property<Boolean> = objects.property<Boolean>()
+    .convention(true)
+
   @get:Nested
   abstract val sizeOptions: SizeOptions
 
