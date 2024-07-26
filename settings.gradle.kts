@@ -1,4 +1,4 @@
-rootProject.name = "internal-emerge-android"
+rootProject.name = "emerge-android"
 
 pluginManagement {
   repositories {

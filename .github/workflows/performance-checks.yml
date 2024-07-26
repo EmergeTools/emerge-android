@@ -2,13 +2,16 @@ name: performance checks
 
 on:
   push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+    branches: [ main ]
     paths:
       - gradle/**
+      - gradle-plugin/**
+      - performance/**
+  pull_request:
+    branches: [ main ]
+    paths:
+      - gradle/**
+      - gradle-plugin/**
       - performance/**
 
 jobs:

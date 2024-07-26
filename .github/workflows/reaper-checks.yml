@@ -1,8 +1,12 @@
-name: Reaper sample tests
+name: reaper checks
 
 on:
   push:
     branches: [ main ]
+    paths:
+      - gradle/**
+      - gradle-plugin/**
+      - reaper/**
   pull_request:
     branches: [ main ]
     paths:
