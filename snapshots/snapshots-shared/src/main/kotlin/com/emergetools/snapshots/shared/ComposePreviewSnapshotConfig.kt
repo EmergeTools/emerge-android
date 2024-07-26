@@ -8,6 +8,7 @@ import kotlinx.serialization.Serializable
 data class ComposePreviewSnapshotConfig(
   val fullyQualifiedClassName: String,
   val originalFqn: String,
+  val isAppStoreSnapshot: Boolean? = null,
   // Preview annotation params:
   val name: String? = null,
   val group: String? = null,
