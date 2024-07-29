@@ -11,7 +11,8 @@ import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
-import com.emergetools.snapshots.SnapshotType.COMPOSABLE
+import com.emergetools.snapshots.SnapshotErrorType
+import com.emergetools.snapshots.SnapshotType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.max
 
@@ -83,7 +84,13 @@ fun snapshotComposable(
       }
       bitmap?.let {
         snapshotRule.take(bitmap, previewConfig)
-      } ?: snapshotRule.saveError(COMPOSABLE, previewConfig)
+      } ?: run {
+        snapshotRule.saveError(
+          type = SnapshotType.COMPOSABLE,
+          errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
+          composePreviewSnapshotConfig = previewConfig,
+        )
+      }
     }
   } catch (e: Exception) {
     Log.e(
@@ -92,8 +99,9 @@ fun snapshotComposable(
       e,
     )
     snapshotRule.saveError(
-      COMPOSABLE,
-      previewConfig
+      type = SnapshotType.COMPOSABLE,
+      errorType = SnapshotErrorType.GENERAL,
+      composePreviewSnapshotConfig = previewConfig,
     )
     // Re-throw to fail the test
     throw e

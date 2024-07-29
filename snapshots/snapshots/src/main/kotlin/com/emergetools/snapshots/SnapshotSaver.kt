@@ -76,6 +76,7 @@ internal object SnapshotSaver {
     displayName: String?,
     fqn: String,
     type: SnapshotType,
+    errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
@@ -98,6 +99,7 @@ internal object SnapshotSaver {
         keyName = keyName,
         type = type,
         fqn = fqn,
+        errorType = errorType,
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
@@ -144,6 +146,7 @@ internal object SnapshotSaver {
     displayName: String?,
     fqn: String,
     type: SnapshotType,
+    errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
@@ -151,6 +154,7 @@ internal object SnapshotSaver {
       displayName = displayName,
       fqn = fqn,
       type = type,
+      errorType = errorType,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
 

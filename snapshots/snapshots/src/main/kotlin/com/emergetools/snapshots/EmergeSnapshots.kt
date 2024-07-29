@@ -57,12 +57,14 @@ class EmergeSnapshots : TestRule {
 
   internal fun saveError(
     type: SnapshotType,
+    errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
   ) {
     SnapshotSaver.saveError(
       displayName = null,
       fqn = fqn,
       type = type,
+      errorType = errorType,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
   }
