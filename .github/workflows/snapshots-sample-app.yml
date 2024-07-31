@@ -1,12 +1,9 @@
 name: snapshots sample app
 
 on:
+  # Intentionally run on all pushes to main branch to ensure we always have a base build with snapshots
   push:
     branches: [ main ]
-    paths:
-      - gradle/**
-      - gradle-plugin/**
-      - snapshots/**
   pull_request:
     branches: [ main ]
     paths:
