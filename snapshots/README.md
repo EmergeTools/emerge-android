@@ -69,7 +69,8 @@ fun MyComposablePreview() {
 }
 ```
 
-_⚠️ Currently only no-arg preview functions are supported. `@PreviewParameter` annotated arguments like the below example are not yet supported._
+_⚠️ Currently only no-arg preview functions are supported. `@PreviewParameter` annotated arguments
+like the below example are not yet supported._
 
 ```kotlin
 
@@ -85,7 +86,8 @@ fun MyComposablePreview(
 
 #### Variant support
 
-Emerge currently supports all `@Preview` annotation parameters except for `wallpaper`.
+Emerge currently supports all `@Preview` annotation parameters except for `wallpaper`
+and `showSystemUi`.
 
 Emerge will automatically generate a snapshot test for each Preview annotation present. For example,
 for the following composable:
@@ -134,9 +136,11 @@ dependencies {
 
 ##### Ignoring private previews
 
-Emerge can snapshot Compose previews with any visibility, like `private` or `internal`. But for some projects, you might not want to snapshot private previews for various reasons. 
+Emerge can snapshot Compose previews with any visibility, like `private` or `internal`. But for some
+projects, you might not want to snapshot private previews for various reasons.
 
-Emerge's gradle plugin has an option to include private previews, which can be set to false to disable snapshotting `private` visibility preview functions.
+Emerge's gradle plugin has an option to include private previews, which can be set to false to
+disable snapshotting `private` visibility preview functions.
 
 ```kotlin
 emerge {
@@ -237,10 +241,11 @@ For more details on Emerge's snapshotting service, see
 the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
 
 ## Artifacts & versions
-| Artifact                                        | Description                                     | Latest                                                                                                                                                                                                             | Min SDK |
-|-------------------------------------------------|-------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `com.emergetools.snapshots:snapshots`           | Snapshot testing SDK                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)           | 23      |
-| `com.emergetools.snapshots:snapshots-annotations`           | Annotations to ignore snapshots                            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)           | 23      |
+
+| Artifact                                          | Description                     | Latest                                                                                                                                                                                                                           | Min SDK |
+|---------------------------------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `com.emergetools.snapshots:snapshots`             | Snapshot testing SDK            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                         | 23      |
+| `com.emergetools.snapshots:snapshots-annotations` | Annotations to ignore snapshots | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23      |
 
 ## Releasing
 
@@ -249,13 +254,13 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 1. Update the `emerge-snapshots` version in `/gradle/libs.versions.toml`
 2. Update the `/snapshots/CHANGELOG.md`
 3. `gt c -am "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
-   1. Alt
-      1. `git add *`
-      2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
+  1. Alt
+    1. `git add *`
+    2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
 4. `gt ss`
-   1. Alt:
-      1. `git push`
-      2. Open PR
+  1. Alt:
+    1. `git push`
+    2. Open PR
 5. Get PR approved and merge
 6. Create a new release on GitHub
 7. Tag version `snapshots-vX.Y.Z`
