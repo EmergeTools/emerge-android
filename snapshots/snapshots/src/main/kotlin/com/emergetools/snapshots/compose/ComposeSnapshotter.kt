@@ -68,20 +68,11 @@ fun snapshotComposable(
     composeView.post {
       // Measure the composable agnostic of the parent constraints to layout properly in activity
       val composableSize = measureComposableSize(composeView, previewConfig)
-      val bitmap = if (previewConfig.showSystemUi == true && previewConfig.device == null) {
-        val rootView = activity.window.decorView.rootView
-        captureBitmap(
-          view = rootView,
-          width = rootView.width,
-          height = rootView.height,
-        )
-      } else {
-        captureBitmap(
-          view = composeView,
-          width = composableSize.width,
-          height = composableSize.height,
-        )
-      }
+      val bitmap = captureBitmap(
+        view = composeView,
+        width = composableSize.width,
+        height = composableSize.height,
+      )
       bitmap?.let {
         snapshotRule.take(bitmap, previewConfig)
       } ?: run {
@@ -121,7 +112,8 @@ private fun measureComposableSize(
       // Override the width and height if set in preview annotation
       val deviceDpScale = deviceSpec.densityPpi / DEFAULT_DENSITY_PPI
       val widthPixels = previewConfig.widthDp?.let { it * deviceDpScale } ?: deviceSpec.widthPixels
-      val heightPixels = previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
+      val heightPixels =
+        previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
       Log.i(
         EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
         "Measuring composable with device dimensions: $widthPixels x $heightPixels"
