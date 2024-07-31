@@ -207,6 +207,6 @@ fun longToBase64(hash: Long): String {
   for (i in 0..7) {
     buf[i] = ((hash shr i * 8) and 0xFFL).toByte()
   }
-  val hashAsBase64 = Base64.encodeToString(buf, Base64.DEFAULT)
-  return hashAsBase64
+  val hashAsBase64 = Base64.encodeToString(buf, Base64.NO_WRAP)
+  return hashAsBase64.strip()
 }
