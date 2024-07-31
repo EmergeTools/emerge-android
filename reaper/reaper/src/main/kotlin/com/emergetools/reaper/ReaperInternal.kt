@@ -34,10 +34,10 @@ private class Report(val stream: FileOutputStream, val dataStream: DataOutputStr
 }
 
 internal object ReaperInternal {
-  private const val TAG = "Reaper"
   private const val MANIFEST_TAG_INSTRUMENTED = "com.emergetools.reaper.REAPER_INSTRUMENTED"
   private const val MANIFEST_TAG_PUBLISHABLE_API_KEY = "com.emergetools.reaper.PUBLISHABLE_API_KEY"
   private const val MANIFEST_TAG_OVERRIDE_BASE_URL = "com.emergetools.OVERRIDE_BASE_URL"
+  private const val MANIFEST_TAG_DEBUG = "com.emergetools.reaper.DEBUG"
   private const val FLUSH_PERIOD_MS = 60L * 1000L
   private const val PENDING_REPORTS_LIMIT = 20
 
@@ -46,6 +46,7 @@ internal object ReaperInternal {
   // Members below should only be accessed while holding the lock for this object.
   // Set at init()
   private var isInitialized: Boolean = false
+  private var isDebug: Boolean = false
   private var apiKey = ""
   private var baseUrl = ReaperConfig.EMERGE_BASE_URL
 
@@ -127,6 +128,11 @@ internal object ReaperInternal {
     if (apiKey == "") {
       fatalError(context, "Manifest com.emergetools.PUBLISHABLE_API_KEY must be set and non-empty.")
     }
+
+    isDebug = context.packageManager.getApplicationInfo(
+      context.packageName,
+      PackageManager.GET_META_DATA
+    ).metaData.getBoolean(MANIFEST_TAG_DEBUG, false)
 
     this.isInitialized = true
 
@@ -285,7 +291,8 @@ internal object ReaperInternal {
     // Schedule upload job:
     val data = workDataOf(
       ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
-      ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl
+      ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
+      ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
     )
 
     val uploadWorkRequest =
@@ -330,21 +337,5 @@ internal object ReaperInternal {
     name = name.replace(":", "_")
     name = name.replace(".", "_")
     return "report_$name"
-  }
-
-  private fun ensureDirectories(context: Context): Boolean {
-    val current = getCurrentDir(context)
-    if (!current.mkdirs() && !current.isDirectory()) {
-      Log.e(TAG, "mkdirs ${current.absolutePath} failed")
-      return false
-    }
-
-    val pending = getPendingDir(context)
-    if (!pending.mkdirs() && !pending.isDirectory()) {
-      Log.e(TAG, "mkdirs ${pending.absolutePath} failed")
-      return false
-    }
-
-    return true
   }
 }
