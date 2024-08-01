@@ -31,6 +31,7 @@ import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setU
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
+import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
@@ -224,10 +225,13 @@ class EmergePlugin : Plugin<Project> {
     extension: EmergePluginExtension,
     variant: Variant,
   ) {
-    val preflightTaskName = "${EMERGE_TASK_PREFIX}PreflightReaper${variant.name.capitalize()}"
-    val taskName = "${EMERGE_TASK_PREFIX}InitializeReaper${variant.name.capitalize()}"
+    val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
+    val uploadAabTaskName = "${EMERGE_TASK_PREFIX}UploadReaperAab${variant.name.capitalize()}"
+    val initializeTaskName = "${EMERGE_TASK_PREFIX}InitializeReaper${variant.name.capitalize()}"
 
     val preflightTask = appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
+      it.group = EMERGE_TASK_GROUP
+      it.description = "Validate Reaper is initialized for variant ${variant.name}"
       it.reaperEnabled.set(extension.reaperOptions.enabled)
       it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
       it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
@@ -243,13 +247,19 @@ class EmergePlugin : Plugin<Project> {
       }
     }
 
-    appProject.tasks.register(taskName, InitializeReaper::class.java) {
+    appProject.tasks.register(uploadAabTaskName, InitializeReaper::class.java) {
       it.group = EMERGE_TASK_GROUP
-      it.description = "Confirms Reaper is initialized and uploads an AAB for variant ${variant.name} to Emerge."
+      it.description = "Uploads an AAB for variant ${variant.name} to Emerge with Reaper instrumentation added."
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
+    }
+
+    appProject.tasks.register(initializeTaskName, DefaultTask::class.java) {
+      it.group = EMERGE_TASK_GROUP
+      it.description = "Confirms Reaper is initialized and uploads an AAB for variant ${variant.name} to Emerge."
       it.dependsOn(preflightTask)
+      it.dependsOn(uploadAabTaskName)
     }
   }
 
