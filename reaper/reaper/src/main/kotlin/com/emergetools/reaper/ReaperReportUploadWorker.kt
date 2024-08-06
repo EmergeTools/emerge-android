@@ -27,6 +27,7 @@ import java.io.DataInputStream
 import java.io.EOFException
 import java.io.File
 import java.io.FileInputStream
+import java.io.FileOutputStream
 import java.io.IOException
 import kotlin.coroutines.resumeWithException
 
@@ -36,9 +37,9 @@ internal class ReaperReportUploadWorker(
 ) : CoroutineWorker(context, params) {
 
   companion object {
-    const val TAG = "Reaper"
     const val EXTRA_API_KEY = "REAPER_API_KEY"
     const val EXTRA_BASE_URL = "REAPER_BASE_URL"
+    const val EXTRA_DEBUG = "REAPER_DEBUG"
   }
 
   private val client = OkHttpClient()
@@ -48,6 +49,8 @@ internal class ReaperReportUploadWorker(
       TAG,
       "ReaperReportUploadWorker"
     )
+
+    ensureDirectories(context)
 
     val apiKey = inputData.getString(EXTRA_API_KEY)
     if (apiKey == null) {
@@ -59,6 +62,8 @@ internal class ReaperReportUploadWorker(
       Log.e(TAG, "EXTRA_BASE_URL not set")
       return@withContext Result.failure()
     }
+    val isDebug = inputData.getBoolean(EXTRA_DEBUG, false)
+
     val pendingDir = getPendingDir(context)
     val files = pendingDir.listFiles()
     if (files == null) {
@@ -71,7 +76,7 @@ internal class ReaperReportUploadWorker(
     var success = true
     for (file in files) {
       try {
-        createAndUploadReport(apiKey, baseUrl, file)
+        createAndUploadReport(apiKey = apiKey, baseUrl = baseUrl, isDebug = isDebug, file = file)
       } catch (e: Exception) {
         Log.e(TAG, "Failed to report ${file.absolutePath}")
         success = false
@@ -91,7 +96,12 @@ internal class ReaperReportUploadWorker(
     }
   }
 
-  private suspend fun createAndUploadReport(apiKey: String, baseUrl: String, file: File): Unit =
+  private suspend fun createAndUploadReport(
+    apiKey: String,
+    baseUrl: String,
+    isDebug: Boolean,
+    file: File
+  ): Unit =
     withContext(Dispatchers.IO) {
       if (file.exists()) {
         Log.d(
@@ -139,7 +149,9 @@ internal class ReaperReportUploadWorker(
       uploadReaperReport(
         apiKey = apiKey,
         report = report,
-        baseUrl = baseUrl
+        baseUrl = baseUrl,
+        isDebug = isDebug,
+        reportName = file.name,
       )
     }
 
@@ -147,6 +159,8 @@ internal class ReaperReportUploadWorker(
     apiKey: String,
     report: ReaperReport,
     baseUrl: String,
+    isDebug: Boolean,
+    reportName: String,
   ) {
     val json = Json {
       encodeDefaults = true
@@ -154,6 +168,13 @@ internal class ReaperReportUploadWorker(
     }
 
     val reportString = json.encodeToString(report)
+
+    if (isDebug) {
+      val path = File(getDebugDir(context), "$reportName.json")
+      val stream = FileOutputStream(path)
+      stream.write(reportString.encodeToByteArray())
+    }
+
     val url = "$baseUrl/report"
     val request = Request.Builder().apply {
       header("Authorization", "Bearer $apiKey")

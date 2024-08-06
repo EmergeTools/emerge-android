@@ -32,7 +32,6 @@ class ReaperReportErrorWorker(
 ) : CoroutineWorker(context, params) {
 
   companion object {
-    const val TAG = "Reaper"
     const val EXTRA_API_KEY = "REAPER_API_KEY"
     const val EXTRA_BASE_URL = "REAPER_BASE_URL"
     const val EXTRA_MESSAGE = "REAPER_MESSAGE"
@@ -130,7 +129,7 @@ class ReaperReportErrorWorker(
 }
 
 fun reportError(ctx: Context, baseUrl: String, apiKey: String, message: String) {
-  Log.e(ReaperReportErrorWorker.TAG, "Error. backend=$baseUrl message=$message")
+  Log.e(TAG, "Error. backend=$baseUrl message=$message")
   val data = workDataOf(
     ReaperReportErrorWorker.EXTRA_API_KEY to apiKey,
     ReaperReportErrorWorker.EXTRA_BASE_URL to baseUrl,
