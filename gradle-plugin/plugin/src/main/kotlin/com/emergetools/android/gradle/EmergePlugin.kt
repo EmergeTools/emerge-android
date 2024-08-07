@@ -31,7 +31,6 @@ import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setU
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
-import org.gradle.api.DefaultTask
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.provider.Property
@@ -117,7 +116,7 @@ class EmergePlugin : Plugin<Project> {
 
         // Always register the Reaper initialization task even if Reaper is disabled since users use
         // it to help get Reaper setup for the first time.
-        registerInitializeReaperTask(appProject, emergeExtension, variant)
+        registerReaperTasks(appProject, emergeExtension, variant)
 
         registerReaperTransform(
           project = appProject,
@@ -217,49 +216,6 @@ class EmergePlugin : Plugin<Project> {
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.sizeOptions, variant)
-    }
-  }
-
-  private fun registerInitializeReaperTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
-    val uploadAabTaskName = "${EMERGE_TASK_PREFIX}UploadReaperAab${variant.name.capitalize()}"
-    val initializeTaskName = "${EMERGE_TASK_PREFIX}InitializeReaper${variant.name.capitalize()}"
-
-    val preflightTask = appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Validate Reaper is initialized for variant ${variant.name}"
-      it.reaperEnabled.set(extension.reaperOptions.enabled)
-      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
-      it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
-
-      // We want preflight to happen pretty early so we can detect error conditions and give them
-      // nice messages. Specifically we need it to occur prior to 'linking' steps which we detect
-      // that the Reaper added instrumentation calls methods in the SDK to avoid confusing error
-      // messages.
-      val bundleTaskName = "minify${variant.name.capitalize()}WithR8"
-      val bundleTasks = appProject.getTasksByName(bundleTaskName, false)
-      if (bundleTasks.size != 0) {
-        bundleTasks.forEach { bundleTask -> bundleTask.dependsOn(it) }
-      }
-    }
-
-    appProject.tasks.register(uploadAabTaskName, InitializeReaper::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Uploads an AAB for variant ${variant.name} to Emerge with Reaper instrumentation added."
-      it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, appProject, variant)
-      it.setTagFromProductOptions(extension.reaperOptions, variant)
-    }
-
-    appProject.tasks.register(initializeTaskName, DefaultTask::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Confirms Reaper is initialized and uploads an AAB for variant ${variant.name} to Emerge."
-      it.dependsOn(preflightTask)
-      it.dependsOn(uploadAabTaskName)
     }
   }
 
@@ -467,6 +423,62 @@ class EmergePlugin : Plugin<Project> {
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.snapshotOptions, variant)
       it.dependsOn(packageTask)
+    }
+  }
+
+  private fun registerReaperTasks(
+    appProject: Project,
+    extension: EmergePluginExtension,
+    variant: Variant,
+  ) {
+    registerReaperPreflightTask(appProject, extension, variant)
+    // Only register upload task if Reaper is enabled
+    if (extension.reaperOptions.enabled.getOrElse(false)) {
+      registerReaperUploadTask(appProject, extension, variant)
+    }
+  }
+
+  private fun registerReaperPreflightTask(
+    appProject: Project,
+    extension: EmergePluginExtension,
+    variant: Variant,
+  ) {
+    val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
+    appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
+      it.group = EMERGE_TASK_GROUP
+      it.description = "Validate Reaper is initialized for variant ${variant.name}"
+      it.reaperEnabled.set(extension.reaperOptions.enabled)
+      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
+      it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
+
+      // We want preflight to happen pretty early so we can detect error conditions and give them
+      // nice messages. Specifically we need it to occur prior to 'linking' steps which we detect
+      // that the Reaper added instrumentation calls methods in the SDK to avoid confusing error
+      // messages.
+      val minifyTaskName = "minify${variant.name.capitalize()}WithR8"
+      val minifyTasks = appProject.getTasksByName(minifyTaskName, false)
+      if (minifyTasks.size != 0) {
+        minifyTasks.forEach { minifyTask -> minifyTask.dependsOn(it) }
+      }
+    }
+  }
+
+  private fun registerReaperUploadTask(
+    appProject: Project,
+    extension: EmergePluginExtension,
+    variant: Variant,
+  ) {
+    val uploadReaperAabTaskName = "${EMERGE_TASK_PREFIX}UploadReaperAab${variant.name.capitalize()}"
+    val uploadReaperAabTask =
+      appProject.tasks.register(uploadReaperAabTaskName, InitializeReaper::class.java) {
+        it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
+        it.setUploadTaskInputs(extension, appProject, variant)
+        it.setTagFromProductOptions(extension.reaperOptions, variant)
+      }
+    // Hook the bundle tasks to run the reaper upload task after they complete.
+    appProject.afterEvaluate { project ->
+      val bundleTask = project.tasks.named("bundle${variant.name.capitalize()}")
+      bundleTask.configure { it.finalizedBy(uploadReaperAabTask) }
     }
   }
 
