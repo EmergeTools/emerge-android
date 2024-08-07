@@ -41,9 +41,9 @@ abstract class InitializeReaper : BaseUploadTask() {
     checkNotNull(response) {
       "Upload failed, please check your network connection and try again. ${response.toString()}"
     }
-    logger.lifecycle("Reaper initialized. View Reaper status at the url:")
+    logger.lifecycle("Reaper initialized! View Reaper reports at the url:")
     logger.lifecycle("https://emergetools.com/reaper/${response.uploadId}")
-    logger.lifecycle("Reaper processing can take up to 10 minutes.")
+    logger.lifecycle("Initial processing can take up to 10 minutes.")
   }
 
   companion object {
