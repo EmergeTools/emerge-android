@@ -8,6 +8,9 @@ Reaper is an SDK that uses production data for detecting dead code.
 - View statistics on real-world code usage.
 - (Upcoming) Automated code deletion.
 
+For full details,
+see [the Emerge Reaper docs](https://docs.emergetools.com/docs/reaper-setup-android).
+
 ## Quickstart (~10 min)
 
 ### Setup Emerge Gradle plugin
@@ -32,10 +35,12 @@ emerge {
 
 You must set `enabled` to be `true` for reaper to work properly. Behind the scenes, the Emerge
 Gradle plugin will instrument your code to drop breadcrumbs that Reaper can use to detect dead code
-when this property is set.
+when this property is set. _You can set `enabled` to false when building debug builds to avoid
+instrumenting your code for all builds._
 
-`publishableApiKey` is a token included with reports uploaded from the field to Emergetools.
-The key can be found [here](https://emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled).
+`publishableApiKey` is a token included with reports uploaded from the field to Emerge.
+Your team's key can be
+found [here](https://emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled).
 
 **Emerge recommends enabling reaper on any release build run.**
 
@@ -52,38 +57,25 @@ dependencies {
 }
 ```
 
-### Upload a release build
+### Build a release build
 
 Emerge needs a valid release AAB to generate a list of all possible classes within your app.
 
 ```shell
-./gradlew :app:emergeUploadReleaseAAB
+./gradlew :app:bundleRelease
 ```
 
-An Emerge url will be printed to the console. Navigate to this URL as you'll need it for the next
-step!
+By setting the `reaper.enabled` property to `true`, the Emerge Gradle plugin will instrument your
+release app's code and upload the resulting AAB from the `bundle` task to Emerge.
 
-### Initialize Reaper
-
-In your app's Application class, call `Reaper.init()`, passing the application instance and your
-Reaper API key.
-
-```kotlin
-class MyApplication : Application() {
-
-  override fun onCreate() {
-    super.onCreate()
-    Reaper.init(this, "<YOUR_REAPER_API_KEY>")
-  }
-}
-```
-
-You can find your org's Reaper API key by visiting the Reaper page in the Emerge sidebar from the
-url printed by the previous step.
+Emerge will then analyze the AAB, parsing all classes in the app. This process can take a few
+minutes. Upon receiving Reaper reports from production data, Emerge will automatically mark used
+classes as used.
 
 ### Release your app with Reaper
 
-That's it! Build and ship your release app with Reaper enabled to start detecting dead code.
+That's it! Build and ship the AAB you generated in the previous step with Reaper enabled to start
+detecting dead code.
 
 As reports come in, Emerge's Reaper UI will show unused code from real user reports. We recommend
 waiting a few days after a release before acting on the data to ensure enough time for a wide range
@@ -91,7 +83,7 @@ of user sessions to have used your app.
 
 ## How it works
 
-Emerge Reaper uses production data to detect dead code by determining what code is used at runtime.
+Reaper uses production data to detect dead code by determining what code is used at runtime.
 
 It works by instrumenting code using our Gradle plugin, which instruments class initialization
 functions. Upon a class being initialized, Emerge will mark that class as used in an in-memory
@@ -101,35 +93,6 @@ recorded.
 Upon a user backgrounding the application, Emerge will send the list of hashes of used classes to
 the Emerge backend. Emerge will then process each report received, marking classes as used if any
 user session reports that class being used.
-
-## Size impact
-
-Emerge's Reaper SDK is very small and has a negligible impact on your app's size.
-
-The instrumentation adds class intitialization logging to your app's code, so actual size impact is
-a function of how many classes are in your app.
-
-TODO: Ryan/Hector
-In testing, Emerge has seen an app of XX classes increase ~XX KB in size.
-
-TODO: Ryan/Hector - Public emerge comparison link
-
-## Performance impact
-
-TODO: Ryan/Hector
-From testing with a variety of apps, we've found that the performance impact of Reaper is
-negligible.
-
-TODO: Ryan/Hector - Public emerge comparison link
-
-## Data impact
-
-## Load
-
-Reaper has been in production in numerous apps with hundreds of millions of users since 2023.
-
-Emerge can easily handle reports for these apps, sometimes containing tens of thousands of class
-usage reports.
 
 ## Releasing
 
