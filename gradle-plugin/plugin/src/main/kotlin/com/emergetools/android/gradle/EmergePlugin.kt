@@ -1,6 +1,5 @@
 package com.emergetools.android.gradle
 
-import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.dsl.TestExtension
 import com.android.build.api.instrumentation.FramesComputationMode
 import com.android.build.api.instrumentation.InstrumentationScope
@@ -8,34 +7,19 @@ import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationAndroidComponentsExtension
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.TestAndroidComponentsExtension
-import com.android.build.api.variant.TestVariant
-import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
-import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
-import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
-import com.emergetools.android.gradle.tasks.perf.GeneratePerfProject
-import com.emergetools.android.gradle.tasks.perf.LocalPerfTest
-import com.emergetools.android.gradle.tasks.perf.UploadPerfBundle
-import com.emergetools.android.gradle.tasks.reaper.InitializeReaper
-import com.emergetools.android.gradle.tasks.reaper.PreflightReaper
-import com.emergetools.android.gradle.tasks.size.UploadAAB
-import com.emergetools.android.gradle.tasks.size.UploadAPK
-import com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots
-import com.emergetools.android.gradle.tasks.snapshots.PackageSnapshotArtifacts
-import com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle
-import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
+import com.emergetools.android.gradle.tasks.perf.registerGeneratePerfProjectTask
+import com.emergetools.android.gradle.tasks.perf.registerPerformanceTasks
+import com.emergetools.android.gradle.tasks.reaper.registerReaperTasks
+import com.emergetools.android.gradle.tasks.size.registerSizeTasks
+import com.emergetools.android.gradle.tasks.snapshots.registerSnapshotTasks
 import com.emergetools.android.gradle.util.AgpVersions
-import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.orEmpty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
-import org.gradle.api.provider.Property
 import org.gradle.api.tasks.StopExecutionException
-import org.gradle.api.tasks.TaskProvider
 
 class EmergePlugin : Plugin<Project> {
 
@@ -86,7 +70,7 @@ class EmergePlugin : Plugin<Project> {
               "No performance project found for path ${perfProjectPath.get()}, " +
                 "registering generate task only"
             )
-            registerGeneratePerfProjectTask(project, perfProjectPath)
+            registerGeneratePerfProjectTask(project, perfProjectPath, appVariants)
           }
         }
 
@@ -108,9 +92,6 @@ class EmergePlugin : Plugin<Project> {
         appVariants.add(variant)
 
         if (emergeExtension.sizeOptions.enabled.getOrElse(true)) {
-          appProject.logger.debug(
-            "Registering size tasks for variant ${variant.name} in project ${appProject.path}"
-          )
           registerSizeTasks(appProject, emergeExtension, variant)
         }
 
@@ -171,314 +152,10 @@ class EmergePlugin : Plugin<Project> {
           appProject,
           performanceProject,
           emergeExtension,
-          perfVariant
+          perfVariant,
+          appVariants
         )
       }
-    }
-  }
-
-  private fun registerSizeTasks(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    registerUploadAPKTask(appProject, extension, variant)
-    registerUploadAABTask(appProject, extension, variant)
-  }
-
-  private fun registerUploadAPKTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    val taskName = "${EMERGE_TASK_PREFIX}Upload${variant.name.capitalize()}Apk"
-
-    appProject.tasks.register(taskName, UploadAPK::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Builds and uploads an APK for variant ${variant.name} to Emerge."
-      it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
-      it.proguardMapping.set(variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE))
-      it.setUploadTaskInputs(extension, appProject, variant)
-      it.setTagFromProductOptions(extension.sizeOptions, variant)
-    }
-  }
-
-  private fun registerUploadAABTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    val taskName = "${EMERGE_TASK_PREFIX}Upload${variant.name.capitalize()}Aab"
-
-    appProject.tasks.register(taskName, UploadAAB::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Builds and uploads an AAB for variant ${variant.name} to Emerge."
-      it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-      it.setUploadTaskInputs(extension, appProject, variant)
-      it.setTagFromProductOptions(extension.sizeOptions, variant)
-    }
-  }
-
-  private fun registerPerformanceTasks(
-    appProject: Project,
-    performanceProject: Project,
-    extension: EmergePluginExtension,
-    perfVariant: TestVariant,
-  ) {
-    // We're not concerned with the variants of the performance project, rather the app variants,
-    // generate a perf task for each app variant for the single debug variant of the perf project.
-    appVariants.forEach { appVariant ->
-      registerEmergeLocalTestTask(appProject, performanceProject, appVariant, perfVariant)
-      registerUploadPerfBundleTask(
-        appProject, performanceProject, appVariant, perfVariant, extension
-      )
-    }
-  }
-
-  private fun registerUploadPerfBundleTask(
-    appProject: Project,
-    performanceProject: Project,
-    appVariant: Variant,
-    performanceVariant: TestVariant,
-    extension: EmergePluginExtension,
-  ) {
-    val taskName = "${EMERGE_TASK_PREFIX}Upload${appVariant.name.capitalize()}PerfBundle"
-    appProject.tasks.register(taskName, UploadPerfBundle::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Builds & uploads an AAB for variant ${appVariant.name} to " +
-        "Emerge with ${performanceProject.name} test APK."
-      it.artifact.set(appVariant.artifacts.get(SingleArtifact.BUNDLE))
-      it.perfArtifactDir.set(performanceVariant.artifacts.get(SingleArtifact.APK))
-      it.setUploadTaskInputs(extension, appProject, appVariant)
-      it.setTagFromProductOptions(extension.perfOptions, appVariant)
-    }
-  }
-
-  private fun registerGeneratePerfProjectTask(
-    appProject: Project,
-    performanceProjectPath: Property<String>,
-  ) {
-    val rootDir = appProject.rootDir
-    appProject.tasks.register(GENERATE_PERF_PROJECT_TASK_NAME, GeneratePerfProject::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Generates a new performance testing project."
-      it.appPackageName.set(
-        appProject.provider {
-          if (appVariants.isEmpty()) return@provider null
-          val appVariant =
-            appVariants.find { appVariant -> appVariant.name == "release" } ?: appVariants.first()
-          appVariant.applicationId.get()
-        }
-      )
-      it.performanceProjectPath.set(performanceProjectPath)
-      it.rootDir.set(rootDir)
-      rootDir.resolve("settings.gradle.kts").let { settingsKtsFile ->
-        if (settingsKtsFile.exists()) {
-          it.gradleSettingsFile.set(settingsKtsFile)
-        }
-      }
-      rootDir.resolve("settings.gradle").let { settingsFile ->
-        if (settingsFile.exists()) {
-          it.gradleSettingsFile.set(settingsFile)
-        }
-      }
-    }
-  }
-
-  private fun registerEmergeLocalTestTask(
-    appProject: Project,
-    performanceProject: Project,
-    appVariant: ApplicationVariant,
-    performanceVariant: TestVariant,
-  ) {
-    val appVariantName = appVariant.name.capitalize()
-    val perfVariantName = performanceVariant.name.capitalize()
-
-    val taskName = "emergeLocal${appVariantName}Test"
-    val task = appProject.tasks.register(taskName, LocalPerfTest::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Installs and runs tests for ${performanceVariant.name} on" +
-        " connected devices. For testing and debugging."
-      it.appPackageName.set(appVariant.applicationId)
-      it.testPackageName.set(performanceVariant.namespace)
-    }
-
-    val uninstallAppTaskPath = "${appProject.path}:uninstall$appVariantName"
-    val installAppTaskPath = "${appProject.path}:install$appVariantName"
-
-    // We need the uninstall task to run first but don't want to enforce that
-    // order unless the local test task is actually being run
-    if (appProject.project.gradle.startParameter.taskNames.any { it.contains(taskName) }) {
-      appProject.tasks.all {
-        if (it.path == installAppTaskPath) {
-          it.shouldRunAfter(uninstallAppTaskPath)
-        }
-      }
-    }
-
-    task.dependsOn(uninstallAppTaskPath)
-    task.dependsOn(installAppTaskPath)
-    task.dependsOn("${performanceProject.path}:install$perfVariantName")
-  }
-
-  private fun registerSnapshotTasks(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: ApplicationVariant,
-    androidTest: AndroidTest,
-  ) {
-    variant.instrumentation.let { instrumentation ->
-      instrumentation.transformClassesWith(
-        SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
-        InstrumentationScope.ALL,
-      ) { params ->
-        // Force invalidate/reinstrument classes if debug option is set
-        if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
-          params.invalidate.set(System.currentTimeMillis())
-        }
-      }
-    }
-
-    val snapshotPackageTask = registerSnapshotPackageTask(appProject, variant, androidTest)
-    registerSnapshotLocalTask(appProject, extension, variant, androidTest, snapshotPackageTask)
-    registerSnapshotUploadTask(appProject, extension, variant, snapshotPackageTask)
-  }
-
-  private fun registerSnapshotPackageTask(
-    appProject: Project,
-    variant: ApplicationVariant,
-    androidTest: AndroidTest,
-  ): TaskProvider<PackageSnapshotArtifacts> {
-    val variantName = variant.name.capitalize()
-
-    val taskName = "${EMERGE_TASK_PREFIX}Package${variantName}SnapshotArtifacts"
-    return appProject.tasks.register(taskName, PackageSnapshotArtifacts::class.java) {
-      it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
-      it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
-      it.outputDirectory.set(
-        appProject.layout.buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts")
-      )
-      it.artifactMetadataPath.set(
-        appProject.layout.buildDirectory.file(
-          "${BUILD_OUTPUT_DIR_NAME}/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"
-        )
-      )
-      it.agpVersion.set(AgpVersions.CURRENT.toString())
-    }
-  }
-
-  private fun registerSnapshotLocalTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: ApplicationVariant,
-    androidTest: AndroidTest,
-    packageTask: TaskProvider<PackageSnapshotArtifacts>,
-  ) {
-    val variantName = variant.name.capitalize()
-
-    val buildDirectory = appProject.layout.buildDirectory
-    val snapshotStorageDirectory = extension.snapshotOptions.snapshotsStorageDirectory.orElse(
-      buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/snapshots/outputs")
-    )
-
-    val targetAppId = variant.applicationId
-    val testAppId = androidTest.applicationId
-    val testInstrumentationRunner = androidTest.instrumentationRunner
-
-    val taskName = "${EMERGE_TASK_PREFIX}LocalSnapshots$variantName"
-    appProject.tasks.register(taskName, LocalSnapshots::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Generate snapshots locally for variant $variantName." +
-        " Requires a device or emulator connected."
-      it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
-      it.snapshotStorageDirectory.set(snapshotStorageDirectory)
-      it.previewExtractDir.set(buildDirectory.dir("${BUILD_OUTPUT_DIR_NAME}/previews"))
-      it.targetAppId.set(targetAppId)
-      it.testAppId.set(testAppId)
-      it.testInstrumentationRunner.set(testInstrumentationRunner)
-      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
-      it.dependsOn(packageTask)
-    }
-  }
-
-  private fun registerSnapshotUploadTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: ApplicationVariant,
-    packageTask: TaskProvider<PackageSnapshotArtifacts>,
-  ) {
-    val variantName = variant.name.capitalize()
-
-    val taskName = "${EMERGE_TASK_PREFIX}UploadSnapshotBundle${variantName}"
-    appProject.tasks.register(taskName, UploadSnapshotBundle::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Builds and uploads a snapshot bundle to Emerge. Snapshots will be" +
-        " generated on Emerge's cloud infrastructure and diffed based on the vcs params set" +
-        " in the Emerge plugin extension."
-      it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
-      it.artifactMetadataPath.set(
-        packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
-      it.apiVersion.set(extension.snapshotOptions.apiVersion)
-      it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
-      it.setUploadTaskInputs(extension, appProject, variant)
-      it.setTagFromProductOptions(extension.snapshotOptions, variant)
-      it.dependsOn(packageTask)
-    }
-  }
-
-  private fun registerReaperTasks(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    registerReaperPreflightTask(appProject, extension, variant)
-    // Only register upload task if Reaper is enabled
-    if (extension.reaperOptions.enabled.getOrElse(false)) {
-      registerReaperUploadTask(appProject, extension, variant)
-    }
-  }
-
-  private fun registerReaperPreflightTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
-    appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
-      it.group = EMERGE_TASK_GROUP
-      it.description = "Validate Reaper is initialized for variant ${variant.name}"
-      it.reaperEnabled.set(extension.reaperOptions.enabled)
-      it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
-      it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
-
-      // We want preflight to happen pretty early so we can detect error conditions and give them
-      // nice messages. Specifically we need it to occur prior to 'linking' steps which we detect
-      // that the Reaper added instrumentation calls methods in the SDK to avoid confusing error
-      // messages.
-      val minifyTaskName = "minify${variant.name.capitalize()}WithR8"
-      val minifyTasks = appProject.getTasksByName(minifyTaskName, false)
-      if (minifyTasks.size != 0) {
-        minifyTasks.forEach { minifyTask -> minifyTask.dependsOn(it) }
-      }
-    }
-  }
-
-  private fun registerReaperUploadTask(
-    appProject: Project,
-    extension: EmergePluginExtension,
-    variant: Variant,
-  ) {
-    val uploadReaperAabTaskName = "${EMERGE_TASK_PREFIX}UploadReaperAab${variant.name.capitalize()}"
-    val uploadReaperAabTask =
-      appProject.tasks.register(uploadReaperAabTaskName, InitializeReaper::class.java) {
-        it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
-        it.setUploadTaskInputs(extension, appProject, variant)
-        it.setTagFromProductOptions(extension.reaperOptions, variant)
-      }
-    // Hook the bundle tasks to run the reaper upload task after they complete.
-    appProject.afterEvaluate { project ->
-      val bundleTask = project.tasks.named("bundle${variant.name.capitalize()}")
-      bundleTask.configure { it.finalizedBy(uploadReaperAabTask) }
     }
   }
 
@@ -537,7 +214,7 @@ class EmergePlugin : Plugin<Project> {
     extension: EmergePluginExtension,
   ) {
     project.tasks.register("saveExtensionConfig", SaveExtensionConfigTask::class.java) {
-      it.group = EMERGE_TASK_GROUP
+      it.group = "Emerge debug"
       it.description = "Saves the Emerge extension configuration to a local file for debugging."
       it.emergePluginExtension.set(extension)
     }
@@ -620,16 +297,13 @@ class EmergePlugin : Plugin<Project> {
     const val BUILD_OUTPUT_DIR_NAME = "emergetools"
 
     private const val EMERGE_EXTENSION_NAME = "emerge"
-    private const val EMERGE_TASK_PREFIX = "emerge"
-    private const val EMERGE_TASK_GROUP = "Emerge"
+    const val EMERGE_TASK_PREFIX = "emerge"
 
     private const val EMERGE_DEBUG_TASK_PROPERTY = "emergeDebug"
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
-
-    private const val GENERATE_PERF_PROJECT_TASK_NAME = "emergeGeneratePerformanceProject"
 
     private val PERFORMANCE_PROJECT_DEPENDENCIES = listOf(
       "androidx.test.ext:junit:1.1.3",
