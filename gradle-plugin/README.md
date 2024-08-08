@@ -452,7 +452,6 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 ### Releasing a new version
 
 1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
-1. Update the plugin version in documentation.
 1. Update the `/gradle-plugin/CHANGELOG.md`
 1. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 1. Alt
