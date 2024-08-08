@@ -5,6 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.0-rc01 - 2024-08-07
+
+- Make reaper opt-in by specifying variants with `enabledVariants` property. [#227](https://github.com/EmergeTools/emerge-android/pull/227)
+- Cleanup and move task registration logic into separate files in relevant packages. [#225](https://github.com/EmergeTools/emerge-android/pull/225)
+- Hook default bundle task rather than having explicit initialize task. [#223](https://github.com/EmergeTools/emerge-android/pull/223)
+- Make preflight reaper task args optional. [#222](https://github.com/EmergeTools/emerge-android/pull/222)
+- Split emergeInitializeReaper task to validate & upload. [#213](https://github.com/EmergeTools/emerge-android/pull/213)
+
 ## 4.0.0-beta03 - 2024-07-30
 
 - Add information for dependency attribution. [#142](https://github.com/EmergeTools/emerge-android/pull/142)
