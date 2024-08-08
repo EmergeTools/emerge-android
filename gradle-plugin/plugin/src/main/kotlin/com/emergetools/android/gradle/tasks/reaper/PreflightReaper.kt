@@ -32,9 +32,10 @@ abstract class PreflightReaper : DefaultTask() {
   fun execute() {
     val preflight = Preflight("Reaper")
 
-    preflight.add("Reaper enabled") {
+    val variantName = variantName.get()
+    preflight.add("Reaper enabled for variant: ${variantName}") {
       if (!reaperEnabled.getOrElse(false)) {
-        throw PreflightFailure("Reaper not enabled for this variant (${variantName.get()}). Make sure \"${variantName.get()}\" is included in `reaper.enabledVariants`")
+        throw PreflightFailure("Reaper not enabled for variant $variantName. Make sure \"${variantName}\" is included in `reaper.enabledVariants`")
       }
     }
 

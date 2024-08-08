@@ -230,9 +230,6 @@ class EmergePlugin : Plugin<Project> {
     val publishableApiKey = extension.reaperOptions.publishableApiKey.getOrElse("")
     val isVariantEnabled = enabledVariants.contains(variant.name)
     if (isVariantEnabled) {
-      if (publishableApiKey.isEmpty()) {
-        throw StopExecutionException("If Reaper is enabled publishableApiKey must be set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
-      }
       project.logger.info("Registering reaper transform for variant ${variant.name}")
       variant.instrumentation.let {
         it.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
@@ -273,11 +270,11 @@ class EmergePlugin : Plugin<Project> {
           ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
           └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
           reaper
-          ├── publishableApiKey:         ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
-          └── enabledVariants:           ${extension.reaperOptions.enabledVariants.getOrElse(
+          ├── enabledVariants:           ${extension.reaperOptions.enabledVariants.getOrElse(
         emptyList()
       )}
-          ├── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
+          ├── publishableApiKey:         ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
+          └── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
           performance
           ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
           ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}

@@ -65,6 +65,7 @@ private fun registerReaperUploadTask(
   val uploadReaperAabTask =
     appProject.tasks.register(uploadReaperAabTaskName, InitializeReaper::class.java) {
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
+      it.publishableApiKey.set(extension.reaperOptions.publishableApiKey)
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
     }
