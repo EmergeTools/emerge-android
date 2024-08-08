@@ -109,7 +109,10 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val baseUrl: Property<String>
 
-  protected fun upload(artifactMetadata: ArtifactMetadata, onUpload: (EmergeUploadResponse) -> Unit) {
+  protected fun upload(
+    artifactMetadata: ArtifactMetadata,
+    onSuccessfulUpload: (EmergeUploadResponse) -> Unit,
+  ) {
     check(!apiToken.getOrElse(System.getenv(DEFAULT_API_TOKEN_ENV_KEY)).isNullOrBlank()) {
       "Missing API token. Please set the 'apiToken' property in the emerge {} extension block or" +
         " ensure an 'EMERGE_API_TOKEN' environment variable is set with a valid API token." +
@@ -185,7 +188,7 @@ abstract class BaseUploadTask : DefaultTask() {
       it.createNewFile()
       it.writeText(Json.encodeToString(response))
     }
-    onUpload(response)
+    onSuccessfulUpload(response)
   }
 
   /**
@@ -256,7 +259,8 @@ abstract class BaseUploadTask : DefaultTask() {
       project: Project,
       variant: Variant,
     ) {
-      val emergeOutputDir = File(project.layout.buildDirectory.asFile.get(), ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
+      val emergeOutputDir =
+        File(project.layout.buildDirectory.asFile.get(), ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
