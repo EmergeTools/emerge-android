@@ -109,7 +109,7 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val baseUrl: Property<String>
 
-  protected fun upload(artifactMetadata: ArtifactMetadata): EmergeUploadResponse? {
+  protected fun upload(artifactMetadata: ArtifactMetadata, onUpload: (EmergeUploadResponse) -> Unit) {
     check(!apiToken.getOrElse(System.getenv(DEFAULT_API_TOKEN_ENV_KEY)).isNullOrBlank()) {
       "Missing API token. Please set the 'apiToken' property in the emerge {} extension block or" +
         " ensure an 'EMERGE_API_TOKEN' environment variable is set with a valid API token." +
@@ -171,15 +171,20 @@ abstract class BaseUploadTask : DefaultTask() {
       }
     }
 
-    // Write the upload response to a file so it can be read by clients should they want to ingest
-    // the buildId or url
-    val response = uploadFile(zipFile, outputDir)
-    File(outputDir, UPLOAD_RESPONSE_FILE_NAME).also {
-      it.createNewFile()
-      it.writeText(Json.encodeToString(response))
+    if (dryRun.get()) {
+      zipFile.copyTo(File(outputDir, "/${zipFile.name}"), overwrite = true)
+      logger.lifecycle("Dry run complete. Zip file created at: ${zipFile.path}")
+      return
     }
 
-    return response
+    val response = uploadFile(zipFile)
+    // Write the upload response to a file so it can be read by clients should they want to ingest
+    // the uploadId or url
+    File(outputDir, UPLOAD_RESPONSE_FILE_NAME).also {
+      it.createNewFile()
+      it.writeText(Json.encodeToString(it))
+    }
+    onUpload(response)
   }
 
   /**
@@ -208,15 +213,7 @@ abstract class BaseUploadTask : DefaultTask() {
     )
   }
 
-  private fun uploadFile(
-    file: File,
-    outputDir: File,
-  ): EmergeUploadResponse? {
-    if (dryRun.get()) {
-      file.copyTo(File(outputDir, "/${file.name}"), overwrite = true)
-      return null
-    }
-
+  private fun uploadFile(file: File): EmergeUploadResponse {
     val okHttpClient = OkHttpClient.Builder()
       .connectTimeout(30, TimeUnit.SECONDS)
       .readTimeout(30, TimeUnit.SECONDS)

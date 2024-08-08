@@ -83,20 +83,17 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
     }
     val artifactMetadata: ArtifactMetadata = Json.decodeFromString(artifactMetadataFilePath.readText())
 
-    val response = upload(
+    upload(
       artifactMetadata = artifactMetadata.copy(
         created = Clock.System.now()
       )
-    )
-    checkNotNull(response) {
-      "Upload failed, please check your network connection and try again."
+    ) { response ->
+      logger.lifecycle(
+        "Snapshot bundle upload successful! View snapshots at the following url:"
+      )
+      logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
+      logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")
     }
-
-    logger.lifecycle(
-      "Snapshot bundle upload successful! View snapshots at the following url:"
-    )
-    logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
-    logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")
   }
 
   companion object {

@@ -37,13 +37,11 @@ abstract class InitializeReaper : BaseUploadTask() {
       proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
     )
 
-    val response = upload(artifactMetadata)
-    checkNotNull(response) {
-      "Upload failed, please check your network connection and try again. ${response.toString()}"
+    upload(artifactMetadata) { response ->
+      logger.lifecycle("Reaper initialized! View Reaper reports for this version at the following url:")
+      logger.lifecycle("https://emergetools.com/reaper/${response.uploadId}")
+      logger.lifecycle("Note: Initial Reaper processing can take up to 10 minutes.")
     }
-    logger.lifecycle("Reaper initialized! View Reaper reports at the url:")
-    logger.lifecycle("https://emergetools.com/reaper/${response.uploadId}")
-    logger.lifecycle("Initial processing can take up to 10 minutes.")
   }
 
   companion object {

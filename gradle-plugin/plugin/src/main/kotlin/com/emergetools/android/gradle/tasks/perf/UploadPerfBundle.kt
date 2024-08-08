@@ -65,16 +65,13 @@ abstract class UploadPerfBundle : BaseUploadTask() {
       proguardMappingsZipPath = "$artifactName/${UploadAAB.AAB_PROGUARD_PATH}",
     )
 
-    val response = upload(artifactMetadata)
-    checkNotNull(response) {
-      "Upload failed, please check your network connection and try again."
+    upload(artifactMetadata) { response ->
+      logger.lifecycle(
+        "Performance bundle upload successful! " +
+          "View Emerge's performance analysis at the following url:"
+      )
+      logger.lifecycle("https://emergetools.com/performance/compare/${response.uploadId}")
+      logger.lifecycle("Performance testing usually takes around 30 minutes or less.")
     }
-
-    logger.lifecycle(
-      "Performance bundle upload successful! " +
-        "View Emerge's performance analysis at the following url:"
-    )
-    logger.lifecycle("https://emergetools.com/build/${response.uploadId}?buildContent=comparison")
-    logger.lifecycle("Performance testing usually takes around 30 minutes or less.")
   }
 }
