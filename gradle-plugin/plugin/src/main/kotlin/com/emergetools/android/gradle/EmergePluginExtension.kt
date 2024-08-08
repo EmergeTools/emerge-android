@@ -11,6 +11,7 @@ import com.emergetools.android.gradle.util.providers.GitShaValueSource
 import org.gradle.api.Action
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.model.ObjectFactory
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.provider.ProviderFactory
 import org.gradle.api.tasks.Nested
@@ -171,7 +172,7 @@ abstract class DebugOptions : ProductOptions() {
 }
 
 abstract class ReaperOptions : ProductOptions() {
-  abstract val enabled: Property<Boolean>
+  abstract val enabledVariants: ListProperty<String>
 
   abstract val publishableApiKey: Property<String>
 }

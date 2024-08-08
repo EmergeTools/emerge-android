@@ -263,9 +263,9 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 
 #### Tasks
 
-| Task                                  | Description                                         |
-|---------------------------------------|-----------------------------------------------------|
-| `emergeInitializeReaper{Variant}`     | Upload an .aab to Emergetools to initialize Reaper. |
+| Task                            | Description                                                  |
+|---------------------------------|--------------------------------------------------------------|
+| `emergeValidateReaper{Variant}` | Validate Reaper is properly set up for the specific variant. |
 
 #### Configuration
 
@@ -276,6 +276,9 @@ emerge {
   // ..
 
   reaper {
+    // The build variants Reaper is enabled for.
+    // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
+    enabledVariants.set(listOf("release", "releaseVariant2"))
     // The key used to identify Reaper reports for your organization.
     publishableApiKey.set("<Reaper API key>")
 
@@ -283,21 +286,17 @@ emerge {
     tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
-
-    // If Reaper is enabled. When Reaper is enabled the application bytecode will be
-    // instrumented to support Reaper.
-    enabled.set(true)
   }
 }
 ```
 
 ##### Fields
 
-| Field                       | Type      | Default    | Description                                                                                       |
-|-----------------------------|-----------|------------|---------------------------------------------------------------------------------------------------|
-| `publishableApiKey`         | `String`  |            | This key is used to identify Reaper reports sent from your application for your organization.     |
-| `tag`                       | `String`  | `release`  | The build tag to use for grouping builds in the Emerge dashboard.                                 |
-| `enabled`                   | `Boolean` | `false`    | If snapshot tasks/project configuration are enabled.                                              |
+| Field               | Type           | Default       | Description                                                                                   |
+|---------------------|----------------|---------------|-----------------------------------------------------------------------------------------------|
+| `publishableApiKey` | `String`       |               | This key is used to identify Reaper reports sent from your application for your organization. |
+| `tag`               | `String`       | `release`     | The build tag to use for grouping builds in the Emerge dashboard.                             |
+| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                  |
 
 ## Full configuration
 
@@ -369,6 +368,9 @@ emerge {
   }
 
   reaper {
+    // The build variants Reaper is enabled for.
+    // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
+    enabledVariants.set(listOf("release", "releaseVariant2"))
     // The key used to identify Reaper reports for your organization.
     publishableApiKey.set("<Reaper API key>")
 
@@ -377,9 +379,6 @@ emerge {
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
 
-    // If Reaper is enabled. When Reaper is enabled the application bytecode will be
-    // instrumented to support Reaper.
-    enabled.set(true)
   }
 }
 ```

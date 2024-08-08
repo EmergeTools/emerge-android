@@ -5,9 +5,12 @@ import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
 import kotlinx.datetime.Clock
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
+import org.gradle.api.tasks.StopExecutionException
 import org.gradle.api.tasks.TaskAction
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
@@ -17,6 +20,9 @@ abstract class InitializeReaper : BaseUploadTask() {
   @get:InputFile
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val artifact: RegularFileProperty
+
+  @get:Input
+  abstract val publishableApiKey: Property<String>
 
   override fun includeFilesInUpload(zos: ZipOutputStream) {
     artifact.get().asFile.inputStream().use { inputStream ->
@@ -28,6 +34,10 @@ abstract class InitializeReaper : BaseUploadTask() {
 
   @TaskAction
   fun execute() {
+    if (publishableApiKey.orNull == null) {
+      throw StopExecutionException("publishableApiKey must be set for Reaper to work properly. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
+    }
+
     val artifactName = artifact.get().asFile.name
     val artifactMetadata = ArtifactMetadata(
       created = Clock.System.now(),

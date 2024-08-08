@@ -225,13 +225,11 @@ class EmergePlugin : Plugin<Project> {
     extension: EmergePluginExtension,
     variant: ApplicationVariant,
   ) {
-    val enabled = extension.reaperOptions.enabled.getOrElse(false)
+    val enabledVariants = extension.reaperOptions.enabledVariants.getOrElse(emptyList())
 
-    val publishableApiKey = extension.reaperOptions.publishableApiKey.orNull ?: ""
-    if (enabled) {
-      if (publishableApiKey == "") {
-        throw StopExecutionException("If Reaper is enabled publishableApiKey must be set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
-      }
+    val publishableApiKey = extension.reaperOptions.publishableApiKey.getOrElse("")
+    val isVariantEnabled = enabledVariants.contains(variant.name)
+    if (isVariantEnabled) {
       project.logger.info("Registering reaper transform for variant ${variant.name}")
       variant.instrumentation.let {
         it.setAsmFramesComputationMode(FramesComputationMode.COMPUTE_FRAMES_FOR_INSTRUMENTED_METHODS)
@@ -243,7 +241,7 @@ class EmergePlugin : Plugin<Project> {
     }
 
     // We must always set these to something make the manifest merger happy:
-    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (enabled) "true" else "false")
+    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (isVariantEnabled) "true" else "false")
     variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
 
@@ -272,9 +270,11 @@ class EmergePlugin : Plugin<Project> {
           ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
           └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
           reaper
+          ├── enabledVariants:           ${extension.reaperOptions.enabledVariants.getOrElse(
+        emptyList()
+      )}
           ├── publishableApiKey:         ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
-          ├── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
-          └── enabled:                   ${extension.reaperOptions.enabled.getOrElse(false)}
+          └── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
           performance
           ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
           ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}

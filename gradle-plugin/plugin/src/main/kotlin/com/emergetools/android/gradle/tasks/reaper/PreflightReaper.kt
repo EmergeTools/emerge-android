@@ -5,6 +5,7 @@ import com.emergetools.android.gradle.util.preflight.PreflightFailure
 import org.gradle.api.DefaultTask
 import org.gradle.api.GradleException
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFile
@@ -18,6 +19,9 @@ abstract class PreflightReaper : DefaultTask() {
   abstract val reaperEnabled: Property<Boolean>
 
   @get:Input
+  abstract val variantName: Property<String>
+
+  @get:Input
   @get:Optional
   abstract val reaperPublishableApiKey: Property<String>
 
@@ -28,9 +32,10 @@ abstract class PreflightReaper : DefaultTask() {
   fun execute() {
     val preflight = Preflight("Reaper")
 
-    preflight.add("Reaper enabled") {
+    val variantName = variantName.get()
+    preflight.add("Reaper enabled for variant: ${variantName}") {
       if (!reaperEnabled.getOrElse(false)) {
-        throw PreflightFailure("Reaper not enabled. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk")
+        throw PreflightFailure("Reaper not enabled for variant $variantName. Make sure \"${variantName}\" is included in `reaper.enabledVariants`")
       }
     }
 

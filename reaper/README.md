@@ -23,26 +23,27 @@ plugins {
 }
 
 emerge {
-  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  // Emerge uses the EMERGE_API_TOKEN env variable by default if you don't set a value explicitly.
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   reaper {
-    enabled.set(true)
+    // Specify all variants of your app you'd like to add Reaper to.
+    // We recommend setting the release variant you ship to the Play Store.
+    enabledVariants.set(listOf("release"))
     publishableApiKey.set(System.getenv("EMERGE_PUBLISHABLE_API_KEY"))
   }
 }
 ```
 
-You must set `enabled` to be `true` for reaper to work properly. Behind the scenes, the Emerge
-Gradle plugin will instrument your code to drop breadcrumbs that Reaper can use to detect dead code
-when this property is set. _You can set `enabled` to false when building debug builds to avoid
-instrumenting your code for all builds._
+You must add the variant you intend to add Reaper to to the `enabledVariants` list for reaper to
+work properly. Behind the scenes, the Emerge Gradle plugin will instrument your code for the specified varaint(s)
+to drop breadcrumbs that Reaper can use to detect dead code.
 
 `publishableApiKey` is a token included with reports uploaded from the field to Emerge.
 Your team's key can be
 found [here](https://emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled).
 
-**Emerge recommends enabling reaper on any release build run.**
+**Emerge recommends enabling reaper on any variant you ship to the Play Store or other release distribution.**
 
 See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
@@ -65,11 +66,13 @@ Emerge needs a valid release AAB to generate a list of all possible classes with
 ./gradlew :app:bundleRelease
 ```
 
-By setting the `reaper.enabled` property to `true`, the Emerge Gradle plugin will instrument your
-release app's code and upload the resulting AAB from the `bundle` task to Emerge.
+By adding your variant to the `reaper.enabledVariants` property, the Emerge Gradle plugin will instrument your
+that variant's code and upload the resulting AAB from the `bundle` task to Emerge.
 
 Emerge will then analyze the AAB, parsing all classes in the app. This process can take a few
-minutes. Upon receiving Reaper reports from production data, Emerge will automatically mark used
+minutes.
+
+Upon receiving Reaper reports from production data, Emerge will automatically mark used
 classes as used.
 
 ### Release your app with Reaper
@@ -94,7 +97,7 @@ Upon a user backgrounding the application, Emerge will send the list of hashes o
 the Emerge backend. Emerge will then process each report received, marking classes as used if any
 user session reports that class being used.
 
-## Releasing
+## Releasing Reaper SDK
 
 ### Releasing a new version
 
