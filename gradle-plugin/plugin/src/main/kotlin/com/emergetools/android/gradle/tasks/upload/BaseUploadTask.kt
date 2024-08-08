@@ -171,9 +171,10 @@ abstract class BaseUploadTask : DefaultTask() {
       }
     }
 
-    if (dryRun.get()) {
-      zipFile.copyTo(File(outputDir, "/${zipFile.name}"), overwrite = true)
-      logger.lifecycle("Dry run complete. Zip file created at: ${zipFile.path}")
+    if (dryRun.getOrElse(false)) {
+      val outputFilePath = File(outputDir, zipFile.name)
+      zipFile.copyTo(outputFilePath, overwrite = true)
+      logger.lifecycle("Dry run complete. Zip file created at: ${outputFilePath.path}")
       return
     }
 
@@ -182,7 +183,7 @@ abstract class BaseUploadTask : DefaultTask() {
     // the uploadId or url
     File(outputDir, UPLOAD_RESPONSE_FILE_NAME).also {
       it.createNewFile()
-      it.writeText(Json.encodeToString(it))
+      it.writeText(Json.encodeToString(response))
     }
     onUpload(response)
   }
@@ -255,7 +256,7 @@ abstract class BaseUploadTask : DefaultTask() {
       project: Project,
       variant: Variant,
     ) {
-      val emergeOutputDir = File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
+      val emergeOutputDir = File(project.layout.buildDirectory.asFile.get(), ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())
