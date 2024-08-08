@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 4.0.0-rc01 - 2024-08-07
 
 - Make reaper opt-in by specifying variants with `enabledVariants` property. [#227](https://github.com/EmergeTools/emerge-android/pull/227)
+- Better handle `dryRun` to not cause a crash. [#229](https://github.com/EmergeTools/emerge-android/pull/229)
 - Cleanup and move task registration logic into separate files in relevant packages. [#225](https://github.com/EmergeTools/emerge-android/pull/225)
 - Hook default bundle task rather than having explicit initialize task. [#223](https://github.com/EmergeTools/emerge-android/pull/223)
 - Make preflight reaper task args optional. [#222](https://github.com/EmergeTools/emerge-android/pull/222)
