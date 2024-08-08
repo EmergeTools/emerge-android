@@ -109,7 +109,10 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Optional
   abstract val baseUrl: Property<String>
 
-  protected fun upload(artifactMetadata: ArtifactMetadata): EmergeUploadResponse? {
+  protected fun upload(
+    artifactMetadata: ArtifactMetadata,
+    onSuccessfulUpload: (EmergeUploadResponse) -> Unit,
+  ) {
     check(!apiToken.getOrElse(System.getenv(DEFAULT_API_TOKEN_ENV_KEY)).isNullOrBlank()) {
       "Missing API token. Please set the 'apiToken' property in the emerge {} extension block or" +
         " ensure an 'EMERGE_API_TOKEN' environment variable is set with a valid API token." +
@@ -171,15 +174,21 @@ abstract class BaseUploadTask : DefaultTask() {
       }
     }
 
+    if (dryRun.getOrElse(false)) {
+      val outputFilePath = File(outputDir, zipFile.name)
+      zipFile.copyTo(outputFilePath, overwrite = true)
+      logger.lifecycle("Dry run complete. Zip file created at: ${outputFilePath.path}")
+      return
+    }
+
+    val response = uploadFile(zipFile)
     // Write the upload response to a file so it can be read by clients should they want to ingest
-    // the buildId or url
-    val response = uploadFile(zipFile, outputDir)
+    // the uploadId or url
     File(outputDir, UPLOAD_RESPONSE_FILE_NAME).also {
       it.createNewFile()
       it.writeText(Json.encodeToString(response))
     }
-
-    return response
+    onSuccessfulUpload(response)
   }
 
   /**
@@ -208,15 +217,7 @@ abstract class BaseUploadTask : DefaultTask() {
     )
   }
 
-  private fun uploadFile(
-    file: File,
-    outputDir: File,
-  ): EmergeUploadResponse? {
-    if (dryRun.get()) {
-      file.copyTo(File(outputDir, "/${file.name}"), overwrite = true)
-      return null
-    }
-
+  private fun uploadFile(file: File): EmergeUploadResponse {
     val okHttpClient = OkHttpClient.Builder()
       .connectTimeout(30, TimeUnit.SECONDS)
       .readTimeout(30, TimeUnit.SECONDS)
@@ -258,7 +259,8 @@ abstract class BaseUploadTask : DefaultTask() {
       project: Project,
       variant: Variant,
     ) {
-      val emergeOutputDir = File(project.buildDir, ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
+      val emergeOutputDir =
+        File(project.layout.buildDirectory.asFile.get(), ARTIFACT_OUTPUT_DIR).also(File::mkdirs)
       dryRun.set(extension.dryRun)
       apiToken.set(extension.apiToken)
       agpVersion.set(AgpVersions.CURRENT.toString())

@@ -37,14 +37,11 @@ abstract class UploadAAB : BaseUploadTask() {
       proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
     )
 
-    val response = upload(artifactMetadata)
-    checkNotNull(response) {
-      "Upload failed, please check your network connection and try again. ${response.toString()}"
+    upload(artifactMetadata) { response ->
+      logger.lifecycle("AAB Upload successful! View Emerge's size analysis at the following url:")
+      logger.lifecycle("https://emergetools.com/build/${response.uploadId}")
+      logger.lifecycle("Size processing can take up to 10 minutes.")
     }
-
-    logger.lifecycle("AAB Upload successful! View Emerge's size analysis at the following url:")
-    logger.lifecycle("https://emergetools.com/build/${response.uploadId}")
-    logger.lifecycle("Size processing can take up to 10 minutes.")
   }
 
   companion object {
