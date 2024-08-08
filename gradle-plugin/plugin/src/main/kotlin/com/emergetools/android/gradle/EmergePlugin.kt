@@ -227,10 +227,10 @@ class EmergePlugin : Plugin<Project> {
   ) {
     val enabledVariants = extension.reaperOptions.enabledVariants.getOrElse(emptyList())
 
-    val publishableApiKey = extension.reaperOptions.publishableApiKey.orNull ?: ""
+    val publishableApiKey = extension.reaperOptions.publishableApiKey.getOrElse("")
     val isVariantEnabled = enabledVariants.contains(variant.name)
     if (isVariantEnabled) {
-      if (publishableApiKey == "") {
+      if (publishableApiKey.isEmpty()) {
         throw StopExecutionException("If Reaper is enabled publishableApiKey must be set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
       }
       project.logger.info("Registering reaper transform for variant ${variant.name}")
