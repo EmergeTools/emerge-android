@@ -24,7 +24,11 @@ import java.io.FileOutputStream
 import java.util.UUID
 
 // The Reaper report currently in progress:
-private class Report(val stream: FileOutputStream, val dataStream: DataOutputStream, val path: File) {
+private class Report(
+  val stream: FileOutputStream,
+  val dataStream: DataOutputStream,
+  val path: File
+) {
   // All the hashes we have written so far.
   val written = mutableSetOf<Long>()
 
@@ -129,8 +133,10 @@ internal object ReaperInternal {
 
     if (!isEnabled) {
       // Explicitly don't use fatalError to ensure we don't crash other variants
-      Log.w(TAG,
-        "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants list in the Emerge gradle plugin configuration block."
+      Log.w(
+        TAG,
+        "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants" +
+          " list in the Emerge gradle plugin configuration block."
       )
       return
     }
