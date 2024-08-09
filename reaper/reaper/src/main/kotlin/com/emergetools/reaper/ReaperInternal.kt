@@ -121,6 +121,20 @@ internal object ReaperInternal {
       Log.e(TAG, "Reaper already initialized, ignoring Reaper.init().")
       return
     }
+
+    val isEnabled = context.packageManager.getApplicationInfo(
+      context.packageName,
+      PackageManager.GET_META_DATA
+    ).metaData.getBoolean(MANIFEST_TAG_INSTRUMENTED, false)
+
+    if (!isEnabled) {
+      // Explicitly don't use fatalError to ensure we don't crash other variants
+      Log.w(TAG,
+        "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants list in the Emerge gradle plugin configuration block."
+      )
+      return
+    }
+
     apiKey = context.packageManager.getApplicationInfo(
       context.packageName,
       PackageManager.GET_META_DATA
@@ -135,11 +149,6 @@ internal object ReaperInternal {
     ).metaData.getBoolean(MANIFEST_TAG_DEBUG, false)
 
     this.isInitialized = true
-
-    val isInstrumented = context.packageManager.getApplicationInfo(
-      context.packageName,
-      PackageManager.GET_META_DATA
-    ).metaData.getBoolean(MANIFEST_TAG_INSTRUMENTED)
 
     this.baseUrl = context.packageManager.getApplicationInfo(
       context.packageName,
@@ -158,21 +167,13 @@ internal object ReaperInternal {
       return
     }
 
-    if (isInstrumented) {
-      Log.d(
-        TAG,
-        "Reaper initialized. report=$path backend=${this.baseUrl} tracker=${tracker.name}"
-      )
-      val lifecycleObserver = ReaperLifecycleObserver(context.applicationContext)
-      ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-      onFlushPeriod(context)
-    } else {
-      Log.e(
-        TAG,
-        "Code not instrumented for Reaper but Reaper was initialized. " +
-          "See https://docs.emergetools.com/docs/reaper-setup-android"
-      )
-    }
+    Log.d(
+      TAG,
+      "Reaper initialized. report=$path backend=${this.baseUrl} tracker=${tracker.name}"
+    )
+    val lifecycleObserver = ReaperLifecycleObserver(context.applicationContext)
+    ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
+    onFlushPeriod(context)
   }
 
   private fun flushSynchronized(context: Context) {
