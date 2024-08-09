@@ -24,7 +24,11 @@ import java.io.FileOutputStream
 import java.util.UUID
 
 // The Reaper report currently in progress:
-private class Report(val stream: FileOutputStream, val dataStream: DataOutputStream, val path: File) {
+private class Report(
+  val stream: FileOutputStream,
+  val dataStream: DataOutputStream,
+  val path: File
+) {
   // All the hashes we have written so far.
   val written = mutableSetOf<Long>()
 
@@ -34,6 +38,7 @@ private class Report(val stream: FileOutputStream, val dataStream: DataOutputStr
 }
 
 internal object ReaperInternal {
+  private const val MANIFEST_TAG_ENABLED = "com.emergetools.reaper.ENABLED"
   private const val MANIFEST_TAG_INSTRUMENTED = "com.emergetools.reaper.REAPER_INSTRUMENTED"
   private const val MANIFEST_TAG_PUBLISHABLE_API_KEY = "com.emergetools.reaper.PUBLISHABLE_API_KEY"
   private const val MANIFEST_TAG_OVERRIDE_BASE_URL = "com.emergetools.OVERRIDE_BASE_URL"
@@ -121,6 +126,19 @@ internal object ReaperInternal {
       Log.e(TAG, "Reaper already initialized, ignoring Reaper.init().")
       return
     }
+
+    val isEnabled = context.packageManager.getApplicationInfo(
+      context.packageName,
+      PackageManager.GET_META_DATA
+    ).metaData.getBoolean(MANIFEST_TAG_ENABLED, false)
+
+    if (!isEnabled) {
+      fatalError(
+        context,
+        "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants list in the Emerge gradle plugin configuration block."
+      )
+    }
+
     apiKey = context.packageManager.getApplicationInfo(
       context.packageName,
       PackageManager.GET_META_DATA
