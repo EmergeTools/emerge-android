@@ -241,6 +241,7 @@ class EmergePlugin : Plugin<Project> {
     }
 
     // We must always set these to something make the manifest merger happy:
+    variant.manifestPlaceholders.put("emerge.reaper.enabled", if (isVariantEnabled) "true" else "false")
     variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (isVariantEnabled) "true" else "false")
     variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
