@@ -4,15 +4,12 @@ import android.content.Context
 import android.content.Intent
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.platform.app.InstrumentationRegistry
-import androidx.test.runner.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.UiDevice
 import androidx.test.uiautomator.Until
 import org.junit.Assert.assertNotNull
 import org.junit.Test
-import org.junit.runner.RunWith
 
-@RunWith(AndroidJUnit4::class)
 class ReaperStressSampleUiTest {
 
   @Test
@@ -43,9 +40,6 @@ class ReaperStressSampleUiTest {
       Until.hasObject(By.pkg(context.packageName).depth(0)),
       5000
     )
-
-    // Click on the first item in the list
-    device.findObject(By.text("Story 1")).click()
 
     // Give time to land on next screen
     Thread.sleep(1000)

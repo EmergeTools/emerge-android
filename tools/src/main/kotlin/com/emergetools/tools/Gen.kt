@@ -133,9 +133,9 @@ fun writeNumbers(directory: String) {
 
 fun main() {
   val root = System.getProperty("user.dir")
-  println("Working Directory = $root")
   val directory =
-    "./reaper/sample/stress/src/main/kotlin/com/emergetools/reaper/sample/stress/numbers"
+    "$root/../reaper/sample/stress/src/main/kotlin/com/emergetools/reaper/sample/stress/numbers"
+  File(directory).mkdir()
   writeCommon(directory)
   writeNumbers(directory)
 }

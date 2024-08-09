@@ -17,7 +17,7 @@ emerge {
   }
 
   reaper {
-    enabledVariants.set(listOf("releaseWithReaper, debug"))
+    enabledVariants.set(listOf("releaseWithReaper"))
     publishableApiKey.set(System.getenv("EMERGE_REAPER_API_KEY") ?: "<key>")
   }
 }
@@ -45,6 +45,7 @@ android {
     }
     getByName("release") {
       isMinifyEnabled = true
+      signingConfig = signingConfigs.getByName("debug")
     }
     create("releaseWithReaper") {
       initWith(getByName("release"))
@@ -62,14 +63,6 @@ android {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_17.toString()
   }
-
-  buildFeatures {
-    compose = true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extension.get()
-  }
 }
 
 buildConfig {
@@ -78,26 +71,16 @@ buildConfig {
 }
 
 dependencies {
-  implementation(libs.androidx.activity)
-  implementation(libs.androidx.activity.compose)
-  implementation(libs.androidx.navigation.compose)
-  implementation(libs.androidx.navigation.ui.ktx)
-  implementation(libs.kotlinx.serialization)
-
   // Reaper SDK
   implementation(projects.reaper.reaper)
 
-  implementation(platform(libs.compose.bom))
-  implementation(libs.compose.ui)
-  implementation(libs.compose.ui.tooling)
-  implementation(libs.compose.ui.tooling.preview)
-  implementation(libs.compose.material)
-  implementation(libs.androidx.test.core.ktx)
 
-  androidTestImplementation(libs.compose.runtime)
-  androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.test.core.ktx)
   androidTestImplementation(libs.androidx.test.core)
+  androidTestImplementation(libs.androidx.test.rules)
+  androidTestImplementation(libs.androidx.test.ext.junit)
+
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.test.uiautomator)
 }
