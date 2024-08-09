@@ -10,6 +10,9 @@
 
   <application>
     <meta-data
+      android:name="com.emergetools.reaper.ENABLED"
+      android:value="${emerge.reaper.enabled}" />
+    <meta-data
       android:name="com.emergetools.reaper.REAPER_INSTRUMENTED"
       android:value="${emerge.reaper.instrumented}" />
     <meta-data
