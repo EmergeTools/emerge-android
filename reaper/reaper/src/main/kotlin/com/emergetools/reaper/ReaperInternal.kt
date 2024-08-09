@@ -133,10 +133,12 @@ internal object ReaperInternal {
     ).metaData.getBoolean(MANIFEST_TAG_ENABLED, false)
 
     if (!isEnabled) {
-      fatalError(
-        context,
+      // Explicitly don't use fatalError to ensure we don't crash other variants
+      Log.w(
+        TAG,
         "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants list in the Emerge gradle plugin configuration block."
       )
+      return
     }
 
     apiKey = context.packageManager.getApplicationInfo(
