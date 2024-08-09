@@ -136,7 +136,7 @@ internal object ReaperInternal {
       Log.w(
         TAG,
         "Reaper is not enabled, ensure this variant is specified in the reaper.enabledVariants" +
-          " list in the Emerge gradle plugin configuration block."
+          " list in the Emerge gradle plugin configuration block. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk."
       )
       return
     }
