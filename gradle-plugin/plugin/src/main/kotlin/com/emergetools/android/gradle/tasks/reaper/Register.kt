@@ -20,12 +20,11 @@ fun registerReaperTasks(
     "Registering reaper tasks for variant ${variant.name} in project ${appProject.path}"
   )
 
-  registerReaperPreflightTask(appProject, extension, variant)
-
   val enabledVariants = extension.reaperOptions.enabledVariants.getOrElse(emptyList())
   // Only register upload task if Reaper is enabled for variant
   if (enabledVariants.contains(variant.name)) {
     appProject.logger.debug("Reaper enabled for variant ${variant.name}")
+    registerReaperPreflightTask(appProject, extension, variant)
     registerReaperUploadTask(appProject, extension, variant)
   }
 }
@@ -39,7 +38,6 @@ private fun registerReaperPreflightTask(
   appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
     it.group = EMERGE_REAPER_TASK_GROUP
     it.description = "Validate Reaper is properly set up for variant ${variant.name}"
-    it.variantName.set(variant.name)
     it.reaperEnabled.set(extension.reaperOptions.enabledVariants.getOrElse(emptyList()).contains(variant.name))
     it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
     it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
