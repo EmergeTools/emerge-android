@@ -10,6 +10,8 @@ import com.emergetools.android.gradle.util.capitalize
 import org.gradle.api.Project
 
 const val EMERGE_REAPER_TASK_GROUP = "Emerge reaper"
+const val REAPER_DEP_GROUP = "com.emergetools.reaper"
+const val REAPER_DEP_NAME = "reaper"
 
 fun registerReaperTasks(
   appProject: Project,
@@ -42,17 +44,11 @@ private fun registerReaperPreflightTask(
     it.variantName.set(variant.name)
     it.reaperEnabled.set(extension.reaperOptions.enabledVariants.getOrElse(emptyList()).contains(variant.name))
     it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
-    it.mergedManifestFile.set(variant.artifacts.get(SingleArtifact.MERGED_MANIFEST))
-
-    // We want preflight to happen pretty early so we can detect error conditions and give them
-    // nice messages. Specifically we need it to occur prior to 'linking' steps which we detect
-    // that the Reaper added instrumentation calls methods in the SDK to avoid confusing error
-    // messages.
-    val minifyTaskName = "minify${variant.name.capitalize()}WithR8"
-    val minifyTasks = appProject.getTasksByName(minifyTaskName, false)
-    if (minifyTasks.size != 0) {
-      minifyTasks.forEach { minifyTask -> minifyTask.dependsOn(it) }
-    }
+    it.hasReaperImplementationDependency.set(
+      appProject.configurations.findByName("implementation")?.dependencies?.any { dep ->
+        dep.group == REAPER_DEP_GROUP && dep.name == REAPER_DEP_NAME
+      }
+    )
   }
 }
 
