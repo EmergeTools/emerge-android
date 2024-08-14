@@ -191,9 +191,12 @@ internal object SnapshotSaver {
     writer: FileOutputStream.() -> Unit,
   ) {
     val outputFile = File(dir, filenameWithExtension)
-    check(!outputFile.exists()) {
-      "File with name $filenameWithExtension already exists."
+
+    if (outputFile.exists()) {
+      Log.e(TAG, "File with name $filenameWithExtension already exists, skipping save.")
+      return
     }
+
     Log.d(TAG, "Saving file to ${outputFile.path}")
     outputFile.outputStream().use { writer(it) }
   }
