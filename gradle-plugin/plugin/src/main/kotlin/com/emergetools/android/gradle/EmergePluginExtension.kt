@@ -129,6 +129,9 @@ abstract class GitHubOptions @Inject constructor(
 
   val repoName: Property<String> = objects.property(String::class.java)
     .convention(providers.of(GitHubRepoNameValueSource::class.java) {})
+
+  val includeEventInformation = objects.property(Boolean::class.java)
+    .convention(true)
 }
 
 abstract class GitLabOptions {
