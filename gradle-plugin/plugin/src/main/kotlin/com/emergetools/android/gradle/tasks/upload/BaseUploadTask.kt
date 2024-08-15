@@ -172,7 +172,6 @@ abstract class BaseUploadTask : DefaultTask() {
           val githubEventFile = File(gitHubEventPath)
           if (githubEventFile.exists()) {
             val githubEventDataFile = File(outputDir, CIDebugData.GITHUB_EVENT_DATA_FILE_NAME).also {
-              it.createNewFile()
               githubEventFile.copyTo(it)
             }
             githubEventDataFile.inputStream().use { inputStream ->
