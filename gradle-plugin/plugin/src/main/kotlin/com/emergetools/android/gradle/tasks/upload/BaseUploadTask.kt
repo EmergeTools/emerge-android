@@ -171,17 +171,14 @@ abstract class BaseUploadTask : DefaultTask() {
         gitHubEventPath?.let {
           val githubEventFile = File(gitHubEventPath)
           if (githubEventFile.exists()) {
-            val githubEventDataFile = File(outputDir, CIDebugData.GITHUB_EVENT_DATA_FILE_NAME).also {
-              githubEventFile.copyTo(it)
-            }
-            githubEventDataFile.inputStream().use { inputStream ->
-              zos.putNextEntry(ZipEntry(githubEventDataFile.name))
+            githubEventFile.inputStream().use { inputStream ->
+              zos.putNextEntry(ZipEntry(CIDebugData.GITHUB_EVENT_DATA_FILE_NAME))
               inputStream.copyTo(zos)
               zos.closeEntry()
             }
             finalArtifactMetadata = artifactMetadata.copy(
               ciDebugData = CIDebugData(
-                gitHubEventDataPath = githubEventDataFile.name,
+                gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
               ),
             )
           }
