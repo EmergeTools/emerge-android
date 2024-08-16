@@ -83,6 +83,10 @@ abstract class BaseUploadTask : DefaultTask() {
 
   @get:Input
   @get:Optional
+  abstract val gitHubIncludeEventInformation: Property<Boolean>
+
+  @get:Input
+  @get:Optional
   abstract val gitLabProjectId: Property<String>
 
   @get:Input
@@ -159,6 +163,25 @@ abstract class BaseUploadTask : DefaultTask() {
           finalArtifactMetadata = artifactMetadata.copy(
             dependencyMetadataZipPath = dependenciesFile.name,
           )
+        }
+      }
+
+      if (gitHubIncludeEventInformation.getOrElse(true)) {
+        val gitHubEventPath = System.getenv("GITHUB_EVENT_PATH")
+        gitHubEventPath?.let {
+          val githubEventFile = File(gitHubEventPath)
+          if (githubEventFile.exists()) {
+            githubEventFile.inputStream().use { inputStream ->
+              zos.putNextEntry(ZipEntry(CIDebugData.GITHUB_EVENT_DATA_FILE_NAME))
+              inputStream.copyTo(zos)
+              zos.closeEntry()
+            }
+            finalArtifactMetadata = artifactMetadata.copy(
+              ciDebugData = CIDebugData(
+                gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
+              ),
+            )
+          }
         }
       }
 
@@ -272,6 +295,7 @@ abstract class BaseUploadTask : DefaultTask() {
       prNumber.set(extension.vcsOptions.prNumber)
       gitHubRepoOwner.set(extension.vcsOptions.gitHubOptions.repoOwner)
       gitHubRepoName.set(extension.vcsOptions.gitHubOptions.repoName)
+      gitHubIncludeEventInformation.set(extension.vcsOptions.gitHubOptions.includeEventInformation)
       gitLabProjectId.set(extension.vcsOptions.gitLabOptions.projectId)
 
       if (project.hasProperty(BASE_URL_ARG_KEY)) {
