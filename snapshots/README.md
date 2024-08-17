@@ -115,7 +115,7 @@ the `@IgnoreEmergeSnapshot` annotation to the preview function.
 
 ```kotlin
 @Preview
-@EmergeIgnoreSnapshot
+@IgnoreEmergeSnapshot
 @Composable
 fun MyComposablePreview() {
   MyComposable(
@@ -245,7 +245,7 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 | Artifact                                          | Description                     | Latest                                                                                                                                                                                                                           | Min SDK |
 |---------------------------------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
 | `com.emergetools.snapshots:snapshots`             | Snapshot testing SDK            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                         | 23      |
-| `com.emergetools.snapshots:snapshots-annotations` | Annotations to ignore snapshots | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23      |
+| `com.emergetools.snapshots:snapshots-annotations` | Additional snapshot annotations | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23      |
 
 ## Releasing
 
