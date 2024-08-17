@@ -58,12 +58,11 @@ abstract class SnapshotsPreflight : DefaultTask() {
     preflight.logOutput(
       logger,
       additionalSuccessLogging = {
-        val variantNameForTask = variantName.get().capitalize()
-        val localTaskName = "${EMERGE_TASK_PREFIX}LocalSnapshots${variantNameForTask}"
+        val localTaskName = getSnapshotLocalTaskName(variantName.get())
         val localTaskInstructions =
           "Check snapshots locally with ./gradlew ${appProjectPath.get()}:${localTaskName} (make sure to have an emulator or connected device running)"
 
-        val uploadTaskName = "${EMERGE_TASK_PREFIX}UploadSnapshotsBundle${variantNameForTask}"
+        val uploadTaskName = getSnapshotUploadTaskName(variantName.get())
         val uploadTaskInstructions =
           "Upload & run snapshots on Emerge with ./gradlew ${appProjectPath.get()}:${uploadTaskName}"
 
