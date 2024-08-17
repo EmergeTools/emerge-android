@@ -17,6 +17,8 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.TaskProvider
 
 const val EMERGE_SNAPSHOTS_TASK_GROUP = "Emerge snapshots"
+const val SNAPSHOTS_DEP_GROUP = "com.emergetools.snapshots"
+const val SNAPSHOTS_DEP_NAME = "snapshots"
 
 fun registerSnapshotTasks(
   appProject: Project,
@@ -27,6 +29,8 @@ fun registerSnapshotTasks(
   appProject.logger.debug(
     "Registering snapshot tasks for variant ${variant.name} in project ${appProject.path}"
   )
+
+  registerSnapshotPreflightTask(appProject, extension, variant)
 
   variant.instrumentation.let { instrumentation ->
     instrumentation.transformClassesWith(
@@ -67,6 +71,28 @@ private fun registerSnapshotPackageTask(
     it.agpVersion.set(AgpVersions.CURRENT.toString())
   }
 }
+
+private fun registerSnapshotPreflightTask(
+  appProject: Project,
+  extension: EmergePluginExtension,
+  variant: ApplicationVariant,
+) {
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateSnapshots${variant.name.capitalize()}"
+  appProject.tasks.register(preflightTaskName, SnapshotsPreflight::class.java) {
+    it.group = EMERGE_SNAPSHOTS_TASK_GROUP
+    it.description = "Validate Snapshots is properly set up for variant ${variant.name}"
+    it.variantName.set(variant.name)
+    it.appProjectPath.set(appProject.path)
+    it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
+    it.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
+    it.hasSnapshotsAndroidTestImplementationDependency.set(
+      appProject.configurations.findByName("androidTestImplementation")?.dependencies?.any { dep ->
+        dep.group == SNAPSHOTS_DEP_GROUP && dep.name == SNAPSHOTS_DEP_NAME
+      }
+    )
+  }
+}
+
 
 private fun registerSnapshotLocalTask(
   appProject: Project,

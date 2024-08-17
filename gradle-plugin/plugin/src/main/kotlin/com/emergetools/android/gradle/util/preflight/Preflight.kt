@@ -1,11 +1,14 @@
 package com.emergetools.android.gradle.util.preflight
 
+import org.gradle.api.GradleException
+import org.gradle.api.logging.Logger
+
 private data class Item(val description: String, val result: Result<Unit>) {
   val isFailure = result.isFailure
   val isSuccess = result.isSuccess
 }
 
-class PreflightFailure(message: String): Exception(message)
+class PreflightFailure(message: String) : Exception(message)
 
 class Preflight(private val title: String) {
   private val items = mutableListOf<Item>()
@@ -21,6 +24,25 @@ class Preflight(private val title: String) {
       }
     }
     return true
+  }
+
+  fun logOutput(
+    logger: Logger,
+    additionalSuccessLogging: (() -> String)? = null,
+    additionalFailureLogging: (() -> String)? = null,
+  ) {
+    logger.lifecycle("")
+    logger.lifecycle(render())
+    logger.lifecycle("")
+
+    if (isSuccessful()) {
+      additionalSuccessLogging?.let { logger.lifecycle(it()) }
+    }
+
+    if (!isSuccessful()) {
+      additionalFailureLogging?.let { logger.lifecycle(it()) }
+      throw GradleException(renderErrors())
+    }
   }
 
   /**
