@@ -3,7 +3,7 @@ package com.emergetools.android.gradle.tasks.snapshots
 import com.emergetools.android.gradle.tasks.base.BasePreflightTask
 import com.emergetools.android.gradle.util.preflight.Preflight
 import com.emergetools.android.gradle.util.preflight.PreflightFailure
-import com.emergetools.android.gradle.util.preflight.PreflightVcsInfo.Companion.setFromBasePreflightTask
+import com.emergetools.android.gradle.util.preflight.PreflightWarning
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
@@ -30,10 +30,7 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
 
   @TaskAction
   fun execute() {
-    val preflight = Preflight(
-      title = "Snapshots",
-      vcsInfo = setFromBasePreflightTask()
-    )
+    val preflight = Preflight("Snapshots preflight")
 
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {
@@ -56,6 +53,54 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
         throw PreflightFailure("Snapshots androidTestImplementation dependency not set. See https://docs.emergetools.com/docs/android-snapshots-v1#add-snapshot-sdk")
       }
     }
+
+    val vcsPreflight = Preflight("VCS Info")
+    vcsPreflight.add("SHA: ${sha.getOrElse("Not set")}") {
+      if (sha.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("Base SHA: ${baseSha.getOrElse("Not set")}") {
+      if (baseSha.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("Branch name: ${branchName.getOrElse("Not set")}") {
+      if (branchName.getOrElse("") == "HEAD") {
+        throw PreflightWarning("Branch could be in a detached head state which could lead to trouble posting status checks. Make sure to check your sha matches the commit sha on your branch.")
+      }
+
+      if (branchName.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("PR number: ${prNumber.getOrElse("Not set")}") {
+      if (prNumber.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("[GitHub only] GitHub repo name: ${gitHubRepoName.getOrElse("Not set")}") {
+      if (gitHubRepoName.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("[GitHub only] GitHub repo owner: ${gitHubRepoOwner.getOrElse("Not set")}") {
+      if (gitHubRepoOwner.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+
+    vcsPreflight.add("[GitLab only] GitLab project ID: ${gitLabProjectId.getOrElse("Not set")}") {
+      if (gitLabProjectId.getOrElse("").isBlank()) {
+        throw PreflightWarning("Emerge won't be able to post status checks or comments without a value.")
+      }
+    }
+    preflight.addSubPreflight(vcsPreflight)
 
     preflight.logOutput(
       logger,
