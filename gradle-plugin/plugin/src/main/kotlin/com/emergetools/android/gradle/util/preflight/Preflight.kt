@@ -145,7 +145,7 @@ class Preflight(
   private fun getHeadingBottom(heading: String): String {
     return (CharArray(heading.length) {
       if (it == 0) {
-        return@CharArray '╚'
+        return@CharArray '╠'
       }
       if (it == heading.length - 1) {
         return@CharArray '╝'
