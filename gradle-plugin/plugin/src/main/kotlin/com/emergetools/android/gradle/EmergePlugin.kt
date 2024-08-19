@@ -256,39 +256,40 @@ class EmergePlugin : Plugin<Project> {
           ========================
           = Emerge configuration =
           ========================
-          apiToken:                      ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
-          includeDependencyInformation:  ${extension.includeDependencyInformation.orElse(true)}
-          dryRun (optional):             ${extension.dryRun.orEmpty()}
-          verbose (optional):            ${extension.verbose.orEmpty()}
+          apiToken:                        ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
+          includeDependencyInformation:    ${extension.includeDependencyInformation.orElse(true)}
+          dryRun (optional):               ${extension.dryRun.orEmpty()}
+          verbose (optional):              ${extension.verbose.orEmpty()}
           size
-          ├── tag (optional):            ${extension.sizeOptions.tag.orEmpty()}
-          └── enabled:                   ${extension.sizeOptions.enabled.getOrElse(true)}
+          ├── tag (optional):              ${extension.sizeOptions.tag.orEmpty()}
+          └── enabled:                     ${extension.sizeOptions.enabled.getOrElse(true)}
           snapshots
-          ├── snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          ├── apiVersion:                ${extension.snapshotOptions.apiVersion.orEmpty()}
-          ├── includePrivatePreviews:    ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}
-          ├── tag (optional):            ${extension.snapshotOptions.tag.orEmpty()}
-          └── enabled:                   ${extension.snapshotOptions.enabled.getOrElse(true)}
+          ├── snapshotsStorageDirectory:   ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
+          ├── apiVersion:                  ${extension.snapshotOptions.apiVersion.orEmpty()}
+          ├── includePrivatePreviews:      ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}
+          ├── tag (optional):              ${extension.snapshotOptions.tag.orEmpty()}
+          └── enabled:                     ${extension.snapshotOptions.enabled.getOrElse(true)}
           reaper
-          ├── enabledVariants:           ${extension.reaperOptions.enabledVariants.getOrElse(
+          ├── enabledVariants:             ${extension.reaperOptions.enabledVariants.getOrElse(
         emptyList()
       )}
-          ├── publishableApiKey:         ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
-          └── tag (optional):            ${extension.reaperOptions.tag.orEmpty()}
+          ├── publishableApiKey:           ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
+          └── tag (optional):              ${extension.reaperOptions.tag.orEmpty()}
           performance
-          ├── projectPath:               ${extension.perfOptions.projectPath.orEmpty()}
-          ├── tag (optional):            ${extension.perfOptions.tag.orEmpty()}
-          └── enabled:                   ${extension.perfOptions.enabled.getOrElse(true)}
+          ├── projectPath:                 ${extension.perfOptions.projectPath.orEmpty()}
+          ├── tag (optional):              ${extension.perfOptions.tag.orEmpty()}
+          └── enabled:                     ${extension.perfOptions.enabled.getOrElse(true)}
           vcsOptions (optional, defaults to Git values)
-          ├── sha:                       ${extension.vcsOptions.sha.orEmpty()}
-          ├── baseSha:                   ${extension.vcsOptions.baseSha.orEmpty()}
-          ├── branchName:                ${extension.vcsOptions.branchName.orEmpty()}
-          ├── prNumber:                  ${extension.vcsOptions.prNumber.orEmpty()}
+          ├── sha:                         ${extension.vcsOptions.sha.orEmpty()}
+          ├── baseSha:                     ${extension.vcsOptions.baseSha.orEmpty()}
+          ├── branchName:                  ${extension.vcsOptions.branchName.orEmpty()}
+          ├── prNumber:                    ${extension.vcsOptions.prNumber.orEmpty()}
           ├── gitHubOptions
-          │   ├── repoOwner:             ${extension.vcsOptions.gitHubOptions.repoOwner.orEmpty()}
-          │   └── repoName:              ${extension.vcsOptions.gitHubOptions.repoName.orEmpty()}
+          │   ├── repoOwner:               ${extension.vcsOptions.gitHubOptions.repoOwner.orEmpty()}
+          │   ├── repoName:                ${extension.vcsOptions.gitHubOptions.repoName.orEmpty()}
+          │   └── includeEventInformation: ${extension.vcsOptions.gitHubOptions.includeEventInformation.orEmpty()}
           └── gitLabOptions
-              └── projectId:             ${extension.vcsOptions.gitLabOptions.projectId.orEmpty()}
+              └── projectId:               ${extension.vcsOptions.gitLabOptions.projectId.orEmpty()}
       """.trimIndent()
     )
   }

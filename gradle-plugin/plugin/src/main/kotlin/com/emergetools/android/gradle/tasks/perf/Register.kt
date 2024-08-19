@@ -7,8 +7,8 @@ import com.android.build.api.variant.Variant
 import com.android.build.gradle.internal.tasks.factory.dependsOn
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.capitalize
 import org.gradle.api.Project
 import org.gradle.api.provider.Property

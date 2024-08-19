@@ -1,16 +1,15 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
-import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
-import com.emergetools.android.gradle.util.capitalize
+import com.emergetools.android.gradle.tasks.base.BasePreflightTask
 import com.emergetools.android.gradle.util.preflight.Preflight
 import com.emergetools.android.gradle.util.preflight.PreflightFailure
-import org.gradle.api.DefaultTask
+import com.emergetools.android.gradle.util.preflight.PreflightVcsInfo.Companion.setFromBasePreflightTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
-abstract class SnapshotsPreflight : DefaultTask() {
+abstract class SnapshotsPreflight : BasePreflightTask() {
 
   @get:Input
   @get:Optional
@@ -31,7 +30,10 @@ abstract class SnapshotsPreflight : DefaultTask() {
 
   @TaskAction
   fun execute() {
-    val preflight = Preflight("Snapshots")
+    val preflight = Preflight(
+      title = "Snapshots",
+      vcsInfo = setFromBasePreflightTask()
+    )
 
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {

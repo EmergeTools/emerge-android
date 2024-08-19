@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.util.preflight
 
+import com.emergetools.android.gradle.tasks.base.BasePreflightTask
 import org.gradle.api.GradleException
 import org.gradle.api.logging.Logger
 
@@ -10,7 +11,34 @@ private data class Item(val description: String, val result: Result<Unit>) {
 
 class PreflightFailure(message: String) : Exception(message)
 
-class Preflight(private val title: String) {
+data class PreflightVcsInfo(
+  val sha: String? = null,
+  val baseSha: String? = null,
+  val branchName: String? = null,
+  val prNumber: String? = null,
+  val gitHubRepoName: String? = null,
+  val gitHubRepoOwner: String? = null,
+  val gitLabProjectId: String? = null,
+) {
+  companion object {
+    fun BasePreflightTask.setFromBasePreflightTask(): PreflightVcsInfo {
+      return PreflightVcsInfo(
+        sha = sha.orNull,
+        baseSha = baseSha.orNull,
+        branchName = branchName.orNull,
+        prNumber = prNumber.orNull,
+        gitHubRepoName = gitHubRepoName.orNull,
+        gitHubRepoOwner = gitHubRepoOwner.orNull,
+        gitLabProjectId = gitLabProjectId.orNull,
+      )
+    }
+  }
+}
+
+class Preflight(
+  private val title: String,
+  private val vcsInfo: PreflightVcsInfo? = null,
+) {
   private val items = mutableListOf<Item>()
 
   fun add(description: String, check: () -> Unit) {
@@ -60,26 +88,12 @@ class Preflight(private val title: String) {
     val successCount = items.count { it.isSuccess }
     val totalCount = items.size
     val heading = "║ $title preflight $result ($successCount/${totalCount}) ║"
-    val headingTop = (CharArray(heading.length) {
-      if (it == 0) {
-        return@CharArray '╔'
-      }
-      if (it == heading.length - 1) {
-        return@CharArray '╗'
-      }
-      return@CharArray '═'
-    }).joinToString("");
-    val headingBottom = (CharArray(heading.length) {
-      if (it == 0) {
-        return@CharArray '╠'
-      }
-      if (it == heading.length - 1) {
-        return@CharArray '╝'
-      }
-      return@CharArray '═'
-    }).joinToString("");
 
-    val lines = mutableListOf(headingTop, heading, headingBottom)
+    val lines = mutableListOf(
+      getHeadingTop(heading),
+      heading,
+      getHeadingBottom(heading)
+    )
 
     for (item in items) {
       val isLast = items.last() == item
@@ -88,7 +102,56 @@ class Preflight(private val title: String) {
       val description = item.description
       lines.add("$box $emoji $description")
     }
+
+    vcsInfo?.let { vcsInfo ->
+      val vcsHeading = "║ VCS Info ║"
+      lines.add("\n")
+      lines.add(getHeadingTop(vcsHeading))
+      lines.add(vcsHeading)
+      lines.add(getHeadingBottom(vcsHeading))
+
+      val vcsItems = mutableListOf<String>()
+      vcsItems.add("SHA: ${vcsInfo.sha ?: "Empty"}")
+      vcsItems.add("Base SHA: ${vcsInfo.baseSha ?: "Empty"}")
+      vcsItems.add("Branch: ${vcsInfo.branchName ?: "Empty"}")
+      vcsItems.add("PR number: ${vcsInfo.prNumber ?: "Not set"}")
+      vcsItems.add("GitHub")
+      vcsItems.add("Repo name: ${vcsInfo.gitHubRepoName ?: "Not set"}")
+      vcsItems.add("Repo owner: ${vcsInfo.gitHubRepoOwner ?: "Not set"}")
+      vcsItems.add("GitLab")
+      vcsItems.add("Project ID: ${vcsInfo.gitLabProjectId ?: "Not set"}")
+      vcsItems.forEach { item ->
+        val isLast = vcsItems.last() == item
+        val box = if (isLast) "╚═" else "╠═"
+        lines.add("$box $item")
+      }
+    }
+
     return lines.joinToString(separator = "\n")
+  }
+
+  private fun getHeadingTop(heading: String): String {
+    return (CharArray(heading.length) {
+      if (it == 0) {
+        return@CharArray '╔'
+      }
+      if (it == heading.length - 1) {
+        return@CharArray '╗'
+      }
+      return@CharArray '═'
+    }).joinToString("")
+  }
+
+  private fun getHeadingBottom(heading: String): String {
+    return (CharArray(heading.length) {
+      if (it == 0) {
+        return@CharArray '╚'
+      }
+      if (it == heading.length - 1) {
+        return@CharArray '╝'
+      }
+      return@CharArray '═'
+    }).joinToString("")
   }
 
   fun renderErrors(): String {

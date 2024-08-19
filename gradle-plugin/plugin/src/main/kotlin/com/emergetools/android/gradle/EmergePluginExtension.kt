@@ -1,6 +1,6 @@
 package com.emergetools.android.gradle
 
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask
 import com.emergetools.android.gradle.util.property
 import com.emergetools.android.gradle.util.providers.GitBaseShaValueSource
 import com.emergetools.android.gradle.util.providers.GitCurrentBranchValueSource

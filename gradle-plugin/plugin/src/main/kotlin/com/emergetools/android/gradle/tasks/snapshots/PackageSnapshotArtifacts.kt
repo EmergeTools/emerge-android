@@ -1,7 +1,7 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
 import com.emergetools.android.gradle.BuildConfig
-import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
+import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
