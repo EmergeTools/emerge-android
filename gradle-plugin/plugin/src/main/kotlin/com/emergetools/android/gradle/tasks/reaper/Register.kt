@@ -38,10 +38,11 @@ private fun registerReaperPreflightTask(
   variant: Variant,
 ) {
   val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
-  appProject.tasks.register(preflightTaskName, PreflightReaper::class.java) {
+  appProject.tasks.register(preflightTaskName, ReaperPreflight::class.java) {
     it.group = EMERGE_REAPER_TASK_GROUP
     it.description = "Validate Reaper is properly set up for variant ${variant.name}"
     it.variantName.set(variant.name)
+    it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
     it.reaperEnabled.set(extension.reaperOptions.enabledVariants.getOrElse(emptyList()).contains(variant.name))
     it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
     it.hasReaperImplementationDependency.set(

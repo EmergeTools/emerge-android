@@ -3,20 +3,16 @@ package com.emergetools.android.gradle.tasks.reaper
 import com.emergetools.android.gradle.util.preflight.Preflight
 import com.emergetools.android.gradle.util.preflight.PreflightFailure
 import org.gradle.api.DefaultTask
-import org.gradle.api.GradleException
-import org.gradle.api.file.RegularFile
-import org.gradle.api.file.RegularFileProperty
-import org.gradle.api.internal.artifacts.configurations.Configurations
-import org.gradle.api.internal.artifacts.configurations.ConfigurationsProvider
-import org.gradle.api.provider.ListProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
-import org.gradle.api.tasks.InputFile
-import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
-abstract class PreflightReaper : DefaultTask() {
+abstract class ReaperPreflight : DefaultTask() {
+
+  @get:Input
+  @get:Optional
+  abstract val hasEmergeApiToken: Property<Boolean>
 
   @get:Input
   @get:Optional
@@ -36,6 +32,13 @@ abstract class PreflightReaper : DefaultTask() {
   @TaskAction
   fun execute() {
     val preflight = Preflight("Reaper")
+
+    val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
+    preflight.add("Emerge API token set") {
+      if (!hasEmergeApiToken) {
+        throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")
+      }
+    }
 
     val variantName = variantName.get()
     preflight.add("enabled for variant: $variantName") {
@@ -60,12 +63,6 @@ abstract class PreflightReaper : DefaultTask() {
       }
     }
 
-    logger.lifecycle("")
-    logger.lifecycle(preflight.render())
-    logger.lifecycle("")
-
-    if (!preflight.isSuccessful()) {
-      throw GradleException(preflight.renderErrors())
-    }
+    preflight.logOutput(logger)
   }
 }
