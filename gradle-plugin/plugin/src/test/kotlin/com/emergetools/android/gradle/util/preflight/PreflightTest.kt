@@ -40,9 +40,9 @@ class PreflightTest {
     preflight.add("Towel on person") {}
     preflight.add("Tea hot") {}
     assertEquals("""
-    ╔══════════════════════════════════════════════╗
-    ║ Douglas Adams preflight was successful (3/3) ║
-    ╠══════════════════════════════════════════════╝
+    ╔════════════════════════════════════╗
+    ║ Douglas Adams was successful (3/3) ║
+    ╠════════════════════════════════════╝
     ╠═ ✅ HHGTTG open to page 42
     ╠═ ✅ Towel on person
     ╚═ ✅ Tea hot
@@ -58,9 +58,9 @@ class PreflightTest {
     }
     preflight.add("Tea hot") {}
     assertEquals("""
-    ╔══════════════════════════════════════╗
-    ║ Douglas Adams preflight failed (2/3) ║
-    ╠══════════════════════════════════════╝
+    ╔════════════════════════════╗
+    ║ Douglas Adams failed (2/3) ║
+    ╠════════════════════════════╝
     ╠═ ✅ HHGTTG open to page 42
     ╠═ ❌ Towel on person
     ╚═ ✅ Tea hot
