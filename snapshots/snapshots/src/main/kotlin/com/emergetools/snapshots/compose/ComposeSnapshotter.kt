@@ -10,6 +10,9 @@ import androidx.compose.runtime.Composer
 import androidx.compose.runtime.currentComposer
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
+import androidx.core.view.WindowCompat
+import androidx.core.view.WindowInsetsCompat
+import androidx.core.view.WindowInsetsControllerCompat
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.SnapshotType
@@ -49,6 +52,10 @@ fun snapshotComposable(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Invoking composable method: ${composableMethod?.name}"
     )
+
+    WindowCompat.setDecorFitsSystemWindows(activity.window, false)
+    WindowInsetsControllerCompat(activity.window, activity.window.decorView)
+      .show(WindowInsetsCompat.Type.systemBars())
 
     val composeView = ComposeView(activity)
     composeView.layoutParams =
