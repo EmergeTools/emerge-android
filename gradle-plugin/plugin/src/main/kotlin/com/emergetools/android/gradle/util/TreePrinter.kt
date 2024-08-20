@@ -56,3 +56,8 @@ class TreePrinter(private val rootHeading: String) {
   }
 }
 
+fun treePrinter(rootTitle: String, build: TreePrinter.() -> Unit): String {
+  val treePrinter = TreePrinter(rootTitle)
+  treePrinter.build()
+  return treePrinter.print()
+}
