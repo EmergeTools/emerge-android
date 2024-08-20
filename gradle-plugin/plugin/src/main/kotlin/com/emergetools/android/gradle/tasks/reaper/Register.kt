@@ -4,8 +4,8 @@ import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.Variant
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.capitalize
 import org.gradle.api.Project
 
@@ -37,7 +37,7 @@ private fun registerReaperPreflightTask(
   extension: EmergePluginExtension,
   variant: Variant,
 ) {
-  val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}ReaperPreflight${variant.name.capitalize()}"
   appProject.tasks.register(preflightTaskName, ReaperPreflight::class.java) {
     it.group = EMERGE_REAPER_TASK_GROUP
     it.description = "Validate Reaper is properly set up for variant ${variant.name}"

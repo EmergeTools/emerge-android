@@ -8,9 +8,10 @@ import com.emergetools.android.gradle.EmergePlugin.Companion.BUILD_OUTPUT_DIR_NA
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
-import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setTagFromProductOptions
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask.Companion.setUploadTaskInputs
+import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
+import com.emergetools.android.gradle.tasks.base.BasePreflightTask.Companion.setPreflightTaskInputs
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import org.gradle.api.Project
@@ -77,7 +78,7 @@ private fun registerSnapshotPreflightTask(
   extension: EmergePluginExtension,
   variant: ApplicationVariant,
 ) {
-  val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateSnapshots${variant.name.capitalize()}"
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}SnapshotsPreflight${variant.name.capitalize()}"
   appProject.tasks.register(preflightTaskName, SnapshotsPreflight::class.java) {
     it.group = EMERGE_SNAPSHOTS_TASK_GROUP
     it.description = "Validate Snapshots is properly set up for variant ${variant.name}"
@@ -90,6 +91,7 @@ private fun registerSnapshotPreflightTask(
         dep.group == SNAPSHOTS_DEP_GROUP && dep.name == SNAPSHOTS_DEP_NAME
       }
     )
+    it.setPreflightTaskInputs(extension)
   }
 }
 

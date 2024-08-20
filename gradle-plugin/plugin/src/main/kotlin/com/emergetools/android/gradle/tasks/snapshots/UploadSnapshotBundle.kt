@@ -1,7 +1,7 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
-import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
+import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask
 import com.emergetools.android.gradle.util.network.EmergeUploadRequestData
 import kotlinx.datetime.Clock
 import kotlinx.serialization.json.Json

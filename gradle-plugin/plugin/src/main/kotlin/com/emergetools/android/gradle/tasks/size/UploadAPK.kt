@@ -1,8 +1,8 @@
 package com.emergetools.android.gradle.tasks.size
 
 import com.emergetools.android.gradle.BuildConfig
-import com.emergetools.android.gradle.tasks.upload.ArtifactMetadata
-import com.emergetools.android.gradle.tasks.upload.BaseUploadTask
+import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
+import com.emergetools.android.gradle.tasks.base.BaseUploadTask
 import kotlinx.datetime.Clock
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
