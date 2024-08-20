@@ -31,8 +31,7 @@ abstract class ReaperPreflight : DefaultTask() {
 
   @TaskAction
   fun execute() {
-    // Reaper isn't reliant on VCS info so skip to make output cleaner
-    val preflight = Preflight("Reaper")
+    val preflight = Preflight("Reaper preflight check")
 
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {
@@ -64,6 +63,7 @@ abstract class ReaperPreflight : DefaultTask() {
       }
     }
 
+    // Reaper isn't reliant on VCS info so skip vcs sub-preflight check to make output cleaner
     preflight.logOutput(logger)
   }
 }

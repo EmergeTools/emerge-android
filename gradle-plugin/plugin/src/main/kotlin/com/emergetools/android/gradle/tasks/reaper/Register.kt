@@ -37,7 +37,7 @@ private fun registerReaperPreflightTask(
   extension: EmergePluginExtension,
   variant: Variant,
 ) {
-  val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateReaper${variant.name.capitalize()}"
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}ReaperPreflight${variant.name.capitalize()}"
   appProject.tasks.register(preflightTaskName, ReaperPreflight::class.java) {
     it.group = EMERGE_REAPER_TASK_GROUP
     it.description = "Validate Reaper is properly set up for variant ${variant.name}"

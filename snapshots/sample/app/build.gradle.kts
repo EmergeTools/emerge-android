@@ -8,8 +8,6 @@ emerge {
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   vcs {
-    branchName.set("HEAD")
-
     gitHub {
       repoName.set("emerge-android")
       repoOwner.set("EmergeTools")

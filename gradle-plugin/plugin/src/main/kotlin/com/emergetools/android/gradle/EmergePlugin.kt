@@ -16,6 +16,7 @@ import com.emergetools.android.gradle.tasks.reaper.registerReaperTasks
 import com.emergetools.android.gradle.tasks.size.registerSizeTasks
 import com.emergetools.android.gradle.tasks.snapshots.registerSnapshotTasks
 import com.emergetools.android.gradle.util.AgpVersions
+import com.emergetools.android.gradle.util.TreePrinter
 import com.emergetools.android.gradle.util.orEmpty
 import org.gradle.api.Plugin
 import org.gradle.api.Project
@@ -241,7 +242,10 @@ class EmergePlugin : Plugin<Project> {
     }
 
     // We must always set these to something make the manifest merger happy:
-    variant.manifestPlaceholders.put("emerge.reaper.instrumented", if (isVariantEnabled) "true" else "false")
+    variant.manifestPlaceholders.put(
+      "emerge.reaper.instrumented",
+      if (isVariantEnabled) "true" else "false"
+    )
     variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
 
@@ -251,47 +255,99 @@ class EmergePlugin : Plugin<Project> {
   ) {
     if (!project.logger.isInfoEnabled) return
 
-    project.logger.lifecycle(
-      """
-          ========================
-          = Emerge configuration =
-          ========================
-          apiToken:                        ${if (extension.apiToken.isPresent) "*****" else "MISSING"}
-          includeDependencyInformation:    ${extension.includeDependencyInformation.orElse(true)}
-          dryRun (optional):               ${extension.dryRun.orEmpty()}
-          verbose (optional):              ${extension.verbose.orEmpty()}
-          size
-          ├── tag (optional):              ${extension.sizeOptions.tag.orEmpty()}
-          └── enabled:                     ${extension.sizeOptions.enabled.getOrElse(true)}
-          snapshots
-          ├── snapshotsStorageDirectory:   ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}
-          ├── apiVersion:                  ${extension.snapshotOptions.apiVersion.orEmpty()}
-          ├── includePrivatePreviews:      ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}
-          ├── tag (optional):              ${extension.snapshotOptions.tag.orEmpty()}
-          └── enabled:                     ${extension.snapshotOptions.enabled.getOrElse(true)}
-          reaper
-          ├── enabledVariants:             ${extension.reaperOptions.enabledVariants.getOrElse(
-        emptyList()
-      )}
-          ├── publishableApiKey:           ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}
-          └── tag (optional):              ${extension.reaperOptions.tag.orEmpty()}
-          performance
-          ├── projectPath:                 ${extension.perfOptions.projectPath.orEmpty()}
-          ├── tag (optional):              ${extension.perfOptions.tag.orEmpty()}
-          └── enabled:                     ${extension.perfOptions.enabled.getOrElse(true)}
-          vcsOptions (optional, defaults to Git values)
-          ├── sha:                         ${extension.vcsOptions.sha.orEmpty()}
-          ├── baseSha:                     ${extension.vcsOptions.baseSha.orEmpty()}
-          ├── branchName:                  ${extension.vcsOptions.branchName.orEmpty()}
-          ├── prNumber:                    ${extension.vcsOptions.prNumber.orEmpty()}
-          ├── gitHubOptions
-          │   ├── repoOwner:               ${extension.vcsOptions.gitHubOptions.repoOwner.orEmpty()}
-          │   ├── repoName:                ${extension.vcsOptions.gitHubOptions.repoName.orEmpty()}
-          │   └── includeEventInformation: ${extension.vcsOptions.gitHubOptions.includeEventInformation.orEmpty()}
-          └── gitLabOptions
-              └── projectId:               ${extension.vcsOptions.gitLabOptions.projectId.orEmpty()}
-      """.trimIndent()
+    val treePrinter = TreePrinter("Emerge configuration")
+
+    treePrinter.addItem("apiToken: ${if (extension.apiToken.isPresent) "*****" else "MISSING"}")
+    treePrinter.addItem(
+      "includeDependencyInformation: ${extension.includeDependencyInformation.getOrElse(true)}"
     )
+    treePrinter.addItem("dryRun (optional): ${extension.dryRun.orEmpty()}")
+    treePrinter.addItem("verbose (optional): ${extension.verbose.orEmpty()}")
+
+    val sizeHeading = treePrinter.addHeading("size")
+    treePrinter.addItem("tag (optional): ${extension.sizeOptions.tag.orEmpty()}", sizeHeading)
+    treePrinter.addItem("enabled: ${extension.sizeOptions.enabled.getOrElse(true)}", sizeHeading)
+
+    val snapshotsHeading = treePrinter.addHeading("snapshots")
+    treePrinter.addItem(
+      "snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}",
+      snapshotsHeading
+    )
+    treePrinter.addItem(
+      "apiVersion: ${extension.snapshotOptions.apiVersion.orEmpty()}",
+      snapshotsHeading
+    )
+    treePrinter.addItem(
+      "includePrivatePreviews: ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}",
+      snapshotsHeading
+    )
+    treePrinter.addItem(
+      "tag (optional): ${extension.snapshotOptions.tag.orEmpty()}",
+      snapshotsHeading
+    )
+    treePrinter.addItem(
+      "enabled: ${extension.snapshotOptions.enabled.getOrElse(true)}",
+      snapshotsHeading
+    )
+
+    val reaperHeading = treePrinter.addHeading("reaper")
+    treePrinter.addItem(
+      "enabledVariants: ${
+        extension.reaperOptions.enabledVariants.getOrElse(
+          emptyList()
+        )
+      }", reaperHeading
+    )
+    treePrinter.addItem(
+      "publishableApiKey: ${
+        if (extension.reaperOptions.publishableApiKey.isPresent
+        ) "*****" else "MISSING"
+      }", reaperHeading
+    )
+    treePrinter.addItem("tag (optional): ${extension.reaperOptions.tag.orEmpty()}", reaperHeading)
+
+    val performanceHeading = treePrinter.addHeading("performance")
+    treePrinter.addItem(
+      "projectPath: ${extension.perfOptions.projectPath.orEmpty()}",
+      performanceHeading
+    )
+    treePrinter.addItem(
+      "tag (optional): ${extension.perfOptions.tag.orEmpty()}",
+      performanceHeading
+    )
+    treePrinter.addItem(
+      "enabled: ${extension.perfOptions.enabled.getOrElse(true)}",
+      performanceHeading
+    )
+
+    val vcsOptionsHeading = treePrinter.addHeading("vcsOptions (optional, defaults to Git values)")
+    treePrinter.addItem("sha: ${extension.vcsOptions.sha.orEmpty()}", vcsOptionsHeading)
+    treePrinter.addItem("baseSha: ${extension.vcsOptions.baseSha.orEmpty()}", vcsOptionsHeading)
+    treePrinter.addItem(
+      "branchName: ${extension.vcsOptions.branchName.orEmpty()}",
+      vcsOptionsHeading
+    )
+    treePrinter.addItem("prNumber: ${extension.vcsOptions.prNumber.orEmpty()}", vcsOptionsHeading)
+    treePrinter.addItem("gitHubOptions", vcsOptionsHeading)
+    treePrinter.addItem(
+      "repoOwner: ${extension.vcsOptions.gitHubOptions.repoOwner.orEmpty()}",
+      vcsOptionsHeading
+    )
+    treePrinter.addItem(
+      "repoName: ${extension.vcsOptions.gitHubOptions.repoName.orEmpty()}",
+      vcsOptionsHeading
+    )
+    treePrinter.addItem(
+      "includeEventInformation: ${extension.vcsOptions.gitHubOptions.includeEventInformation.orEmpty()}",
+      vcsOptionsHeading
+    )
+    treePrinter.addItem("gitLabOptions", vcsOptionsHeading)
+    treePrinter.addItem(
+      "projectId: ${extension.vcsOptions.gitLabOptions.projectId.orEmpty()}",
+      vcsOptionsHeading
+    )
+
+    project.logger.lifecycle(treePrinter.print())
   }
 
   companion object {

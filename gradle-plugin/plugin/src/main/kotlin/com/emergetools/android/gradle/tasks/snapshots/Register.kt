@@ -78,7 +78,7 @@ private fun registerSnapshotPreflightTask(
   extension: EmergePluginExtension,
   variant: ApplicationVariant,
 ) {
-  val preflightTaskName = "${EMERGE_TASK_PREFIX}ValidateSnapshots${variant.name.capitalize()}"
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}SnapshotsPreflight${variant.name.capitalize()}"
   appProject.tasks.register(preflightTaskName, SnapshotsPreflight::class.java) {
     it.group = EMERGE_SNAPSHOTS_TASK_GROUP
     it.description = "Validate Snapshots is properly set up for variant ${variant.name}"

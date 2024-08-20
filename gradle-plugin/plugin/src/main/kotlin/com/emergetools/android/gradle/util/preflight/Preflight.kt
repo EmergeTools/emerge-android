@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.util.preflight
 
+import com.emergetools.android.gradle.util.TreePrinter
 import org.gradle.api.GradleException
 import org.gradle.api.logging.Logger
 
@@ -87,20 +88,18 @@ class Preflight(private val title: String) {
    * from the preflight checks.
    */
   fun render(): String {
-    val result = if (isSuccessful()) "was successful" else "failed"
+    val result = if (isSuccessful()) {
+      val warningCount = items.count { it.isWarning }
+      if (warningCount > 0) {
+        "was successful with $warningCount warning${if (warningCount > 1) "s" else ""}"
+      } else "was successful"
+    } else "failed"
     val successCount = items.count { it.isSuccess }
     val totalCount = items.size
-    val heading = "║ $title $result ($successCount/${totalCount}) ║"
-
-    val lines = mutableListOf(
-      getHeadingTop(heading),
-      heading,
-      getHeadingBottom(heading)
-    )
+    val heading = "$title $result ($successCount/${totalCount})"
+    val treePrinter = TreePrinter(heading)
 
     for (item in items) {
-      val isLast = items.last() == item
-      val box = if (isLast) "╚═" else "╠═"
       val emoji = when {
         item.isWarning -> "⚠️"
         item.isSuccess -> "✅"
@@ -108,8 +107,6 @@ class Preflight(private val title: String) {
       }
       val description = item.description
       val line = buildString {
-        append(box)
-        append(" ")
         append(emoji)
         append(" ")
         append(description)
@@ -118,9 +115,10 @@ class Preflight(private val title: String) {
           append((item.result as Result.Warning).message)
         }
       }
-      lines.add(line)
+      treePrinter.addItem(line)
     }
 
+    val lines = mutableListOf(treePrinter.print())
     for (subPreflight in subPreflights) {
       lines.add("\n")
       lines.add(subPreflight.render())
