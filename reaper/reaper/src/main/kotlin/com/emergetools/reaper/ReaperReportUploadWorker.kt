@@ -23,12 +23,14 @@ import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
 import okhttp3.internal.closeQuietly
+import java.io.ByteArrayOutputStream
 import java.io.DataInputStream
 import java.io.EOFException
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
 import java.io.IOException
+import java.util.zip.GZIPOutputStream
 import kotlin.coroutines.resumeWithException
 
 internal class ReaperReportUploadWorker(
@@ -175,11 +177,14 @@ internal class ReaperReportUploadWorker(
       stream.write(reportString.encodeToByteArray())
     }
 
+    val compressedReport = gzipCompressReport(reportString)
+
     val url = "$baseUrl/report"
     val request = Request.Builder().apply {
       header("Authorization", "Bearer $apiKey")
+      header("Content-Encoding", "gzip")
       url(url)
-      post(reportString.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull()))
+      post(compressedReport.toRequestBody("application/json; charset=utf-8".toMediaTypeOrNull()))
     }.build()
 
     client.newCall(request).executeAsync().use { response ->
@@ -194,6 +199,14 @@ internal class ReaperReportUploadWorker(
         reportError(applicationContext, baseUrl, apiKey, response.toString())
       }
     }
+  }
+
+  private fun gzipCompressReport(reportString: String): ByteArray {
+    val byteArrayOutputStream = ByteArrayOutputStream()
+    GZIPOutputStream(byteArrayOutputStream).use { gzip ->
+      gzip.write(reportString.toByteArray())
+    }
+    return byteArrayOutputStream.toByteArray()
   }
 
   @OptIn(ExperimentalCoroutinesApi::class)
