@@ -21,6 +21,8 @@ data class ComposePreviewSnapshotConfig(
   val backgroundColor: Long? = null,
   val showSystemUi: Boolean? = null,
   val device: String? = null,
+  val apiLevel: Int? = null,
+  val wallpaper: Int? = null,
 ) {
 
   /**
@@ -35,7 +37,9 @@ data class ComposePreviewSnapshotConfig(
       showBackground == null &&
       backgroundColor == null &&
       showSystemUi == null &&
-      device == null
+      device == null &&
+      apiLevel == null &&
+      wallpaper == null
   }
 
   /**
@@ -57,6 +61,8 @@ data class ComposePreviewSnapshotConfig(
       backgroundColor?.let { append("_bgc_$it") }
       showSystemUi?.let { append("_sysui_$it") }
       device?.let { append("_dev_$it") }
+      apiLevel?.let { append("_api_$it") }
+      wallpaper?.let { append("_wp_$it") }
     }
   }
 }
