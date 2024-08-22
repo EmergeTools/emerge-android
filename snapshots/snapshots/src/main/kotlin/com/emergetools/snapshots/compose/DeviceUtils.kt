@@ -2,6 +2,7 @@
 
 package com.emergetools.snapshots.compose
 
+import com.emergetools.snapshots.compose.DeviceSpec.Companion.MDPI_THRESHOLD
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.abs
 
@@ -34,7 +35,7 @@ data class DeviceSpec(
 
   companion object {
     private const val LDPI_THRESHOLD = 120
-    private const val MDPI_THRESHOLD = 160
+    const val MDPI_THRESHOLD = 160
     private const val HDPI_THRESHOLD = 240
     private const val XHDPI_THRESHOLD = 320
     private const val XXHDPI_THRESHOLD = 480
@@ -263,7 +264,7 @@ fun configToDimensionSpec(
   config: ComposePreviewSnapshotConfig,
 ): DimensionSpec {
   val devicePreviewString = parseDevicePreviewString(config.device)
-  val densityPpi = devicePreviewString?.dpi
+  val densityPpi = devicePreviewString?.dpi?.let { it / MDPI_THRESHOLD }
   val dimensionSpec: DimensionSpec? = when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]?.dimensionSpec
     devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]?.dimensionSpec
@@ -317,15 +318,18 @@ fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
       val match = idPattern.matchEntire(deviceString)!!
       DevicePreviewString(type = "id", id = match.groups["id"]?.value)
     }
+
     namePattern.matchEntire(deviceString) != null -> {
       val match = namePattern.matchEntire(deviceString)!!
       DevicePreviewString(type = "name", name = match.groups["name"]?.value)
     }
+
     specPattern.matchEntire(deviceString) != null -> {
       val match = specPattern.matchEntire(deviceString)!!
       val specContent = match.groups["spec"]?.value ?: return null
       parseSpecContent(specContent)
     }
+
     else -> null
   }
 }
