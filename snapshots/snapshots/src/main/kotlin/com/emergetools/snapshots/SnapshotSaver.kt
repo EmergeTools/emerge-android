@@ -132,7 +132,7 @@ internal object SnapshotSaver {
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
 
-    Log.d(TAG, "Saving error metadata for $keyName")
+    Log.d(TAG, "Saving metadata for $keyName")
     val jsonString = Json.encodeToString(metadata)
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
