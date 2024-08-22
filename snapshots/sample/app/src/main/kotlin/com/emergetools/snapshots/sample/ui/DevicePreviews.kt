@@ -69,4 +69,16 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(showSystemUi = false, device = Devices.FOLDABLE)
 @Preview(showSystemUi = false, device = Devices.TABLET)
 @Preview(showSystemUi = false, device = Devices.DESKTOP)
+@Preview(
+  name = "landscape",
+  device = "spec:width=411dp,height=891dp, orientation=landscape, dpi=480"
+)
+@Preview(
+  name = "foldable",
+  device = "spec:width=673dp, height=841dp, orientation=portrait, dpi=480"
+)
+@Preview(
+  name = "tablet",
+  device = "spec:width=800dp, height=1280dp, orientation=landscape, dpi=480"
+)
 annotation class DevicePreviews
