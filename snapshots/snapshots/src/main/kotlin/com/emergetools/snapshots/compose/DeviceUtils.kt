@@ -2,6 +2,7 @@
 
 package com.emergetools.snapshots.compose
 
+import com.emergetools.snapshots.compose.DeviceSpec.Companion.MDPI_THRESHOLD
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.abs
 
@@ -34,7 +35,7 @@ data class DeviceSpec(
 
   companion object {
     private const val LDPI_THRESHOLD = 120
-    private const val MDPI_THRESHOLD = 160
+    const val MDPI_THRESHOLD = 160
     private const val HDPI_THRESHOLD = 240
     private const val XHDPI_THRESHOLD = 320
     private const val XXHDPI_THRESHOLD = 480
@@ -263,16 +264,25 @@ fun configToDimensionSpec(
   config: ComposePreviewSnapshotConfig,
 ): DimensionSpec {
   val devicePreviewString = parseDevicePreviewString(config.device)
-  val densityPpi = devicePreviewString?.dpi
+  val densityPpi = devicePreviewString?.dpi?.let { it / MDPI_THRESHOLD }
   val dimensionSpec: DimensionSpec? = when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]?.dimensionSpec
     devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]?.dimensionSpec
-    else -> DimensionSpec(
-      widthDp = devicePreviewString?.widthDp,
-      heightDp = devicePreviewString?.heightDp,
-      densityPpi = densityPpi,
-      scalingFactor = densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
-    )
+    else -> {
+      var widthDp = devicePreviewString?.widthDp
+      var heightDp = devicePreviewString?.heightDp
+      // Flip to match orientation
+      if (devicePreviewString?.orientation == "landscape") {
+        heightDp = devicePreviewString.widthDp
+        widthDp = devicePreviewString.heightDp
+      }
+      DimensionSpec(
+        widthDp = widthDp,
+        heightDp = heightDp,
+        densityPpi = densityPpi,
+        scalingFactor = densityPpi?.let(DeviceSpec::getClosestDensityScalingFactor)
+      )
+    }
   }
 
   // Override final values with those specified by user (width/height), and use the default values if not specified
@@ -291,37 +301,51 @@ data class DevicePreviewString(
   val name: String? = null,
   val widthDp: Int? = null,
   val heightDp: Int? = null,
-  val dpi: Int? = null
+  val dpi: Int? = null,
+  val orientation: String? = null,
+  // Intentionally not supporting `shape`
 )
 
 fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
   if (deviceString.isNullOrEmpty()) return null
 
-  // All formats of this string can be found at:
-  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Device.android.kt;bpv=0
-  val devicePattern = Regex(
-    """(id:(?<id>[a-zA-Z0-9_ ]+))|(name:(?<name>[a-zA-Z0-9_ ]+))|(spec:id=(?<specId>[a-zA-Z0-9_]+),shape=(?<shape>[a-zA-Z0-9_]+),width=(?<width>\d+),height=(?<height>\d+),unit=(?<unit>[a-zA-Z]+),dpi=(?<dpi>\d+))"""
-  )
+  val idPattern = Regex("""id:(?<id>[a-zA-Z0-9_ ]+)""")
+  val namePattern = Regex("""name:(?<name>[a-zA-Z0-9_ ]+)""")
+  val specPattern = Regex("""spec:(?<spec>.+)""")
 
-  val matchResult = devicePattern.matchEntire(deviceString)
-  return matchResult?.let { result ->
-    val groups = result.groups
-    when {
-      groups["id"]?.value != null -> DevicePreviewString(type = "id", id = groups["id"]?.value)
-      groups["name"]?.value != null -> DevicePreviewString(
-        type = "name",
-        name = groups["name"]?.value
-      )
-
-      groups["specId"]?.value != null -> DevicePreviewString(
-        type = "spec",
-        id = groups["specId"]?.value,
-        widthDp = groups["width"]?.value?.toInt(),
-        heightDp = groups["height"]?.value?.toInt(),
-        dpi = groups["dpi"]?.value?.toInt(),
-      )
-
-      else -> null
+  return when {
+    idPattern.matchEntire(deviceString) != null -> {
+      val match = idPattern.matchEntire(deviceString)!!
+      DevicePreviewString(type = "id", id = match.groups["id"]?.value)
     }
+
+    namePattern.matchEntire(deviceString) != null -> {
+      val match = namePattern.matchEntire(deviceString)!!
+      DevicePreviewString(type = "name", name = match.groups["name"]?.value)
+    }
+
+    specPattern.matchEntire(deviceString) != null -> {
+      val match = specPattern.matchEntire(deviceString)!!
+      val specContent = match.groups["spec"]?.value ?: return null
+      parseSpecContent(specContent)
+    }
+
+    else -> null
   }
+}
+
+private fun parseSpecContent(specContent: String): DevicePreviewString {
+  val paramPattern = Regex("""(\w+)=([^,]+)""")
+  val params = paramPattern.findAll(specContent)
+    .associate { it.groupValues[1] to it.groupValues[2].trim() }
+
+  return DevicePreviewString(
+    type = "spec",
+    id = params["id"],
+    // Currently assuming dp, add support later if needed for other values
+    widthDp = params["width"]?.removeSuffix("dp")?.toIntOrNull(),
+    heightDp = params["height"]?.removeSuffix("dp")?.toIntOrNull(),
+    dpi = params["dpi"]?.toIntOrNull(),
+    orientation = params["orientation"]?.lowercase()
+  )
 }

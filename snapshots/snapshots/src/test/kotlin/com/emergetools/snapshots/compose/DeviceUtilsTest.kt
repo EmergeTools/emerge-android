@@ -43,7 +43,19 @@ class DeviceUtilsTest {
       ),
       null to null,
       "" to null,
-      "invalid string" to null
+      "invalid string" to null,
+      "spec:width=390dp,height=860dp" to DevicePreviewString(
+        type = "spec",
+        widthDp = 390,
+        heightDp = 860
+      ),
+      "spec:width=673dp, height=841dp, orientation=portrait, dpi=480" to DevicePreviewString(
+        type = "spec",
+        widthDp = 673,
+        heightDp = 841,
+        orientation = "portrait",
+        dpi = 480
+      ),
     )
 
     for ((input, expected) in testCases) {
