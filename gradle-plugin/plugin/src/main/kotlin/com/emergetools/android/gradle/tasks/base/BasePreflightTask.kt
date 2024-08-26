@@ -70,26 +70,30 @@ abstract class BasePreflightTask : DefaultTask() {
     }
 
     val hasGitLabProjectId = gitLabProjectId.getOrElse("").isBlank()
+    // Don't add if GitLab info set
+    if (!hasGitLabProjectId) {
 
-    vcsPreflight.add("[GitHub only] GitHub repo name: ${gitHubRepoName.getOrElse("Not set")}") {
-      // Don't warn if GitLab info set and repoName empty
-      if (!hasGitLabProjectId && gitHubRepoName.getOrElse("").isBlank()) {
-        throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
+      vcsPreflight.add("[GitHub only] GitHub repo name: ${gitHubRepoName.getOrElse("Not set")}") {
+        if (gitHubRepoName.getOrElse("").isBlank()) {
+          throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
+        }
+      }
+
+      vcsPreflight.add("[GitHub only] GitHub repo owner: ${gitHubRepoOwner.getOrElse("Not set")}") {
+        if (gitHubRepoOwner.getOrElse("").isBlank()) {
+          throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
+        }
       }
     }
 
-    vcsPreflight.add("[GitHub only] GitHub repo owner: ${gitHubRepoOwner.getOrElse("Not set")}") {
-      // Don't warn if GitLab info set and repoOwner empty
-      if (!hasGitLabProjectId && gitHubRepoOwner.getOrElse("").isBlank()) {
-        throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
-      }
-    }
-
-    val hasGitHubRepoInfo = gitHubRepoOwner.getOrElse("").isNotBlank() || gitHubRepoName.getOrElse("").isNotBlank()
-    vcsPreflight.add("[GitLab only] GitLab project ID: ${gitLabProjectId.getOrElse("Not set")}") {
-      // Don't warn if GitHub info set and projectId empty
-      if (!hasGitHubRepoInfo && gitLabProjectId.getOrElse("").isBlank()) {
-        throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
+    val hasGitHubRepoInfo =
+      gitHubRepoOwner.getOrElse("").isNotBlank() || gitHubRepoName.getOrElse("").isNotBlank()
+    // Don't add if GitHub info set
+    if (!hasGitHubRepoInfo) {
+      vcsPreflight.add("[GitLab only] GitLab project ID: ${gitLabProjectId.getOrElse("Not set")}") {
+        if (gitLabProjectId.getOrElse("").isBlank()) {
+          throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
+        }
       }
     }
 
