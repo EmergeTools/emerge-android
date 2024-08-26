@@ -13,6 +13,8 @@ bug fixes and pre-flight tasks for all products to check configuration before up
 Changes since 4.0.0-rc02:
 
 - Adds size preflight check. [#245](https://github.com/EmergeTools/emerge-android/pull/245)
+- Ignore GitHub/GitLab info in preflight checks if other is
+  set. [#247](https://github.com/EmergeTools/emerge-android/pull/247)
 - Add VCS info to preflight checks. [#239](https://github.com/EmergeTools/emerge-android/pull/239)
 - Adds snapshot preflight check. [#238](https://github.com/EmergeTools/emerge-android/pull/238)
 - Include GitHub event data in upload for
