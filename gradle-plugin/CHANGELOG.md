@@ -5,29 +5,53 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.0 - 2024-08-26
+
+4.0.0 brings support for Reaper, Emerge's SDK to detect dead code at runtime, as well as cleanups,
+bug fixes and pre-flight tasks for all products to check configuration before uploading.
+
+Changes since 4.0.0-rc02:
+
+- Adds size preflight check. [#245](https://github.com/EmergeTools/emerge-android/pull/245)
+- Add VCS info to preflight checks. [#239](https://github.com/EmergeTools/emerge-android/pull/239)
+- Adds snapshot preflight check. [#238](https://github.com/EmergeTools/emerge-android/pull/238)
+- Include GitHub event data in upload for
+  debugging. [#237](https://github.com/EmergeTools/emerge-android/pull/237)
+
 ## 4.0.0-rc02 - 2024-08-14
 
-- Fix reaper preflight check to detect SDK without hooking minify task. [#234](https://github.com/EmergeTools/emerge-android/pull/234)
+- Fix reaper preflight check to detect SDK without hooking minify
+  task. [#234](https://github.com/EmergeTools/emerge-android/pull/234)
 
 ## 4.0.0-rc01 - 2024-08-07
 
-- Make reaper opt-in by specifying variants with `enabledVariants` property. [#227](https://github.com/EmergeTools/emerge-android/pull/227)
-- Better handle `dryRun` to not cause a crash. [#229](https://github.com/EmergeTools/emerge-android/pull/229)
-- Cleanup and move task registration logic into separate files in relevant packages. [#225](https://github.com/EmergeTools/emerge-android/pull/225)
-- Hook default bundle task rather than having explicit initialize task. [#223](https://github.com/EmergeTools/emerge-android/pull/223)
-- Make preflight reaper task args optional. [#222](https://github.com/EmergeTools/emerge-android/pull/222)
-- Split emergeInitializeReaper task to validate & upload. [#213](https://github.com/EmergeTools/emerge-android/pull/213)
+- Make reaper opt-in by specifying variants with `enabledVariants`
+  property. [#227](https://github.com/EmergeTools/emerge-android/pull/227)
+- Better handle `dryRun` to not cause a
+  crash. [#229](https://github.com/EmergeTools/emerge-android/pull/229)
+- Cleanup and move task registration logic into separate files in relevant
+  packages. [#225](https://github.com/EmergeTools/emerge-android/pull/225)
+- Hook default bundle task rather than having explicit initialize
+  task. [#223](https://github.com/EmergeTools/emerge-android/pull/223)
+- Make preflight reaper task args
+  optional. [#222](https://github.com/EmergeTools/emerge-android/pull/222)
+- Split emergeInitializeReaper task to validate &
+  upload. [#213](https://github.com/EmergeTools/emerge-android/pull/213)
 
 ## 4.0.0-beta03 - 2024-07-30
 
-- Add information for dependency attribution. [#142](https://github.com/EmergeTools/emerge-android/pull/142)
-- Add logcat dump to localSnapshots task. [#206](https://github.com/EmergeTools/emerge-android/pull/206)
+- Add information for dependency
+  attribution. [#142](https://github.com/EmergeTools/emerge-android/pull/142)
+- Add logcat dump to localSnapshots
+  task. [#206](https://github.com/EmergeTools/emerge-android/pull/206)
 
 ## 4.0.0-beta02 - 2024-07-24
 
-- Reaper instrumentation to use invoke-static rather than invoke-virtual. [#199](https://github.com/EmergeTools/emerge-android/pull/199)
+- Reaper instrumentation to use invoke-static rather than
+  invoke-virtual. [#199](https://github.com/EmergeTools/emerge-android/pull/199)
 - Add preflight task for Reaper. [#197](https://github.com/EmergeTools/emerge-android/pull/197)
-- Set reaper manifest keys even when not enabled. [#192](https://github.com/EmergeTools/emerge-android/pull/192)
+- Set reaper manifest keys even when not
+  enabled. [#192](https://github.com/EmergeTools/emerge-android/pull/192)
 
 ## 4.0.0-beta01 - 2024-07-10
 
@@ -35,7 +59,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 3.1.2 - 2024-07-10
 
-- Support `device` Preview annotation parameter in local snapshotting. [#183](https://github.com/EmergeTools/emerge-android/pull/183)
+- Support `device` Preview annotation parameter in local
+  snapshotting. [#183](https://github.com/EmergeTools/emerge-android/pull/183)
 
 ## 3.1.1 - 2024-06-25
 
