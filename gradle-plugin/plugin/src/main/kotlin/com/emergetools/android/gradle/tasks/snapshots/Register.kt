@@ -95,7 +95,6 @@ private fun registerSnapshotPreflightTask(
   }
 }
 
-
 private fun registerSnapshotLocalTask(
   appProject: Project,
   extension: EmergePluginExtension,

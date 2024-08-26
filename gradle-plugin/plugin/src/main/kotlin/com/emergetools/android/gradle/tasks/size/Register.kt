@@ -4,6 +4,7 @@ import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.Variant
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
+import com.emergetools.android.gradle.tasks.base.BasePreflightTask.Companion.setPreflightTaskInputs
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.capitalize
@@ -20,8 +21,27 @@ fun registerSizeTasks(
     "Registering size tasks for variant ${variant.name} in project ${appProject.path}"
   )
 
+  registerSizeAnalysisPreflightTask(appProject, extension, variant)
+
   registerUploadAPKTask(appProject, extension, variant)
   registerUploadAABTask(appProject, extension, variant)
+}
+
+private fun registerSizeAnalysisPreflightTask(
+  appProject: Project,
+  extension: EmergePluginExtension,
+  variant: Variant,
+) {
+  val preflightTaskName = "${EMERGE_TASK_PREFIX}SizeAnalysisPreflight${variant.name.capitalize()}"
+  appProject.tasks.register(preflightTaskName, SizePreflight::class.java) {
+    it.group = EMERGE_SIZE_TASK_GROUP
+    it.description = "Validate Size analysis is properly set up for variant ${variant.name}"
+    it.variantName.set(variant.name)
+    it.appProjectPath.set(appProject.path)
+    it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
+    it.sizeEnabled.set(extension.sizeOptions.enabled.getOrElse(true))
+    it.setPreflightTaskInputs(extension)
+  }
 }
 
 private fun registerUploadAPKTask(
@@ -46,7 +66,7 @@ private fun registerUploadAABTask(
   extension: EmergePluginExtension,
   variant: Variant,
 ) {
-  val taskName = "${EMERGE_TASK_PREFIX}Upload${variant.name.capitalize()}Aab"
+  val taskName = getUploadAabTaskName(variant.name)
 
   appProject.tasks.register(taskName, UploadAAB::class.java) {
     it.group = EMERGE_SIZE_TASK_GROUP
@@ -55,4 +75,8 @@ private fun registerUploadAABTask(
     it.setUploadTaskInputs(extension, appProject, variant)
     it.setTagFromProductOptions(extension.sizeOptions, variant)
   }
+}
+
+fun getUploadAabTaskName(variantName: String): String {
+  return "${EMERGE_TASK_PREFIX}Upload${variantName.capitalize()}Aab"
 }
