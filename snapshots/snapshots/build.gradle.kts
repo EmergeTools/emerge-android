@@ -50,7 +50,9 @@ android {
 dependencies {
 
   implementation(libs.junit)
-  implementation(libs.kotlinx.serialization)
+  testImplementation(libs.junit)
+
+  api(libs.kotlinx.serialization)
 
   api(platform(libs.compose.bom))
   api(libs.compose.runtime)
@@ -66,7 +68,6 @@ dependencies {
   api(libs.androidx.test.runner)
   api(libs.compose.ui.test.junit)
 
-  testImplementation(libs.junit)
 }
 
 tasks.register("generateMetaInfVersion") {
