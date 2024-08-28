@@ -19,6 +19,7 @@ plugins {
 }
 
 emerge {
+  // If not explicitly set, Emerge uses the EMERGE_API_TOKEN env variable
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
