@@ -9,7 +9,8 @@ Emerge Android tooling & Gradle plugin for using Emerge's suite of developer too
 
 ## Getting started
 
-Using Emerge's Android tooling requires an Emerge account and Emerge offers generous trial & indie tiers to get started.
+Using Emerge's Android tooling requires an Emerge account. Emerge offers generous trial & indie
+tiers to get started!
 
 Create an account for free at [emergetools.com](https://www.emergetools.com/).
 
