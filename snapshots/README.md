@@ -94,15 +94,22 @@ before uploading to Emerge.
 
 ### Upload to Emerge
 
-The Emerge Gradle plugin offers a single command to build & upload snapshot tests to Emerge. Emerge
-will handle generating, storing, and diffing the snapshots against a base build for you.
+The Emerge Gradle plugin offers a single command to build & upload snapshot tests to Emerge.
 
 ```shell Shell
 ./gradlew :app:emergeUploadSnapshotBundleDebug
 ```
 
+Emerge will handle generating, storing, and diffing the snapshots against a base build by git
+information for you.
+
 Once uploaded, snapshots and diffs are viewable directly in the Emerge UI. You can find a link to
 the build in the Gradle output.
+
+For integrating snapshots in CI, Emerge recommends the following order:
+1. Adding snapshots to the main branch. This ensures all PRs have a base build to diff against.
+2. Adding snapshots to all commits on PRs. This ensures that snapshots are generated for every
+   commit, allowing for diffing any changes.
 
 > [!TIP]
 > **👍 That's it!**
