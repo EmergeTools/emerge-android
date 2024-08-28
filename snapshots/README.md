@@ -16,9 +16,9 @@ Composables, Activities, and Views. Emerge handles **everything** for you, inclu
 
 And many more features!
 
-## Quickstart (~10 minutes)
+## Quickstart (<10 minutes)
 
-This is a quick setup guide to set up end-to-end snapshots as in about 10 minutes. For a full
+This is a quick setup guide to set up end-to-end snapshots in about 10 minutes. For a full
 guide on setting up Emerge snapshots, see
 the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1).
 
@@ -32,23 +32,85 @@ plugins {
 }
 
 emerge {
-  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  // If not explicitly set, Emerge uses the EMERGE_API_TOKEN env variable
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
 
 See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
-### Add Snapshot SDK
+### Add Snapshots SDK
 
-Add the Emerge snapshot SDK as an `androidTest` dependency to your application module. For automatic
-compose `@Preview` snapshot generation, add the KSP processor as a `ksp` dependency.
+Emerge snapshot SDKs are published to Maven Central and should be added as dependencies to your app's `build.gradle.kts` file.
 
-```kotlin
+Compose `@Preview` snapshot generation relies on a Gradle plugin instrumentation to modify Compose Previews to be visible at runtime. Our snapshot SDK can then handle everything else, invoking the Compose Preview and saving the resulting snapshot image.
+
+```kotlin build.gradle.kts (app module)
 dependencies {
-  androidTestImplementation("com.emergetools.snapshots:snapshots:{latest_version}")
+  // ..
+
+  androidTestImplementation("com.emergetools.snapshots:snapshots:<latest_version>")
 }
 ```
+
+Latest version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)
+
+### Run preflight check
+
+Let's check that everything's set up properly by running the snapshots preflight task. A preflight
+check is automatically generated for all debug variants of your app:
+
+`./gradlew :<app>:emergeSnapshotsPreflightDebug`
+
+The preflight task will give detailed output about the Emerge snapshots integration:
+
+```shell
+› ./gradlew :app:emergeSnapshotsPreflightDebug
+
+> Task :app:emergeSnapshotsPreflightDebug
+
+╔════════════════════════════════════════════════╗
+║ Snapshots preflight check was successful (3/3) ║
+╠════════════════════════════════════════════════╝
+╠═ ✅ Emerge API token set
+╠═ ✅ Snapshots enabled
+╚═ ✅ Snapshots SDK is an androidTestImplementation dependency
+
+╔═════════════════════════════════════╗
+║ VCS Info check was successful (4/4) ║
+╠═════════════════════════════════════╝
+╠═ ✅ SHA: 123456789..
+╠═ ✅ Base SHA: 987654321..
+╠═ ✅ Branch name: main
+╚═ ✅ PR number: 123
+
+Snapshots preflight was successful!
+Check snapshots locally with ./gradlew :app:emergeLocalSnapshotsDebug (make sure to have an emulator or connected device running)
+Upload & run snapshots on Emerge with ./gradlew :app:emergeUploadSnapshotBundleDebug
+```
+
+If there are any issues or warnings, the preflight task should help you identify and address them
+before uploading to Emerge.
+
+### Upload to Emerge
+
+The Emerge Gradle plugin offers a single command to build & upload snapshot tests to Emerge. Emerge
+will handle generating, storing, and diffing the snapshots against a base build for you.
+
+```shell Shell
+./gradlew :app:emergeUploadSnapshotBundleDebug
+```
+
+Once uploaded, snapshots and diffs are viewable directly in the Emerge UI. You can find a link to
+the build in the Gradle output.
+
+> [!TIP]
+> **👍 That's it!**
+> Emerge recommends running snapshot tests on every commit. Emerge will handle generating, storing
+> and diffing based on Git information.
+> Continue reading for full details on how Emerge generates and manages snapshots.
+
+## Details
 
 ### Compose snapshotting
 
@@ -134,6 +196,8 @@ dependencies {
 }
 ```
 
+Latest annotations version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)
+
 ##### Ignoring private previews
 
 Emerge can snapshot Compose previews with any visibility, like `private` or `internal`. But for some
@@ -207,7 +271,8 @@ _Snapshot support was added in Emerge gradle plugin v2.0.0, versions below 2.0.0
 snapshots._
 
 Then, run the `emergeLocalSnapshots<variant>` task to generate snapshots. You'll need a connected
-device or emulator actively running.
+device or emulator actively running and `ANDROID_HOME` set to the location of the Android SDK is on
+your `PATH`.
 
 ```shell
 ./gradlew :snapshots:snapshots-sample:emergeLocalSnapshotsDebug

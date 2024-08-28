@@ -23,7 +23,7 @@ plugins {
 }
 
 emerge {
-  // Emerge uses the EMERGE_API_TOKEN env variable by default if you don't set a value explicitly.
+  // If not explicitly set, Emerge uses the EMERGE_API_TOKEN env variable
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
   reaper {

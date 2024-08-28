@@ -32,7 +32,7 @@ plugins {
 }
 
 emerge {
-  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  // If not explicitly set, Emerge uses the EMERGE_API_TOKEN env variable
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 }
 ```
@@ -53,9 +53,9 @@ file. The example in this guide uses the `EMERGE_API_TOKEN` environment variable
 
 ### VCS
 
-Emerge is best designed to work as part of your CI workflow for diffing and comparing size,
-performance and snapshots. To ensure these comparisons are accurate, Emerge leverages VCS
-information to accurately determine the proper comparison builds.
+Emerge works best as part of your CI workflow for diffing and comparing size, snapshots and
+performance. To ensure these comparisons are accurate, Emerge leverages VCS information to
+accurately determine the proper comparison builds.
 
 #### Configuration
 
@@ -118,24 +118,26 @@ emerge {
 
 ##### Properties
 
-| Field              | Type     | Default                | Description                                       |
-|--------------------|----------|------------------------|---------------------------------------------------|
-| `sha`              | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                    |
-| `baseSha`          | `String` | base branch commit sha | The Git sha of the base build to compare against. |
-| `branchName`       | `String` | Current branch name    | The name of the branch being built.               |
-| `prNumber`         | `String` |                        | The number of the pull request being built.       |
-| `gitHub.repoOwner` | `String` | Repo ID before '/'     | The owner of the GitHub repository.               |
-| `gitHub.repoName`  | `String` | Repo ID after '/'      | The name of the GitHub repository.                |
-| `gitLab.projectId` | `String` |                        | The ID of the GitLab repository.                  |
+| Field                            | Type     | Default                | Description                                         |
+|----------------------------------|----------|------------------------|-----------------------------------------------------|
+| `sha`                            | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                      |
+| `baseSha`                        | `String` | base branch commit sha | The Git sha of the base build to compare against.   |
+| `branchName`                     | `String` | Current branch name    | The name of the branch being built.                 |
+| `prNumber`                       | `String` |                        | The number of the pull request being built.         |
+| `gitHub.repoOwner`               | `String` | Repo ID before '/'     | The owner of the GitHub repository.                 |
+| `gitHub.repoName`                | `String` | Repo ID after '/'      | The name of the GitHub repository.                  |
+| `gitHub.includeEventInformation` | `String` | `true`                 | Whether to include GitHub event data for debugging. |
+| `gitLab.projectId`               | `String` |                        | The ID of the GitLab repository.                    |
 
 ## App size
 
 #### Tasks
 
-| Task                       | Description                                                               |
-|----------------------------|---------------------------------------------------------------------------|
-| `emergeUpload{Variant}Apk` | Upload an APK matching the specified variant to Emerge for size analysis. |
-| `emergeUpload{Variant}Aab` | Upload an AAB matching the specified variant to Emerge for size analysis. |
+| Task                                   | Description                                                                                     |
+|----------------------------------------|-------------------------------------------------------------------------------------------------|
+| `emergeSizeAnalysisPreflight{Variant}` | Run a preflight check to validate if size analysis is properly set up for the specific variant. |
+| `emergeUpload{Variant}Apk`             | Upload an APK matching the specified variant to Emerge for size analysis.                       |
+| `emergeUpload{Variant}Aab`             | Upload an AAB matching the specified variant to Emerge for size analysis.                       |
 
 #### Configuration
 
@@ -163,6 +165,110 @@ emerge {
 |-----------|-----------|-----------|-------------------------------------------------------------|
 | `tag`     | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard. |
 | `enabled` | `Boolean` | `true`    | If size tasks/project configuration are enabled.            |
+
+### Snapshots
+
+See the [Emerge Snapshots documentation](https://docs.emergetools.com/docs/android-snapshots-v1) for
+all info on setting up snapshot testing.
+
+#### Tasks
+
+| Task                                  | Description                                                                                                                             |
+|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
+| `emergeSnapshotsPreflight{Variant}`   | Run a preflight check to validate if snapshots are properly set up for the specific variant.                                            |
+| `emergeUploadSnapshotBundle{Variant}` | Builds & uploads target & test APKs for the specified variant. Snapshots will be generated & saved in Emerge's cloud snapshot offering. |
+| `emergeLocalSnapshots{Variant}`       | Run snapshot tests locally.                                                                                                             |
+
+_Note: The local snapshots task relies on ADB to run. Ensure a device or emulator is
+connected/running and `ANDROID_HOME` set to the location of the Android SDK is on your `PATH`._
+
+#### Configuration
+
+The `snapshot` extension allows you to configure snapshot-specific fields.
+
+```kotlin
+emerge {
+  // ..
+
+  snapshots {
+    // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
+    snapshotsStorageDirectory.set("/src/main/snapshots")
+
+    // Android API version to run snapshots on, must be 29, 31, 33 or 34.
+    apiVersion.set(33)
+
+    // Include private previews in snapshot generation - defaults to true
+    includePrivatePreviews.set(false)
+
+    // Tag to use for grouping builds in the Emerge dashboard
+    tag.set("snapshots")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
+
+    // If performance tasks/project configuration are enabled.
+    enabled.set(true)
+  }
+}
+```
+
+For `apiVersion`, Emerge currently only supports APIs 29, 31, 33 & 34. For an easy mapping of API
+versions to releases & names, see [Android API levels](https://apilevels.com/).
+
+##### Fields
+
+| Field                       | Type      | Default                           | Description                                                                                       |
+|-----------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
+| `includePrivatePreviews`    | `Boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
+| `apiVersion`                | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
+| `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
+| `tag`                       | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
+| `enabled`                   | `Boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
+
+### Reaper
+
+The `reaper` extension allows you to configure reaper-specific fields.
+
+By default, Reaper will hook into the default `bundle<variant>` task for any `enabledVariants` to
+upload the built app to Emerge for detecting all classes. See
+the [Reaper docs](https://docs.emergetools.com/docs/reaper-setup-android) for more information.
+
+#### Tasks
+
+| Task                             | Description                                                                              |
+|----------------------------------|------------------------------------------------------------------------------------------|
+| `emergeReaperPreflight{Variant}` | Run a preflight check to validate if reaper is properly set up for the specific variant. |
+
+#### Configuration
+
+The `reaper` extension allows you to configure Reaper-specific fields.
+
+```kotlin
+emerge {
+  // ..
+
+  reaper {
+    // The build variants Reaper is enabled for.
+    // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
+    enabledVariants.set(listOf("release", "releaseVariant2"))
+    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable
+    // Note: This key is not the same as the API key used for uploading to Emerge - you can find this
+    publishableApiKey.set(System.getenv("REAPER_API_TOKEN"))
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
+    tag.setFromVariant()
+  }
+}
+```
+
+##### Fields
+
+| Field               | Type           | Default       | Description                                                                                   |
+|---------------------|----------------|---------------|-----------------------------------------------------------------------------------------------|
+| `publishableApiKey` | `String`       |               | This key is used to identify Reaper reports sent from your application for your organization. |
+| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                  |
+| `tag`               | `String`       | `release`     | The build tag to use for grouping builds in the Emerge dashboard.                             |
 
 ### Performance
 
@@ -208,117 +314,38 @@ emerge {
 | `tag`         | `String`  | `release` | The tag to use for grouping builds in the Emerge dashboard.          |
 | `enabled`     | `Boolean` | `true`    | If performance tasks/project configuration are enabled.              |
 
-### Snapshots
-
-#### Tasks
-
-| Task                                  | Description                                                                                                                             |
-|---------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------|
-| `emergeLocalSnapshots{Variant}`       | Run snapshot tests locally.                                                                                                             |
-| `emergeUploadSnapshotBundle{Variant}` | Builds & uploads target & test APKs for the specified variant. Snapshots will be generated & saved in Emerge's cloud snapshot offering. |
-
-#### Configuration
-
-The `snapshot` extension allows you to configure snapshot-specific fields.
-
-```kotlin
-emerge {
-  // ..
-
-  snapshots {
-    // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
-    snapshotsStorageDirectory.set("/src/main/snapshots")
-
-    // Android API version to run snapshots on, must be 29, 31, 33 or 34.
-    apiVersion.set(33)
-
-    // Include private previews in snapshot generation - defaults to true
-    includePrivatePreviews.set(false)
-
-    // Tag to use for grouping builds in the Emerge dashboard
-    tag.set("snapshots")
-    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
-    tag.setFromVariant()
-
-    // If performance tasks/project configuration are enabled.
-    enabled.set(true)
-  }
-}
-```
-
-For `apiVersion`, Emerge currently only supports APIs 29, 31, 33 & 34. For an easy mapping of API
-versions to releases & names, see [Android API levels](https://apilevels.com/).
-
-##### Fields
-
-| Field                       | Type      | Default                           | Description                                                                                       |
-|-----------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
-| `tag`                       | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
-| `snapshotsStorageDirectory` | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
-| `apiVersion`                | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
-| `enabled`                   | `Boolean` | `true`                            | If snapshot tasks/project configuration are enabled.                                              |
-| `includePrivatePreviews`    | `Boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
-
-### Reaper
-
-#### Tasks
-
-| Task                            | Description                                                  |
-|---------------------------------|--------------------------------------------------------------|
-| `emergeValidateReaper{Variant}` | Validate Reaper is properly set up for the specific variant. |
-
-#### Configuration
-
-The `reaper` extension allows you to configure Reaper-specific fields.
-
-```kotlin
-emerge {
-  // ..
-
-  reaper {
-    // The build variants Reaper is enabled for.
-    // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
-    enabledVariants.set(listOf("release", "releaseVariant2"))
-    // The key used to identify Reaper reports for your organization.
-    publishableApiKey.set("<Reaper API key>")
-
-    // Optional, defaults to 'release'
-    tag.set("release")
-    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
-    tag.setFromVariant()
-  }
-}
-```
-
-##### Fields
-
-| Field               | Type           | Default       | Description                                                                                   |
-|---------------------|----------------|---------------|-----------------------------------------------------------------------------------------------|
-| `publishableApiKey` | `String`       |               | This key is used to identify Reaper reports sent from your application for your organization. |
-| `tag`               | `String`       | `release`     | The build tag to use for grouping builds in the Emerge dashboard.                             |
-| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                  |
-
 ## Full configuration
 
 ```kotlin
 emerge {
-  // Emerge uses the EMERGE_API_TOKEN env variable by default, so no need to set env explicitly
+  // If not explicitly set, Emerge uses the EMERGE_API_TOKEN env variable
   apiToken.set(System.getenv("EMERGE_API_TOKEN"))
 
+  // Defaults to true, if true, dependency info (module & third party) is included in upload to Emerge
+  includeDependencyInformation.set(true)
+
+  // Optional, defaults to false, use to execute tasks without uploading to Emerge
+  dryRun.set(false)
+
+verbose.set(false)
+
   vcs {
-    // Optional, will be set automatically using Git information.
+    // Optional, will attempt to set automatically using Git information.
     sha.set("..")
-    // Optional, will be set automatically using Git information.
+    // Optional, will attempt to set automatically using Git information.
     baseSha.set("..")
-    // Optional, will be set automatically using Git information.
+    // Optional, will attempt to set automatically using Git information.
     branchName.set("my-feature")
+
     prNumber.set("123")
 
     gitHub {
-      // Required for CI status checks (only if using GitHub)
+      // Required for CI status checks (only if using GitHub) - Emerge will attempt to set with GitHub event info
       repoOwner.set("..")
-      // Required for CI status checks (only if using GitHub)
+      // Required for CI status checks (only if using GitHub) - Emerge will attempt to set with GitHub event info
       repoName.set("..")
+      // Optional, defaults to true, include GitHub event data in upload for debugging
+      includeEventInformation.set(true)
     }
 
     gitLab {
@@ -334,19 +361,6 @@ emerge {
     tag.setFromVariant()
 
     // If size tasks/project configuration are enabled.
-    enabled.set(true)
-  }
-
-  performance {
-    // Required for performance testing
-    projectPath.set(":perf")
-
-    // Optional, defaults to 'release'
-    tag.set("release")
-    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
-    tag.setFromVariant()
-
-    // If performance tasks/project configuration are enabled.
     enabled.set(true)
   }
 
@@ -371,14 +385,28 @@ emerge {
     // The build variants Reaper is enabled for.
     // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
     enabledVariants.set(listOf("release", "releaseVariant2"))
-    // The key used to identify Reaper reports for your organization.
-    publishableApiKey.set("<Reaper API key>")
+    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable
+    // Note: This key is not the same as the API key used for uploading to Emerge - you can find this
+    publishableApiKey.set(System.getenv("REAPER_API_TOKEN"))
 
     // Optional, defaults to 'release'
     tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
 
+  }
+
+  performance {
+    // Required for performance testing
+    projectPath.set(":perf")
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
+    tag.setFromVariant()
+
+    // If performance tasks/project configuration are enabled.
+    enabled.set(true)
   }
 }
 ```
@@ -387,47 +415,6 @@ emerge {
 
 - The Emerge Gradle Plugin is compatible with
   the [Gradle configuration cache](https://docs.gradle.org/current/userguide/configuration_cache.html).
-
-## Migration from 1.X
-
-Breaking changes:
-
-#### General
-
-- Root-project configuration is no longer supported. Users should move the Emerge plugin's
-  configuration to the application module(s) they wish to use with Emerge.
-- Top-level `buildType` field has been removed in favor of per-product `buildType` setting
-  - We recommend setting any existing `buildType` values as `size.buildType`.
-- Top-level `performanceProjectPath` has been moved to `performance.projectPath`.
-
-#### VCS
-
-- `vcsOptions` has become `vcs`.
-- `vcsOptions.gitHubOptions` has become `vcs.gitHub`.
-- `vcsOptions.gitLabOptions` has become `vcs.gitLab`.
-
-#### Performance
-
-- Users must now add the kotlin-android plugin to their performance module:
-
-```kotlin
-plugins {
-  id("org.jetbrains.kotlin.android")
-}
-```
-
-- Users must now add the Emerge perf test SDK dependency to their performance module:
-
-```kotlin
-dependencies {
-  implementation("com.emergetools.test:performance:{version}")
-}
-```
-
-#### Launch booster
-
-- Removal of `launchBooster` extension.
-- Removal of `emergeGenerate{Variant}BaselineProfile` task.
 
 # Maintenance
 
