@@ -88,7 +88,7 @@ private fun registerSnapshotPreflightTask(
     it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
     it.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
     it.hasSnapshotsAndroidTestImplementationDependency.set(
-      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME)
+      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME, variant.androidTest)
     )
     it.setPreflightTaskInputs(extension)
   }
