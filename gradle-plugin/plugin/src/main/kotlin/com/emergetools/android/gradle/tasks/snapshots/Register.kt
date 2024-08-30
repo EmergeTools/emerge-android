@@ -14,6 +14,7 @@ import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTag
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
+import com.emergetools.android.gradle.util.hasDependency
 import org.gradle.api.Project
 import org.gradle.api.tasks.TaskProvider
 
@@ -87,9 +88,7 @@ private fun registerSnapshotPreflightTask(
     it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
     it.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
     it.hasSnapshotsAndroidTestImplementationDependency.set(
-      appProject.configurations.findByName("androidTestImplementation")?.dependencies?.any { dep ->
-        dep.group == SNAPSHOTS_DEP_GROUP && dep.name == SNAPSHOTS_DEP_NAME
-      }
+      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME)
     )
     it.setPreflightTaskInputs(extension)
   }
