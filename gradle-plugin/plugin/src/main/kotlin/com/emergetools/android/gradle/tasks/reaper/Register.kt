@@ -7,6 +7,7 @@ import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.capitalize
+import com.emergetools.android.gradle.util.hasDependency
 import org.gradle.api.Project
 
 const val EMERGE_REAPER_TASK_GROUP = "Emerge reaper"
@@ -46,9 +47,7 @@ private fun registerReaperPreflightTask(
     it.reaperEnabled.set(extension.reaperOptions.enabledVariants.getOrElse(emptyList()).contains(variant.name))
     it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
     it.hasReaperImplementationDependency.set(
-      appProject.configurations.findByName("implementation")?.dependencies?.any { dep ->
-        dep.group == REAPER_DEP_GROUP && dep.name == REAPER_DEP_NAME
-      }
+      hasDependency(appProject, variant, REAPER_DEP_GROUP, REAPER_DEP_NAME)
     )
   }
 }
