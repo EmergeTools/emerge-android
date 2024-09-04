@@ -5,14 +5,31 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0-beta01 - 2024-09-04
+
+Note: Existing previews with custom `device` specs will potentially have expected diffs.
+1.3.0 fixes an issue where custom `device` specs did not produce expected dimensions.
+Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
+commit with 1.3.
+
+- Remove skipping logic and ignore a test entirely if not a snapshot
+  test. [#253](https://github.com/EmergeTools/emerge-android/pull/253)
+- Fix custom device specs. [#243](https://github.com/EmergeTools/emerge-android/pull/243)
+- Add apiLevel & wallpaper params to key to ensure we don't clobber other
+  previews. [#241](https://github.com/EmergeTools/emerge-android/pull/241)
+- Don't hard error on file already
+  existing. [#235](https://github.com/EmergeTools/emerge-android/pull/235)
+
 ## 1.2.0 - 2024-07-31
 
 Note: Existing previews with `device` parameters will have expected diffs. 1.2.0 fixes an issue
 where `device` dimensions did not match expected dimensions. Emerge recommends merging the 1.2
 update and rebasing PRs with unexpected diffs onto the main base commit with 1.2.
 
-- Temporarily remove support for `showSystemUi`. [#212](https://github.com/EmergeTools/emerge-android/pull/212)
-- Add support for reporting snapshot error types. [#207](https://github.com/EmergeTools/emerge-android/pull/207)
+- Temporarily remove support
+  for `showSystemUi`. [#212](https://github.com/EmergeTools/emerge-android/pull/212)
+- Add support for reporting snapshot error
+  types. [#207](https://github.com/EmergeTools/emerge-android/pull/207)
 - Add `isAppstoreSnapshot` to config. [#210](https://github.com/EmergeTools/emerge-android/pull/210)
 - Fix `device` dimensions. [#206](https://github.com/EmergeTools/emerge-android/pull/206)
 
