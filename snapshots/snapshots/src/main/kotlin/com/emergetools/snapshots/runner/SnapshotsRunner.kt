@@ -26,8 +26,9 @@ internal class SnapshotsRunner(
       Log.d(TAG, "Running test class: ${testClass.simpleName}")
       super.run(notifier)
     } else {
+      // Note: We intentionally do not mark the test as ignored as we
+      // don't care to acknowledge the test to ensure it doesn't take test run time/get assigned to an emulator
       Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
-      notifier.fireTestIgnored(description)
     }
   }
 
