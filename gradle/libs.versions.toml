@@ -20,7 +20,7 @@ mockito = "4.0.0"
 
 # internal
 emerge-gradle-plugin = "4.0.0"
-emerge-peformance = "2.1.2"
+emerge-performance = "2.1.2"
 emerge-reaper = "1.0.0-rc01"
 emerge-snapshots = "1.2.0"
 
