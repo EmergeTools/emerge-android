@@ -1,0 +1,35 @@
+name: distribution release deploy
+
+on:
+  release:
+    types: [ published ]
+
+jobs:
+  deploy-distribution:
+
+    runs-on: ubuntu-latest
+
+    # Only run when the tag begins with the string "distribution-"
+    if: ${{ startsWith(github.event.release.tag_name, 'distribution-') }}
+
+    env:
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
+      ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
+
+    strategy:
+      matrix:
+        node-version: [ 18.x ]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+      - name: Sanity check distribution test
+        run: ./gradlew :distribution:distribution:test -Pandroid.useAndroidX=true
+      - name: Deploy distribution
+        run: ./gradlew :distribution:distribution:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
