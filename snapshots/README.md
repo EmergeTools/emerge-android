@@ -41,9 +41,12 @@ See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
 ### Add Snapshots SDK
 
-Emerge snapshot SDKs are published to Maven Central and should be added as dependencies to your app's `build.gradle.kts` file.
+Emerge snapshot SDKs are published to Maven Central and should be added as dependencies to your
+app's `build.gradle.kts` file.
 
-Compose `@Preview` snapshot generation relies on a Gradle plugin instrumentation to modify Compose Previews to be visible at runtime. Our snapshot SDK can then handle everything else, invoking the Compose Preview and saving the resulting snapshot image.
+Compose `@Preview` snapshot generation relies on a Gradle plugin instrumentation to modify Compose
+Previews to be visible at runtime. Our snapshot SDK can then handle everything else, invoking the
+Compose Preview and saving the resulting snapshot image.
 
 ```kotlin build.gradle.kts (app module)
 dependencies {
@@ -53,7 +56,8 @@ dependencies {
 }
 ```
 
-Latest version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)
+Latest
+version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)
 
 ### Run preflight check
 
@@ -107,6 +111,7 @@ Once uploaded, snapshots and diffs are viewable directly in the Emerge UI. You c
 the build in the Gradle output.
 
 For integrating snapshots in CI, Emerge recommends the following order:
+
 1. Adding snapshots to the main branch. This ensures all PRs have a base build to diff against.
 2. Adding snapshots to all commits on PRs. This ensures that snapshots are generated for every
    commit, allowing for diffing any changes.
@@ -203,7 +208,8 @@ dependencies {
 }
 ```
 
-Latest annotations version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)
+Latest annotations
+version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)
 
 ##### Ignoring private previews
 
@@ -326,13 +332,13 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 1. Update the `emerge-snapshots` version in `/gradle/libs.versions.toml`
 2. Update the `/snapshots/CHANGELOG.md`
 3. `gt c -am "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
-  1. Alt
-    1. `git add *`
-    2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
+1. Alt
+   1. `git add *`
+   2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
 4. `gt ss`
-  1. Alt:
-    1. `git push`
-    2. Open PR
+1. Alt:
+   1. `git push`
+   2. Open PR
 5. Get PR approved and merge
 6. Create a new release on GitHub
 7. Tag version `snapshots-vX.Y.Z`
@@ -342,5 +348,6 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 The `snapshots-release` workflow will automatically publish the new version to Sonatype upon new
 release publish.
 
-From there, the release will need to be promoted to the main repository from the Sonatype UI.
+From there, the release will need to be promoted to the main repository from
+the [Sonatype UI](https://s01.oss.sonatype.org/).
 
