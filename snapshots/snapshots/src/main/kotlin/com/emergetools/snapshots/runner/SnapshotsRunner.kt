@@ -37,10 +37,10 @@ internal class SnapshotsRunner(
     } else {
       // If isInDiscovery and the test is intended to be ignored,
       // we won't even mark it as ignored to ensure it isn't addressed
-      if (!isInDiscovery) {
+//      if (!isInDiscovery) {
         Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
-        notifier.fireTestIgnored(description)
-      }
+//        notifier.fireTestIgnored(description)
+//      }
     }
   }
 
