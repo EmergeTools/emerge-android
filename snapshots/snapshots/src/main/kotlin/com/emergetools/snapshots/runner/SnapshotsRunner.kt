@@ -2,10 +2,8 @@ package com.emergetools.snapshots.runner
 
 import android.util.Log
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
-import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveParameterizedInvoker
-import com.emergetools.snapshots.runner.SnapshotsRunnerBuilder.Companion
 import org.junit.Rule
 import org.junit.runner.notification.RunNotifier
 
