@@ -24,23 +24,13 @@ internal class SnapshotsRunner(
     val isReflectiveInvoker =
       testClass == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java
 
-    val args = InstrumentationRegistry.getArguments()
-    val isInDiscovery = args.getBoolean(
-      "log",
-      false
-    )
-    Log.d(SnapshotsRunnerBuilder.TAG, "isInDiscovery: $isInDiscovery")
-
     if (hasEmergeSnapshotRule || (useReflectiveInvoke && isReflectiveInvoker)) {
       Log.d(TAG, "Running test class: ${testClass.simpleName}")
       super.run(notifier)
     } else {
-      // If isInDiscovery and the test is intended to be ignored,
-      // we won't even mark it as ignored to ensure it isn't addressed
-//      if (!isInDiscovery) {
-        Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
-//        notifier.fireTestIgnored(description)
-//      }
+      // Note: We intentionally do not mark the test as ignored as we
+      // don't care to acknowledge the test to ensure it doesn't take test run time/get assigned to an emulator
+      Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
     }
   }
 
