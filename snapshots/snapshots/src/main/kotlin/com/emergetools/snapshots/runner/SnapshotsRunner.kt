@@ -2,8 +2,10 @@ package com.emergetools.snapshots.runner
 
 import android.util.Log
 import androidx.test.internal.runner.junit4.AndroidJUnit4ClassRunner
+import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.compose.EmergeComposeSnapshotReflectiveParameterizedInvoker
+import com.emergetools.snapshots.runner.SnapshotsRunnerBuilder.Companion
 import org.junit.Rule
 import org.junit.runner.notification.RunNotifier
 
@@ -22,12 +24,23 @@ internal class SnapshotsRunner(
     val isReflectiveInvoker =
       testClass == EmergeComposeSnapshotReflectiveParameterizedInvoker::class.java
 
+    val args = InstrumentationRegistry.getArguments()
+    val isInDiscovery = args.getBoolean(
+      "log",
+      false
+    )
+    Log.d(SnapshotsRunnerBuilder.TAG, "isInDiscovery: $isInDiscovery")
+
     if (hasEmergeSnapshotRule || (useReflectiveInvoke && isReflectiveInvoker)) {
       Log.d(TAG, "Running test class: ${testClass.simpleName}")
       super.run(notifier)
     } else {
-      Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
-      notifier.fireTestIgnored(description)
+      // If isInDiscovery and the test is intended to be ignored,
+      // we won't even mark it as ignored to ensure it isn't addressed
+      if (!isInDiscovery) {
+        Log.d(TAG, "Ignoring test class: ${testClass.simpleName}")
+        notifier.fireTestIgnored(description)
+      }
     }
   }
 
