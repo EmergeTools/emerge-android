@@ -1,6 +1,6 @@
 package com.emergetools.reaper
 
-class SynchronizedSetHashTracker(private var onFlush: (Collection<Long>) -> Unit) : HashTracker {
+class SynchronizedSetHashTracker : HashTracker {
   override val name = "SynchronizedSetHashTracker"
   private val observedHashes = mutableSetOf<Long>()
 
@@ -10,7 +10,7 @@ class SynchronizedSetHashTracker(private var onFlush: (Collection<Long>) -> Unit
     }
   }
 
-  override fun flush() {
+  override fun flush(onFlush: (Collection<Long>) -> Unit) {
     val observedHashesCopy: Set<Long>
     synchronized(observedHashes) {
       observedHashesCopy = observedHashes.toSet()

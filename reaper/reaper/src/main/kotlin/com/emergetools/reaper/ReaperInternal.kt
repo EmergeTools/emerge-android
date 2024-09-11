@@ -31,10 +31,6 @@ private class Report(
 ) {
   // All the hashes we have written so far.
   val written = mutableSetOf<Long>()
-
-  // Hashes we've seen since the last write/flush() this will normally be a mixture of hashes we
-  // already saw and new hashes.
-  val seenSinceLastWrite = mutableSetOf<Long>()
 }
 
 internal object ReaperInternal {
@@ -45,7 +41,7 @@ internal object ReaperInternal {
   private const val FLUSH_PERIOD_MS = 60L * 1000L
   private const val PENDING_REPORTS_LIMIT = 20
 
-  private val tracker = ThreadLocalSetHashTracker { onFlush(it) }
+  private val tracker = ThreadLocalSetHashTracker()
 
   // Members below should only be accessed while holding the lock for this object.
   // Set at init()
@@ -193,16 +189,16 @@ internal object ReaperInternal {
       Log.d(TAG, "Flushing report ${report.path.absolutePath}")
     }
 
-    // HashTracker calls onFlush which updates report.seenSinceLastWrite
-    tracker.flush()
-
-    report.seenSinceLastWrite.forEach { hash ->
-      if (!report.written.contains(hash)) {
-        report.dataStream.writeLong(hash)
-        report.written.add(hash)
+    // Hashes observed since the last flush() this will normally be a mixture of hashes we
+    // already saw and new hashes.
+    tracker.flush {
+      it.forEach { hash ->
+        if (!report.written.contains(hash)) {
+          report.dataStream.writeLong(hash)
+          report.written.add(hash)
+        }
       }
     }
-    report.seenSinceLastWrite.clear()
 
     // Flush the underlying file.
     report.dataStream.flush()
@@ -214,11 +210,6 @@ internal object ReaperInternal {
     Handler(Looper.getMainLooper()).postDelayed({
       onFlushPeriod(context)
     }, FLUSH_PERIOD_MS)
-  }
-
-  private fun onFlush(hashes: Collection<Long>) {
-    val report = this.report ?: return
-    report.seenSinceLastWrite.addAll(hashes)
   }
 
   private fun startReportSynchronized(context: Context): String? {

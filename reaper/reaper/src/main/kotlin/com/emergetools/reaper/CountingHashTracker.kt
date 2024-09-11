@@ -1,6 +1,6 @@
 package com.emergetools.reaper
 
-class CountingHashTracker(private var onFlush: (Collection<Long>) -> Unit) : HashTracker {
+class CountingHashTracker : HashTracker {
   override val name = "CountingHashTracker"
   private var count = 0L
 
@@ -8,7 +8,7 @@ class CountingHashTracker(private var onFlush: (Collection<Long>) -> Unit) : Has
     count++
   }
 
-  override fun flush() {
+  override fun flush(onFlush: (Collection<Long>) -> Unit) {
     onFlush(mutableSetOf(count))
   }
 }

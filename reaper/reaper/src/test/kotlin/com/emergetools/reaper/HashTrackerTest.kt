@@ -8,17 +8,17 @@ import kotlin.random.Random
 
 enum class TrackerImplementation {
   SYNCHRONIZED_SET {
-    override fun make(onFlush: (Collection<Long>) -> Unit): SynchronizedSetHashTracker {
-      return SynchronizedSetHashTracker(onFlush)
+    override fun make(): SynchronizedSetHashTracker {
+      return SynchronizedSetHashTracker()
     }
   },
   THREAD_LOCAL_SET {
-    override fun make(onFlush: (Collection<Long>) -> Unit): ThreadLocalSetHashTracker {
-      return ThreadLocalSetHashTracker(onFlush)
+    override fun make(): ThreadLocalSetHashTracker {
+      return ThreadLocalSetHashTracker()
     }
   };
 
-  abstract fun make(onFlush: (Collection<Long>) -> Unit): HashTracker
+  abstract fun make(): HashTracker
 }
 
 class HashTrackerTest {
@@ -26,8 +26,8 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `returns nothing when nothing logged`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
-    tracker.flush()
+    val tracker = implementation.make()
+    tracker.flush { observedHashes = it }
     assertThat(observedHashes).isEmpty()
   }
 
@@ -35,9 +35,9 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `returns logged hashes`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
     tracker.logMethodEntry(42)
-    tracker.flush()
+    tracker.flush { observedHashes = it }
     assertThat(observedHashes).containsExactly(42L)
   }
 
@@ -45,11 +45,11 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `returns multiple logged hashes`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
 
     tracker.logMethodEntry(42)
     tracker.logMethodEntry(43)
-    tracker.flush()
+    tracker.flush { observedHashes = it }
 
     assertThat(observedHashes).containsExactly(42L, 43L)
   }
@@ -58,14 +58,14 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `reports hashes only once`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
 
     tracker.logMethodEntry(1)
     tracker.logMethodEntry(1)
     tracker.logMethodEntry(1)
     tracker.logMethodEntry(1)
     tracker.logMethodEntry(1)
-    tracker.flush()
+    tracker.flush { observedHashes = it }
 
     assertThat(observedHashes).containsExactly(1L)
   }
@@ -74,12 +74,12 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `forgets hashes after flushing`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
 
     tracker.logMethodEntry(1)
-    tracker.flush()
+    tracker.flush { observedHashes = it }
     tracker.logMethodEntry(2)
-    tracker.flush()
+    tracker.flush { observedHashes = it }
 
     assertThat(observedHashes).containsExactly(2L)
   }
@@ -88,7 +88,7 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `handles logging from concurrent threads`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
 
     val threadCount = 10
     val methodCount = 1000
@@ -108,7 +108,7 @@ class HashTrackerTest {
       thread.join()
     }
 
-    tracker.flush()
+    tracker.flush { observedHashes = it }
 
     for (i in 1..threadCount * methodCount) {
       assertThat(observedHashes).contains(i.toLong())
@@ -119,7 +119,7 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `handles overlapping logging from concurrent threads`(implementation: TrackerImplementation) {
     var observedHashes: Collection<Long>? = null
-    val tracker = implementation.make { observedHashes = it }
+    val tracker = implementation.make()
 
     val methodCount = 10000
     // Generate a bunch of hashes every thread will log:
@@ -151,7 +151,7 @@ class HashTrackerTest {
       thread.join()
     }
 
-    tracker.flush()
+    tracker.flush { observedHashes = it }
 
     assertThat(observedHashes).containsExactlyElementsIn(allHashes)
   }
@@ -160,11 +160,7 @@ class HashTrackerTest {
   @EnumSource(TrackerImplementation::class)
   fun `handles interleaved logging and flush`(implementation: TrackerImplementation) {
     val observedHashes = mutableSetOf<Long>()
-    val tracker = implementation.make {
-      synchronized(observedHashes) {
-        observedHashes.addAll(it)
-      }
-    }
+    val tracker = implementation.make()
 
     val methodCount = 1000
     val commonHashes = getHashes(methodCount, 42)
@@ -182,7 +178,11 @@ class HashTrackerTest {
           for (j in 0 until methodCount) {
             tracker.logMethodEntry(commonHashes[j])
             tracker.logMethodEntry(myHashes[j])
-            tracker.flush()
+            tracker.flush {
+              synchronized(observedHashes) {
+                observedHashes.addAll(it)
+              }
+            }
           }
         }
       )
