@@ -1,6 +1,7 @@
 package com.emergetools.reaper
 
 import android.content.Context
+import android.content.pm.PackageManager
 import android.util.Log
 import androidx.work.Constraints
 import androidx.work.CoroutineWorker
@@ -128,8 +129,16 @@ class ReaperReportErrorWorker(
   }
 }
 
-fun reportError(ctx: Context, baseUrl: String, apiKey: String, message: String) {
-  Log.e(TAG, "Error. backend=$baseUrl message=$message")
+fun reportError(ctx: Context, message: String) {
+  val metaData = ctx.packageManager.getApplicationInfo(
+    ctx.packageName,
+    PackageManager.GET_META_DATA
+  ).metaData
+
+  val baseUrl = getBaseUrl(metaData)
+  val apiKey = getApiKey(metaData)
+
+  Log.e(TAG, "ReaperError: backend`=$baseUrl message=$message")
   val data = workDataOf(
     ReaperReportErrorWorker.EXTRA_API_KEY to apiKey,
     ReaperReportErrorWorker.EXTRA_BASE_URL to baseUrl,

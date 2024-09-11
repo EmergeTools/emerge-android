@@ -10,22 +10,25 @@ import android.content.Context
  * - A server side component which aggregates those reports and compares the used code to the
  *   code in the app. Code which is not used by any user but exists in the app is detected,
  *   displayed and can be deleted.
- * See https://docs.emergetools.com/docs/reaper-setup-android for more
- * information.
+ * See https://docs.emergetools.com/docs/reaper-setup-android for more information.
  */
 object Reaper {
   /**
-   * Initialize Reaper with the provided apiKey. This should be called once in each process. In
-   * addition to calling this method the codebase need be instrumented using the Emergetools
-   * gradle plugin. This method may be called from any thread.
+   * Initialize Reaper. This should be called once in each process. In
+   * addition to calling this method the codebase must be instrumented using the Emergetools
+   * gradle plugin. This method may be called from any thread with a Looper. It is safe to
+   * call this from the main thread.
+   * @param context Android context
    */
   fun init(context: Context) {
     ReaperInternal.init(context)
   }
 
   /**
-   * Flush observed hashes into the current report.
+   * Flush observed hashes into the current report if any.
    * This method may be called from any thread.
+   * Blocks until the flush is complete.
+   * @param context Android context
    */
   fun flush(context: Context) {
     ReaperInternal.flush(context)

@@ -18,6 +18,7 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.Lifecycle
 import androidx.navigation.NavController
 import kotlinx.serialization.Serializable
 
@@ -39,7 +40,11 @@ fun StoryDetailScreen(
       TopAppBar(
         navigationIcon = {
           IconButton(
-            onClick = { navController.popBackStack() }
+            onClick = {
+              if (navController.currentBackStackEntry?.lifecycle?.currentState == Lifecycle.State.RESUMED) {
+                navController.popBackStack()
+              }
+            }
           ) {
             Icon(
               imageVector = Icons.Default.ArrowBack,

@@ -10,8 +10,10 @@ import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Handler
+import android.os.HandlerThread
 import android.os.Looper
 import android.util.Log
+import androidx.annotation.MainThread
 import androidx.lifecycle.ProcessLifecycleOwner
 import androidx.work.Constraints
 import androidx.work.NetworkType
@@ -23,35 +25,19 @@ import java.io.File
 import java.io.FileOutputStream
 import java.util.UUID
 
-// The Reaper report currently in progress:
-private class Report(
-  val stream: FileOutputStream,
-  val dataStream: DataOutputStream,
-  val path: File
-) {
-  // All the hashes we have written so far.
-  val written = mutableSetOf<Long>()
-}
+private const val DEFERRED_START_MS = 5L * 1000L
+private const val FLUSH_PERIOD_MS = 60L * 1000L
 
+/**
+ * Internal counterpart to [com.emergetools.reaper.Reaper]
+ */
 internal object ReaperInternal {
-  private const val MANIFEST_TAG_INSTRUMENTED = "com.emergetools.reaper.REAPER_INSTRUMENTED"
-  private const val MANIFEST_TAG_PUBLISHABLE_API_KEY = "com.emergetools.reaper.PUBLISHABLE_API_KEY"
-  private const val MANIFEST_TAG_OVERRIDE_BASE_URL = "com.emergetools.OVERRIDE_BASE_URL"
-  private const val MANIFEST_TAG_DEBUG = "com.emergetools.reaper.DEBUG"
-  private const val FLUSH_PERIOD_MS = 60L * 1000L
-  private const val PENDING_REPORTS_LIMIT = 20
-
+  // The tracker has to be statically initialized to avoid needing to check in every call to
+  // logMethodEntry if it exists.
   private val tracker = ThreadLocalSetHashTracker()
 
-  // Members below should only be accessed while holding the lock for this object.
-  // Set at init()
-  private var isInitialized: Boolean = false
-  private var isDebug: Boolean = false
-  private var apiKey = ""
-  private var baseUrl = ReaperConfig.EMERGE_BASE_URL
-
-  // Set at init() then reset on finalizeReport().
-  private var report: Report? = null
+  // impl should only be accessed while holding the lock for this object. Set by init().
+  private var impl: ReaperImpl? = null
 
   /**
    * The fast path where we see new hashes. This is called directly by the instrumentation bytecode.
@@ -61,14 +47,28 @@ internal object ReaperInternal {
     tracker.logMethodEntry(methodHash)
   }
 
-  // Our internal API. Each of the methods must be thread safe.
+  /**
+   * There are two methods for initializing Reaper:
+   * 1. Manually via [Reaper.init]
+   * 2. Automatically via [ReaperInitializer]
+   * Either way this method is invoked.
+   * The startup flow is as follows,
+   * - This method creates [ReaperImpl]
+   * - then schedules the remaining startup to happen in [DEFERRED_START_MS] via [Handler.postDelayed].
+   * - The deferred startup ([mainThreadStart]) runs on the main thread and:
+   * - Creates a thread with a [Looper] named `ReaperWorker`
+   * - Sets up an [OnStopLifecycleObserver] to call [ReaperImpl.finalizeReport]
+   * - And finally posts a message to `ReaperWorker` ([workerThreadStart])
+   * - [workerThreadStart] calls
+   * - [ReaperImpl.sweepReports] to action reports left from previous sessions
+   * - [ReaperImpl.startReport] to start the current report
+   * - Sets up a recurring call to [ReaperImpl.flush] every [FLUSH_PERIOD_MS]
+   */
   fun init(context: Context) {
-    // We don't use wrap() here on purpose:
-    // - wrap() checks that isInitialized is true and we haven't set that yet.
-    // - We don't want to swallow deterministic init() exceptions to make life easier for users to
-    //   get the SDK integrated.
     synchronized(this) {
-      initSynchronized(context)
+      trace("Reaper#init") {
+        initSynchronized(context)
+      }
     }
   }
 
@@ -76,58 +76,43 @@ internal object ReaperInternal {
    * Flush all pending hashes to the report on disk.
    */
   fun flush(context: Context) {
-    wrap(context) { flushSynchronized(context) }
-  }
-
-  fun startReport(context: Context) {
-    wrap(context) { startReportSynchronized(context) }
-  }
-
-  /**
-   * Flush a final time then moving the report from the current to the pending
-   * directory. Implicitly starts a new report.
-   */
-  fun finalizeReport(context: Context) {
-    wrap(context) { finalizeReportSynchronized(context) }
-  }
-
-  fun sweepReports(context: Context) {
-    wrap(context) { sweepReportsSynchronized(context) }
+    wrap(context) { it.flush() }
   }
 
   /**
    * Helper for common logic that should exist on most public methods. Takes a lambda and:
-   * 1. Takes the lock
-   * 2. aborts with log message if not initialized
-   * 3. otherwise runs the lambda
+   * 1. aborts with log message if not initialized
+   * 2. takes the lock
+   * 3. otherwise runs the lambda (passing impl)
    * 4. catching and reporting any errors
    */
-  private fun wrap(context: Context, lambda: () -> Unit) {
+  private fun wrap(context: Context, lambda: (impl: ReaperImpl) -> Unit) {
     try {
       synchronized(this) {
-        if (!isInitialized) {
+        val theImpl = impl
+        if (theImpl == null) {
           Log.e(TAG, "Reaper not initialized")
           return
         }
-        lambda()
+        lambda(theImpl)
       }
     } catch (e: Exception) {
-      reportError(context, baseUrl, apiKey, e.toString())
+      reportError(context, e.toString())
     }
   }
 
   private fun initSynchronized(context: Context) {
-    if (isInitialized) {
+    if (impl != null) {
       Log.e(TAG, "Reaper already initialized, ignoring Reaper.init().")
       return
     }
 
-    val isEnabled = context.packageManager.getApplicationInfo(
+    val metaData = context.packageManager.getApplicationInfo(
       context.packageName,
       PackageManager.GET_META_DATA
-    ).metaData.getBoolean(MANIFEST_TAG_INSTRUMENTED, false)
+    ).metaData
 
-    if (!isEnabled) {
+    if (!isInstrumented(metaData)) {
       // Explicitly don't use fatalError to ensure we don't crash other variants
       Log.w(
         TAG,
@@ -138,120 +123,99 @@ internal object ReaperInternal {
       return
     }
 
-    apiKey = context.packageManager.getApplicationInfo(
-      context.packageName,
-      PackageManager.GET_META_DATA
-    ).metaData.getString(MANIFEST_TAG_PUBLISHABLE_API_KEY, "")
+    val apiKey = getApiKey(metaData)
     if (apiKey == "") {
       fatalError(context, "Manifest com.emergetools.PUBLISHABLE_API_KEY must be set and non-empty.")
     }
 
-    isDebug = context.packageManager.getApplicationInfo(
-      context.packageName,
-      PackageManager.GET_META_DATA
-    ).metaData.getBoolean(MANIFEST_TAG_DEBUG, false)
+    val isDebug = isDebug(metaData)
+    val baseUrl = getBaseUrl(metaData)
 
-    this.isInitialized = true
+    val theImpl = ReaperImpl(
+      tracker = tracker,
+      isDebug = isDebug,
+      baseUrl = baseUrl,
+      apiKey = apiKey,
+    )
+    impl = theImpl
 
-    this.baseUrl = context.packageManager.getApplicationInfo(
-      context.packageName,
-      PackageManager.GET_META_DATA
-    ).metaData.getString(MANIFEST_TAG_OVERRIDE_BASE_URL, ReaperConfig.EMERGE_BASE_URL)
+    // Defer remaining main thread startup work (starting the worker thread
+    // and creating the lifecycle observer) till some time later - hopefully
+    // after startup is done. This must happen on the main thread since we
+    // add ProcessLifecycleOwner which must be done from the main thread.
+    Handler(Looper.getMainLooper()).postDelayed({
+      mainThreadStart(context.applicationContext, theImpl)
+    }, DEFERRED_START_MS)
+  }
+}
 
-    // If Reaper was running previously but we did not get a chance to finalize the report we may
-    // end up with reports 'stuck' in current which will never be finalized. Schedule those for
-    // upload.
-    sweepReportsSynchronized(context)
+// The Reaper report currently in progress:
+private class Report(
+  val stream: FileOutputStream,
+  val dataStream: DataOutputStream,
+  val path: File
+) {
+  // All the hashes we have written so far.
+  val written = mutableSetOf<Long>()
+}
 
-    // TODO(chromy): This is IO in the startup path. Maybe we should move it to later.
-    val path = startReportSynchronized(context)
-    if (path == null) {
-      Log.e(TAG, "Failed to start report")
-      return
-    }
+private fun fatalError(context: Context, message: String) {
+  val isRelease = 0 == context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
+  if (isRelease) {
+    Log.e(TAG, message)
+  } else {
+    error(message)
+  }
+}
 
+internal class ReaperImpl(
+  val tracker: HashTracker,
+  val baseUrl: String = ReaperConfig.EMERGE_BASE_URL,
+  val apiKey: String,
+  val isDebug: Boolean = false,
+) {
+
+  companion object {
+    private const val PENDING_REPORTS_LIMIT = 20
+  }
+
+  // Set by startReport() and reset on finalizeReport().
+  private var report: Report? = null
+
+  init {
     Log.d(
       TAG,
-      "Reaper initialized. report=$path backend=${this.baseUrl} tracker=${tracker.name}"
+      "Reaper initialized. backend=${this.baseUrl} tracker=${tracker.name}"
     )
-    val lifecycleObserver = ReaperLifecycleObserver(context.applicationContext)
-    ProcessLifecycleOwner.get().lifecycle.addObserver(lifecycleObserver)
-    onFlushPeriod(context)
   }
 
-  private fun flushSynchronized(context: Context) {
-    checkSynchronized(context)
+  // Our internal API. Each of the methods must be thread safe.
+  @Synchronized
+  fun flush() {
     val report = this.report
-    if (report == null) {
-      Log.e(TAG, "No report to flush")
-      return
-    } else {
-      Log.d(TAG, "Flushing report ${report.path.absolutePath}")
-    }
+    trace("Reaper#flush") {
+      if (report == null) {
+        Log.e(TAG, "No report to flush")
+        return@trace
+      } else {
+        Log.d(TAG, "Flushing report ${report.path.absolutePath}")
+      }
 
-    // Hashes observed since the last flush() this will normally be a mixture of hashes we
-    // already saw and new hashes.
-    tracker.flush {
-      it.forEach { hash ->
-        if (!report.written.contains(hash)) {
-          report.dataStream.writeLong(hash)
-          report.written.add(hash)
+      // Hashes observed since the last flush() this will normally be a mixture of hashes we
+      // already saw and new hashes.
+      tracker.flush {
+        it.forEach { hash ->
+          if (!report.written.contains(hash)) {
+            report.dataStream.writeLong(hash)
+            report.written.add(hash)
+          }
         }
       }
+
+      // Flush the underlying file.
+      report.dataStream.flush()
+      report.stream.flush()
     }
-
-    // Flush the underlying file.
-    report.dataStream.flush()
-    report.stream.flush()
-  }
-
-  private fun onFlushPeriod(context: Context) {
-    flush(context)
-    Handler(Looper.getMainLooper()).postDelayed({
-      onFlushPeriod(context)
-    }, FLUSH_PERIOD_MS)
-  }
-
-  private fun startReportSynchronized(context: Context): String? {
-    checkSynchronized(context)
-    if (!ensureDirectories(context)) {
-      return null
-    }
-
-    val shortUuid = UUID.randomUUID().toString().substring(0, 8)
-    val name = "${getReportPrefix(context)}_$shortUuid"
-    val path = File(getCurrentDir(context), name)
-    val stream = FileOutputStream(path)
-
-    if (!stream.fd.valid()) {
-      Log.e(TAG, "Failed to open Reaper report for writing ${path.absolutePath}")
-      return null
-    }
-    report = Report(stream, DataOutputStream(stream), path)
-
-    return path.absolutePath
-  }
-
-  private fun finalizeReportSynchronized(context: Context) {
-    checkSynchronized(context)
-
-    // Flush any remaining hashes:
-    flushSynchronized(context)
-
-    val report = this.report
-    this.report = null
-    if (report == null) {
-      Log.e(TAG, "No report to finalize")
-      return
-    } else {
-      Log.d(TAG, "Finalizing report ${report.path.absolutePath}")
-    }
-
-    // Move report to pending and schedule upload.
-    sweepReportsSynchronized(context)
-
-    // Start a file for the next report:
-    startReportSynchronized(context)
   }
 
   /**
@@ -259,66 +223,103 @@ internal object ReaperInternal {
    * 2. Move all current reports for this process to pending.
    * 3. Schedule an upload job.
    */
-  private fun sweepReportsSynchronized(context: Context) {
-    checkSynchronized(context)
+  @Synchronized
+  fun sweepReports(context: Context) {
+    trace("Reaper#sweepReports") {
+      // In case directories got deleted between init() and now:
+      ensureDirectories(context)
 
-    // In case directories got deleted between init() and now:
-    ensureDirectories(context)
+      val pendingDir = getPendingDir(context)
+      val currentDir = getCurrentDir(context)
 
-    val pendingDir = getPendingDir(context)
-    val currentDir = getCurrentDir(context)
+      val pendingFiles = currentDir.listFiles() ?: emptyArray<File>()
+      val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
+      val prefix = getReportPrefix(context)
 
-    val pendingFiles = currentDir.listFiles() ?: emptyArray<File>()
-    val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
-    val prefix = getReportPrefix(context)
-
-    if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
-      for (pending in pendingFiles) {
-        pending.delete()
+      if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
+        for (pending in pendingFiles) {
+          pending.delete()
+        }
       }
-    }
 
-    // Move all reports into the 'pending' directory:
-    for (current in currentFiles) {
-      if (current.name.startsWith(prefix)) {
-        val pending = File(pendingDir, current.name)
-        current.renameTo(pending)
-        Log.d(TAG, "Moved ${current.absolutePath} to ${pending.absolutePath}")
+      // Move all reports into the 'pending' directory:
+      for (current in currentFiles) {
+        if (current.name.startsWith(prefix)) {
+          val pending = File(pendingDir, current.name)
+          current.renameTo(pending)
+          Log.d(TAG, "Moved ${current.absolutePath} to ${pending.absolutePath}")
+        }
       }
-    }
 
-    // Schedule upload job:
-    val data = workDataOf(
-      ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
-      ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
-      ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
-    )
+      // Schedule upload job:
+      val data = workDataOf(
+        ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
+        ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
+        ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
+      )
 
-    val uploadWorkRequest =
-      OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
-        setInputData(data)
-        setConstraints(
-          Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        )
-      }.build()
+      val uploadWorkRequest =
+        OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
+          setInputData(data)
+          setConstraints(
+            Constraints.Builder()
+              .setRequiredNetworkType(NetworkType.CONNECTED)
+              .build()
+          )
+        }.build()
 
-    WorkManager.getInstance(context).enqueue(uploadWorkRequest)
-  }
-
-  private fun checkSynchronized(context: Context) {
-    if (!Thread.holdsLock(this)) {
-      fatalError(context, "Unsynchronized call to internal method")
+      WorkManager.getInstance(context).enqueue(uploadWorkRequest)
     }
   }
 
-  private fun fatalError(context: Context, message: String) {
-    val isRelease = 0 == context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-    if (isRelease) {
-      Log.e(TAG, message)
-    } else {
-      error(message)
+  @Synchronized
+  fun startReport(context: Context): String? {
+    return trace("Reaper#startReport") {
+      if (!ensureDirectories(context)) {
+        return@trace null
+      }
+
+      val shortUuid = UUID.randomUUID().toString().substring(0, 8)
+      val name = "${getReportPrefix(context)}_$shortUuid"
+      val path = File(getCurrentDir(context), name)
+      val stream = FileOutputStream(path)
+      val absolutePath = path.absolutePath
+
+      if (!stream.fd.valid()) {
+        Log.e(TAG, "Failed to open Reaper report for writing $absolutePath")
+        return@trace null
+      }
+      report = Report(stream, DataOutputStream(stream), path)
+
+      Log.d(
+        TAG,
+        "Reaper report started. report=$absolutePath backend=$baseUrl tracker=${tracker.name}"
+      )
+
+      return@trace absolutePath
+    }
+  }
+
+  @Synchronized
+  fun finalizeReport(context: Context) {
+    trace("Reaper#finalizeReport") {
+      // Flush any remaining hashes:
+      flush()
+
+      val report = this.report
+      this.report = null
+      if (report == null) {
+        Log.e(TAG, "No report to finalize")
+        return@trace
+      } else {
+        Log.d(TAG, "Finalizing report ${report.path.absolutePath}")
+      }
+
+      // Move report to pending and schedule upload.
+      sweepReports(context)
+
+      // Start a file for the next report:
+      startReport(context)
     }
   }
 
@@ -337,4 +338,77 @@ internal object ReaperInternal {
     name = name.replace(".", "_")
     return "report_$name"
   }
+}
+
+@MainThread
+private fun mainThreadStart(context: Context, impl: ReaperImpl) {
+  trace("Reaper#mainThreadStart") {
+    val thread = HandlerThread("ReaperWorker")
+    thread.start()
+
+    val looper = thread.looper
+    if (looper == null) {
+      fatalError(context, "Could not initialize Reaper worker")
+      return@trace
+    }
+    val handler = Handler(looper)
+
+    // Finalize on onStop:
+    // This observer has to be added from the main thread.
+    val observer = OnStopLifecycleObserver {
+      handler.post {
+        impl.finalizeReport(context)
+      }
+    }
+    ProcessLifecycleOwner.get().lifecycle.addObserver(observer)
+
+    Handler(looper).post {
+      workerThreadStart(context, looper, impl)
+    }
+  }
+}
+
+private fun wrap(context: Context, lambda: () -> Unit) {
+  try {
+    lambda()
+  } catch (e: Exception) {
+    reportError(context, e.toString())
+  }
+}
+
+private fun workerThreadStart(context: Context, looper: Looper, impl: ReaperImpl) {
+  Log.d(TAG, "Reaper#workerThreadStart")
+  val observer = OnStopLifecycleObserver {
+    Handler(looper).post {
+      impl.finalizeReport(context)
+    }
+  }
+  ProcessLifecycleOwner.get().lifecycle.addObserver(observer)
+  trace("Reaper#workerThreadStart") {
+    // If Reaper was running previously but we did not get a chance to finalize the report we may
+    // end up with reports 'stuck' in current which will never be finalized. Schedule those for
+    // upload.
+    wrap(context) {
+      impl.sweepReports(context)
+    }
+
+    wrap(context) {
+      val path = impl.startReport(context)
+      if (path == null) {
+        Log.e(TAG, "Failed to start report")
+      } else {
+        // Schedule flushes every FLUSH_PERIOD_MS
+        scheduleFlush(context, Handler(looper), impl)
+      }
+    }
+  }
+}
+
+private fun scheduleFlush(context: Context, handler: Handler, impl: ReaperImpl) {
+  handler.postDelayed({
+    wrap(context) {
+      impl.flush()
+      scheduleFlush(context, handler, impl)
+    }
+  }, FLUSH_PERIOD_MS)
 }
