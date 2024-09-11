@@ -184,29 +184,32 @@ internal object ReaperInternal {
   }
 
   private fun flushSynchronized(context: Context) {
-    checkSynchronized(context)
-    val report = this.report
-    if (report == null) {
-      Log.e(TAG, "No report to flush")
-      return
-    } else {
-      Log.d(TAG, "Flushing report ${report.path.absolutePath}")
-    }
-
-    // HashTracker calls onFlush which updates report.seenSinceLastWrite
-    tracker.flush()
-
-    report.seenSinceLastWrite.forEach { hash ->
-      if (!report.written.contains(hash)) {
-        report.dataStream.writeLong(hash)
-        report.written.add(hash)
+    return trace("flush") {
+      checkSynchronized(context)
+      block(10*1000)
+      val report = this.report
+      if (report == null) {
+        Log.e(TAG, "No report to flush")
+        return@trace
+      } else {
+        Log.d(TAG, "Flushing report ${report.path.absolutePath}")
       }
-    }
-    report.seenSinceLastWrite.clear()
 
-    // Flush the underlying file.
-    report.dataStream.flush()
-    report.stream.flush()
+      // HashTracker calls onFlush which updates report.seenSinceLastWrite
+      tracker.flush()
+
+      report.seenSinceLastWrite.forEach { hash ->
+        if (!report.written.contains(hash)) {
+          report.dataStream.writeLong(hash)
+          report.written.add(hash)
+        }
+      }
+      report.seenSinceLastWrite.clear()
+
+      // Flush the underlying file.
+      report.dataStream.flush()
+      report.stream.flush()
+    }
   }
 
   private fun onFlushPeriod(context: Context) {
@@ -222,23 +225,25 @@ internal object ReaperInternal {
   }
 
   private fun startReportSynchronized(context: Context): String? {
-    checkSynchronized(context)
-    if (!ensureDirectories(context)) {
-      return null
+    return trace("startReportSynchronized") {
+      checkSynchronized(context)
+      if (!ensureDirectories(context)) {
+        return@trace null
+      }
+
+      val shortUuid = UUID.randomUUID().toString().substring(0, 8)
+      val name = "${getReportPrefix(context)}_$shortUuid"
+      val path = File(getCurrentDir(context), name)
+      val stream = FileOutputStream(path)
+
+      if (!stream.fd.valid()) {
+        Log.e(TAG, "Failed to open Reaper report for writing ${path.absolutePath}")
+        return@trace null
+      }
+      report = Report(stream, DataOutputStream(stream), path)
+
+      return@trace path.absolutePath
     }
-
-    val shortUuid = UUID.randomUUID().toString().substring(0, 8)
-    val name = "${getReportPrefix(context)}_$shortUuid"
-    val path = File(getCurrentDir(context), name)
-    val stream = FileOutputStream(path)
-
-    if (!stream.fd.valid()) {
-      Log.e(TAG, "Failed to open Reaper report for writing ${path.absolutePath}")
-      return null
-    }
-    report = Report(stream, DataOutputStream(stream), path)
-
-    return path.absolutePath
   }
 
   private fun finalizeReportSynchronized(context: Context) {
@@ -269,51 +274,54 @@ internal object ReaperInternal {
    * 3. Schedule an upload job.
    */
   private fun sweepReportsSynchronized(context: Context) {
-    checkSynchronized(context)
+    return trace("sweepReportsSynchronized") {
+      block(10*1000)
+      checkSynchronized(context)
 
-    // In case directories got deleted between init() and now:
-    ensureDirectories(context)
+      // In case directories got deleted between init() and now:
+      ensureDirectories(context)
 
-    val pendingDir = getPendingDir(context)
-    val currentDir = getCurrentDir(context)
+      val pendingDir = getPendingDir(context)
+      val currentDir = getCurrentDir(context)
 
-    val pendingFiles = currentDir.listFiles() ?: emptyArray<File>()
-    val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
-    val prefix = getReportPrefix(context)
+      val pendingFiles = currentDir.listFiles() ?: emptyArray<File>()
+      val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
+      val prefix = getReportPrefix(context)
 
-    if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
-      for (pending in pendingFiles) {
-        pending.delete()
+      if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
+        for (pending in pendingFiles) {
+          pending.delete()
+        }
       }
-    }
 
-    // Move all reports into the 'pending' directory:
-    for (current in currentFiles) {
-      if (current.name.startsWith(prefix)) {
-        val pending = File(pendingDir, current.name)
-        current.renameTo(pending)
-        Log.d(TAG, "Moved ${current.absolutePath} to ${pending.absolutePath}")
+      // Move all reports into the 'pending' directory:
+      for (current in currentFiles) {
+        if (current.name.startsWith(prefix)) {
+          val pending = File(pendingDir, current.name)
+          current.renameTo(pending)
+          Log.d(TAG, "Moved ${current.absolutePath} to ${pending.absolutePath}")
+        }
       }
+
+      // Schedule upload job:
+      val data = workDataOf(
+        ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
+        ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
+        ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
+      )
+
+      val uploadWorkRequest =
+        OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
+          setInputData(data)
+          setConstraints(
+            Constraints.Builder()
+              .setRequiredNetworkType(NetworkType.CONNECTED)
+              .build()
+          )
+        }.build()
+
+      WorkManager.getInstance(context).enqueue(uploadWorkRequest)
     }
-
-    // Schedule upload job:
-    val data = workDataOf(
-      ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
-      ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
-      ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
-    )
-
-    val uploadWorkRequest =
-      OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
-        setInputData(data)
-        setConstraints(
-          Constraints.Builder()
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-        )
-      }.build()
-
-    WorkManager.getInstance(context).enqueue(uploadWorkRequest)
   }
 
   private fun checkSynchronized(context: Context) {
