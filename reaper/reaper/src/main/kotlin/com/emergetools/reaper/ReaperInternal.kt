@@ -1,6 +1,6 @@
 // We catch very generic exceptions on purpose. We need to avoid
 // crashing the host app.
-@file:Suppress("MagicNumber", "TooGenericExceptionCaught")
+@file:Suppress("MagicNumber", "TooGenericExceptionCaught", "TooManyFunctions")
 
 package com.emergetools.reaper
 
@@ -20,10 +20,7 @@ import androidx.work.NetworkType
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.workDataOf
-import java.io.DataOutputStream
 import java.io.File
-import java.io.FileOutputStream
-import java.util.UUID
 
 private const val DEFERRED_START_MS = 5L * 1000L
 private const val FLUSH_PERIOD_MS = 60L * 1000L
@@ -66,7 +63,7 @@ internal object ReaperInternal {
    */
   fun init(context: Context) {
     synchronized(this) {
-      trace("Reaper#init") {
+      androidTrace("Reaper#init") {
         initSynchronized(context)
       }
     }
@@ -131,11 +128,13 @@ internal object ReaperInternal {
     val isDebug = isDebug(metaData)
     val baseUrl = getBaseUrl(metaData)
 
+    val delegate = ReaperImplDelegate(context.applicationContext)
     val theImpl = ReaperImpl(
       tracker = tracker,
+      delegate = delegate,
+      apiKey = apiKey,
       isDebug = isDebug,
       baseUrl = baseUrl,
-      apiKey = apiKey,
     )
     impl = theImpl
 
@@ -149,179 +148,92 @@ internal object ReaperInternal {
   }
 }
 
-// The Reaper report currently in progress:
-private class Report(
-  val stream: FileOutputStream,
-  val dataStream: DataOutputStream,
-  val path: File
-) {
-  // All the hashes we have written so far.
-  val written = mutableSetOf<Long>()
-}
+private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Delegate {
 
-private fun fatalError(context: Context, message: String) {
-  val isRelease = 0 == context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
-  if (isRelease) {
-    Log.e(TAG, message)
-  } else {
-    error(message)
-  }
-}
-
-internal class ReaperImpl(
-  val tracker: HashTracker,
-  val baseUrl: String = ReaperConfig.EMERGE_BASE_URL,
-  val apiKey: String,
-  val isDebug: Boolean = false,
-) {
-
-  companion object {
-    private const val PENDING_REPORTS_LIMIT = 20
+  override fun startReport(id: String): File {
+    ensureDirectories(context)
+    val name = getReportName(id)
+    val file = File(getCurrentDir(context), name)
+    file.delete()
+    file.createNewFile()
+    return file
   }
 
-  // Set by startReport() and reset on finalizeReport().
-  private var report: Report? = null
+  override fun deleteReport(id: String) {
+    ensureDirectories(context)
+    val name = getReportName(id)
+    // Try to delete from both directories:
+    File(getCurrentDir(context), name).delete()
+    File(getPendingDir(context), name).delete()
+  }
 
-  init {
-    Log.d(
-      TAG,
-      "Reaper initialized. backend=${this.baseUrl} tracker=${tracker.name}"
+  override fun markReportPending(id: String) {
+    ensureDirectories(context)
+    val name = getReportName(id)
+    val current = File(getCurrentDir(context), name)
+    val pending = File(getCurrentDir(context), name)
+    current.renameTo(pending)
+  }
+
+  override fun listCurrentReports(): Collection<String> {
+    ensureDirectories(context)
+    return listReports(getCurrentDir(context))
+  }
+
+  override fun listPendingReports(): Collection<String> {
+    ensureDirectories(context)
+    return listReports(getPendingDir(context))
+  }
+
+  private fun listReports(dir: File): Collection<String> {
+    val files = dir.listFiles() ?: emptyArray<File>()
+    val prefix = getReportPrefix()
+    val reports = mutableListOf<String>()
+    for (file in files) {
+      if (file.name.startsWith(prefix)) {
+        val id = getIdFromName(file.name)
+        if (id != null) {
+          reports.add(id)
+        }
+      }
+    }
+    return reports
+  }
+
+  override fun requestUpload(apiKey: String, baseUrl: String, isDebug: Boolean) {
+    // Schedule upload job:
+    val data = workDataOf(
+      ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
+      ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
+      ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
     )
+
+    val uploadWorkRequest =
+      OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
+        setInputData(data)
+        setConstraints(
+          Constraints.Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
+            .build()
+        )
+      }.build()
+
+    WorkManager.getInstance(context).enqueue(uploadWorkRequest)
   }
 
-  // Our internal API. Each of the methods must be thread safe.
-  @Synchronized
-  fun flush() {
-    val report = this.report
-    trace("Reaper#flush") {
-      if (report == null) {
-        Log.e(TAG, "No report to flush")
-        return@trace
-      } else {
-        Log.d(TAG, "Flushing report ${report.path.absolutePath}")
-      }
-
-      // Hashes observed since the last flush() this will normally be a mixture of hashes we
-      // already saw and new hashes.
-      tracker.flush {
-        it.forEach { hash ->
-          if (!report.written.contains(hash)) {
-            report.dataStream.writeLong(hash)
-            report.written.add(hash)
-          }
-        }
-      }
-
-      // Flush the underlying file.
-      report.dataStream.flush()
-      report.stream.flush()
-    }
+  override fun d(message: String) {
+    Log.d(TAG, message)
   }
 
-  /**
-   * 1. If there more than PENDING_REPORTS_LIMIT reports pending delete all pending reports.
-   * 2. Move all current reports for this process to pending.
-   * 3. Schedule an upload job.
-   */
-  @Synchronized
-  fun sweepReports(context: Context) {
-    trace("Reaper#sweepReports") {
-      // In case directories got deleted between init() and now:
-      ensureDirectories(context)
-
-      val pendingDir = getPendingDir(context)
-      val pendingFiles = pendingDir.listFiles() ?: emptyArray<File>()
-      if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
-        for (pending in pendingFiles) {
-          pending.delete()
-        }
-      }
-
-      val currentDir = getCurrentDir(context)
-      val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
-      val prefix = getReportPrefix(context)
-      // Move all reports into the 'pending' directory:
-      for (current in currentFiles) {
-        if (current.name.startsWith(prefix)) {
-          val pending = File(pendingDir, current.name)
-          current.renameTo(pending)
-          Log.d(TAG, "Moved ${current.absolutePath} to ${pending.absolutePath}")
-        }
-      }
-
-      // Schedule upload job:
-      val data = workDataOf(
-        ReaperReportUploadWorker.EXTRA_API_KEY to apiKey,
-        ReaperReportUploadWorker.EXTRA_BASE_URL to baseUrl,
-        ReaperReportUploadWorker.EXTRA_DEBUG to isDebug,
-      )
-
-      val uploadWorkRequest =
-        OneTimeWorkRequest.Builder(ReaperReportUploadWorker::class.java).apply {
-          setInputData(data)
-          setConstraints(
-            Constraints.Builder()
-              .setRequiredNetworkType(NetworkType.CONNECTED)
-              .build()
-          )
-        }.build()
-
-      WorkManager.getInstance(context).enqueue(uploadWorkRequest)
-    }
+  override fun e(message: String) {
+    Log.e(TAG, message)
   }
 
-  @Synchronized
-  fun startReport(context: Context): String? {
-    return trace("Reaper#startReport") {
-      if (!ensureDirectories(context)) {
-        return@trace null
-      }
-
-      val shortUuid = UUID.randomUUID().toString().substring(0, 8)
-      val name = "${getReportPrefix(context)}_$shortUuid"
-      val path = File(getCurrentDir(context), name)
-      val stream = FileOutputStream(path)
-      val absolutePath = path.absolutePath
-
-      if (!stream.fd.valid()) {
-        Log.e(TAG, "Failed to open Reaper report for writing $absolutePath")
-        return@trace null
-      }
-      report = Report(stream, DataOutputStream(stream), path)
-
-      Log.d(
-        TAG,
-        "Reaper report started. report=$absolutePath backend=$baseUrl tracker=${tracker.name}"
-      )
-
-      return@trace absolutePath
-    }
+  override fun <T> trace(name: String, block: () -> T): T {
+    return androidTrace(name, block)
   }
 
-  @Synchronized
-  fun finalizeReport(context: Context) {
-    trace("Reaper#finalizeReport") {
-      // Flush any remaining hashes:
-      flush()
-
-      val report = this.report
-      this.report = null
-      if (report == null) {
-        Log.e(TAG, "No report to finalize")
-        return@trace
-      } else {
-        Log.d(TAG, "Finalizing report ${report.path.absolutePath}")
-      }
-
-      // Move report to pending and schedule upload.
-      sweepReports(context)
-
-      // Start a file for the next report:
-      startReport(context)
-    }
-  }
-
-  private fun getReportPrefix(context: Context): String {
+  private fun getReportPrefix(): String {
     var name = context.packageName
     if (Build.VERSION.SDK_INT >= 28) {
       // This will normally be:
@@ -336,18 +248,35 @@ internal class ReaperImpl(
     name = name.replace(".", "_")
     return "report_$name"
   }
+
+  private fun getReportName(id: String): String {
+    return "${getReportPrefix()}_$id"
+  }
+
+  private fun getIdFromName(name: String): String? {
+    return name.split("_").lastOrNull()
+  }
+}
+
+private fun fatalError(context: Context, message: String) {
+  val isRelease = 0 == context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE
+  if (isRelease) {
+    Log.e(TAG, message)
+  } else {
+    error(message)
+  }
 }
 
 @MainThread
 private fun mainThreadStart(context: Context, impl: ReaperImpl) {
-  trace("Reaper#mainThreadStart") {
+  androidTrace("Reaper#mainThreadStart") {
     val thread = HandlerThread("ReaperWorker")
     thread.start()
 
     val looper = thread.looper
     if (looper == null) {
       fatalError(context, "Could not initialize Reaper worker")
-      return@trace
+      return@androidTrace
     }
     val handler = Handler(looper)
 
@@ -355,7 +284,7 @@ private fun mainThreadStart(context: Context, impl: ReaperImpl) {
     // This observer has to be added from the main thread.
     val observer = OnStopLifecycleObserver {
       handler.post {
-        impl.finalizeReport(context)
+        impl.finalizeReport()
       }
     }
     ProcessLifecycleOwner.get().lifecycle.addObserver(observer)
@@ -378,20 +307,20 @@ private fun workerThreadStart(context: Context, looper: Looper, impl: ReaperImpl
   Log.d(TAG, "Reaper#workerThreadStart")
   val observer = OnStopLifecycleObserver {
     Handler(looper).post {
-      impl.finalizeReport(context)
+      impl.finalizeReport()
     }
   }
   ProcessLifecycleOwner.get().lifecycle.addObserver(observer)
-  trace("Reaper#workerThreadStart") {
+  androidTrace("Reaper#workerThreadStart") {
     // If Reaper was running previously but we did not get a chance to finalize the report we may
     // end up with reports 'stuck' in current which will never be finalized. Schedule those for
     // upload.
     wrap(context) {
-      impl.sweepReports(context)
+      impl.sweepReports()
     }
 
     wrap(context) {
-      val path = impl.startReport(context)
+      val path = impl.startReport()
       if (path == null) {
         Log.e(TAG, "Failed to start report")
       } else {

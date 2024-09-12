@@ -4,19 +4,19 @@ import android.content.Context
 import android.util.Log
 import java.io.File
 
-private const val REAPER_DIR_SUFFIX = "reaper"
-private const val REAPER_CURRENT_DIR_SUFFIX = "$REAPER_DIR_SUFFIX/current"
-private const val REAPER_PENDING_DIR_SUFFIX = "$REAPER_DIR_SUFFIX/pending"
-private const val REAPER_DEBUG_DIR_SUFFIX = "$REAPER_DIR_SUFFIX/debug"
+private const val REAPER_DIR = "reaper"
+private const val REAPER_CURRENT_DIR = "$REAPER_DIR/current"
+private const val REAPER_PENDING_DIR = "$REAPER_DIR/pending"
+private const val REAPER_DEBUG_DIR = "$REAPER_DIR/debug"
 
 internal fun getPendingDir(context: Context) =
-  File(context.applicationContext.cacheDir, REAPER_PENDING_DIR_SUFFIX)
+  File(context.applicationContext.cacheDir, REAPER_PENDING_DIR)
 
 internal fun getCurrentDir(context: Context) =
-  File(context.applicationContext.cacheDir, REAPER_CURRENT_DIR_SUFFIX)
+  File(context.applicationContext.cacheDir, REAPER_CURRENT_DIR)
 
 internal fun getDebugDir(context: Context) =
-  File(context.applicationContext.cacheDir, REAPER_DEBUG_DIR_SUFFIX)
+  File(context.applicationContext.cacheDir, REAPER_DEBUG_DIR)
 
 internal fun ensureDirectories(context: Context): Boolean {
   var success = true

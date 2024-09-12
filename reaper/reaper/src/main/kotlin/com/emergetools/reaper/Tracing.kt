@@ -3,7 +3,7 @@ package com.emergetools.reaper
 import android.os.Trace
 import java.lang.Thread.sleep
 
-internal fun <T> trace(name: String, block: () -> T): T {
+internal fun <T> androidTrace(name: String, block: () -> T): T {
   try {
     Trace.beginSection(name)
     return block()
@@ -13,7 +13,7 @@ internal fun <T> trace(name: String, block: () -> T): T {
 }
 
 internal fun block(ms: Long) {
-  trace("sleep") {
+  androidTrace("sleep") {
     sleep(ms)
   }
 }
