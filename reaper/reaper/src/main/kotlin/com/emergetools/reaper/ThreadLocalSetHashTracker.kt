@@ -1,6 +1,6 @@
 package com.emergetools.reaper
 
-class ThreadLocalSetHashTracker(private var onFlush: (Collection<Long>) -> Unit) : HashTracker {
+class ThreadLocalSetHashTracker : HashTracker {
   override val name = "ThreadLocalSetHashTracker"
 
   // TODO(chromy): Should be a weak ref?
@@ -24,7 +24,7 @@ class ThreadLocalSetHashTracker(private var onFlush: (Collection<Long>) -> Unit)
     }
   }
 
-  override fun flush() {
+  override fun flush(onFlush: (Collection<Long>) -> Unit) {
     val seen = mutableSetOf<Long>()
 
     synchronized(sets) {
