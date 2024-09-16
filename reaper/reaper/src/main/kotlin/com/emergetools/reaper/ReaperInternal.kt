@@ -230,18 +230,16 @@ internal class ReaperImpl(
       ensureDirectories(context)
 
       val pendingDir = getPendingDir(context)
-      val currentDir = getCurrentDir(context)
-
-      val pendingFiles = currentDir.listFiles() ?: emptyArray<File>()
-      val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
-      val prefix = getReportPrefix(context)
-
+      val pendingFiles = pendingDir.listFiles() ?: emptyArray<File>()
       if (pendingFiles.size > PENDING_REPORTS_LIMIT) {
         for (pending in pendingFiles) {
           pending.delete()
         }
       }
 
+      val currentDir = getCurrentDir(context)
+      val currentFiles = currentDir.listFiles() ?: emptyArray<File>()
+      val prefix = getReportPrefix(context)
       // Move all reports into the 'pending' directory:
       for (current in currentFiles) {
         if (current.name.startsWith(prefix)) {
