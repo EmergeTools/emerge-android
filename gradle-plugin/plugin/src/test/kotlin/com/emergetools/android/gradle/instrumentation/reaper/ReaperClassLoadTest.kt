@@ -6,7 +6,7 @@ import java.util.Base64
 
 class ReaperClassLoadTest {
 
-  fun byteArrayOf(vararg elements: Int): ByteArray {
+  private fun byteArrayOf(vararg elements: Int): ByteArray {
     return elements.map { it.toByte() }.toByteArray()
   }
 
