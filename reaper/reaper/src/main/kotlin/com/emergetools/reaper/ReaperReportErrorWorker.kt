@@ -129,7 +129,7 @@ class ReaperReportErrorWorker(
   }
 }
 
-fun reportError(ctx: Context, message: String) {
+fun sendError(ctx: Context, message: String) {
   val metaData = ctx.packageManager.getApplicationInfo(
     ctx.packageName,
     PackageManager.GET_META_DATA
@@ -138,7 +138,7 @@ fun reportError(ctx: Context, message: String) {
   val baseUrl = getBaseUrl(metaData)
   val apiKey = getApiKey(metaData)
 
-  Log.e(TAG, "ReaperError: backend`=$baseUrl message=$message")
+  Log.e(TAG, "ReaperError: backend=$baseUrl message=$message")
   val data = workDataOf(
     ReaperReportErrorWorker.EXTRA_API_KEY to apiKey,
     ReaperReportErrorWorker.EXTRA_BASE_URL to baseUrl,

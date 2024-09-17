@@ -39,6 +39,10 @@ private class FakeDelegate : ReaperImpl.Delegate {
     // Empty
   }
 
+  override fun sendError(message: String) {
+    // Empty
+  }
+
   override fun d(message: String) {
     // Empty
   }
@@ -55,7 +59,6 @@ private class FakeDelegate : ReaperImpl.Delegate {
 class ReaperImplTest {
   private lateinit var tracker: HashTracker
   private lateinit var delegate: FakeDelegate
-  private lateinit var impl: ReaperImpl
 
   @BeforeEach
   fun init() {
@@ -69,14 +72,14 @@ class ReaperImplTest {
       delegate.startReport("$i")
       delegate.markReportPending("$i")
     }
-    impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
+    val impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
     impl.sweepReports()
     assertThat(delegate.listPendingReports()).isEmpty()
   }
 
   @Test
   fun `uploads reports containing hashes`() {
-    impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
+    val impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
 
     impl.startReport()
     tracker.logMethodEntry(-1L)
@@ -101,7 +104,7 @@ class ReaperImplTest {
   @Test
   fun `reports hashes prior to construction in the first report`() {
     tracker.logMethodEntry(0x0102030405060708)
-    impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
+    val impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
     impl.startReport()
     impl.finalizeReport()
 
@@ -125,7 +128,7 @@ class ReaperImplTest {
   fun `sweeping finalizes pre-existing reports`() {
     delegate.startReport("previous1")
     delegate.startReport("previous2")
-    impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
+    val impl = ReaperImpl(tracker = tracker, delegate = delegate, apiKey = "<apikey>")
     impl.sweepReports()
 
     assertThat(delegate.listPendingReports()).containsExactly("previous1", "previous2")

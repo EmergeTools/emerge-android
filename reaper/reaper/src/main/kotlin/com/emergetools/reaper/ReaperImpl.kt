@@ -1,15 +1,18 @@
 package com.emergetools.reaper
 
+import android.system.ErrnoException
 import java.io.DataOutputStream
 import java.io.File
 import java.io.FileOutputStream
+import java.io.IOException
 import java.util.UUID
 
 // The Reaper report currently in progress:
 private class Report(
   val stream: FileOutputStream,
   val dataStream: DataOutputStream,
-  val path: File
+  val file: File,
+  val id: String,
 ) {
   // All the hashes we have written so far.
   val written = mutableSetOf<Long>()
@@ -31,6 +34,7 @@ internal class ReaperImpl(
     fun listCurrentReports(): Collection<String>
     fun listPendingReports(): Collection<String>
     fun requestUpload(apiKey: String, baseUrl: String, isDebug: Boolean)
+    fun sendError(message: String)
     fun d(message: String)
     fun e(message: String)
     fun <T> trace(name: String, block: () -> T): T
@@ -56,24 +60,50 @@ internal class ReaperImpl(
         delegate.e("No report to flush")
         return@trace
       } else {
-        delegate.d("Flushing report ${report.path.absolutePath}")
+        delegate.d("Flushing report ${report.file.absolutePath}")
       }
 
       // Hashes observed since the last flush() this will normally be a mixture of hashes we
       // already saw and new hashes.
-      tracker.flush {
-        it.forEach { hash ->
-          if (!report.written.contains(hash)) {
-            report.dataStream.writeLong(hash)
-            report.written.add(hash)
+      try {
+        tracker.flush {
+          it.forEach { hash ->
+            if (!report.written.contains(hash)) {
+              report.dataStream.writeLong(hash)
+              report.written.add(hash)
+            }
           }
         }
-      }
 
-      // Flush the underlying file.
-      report.dataStream.flush()
-      report.stream.flush()
+        // Flush the underlying file.
+        report.dataStream.flush()
+        report.stream.flush()
+      } catch (e: ErrnoException) {
+        stopReaperDueToIoError(e)
+      } catch (e: IOException) {
+        stopReaperDueToIoError(e)
+      }
     }
+  }
+
+  private fun stopReaperDueToIoError(e: Exception) {
+    val report = this.report
+    this.report = null
+    if (report != null) {
+      val id = report.id
+      report.dataStream.close()
+      report.stream.close()
+      delegate.deleteReport(id)
+    }
+
+    for (id in delegate.listPendingReports()) {
+      delegate.deleteReport(id)
+    }
+    for (id in delegate.listCurrentReports()) {
+      delegate.deleteReport(id)
+    }
+
+    delegate.sendError(e.toString())
   }
 
   /**
@@ -105,8 +135,8 @@ internal class ReaperImpl(
   @Synchronized
   fun startReport(): String? {
     return delegate.trace("Reaper#startReport") {
-      val shortUuid = UUID.randomUUID().toString().substring(0, REPORT_SUFFIX_SIZE)
-      val file = delegate.startReport(shortUuid)
+      val id = UUID.randomUUID().toString().substring(0, REPORT_SUFFIX_SIZE)
+      val file = delegate.startReport(id)
       if (file == null) {
         delegate.e("Failed to open Reaper report for writing")
         return@trace null
@@ -118,7 +148,7 @@ internal class ReaperImpl(
         delegate.e("Failed to open Reaper report stream for writing $absolutePath")
         return@trace null
       }
-      report = Report(stream, DataOutputStream(stream), file)
+      report = Report(stream, DataOutputStream(stream), file = file, id = id)
 
       delegate.d(
         "Reaper report started. report=$absolutePath backend=$baseUrl tracker=${tracker.name}"
@@ -139,7 +169,9 @@ internal class ReaperImpl(
         delegate.e("No report to finalize")
         return@trace
       } else {
-        delegate.d("Finalizing report ${report.path.absolutePath}")
+        report.dataStream.close()
+        report.stream.close()
+        delegate.d("Finalizing report ${report.file.absolutePath}")
       }
 
       // Move report to pending and schedule upload.
