@@ -12,6 +12,7 @@ import android.os.Build
 import android.os.Handler
 import android.os.HandlerThread
 import android.os.Looper
+import android.system.ErrnoException
 import android.util.Log
 import androidx.annotation.MainThread
 import androidx.lifecycle.ProcessLifecycleOwner
@@ -21,6 +22,8 @@ import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import androidx.work.workDataOf
 import java.io.File
+import java.io.FileNotFoundException
+import java.io.IOException
 
 private const val DEFERRED_START_MS = 5L * 1000L
 private const val FLUSH_PERIOD_MS = 60L * 1000L
@@ -94,7 +97,7 @@ internal object ReaperInternal {
         lambda(theImpl)
       }
     } catch (e: Exception) {
-      reportError(context, e.toString())
+      sendError(context, e.toString())
     }
   }
 
@@ -150,12 +153,23 @@ internal object ReaperInternal {
 
 private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Delegate {
 
-  override fun startReport(id: String): File {
+  override fun startReport(id: String): File? {
     ensureDirectories(context)
     val name = getReportName(id)
     val file = File(getCurrentDir(context), name)
-    file.delete()
-    file.createNewFile()
+    try {
+      file.delete()
+      file.createNewFile()
+    } catch (e: IOException) {
+      e("Failed to create report $e")
+      return null
+    } catch (e: FileNotFoundException) {
+      e("Failed to create report $e")
+      return null
+    } catch (e: ErrnoException) {
+      e("Failed to create report $e")
+      return null
+    }
     return file
   }
 
@@ -171,7 +185,7 @@ private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Dele
     ensureDirectories(context)
     val name = getReportName(id)
     val current = File(getCurrentDir(context), name)
-    val pending = File(getCurrentDir(context), name)
+    val pending = File(getPendingDir(context), name)
     current.renameTo(pending)
   }
 
@@ -219,6 +233,10 @@ private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Dele
       }.build()
 
     WorkManager.getInstance(context).enqueue(uploadWorkRequest)
+  }
+
+  override fun sendError(message: String) {
+    sendError(context, message)
   }
 
   override fun d(message: String) {
@@ -269,6 +287,7 @@ private fun fatalError(context: Context, message: String) {
 
 @MainThread
 private fun mainThreadStart(context: Context, impl: ReaperImpl) {
+  Log.d(TAG, "Reaper#mainThreadStart")
   androidTrace("Reaper#mainThreadStart") {
     val thread = HandlerThread("ReaperWorker")
     thread.start()
@@ -299,18 +318,12 @@ private fun wrap(context: Context, lambda: () -> Unit) {
   try {
     lambda()
   } catch (e: Exception) {
-    reportError(context, e.toString())
+    sendError(context, e.toString())
   }
 }
 
 private fun workerThreadStart(context: Context, looper: Looper, impl: ReaperImpl) {
   Log.d(TAG, "Reaper#workerThreadStart")
-  val observer = OnStopLifecycleObserver {
-    Handler(looper).post {
-      impl.finalizeReport()
-    }
-  }
-  ProcessLifecycleOwner.get().lifecycle.addObserver(observer)
   androidTrace("Reaper#workerThreadStart") {
     // If Reaper was running previously but we did not get a chance to finalize the report we may
     // end up with reports 'stuck' in current which will never be finalized. Schedule those for
