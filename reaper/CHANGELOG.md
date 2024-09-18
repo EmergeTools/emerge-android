@@ -11,6 +11,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Changed initialization and flushing to move much of the work off the
   startup path and onto a dedicated background thread. [#259](https://github.com/EmergeTools/emerge-android/pull/259)
 
+## 1.0.0-rc02 - 2024-09-18
+
+- Handle I/O errors (I/O crash fix). [#262](https://github.com/EmergeTools/emerge-android/pull/262)
+- Split Reaper business logic from I/O. [#261](https://github.com/EmergeTools/emerge-android/pull/261)
+- Fix typo that prevented limiting pending reports. [#260](https://github.com/EmergeTools/emerge-android/pull/260)
+- Move most work off main thread (ANR fix). [#259](https://github.com/EmergeTools/emerge-android/pull/259)
+- Remove unnecessary manifest properties. [#257](https://github.com/EmergeTools/emerge-android/pull/257)
+- Pass `onFlush` directly to `flush`. [#258](https://github.com/EmergeTools/emerge-android/pull/258)
+
 ## 1.0.0-rc01 - 2024-08-09
 
 - Remove fatal exit if `publishableApiKey` is not set. [#232](https://github.com/EmergeTools/emerge-android/pull/232)
