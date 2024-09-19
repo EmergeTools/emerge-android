@@ -15,6 +15,10 @@ import org.junit.runner.RunWith
 @RunWith(AndroidJUnit4::class)
 class ReaperStressSampleUiTest {
 
+  companion object {
+    const val TARGET_PACKAGE_NAME = "com.emergetools.reaper.sample.stress"
+  }
+
   @Test
   fun navigateToDetailScreen() {
     val device = UiDevice.getInstance(InstrumentationRegistry.getInstrumentation())
@@ -31,7 +35,7 @@ class ReaperStressSampleUiTest {
     val context = ApplicationProvider.getApplicationContext<Context>()
 
     val intent = context.packageManager.getLaunchIntentForPackage(
-      context.packageName
+      TARGET_PACKAGE_NAME
     )?.apply {
       // Clear out any previous instances
       addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK)
@@ -40,7 +44,7 @@ class ReaperStressSampleUiTest {
 
     // Wait for the app to appear
     device.wait(
-      Until.hasObject(By.pkg(context.packageName).depth(0)),
+      Until.hasObject(By.pkg(TARGET_PACKAGE_NAME).depth(0)),
       10000
     )
 
