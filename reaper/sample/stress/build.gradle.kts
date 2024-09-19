@@ -17,7 +17,7 @@ emerge {
   }
 
   reaper {
-    enabledVariants.set(listOf("releaseWithReaper"))
+    enabledVariants.set(listOf("releaseWithReaper", "debug"))
     publishableApiKey.set(System.getenv("EMERGE_REAPER_API_KEY") ?: "<key>")
   }
 }
@@ -25,7 +25,6 @@ emerge {
 android {
   namespace = "com.emergetools.reaper.sample.stress"
   compileSdk = 34
-  testBuildType = "releaseWithReaper"
 
   defaultConfig {
     applicationId = "com.emergetools.reaper.sample.stress"
@@ -34,7 +33,7 @@ android {
     versionCode = 1
     versionName = "1.0"
 
-    testInstrumentationRunner = "androidx.test.ext.junit.runners.AndroidJUnit4"
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
       useSupportLibrary = true
     }
@@ -106,7 +105,6 @@ dependencies {
   androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.core)
-  androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.test.uiautomator)
 }
