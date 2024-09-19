@@ -41,7 +41,7 @@ jobs:
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
       - name: Generate test APK
-        run: ./gradlew :reaper:sample:stress:assembleAndroidTest -Pandroid.useAndroidX=true
+        run: ./gradlew :reaper:sample:stress:assembleAndroidTest -Pandroid.useAndroidX=true -PisAndroidTest=true
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}

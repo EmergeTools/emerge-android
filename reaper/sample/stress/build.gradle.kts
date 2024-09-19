@@ -34,6 +34,7 @@ android {
     versionCode = 1
     versionName = "1.0"
 
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
       useSupportLibrary = true
     }
@@ -49,7 +50,13 @@ android {
     }
     create("releaseWithReaper") {
       initWith(getByName("release"))
-      isMinifyEnabled = true
+      // Don't minify androidTest application
+      if (project.hasProperty("isAndroidTest")) {
+        isMinifyEnabled = false
+      } else {
+        isMinifyEnabled = true
+      }
+
       matchingFallbacks += listOf("release")
       signingConfig = signingConfigs.getByName("debug")
     }
