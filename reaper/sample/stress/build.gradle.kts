@@ -17,34 +17,47 @@ emerge {
   }
 
   reaper {
-    enabledVariants.set(listOf("release"))
+    enabledVariants.set(listOf("releaseWithReaper", "debug"))
     publishableApiKey.set(System.getenv("EMERGE_REAPER_API_KEY") ?: "<key>")
   }
 }
 
 android {
-  namespace = "com.emergetools.reaper.sample.manuallyInitialized"
+  namespace = "com.emergetools.reaper.sample.stress"
   compileSdk = 34
 
   defaultConfig {
-    applicationId = "com.emergetools.reaper.sample.manuallyInitialized"
+    applicationId = "com.emergetools.reaper.sample.stress"
     minSdk = 21
     targetSdk = 33
     versionCode = 1
     versionName = "1.0"
 
+    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     vectorDrawables {
       useSupportLibrary = true
     }
   }
 
   buildTypes {
-    release {
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+    getByName("debug") {
+      applicationIdSuffix = ".debug"
+      isDebuggable = true
+    }
+    getByName("release") {
       isMinifyEnabled = true
     }
-    debug {
-      applicationIdSuffix = ".debug"
+    create("releaseWithReaper") {
+      initWith(getByName("release"))
+      // Don't minify androidTest application
+      if (project.hasProperty("isAndroidTest")) {
+        isMinifyEnabled = false
+      } else {
+        isMinifyEnabled = true
+      }
+
+      matchingFallbacks += listOf("release")
+      signingConfig = signingConfigs.getByName("debug")
     }
   }
 
@@ -68,7 +81,7 @@ android {
 
 buildConfig {
   className("ReaperConfig")
-  packageName("com.emergetools.reaper.sample.manuallyInitialized")
+  packageName("com.emergetools.reaper.sample.stress")
 }
 
 dependencies {
@@ -78,6 +91,9 @@ dependencies {
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.kotlinx.serialization)
 
+  // Reaper SDK
+  implementation(projects.reaper.reaper)
+
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.tooling)
@@ -85,7 +101,10 @@ dependencies {
   implementation(libs.compose.material)
   implementation(libs.androidx.test.core.ktx)
 
-  // Reaper SDK
-  implementation(libs.androidx.startup.runtime)
-  implementation(projects.reaper.reaper)
+  androidTestImplementation(libs.compose.runtime)
+  androidTestImplementation(libs.compose.ui)
+  androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.test.core)
+  androidTestImplementation(libs.androidx.test.runner)
+  androidTestImplementation(libs.androidx.test.uiautomator)
 }

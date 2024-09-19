@@ -29,6 +29,7 @@ include(
   ":reaper:sample",
   ":reaper:sample:app",
   ":reaper:sample:manuallyInitializedApp",
+  ":reaper:sample:stress",
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-annotations",
@@ -36,6 +37,7 @@ include(
   ":snapshots:sample",
   ":snapshots:sample:app",
   ":snapshots:sample:ui-module",
+  ":tools",
   ":benchmark",
 )
 includeBuild("gradle-plugin")

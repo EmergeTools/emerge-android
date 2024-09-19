@@ -93,6 +93,7 @@ dependencies {
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.androidx.junit)
   androidTestImplementation(libs.androidx.test.core)
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.test.uiautomator)

@@ -35,13 +35,13 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Generate target APK
-        run: ./gradlew :reaper:sample:app:assembleDebug -Pandroid.useAndroidX=true
+        run: ./gradlew :reaper:sample:stress:assembleDebug -Pandroid.useAndroidX=true
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
       - name: Generate test APK
-        run: ./gradlew :reaper:sample:app:assembleAndroidTest -Pandroid.useAndroidX=true
+        run: ./gradlew :reaper:sample:stress:assembleAndroidTest -Pandroid.useAndroidX=true
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
@@ -60,8 +60,8 @@ jobs:
         run: |
           gcloud firebase test android run \
             --type instrumentation \
-            --app reaper/sample/app/build/outputs/apk/debug/app-debug.apk \
-            --test reaper/sample/app/build/outputs/apk/androidTest/debug/app-debug-androidTest.apk \
+            --app reaper/sample/stress/build/outputs/apk/debug/stress-debug.apk \
+            --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-debug-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \
             --device model=Nexus6P,version=26,locale=en,orientation=portrait \
