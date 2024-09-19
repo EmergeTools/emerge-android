@@ -27,7 +27,7 @@ abstract class UploadAAB : BaseUploadTask() {
   }
 
   @TaskAction
-  fun execute() {
+  open fun execute() {
     val artifactName = artifact.get().asFile.name
     val artifactMetadata = ArtifactMetadata(
       created = Clock.System.now(),

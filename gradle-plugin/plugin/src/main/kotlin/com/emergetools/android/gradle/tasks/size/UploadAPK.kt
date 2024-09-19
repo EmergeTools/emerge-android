@@ -27,7 +27,7 @@ abstract class UploadAPK : BaseUploadTask() {
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val proguardMapping: RegularFileProperty
 
-  private val primaryArtifact: File
+  protected val primaryArtifact: File
     get() {
       val apks = artifactDir.get().asFileTree.filter { it.extension == APK_EXTENSION }
       check(apks.files.size < 2) {
@@ -54,7 +54,7 @@ abstract class UploadAPK : BaseUploadTask() {
   }
 
   @TaskAction
-  fun doExecute() {
+  open fun execute() {
     val artifactName = primaryArtifact.name
     val proguardMappingName = proguardMapping.asFile.orNull?.name
     val artifactMetadata = ArtifactMetadata(

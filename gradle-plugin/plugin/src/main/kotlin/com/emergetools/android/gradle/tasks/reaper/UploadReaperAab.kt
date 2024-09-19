@@ -3,6 +3,7 @@ package com.emergetools.android.gradle.tasks.reaper
 import com.emergetools.android.gradle.BuildConfig
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask
+import com.emergetools.android.gradle.tasks.size.UploadAAB
 import kotlinx.datetime.Clock
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
@@ -15,25 +16,13 @@ import org.gradle.api.tasks.TaskAction
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
-abstract class InitializeReaper : BaseUploadTask() {
-
-  @get:InputFile
-  @get:PathSensitive(PathSensitivity.NAME_ONLY)
-  abstract val artifact: RegularFileProperty
+abstract class UploadReaperAab : UploadAAB() {
 
   @get:Input
   abstract val publishableApiKey: Property<String>
 
-  override fun includeFilesInUpload(zos: ZipOutputStream) {
-    artifact.get().asFile.inputStream().use { inputStream ->
-      zos.putNextEntry(ZipEntry(artifact.get().asFile.name))
-      inputStream.copyTo(zos)
-      zos.closeEntry()
-    }
-  }
-
   @TaskAction
-  fun execute() {
+  override fun execute() {
     if (publishableApiKey.orNull == null) {
       throw StopExecutionException("publishableApiKey must be set for Reaper to work properly. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
     }
@@ -52,10 +41,5 @@ abstract class InitializeReaper : BaseUploadTask() {
       logger.lifecycle("https://emergetools.com/reaper/${response.uploadId}")
       logger.lifecycle("Note: Initial Reaper processing can take up to 10 minutes.")
     }
-  }
-
-  companion object {
-    const val AAB_PROGUARD_PATH =
-      "BUNDLE-METADATA/com.android.tools.build.obfuscation/proguard.map"
   }
 }
