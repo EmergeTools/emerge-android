@@ -34,7 +34,7 @@ android {
     versionCode = 1
     versionName = "1.0"
 
-    testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    testInstrumentationRunner = "androidx.test.ext.junit.runners.AndroidJUnit4"
     vectorDrawables {
       useSupportLibrary = true
     }
@@ -106,6 +106,7 @@ dependencies {
   androidTestImplementation(libs.compose.ui)
   androidTestImplementation(libs.junit)
   androidTestImplementation(libs.androidx.test.core)
+  androidTestImplementation(libs.androidx.test.ext.junit)
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.test.uiautomator)
 }
