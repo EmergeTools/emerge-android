@@ -35,7 +35,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Generate target APK
-        run: ./gradlew :reaper:sample:stress:assembleReleaseWithReaper -Pandroid.useAndroidX=true
+        run: ./gradlew :reaper:sample:stress:assembleDebug -Pandroid.useAndroidX=true
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
