@@ -35,7 +35,7 @@ jobs:
           java-version: '17'
           distribution: 'adopt'
       - name: Generate target APK
-        run: ./gradlew :reaper:sample:stress:assemble -Pandroid.useAndroidX=true
+        run: ./gradlew :reaper:sample:stress:assembleReleaseWithReaper -Pandroid.useAndroidX=true
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
@@ -61,12 +61,12 @@ jobs:
           gcloud firebase test android run \
             --type instrumentation \
             --app reaper/sample/stress/build/outputs/apk/releaseWithReaper/stress-releaseWithReaper.apk \
-            --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-debug-androidTest.apk \
+            --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-releaseWithReaper-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \
             --device model=Nexus6P,version=26,locale=en,orientation=portrait \
             --device model=HWMHA,version=24,locale=en,orientation=portrait \
-            --device model=Nexus6,version=25,locale=en,orientation=portrait
+            --device model=Nexus6,version=25,locale=en,orientation=portrait \
 
   minsdk-test:
     runs-on: ubuntu-latest
