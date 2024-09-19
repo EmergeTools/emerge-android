@@ -61,7 +61,7 @@ jobs:
           gcloud firebase test android run \
             --type instrumentation \
             --app reaper/sample/stress/build/outputs/apk/releaseWithReaper/stress-releaseWithReaper.apk \
-            --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-debug-androidTest.apk \
+            --test reaper/sample/stress/build/outputs/apk/androidTest/releaseWithReaper/stress-releaseWithReaper-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \
             --device model=Nexus6P,version=26,locale=en,orientation=portrait \

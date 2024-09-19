@@ -25,6 +25,7 @@ emerge {
 android {
   namespace = "com.emergetools.reaper.sample.stress"
   compileSdk = 34
+  testBuildType = "releaseWithReaper"
 
   defaultConfig {
     applicationId = "com.emergetools.reaper.sample.stress"
