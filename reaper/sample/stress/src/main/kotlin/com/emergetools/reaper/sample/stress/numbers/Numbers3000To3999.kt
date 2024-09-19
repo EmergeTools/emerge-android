@@ -1,5 +1,6 @@
 package com.emergetools.reaper.sample.stress.numbers
 
+@Suppress("MatchingDeclarationName")
 class Number3000 : StressfulInteger {
 
   companion object {
@@ -29,9 +30,9 @@ class Number3000 : StressfulInteger {
     val b = Number2998()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3001 : StressfulInteger {
 
   companion object {
@@ -61,9 +62,9 @@ class Number3001 : StressfulInteger {
     val b = Number2999()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3002 : StressfulInteger {
 
   companion object {
@@ -93,9 +94,9 @@ class Number3002 : StressfulInteger {
     val b = Number3000()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3003 : StressfulInteger {
 
   companion object {
@@ -125,9 +126,9 @@ class Number3003 : StressfulInteger {
     val b = Number3001()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3004 : StressfulInteger {
 
   companion object {
@@ -157,9 +158,9 @@ class Number3004 : StressfulInteger {
     val b = Number3002()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3005 : StressfulInteger {
 
   companion object {
@@ -189,9 +190,9 @@ class Number3005 : StressfulInteger {
     val b = Number3003()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3006 : StressfulInteger {
 
   companion object {
@@ -221,9 +222,9 @@ class Number3006 : StressfulInteger {
     val b = Number3004()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3007 : StressfulInteger {
 
   companion object {
@@ -253,9 +254,9 @@ class Number3007 : StressfulInteger {
     val b = Number3005()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3008 : StressfulInteger {
 
   companion object {
@@ -285,9 +286,9 @@ class Number3008 : StressfulInteger {
     val b = Number3006()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3009 : StressfulInteger {
 
   companion object {
@@ -317,9 +318,9 @@ class Number3009 : StressfulInteger {
     val b = Number3007()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3010 : StressfulInteger {
 
   companion object {
@@ -349,9 +350,9 @@ class Number3010 : StressfulInteger {
     val b = Number3008()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3011 : StressfulInteger {
 
   companion object {
@@ -381,9 +382,9 @@ class Number3011 : StressfulInteger {
     val b = Number3009()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3012 : StressfulInteger {
 
   companion object {
@@ -413,9 +414,9 @@ class Number3012 : StressfulInteger {
     val b = Number3010()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3013 : StressfulInteger {
 
   companion object {
@@ -445,9 +446,9 @@ class Number3013 : StressfulInteger {
     val b = Number3011()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3014 : StressfulInteger {
 
   companion object {
@@ -477,9 +478,9 @@ class Number3014 : StressfulInteger {
     val b = Number3012()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3015 : StressfulInteger {
 
   companion object {
@@ -509,9 +510,9 @@ class Number3015 : StressfulInteger {
     val b = Number3013()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3016 : StressfulInteger {
 
   companion object {
@@ -541,9 +542,9 @@ class Number3016 : StressfulInteger {
     val b = Number3014()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3017 : StressfulInteger {
 
   companion object {
@@ -573,9 +574,9 @@ class Number3017 : StressfulInteger {
     val b = Number3015()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3018 : StressfulInteger {
 
   companion object {
@@ -605,9 +606,9 @@ class Number3018 : StressfulInteger {
     val b = Number3016()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3019 : StressfulInteger {
 
   companion object {
@@ -637,9 +638,9 @@ class Number3019 : StressfulInteger {
     val b = Number3017()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3020 : StressfulInteger {
 
   companion object {
@@ -669,9 +670,9 @@ class Number3020 : StressfulInteger {
     val b = Number3018()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3021 : StressfulInteger {
 
   companion object {
@@ -701,9 +702,9 @@ class Number3021 : StressfulInteger {
     val b = Number3019()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3022 : StressfulInteger {
 
   companion object {
@@ -733,9 +734,9 @@ class Number3022 : StressfulInteger {
     val b = Number3020()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3023 : StressfulInteger {
 
   companion object {
@@ -765,9 +766,9 @@ class Number3023 : StressfulInteger {
     val b = Number3021()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3024 : StressfulInteger {
 
   companion object {
@@ -797,9 +798,9 @@ class Number3024 : StressfulInteger {
     val b = Number3022()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3025 : StressfulInteger {
 
   companion object {
@@ -829,9 +830,9 @@ class Number3025 : StressfulInteger {
     val b = Number3023()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3026 : StressfulInteger {
 
   companion object {
@@ -861,9 +862,9 @@ class Number3026 : StressfulInteger {
     val b = Number3024()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3027 : StressfulInteger {
 
   companion object {
@@ -893,9 +894,9 @@ class Number3027 : StressfulInteger {
     val b = Number3025()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3028 : StressfulInteger {
 
   companion object {
@@ -925,9 +926,9 @@ class Number3028 : StressfulInteger {
     val b = Number3026()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3029 : StressfulInteger {
 
   companion object {
@@ -957,9 +958,9 @@ class Number3029 : StressfulInteger {
     val b = Number3027()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3030 : StressfulInteger {
 
   companion object {
@@ -989,9 +990,9 @@ class Number3030 : StressfulInteger {
     val b = Number3028()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3031 : StressfulInteger {
 
   companion object {
@@ -1021,9 +1022,9 @@ class Number3031 : StressfulInteger {
     val b = Number3029()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3032 : StressfulInteger {
 
   companion object {
@@ -1053,9 +1054,9 @@ class Number3032 : StressfulInteger {
     val b = Number3030()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3033 : StressfulInteger {
 
   companion object {
@@ -1085,9 +1086,9 @@ class Number3033 : StressfulInteger {
     val b = Number3031()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3034 : StressfulInteger {
 
   companion object {
@@ -1117,9 +1118,9 @@ class Number3034 : StressfulInteger {
     val b = Number3032()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3035 : StressfulInteger {
 
   companion object {
@@ -1149,9 +1150,9 @@ class Number3035 : StressfulInteger {
     val b = Number3033()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3036 : StressfulInteger {
 
   companion object {
@@ -1181,9 +1182,9 @@ class Number3036 : StressfulInteger {
     val b = Number3034()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3037 : StressfulInteger {
 
   companion object {
@@ -1213,9 +1214,9 @@ class Number3037 : StressfulInteger {
     val b = Number3035()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3038 : StressfulInteger {
 
   companion object {
@@ -1245,9 +1246,9 @@ class Number3038 : StressfulInteger {
     val b = Number3036()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3039 : StressfulInteger {
 
   companion object {
@@ -1277,9 +1278,9 @@ class Number3039 : StressfulInteger {
     val b = Number3037()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3040 : StressfulInteger {
 
   companion object {
@@ -1309,9 +1310,9 @@ class Number3040 : StressfulInteger {
     val b = Number3038()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3041 : StressfulInteger {
 
   companion object {
@@ -1341,9 +1342,9 @@ class Number3041 : StressfulInteger {
     val b = Number3039()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3042 : StressfulInteger {
 
   companion object {
@@ -1373,9 +1374,9 @@ class Number3042 : StressfulInteger {
     val b = Number3040()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3043 : StressfulInteger {
 
   companion object {
@@ -1405,9 +1406,9 @@ class Number3043 : StressfulInteger {
     val b = Number3041()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3044 : StressfulInteger {
 
   companion object {
@@ -1437,9 +1438,9 @@ class Number3044 : StressfulInteger {
     val b = Number3042()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3045 : StressfulInteger {
 
   companion object {
@@ -1469,9 +1470,9 @@ class Number3045 : StressfulInteger {
     val b = Number3043()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3046 : StressfulInteger {
 
   companion object {
@@ -1501,9 +1502,9 @@ class Number3046 : StressfulInteger {
     val b = Number3044()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3047 : StressfulInteger {
 
   companion object {
@@ -1533,9 +1534,9 @@ class Number3047 : StressfulInteger {
     val b = Number3045()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3048 : StressfulInteger {
 
   companion object {
@@ -1565,9 +1566,9 @@ class Number3048 : StressfulInteger {
     val b = Number3046()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3049 : StressfulInteger {
 
   companion object {
@@ -1597,9 +1598,9 @@ class Number3049 : StressfulInteger {
     val b = Number3047()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3050 : StressfulInteger {
 
   companion object {
@@ -1629,9 +1630,9 @@ class Number3050 : StressfulInteger {
     val b = Number3048()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3051 : StressfulInteger {
 
   companion object {
@@ -1661,9 +1662,9 @@ class Number3051 : StressfulInteger {
     val b = Number3049()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3052 : StressfulInteger {
 
   companion object {
@@ -1693,9 +1694,9 @@ class Number3052 : StressfulInteger {
     val b = Number3050()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3053 : StressfulInteger {
 
   companion object {
@@ -1725,9 +1726,9 @@ class Number3053 : StressfulInteger {
     val b = Number3051()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3054 : StressfulInteger {
 
   companion object {
@@ -1757,9 +1758,9 @@ class Number3054 : StressfulInteger {
     val b = Number3052()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3055 : StressfulInteger {
 
   companion object {
@@ -1789,9 +1790,9 @@ class Number3055 : StressfulInteger {
     val b = Number3053()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3056 : StressfulInteger {
 
   companion object {
@@ -1821,9 +1822,9 @@ class Number3056 : StressfulInteger {
     val b = Number3054()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3057 : StressfulInteger {
 
   companion object {
@@ -1853,9 +1854,9 @@ class Number3057 : StressfulInteger {
     val b = Number3055()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3058 : StressfulInteger {
 
   companion object {
@@ -1885,9 +1886,9 @@ class Number3058 : StressfulInteger {
     val b = Number3056()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3059 : StressfulInteger {
 
   companion object {
@@ -1917,9 +1918,9 @@ class Number3059 : StressfulInteger {
     val b = Number3057()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3060 : StressfulInteger {
 
   companion object {
@@ -1949,9 +1950,9 @@ class Number3060 : StressfulInteger {
     val b = Number3058()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3061 : StressfulInteger {
 
   companion object {
@@ -1981,9 +1982,9 @@ class Number3061 : StressfulInteger {
     val b = Number3059()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3062 : StressfulInteger {
 
   companion object {
@@ -2013,9 +2014,9 @@ class Number3062 : StressfulInteger {
     val b = Number3060()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3063 : StressfulInteger {
 
   companion object {
@@ -2045,9 +2046,9 @@ class Number3063 : StressfulInteger {
     val b = Number3061()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3064 : StressfulInteger {
 
   companion object {
@@ -2077,9 +2078,9 @@ class Number3064 : StressfulInteger {
     val b = Number3062()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3065 : StressfulInteger {
 
   companion object {
@@ -2109,9 +2110,9 @@ class Number3065 : StressfulInteger {
     val b = Number3063()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3066 : StressfulInteger {
 
   companion object {
@@ -2141,9 +2142,9 @@ class Number3066 : StressfulInteger {
     val b = Number3064()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3067 : StressfulInteger {
 
   companion object {
@@ -2173,9 +2174,9 @@ class Number3067 : StressfulInteger {
     val b = Number3065()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3068 : StressfulInteger {
 
   companion object {
@@ -2205,9 +2206,9 @@ class Number3068 : StressfulInteger {
     val b = Number3066()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3069 : StressfulInteger {
 
   companion object {
@@ -2237,9 +2238,9 @@ class Number3069 : StressfulInteger {
     val b = Number3067()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3070 : StressfulInteger {
 
   companion object {
@@ -2269,9 +2270,9 @@ class Number3070 : StressfulInteger {
     val b = Number3068()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3071 : StressfulInteger {
 
   companion object {
@@ -2301,9 +2302,9 @@ class Number3071 : StressfulInteger {
     val b = Number3069()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3072 : StressfulInteger {
 
   companion object {
@@ -2333,9 +2334,9 @@ class Number3072 : StressfulInteger {
     val b = Number3070()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3073 : StressfulInteger {
 
   companion object {
@@ -2365,9 +2366,9 @@ class Number3073 : StressfulInteger {
     val b = Number3071()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3074 : StressfulInteger {
 
   companion object {
@@ -2397,9 +2398,9 @@ class Number3074 : StressfulInteger {
     val b = Number3072()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3075 : StressfulInteger {
 
   companion object {
@@ -2429,9 +2430,9 @@ class Number3075 : StressfulInteger {
     val b = Number3073()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3076 : StressfulInteger {
 
   companion object {
@@ -2461,9 +2462,9 @@ class Number3076 : StressfulInteger {
     val b = Number3074()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3077 : StressfulInteger {
 
   companion object {
@@ -2493,9 +2494,9 @@ class Number3077 : StressfulInteger {
     val b = Number3075()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3078 : StressfulInteger {
 
   companion object {
@@ -2525,9 +2526,9 @@ class Number3078 : StressfulInteger {
     val b = Number3076()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3079 : StressfulInteger {
 
   companion object {
@@ -2557,9 +2558,9 @@ class Number3079 : StressfulInteger {
     val b = Number3077()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3080 : StressfulInteger {
 
   companion object {
@@ -2589,9 +2590,9 @@ class Number3080 : StressfulInteger {
     val b = Number3078()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3081 : StressfulInteger {
 
   companion object {
@@ -2621,9 +2622,9 @@ class Number3081 : StressfulInteger {
     val b = Number3079()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3082 : StressfulInteger {
 
   companion object {
@@ -2653,9 +2654,9 @@ class Number3082 : StressfulInteger {
     val b = Number3080()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3083 : StressfulInteger {
 
   companion object {
@@ -2685,9 +2686,9 @@ class Number3083 : StressfulInteger {
     val b = Number3081()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3084 : StressfulInteger {
 
   companion object {
@@ -2717,9 +2718,9 @@ class Number3084 : StressfulInteger {
     val b = Number3082()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3085 : StressfulInteger {
 
   companion object {
@@ -2749,9 +2750,9 @@ class Number3085 : StressfulInteger {
     val b = Number3083()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3086 : StressfulInteger {
 
   companion object {
@@ -2781,9 +2782,9 @@ class Number3086 : StressfulInteger {
     val b = Number3084()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3087 : StressfulInteger {
 
   companion object {
@@ -2813,9 +2814,9 @@ class Number3087 : StressfulInteger {
     val b = Number3085()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3088 : StressfulInteger {
 
   companion object {
@@ -2845,9 +2846,9 @@ class Number3088 : StressfulInteger {
     val b = Number3086()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3089 : StressfulInteger {
 
   companion object {
@@ -2877,9 +2878,9 @@ class Number3089 : StressfulInteger {
     val b = Number3087()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3090 : StressfulInteger {
 
   companion object {
@@ -2909,9 +2910,9 @@ class Number3090 : StressfulInteger {
     val b = Number3088()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3091 : StressfulInteger {
 
   companion object {
@@ -2941,9 +2942,9 @@ class Number3091 : StressfulInteger {
     val b = Number3089()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3092 : StressfulInteger {
 
   companion object {
@@ -2973,9 +2974,9 @@ class Number3092 : StressfulInteger {
     val b = Number3090()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3093 : StressfulInteger {
 
   companion object {
@@ -3005,9 +3006,9 @@ class Number3093 : StressfulInteger {
     val b = Number3091()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3094 : StressfulInteger {
 
   companion object {
@@ -3037,9 +3038,9 @@ class Number3094 : StressfulInteger {
     val b = Number3092()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3095 : StressfulInteger {
 
   companion object {
@@ -3069,9 +3070,9 @@ class Number3095 : StressfulInteger {
     val b = Number3093()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3096 : StressfulInteger {
 
   companion object {
@@ -3101,9 +3102,9 @@ class Number3096 : StressfulInteger {
     val b = Number3094()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3097 : StressfulInteger {
 
   companion object {
@@ -3133,9 +3134,9 @@ class Number3097 : StressfulInteger {
     val b = Number3095()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3098 : StressfulInteger {
 
   companion object {
@@ -3165,9 +3166,9 @@ class Number3098 : StressfulInteger {
     val b = Number3096()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3099 : StressfulInteger {
 
   companion object {
@@ -3197,9 +3198,9 @@ class Number3099 : StressfulInteger {
     val b = Number3097()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3100 : StressfulInteger {
 
   companion object {
@@ -3229,9 +3230,9 @@ class Number3100 : StressfulInteger {
     val b = Number3098()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3101 : StressfulInteger {
 
   companion object {
@@ -3261,9 +3262,9 @@ class Number3101 : StressfulInteger {
     val b = Number3099()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3102 : StressfulInteger {
 
   companion object {
@@ -3293,9 +3294,9 @@ class Number3102 : StressfulInteger {
     val b = Number3100()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3103 : StressfulInteger {
 
   companion object {
@@ -3325,9 +3326,9 @@ class Number3103 : StressfulInteger {
     val b = Number3101()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3104 : StressfulInteger {
 
   companion object {
@@ -3357,9 +3358,9 @@ class Number3104 : StressfulInteger {
     val b = Number3102()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3105 : StressfulInteger {
 
   companion object {
@@ -3389,9 +3390,9 @@ class Number3105 : StressfulInteger {
     val b = Number3103()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3106 : StressfulInteger {
 
   companion object {
@@ -3421,9 +3422,9 @@ class Number3106 : StressfulInteger {
     val b = Number3104()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3107 : StressfulInteger {
 
   companion object {
@@ -3453,9 +3454,9 @@ class Number3107 : StressfulInteger {
     val b = Number3105()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3108 : StressfulInteger {
 
   companion object {
@@ -3485,9 +3486,9 @@ class Number3108 : StressfulInteger {
     val b = Number3106()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3109 : StressfulInteger {
 
   companion object {
@@ -3517,9 +3518,9 @@ class Number3109 : StressfulInteger {
     val b = Number3107()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3110 : StressfulInteger {
 
   companion object {
@@ -3549,9 +3550,9 @@ class Number3110 : StressfulInteger {
     val b = Number3108()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3111 : StressfulInteger {
 
   companion object {
@@ -3581,9 +3582,9 @@ class Number3111 : StressfulInteger {
     val b = Number3109()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3112 : StressfulInteger {
 
   companion object {
@@ -3613,9 +3614,9 @@ class Number3112 : StressfulInteger {
     val b = Number3110()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3113 : StressfulInteger {
 
   companion object {
@@ -3645,9 +3646,9 @@ class Number3113 : StressfulInteger {
     val b = Number3111()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3114 : StressfulInteger {
 
   companion object {
@@ -3677,9 +3678,9 @@ class Number3114 : StressfulInteger {
     val b = Number3112()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3115 : StressfulInteger {
 
   companion object {
@@ -3709,9 +3710,9 @@ class Number3115 : StressfulInteger {
     val b = Number3113()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3116 : StressfulInteger {
 
   companion object {
@@ -3741,9 +3742,9 @@ class Number3116 : StressfulInteger {
     val b = Number3114()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3117 : StressfulInteger {
 
   companion object {
@@ -3773,9 +3774,9 @@ class Number3117 : StressfulInteger {
     val b = Number3115()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3118 : StressfulInteger {
 
   companion object {
@@ -3805,9 +3806,9 @@ class Number3118 : StressfulInteger {
     val b = Number3116()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3119 : StressfulInteger {
 
   companion object {
@@ -3837,9 +3838,9 @@ class Number3119 : StressfulInteger {
     val b = Number3117()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3120 : StressfulInteger {
 
   companion object {
@@ -3869,9 +3870,9 @@ class Number3120 : StressfulInteger {
     val b = Number3118()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3121 : StressfulInteger {
 
   companion object {
@@ -3901,9 +3902,9 @@ class Number3121 : StressfulInteger {
     val b = Number3119()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3122 : StressfulInteger {
 
   companion object {
@@ -3933,9 +3934,9 @@ class Number3122 : StressfulInteger {
     val b = Number3120()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3123 : StressfulInteger {
 
   companion object {
@@ -3965,9 +3966,9 @@ class Number3123 : StressfulInteger {
     val b = Number3121()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3124 : StressfulInteger {
 
   companion object {
@@ -3997,9 +3998,9 @@ class Number3124 : StressfulInteger {
     val b = Number3122()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3125 : StressfulInteger {
 
   companion object {
@@ -4029,9 +4030,9 @@ class Number3125 : StressfulInteger {
     val b = Number3123()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3126 : StressfulInteger {
 
   companion object {
@@ -4061,9 +4062,9 @@ class Number3126 : StressfulInteger {
     val b = Number3124()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3127 : StressfulInteger {
 
   companion object {
@@ -4093,9 +4094,9 @@ class Number3127 : StressfulInteger {
     val b = Number3125()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3128 : StressfulInteger {
 
   companion object {
@@ -4125,9 +4126,9 @@ class Number3128 : StressfulInteger {
     val b = Number3126()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3129 : StressfulInteger {
 
   companion object {
@@ -4157,9 +4158,9 @@ class Number3129 : StressfulInteger {
     val b = Number3127()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3130 : StressfulInteger {
 
   companion object {
@@ -4189,9 +4190,9 @@ class Number3130 : StressfulInteger {
     val b = Number3128()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3131 : StressfulInteger {
 
   companion object {
@@ -4221,9 +4222,9 @@ class Number3131 : StressfulInteger {
     val b = Number3129()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3132 : StressfulInteger {
 
   companion object {
@@ -4253,9 +4254,9 @@ class Number3132 : StressfulInteger {
     val b = Number3130()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3133 : StressfulInteger {
 
   companion object {
@@ -4285,9 +4286,9 @@ class Number3133 : StressfulInteger {
     val b = Number3131()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3134 : StressfulInteger {
 
   companion object {
@@ -4317,9 +4318,9 @@ class Number3134 : StressfulInteger {
     val b = Number3132()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3135 : StressfulInteger {
 
   companion object {
@@ -4349,9 +4350,9 @@ class Number3135 : StressfulInteger {
     val b = Number3133()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3136 : StressfulInteger {
 
   companion object {
@@ -4381,9 +4382,9 @@ class Number3136 : StressfulInteger {
     val b = Number3134()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3137 : StressfulInteger {
 
   companion object {
@@ -4413,9 +4414,9 @@ class Number3137 : StressfulInteger {
     val b = Number3135()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3138 : StressfulInteger {
 
   companion object {
@@ -4445,9 +4446,9 @@ class Number3138 : StressfulInteger {
     val b = Number3136()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3139 : StressfulInteger {
 
   companion object {
@@ -4477,9 +4478,9 @@ class Number3139 : StressfulInteger {
     val b = Number3137()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3140 : StressfulInteger {
 
   companion object {
@@ -4509,9 +4510,9 @@ class Number3140 : StressfulInteger {
     val b = Number3138()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3141 : StressfulInteger {
 
   companion object {
@@ -4541,9 +4542,9 @@ class Number3141 : StressfulInteger {
     val b = Number3139()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3142 : StressfulInteger {
 
   companion object {
@@ -4573,9 +4574,9 @@ class Number3142 : StressfulInteger {
     val b = Number3140()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3143 : StressfulInteger {
 
   companion object {
@@ -4605,9 +4606,9 @@ class Number3143 : StressfulInteger {
     val b = Number3141()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3144 : StressfulInteger {
 
   companion object {
@@ -4637,9 +4638,9 @@ class Number3144 : StressfulInteger {
     val b = Number3142()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3145 : StressfulInteger {
 
   companion object {
@@ -4669,9 +4670,9 @@ class Number3145 : StressfulInteger {
     val b = Number3143()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3146 : StressfulInteger {
 
   companion object {
@@ -4701,9 +4702,9 @@ class Number3146 : StressfulInteger {
     val b = Number3144()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3147 : StressfulInteger {
 
   companion object {
@@ -4733,9 +4734,9 @@ class Number3147 : StressfulInteger {
     val b = Number3145()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3148 : StressfulInteger {
 
   companion object {
@@ -4765,9 +4766,9 @@ class Number3148 : StressfulInteger {
     val b = Number3146()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3149 : StressfulInteger {
 
   companion object {
@@ -4797,9 +4798,9 @@ class Number3149 : StressfulInteger {
     val b = Number3147()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3150 : StressfulInteger {
 
   companion object {
@@ -4829,9 +4830,9 @@ class Number3150 : StressfulInteger {
     val b = Number3148()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3151 : StressfulInteger {
 
   companion object {
@@ -4861,9 +4862,9 @@ class Number3151 : StressfulInteger {
     val b = Number3149()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3152 : StressfulInteger {
 
   companion object {
@@ -4893,9 +4894,9 @@ class Number3152 : StressfulInteger {
     val b = Number3150()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3153 : StressfulInteger {
 
   companion object {
@@ -4925,9 +4926,9 @@ class Number3153 : StressfulInteger {
     val b = Number3151()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3154 : StressfulInteger {
 
   companion object {
@@ -4957,9 +4958,9 @@ class Number3154 : StressfulInteger {
     val b = Number3152()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3155 : StressfulInteger {
 
   companion object {
@@ -4989,9 +4990,9 @@ class Number3155 : StressfulInteger {
     val b = Number3153()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3156 : StressfulInteger {
 
   companion object {
@@ -5021,9 +5022,9 @@ class Number3156 : StressfulInteger {
     val b = Number3154()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3157 : StressfulInteger {
 
   companion object {
@@ -5053,9 +5054,9 @@ class Number3157 : StressfulInteger {
     val b = Number3155()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3158 : StressfulInteger {
 
   companion object {
@@ -5085,9 +5086,9 @@ class Number3158 : StressfulInteger {
     val b = Number3156()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3159 : StressfulInteger {
 
   companion object {
@@ -5117,9 +5118,9 @@ class Number3159 : StressfulInteger {
     val b = Number3157()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3160 : StressfulInteger {
 
   companion object {
@@ -5149,9 +5150,9 @@ class Number3160 : StressfulInteger {
     val b = Number3158()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3161 : StressfulInteger {
 
   companion object {
@@ -5181,9 +5182,9 @@ class Number3161 : StressfulInteger {
     val b = Number3159()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3162 : StressfulInteger {
 
   companion object {
@@ -5213,9 +5214,9 @@ class Number3162 : StressfulInteger {
     val b = Number3160()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3163 : StressfulInteger {
 
   companion object {
@@ -5245,9 +5246,9 @@ class Number3163 : StressfulInteger {
     val b = Number3161()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3164 : StressfulInteger {
 
   companion object {
@@ -5277,9 +5278,9 @@ class Number3164 : StressfulInteger {
     val b = Number3162()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3165 : StressfulInteger {
 
   companion object {
@@ -5309,9 +5310,9 @@ class Number3165 : StressfulInteger {
     val b = Number3163()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3166 : StressfulInteger {
 
   companion object {
@@ -5341,9 +5342,9 @@ class Number3166 : StressfulInteger {
     val b = Number3164()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3167 : StressfulInteger {
 
   companion object {
@@ -5373,9 +5374,9 @@ class Number3167 : StressfulInteger {
     val b = Number3165()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3168 : StressfulInteger {
 
   companion object {
@@ -5405,9 +5406,9 @@ class Number3168 : StressfulInteger {
     val b = Number3166()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3169 : StressfulInteger {
 
   companion object {
@@ -5437,9 +5438,9 @@ class Number3169 : StressfulInteger {
     val b = Number3167()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3170 : StressfulInteger {
 
   companion object {
@@ -5469,9 +5470,9 @@ class Number3170 : StressfulInteger {
     val b = Number3168()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3171 : StressfulInteger {
 
   companion object {
@@ -5501,9 +5502,9 @@ class Number3171 : StressfulInteger {
     val b = Number3169()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3172 : StressfulInteger {
 
   companion object {
@@ -5533,9 +5534,9 @@ class Number3172 : StressfulInteger {
     val b = Number3170()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3173 : StressfulInteger {
 
   companion object {
@@ -5565,9 +5566,9 @@ class Number3173 : StressfulInteger {
     val b = Number3171()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3174 : StressfulInteger {
 
   companion object {
@@ -5597,9 +5598,9 @@ class Number3174 : StressfulInteger {
     val b = Number3172()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3175 : StressfulInteger {
 
   companion object {
@@ -5629,9 +5630,9 @@ class Number3175 : StressfulInteger {
     val b = Number3173()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3176 : StressfulInteger {
 
   companion object {
@@ -5661,9 +5662,9 @@ class Number3176 : StressfulInteger {
     val b = Number3174()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3177 : StressfulInteger {
 
   companion object {
@@ -5693,9 +5694,9 @@ class Number3177 : StressfulInteger {
     val b = Number3175()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3178 : StressfulInteger {
 
   companion object {
@@ -5725,9 +5726,9 @@ class Number3178 : StressfulInteger {
     val b = Number3176()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3179 : StressfulInteger {
 
   companion object {
@@ -5757,9 +5758,9 @@ class Number3179 : StressfulInteger {
     val b = Number3177()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3180 : StressfulInteger {
 
   companion object {
@@ -5789,9 +5790,9 @@ class Number3180 : StressfulInteger {
     val b = Number3178()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3181 : StressfulInteger {
 
   companion object {
@@ -5821,9 +5822,9 @@ class Number3181 : StressfulInteger {
     val b = Number3179()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3182 : StressfulInteger {
 
   companion object {
@@ -5853,9 +5854,9 @@ class Number3182 : StressfulInteger {
     val b = Number3180()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3183 : StressfulInteger {
 
   companion object {
@@ -5885,9 +5886,9 @@ class Number3183 : StressfulInteger {
     val b = Number3181()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3184 : StressfulInteger {
 
   companion object {
@@ -5917,9 +5918,9 @@ class Number3184 : StressfulInteger {
     val b = Number3182()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3185 : StressfulInteger {
 
   companion object {
@@ -5949,9 +5950,9 @@ class Number3185 : StressfulInteger {
     val b = Number3183()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3186 : StressfulInteger {
 
   companion object {
@@ -5981,9 +5982,9 @@ class Number3186 : StressfulInteger {
     val b = Number3184()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3187 : StressfulInteger {
 
   companion object {
@@ -6013,9 +6014,9 @@ class Number3187 : StressfulInteger {
     val b = Number3185()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3188 : StressfulInteger {
 
   companion object {
@@ -6045,9 +6046,9 @@ class Number3188 : StressfulInteger {
     val b = Number3186()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3189 : StressfulInteger {
 
   companion object {
@@ -6077,9 +6078,9 @@ class Number3189 : StressfulInteger {
     val b = Number3187()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3190 : StressfulInteger {
 
   companion object {
@@ -6109,9 +6110,9 @@ class Number3190 : StressfulInteger {
     val b = Number3188()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3191 : StressfulInteger {
 
   companion object {
@@ -6141,9 +6142,9 @@ class Number3191 : StressfulInteger {
     val b = Number3189()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3192 : StressfulInteger {
 
   companion object {
@@ -6173,9 +6174,9 @@ class Number3192 : StressfulInteger {
     val b = Number3190()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3193 : StressfulInteger {
 
   companion object {
@@ -6205,9 +6206,9 @@ class Number3193 : StressfulInteger {
     val b = Number3191()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3194 : StressfulInteger {
 
   companion object {
@@ -6237,9 +6238,9 @@ class Number3194 : StressfulInteger {
     val b = Number3192()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3195 : StressfulInteger {
 
   companion object {
@@ -6269,9 +6270,9 @@ class Number3195 : StressfulInteger {
     val b = Number3193()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3196 : StressfulInteger {
 
   companion object {
@@ -6301,9 +6302,9 @@ class Number3196 : StressfulInteger {
     val b = Number3194()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3197 : StressfulInteger {
 
   companion object {
@@ -6333,9 +6334,9 @@ class Number3197 : StressfulInteger {
     val b = Number3195()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3198 : StressfulInteger {
 
   companion object {
@@ -6365,9 +6366,9 @@ class Number3198 : StressfulInteger {
     val b = Number3196()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3199 : StressfulInteger {
 
   companion object {
@@ -6397,9 +6398,9 @@ class Number3199 : StressfulInteger {
     val b = Number3197()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3200 : StressfulInteger {
 
   companion object {
@@ -6429,9 +6430,9 @@ class Number3200 : StressfulInteger {
     val b = Number3198()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3201 : StressfulInteger {
 
   companion object {
@@ -6461,9 +6462,9 @@ class Number3201 : StressfulInteger {
     val b = Number3199()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3202 : StressfulInteger {
 
   companion object {
@@ -6493,9 +6494,9 @@ class Number3202 : StressfulInteger {
     val b = Number3200()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3203 : StressfulInteger {
 
   companion object {
@@ -6525,9 +6526,9 @@ class Number3203 : StressfulInteger {
     val b = Number3201()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3204 : StressfulInteger {
 
   companion object {
@@ -6557,9 +6558,9 @@ class Number3204 : StressfulInteger {
     val b = Number3202()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3205 : StressfulInteger {
 
   companion object {
@@ -6589,9 +6590,9 @@ class Number3205 : StressfulInteger {
     val b = Number3203()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3206 : StressfulInteger {
 
   companion object {
@@ -6621,9 +6622,9 @@ class Number3206 : StressfulInteger {
     val b = Number3204()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3207 : StressfulInteger {
 
   companion object {
@@ -6653,9 +6654,9 @@ class Number3207 : StressfulInteger {
     val b = Number3205()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3208 : StressfulInteger {
 
   companion object {
@@ -6685,9 +6686,9 @@ class Number3208 : StressfulInteger {
     val b = Number3206()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3209 : StressfulInteger {
 
   companion object {
@@ -6717,9 +6718,9 @@ class Number3209 : StressfulInteger {
     val b = Number3207()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3210 : StressfulInteger {
 
   companion object {
@@ -6749,9 +6750,9 @@ class Number3210 : StressfulInteger {
     val b = Number3208()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3211 : StressfulInteger {
 
   companion object {
@@ -6781,9 +6782,9 @@ class Number3211 : StressfulInteger {
     val b = Number3209()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3212 : StressfulInteger {
 
   companion object {
@@ -6813,9 +6814,9 @@ class Number3212 : StressfulInteger {
     val b = Number3210()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3213 : StressfulInteger {
 
   companion object {
@@ -6845,9 +6846,9 @@ class Number3213 : StressfulInteger {
     val b = Number3211()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3214 : StressfulInteger {
 
   companion object {
@@ -6877,9 +6878,9 @@ class Number3214 : StressfulInteger {
     val b = Number3212()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3215 : StressfulInteger {
 
   companion object {
@@ -6909,9 +6910,9 @@ class Number3215 : StressfulInteger {
     val b = Number3213()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3216 : StressfulInteger {
 
   companion object {
@@ -6941,9 +6942,9 @@ class Number3216 : StressfulInteger {
     val b = Number3214()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3217 : StressfulInteger {
 
   companion object {
@@ -6973,9 +6974,9 @@ class Number3217 : StressfulInteger {
     val b = Number3215()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3218 : StressfulInteger {
 
   companion object {
@@ -7005,9 +7006,9 @@ class Number3218 : StressfulInteger {
     val b = Number3216()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3219 : StressfulInteger {
 
   companion object {
@@ -7037,9 +7038,9 @@ class Number3219 : StressfulInteger {
     val b = Number3217()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3220 : StressfulInteger {
 
   companion object {
@@ -7069,9 +7070,9 @@ class Number3220 : StressfulInteger {
     val b = Number3218()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3221 : StressfulInteger {
 
   companion object {
@@ -7101,9 +7102,9 @@ class Number3221 : StressfulInteger {
     val b = Number3219()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3222 : StressfulInteger {
 
   companion object {
@@ -7133,9 +7134,9 @@ class Number3222 : StressfulInteger {
     val b = Number3220()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3223 : StressfulInteger {
 
   companion object {
@@ -7165,9 +7166,9 @@ class Number3223 : StressfulInteger {
     val b = Number3221()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3224 : StressfulInteger {
 
   companion object {
@@ -7197,9 +7198,9 @@ class Number3224 : StressfulInteger {
     val b = Number3222()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3225 : StressfulInteger {
 
   companion object {
@@ -7229,9 +7230,9 @@ class Number3225 : StressfulInteger {
     val b = Number3223()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3226 : StressfulInteger {
 
   companion object {
@@ -7261,9 +7262,9 @@ class Number3226 : StressfulInteger {
     val b = Number3224()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3227 : StressfulInteger {
 
   companion object {
@@ -7293,9 +7294,9 @@ class Number3227 : StressfulInteger {
     val b = Number3225()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3228 : StressfulInteger {
 
   companion object {
@@ -7325,9 +7326,9 @@ class Number3228 : StressfulInteger {
     val b = Number3226()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3229 : StressfulInteger {
 
   companion object {
@@ -7357,9 +7358,9 @@ class Number3229 : StressfulInteger {
     val b = Number3227()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3230 : StressfulInteger {
 
   companion object {
@@ -7389,9 +7390,9 @@ class Number3230 : StressfulInteger {
     val b = Number3228()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3231 : StressfulInteger {
 
   companion object {
@@ -7421,9 +7422,9 @@ class Number3231 : StressfulInteger {
     val b = Number3229()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3232 : StressfulInteger {
 
   companion object {
@@ -7453,9 +7454,9 @@ class Number3232 : StressfulInteger {
     val b = Number3230()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3233 : StressfulInteger {
 
   companion object {
@@ -7485,9 +7486,9 @@ class Number3233 : StressfulInteger {
     val b = Number3231()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3234 : StressfulInteger {
 
   companion object {
@@ -7517,9 +7518,9 @@ class Number3234 : StressfulInteger {
     val b = Number3232()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3235 : StressfulInteger {
 
   companion object {
@@ -7549,9 +7550,9 @@ class Number3235 : StressfulInteger {
     val b = Number3233()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3236 : StressfulInteger {
 
   companion object {
@@ -7581,9 +7582,9 @@ class Number3236 : StressfulInteger {
     val b = Number3234()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3237 : StressfulInteger {
 
   companion object {
@@ -7613,9 +7614,9 @@ class Number3237 : StressfulInteger {
     val b = Number3235()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3238 : StressfulInteger {
 
   companion object {
@@ -7645,9 +7646,9 @@ class Number3238 : StressfulInteger {
     val b = Number3236()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3239 : StressfulInteger {
 
   companion object {
@@ -7677,9 +7678,9 @@ class Number3239 : StressfulInteger {
     val b = Number3237()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3240 : StressfulInteger {
 
   companion object {
@@ -7709,9 +7710,9 @@ class Number3240 : StressfulInteger {
     val b = Number3238()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3241 : StressfulInteger {
 
   companion object {
@@ -7741,9 +7742,9 @@ class Number3241 : StressfulInteger {
     val b = Number3239()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3242 : StressfulInteger {
 
   companion object {
@@ -7773,9 +7774,9 @@ class Number3242 : StressfulInteger {
     val b = Number3240()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3243 : StressfulInteger {
 
   companion object {
@@ -7805,9 +7806,9 @@ class Number3243 : StressfulInteger {
     val b = Number3241()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3244 : StressfulInteger {
 
   companion object {
@@ -7837,9 +7838,9 @@ class Number3244 : StressfulInteger {
     val b = Number3242()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3245 : StressfulInteger {
 
   companion object {
@@ -7869,9 +7870,9 @@ class Number3245 : StressfulInteger {
     val b = Number3243()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3246 : StressfulInteger {
 
   companion object {
@@ -7901,9 +7902,9 @@ class Number3246 : StressfulInteger {
     val b = Number3244()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3247 : StressfulInteger {
 
   companion object {
@@ -7933,9 +7934,9 @@ class Number3247 : StressfulInteger {
     val b = Number3245()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3248 : StressfulInteger {
 
   companion object {
@@ -7965,9 +7966,9 @@ class Number3248 : StressfulInteger {
     val b = Number3246()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3249 : StressfulInteger {
 
   companion object {
@@ -7997,9 +7998,9 @@ class Number3249 : StressfulInteger {
     val b = Number3247()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3250 : StressfulInteger {
 
   companion object {
@@ -8029,9 +8030,9 @@ class Number3250 : StressfulInteger {
     val b = Number3248()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3251 : StressfulInteger {
 
   companion object {
@@ -8061,9 +8062,9 @@ class Number3251 : StressfulInteger {
     val b = Number3249()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3252 : StressfulInteger {
 
   companion object {
@@ -8093,9 +8094,9 @@ class Number3252 : StressfulInteger {
     val b = Number3250()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3253 : StressfulInteger {
 
   companion object {
@@ -8125,9 +8126,9 @@ class Number3253 : StressfulInteger {
     val b = Number3251()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3254 : StressfulInteger {
 
   companion object {
@@ -8157,9 +8158,9 @@ class Number3254 : StressfulInteger {
     val b = Number3252()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3255 : StressfulInteger {
 
   companion object {
@@ -8189,9 +8190,9 @@ class Number3255 : StressfulInteger {
     val b = Number3253()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3256 : StressfulInteger {
 
   companion object {
@@ -8221,9 +8222,9 @@ class Number3256 : StressfulInteger {
     val b = Number3254()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3257 : StressfulInteger {
 
   companion object {
@@ -8253,9 +8254,9 @@ class Number3257 : StressfulInteger {
     val b = Number3255()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3258 : StressfulInteger {
 
   companion object {
@@ -8285,9 +8286,9 @@ class Number3258 : StressfulInteger {
     val b = Number3256()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3259 : StressfulInteger {
 
   companion object {
@@ -8317,9 +8318,9 @@ class Number3259 : StressfulInteger {
     val b = Number3257()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3260 : StressfulInteger {
 
   companion object {
@@ -8349,9 +8350,9 @@ class Number3260 : StressfulInteger {
     val b = Number3258()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3261 : StressfulInteger {
 
   companion object {
@@ -8381,9 +8382,9 @@ class Number3261 : StressfulInteger {
     val b = Number3259()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3262 : StressfulInteger {
 
   companion object {
@@ -8413,9 +8414,9 @@ class Number3262 : StressfulInteger {
     val b = Number3260()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3263 : StressfulInteger {
 
   companion object {
@@ -8445,9 +8446,9 @@ class Number3263 : StressfulInteger {
     val b = Number3261()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3264 : StressfulInteger {
 
   companion object {
@@ -8477,9 +8478,9 @@ class Number3264 : StressfulInteger {
     val b = Number3262()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3265 : StressfulInteger {
 
   companion object {
@@ -8509,9 +8510,9 @@ class Number3265 : StressfulInteger {
     val b = Number3263()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3266 : StressfulInteger {
 
   companion object {
@@ -8541,9 +8542,9 @@ class Number3266 : StressfulInteger {
     val b = Number3264()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3267 : StressfulInteger {
 
   companion object {
@@ -8573,9 +8574,9 @@ class Number3267 : StressfulInteger {
     val b = Number3265()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3268 : StressfulInteger {
 
   companion object {
@@ -8605,9 +8606,9 @@ class Number3268 : StressfulInteger {
     val b = Number3266()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3269 : StressfulInteger {
 
   companion object {
@@ -8637,9 +8638,9 @@ class Number3269 : StressfulInteger {
     val b = Number3267()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3270 : StressfulInteger {
 
   companion object {
@@ -8669,9 +8670,9 @@ class Number3270 : StressfulInteger {
     val b = Number3268()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3271 : StressfulInteger {
 
   companion object {
@@ -8701,9 +8702,9 @@ class Number3271 : StressfulInteger {
     val b = Number3269()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3272 : StressfulInteger {
 
   companion object {
@@ -8733,9 +8734,9 @@ class Number3272 : StressfulInteger {
     val b = Number3270()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3273 : StressfulInteger {
 
   companion object {
@@ -8765,9 +8766,9 @@ class Number3273 : StressfulInteger {
     val b = Number3271()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3274 : StressfulInteger {
 
   companion object {
@@ -8797,9 +8798,9 @@ class Number3274 : StressfulInteger {
     val b = Number3272()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3275 : StressfulInteger {
 
   companion object {
@@ -8829,9 +8830,9 @@ class Number3275 : StressfulInteger {
     val b = Number3273()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3276 : StressfulInteger {
 
   companion object {
@@ -8861,9 +8862,9 @@ class Number3276 : StressfulInteger {
     val b = Number3274()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3277 : StressfulInteger {
 
   companion object {
@@ -8893,9 +8894,9 @@ class Number3277 : StressfulInteger {
     val b = Number3275()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3278 : StressfulInteger {
 
   companion object {
@@ -8925,9 +8926,9 @@ class Number3278 : StressfulInteger {
     val b = Number3276()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3279 : StressfulInteger {
 
   companion object {
@@ -8957,9 +8958,9 @@ class Number3279 : StressfulInteger {
     val b = Number3277()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3280 : StressfulInteger {
 
   companion object {
@@ -8989,9 +8990,9 @@ class Number3280 : StressfulInteger {
     val b = Number3278()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3281 : StressfulInteger {
 
   companion object {
@@ -9021,9 +9022,9 @@ class Number3281 : StressfulInteger {
     val b = Number3279()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3282 : StressfulInteger {
 
   companion object {
@@ -9053,9 +9054,9 @@ class Number3282 : StressfulInteger {
     val b = Number3280()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3283 : StressfulInteger {
 
   companion object {
@@ -9085,9 +9086,9 @@ class Number3283 : StressfulInteger {
     val b = Number3281()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3284 : StressfulInteger {
 
   companion object {
@@ -9117,9 +9118,9 @@ class Number3284 : StressfulInteger {
     val b = Number3282()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3285 : StressfulInteger {
 
   companion object {
@@ -9149,9 +9150,9 @@ class Number3285 : StressfulInteger {
     val b = Number3283()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3286 : StressfulInteger {
 
   companion object {
@@ -9181,9 +9182,9 @@ class Number3286 : StressfulInteger {
     val b = Number3284()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3287 : StressfulInteger {
 
   companion object {
@@ -9213,9 +9214,9 @@ class Number3287 : StressfulInteger {
     val b = Number3285()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3288 : StressfulInteger {
 
   companion object {
@@ -9245,9 +9246,9 @@ class Number3288 : StressfulInteger {
     val b = Number3286()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3289 : StressfulInteger {
 
   companion object {
@@ -9277,9 +9278,9 @@ class Number3289 : StressfulInteger {
     val b = Number3287()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3290 : StressfulInteger {
 
   companion object {
@@ -9309,9 +9310,9 @@ class Number3290 : StressfulInteger {
     val b = Number3288()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3291 : StressfulInteger {
 
   companion object {
@@ -9341,9 +9342,9 @@ class Number3291 : StressfulInteger {
     val b = Number3289()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3292 : StressfulInteger {
 
   companion object {
@@ -9373,9 +9374,9 @@ class Number3292 : StressfulInteger {
     val b = Number3290()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3293 : StressfulInteger {
 
   companion object {
@@ -9405,9 +9406,9 @@ class Number3293 : StressfulInteger {
     val b = Number3291()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3294 : StressfulInteger {
 
   companion object {
@@ -9437,9 +9438,9 @@ class Number3294 : StressfulInteger {
     val b = Number3292()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3295 : StressfulInteger {
 
   companion object {
@@ -9469,9 +9470,9 @@ class Number3295 : StressfulInteger {
     val b = Number3293()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3296 : StressfulInteger {
 
   companion object {
@@ -9501,9 +9502,9 @@ class Number3296 : StressfulInteger {
     val b = Number3294()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3297 : StressfulInteger {
 
   companion object {
@@ -9533,9 +9534,9 @@ class Number3297 : StressfulInteger {
     val b = Number3295()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3298 : StressfulInteger {
 
   companion object {
@@ -9565,9 +9566,9 @@ class Number3298 : StressfulInteger {
     val b = Number3296()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3299 : StressfulInteger {
 
   companion object {
@@ -9597,9 +9598,9 @@ class Number3299 : StressfulInteger {
     val b = Number3297()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3300 : StressfulInteger {
 
   companion object {
@@ -9629,9 +9630,9 @@ class Number3300 : StressfulInteger {
     val b = Number3298()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3301 : StressfulInteger {
 
   companion object {
@@ -9661,9 +9662,9 @@ class Number3301 : StressfulInteger {
     val b = Number3299()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3302 : StressfulInteger {
 
   companion object {
@@ -9693,9 +9694,9 @@ class Number3302 : StressfulInteger {
     val b = Number3300()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3303 : StressfulInteger {
 
   companion object {
@@ -9725,9 +9726,9 @@ class Number3303 : StressfulInteger {
     val b = Number3301()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3304 : StressfulInteger {
 
   companion object {
@@ -9757,9 +9758,9 @@ class Number3304 : StressfulInteger {
     val b = Number3302()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3305 : StressfulInteger {
 
   companion object {
@@ -9789,9 +9790,9 @@ class Number3305 : StressfulInteger {
     val b = Number3303()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3306 : StressfulInteger {
 
   companion object {
@@ -9821,9 +9822,9 @@ class Number3306 : StressfulInteger {
     val b = Number3304()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3307 : StressfulInteger {
 
   companion object {
@@ -9853,9 +9854,9 @@ class Number3307 : StressfulInteger {
     val b = Number3305()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3308 : StressfulInteger {
 
   companion object {
@@ -9885,9 +9886,9 @@ class Number3308 : StressfulInteger {
     val b = Number3306()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3309 : StressfulInteger {
 
   companion object {
@@ -9917,9 +9918,9 @@ class Number3309 : StressfulInteger {
     val b = Number3307()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3310 : StressfulInteger {
 
   companion object {
@@ -9949,9 +9950,9 @@ class Number3310 : StressfulInteger {
     val b = Number3308()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3311 : StressfulInteger {
 
   companion object {
@@ -9981,9 +9982,9 @@ class Number3311 : StressfulInteger {
     val b = Number3309()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3312 : StressfulInteger {
 
   companion object {
@@ -10013,9 +10014,9 @@ class Number3312 : StressfulInteger {
     val b = Number3310()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3313 : StressfulInteger {
 
   companion object {
@@ -10045,9 +10046,9 @@ class Number3313 : StressfulInteger {
     val b = Number3311()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3314 : StressfulInteger {
 
   companion object {
@@ -10077,9 +10078,9 @@ class Number3314 : StressfulInteger {
     val b = Number3312()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3315 : StressfulInteger {
 
   companion object {
@@ -10109,9 +10110,9 @@ class Number3315 : StressfulInteger {
     val b = Number3313()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3316 : StressfulInteger {
 
   companion object {
@@ -10141,9 +10142,9 @@ class Number3316 : StressfulInteger {
     val b = Number3314()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3317 : StressfulInteger {
 
   companion object {
@@ -10173,9 +10174,9 @@ class Number3317 : StressfulInteger {
     val b = Number3315()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3318 : StressfulInteger {
 
   companion object {
@@ -10205,9 +10206,9 @@ class Number3318 : StressfulInteger {
     val b = Number3316()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3319 : StressfulInteger {
 
   companion object {
@@ -10237,9 +10238,9 @@ class Number3319 : StressfulInteger {
     val b = Number3317()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3320 : StressfulInteger {
 
   companion object {
@@ -10269,9 +10270,9 @@ class Number3320 : StressfulInteger {
     val b = Number3318()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3321 : StressfulInteger {
 
   companion object {
@@ -10301,9 +10302,9 @@ class Number3321 : StressfulInteger {
     val b = Number3319()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3322 : StressfulInteger {
 
   companion object {
@@ -10333,9 +10334,9 @@ class Number3322 : StressfulInteger {
     val b = Number3320()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3323 : StressfulInteger {
 
   companion object {
@@ -10365,9 +10366,9 @@ class Number3323 : StressfulInteger {
     val b = Number3321()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3324 : StressfulInteger {
 
   companion object {
@@ -10397,9 +10398,9 @@ class Number3324 : StressfulInteger {
     val b = Number3322()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3325 : StressfulInteger {
 
   companion object {
@@ -10429,9 +10430,9 @@ class Number3325 : StressfulInteger {
     val b = Number3323()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3326 : StressfulInteger {
 
   companion object {
@@ -10461,9 +10462,9 @@ class Number3326 : StressfulInteger {
     val b = Number3324()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3327 : StressfulInteger {
 
   companion object {
@@ -10493,9 +10494,9 @@ class Number3327 : StressfulInteger {
     val b = Number3325()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3328 : StressfulInteger {
 
   companion object {
@@ -10525,9 +10526,9 @@ class Number3328 : StressfulInteger {
     val b = Number3326()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3329 : StressfulInteger {
 
   companion object {
@@ -10557,9 +10558,9 @@ class Number3329 : StressfulInteger {
     val b = Number3327()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3330 : StressfulInteger {
 
   companion object {
@@ -10589,9 +10590,9 @@ class Number3330 : StressfulInteger {
     val b = Number3328()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3331 : StressfulInteger {
 
   companion object {
@@ -10621,9 +10622,9 @@ class Number3331 : StressfulInteger {
     val b = Number3329()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3332 : StressfulInteger {
 
   companion object {
@@ -10653,9 +10654,9 @@ class Number3332 : StressfulInteger {
     val b = Number3330()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3333 : StressfulInteger {
 
   companion object {
@@ -10685,9 +10686,9 @@ class Number3333 : StressfulInteger {
     val b = Number3331()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3334 : StressfulInteger {
 
   companion object {
@@ -10717,9 +10718,9 @@ class Number3334 : StressfulInteger {
     val b = Number3332()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3335 : StressfulInteger {
 
   companion object {
@@ -10749,9 +10750,9 @@ class Number3335 : StressfulInteger {
     val b = Number3333()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3336 : StressfulInteger {
 
   companion object {
@@ -10781,9 +10782,9 @@ class Number3336 : StressfulInteger {
     val b = Number3334()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3337 : StressfulInteger {
 
   companion object {
@@ -10813,9 +10814,9 @@ class Number3337 : StressfulInteger {
     val b = Number3335()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3338 : StressfulInteger {
 
   companion object {
@@ -10845,9 +10846,9 @@ class Number3338 : StressfulInteger {
     val b = Number3336()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3339 : StressfulInteger {
 
   companion object {
@@ -10877,9 +10878,9 @@ class Number3339 : StressfulInteger {
     val b = Number3337()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3340 : StressfulInteger {
 
   companion object {
@@ -10909,9 +10910,9 @@ class Number3340 : StressfulInteger {
     val b = Number3338()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3341 : StressfulInteger {
 
   companion object {
@@ -10941,9 +10942,9 @@ class Number3341 : StressfulInteger {
     val b = Number3339()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3342 : StressfulInteger {
 
   companion object {
@@ -10973,9 +10974,9 @@ class Number3342 : StressfulInteger {
     val b = Number3340()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3343 : StressfulInteger {
 
   companion object {
@@ -11005,9 +11006,9 @@ class Number3343 : StressfulInteger {
     val b = Number3341()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3344 : StressfulInteger {
 
   companion object {
@@ -11037,9 +11038,9 @@ class Number3344 : StressfulInteger {
     val b = Number3342()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3345 : StressfulInteger {
 
   companion object {
@@ -11069,9 +11070,9 @@ class Number3345 : StressfulInteger {
     val b = Number3343()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3346 : StressfulInteger {
 
   companion object {
@@ -11101,9 +11102,9 @@ class Number3346 : StressfulInteger {
     val b = Number3344()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3347 : StressfulInteger {
 
   companion object {
@@ -11133,9 +11134,9 @@ class Number3347 : StressfulInteger {
     val b = Number3345()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3348 : StressfulInteger {
 
   companion object {
@@ -11165,9 +11166,9 @@ class Number3348 : StressfulInteger {
     val b = Number3346()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3349 : StressfulInteger {
 
   companion object {
@@ -11197,9 +11198,9 @@ class Number3349 : StressfulInteger {
     val b = Number3347()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3350 : StressfulInteger {
 
   companion object {
@@ -11229,9 +11230,9 @@ class Number3350 : StressfulInteger {
     val b = Number3348()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3351 : StressfulInteger {
 
   companion object {
@@ -11261,9 +11262,9 @@ class Number3351 : StressfulInteger {
     val b = Number3349()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3352 : StressfulInteger {
 
   companion object {
@@ -11293,9 +11294,9 @@ class Number3352 : StressfulInteger {
     val b = Number3350()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3353 : StressfulInteger {
 
   companion object {
@@ -11325,9 +11326,9 @@ class Number3353 : StressfulInteger {
     val b = Number3351()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3354 : StressfulInteger {
 
   companion object {
@@ -11357,9 +11358,9 @@ class Number3354 : StressfulInteger {
     val b = Number3352()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3355 : StressfulInteger {
 
   companion object {
@@ -11389,9 +11390,9 @@ class Number3355 : StressfulInteger {
     val b = Number3353()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3356 : StressfulInteger {
 
   companion object {
@@ -11421,9 +11422,9 @@ class Number3356 : StressfulInteger {
     val b = Number3354()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3357 : StressfulInteger {
 
   companion object {
@@ -11453,9 +11454,9 @@ class Number3357 : StressfulInteger {
     val b = Number3355()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3358 : StressfulInteger {
 
   companion object {
@@ -11485,9 +11486,9 @@ class Number3358 : StressfulInteger {
     val b = Number3356()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3359 : StressfulInteger {
 
   companion object {
@@ -11517,9 +11518,9 @@ class Number3359 : StressfulInteger {
     val b = Number3357()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3360 : StressfulInteger {
 
   companion object {
@@ -11549,9 +11550,9 @@ class Number3360 : StressfulInteger {
     val b = Number3358()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3361 : StressfulInteger {
 
   companion object {
@@ -11581,9 +11582,9 @@ class Number3361 : StressfulInteger {
     val b = Number3359()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3362 : StressfulInteger {
 
   companion object {
@@ -11613,9 +11614,9 @@ class Number3362 : StressfulInteger {
     val b = Number3360()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3363 : StressfulInteger {
 
   companion object {
@@ -11645,9 +11646,9 @@ class Number3363 : StressfulInteger {
     val b = Number3361()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3364 : StressfulInteger {
 
   companion object {
@@ -11677,9 +11678,9 @@ class Number3364 : StressfulInteger {
     val b = Number3362()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3365 : StressfulInteger {
 
   companion object {
@@ -11709,9 +11710,9 @@ class Number3365 : StressfulInteger {
     val b = Number3363()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3366 : StressfulInteger {
 
   companion object {
@@ -11741,9 +11742,9 @@ class Number3366 : StressfulInteger {
     val b = Number3364()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3367 : StressfulInteger {
 
   companion object {
@@ -11773,9 +11774,9 @@ class Number3367 : StressfulInteger {
     val b = Number3365()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3368 : StressfulInteger {
 
   companion object {
@@ -11805,9 +11806,9 @@ class Number3368 : StressfulInteger {
     val b = Number3366()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3369 : StressfulInteger {
 
   companion object {
@@ -11837,9 +11838,9 @@ class Number3369 : StressfulInteger {
     val b = Number3367()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3370 : StressfulInteger {
 
   companion object {
@@ -11869,9 +11870,9 @@ class Number3370 : StressfulInteger {
     val b = Number3368()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3371 : StressfulInteger {
 
   companion object {
@@ -11901,9 +11902,9 @@ class Number3371 : StressfulInteger {
     val b = Number3369()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3372 : StressfulInteger {
 
   companion object {
@@ -11933,9 +11934,9 @@ class Number3372 : StressfulInteger {
     val b = Number3370()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3373 : StressfulInteger {
 
   companion object {
@@ -11965,9 +11966,9 @@ class Number3373 : StressfulInteger {
     val b = Number3371()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3374 : StressfulInteger {
 
   companion object {
@@ -11997,9 +11998,9 @@ class Number3374 : StressfulInteger {
     val b = Number3372()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3375 : StressfulInteger {
 
   companion object {
@@ -12029,9 +12030,9 @@ class Number3375 : StressfulInteger {
     val b = Number3373()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3376 : StressfulInteger {
 
   companion object {
@@ -12061,9 +12062,9 @@ class Number3376 : StressfulInteger {
     val b = Number3374()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3377 : StressfulInteger {
 
   companion object {
@@ -12093,9 +12094,9 @@ class Number3377 : StressfulInteger {
     val b = Number3375()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3378 : StressfulInteger {
 
   companion object {
@@ -12125,9 +12126,9 @@ class Number3378 : StressfulInteger {
     val b = Number3376()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3379 : StressfulInteger {
 
   companion object {
@@ -12157,9 +12158,9 @@ class Number3379 : StressfulInteger {
     val b = Number3377()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3380 : StressfulInteger {
 
   companion object {
@@ -12189,9 +12190,9 @@ class Number3380 : StressfulInteger {
     val b = Number3378()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3381 : StressfulInteger {
 
   companion object {
@@ -12221,9 +12222,9 @@ class Number3381 : StressfulInteger {
     val b = Number3379()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3382 : StressfulInteger {
 
   companion object {
@@ -12253,9 +12254,9 @@ class Number3382 : StressfulInteger {
     val b = Number3380()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3383 : StressfulInteger {
 
   companion object {
@@ -12285,9 +12286,9 @@ class Number3383 : StressfulInteger {
     val b = Number3381()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3384 : StressfulInteger {
 
   companion object {
@@ -12317,9 +12318,9 @@ class Number3384 : StressfulInteger {
     val b = Number3382()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3385 : StressfulInteger {
 
   companion object {
@@ -12349,9 +12350,9 @@ class Number3385 : StressfulInteger {
     val b = Number3383()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3386 : StressfulInteger {
 
   companion object {
@@ -12381,9 +12382,9 @@ class Number3386 : StressfulInteger {
     val b = Number3384()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3387 : StressfulInteger {
 
   companion object {
@@ -12413,9 +12414,9 @@ class Number3387 : StressfulInteger {
     val b = Number3385()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3388 : StressfulInteger {
 
   companion object {
@@ -12445,9 +12446,9 @@ class Number3388 : StressfulInteger {
     val b = Number3386()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3389 : StressfulInteger {
 
   companion object {
@@ -12477,9 +12478,9 @@ class Number3389 : StressfulInteger {
     val b = Number3387()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3390 : StressfulInteger {
 
   companion object {
@@ -12509,9 +12510,9 @@ class Number3390 : StressfulInteger {
     val b = Number3388()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3391 : StressfulInteger {
 
   companion object {
@@ -12541,9 +12542,9 @@ class Number3391 : StressfulInteger {
     val b = Number3389()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3392 : StressfulInteger {
 
   companion object {
@@ -12573,9 +12574,9 @@ class Number3392 : StressfulInteger {
     val b = Number3390()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3393 : StressfulInteger {
 
   companion object {
@@ -12605,9 +12606,9 @@ class Number3393 : StressfulInteger {
     val b = Number3391()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3394 : StressfulInteger {
 
   companion object {
@@ -12637,9 +12638,9 @@ class Number3394 : StressfulInteger {
     val b = Number3392()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3395 : StressfulInteger {
 
   companion object {
@@ -12669,9 +12670,9 @@ class Number3395 : StressfulInteger {
     val b = Number3393()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3396 : StressfulInteger {
 
   companion object {
@@ -12701,9 +12702,9 @@ class Number3396 : StressfulInteger {
     val b = Number3394()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3397 : StressfulInteger {
 
   companion object {
@@ -12733,9 +12734,9 @@ class Number3397 : StressfulInteger {
     val b = Number3395()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3398 : StressfulInteger {
 
   companion object {
@@ -12765,9 +12766,9 @@ class Number3398 : StressfulInteger {
     val b = Number3396()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3399 : StressfulInteger {
 
   companion object {
@@ -12797,9 +12798,9 @@ class Number3399 : StressfulInteger {
     val b = Number3397()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3400 : StressfulInteger {
 
   companion object {
@@ -12829,9 +12830,9 @@ class Number3400 : StressfulInteger {
     val b = Number3398()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3401 : StressfulInteger {
 
   companion object {
@@ -12861,9 +12862,9 @@ class Number3401 : StressfulInteger {
     val b = Number3399()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3402 : StressfulInteger {
 
   companion object {
@@ -12893,9 +12894,9 @@ class Number3402 : StressfulInteger {
     val b = Number3400()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3403 : StressfulInteger {
 
   companion object {
@@ -12925,9 +12926,9 @@ class Number3403 : StressfulInteger {
     val b = Number3401()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3404 : StressfulInteger {
 
   companion object {
@@ -12957,9 +12958,9 @@ class Number3404 : StressfulInteger {
     val b = Number3402()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3405 : StressfulInteger {
 
   companion object {
@@ -12989,9 +12990,9 @@ class Number3405 : StressfulInteger {
     val b = Number3403()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3406 : StressfulInteger {
 
   companion object {
@@ -13021,9 +13022,9 @@ class Number3406 : StressfulInteger {
     val b = Number3404()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3407 : StressfulInteger {
 
   companion object {
@@ -13053,9 +13054,9 @@ class Number3407 : StressfulInteger {
     val b = Number3405()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3408 : StressfulInteger {
 
   companion object {
@@ -13085,9 +13086,9 @@ class Number3408 : StressfulInteger {
     val b = Number3406()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3409 : StressfulInteger {
 
   companion object {
@@ -13117,9 +13118,9 @@ class Number3409 : StressfulInteger {
     val b = Number3407()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3410 : StressfulInteger {
 
   companion object {
@@ -13149,9 +13150,9 @@ class Number3410 : StressfulInteger {
     val b = Number3408()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3411 : StressfulInteger {
 
   companion object {
@@ -13181,9 +13182,9 @@ class Number3411 : StressfulInteger {
     val b = Number3409()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3412 : StressfulInteger {
 
   companion object {
@@ -13213,9 +13214,9 @@ class Number3412 : StressfulInteger {
     val b = Number3410()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3413 : StressfulInteger {
 
   companion object {
@@ -13245,9 +13246,9 @@ class Number3413 : StressfulInteger {
     val b = Number3411()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3414 : StressfulInteger {
 
   companion object {
@@ -13277,9 +13278,9 @@ class Number3414 : StressfulInteger {
     val b = Number3412()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3415 : StressfulInteger {
 
   companion object {
@@ -13309,9 +13310,9 @@ class Number3415 : StressfulInteger {
     val b = Number3413()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3416 : StressfulInteger {
 
   companion object {
@@ -13341,9 +13342,9 @@ class Number3416 : StressfulInteger {
     val b = Number3414()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3417 : StressfulInteger {
 
   companion object {
@@ -13373,9 +13374,9 @@ class Number3417 : StressfulInteger {
     val b = Number3415()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3418 : StressfulInteger {
 
   companion object {
@@ -13405,9 +13406,9 @@ class Number3418 : StressfulInteger {
     val b = Number3416()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3419 : StressfulInteger {
 
   companion object {
@@ -13437,9 +13438,9 @@ class Number3419 : StressfulInteger {
     val b = Number3417()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3420 : StressfulInteger {
 
   companion object {
@@ -13469,9 +13470,9 @@ class Number3420 : StressfulInteger {
     val b = Number3418()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3421 : StressfulInteger {
 
   companion object {
@@ -13501,9 +13502,9 @@ class Number3421 : StressfulInteger {
     val b = Number3419()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3422 : StressfulInteger {
 
   companion object {
@@ -13533,9 +13534,9 @@ class Number3422 : StressfulInteger {
     val b = Number3420()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3423 : StressfulInteger {
 
   companion object {
@@ -13565,9 +13566,9 @@ class Number3423 : StressfulInteger {
     val b = Number3421()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3424 : StressfulInteger {
 
   companion object {
@@ -13597,9 +13598,9 @@ class Number3424 : StressfulInteger {
     val b = Number3422()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3425 : StressfulInteger {
 
   companion object {
@@ -13629,9 +13630,9 @@ class Number3425 : StressfulInteger {
     val b = Number3423()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3426 : StressfulInteger {
 
   companion object {
@@ -13661,9 +13662,9 @@ class Number3426 : StressfulInteger {
     val b = Number3424()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3427 : StressfulInteger {
 
   companion object {
@@ -13693,9 +13694,9 @@ class Number3427 : StressfulInteger {
     val b = Number3425()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3428 : StressfulInteger {
 
   companion object {
@@ -13725,9 +13726,9 @@ class Number3428 : StressfulInteger {
     val b = Number3426()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3429 : StressfulInteger {
 
   companion object {
@@ -13757,9 +13758,9 @@ class Number3429 : StressfulInteger {
     val b = Number3427()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3430 : StressfulInteger {
 
   companion object {
@@ -13789,9 +13790,9 @@ class Number3430 : StressfulInteger {
     val b = Number3428()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3431 : StressfulInteger {
 
   companion object {
@@ -13821,9 +13822,9 @@ class Number3431 : StressfulInteger {
     val b = Number3429()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3432 : StressfulInteger {
 
   companion object {
@@ -13853,9 +13854,9 @@ class Number3432 : StressfulInteger {
     val b = Number3430()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3433 : StressfulInteger {
 
   companion object {
@@ -13885,9 +13886,9 @@ class Number3433 : StressfulInteger {
     val b = Number3431()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3434 : StressfulInteger {
 
   companion object {
@@ -13917,9 +13918,9 @@ class Number3434 : StressfulInteger {
     val b = Number3432()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3435 : StressfulInteger {
 
   companion object {
@@ -13949,9 +13950,9 @@ class Number3435 : StressfulInteger {
     val b = Number3433()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3436 : StressfulInteger {
 
   companion object {
@@ -13981,9 +13982,9 @@ class Number3436 : StressfulInteger {
     val b = Number3434()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3437 : StressfulInteger {
 
   companion object {
@@ -14013,9 +14014,9 @@ class Number3437 : StressfulInteger {
     val b = Number3435()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3438 : StressfulInteger {
 
   companion object {
@@ -14045,9 +14046,9 @@ class Number3438 : StressfulInteger {
     val b = Number3436()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3439 : StressfulInteger {
 
   companion object {
@@ -14077,9 +14078,9 @@ class Number3439 : StressfulInteger {
     val b = Number3437()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3440 : StressfulInteger {
 
   companion object {
@@ -14109,9 +14110,9 @@ class Number3440 : StressfulInteger {
     val b = Number3438()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3441 : StressfulInteger {
 
   companion object {
@@ -14141,9 +14142,9 @@ class Number3441 : StressfulInteger {
     val b = Number3439()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3442 : StressfulInteger {
 
   companion object {
@@ -14173,9 +14174,9 @@ class Number3442 : StressfulInteger {
     val b = Number3440()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3443 : StressfulInteger {
 
   companion object {
@@ -14205,9 +14206,9 @@ class Number3443 : StressfulInteger {
     val b = Number3441()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3444 : StressfulInteger {
 
   companion object {
@@ -14237,9 +14238,9 @@ class Number3444 : StressfulInteger {
     val b = Number3442()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3445 : StressfulInteger {
 
   companion object {
@@ -14269,9 +14270,9 @@ class Number3445 : StressfulInteger {
     val b = Number3443()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3446 : StressfulInteger {
 
   companion object {
@@ -14301,9 +14302,9 @@ class Number3446 : StressfulInteger {
     val b = Number3444()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3447 : StressfulInteger {
 
   companion object {
@@ -14333,9 +14334,9 @@ class Number3447 : StressfulInteger {
     val b = Number3445()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3448 : StressfulInteger {
 
   companion object {
@@ -14365,9 +14366,9 @@ class Number3448 : StressfulInteger {
     val b = Number3446()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3449 : StressfulInteger {
 
   companion object {
@@ -14397,9 +14398,9 @@ class Number3449 : StressfulInteger {
     val b = Number3447()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3450 : StressfulInteger {
 
   companion object {
@@ -14429,9 +14430,9 @@ class Number3450 : StressfulInteger {
     val b = Number3448()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3451 : StressfulInteger {
 
   companion object {
@@ -14461,9 +14462,9 @@ class Number3451 : StressfulInteger {
     val b = Number3449()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3452 : StressfulInteger {
 
   companion object {
@@ -14493,9 +14494,9 @@ class Number3452 : StressfulInteger {
     val b = Number3450()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3453 : StressfulInteger {
 
   companion object {
@@ -14525,9 +14526,9 @@ class Number3453 : StressfulInteger {
     val b = Number3451()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3454 : StressfulInteger {
 
   companion object {
@@ -14557,9 +14558,9 @@ class Number3454 : StressfulInteger {
     val b = Number3452()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3455 : StressfulInteger {
 
   companion object {
@@ -14589,9 +14590,9 @@ class Number3455 : StressfulInteger {
     val b = Number3453()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3456 : StressfulInteger {
 
   companion object {
@@ -14621,9 +14622,9 @@ class Number3456 : StressfulInteger {
     val b = Number3454()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3457 : StressfulInteger {
 
   companion object {
@@ -14653,9 +14654,9 @@ class Number3457 : StressfulInteger {
     val b = Number3455()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3458 : StressfulInteger {
 
   companion object {
@@ -14685,9 +14686,9 @@ class Number3458 : StressfulInteger {
     val b = Number3456()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3459 : StressfulInteger {
 
   companion object {
@@ -14717,9 +14718,9 @@ class Number3459 : StressfulInteger {
     val b = Number3457()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3460 : StressfulInteger {
 
   companion object {
@@ -14749,9 +14750,9 @@ class Number3460 : StressfulInteger {
     val b = Number3458()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3461 : StressfulInteger {
 
   companion object {
@@ -14781,9 +14782,9 @@ class Number3461 : StressfulInteger {
     val b = Number3459()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3462 : StressfulInteger {
 
   companion object {
@@ -14813,9 +14814,9 @@ class Number3462 : StressfulInteger {
     val b = Number3460()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3463 : StressfulInteger {
 
   companion object {
@@ -14845,9 +14846,9 @@ class Number3463 : StressfulInteger {
     val b = Number3461()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3464 : StressfulInteger {
 
   companion object {
@@ -14877,9 +14878,9 @@ class Number3464 : StressfulInteger {
     val b = Number3462()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3465 : StressfulInteger {
 
   companion object {
@@ -14909,9 +14910,9 @@ class Number3465 : StressfulInteger {
     val b = Number3463()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3466 : StressfulInteger {
 
   companion object {
@@ -14941,9 +14942,9 @@ class Number3466 : StressfulInteger {
     val b = Number3464()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3467 : StressfulInteger {
 
   companion object {
@@ -14973,9 +14974,9 @@ class Number3467 : StressfulInteger {
     val b = Number3465()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3468 : StressfulInteger {
 
   companion object {
@@ -15005,9 +15006,9 @@ class Number3468 : StressfulInteger {
     val b = Number3466()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3469 : StressfulInteger {
 
   companion object {
@@ -15037,9 +15038,9 @@ class Number3469 : StressfulInteger {
     val b = Number3467()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3470 : StressfulInteger {
 
   companion object {
@@ -15069,9 +15070,9 @@ class Number3470 : StressfulInteger {
     val b = Number3468()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3471 : StressfulInteger {
 
   companion object {
@@ -15101,9 +15102,9 @@ class Number3471 : StressfulInteger {
     val b = Number3469()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3472 : StressfulInteger {
 
   companion object {
@@ -15133,9 +15134,9 @@ class Number3472 : StressfulInteger {
     val b = Number3470()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3473 : StressfulInteger {
 
   companion object {
@@ -15165,9 +15166,9 @@ class Number3473 : StressfulInteger {
     val b = Number3471()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3474 : StressfulInteger {
 
   companion object {
@@ -15197,9 +15198,9 @@ class Number3474 : StressfulInteger {
     val b = Number3472()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3475 : StressfulInteger {
 
   companion object {
@@ -15229,9 +15230,9 @@ class Number3475 : StressfulInteger {
     val b = Number3473()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3476 : StressfulInteger {
 
   companion object {
@@ -15261,9 +15262,9 @@ class Number3476 : StressfulInteger {
     val b = Number3474()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3477 : StressfulInteger {
 
   companion object {
@@ -15293,9 +15294,9 @@ class Number3477 : StressfulInteger {
     val b = Number3475()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3478 : StressfulInteger {
 
   companion object {
@@ -15325,9 +15326,9 @@ class Number3478 : StressfulInteger {
     val b = Number3476()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3479 : StressfulInteger {
 
   companion object {
@@ -15357,9 +15358,9 @@ class Number3479 : StressfulInteger {
     val b = Number3477()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3480 : StressfulInteger {
 
   companion object {
@@ -15389,9 +15390,9 @@ class Number3480 : StressfulInteger {
     val b = Number3478()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3481 : StressfulInteger {
 
   companion object {
@@ -15421,9 +15422,9 @@ class Number3481 : StressfulInteger {
     val b = Number3479()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3482 : StressfulInteger {
 
   companion object {
@@ -15453,9 +15454,9 @@ class Number3482 : StressfulInteger {
     val b = Number3480()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3483 : StressfulInteger {
 
   companion object {
@@ -15485,9 +15486,9 @@ class Number3483 : StressfulInteger {
     val b = Number3481()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3484 : StressfulInteger {
 
   companion object {
@@ -15517,9 +15518,9 @@ class Number3484 : StressfulInteger {
     val b = Number3482()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3485 : StressfulInteger {
 
   companion object {
@@ -15549,9 +15550,9 @@ class Number3485 : StressfulInteger {
     val b = Number3483()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3486 : StressfulInteger {
 
   companion object {
@@ -15581,9 +15582,9 @@ class Number3486 : StressfulInteger {
     val b = Number3484()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3487 : StressfulInteger {
 
   companion object {
@@ -15613,9 +15614,9 @@ class Number3487 : StressfulInteger {
     val b = Number3485()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3488 : StressfulInteger {
 
   companion object {
@@ -15645,9 +15646,9 @@ class Number3488 : StressfulInteger {
     val b = Number3486()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3489 : StressfulInteger {
 
   companion object {
@@ -15677,9 +15678,9 @@ class Number3489 : StressfulInteger {
     val b = Number3487()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3490 : StressfulInteger {
 
   companion object {
@@ -15709,9 +15710,9 @@ class Number3490 : StressfulInteger {
     val b = Number3488()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3491 : StressfulInteger {
 
   companion object {
@@ -15741,9 +15742,9 @@ class Number3491 : StressfulInteger {
     val b = Number3489()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3492 : StressfulInteger {
 
   companion object {
@@ -15773,9 +15774,9 @@ class Number3492 : StressfulInteger {
     val b = Number3490()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3493 : StressfulInteger {
 
   companion object {
@@ -15805,9 +15806,9 @@ class Number3493 : StressfulInteger {
     val b = Number3491()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3494 : StressfulInteger {
 
   companion object {
@@ -15837,9 +15838,9 @@ class Number3494 : StressfulInteger {
     val b = Number3492()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3495 : StressfulInteger {
 
   companion object {
@@ -15869,9 +15870,9 @@ class Number3495 : StressfulInteger {
     val b = Number3493()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3496 : StressfulInteger {
 
   companion object {
@@ -15901,9 +15902,9 @@ class Number3496 : StressfulInteger {
     val b = Number3494()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3497 : StressfulInteger {
 
   companion object {
@@ -15933,9 +15934,9 @@ class Number3497 : StressfulInteger {
     val b = Number3495()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3498 : StressfulInteger {
 
   companion object {
@@ -15965,9 +15966,9 @@ class Number3498 : StressfulInteger {
     val b = Number3496()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3499 : StressfulInteger {
 
   companion object {
@@ -15997,9 +15998,9 @@ class Number3499 : StressfulInteger {
     val b = Number3497()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3500 : StressfulInteger {
 
   companion object {
@@ -16029,9 +16030,9 @@ class Number3500 : StressfulInteger {
     val b = Number3498()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3501 : StressfulInteger {
 
   companion object {
@@ -16061,9 +16062,9 @@ class Number3501 : StressfulInteger {
     val b = Number3499()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3502 : StressfulInteger {
 
   companion object {
@@ -16093,9 +16094,9 @@ class Number3502 : StressfulInteger {
     val b = Number3500()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3503 : StressfulInteger {
 
   companion object {
@@ -16125,9 +16126,9 @@ class Number3503 : StressfulInteger {
     val b = Number3501()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3504 : StressfulInteger {
 
   companion object {
@@ -16157,9 +16158,9 @@ class Number3504 : StressfulInteger {
     val b = Number3502()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3505 : StressfulInteger {
 
   companion object {
@@ -16189,9 +16190,9 @@ class Number3505 : StressfulInteger {
     val b = Number3503()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3506 : StressfulInteger {
 
   companion object {
@@ -16221,9 +16222,9 @@ class Number3506 : StressfulInteger {
     val b = Number3504()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3507 : StressfulInteger {
 
   companion object {
@@ -16253,9 +16254,9 @@ class Number3507 : StressfulInteger {
     val b = Number3505()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3508 : StressfulInteger {
 
   companion object {
@@ -16285,9 +16286,9 @@ class Number3508 : StressfulInteger {
     val b = Number3506()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3509 : StressfulInteger {
 
   companion object {
@@ -16317,9 +16318,9 @@ class Number3509 : StressfulInteger {
     val b = Number3507()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3510 : StressfulInteger {
 
   companion object {
@@ -16349,9 +16350,9 @@ class Number3510 : StressfulInteger {
     val b = Number3508()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3511 : StressfulInteger {
 
   companion object {
@@ -16381,9 +16382,9 @@ class Number3511 : StressfulInteger {
     val b = Number3509()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3512 : StressfulInteger {
 
   companion object {
@@ -16413,9 +16414,9 @@ class Number3512 : StressfulInteger {
     val b = Number3510()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3513 : StressfulInteger {
 
   companion object {
@@ -16445,9 +16446,9 @@ class Number3513 : StressfulInteger {
     val b = Number3511()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3514 : StressfulInteger {
 
   companion object {
@@ -16477,9 +16478,9 @@ class Number3514 : StressfulInteger {
     val b = Number3512()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3515 : StressfulInteger {
 
   companion object {
@@ -16509,9 +16510,9 @@ class Number3515 : StressfulInteger {
     val b = Number3513()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3516 : StressfulInteger {
 
   companion object {
@@ -16541,9 +16542,9 @@ class Number3516 : StressfulInteger {
     val b = Number3514()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3517 : StressfulInteger {
 
   companion object {
@@ -16573,9 +16574,9 @@ class Number3517 : StressfulInteger {
     val b = Number3515()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3518 : StressfulInteger {
 
   companion object {
@@ -16605,9 +16606,9 @@ class Number3518 : StressfulInteger {
     val b = Number3516()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3519 : StressfulInteger {
 
   companion object {
@@ -16637,9 +16638,9 @@ class Number3519 : StressfulInteger {
     val b = Number3517()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3520 : StressfulInteger {
 
   companion object {
@@ -16669,9 +16670,9 @@ class Number3520 : StressfulInteger {
     val b = Number3518()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3521 : StressfulInteger {
 
   companion object {
@@ -16701,9 +16702,9 @@ class Number3521 : StressfulInteger {
     val b = Number3519()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3522 : StressfulInteger {
 
   companion object {
@@ -16733,9 +16734,9 @@ class Number3522 : StressfulInteger {
     val b = Number3520()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3523 : StressfulInteger {
 
   companion object {
@@ -16765,9 +16766,9 @@ class Number3523 : StressfulInteger {
     val b = Number3521()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3524 : StressfulInteger {
 
   companion object {
@@ -16797,9 +16798,9 @@ class Number3524 : StressfulInteger {
     val b = Number3522()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3525 : StressfulInteger {
 
   companion object {
@@ -16829,9 +16830,9 @@ class Number3525 : StressfulInteger {
     val b = Number3523()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3526 : StressfulInteger {
 
   companion object {
@@ -16861,9 +16862,9 @@ class Number3526 : StressfulInteger {
     val b = Number3524()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3527 : StressfulInteger {
 
   companion object {
@@ -16893,9 +16894,9 @@ class Number3527 : StressfulInteger {
     val b = Number3525()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3528 : StressfulInteger {
 
   companion object {
@@ -16925,9 +16926,9 @@ class Number3528 : StressfulInteger {
     val b = Number3526()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3529 : StressfulInteger {
 
   companion object {
@@ -16957,9 +16958,9 @@ class Number3529 : StressfulInteger {
     val b = Number3527()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3530 : StressfulInteger {
 
   companion object {
@@ -16989,9 +16990,9 @@ class Number3530 : StressfulInteger {
     val b = Number3528()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3531 : StressfulInteger {
 
   companion object {
@@ -17021,9 +17022,9 @@ class Number3531 : StressfulInteger {
     val b = Number3529()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3532 : StressfulInteger {
 
   companion object {
@@ -17053,9 +17054,9 @@ class Number3532 : StressfulInteger {
     val b = Number3530()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3533 : StressfulInteger {
 
   companion object {
@@ -17085,9 +17086,9 @@ class Number3533 : StressfulInteger {
     val b = Number3531()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3534 : StressfulInteger {
 
   companion object {
@@ -17117,9 +17118,9 @@ class Number3534 : StressfulInteger {
     val b = Number3532()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3535 : StressfulInteger {
 
   companion object {
@@ -17149,9 +17150,9 @@ class Number3535 : StressfulInteger {
     val b = Number3533()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3536 : StressfulInteger {
 
   companion object {
@@ -17181,9 +17182,9 @@ class Number3536 : StressfulInteger {
     val b = Number3534()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3537 : StressfulInteger {
 
   companion object {
@@ -17213,9 +17214,9 @@ class Number3537 : StressfulInteger {
     val b = Number3535()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3538 : StressfulInteger {
 
   companion object {
@@ -17245,9 +17246,9 @@ class Number3538 : StressfulInteger {
     val b = Number3536()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3539 : StressfulInteger {
 
   companion object {
@@ -17277,9 +17278,9 @@ class Number3539 : StressfulInteger {
     val b = Number3537()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3540 : StressfulInteger {
 
   companion object {
@@ -17309,9 +17310,9 @@ class Number3540 : StressfulInteger {
     val b = Number3538()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3541 : StressfulInteger {
 
   companion object {
@@ -17341,9 +17342,9 @@ class Number3541 : StressfulInteger {
     val b = Number3539()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3542 : StressfulInteger {
 
   companion object {
@@ -17373,9 +17374,9 @@ class Number3542 : StressfulInteger {
     val b = Number3540()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3543 : StressfulInteger {
 
   companion object {
@@ -17405,9 +17406,9 @@ class Number3543 : StressfulInteger {
     val b = Number3541()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3544 : StressfulInteger {
 
   companion object {
@@ -17437,9 +17438,9 @@ class Number3544 : StressfulInteger {
     val b = Number3542()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3545 : StressfulInteger {
 
   companion object {
@@ -17469,9 +17470,9 @@ class Number3545 : StressfulInteger {
     val b = Number3543()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3546 : StressfulInteger {
 
   companion object {
@@ -17501,9 +17502,9 @@ class Number3546 : StressfulInteger {
     val b = Number3544()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3547 : StressfulInteger {
 
   companion object {
@@ -17533,9 +17534,9 @@ class Number3547 : StressfulInteger {
     val b = Number3545()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3548 : StressfulInteger {
 
   companion object {
@@ -17565,9 +17566,9 @@ class Number3548 : StressfulInteger {
     val b = Number3546()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3549 : StressfulInteger {
 
   companion object {
@@ -17597,9 +17598,9 @@ class Number3549 : StressfulInteger {
     val b = Number3547()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3550 : StressfulInteger {
 
   companion object {
@@ -17629,9 +17630,9 @@ class Number3550 : StressfulInteger {
     val b = Number3548()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3551 : StressfulInteger {
 
   companion object {
@@ -17661,9 +17662,9 @@ class Number3551 : StressfulInteger {
     val b = Number3549()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3552 : StressfulInteger {
 
   companion object {
@@ -17693,9 +17694,9 @@ class Number3552 : StressfulInteger {
     val b = Number3550()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3553 : StressfulInteger {
 
   companion object {
@@ -17725,9 +17726,9 @@ class Number3553 : StressfulInteger {
     val b = Number3551()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3554 : StressfulInteger {
 
   companion object {
@@ -17757,9 +17758,9 @@ class Number3554 : StressfulInteger {
     val b = Number3552()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3555 : StressfulInteger {
 
   companion object {
@@ -17789,9 +17790,9 @@ class Number3555 : StressfulInteger {
     val b = Number3553()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3556 : StressfulInteger {
 
   companion object {
@@ -17821,9 +17822,9 @@ class Number3556 : StressfulInteger {
     val b = Number3554()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3557 : StressfulInteger {
 
   companion object {
@@ -17853,9 +17854,9 @@ class Number3557 : StressfulInteger {
     val b = Number3555()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3558 : StressfulInteger {
 
   companion object {
@@ -17885,9 +17886,9 @@ class Number3558 : StressfulInteger {
     val b = Number3556()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3559 : StressfulInteger {
 
   companion object {
@@ -17917,9 +17918,9 @@ class Number3559 : StressfulInteger {
     val b = Number3557()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3560 : StressfulInteger {
 
   companion object {
@@ -17949,9 +17950,9 @@ class Number3560 : StressfulInteger {
     val b = Number3558()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3561 : StressfulInteger {
 
   companion object {
@@ -17981,9 +17982,9 @@ class Number3561 : StressfulInteger {
     val b = Number3559()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3562 : StressfulInteger {
 
   companion object {
@@ -18013,9 +18014,9 @@ class Number3562 : StressfulInteger {
     val b = Number3560()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3563 : StressfulInteger {
 
   companion object {
@@ -18045,9 +18046,9 @@ class Number3563 : StressfulInteger {
     val b = Number3561()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3564 : StressfulInteger {
 
   companion object {
@@ -18077,9 +18078,9 @@ class Number3564 : StressfulInteger {
     val b = Number3562()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3565 : StressfulInteger {
 
   companion object {
@@ -18109,9 +18110,9 @@ class Number3565 : StressfulInteger {
     val b = Number3563()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3566 : StressfulInteger {
 
   companion object {
@@ -18141,9 +18142,9 @@ class Number3566 : StressfulInteger {
     val b = Number3564()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3567 : StressfulInteger {
 
   companion object {
@@ -18173,9 +18174,9 @@ class Number3567 : StressfulInteger {
     val b = Number3565()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3568 : StressfulInteger {
 
   companion object {
@@ -18205,9 +18206,9 @@ class Number3568 : StressfulInteger {
     val b = Number3566()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3569 : StressfulInteger {
 
   companion object {
@@ -18237,9 +18238,9 @@ class Number3569 : StressfulInteger {
     val b = Number3567()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3570 : StressfulInteger {
 
   companion object {
@@ -18269,9 +18270,9 @@ class Number3570 : StressfulInteger {
     val b = Number3568()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3571 : StressfulInteger {
 
   companion object {
@@ -18301,9 +18302,9 @@ class Number3571 : StressfulInteger {
     val b = Number3569()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3572 : StressfulInteger {
 
   companion object {
@@ -18333,9 +18334,9 @@ class Number3572 : StressfulInteger {
     val b = Number3570()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3573 : StressfulInteger {
 
   companion object {
@@ -18365,9 +18366,9 @@ class Number3573 : StressfulInteger {
     val b = Number3571()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3574 : StressfulInteger {
 
   companion object {
@@ -18397,9 +18398,9 @@ class Number3574 : StressfulInteger {
     val b = Number3572()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3575 : StressfulInteger {
 
   companion object {
@@ -18429,9 +18430,9 @@ class Number3575 : StressfulInteger {
     val b = Number3573()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3576 : StressfulInteger {
 
   companion object {
@@ -18461,9 +18462,9 @@ class Number3576 : StressfulInteger {
     val b = Number3574()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3577 : StressfulInteger {
 
   companion object {
@@ -18493,9 +18494,9 @@ class Number3577 : StressfulInteger {
     val b = Number3575()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3578 : StressfulInteger {
 
   companion object {
@@ -18525,9 +18526,9 @@ class Number3578 : StressfulInteger {
     val b = Number3576()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3579 : StressfulInteger {
 
   companion object {
@@ -18557,9 +18558,9 @@ class Number3579 : StressfulInteger {
     val b = Number3577()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3580 : StressfulInteger {
 
   companion object {
@@ -18589,9 +18590,9 @@ class Number3580 : StressfulInteger {
     val b = Number3578()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3581 : StressfulInteger {
 
   companion object {
@@ -18621,9 +18622,9 @@ class Number3581 : StressfulInteger {
     val b = Number3579()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3582 : StressfulInteger {
 
   companion object {
@@ -18653,9 +18654,9 @@ class Number3582 : StressfulInteger {
     val b = Number3580()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3583 : StressfulInteger {
 
   companion object {
@@ -18685,9 +18686,9 @@ class Number3583 : StressfulInteger {
     val b = Number3581()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3584 : StressfulInteger {
 
   companion object {
@@ -18717,9 +18718,9 @@ class Number3584 : StressfulInteger {
     val b = Number3582()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3585 : StressfulInteger {
 
   companion object {
@@ -18749,9 +18750,9 @@ class Number3585 : StressfulInteger {
     val b = Number3583()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3586 : StressfulInteger {
 
   companion object {
@@ -18781,9 +18782,9 @@ class Number3586 : StressfulInteger {
     val b = Number3584()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3587 : StressfulInteger {
 
   companion object {
@@ -18813,9 +18814,9 @@ class Number3587 : StressfulInteger {
     val b = Number3585()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3588 : StressfulInteger {
 
   companion object {
@@ -18845,9 +18846,9 @@ class Number3588 : StressfulInteger {
     val b = Number3586()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3589 : StressfulInteger {
 
   companion object {
@@ -18877,9 +18878,9 @@ class Number3589 : StressfulInteger {
     val b = Number3587()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3590 : StressfulInteger {
 
   companion object {
@@ -18909,9 +18910,9 @@ class Number3590 : StressfulInteger {
     val b = Number3588()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3591 : StressfulInteger {
 
   companion object {
@@ -18941,9 +18942,9 @@ class Number3591 : StressfulInteger {
     val b = Number3589()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3592 : StressfulInteger {
 
   companion object {
@@ -18973,9 +18974,9 @@ class Number3592 : StressfulInteger {
     val b = Number3590()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3593 : StressfulInteger {
 
   companion object {
@@ -19005,9 +19006,9 @@ class Number3593 : StressfulInteger {
     val b = Number3591()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3594 : StressfulInteger {
 
   companion object {
@@ -19037,9 +19038,9 @@ class Number3594 : StressfulInteger {
     val b = Number3592()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3595 : StressfulInteger {
 
   companion object {
@@ -19069,9 +19070,9 @@ class Number3595 : StressfulInteger {
     val b = Number3593()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3596 : StressfulInteger {
 
   companion object {
@@ -19101,9 +19102,9 @@ class Number3596 : StressfulInteger {
     val b = Number3594()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3597 : StressfulInteger {
 
   companion object {
@@ -19133,9 +19134,9 @@ class Number3597 : StressfulInteger {
     val b = Number3595()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3598 : StressfulInteger {
 
   companion object {
@@ -19165,9 +19166,9 @@ class Number3598 : StressfulInteger {
     val b = Number3596()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3599 : StressfulInteger {
 
   companion object {
@@ -19197,9 +19198,9 @@ class Number3599 : StressfulInteger {
     val b = Number3597()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3600 : StressfulInteger {
 
   companion object {
@@ -19229,9 +19230,9 @@ class Number3600 : StressfulInteger {
     val b = Number3598()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3601 : StressfulInteger {
 
   companion object {
@@ -19261,9 +19262,9 @@ class Number3601 : StressfulInteger {
     val b = Number3599()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3602 : StressfulInteger {
 
   companion object {
@@ -19293,9 +19294,9 @@ class Number3602 : StressfulInteger {
     val b = Number3600()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3603 : StressfulInteger {
 
   companion object {
@@ -19325,9 +19326,9 @@ class Number3603 : StressfulInteger {
     val b = Number3601()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3604 : StressfulInteger {
 
   companion object {
@@ -19357,9 +19358,9 @@ class Number3604 : StressfulInteger {
     val b = Number3602()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3605 : StressfulInteger {
 
   companion object {
@@ -19389,9 +19390,9 @@ class Number3605 : StressfulInteger {
     val b = Number3603()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3606 : StressfulInteger {
 
   companion object {
@@ -19421,9 +19422,9 @@ class Number3606 : StressfulInteger {
     val b = Number3604()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3607 : StressfulInteger {
 
   companion object {
@@ -19453,9 +19454,9 @@ class Number3607 : StressfulInteger {
     val b = Number3605()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3608 : StressfulInteger {
 
   companion object {
@@ -19485,9 +19486,9 @@ class Number3608 : StressfulInteger {
     val b = Number3606()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3609 : StressfulInteger {
 
   companion object {
@@ -19517,9 +19518,9 @@ class Number3609 : StressfulInteger {
     val b = Number3607()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3610 : StressfulInteger {
 
   companion object {
@@ -19549,9 +19550,9 @@ class Number3610 : StressfulInteger {
     val b = Number3608()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3611 : StressfulInteger {
 
   companion object {
@@ -19581,9 +19582,9 @@ class Number3611 : StressfulInteger {
     val b = Number3609()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3612 : StressfulInteger {
 
   companion object {
@@ -19613,9 +19614,9 @@ class Number3612 : StressfulInteger {
     val b = Number3610()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3613 : StressfulInteger {
 
   companion object {
@@ -19645,9 +19646,9 @@ class Number3613 : StressfulInteger {
     val b = Number3611()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3614 : StressfulInteger {
 
   companion object {
@@ -19677,9 +19678,9 @@ class Number3614 : StressfulInteger {
     val b = Number3612()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3615 : StressfulInteger {
 
   companion object {
@@ -19709,9 +19710,9 @@ class Number3615 : StressfulInteger {
     val b = Number3613()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3616 : StressfulInteger {
 
   companion object {
@@ -19741,9 +19742,9 @@ class Number3616 : StressfulInteger {
     val b = Number3614()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3617 : StressfulInteger {
 
   companion object {
@@ -19773,9 +19774,9 @@ class Number3617 : StressfulInteger {
     val b = Number3615()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3618 : StressfulInteger {
 
   companion object {
@@ -19805,9 +19806,9 @@ class Number3618 : StressfulInteger {
     val b = Number3616()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3619 : StressfulInteger {
 
   companion object {
@@ -19837,9 +19838,9 @@ class Number3619 : StressfulInteger {
     val b = Number3617()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3620 : StressfulInteger {
 
   companion object {
@@ -19869,9 +19870,9 @@ class Number3620 : StressfulInteger {
     val b = Number3618()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3621 : StressfulInteger {
 
   companion object {
@@ -19901,9 +19902,9 @@ class Number3621 : StressfulInteger {
     val b = Number3619()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3622 : StressfulInteger {
 
   companion object {
@@ -19933,9 +19934,9 @@ class Number3622 : StressfulInteger {
     val b = Number3620()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3623 : StressfulInteger {
 
   companion object {
@@ -19965,9 +19966,9 @@ class Number3623 : StressfulInteger {
     val b = Number3621()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3624 : StressfulInteger {
 
   companion object {
@@ -19997,9 +19998,9 @@ class Number3624 : StressfulInteger {
     val b = Number3622()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3625 : StressfulInteger {
 
   companion object {
@@ -20029,9 +20030,9 @@ class Number3625 : StressfulInteger {
     val b = Number3623()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3626 : StressfulInteger {
 
   companion object {
@@ -20061,9 +20062,9 @@ class Number3626 : StressfulInteger {
     val b = Number3624()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3627 : StressfulInteger {
 
   companion object {
@@ -20093,9 +20094,9 @@ class Number3627 : StressfulInteger {
     val b = Number3625()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3628 : StressfulInteger {
 
   companion object {
@@ -20125,9 +20126,9 @@ class Number3628 : StressfulInteger {
     val b = Number3626()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3629 : StressfulInteger {
 
   companion object {
@@ -20157,9 +20158,9 @@ class Number3629 : StressfulInteger {
     val b = Number3627()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3630 : StressfulInteger {
 
   companion object {
@@ -20189,9 +20190,9 @@ class Number3630 : StressfulInteger {
     val b = Number3628()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3631 : StressfulInteger {
 
   companion object {
@@ -20221,9 +20222,9 @@ class Number3631 : StressfulInteger {
     val b = Number3629()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3632 : StressfulInteger {
 
   companion object {
@@ -20253,9 +20254,9 @@ class Number3632 : StressfulInteger {
     val b = Number3630()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3633 : StressfulInteger {
 
   companion object {
@@ -20285,9 +20286,9 @@ class Number3633 : StressfulInteger {
     val b = Number3631()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3634 : StressfulInteger {
 
   companion object {
@@ -20317,9 +20318,9 @@ class Number3634 : StressfulInteger {
     val b = Number3632()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3635 : StressfulInteger {
 
   companion object {
@@ -20349,9 +20350,9 @@ class Number3635 : StressfulInteger {
     val b = Number3633()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3636 : StressfulInteger {
 
   companion object {
@@ -20381,9 +20382,9 @@ class Number3636 : StressfulInteger {
     val b = Number3634()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3637 : StressfulInteger {
 
   companion object {
@@ -20413,9 +20414,9 @@ class Number3637 : StressfulInteger {
     val b = Number3635()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3638 : StressfulInteger {
 
   companion object {
@@ -20445,9 +20446,9 @@ class Number3638 : StressfulInteger {
     val b = Number3636()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3639 : StressfulInteger {
 
   companion object {
@@ -20477,9 +20478,9 @@ class Number3639 : StressfulInteger {
     val b = Number3637()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3640 : StressfulInteger {
 
   companion object {
@@ -20509,9 +20510,9 @@ class Number3640 : StressfulInteger {
     val b = Number3638()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3641 : StressfulInteger {
 
   companion object {
@@ -20541,9 +20542,9 @@ class Number3641 : StressfulInteger {
     val b = Number3639()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3642 : StressfulInteger {
 
   companion object {
@@ -20573,9 +20574,9 @@ class Number3642 : StressfulInteger {
     val b = Number3640()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3643 : StressfulInteger {
 
   companion object {
@@ -20605,9 +20606,9 @@ class Number3643 : StressfulInteger {
     val b = Number3641()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3644 : StressfulInteger {
 
   companion object {
@@ -20637,9 +20638,9 @@ class Number3644 : StressfulInteger {
     val b = Number3642()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3645 : StressfulInteger {
 
   companion object {
@@ -20669,9 +20670,9 @@ class Number3645 : StressfulInteger {
     val b = Number3643()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3646 : StressfulInteger {
 
   companion object {
@@ -20701,9 +20702,9 @@ class Number3646 : StressfulInteger {
     val b = Number3644()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3647 : StressfulInteger {
 
   companion object {
@@ -20733,9 +20734,9 @@ class Number3647 : StressfulInteger {
     val b = Number3645()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3648 : StressfulInteger {
 
   companion object {
@@ -20765,9 +20766,9 @@ class Number3648 : StressfulInteger {
     val b = Number3646()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3649 : StressfulInteger {
 
   companion object {
@@ -20797,9 +20798,9 @@ class Number3649 : StressfulInteger {
     val b = Number3647()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3650 : StressfulInteger {
 
   companion object {
@@ -20829,9 +20830,9 @@ class Number3650 : StressfulInteger {
     val b = Number3648()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3651 : StressfulInteger {
 
   companion object {
@@ -20861,9 +20862,9 @@ class Number3651 : StressfulInteger {
     val b = Number3649()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3652 : StressfulInteger {
 
   companion object {
@@ -20893,9 +20894,9 @@ class Number3652 : StressfulInteger {
     val b = Number3650()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3653 : StressfulInteger {
 
   companion object {
@@ -20925,9 +20926,9 @@ class Number3653 : StressfulInteger {
     val b = Number3651()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3654 : StressfulInteger {
 
   companion object {
@@ -20957,9 +20958,9 @@ class Number3654 : StressfulInteger {
     val b = Number3652()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3655 : StressfulInteger {
 
   companion object {
@@ -20989,9 +20990,9 @@ class Number3655 : StressfulInteger {
     val b = Number3653()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3656 : StressfulInteger {
 
   companion object {
@@ -21021,9 +21022,9 @@ class Number3656 : StressfulInteger {
     val b = Number3654()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3657 : StressfulInteger {
 
   companion object {
@@ -21053,9 +21054,9 @@ class Number3657 : StressfulInteger {
     val b = Number3655()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3658 : StressfulInteger {
 
   companion object {
@@ -21085,9 +21086,9 @@ class Number3658 : StressfulInteger {
     val b = Number3656()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3659 : StressfulInteger {
 
   companion object {
@@ -21117,9 +21118,9 @@ class Number3659 : StressfulInteger {
     val b = Number3657()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3660 : StressfulInteger {
 
   companion object {
@@ -21149,9 +21150,9 @@ class Number3660 : StressfulInteger {
     val b = Number3658()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3661 : StressfulInteger {
 
   companion object {
@@ -21181,9 +21182,9 @@ class Number3661 : StressfulInteger {
     val b = Number3659()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3662 : StressfulInteger {
 
   companion object {
@@ -21213,9 +21214,9 @@ class Number3662 : StressfulInteger {
     val b = Number3660()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3663 : StressfulInteger {
 
   companion object {
@@ -21245,9 +21246,9 @@ class Number3663 : StressfulInteger {
     val b = Number3661()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3664 : StressfulInteger {
 
   companion object {
@@ -21277,9 +21278,9 @@ class Number3664 : StressfulInteger {
     val b = Number3662()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3665 : StressfulInteger {
 
   companion object {
@@ -21309,9 +21310,9 @@ class Number3665 : StressfulInteger {
     val b = Number3663()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3666 : StressfulInteger {
 
   companion object {
@@ -21341,9 +21342,9 @@ class Number3666 : StressfulInteger {
     val b = Number3664()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3667 : StressfulInteger {
 
   companion object {
@@ -21373,9 +21374,9 @@ class Number3667 : StressfulInteger {
     val b = Number3665()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3668 : StressfulInteger {
 
   companion object {
@@ -21405,9 +21406,9 @@ class Number3668 : StressfulInteger {
     val b = Number3666()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3669 : StressfulInteger {
 
   companion object {
@@ -21437,9 +21438,9 @@ class Number3669 : StressfulInteger {
     val b = Number3667()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3670 : StressfulInteger {
 
   companion object {
@@ -21469,9 +21470,9 @@ class Number3670 : StressfulInteger {
     val b = Number3668()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3671 : StressfulInteger {
 
   companion object {
@@ -21501,9 +21502,9 @@ class Number3671 : StressfulInteger {
     val b = Number3669()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3672 : StressfulInteger {
 
   companion object {
@@ -21533,9 +21534,9 @@ class Number3672 : StressfulInteger {
     val b = Number3670()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3673 : StressfulInteger {
 
   companion object {
@@ -21565,9 +21566,9 @@ class Number3673 : StressfulInteger {
     val b = Number3671()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3674 : StressfulInteger {
 
   companion object {
@@ -21597,9 +21598,9 @@ class Number3674 : StressfulInteger {
     val b = Number3672()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3675 : StressfulInteger {
 
   companion object {
@@ -21629,9 +21630,9 @@ class Number3675 : StressfulInteger {
     val b = Number3673()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3676 : StressfulInteger {
 
   companion object {
@@ -21661,9 +21662,9 @@ class Number3676 : StressfulInteger {
     val b = Number3674()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3677 : StressfulInteger {
 
   companion object {
@@ -21693,9 +21694,9 @@ class Number3677 : StressfulInteger {
     val b = Number3675()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3678 : StressfulInteger {
 
   companion object {
@@ -21725,9 +21726,9 @@ class Number3678 : StressfulInteger {
     val b = Number3676()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3679 : StressfulInteger {
 
   companion object {
@@ -21757,9 +21758,9 @@ class Number3679 : StressfulInteger {
     val b = Number3677()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3680 : StressfulInteger {
 
   companion object {
@@ -21789,9 +21790,9 @@ class Number3680 : StressfulInteger {
     val b = Number3678()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3681 : StressfulInteger {
 
   companion object {
@@ -21821,9 +21822,9 @@ class Number3681 : StressfulInteger {
     val b = Number3679()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3682 : StressfulInteger {
 
   companion object {
@@ -21853,9 +21854,9 @@ class Number3682 : StressfulInteger {
     val b = Number3680()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3683 : StressfulInteger {
 
   companion object {
@@ -21885,9 +21886,9 @@ class Number3683 : StressfulInteger {
     val b = Number3681()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3684 : StressfulInteger {
 
   companion object {
@@ -21917,9 +21918,9 @@ class Number3684 : StressfulInteger {
     val b = Number3682()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3685 : StressfulInteger {
 
   companion object {
@@ -21949,9 +21950,9 @@ class Number3685 : StressfulInteger {
     val b = Number3683()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3686 : StressfulInteger {
 
   companion object {
@@ -21981,9 +21982,9 @@ class Number3686 : StressfulInteger {
     val b = Number3684()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3687 : StressfulInteger {
 
   companion object {
@@ -22013,9 +22014,9 @@ class Number3687 : StressfulInteger {
     val b = Number3685()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3688 : StressfulInteger {
 
   companion object {
@@ -22045,9 +22046,9 @@ class Number3688 : StressfulInteger {
     val b = Number3686()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3689 : StressfulInteger {
 
   companion object {
@@ -22077,9 +22078,9 @@ class Number3689 : StressfulInteger {
     val b = Number3687()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3690 : StressfulInteger {
 
   companion object {
@@ -22109,9 +22110,9 @@ class Number3690 : StressfulInteger {
     val b = Number3688()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3691 : StressfulInteger {
 
   companion object {
@@ -22141,9 +22142,9 @@ class Number3691 : StressfulInteger {
     val b = Number3689()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3692 : StressfulInteger {
 
   companion object {
@@ -22173,9 +22174,9 @@ class Number3692 : StressfulInteger {
     val b = Number3690()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3693 : StressfulInteger {
 
   companion object {
@@ -22205,9 +22206,9 @@ class Number3693 : StressfulInteger {
     val b = Number3691()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3694 : StressfulInteger {
 
   companion object {
@@ -22237,9 +22238,9 @@ class Number3694 : StressfulInteger {
     val b = Number3692()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3695 : StressfulInteger {
 
   companion object {
@@ -22269,9 +22270,9 @@ class Number3695 : StressfulInteger {
     val b = Number3693()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3696 : StressfulInteger {
 
   companion object {
@@ -22301,9 +22302,9 @@ class Number3696 : StressfulInteger {
     val b = Number3694()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3697 : StressfulInteger {
 
   companion object {
@@ -22333,9 +22334,9 @@ class Number3697 : StressfulInteger {
     val b = Number3695()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3698 : StressfulInteger {
 
   companion object {
@@ -22365,9 +22366,9 @@ class Number3698 : StressfulInteger {
     val b = Number3696()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3699 : StressfulInteger {
 
   companion object {
@@ -22397,9 +22398,9 @@ class Number3699 : StressfulInteger {
     val b = Number3697()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3700 : StressfulInteger {
 
   companion object {
@@ -22429,9 +22430,9 @@ class Number3700 : StressfulInteger {
     val b = Number3698()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3701 : StressfulInteger {
 
   companion object {
@@ -22461,9 +22462,9 @@ class Number3701 : StressfulInteger {
     val b = Number3699()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3702 : StressfulInteger {
 
   companion object {
@@ -22493,9 +22494,9 @@ class Number3702 : StressfulInteger {
     val b = Number3700()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3703 : StressfulInteger {
 
   companion object {
@@ -22525,9 +22526,9 @@ class Number3703 : StressfulInteger {
     val b = Number3701()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3704 : StressfulInteger {
 
   companion object {
@@ -22557,9 +22558,9 @@ class Number3704 : StressfulInteger {
     val b = Number3702()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3705 : StressfulInteger {
 
   companion object {
@@ -22589,9 +22590,9 @@ class Number3705 : StressfulInteger {
     val b = Number3703()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3706 : StressfulInteger {
 
   companion object {
@@ -22621,9 +22622,9 @@ class Number3706 : StressfulInteger {
     val b = Number3704()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3707 : StressfulInteger {
 
   companion object {
@@ -22653,9 +22654,9 @@ class Number3707 : StressfulInteger {
     val b = Number3705()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3708 : StressfulInteger {
 
   companion object {
@@ -22685,9 +22686,9 @@ class Number3708 : StressfulInteger {
     val b = Number3706()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3709 : StressfulInteger {
 
   companion object {
@@ -22717,9 +22718,9 @@ class Number3709 : StressfulInteger {
     val b = Number3707()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3710 : StressfulInteger {
 
   companion object {
@@ -22749,9 +22750,9 @@ class Number3710 : StressfulInteger {
     val b = Number3708()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3711 : StressfulInteger {
 
   companion object {
@@ -22781,9 +22782,9 @@ class Number3711 : StressfulInteger {
     val b = Number3709()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3712 : StressfulInteger {
 
   companion object {
@@ -22813,9 +22814,9 @@ class Number3712 : StressfulInteger {
     val b = Number3710()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3713 : StressfulInteger {
 
   companion object {
@@ -22845,9 +22846,9 @@ class Number3713 : StressfulInteger {
     val b = Number3711()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3714 : StressfulInteger {
 
   companion object {
@@ -22877,9 +22878,9 @@ class Number3714 : StressfulInteger {
     val b = Number3712()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3715 : StressfulInteger {
 
   companion object {
@@ -22909,9 +22910,9 @@ class Number3715 : StressfulInteger {
     val b = Number3713()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3716 : StressfulInteger {
 
   companion object {
@@ -22941,9 +22942,9 @@ class Number3716 : StressfulInteger {
     val b = Number3714()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3717 : StressfulInteger {
 
   companion object {
@@ -22973,9 +22974,9 @@ class Number3717 : StressfulInteger {
     val b = Number3715()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3718 : StressfulInteger {
 
   companion object {
@@ -23005,9 +23006,9 @@ class Number3718 : StressfulInteger {
     val b = Number3716()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3719 : StressfulInteger {
 
   companion object {
@@ -23037,9 +23038,9 @@ class Number3719 : StressfulInteger {
     val b = Number3717()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3720 : StressfulInteger {
 
   companion object {
@@ -23069,9 +23070,9 @@ class Number3720 : StressfulInteger {
     val b = Number3718()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3721 : StressfulInteger {
 
   companion object {
@@ -23101,9 +23102,9 @@ class Number3721 : StressfulInteger {
     val b = Number3719()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3722 : StressfulInteger {
 
   companion object {
@@ -23133,9 +23134,9 @@ class Number3722 : StressfulInteger {
     val b = Number3720()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3723 : StressfulInteger {
 
   companion object {
@@ -23165,9 +23166,9 @@ class Number3723 : StressfulInteger {
     val b = Number3721()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3724 : StressfulInteger {
 
   companion object {
@@ -23197,9 +23198,9 @@ class Number3724 : StressfulInteger {
     val b = Number3722()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3725 : StressfulInteger {
 
   companion object {
@@ -23229,9 +23230,9 @@ class Number3725 : StressfulInteger {
     val b = Number3723()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3726 : StressfulInteger {
 
   companion object {
@@ -23261,9 +23262,9 @@ class Number3726 : StressfulInteger {
     val b = Number3724()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3727 : StressfulInteger {
 
   companion object {
@@ -23293,9 +23294,9 @@ class Number3727 : StressfulInteger {
     val b = Number3725()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3728 : StressfulInteger {
 
   companion object {
@@ -23325,9 +23326,9 @@ class Number3728 : StressfulInteger {
     val b = Number3726()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3729 : StressfulInteger {
 
   companion object {
@@ -23357,9 +23358,9 @@ class Number3729 : StressfulInteger {
     val b = Number3727()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3730 : StressfulInteger {
 
   companion object {
@@ -23389,9 +23390,9 @@ class Number3730 : StressfulInteger {
     val b = Number3728()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3731 : StressfulInteger {
 
   companion object {
@@ -23421,9 +23422,9 @@ class Number3731 : StressfulInteger {
     val b = Number3729()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3732 : StressfulInteger {
 
   companion object {
@@ -23453,9 +23454,9 @@ class Number3732 : StressfulInteger {
     val b = Number3730()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3733 : StressfulInteger {
 
   companion object {
@@ -23485,9 +23486,9 @@ class Number3733 : StressfulInteger {
     val b = Number3731()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3734 : StressfulInteger {
 
   companion object {
@@ -23517,9 +23518,9 @@ class Number3734 : StressfulInteger {
     val b = Number3732()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3735 : StressfulInteger {
 
   companion object {
@@ -23549,9 +23550,9 @@ class Number3735 : StressfulInteger {
     val b = Number3733()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3736 : StressfulInteger {
 
   companion object {
@@ -23581,9 +23582,9 @@ class Number3736 : StressfulInteger {
     val b = Number3734()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3737 : StressfulInteger {
 
   companion object {
@@ -23613,9 +23614,9 @@ class Number3737 : StressfulInteger {
     val b = Number3735()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3738 : StressfulInteger {
 
   companion object {
@@ -23645,9 +23646,9 @@ class Number3738 : StressfulInteger {
     val b = Number3736()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3739 : StressfulInteger {
 
   companion object {
@@ -23677,9 +23678,9 @@ class Number3739 : StressfulInteger {
     val b = Number3737()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3740 : StressfulInteger {
 
   companion object {
@@ -23709,9 +23710,9 @@ class Number3740 : StressfulInteger {
     val b = Number3738()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3741 : StressfulInteger {
 
   companion object {
@@ -23741,9 +23742,9 @@ class Number3741 : StressfulInteger {
     val b = Number3739()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3742 : StressfulInteger {
 
   companion object {
@@ -23773,9 +23774,9 @@ class Number3742 : StressfulInteger {
     val b = Number3740()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3743 : StressfulInteger {
 
   companion object {
@@ -23805,9 +23806,9 @@ class Number3743 : StressfulInteger {
     val b = Number3741()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3744 : StressfulInteger {
 
   companion object {
@@ -23837,9 +23838,9 @@ class Number3744 : StressfulInteger {
     val b = Number3742()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3745 : StressfulInteger {
 
   companion object {
@@ -23869,9 +23870,9 @@ class Number3745 : StressfulInteger {
     val b = Number3743()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3746 : StressfulInteger {
 
   companion object {
@@ -23901,9 +23902,9 @@ class Number3746 : StressfulInteger {
     val b = Number3744()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3747 : StressfulInteger {
 
   companion object {
@@ -23933,9 +23934,9 @@ class Number3747 : StressfulInteger {
     val b = Number3745()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3748 : StressfulInteger {
 
   companion object {
@@ -23965,9 +23966,9 @@ class Number3748 : StressfulInteger {
     val b = Number3746()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3749 : StressfulInteger {
 
   companion object {
@@ -23997,9 +23998,9 @@ class Number3749 : StressfulInteger {
     val b = Number3747()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3750 : StressfulInteger {
 
   companion object {
@@ -24029,9 +24030,9 @@ class Number3750 : StressfulInteger {
     val b = Number3748()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3751 : StressfulInteger {
 
   companion object {
@@ -24061,9 +24062,9 @@ class Number3751 : StressfulInteger {
     val b = Number3749()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3752 : StressfulInteger {
 
   companion object {
@@ -24093,9 +24094,9 @@ class Number3752 : StressfulInteger {
     val b = Number3750()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3753 : StressfulInteger {
 
   companion object {
@@ -24125,9 +24126,9 @@ class Number3753 : StressfulInteger {
     val b = Number3751()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3754 : StressfulInteger {
 
   companion object {
@@ -24157,9 +24158,9 @@ class Number3754 : StressfulInteger {
     val b = Number3752()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3755 : StressfulInteger {
 
   companion object {
@@ -24189,9 +24190,9 @@ class Number3755 : StressfulInteger {
     val b = Number3753()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3756 : StressfulInteger {
 
   companion object {
@@ -24221,9 +24222,9 @@ class Number3756 : StressfulInteger {
     val b = Number3754()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3757 : StressfulInteger {
 
   companion object {
@@ -24253,9 +24254,9 @@ class Number3757 : StressfulInteger {
     val b = Number3755()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3758 : StressfulInteger {
 
   companion object {
@@ -24285,9 +24286,9 @@ class Number3758 : StressfulInteger {
     val b = Number3756()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3759 : StressfulInteger {
 
   companion object {
@@ -24317,9 +24318,9 @@ class Number3759 : StressfulInteger {
     val b = Number3757()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3760 : StressfulInteger {
 
   companion object {
@@ -24349,9 +24350,9 @@ class Number3760 : StressfulInteger {
     val b = Number3758()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3761 : StressfulInteger {
 
   companion object {
@@ -24381,9 +24382,9 @@ class Number3761 : StressfulInteger {
     val b = Number3759()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3762 : StressfulInteger {
 
   companion object {
@@ -24413,9 +24414,9 @@ class Number3762 : StressfulInteger {
     val b = Number3760()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3763 : StressfulInteger {
 
   companion object {
@@ -24445,9 +24446,9 @@ class Number3763 : StressfulInteger {
     val b = Number3761()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3764 : StressfulInteger {
 
   companion object {
@@ -24477,9 +24478,9 @@ class Number3764 : StressfulInteger {
     val b = Number3762()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3765 : StressfulInteger {
 
   companion object {
@@ -24509,9 +24510,9 @@ class Number3765 : StressfulInteger {
     val b = Number3763()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3766 : StressfulInteger {
 
   companion object {
@@ -24541,9 +24542,9 @@ class Number3766 : StressfulInteger {
     val b = Number3764()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3767 : StressfulInteger {
 
   companion object {
@@ -24573,9 +24574,9 @@ class Number3767 : StressfulInteger {
     val b = Number3765()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3768 : StressfulInteger {
 
   companion object {
@@ -24605,9 +24606,9 @@ class Number3768 : StressfulInteger {
     val b = Number3766()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3769 : StressfulInteger {
 
   companion object {
@@ -24637,9 +24638,9 @@ class Number3769 : StressfulInteger {
     val b = Number3767()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3770 : StressfulInteger {
 
   companion object {
@@ -24669,9 +24670,9 @@ class Number3770 : StressfulInteger {
     val b = Number3768()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3771 : StressfulInteger {
 
   companion object {
@@ -24701,9 +24702,9 @@ class Number3771 : StressfulInteger {
     val b = Number3769()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3772 : StressfulInteger {
 
   companion object {
@@ -24733,9 +24734,9 @@ class Number3772 : StressfulInteger {
     val b = Number3770()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3773 : StressfulInteger {
 
   companion object {
@@ -24765,9 +24766,9 @@ class Number3773 : StressfulInteger {
     val b = Number3771()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3774 : StressfulInteger {
 
   companion object {
@@ -24797,9 +24798,9 @@ class Number3774 : StressfulInteger {
     val b = Number3772()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3775 : StressfulInteger {
 
   companion object {
@@ -24829,9 +24830,9 @@ class Number3775 : StressfulInteger {
     val b = Number3773()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3776 : StressfulInteger {
 
   companion object {
@@ -24861,9 +24862,9 @@ class Number3776 : StressfulInteger {
     val b = Number3774()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3777 : StressfulInteger {
 
   companion object {
@@ -24893,9 +24894,9 @@ class Number3777 : StressfulInteger {
     val b = Number3775()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3778 : StressfulInteger {
 
   companion object {
@@ -24925,9 +24926,9 @@ class Number3778 : StressfulInteger {
     val b = Number3776()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3779 : StressfulInteger {
 
   companion object {
@@ -24957,9 +24958,9 @@ class Number3779 : StressfulInteger {
     val b = Number3777()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3780 : StressfulInteger {
 
   companion object {
@@ -24989,9 +24990,9 @@ class Number3780 : StressfulInteger {
     val b = Number3778()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3781 : StressfulInteger {
 
   companion object {
@@ -25021,9 +25022,9 @@ class Number3781 : StressfulInteger {
     val b = Number3779()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3782 : StressfulInteger {
 
   companion object {
@@ -25053,9 +25054,9 @@ class Number3782 : StressfulInteger {
     val b = Number3780()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3783 : StressfulInteger {
 
   companion object {
@@ -25085,9 +25086,9 @@ class Number3783 : StressfulInteger {
     val b = Number3781()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3784 : StressfulInteger {
 
   companion object {
@@ -25117,9 +25118,9 @@ class Number3784 : StressfulInteger {
     val b = Number3782()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3785 : StressfulInteger {
 
   companion object {
@@ -25149,9 +25150,9 @@ class Number3785 : StressfulInteger {
     val b = Number3783()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3786 : StressfulInteger {
 
   companion object {
@@ -25181,9 +25182,9 @@ class Number3786 : StressfulInteger {
     val b = Number3784()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3787 : StressfulInteger {
 
   companion object {
@@ -25213,9 +25214,9 @@ class Number3787 : StressfulInteger {
     val b = Number3785()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3788 : StressfulInteger {
 
   companion object {
@@ -25245,9 +25246,9 @@ class Number3788 : StressfulInteger {
     val b = Number3786()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3789 : StressfulInteger {
 
   companion object {
@@ -25277,9 +25278,9 @@ class Number3789 : StressfulInteger {
     val b = Number3787()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3790 : StressfulInteger {
 
   companion object {
@@ -25309,9 +25310,9 @@ class Number3790 : StressfulInteger {
     val b = Number3788()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3791 : StressfulInteger {
 
   companion object {
@@ -25341,9 +25342,9 @@ class Number3791 : StressfulInteger {
     val b = Number3789()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3792 : StressfulInteger {
 
   companion object {
@@ -25373,9 +25374,9 @@ class Number3792 : StressfulInteger {
     val b = Number3790()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3793 : StressfulInteger {
 
   companion object {
@@ -25405,9 +25406,9 @@ class Number3793 : StressfulInteger {
     val b = Number3791()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3794 : StressfulInteger {
 
   companion object {
@@ -25437,9 +25438,9 @@ class Number3794 : StressfulInteger {
     val b = Number3792()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3795 : StressfulInteger {
 
   companion object {
@@ -25469,9 +25470,9 @@ class Number3795 : StressfulInteger {
     val b = Number3793()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3796 : StressfulInteger {
 
   companion object {
@@ -25501,9 +25502,9 @@ class Number3796 : StressfulInteger {
     val b = Number3794()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3797 : StressfulInteger {
 
   companion object {
@@ -25533,9 +25534,9 @@ class Number3797 : StressfulInteger {
     val b = Number3795()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3798 : StressfulInteger {
 
   companion object {
@@ -25565,9 +25566,9 @@ class Number3798 : StressfulInteger {
     val b = Number3796()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3799 : StressfulInteger {
 
   companion object {
@@ -25597,9 +25598,9 @@ class Number3799 : StressfulInteger {
     val b = Number3797()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3800 : StressfulInteger {
 
   companion object {
@@ -25629,9 +25630,9 @@ class Number3800 : StressfulInteger {
     val b = Number3798()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3801 : StressfulInteger {
 
   companion object {
@@ -25661,9 +25662,9 @@ class Number3801 : StressfulInteger {
     val b = Number3799()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3802 : StressfulInteger {
 
   companion object {
@@ -25693,9 +25694,9 @@ class Number3802 : StressfulInteger {
     val b = Number3800()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3803 : StressfulInteger {
 
   companion object {
@@ -25725,9 +25726,9 @@ class Number3803 : StressfulInteger {
     val b = Number3801()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3804 : StressfulInteger {
 
   companion object {
@@ -25757,9 +25758,9 @@ class Number3804 : StressfulInteger {
     val b = Number3802()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3805 : StressfulInteger {
 
   companion object {
@@ -25789,9 +25790,9 @@ class Number3805 : StressfulInteger {
     val b = Number3803()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3806 : StressfulInteger {
 
   companion object {
@@ -25821,9 +25822,9 @@ class Number3806 : StressfulInteger {
     val b = Number3804()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3807 : StressfulInteger {
 
   companion object {
@@ -25853,9 +25854,9 @@ class Number3807 : StressfulInteger {
     val b = Number3805()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3808 : StressfulInteger {
 
   companion object {
@@ -25885,9 +25886,9 @@ class Number3808 : StressfulInteger {
     val b = Number3806()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3809 : StressfulInteger {
 
   companion object {
@@ -25917,9 +25918,9 @@ class Number3809 : StressfulInteger {
     val b = Number3807()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3810 : StressfulInteger {
 
   companion object {
@@ -25949,9 +25950,9 @@ class Number3810 : StressfulInteger {
     val b = Number3808()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3811 : StressfulInteger {
 
   companion object {
@@ -25981,9 +25982,9 @@ class Number3811 : StressfulInteger {
     val b = Number3809()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3812 : StressfulInteger {
 
   companion object {
@@ -26013,9 +26014,9 @@ class Number3812 : StressfulInteger {
     val b = Number3810()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3813 : StressfulInteger {
 
   companion object {
@@ -26045,9 +26046,9 @@ class Number3813 : StressfulInteger {
     val b = Number3811()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3814 : StressfulInteger {
 
   companion object {
@@ -26077,9 +26078,9 @@ class Number3814 : StressfulInteger {
     val b = Number3812()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3815 : StressfulInteger {
 
   companion object {
@@ -26109,9 +26110,9 @@ class Number3815 : StressfulInteger {
     val b = Number3813()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3816 : StressfulInteger {
 
   companion object {
@@ -26141,9 +26142,9 @@ class Number3816 : StressfulInteger {
     val b = Number3814()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3817 : StressfulInteger {
 
   companion object {
@@ -26173,9 +26174,9 @@ class Number3817 : StressfulInteger {
     val b = Number3815()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3818 : StressfulInteger {
 
   companion object {
@@ -26205,9 +26206,9 @@ class Number3818 : StressfulInteger {
     val b = Number3816()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3819 : StressfulInteger {
 
   companion object {
@@ -26237,9 +26238,9 @@ class Number3819 : StressfulInteger {
     val b = Number3817()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3820 : StressfulInteger {
 
   companion object {
@@ -26269,9 +26270,9 @@ class Number3820 : StressfulInteger {
     val b = Number3818()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3821 : StressfulInteger {
 
   companion object {
@@ -26301,9 +26302,9 @@ class Number3821 : StressfulInteger {
     val b = Number3819()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3822 : StressfulInteger {
 
   companion object {
@@ -26333,9 +26334,9 @@ class Number3822 : StressfulInteger {
     val b = Number3820()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3823 : StressfulInteger {
 
   companion object {
@@ -26365,9 +26366,9 @@ class Number3823 : StressfulInteger {
     val b = Number3821()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3824 : StressfulInteger {
 
   companion object {
@@ -26397,9 +26398,9 @@ class Number3824 : StressfulInteger {
     val b = Number3822()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3825 : StressfulInteger {
 
   companion object {
@@ -26429,9 +26430,9 @@ class Number3825 : StressfulInteger {
     val b = Number3823()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3826 : StressfulInteger {
 
   companion object {
@@ -26461,9 +26462,9 @@ class Number3826 : StressfulInteger {
     val b = Number3824()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3827 : StressfulInteger {
 
   companion object {
@@ -26493,9 +26494,9 @@ class Number3827 : StressfulInteger {
     val b = Number3825()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3828 : StressfulInteger {
 
   companion object {
@@ -26525,9 +26526,9 @@ class Number3828 : StressfulInteger {
     val b = Number3826()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3829 : StressfulInteger {
 
   companion object {
@@ -26557,9 +26558,9 @@ class Number3829 : StressfulInteger {
     val b = Number3827()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3830 : StressfulInteger {
 
   companion object {
@@ -26589,9 +26590,9 @@ class Number3830 : StressfulInteger {
     val b = Number3828()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3831 : StressfulInteger {
 
   companion object {
@@ -26621,9 +26622,9 @@ class Number3831 : StressfulInteger {
     val b = Number3829()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3832 : StressfulInteger {
 
   companion object {
@@ -26653,9 +26654,9 @@ class Number3832 : StressfulInteger {
     val b = Number3830()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3833 : StressfulInteger {
 
   companion object {
@@ -26685,9 +26686,9 @@ class Number3833 : StressfulInteger {
     val b = Number3831()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3834 : StressfulInteger {
 
   companion object {
@@ -26717,9 +26718,9 @@ class Number3834 : StressfulInteger {
     val b = Number3832()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3835 : StressfulInteger {
 
   companion object {
@@ -26749,9 +26750,9 @@ class Number3835 : StressfulInteger {
     val b = Number3833()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3836 : StressfulInteger {
 
   companion object {
@@ -26781,9 +26782,9 @@ class Number3836 : StressfulInteger {
     val b = Number3834()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3837 : StressfulInteger {
 
   companion object {
@@ -26813,9 +26814,9 @@ class Number3837 : StressfulInteger {
     val b = Number3835()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3838 : StressfulInteger {
 
   companion object {
@@ -26845,9 +26846,9 @@ class Number3838 : StressfulInteger {
     val b = Number3836()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3839 : StressfulInteger {
 
   companion object {
@@ -26877,9 +26878,9 @@ class Number3839 : StressfulInteger {
     val b = Number3837()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3840 : StressfulInteger {
 
   companion object {
@@ -26909,9 +26910,9 @@ class Number3840 : StressfulInteger {
     val b = Number3838()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3841 : StressfulInteger {
 
   companion object {
@@ -26941,9 +26942,9 @@ class Number3841 : StressfulInteger {
     val b = Number3839()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3842 : StressfulInteger {
 
   companion object {
@@ -26973,9 +26974,9 @@ class Number3842 : StressfulInteger {
     val b = Number3840()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3843 : StressfulInteger {
 
   companion object {
@@ -27005,9 +27006,9 @@ class Number3843 : StressfulInteger {
     val b = Number3841()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3844 : StressfulInteger {
 
   companion object {
@@ -27037,9 +27038,9 @@ class Number3844 : StressfulInteger {
     val b = Number3842()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3845 : StressfulInteger {
 
   companion object {
@@ -27069,9 +27070,9 @@ class Number3845 : StressfulInteger {
     val b = Number3843()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3846 : StressfulInteger {
 
   companion object {
@@ -27101,9 +27102,9 @@ class Number3846 : StressfulInteger {
     val b = Number3844()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3847 : StressfulInteger {
 
   companion object {
@@ -27133,9 +27134,9 @@ class Number3847 : StressfulInteger {
     val b = Number3845()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3848 : StressfulInteger {
 
   companion object {
@@ -27165,9 +27166,9 @@ class Number3848 : StressfulInteger {
     val b = Number3846()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3849 : StressfulInteger {
 
   companion object {
@@ -27197,9 +27198,9 @@ class Number3849 : StressfulInteger {
     val b = Number3847()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3850 : StressfulInteger {
 
   companion object {
@@ -27229,9 +27230,9 @@ class Number3850 : StressfulInteger {
     val b = Number3848()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3851 : StressfulInteger {
 
   companion object {
@@ -27261,9 +27262,9 @@ class Number3851 : StressfulInteger {
     val b = Number3849()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3852 : StressfulInteger {
 
   companion object {
@@ -27293,9 +27294,9 @@ class Number3852 : StressfulInteger {
     val b = Number3850()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3853 : StressfulInteger {
 
   companion object {
@@ -27325,9 +27326,9 @@ class Number3853 : StressfulInteger {
     val b = Number3851()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3854 : StressfulInteger {
 
   companion object {
@@ -27357,9 +27358,9 @@ class Number3854 : StressfulInteger {
     val b = Number3852()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3855 : StressfulInteger {
 
   companion object {
@@ -27389,9 +27390,9 @@ class Number3855 : StressfulInteger {
     val b = Number3853()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3856 : StressfulInteger {
 
   companion object {
@@ -27421,9 +27422,9 @@ class Number3856 : StressfulInteger {
     val b = Number3854()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3857 : StressfulInteger {
 
   companion object {
@@ -27453,9 +27454,9 @@ class Number3857 : StressfulInteger {
     val b = Number3855()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3858 : StressfulInteger {
 
   companion object {
@@ -27485,9 +27486,9 @@ class Number3858 : StressfulInteger {
     val b = Number3856()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3859 : StressfulInteger {
 
   companion object {
@@ -27517,9 +27518,9 @@ class Number3859 : StressfulInteger {
     val b = Number3857()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3860 : StressfulInteger {
 
   companion object {
@@ -27549,9 +27550,9 @@ class Number3860 : StressfulInteger {
     val b = Number3858()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3861 : StressfulInteger {
 
   companion object {
@@ -27581,9 +27582,9 @@ class Number3861 : StressfulInteger {
     val b = Number3859()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3862 : StressfulInteger {
 
   companion object {
@@ -27613,9 +27614,9 @@ class Number3862 : StressfulInteger {
     val b = Number3860()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3863 : StressfulInteger {
 
   companion object {
@@ -27645,9 +27646,9 @@ class Number3863 : StressfulInteger {
     val b = Number3861()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3864 : StressfulInteger {
 
   companion object {
@@ -27677,9 +27678,9 @@ class Number3864 : StressfulInteger {
     val b = Number3862()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3865 : StressfulInteger {
 
   companion object {
@@ -27709,9 +27710,9 @@ class Number3865 : StressfulInteger {
     val b = Number3863()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3866 : StressfulInteger {
 
   companion object {
@@ -27741,9 +27742,9 @@ class Number3866 : StressfulInteger {
     val b = Number3864()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3867 : StressfulInteger {
 
   companion object {
@@ -27773,9 +27774,9 @@ class Number3867 : StressfulInteger {
     val b = Number3865()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3868 : StressfulInteger {
 
   companion object {
@@ -27805,9 +27806,9 @@ class Number3868 : StressfulInteger {
     val b = Number3866()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3869 : StressfulInteger {
 
   companion object {
@@ -27837,9 +27838,9 @@ class Number3869 : StressfulInteger {
     val b = Number3867()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3870 : StressfulInteger {
 
   companion object {
@@ -27869,9 +27870,9 @@ class Number3870 : StressfulInteger {
     val b = Number3868()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3871 : StressfulInteger {
 
   companion object {
@@ -27901,9 +27902,9 @@ class Number3871 : StressfulInteger {
     val b = Number3869()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3872 : StressfulInteger {
 
   companion object {
@@ -27933,9 +27934,9 @@ class Number3872 : StressfulInteger {
     val b = Number3870()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3873 : StressfulInteger {
 
   companion object {
@@ -27965,9 +27966,9 @@ class Number3873 : StressfulInteger {
     val b = Number3871()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3874 : StressfulInteger {
 
   companion object {
@@ -27997,9 +27998,9 @@ class Number3874 : StressfulInteger {
     val b = Number3872()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3875 : StressfulInteger {
 
   companion object {
@@ -28029,9 +28030,9 @@ class Number3875 : StressfulInteger {
     val b = Number3873()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3876 : StressfulInteger {
 
   companion object {
@@ -28061,9 +28062,9 @@ class Number3876 : StressfulInteger {
     val b = Number3874()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3877 : StressfulInteger {
 
   companion object {
@@ -28093,9 +28094,9 @@ class Number3877 : StressfulInteger {
     val b = Number3875()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3878 : StressfulInteger {
 
   companion object {
@@ -28125,9 +28126,9 @@ class Number3878 : StressfulInteger {
     val b = Number3876()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3879 : StressfulInteger {
 
   companion object {
@@ -28157,9 +28158,9 @@ class Number3879 : StressfulInteger {
     val b = Number3877()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3880 : StressfulInteger {
 
   companion object {
@@ -28189,9 +28190,9 @@ class Number3880 : StressfulInteger {
     val b = Number3878()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3881 : StressfulInteger {
 
   companion object {
@@ -28221,9 +28222,9 @@ class Number3881 : StressfulInteger {
     val b = Number3879()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3882 : StressfulInteger {
 
   companion object {
@@ -28253,9 +28254,9 @@ class Number3882 : StressfulInteger {
     val b = Number3880()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3883 : StressfulInteger {
 
   companion object {
@@ -28285,9 +28286,9 @@ class Number3883 : StressfulInteger {
     val b = Number3881()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3884 : StressfulInteger {
 
   companion object {
@@ -28317,9 +28318,9 @@ class Number3884 : StressfulInteger {
     val b = Number3882()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3885 : StressfulInteger {
 
   companion object {
@@ -28349,9 +28350,9 @@ class Number3885 : StressfulInteger {
     val b = Number3883()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3886 : StressfulInteger {
 
   companion object {
@@ -28381,9 +28382,9 @@ class Number3886 : StressfulInteger {
     val b = Number3884()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3887 : StressfulInteger {
 
   companion object {
@@ -28413,9 +28414,9 @@ class Number3887 : StressfulInteger {
     val b = Number3885()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3888 : StressfulInteger {
 
   companion object {
@@ -28445,9 +28446,9 @@ class Number3888 : StressfulInteger {
     val b = Number3886()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3889 : StressfulInteger {
 
   companion object {
@@ -28477,9 +28478,9 @@ class Number3889 : StressfulInteger {
     val b = Number3887()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3890 : StressfulInteger {
 
   companion object {
@@ -28509,9 +28510,9 @@ class Number3890 : StressfulInteger {
     val b = Number3888()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3891 : StressfulInteger {
 
   companion object {
@@ -28541,9 +28542,9 @@ class Number3891 : StressfulInteger {
     val b = Number3889()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3892 : StressfulInteger {
 
   companion object {
@@ -28573,9 +28574,9 @@ class Number3892 : StressfulInteger {
     val b = Number3890()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3893 : StressfulInteger {
 
   companion object {
@@ -28605,9 +28606,9 @@ class Number3893 : StressfulInteger {
     val b = Number3891()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3894 : StressfulInteger {
 
   companion object {
@@ -28637,9 +28638,9 @@ class Number3894 : StressfulInteger {
     val b = Number3892()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3895 : StressfulInteger {
 
   companion object {
@@ -28669,9 +28670,9 @@ class Number3895 : StressfulInteger {
     val b = Number3893()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3896 : StressfulInteger {
 
   companion object {
@@ -28701,9 +28702,9 @@ class Number3896 : StressfulInteger {
     val b = Number3894()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3897 : StressfulInteger {
 
   companion object {
@@ -28733,9 +28734,9 @@ class Number3897 : StressfulInteger {
     val b = Number3895()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3898 : StressfulInteger {
 
   companion object {
@@ -28765,9 +28766,9 @@ class Number3898 : StressfulInteger {
     val b = Number3896()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3899 : StressfulInteger {
 
   companion object {
@@ -28797,9 +28798,9 @@ class Number3899 : StressfulInteger {
     val b = Number3897()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3900 : StressfulInteger {
 
   companion object {
@@ -28829,9 +28830,9 @@ class Number3900 : StressfulInteger {
     val b = Number3898()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3901 : StressfulInteger {
 
   companion object {
@@ -28861,9 +28862,9 @@ class Number3901 : StressfulInteger {
     val b = Number3899()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3902 : StressfulInteger {
 
   companion object {
@@ -28893,9 +28894,9 @@ class Number3902 : StressfulInteger {
     val b = Number3900()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3903 : StressfulInteger {
 
   companion object {
@@ -28925,9 +28926,9 @@ class Number3903 : StressfulInteger {
     val b = Number3901()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3904 : StressfulInteger {
 
   companion object {
@@ -28957,9 +28958,9 @@ class Number3904 : StressfulInteger {
     val b = Number3902()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3905 : StressfulInteger {
 
   companion object {
@@ -28989,9 +28990,9 @@ class Number3905 : StressfulInteger {
     val b = Number3903()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3906 : StressfulInteger {
 
   companion object {
@@ -29021,9 +29022,9 @@ class Number3906 : StressfulInteger {
     val b = Number3904()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3907 : StressfulInteger {
 
   companion object {
@@ -29053,9 +29054,9 @@ class Number3907 : StressfulInteger {
     val b = Number3905()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3908 : StressfulInteger {
 
   companion object {
@@ -29085,9 +29086,9 @@ class Number3908 : StressfulInteger {
     val b = Number3906()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3909 : StressfulInteger {
 
   companion object {
@@ -29117,9 +29118,9 @@ class Number3909 : StressfulInteger {
     val b = Number3907()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3910 : StressfulInteger {
 
   companion object {
@@ -29149,9 +29150,9 @@ class Number3910 : StressfulInteger {
     val b = Number3908()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3911 : StressfulInteger {
 
   companion object {
@@ -29181,9 +29182,9 @@ class Number3911 : StressfulInteger {
     val b = Number3909()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3912 : StressfulInteger {
 
   companion object {
@@ -29213,9 +29214,9 @@ class Number3912 : StressfulInteger {
     val b = Number3910()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3913 : StressfulInteger {
 
   companion object {
@@ -29245,9 +29246,9 @@ class Number3913 : StressfulInteger {
     val b = Number3911()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3914 : StressfulInteger {
 
   companion object {
@@ -29277,9 +29278,9 @@ class Number3914 : StressfulInteger {
     val b = Number3912()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3915 : StressfulInteger {
 
   companion object {
@@ -29309,9 +29310,9 @@ class Number3915 : StressfulInteger {
     val b = Number3913()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3916 : StressfulInteger {
 
   companion object {
@@ -29341,9 +29342,9 @@ class Number3916 : StressfulInteger {
     val b = Number3914()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3917 : StressfulInteger {
 
   companion object {
@@ -29373,9 +29374,9 @@ class Number3917 : StressfulInteger {
     val b = Number3915()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3918 : StressfulInteger {
 
   companion object {
@@ -29405,9 +29406,9 @@ class Number3918 : StressfulInteger {
     val b = Number3916()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3919 : StressfulInteger {
 
   companion object {
@@ -29437,9 +29438,9 @@ class Number3919 : StressfulInteger {
     val b = Number3917()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3920 : StressfulInteger {
 
   companion object {
@@ -29469,9 +29470,9 @@ class Number3920 : StressfulInteger {
     val b = Number3918()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3921 : StressfulInteger {
 
   companion object {
@@ -29501,9 +29502,9 @@ class Number3921 : StressfulInteger {
     val b = Number3919()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3922 : StressfulInteger {
 
   companion object {
@@ -29533,9 +29534,9 @@ class Number3922 : StressfulInteger {
     val b = Number3920()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3923 : StressfulInteger {
 
   companion object {
@@ -29565,9 +29566,9 @@ class Number3923 : StressfulInteger {
     val b = Number3921()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3924 : StressfulInteger {
 
   companion object {
@@ -29597,9 +29598,9 @@ class Number3924 : StressfulInteger {
     val b = Number3922()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3925 : StressfulInteger {
 
   companion object {
@@ -29629,9 +29630,9 @@ class Number3925 : StressfulInteger {
     val b = Number3923()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3926 : StressfulInteger {
 
   companion object {
@@ -29661,9 +29662,9 @@ class Number3926 : StressfulInteger {
     val b = Number3924()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3927 : StressfulInteger {
 
   companion object {
@@ -29693,9 +29694,9 @@ class Number3927 : StressfulInteger {
     val b = Number3925()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3928 : StressfulInteger {
 
   companion object {
@@ -29725,9 +29726,9 @@ class Number3928 : StressfulInteger {
     val b = Number3926()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3929 : StressfulInteger {
 
   companion object {
@@ -29757,9 +29758,9 @@ class Number3929 : StressfulInteger {
     val b = Number3927()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3930 : StressfulInteger {
 
   companion object {
@@ -29789,9 +29790,9 @@ class Number3930 : StressfulInteger {
     val b = Number3928()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3931 : StressfulInteger {
 
   companion object {
@@ -29821,9 +29822,9 @@ class Number3931 : StressfulInteger {
     val b = Number3929()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3932 : StressfulInteger {
 
   companion object {
@@ -29853,9 +29854,9 @@ class Number3932 : StressfulInteger {
     val b = Number3930()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3933 : StressfulInteger {
 
   companion object {
@@ -29885,9 +29886,9 @@ class Number3933 : StressfulInteger {
     val b = Number3931()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3934 : StressfulInteger {
 
   companion object {
@@ -29917,9 +29918,9 @@ class Number3934 : StressfulInteger {
     val b = Number3932()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3935 : StressfulInteger {
 
   companion object {
@@ -29949,9 +29950,9 @@ class Number3935 : StressfulInteger {
     val b = Number3933()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3936 : StressfulInteger {
 
   companion object {
@@ -29981,9 +29982,9 @@ class Number3936 : StressfulInteger {
     val b = Number3934()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3937 : StressfulInteger {
 
   companion object {
@@ -30013,9 +30014,9 @@ class Number3937 : StressfulInteger {
     val b = Number3935()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3938 : StressfulInteger {
 
   companion object {
@@ -30045,9 +30046,9 @@ class Number3938 : StressfulInteger {
     val b = Number3936()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3939 : StressfulInteger {
 
   companion object {
@@ -30077,9 +30078,9 @@ class Number3939 : StressfulInteger {
     val b = Number3937()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3940 : StressfulInteger {
 
   companion object {
@@ -30109,9 +30110,9 @@ class Number3940 : StressfulInteger {
     val b = Number3938()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3941 : StressfulInteger {
 
   companion object {
@@ -30141,9 +30142,9 @@ class Number3941 : StressfulInteger {
     val b = Number3939()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3942 : StressfulInteger {
 
   companion object {
@@ -30173,9 +30174,9 @@ class Number3942 : StressfulInteger {
     val b = Number3940()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3943 : StressfulInteger {
 
   companion object {
@@ -30205,9 +30206,9 @@ class Number3943 : StressfulInteger {
     val b = Number3941()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3944 : StressfulInteger {
 
   companion object {
@@ -30237,9 +30238,9 @@ class Number3944 : StressfulInteger {
     val b = Number3942()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3945 : StressfulInteger {
 
   companion object {
@@ -30269,9 +30270,9 @@ class Number3945 : StressfulInteger {
     val b = Number3943()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3946 : StressfulInteger {
 
   companion object {
@@ -30301,9 +30302,9 @@ class Number3946 : StressfulInteger {
     val b = Number3944()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3947 : StressfulInteger {
 
   companion object {
@@ -30333,9 +30334,9 @@ class Number3947 : StressfulInteger {
     val b = Number3945()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3948 : StressfulInteger {
 
   companion object {
@@ -30365,9 +30366,9 @@ class Number3948 : StressfulInteger {
     val b = Number3946()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3949 : StressfulInteger {
 
   companion object {
@@ -30397,9 +30398,9 @@ class Number3949 : StressfulInteger {
     val b = Number3947()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3950 : StressfulInteger {
 
   companion object {
@@ -30429,9 +30430,9 @@ class Number3950 : StressfulInteger {
     val b = Number3948()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3951 : StressfulInteger {
 
   companion object {
@@ -30461,9 +30462,9 @@ class Number3951 : StressfulInteger {
     val b = Number3949()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3952 : StressfulInteger {
 
   companion object {
@@ -30493,9 +30494,9 @@ class Number3952 : StressfulInteger {
     val b = Number3950()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3953 : StressfulInteger {
 
   companion object {
@@ -30525,9 +30526,9 @@ class Number3953 : StressfulInteger {
     val b = Number3951()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3954 : StressfulInteger {
 
   companion object {
@@ -30557,9 +30558,9 @@ class Number3954 : StressfulInteger {
     val b = Number3952()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3955 : StressfulInteger {
 
   companion object {
@@ -30589,9 +30590,9 @@ class Number3955 : StressfulInteger {
     val b = Number3953()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3956 : StressfulInteger {
 
   companion object {
@@ -30621,9 +30622,9 @@ class Number3956 : StressfulInteger {
     val b = Number3954()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3957 : StressfulInteger {
 
   companion object {
@@ -30653,9 +30654,9 @@ class Number3957 : StressfulInteger {
     val b = Number3955()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3958 : StressfulInteger {
 
   companion object {
@@ -30685,9 +30686,9 @@ class Number3958 : StressfulInteger {
     val b = Number3956()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3959 : StressfulInteger {
 
   companion object {
@@ -30717,9 +30718,9 @@ class Number3959 : StressfulInteger {
     val b = Number3957()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3960 : StressfulInteger {
 
   companion object {
@@ -30749,9 +30750,9 @@ class Number3960 : StressfulInteger {
     val b = Number3958()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3961 : StressfulInteger {
 
   companion object {
@@ -30781,9 +30782,9 @@ class Number3961 : StressfulInteger {
     val b = Number3959()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3962 : StressfulInteger {
 
   companion object {
@@ -30813,9 +30814,9 @@ class Number3962 : StressfulInteger {
     val b = Number3960()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3963 : StressfulInteger {
 
   companion object {
@@ -30845,9 +30846,9 @@ class Number3963 : StressfulInteger {
     val b = Number3961()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3964 : StressfulInteger {
 
   companion object {
@@ -30877,9 +30878,9 @@ class Number3964 : StressfulInteger {
     val b = Number3962()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3965 : StressfulInteger {
 
   companion object {
@@ -30909,9 +30910,9 @@ class Number3965 : StressfulInteger {
     val b = Number3963()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3966 : StressfulInteger {
 
   companion object {
@@ -30941,9 +30942,9 @@ class Number3966 : StressfulInteger {
     val b = Number3964()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3967 : StressfulInteger {
 
   companion object {
@@ -30973,9 +30974,9 @@ class Number3967 : StressfulInteger {
     val b = Number3965()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3968 : StressfulInteger {
 
   companion object {
@@ -31005,9 +31006,9 @@ class Number3968 : StressfulInteger {
     val b = Number3966()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3969 : StressfulInteger {
 
   companion object {
@@ -31037,9 +31038,9 @@ class Number3969 : StressfulInteger {
     val b = Number3967()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3970 : StressfulInteger {
 
   companion object {
@@ -31069,9 +31070,9 @@ class Number3970 : StressfulInteger {
     val b = Number3968()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3971 : StressfulInteger {
 
   companion object {
@@ -31101,9 +31102,9 @@ class Number3971 : StressfulInteger {
     val b = Number3969()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3972 : StressfulInteger {
 
   companion object {
@@ -31133,9 +31134,9 @@ class Number3972 : StressfulInteger {
     val b = Number3970()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3973 : StressfulInteger {
 
   companion object {
@@ -31165,9 +31166,9 @@ class Number3973 : StressfulInteger {
     val b = Number3971()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3974 : StressfulInteger {
 
   companion object {
@@ -31197,9 +31198,9 @@ class Number3974 : StressfulInteger {
     val b = Number3972()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3975 : StressfulInteger {
 
   companion object {
@@ -31229,9 +31230,9 @@ class Number3975 : StressfulInteger {
     val b = Number3973()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3976 : StressfulInteger {
 
   companion object {
@@ -31261,9 +31262,9 @@ class Number3976 : StressfulInteger {
     val b = Number3974()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3977 : StressfulInteger {
 
   companion object {
@@ -31293,9 +31294,9 @@ class Number3977 : StressfulInteger {
     val b = Number3975()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3978 : StressfulInteger {
 
   companion object {
@@ -31325,9 +31326,9 @@ class Number3978 : StressfulInteger {
     val b = Number3976()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3979 : StressfulInteger {
 
   companion object {
@@ -31357,9 +31358,9 @@ class Number3979 : StressfulInteger {
     val b = Number3977()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3980 : StressfulInteger {
 
   companion object {
@@ -31389,9 +31390,9 @@ class Number3980 : StressfulInteger {
     val b = Number3978()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3981 : StressfulInteger {
 
   companion object {
@@ -31421,9 +31422,9 @@ class Number3981 : StressfulInteger {
     val b = Number3979()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3982 : StressfulInteger {
 
   companion object {
@@ -31453,9 +31454,9 @@ class Number3982 : StressfulInteger {
     val b = Number3980()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3983 : StressfulInteger {
 
   companion object {
@@ -31485,9 +31486,9 @@ class Number3983 : StressfulInteger {
     val b = Number3981()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3984 : StressfulInteger {
 
   companion object {
@@ -31517,9 +31518,9 @@ class Number3984 : StressfulInteger {
     val b = Number3982()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3985 : StressfulInteger {
 
   companion object {
@@ -31549,9 +31550,9 @@ class Number3985 : StressfulInteger {
     val b = Number3983()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3986 : StressfulInteger {
 
   companion object {
@@ -31581,9 +31582,9 @@ class Number3986 : StressfulInteger {
     val b = Number3984()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3987 : StressfulInteger {
 
   companion object {
@@ -31613,9 +31614,9 @@ class Number3987 : StressfulInteger {
     val b = Number3985()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3988 : StressfulInteger {
 
   companion object {
@@ -31645,9 +31646,9 @@ class Number3988 : StressfulInteger {
     val b = Number3986()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3989 : StressfulInteger {
 
   companion object {
@@ -31677,9 +31678,9 @@ class Number3989 : StressfulInteger {
     val b = Number3987()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3990 : StressfulInteger {
 
   companion object {
@@ -31709,9 +31710,9 @@ class Number3990 : StressfulInteger {
     val b = Number3988()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3991 : StressfulInteger {
 
   companion object {
@@ -31741,9 +31742,9 @@ class Number3991 : StressfulInteger {
     val b = Number3989()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3992 : StressfulInteger {
 
   companion object {
@@ -31773,9 +31774,9 @@ class Number3992 : StressfulInteger {
     val b = Number3990()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3993 : StressfulInteger {
 
   companion object {
@@ -31805,9 +31806,9 @@ class Number3993 : StressfulInteger {
     val b = Number3991()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3994 : StressfulInteger {
 
   companion object {
@@ -31837,9 +31838,9 @@ class Number3994 : StressfulInteger {
     val b = Number3992()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3995 : StressfulInteger {
 
   companion object {
@@ -31869,9 +31870,9 @@ class Number3995 : StressfulInteger {
     val b = Number3993()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3996 : StressfulInteger {
 
   companion object {
@@ -31901,9 +31902,9 @@ class Number3996 : StressfulInteger {
     val b = Number3994()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3997 : StressfulInteger {
 
   companion object {
@@ -31933,9 +31934,9 @@ class Number3997 : StressfulInteger {
     val b = Number3995()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3998 : StressfulInteger {
 
   companion object {
@@ -31965,9 +31966,9 @@ class Number3998 : StressfulInteger {
     val b = Number3996()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number3999 : StressfulInteger {
 
   companion object {
@@ -31997,6 +31998,4 @@ class Number3999 : StressfulInteger {
     val b = Number3997()
     return a.fib() + b.fib()
   }
-
 }
-

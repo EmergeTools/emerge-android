@@ -1,6 +1,5 @@
 package com.emergetools.reaper.sample.stress.numbers
 
-
 interface StressfulInteger {
   // Return k where k=this.
   fun value(): Int

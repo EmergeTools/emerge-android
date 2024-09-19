@@ -4,11 +4,9 @@ import java.io.File
 import java.io.PrintWriter
 import kotlin.math.min
 
-private const val MAXIMUM_NUMBER = 10000
+private const val MAXIMUM_NUMBER = 10001
 
 private const val NUMBERS_PER_FILE = 1000
-
-private const val INDENT = 4
 
 fun rewriteFile(file: File, block: (PrintWriter) -> Unit) {
   if (file.exists()) {
@@ -19,12 +17,12 @@ fun rewriteFile(file: File, block: (PrintWriter) -> Unit) {
 }
 
 fun writeCommon(directory: String) {
-  val path = "$directory/Common.kt"
+  val path = "$directory/StressfulInteger.kt"
   val f = File(path)
   rewriteFile(f) { out ->
-    out.println("""
+    out.println(
+      """
       |package com.emergetools.reaper.sample.stress.numbers
-      |
       |
       |interface StressfulInteger {
       |  // Return k where k=this.
@@ -40,7 +38,9 @@ fun writeCommon(directory: String) {
       |  // Sum the numbers i where k <= i < n instantiating n - k objects
       |  // using n - k unique classes.
       |  fun sumTo(limit: StressfulInteger): Int
-      |}""".trimMargin())
+      |}
+      """.trimMargin()
+    )
   }
 }
 
@@ -53,59 +53,79 @@ fun writeNumbers(directory: String) {
     val path = "$directory/$name.kt"
     val f = File(path)
     rewriteFile(f) { out ->
-      val addBlock: (s: String) -> Unit = { s ->
+      val addBlock: (s: String, isLast: Boolean) -> Unit = { s, isLast ->
         out.print(s.trim().trimMargin())
-        out.print("\n\n")
+        val newline = if (isLast) "\n" else "\n\n"
+        out.print(newline)
       }
       out.println("package com.emergetools.reaper.sample.stress.numbers")
       out.println("")
       for (n in firstNumber..lastNumber) {
+        out.println("@Suppress(\"MatchingDeclarationName\")")
         out.println("class Number$n : StressfulInteger {\n")
 
-        addBlock("""
+        addBlock(
+          """
         |  companion object {
         |    private var VALUE = $n
-        |  }"""
+        |  }""",
+          false
         )
 
-        addBlock("""
+        addBlock(
+          """
         |  override fun value(): Int {
         |    return VALUE
-        |  }""")
+        |  }""",
+          false
+        )
 
-        addBlock("""
+        addBlock(
+          """
         |  override fun half(): StressfulInteger {
-        |    return Number${n/2}()
-        |  }""")
+        |    return Number${n / 2}()
+        |  }""",
+          false
+        )
 
-        addBlock("""
+        addBlock(
+          """
         |  override fun sumTo(limit: StressfulInteger): Int {
         |    if (value() >= limit.value()) {
         |      return 0
         |    } else {
-        |      val left = Number${min(n*2+1, MAXIMUM_NUMBER)}()
-        |      val right = Number${min(n*2+2, MAXIMUM_NUMBER)}()
+        |      val left = Number${min(n * 2 + 1, MAXIMUM_NUMBER)}()
+        |      val right = Number${min(n * 2 + 2, MAXIMUM_NUMBER)}()
         |      return value() + left.sumTo(limit) + right.sumTo(limit)
         |    }
-        |  }""")
+        |  }""",
+          false
+        )
 
         if ((n == 0) or (n == 1)) {
-          addBlock("""
+          addBlock(
+            """
           |  override fun fib(): Int {
           |    return $n
-          |  }"""
+          |  }""",
+            true,
           )
         } else {
-          addBlock("""
+          addBlock(
+            """
           |  override fun fib(): Int {
           |    val a = Number${n - 1}()
           |    val b = Number${n - 2}()
           |    return a.fib() + b.fib()
-          |  }""")
+          |  }""",
+            true,
+          )
         }
 
         out.println("}")
-        out.println("")
+        if (lastNumber != n) {
+          out.println()
+        }
       }
     }
   }
@@ -114,7 +134,8 @@ fun writeNumbers(directory: String) {
 fun main() {
   val root = System.getProperty("user.dir")
   println("Working Directory = $root")
-  val directory = "../reaper/sample/stress/src/main/kotlin/com/emergetools/reaper/sample/stress/numbers"
+  val directory =
+    "./reaper/sample/stress/src/main/kotlin/com/emergetools/reaper/sample/stress/numbers"
   writeCommon(directory)
   writeNumbers(directory)
 }

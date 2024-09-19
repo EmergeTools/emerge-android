@@ -1,5 +1,6 @@
 package com.emergetools.reaper.sample.stress.numbers
 
+@Suppress("MatchingDeclarationName")
 class Number5000 : StressfulInteger {
 
   companion object {
@@ -18,8 +19,8 @@ class Number5000 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29,9 +30,9 @@ class Number5000 : StressfulInteger {
     val b = Number4998()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5001 : StressfulInteger {
 
   companion object {
@@ -50,8 +51,8 @@ class Number5001 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -61,9 +62,9 @@ class Number5001 : StressfulInteger {
     val b = Number4999()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5002 : StressfulInteger {
 
   companion object {
@@ -82,8 +83,8 @@ class Number5002 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -93,9 +94,9 @@ class Number5002 : StressfulInteger {
     val b = Number5000()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5003 : StressfulInteger {
 
   companion object {
@@ -114,8 +115,8 @@ class Number5003 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -125,9 +126,9 @@ class Number5003 : StressfulInteger {
     val b = Number5001()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5004 : StressfulInteger {
 
   companion object {
@@ -146,8 +147,8 @@ class Number5004 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -157,9 +158,9 @@ class Number5004 : StressfulInteger {
     val b = Number5002()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5005 : StressfulInteger {
 
   companion object {
@@ -178,8 +179,8 @@ class Number5005 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -189,9 +190,9 @@ class Number5005 : StressfulInteger {
     val b = Number5003()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5006 : StressfulInteger {
 
   companion object {
@@ -210,8 +211,8 @@ class Number5006 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -221,9 +222,9 @@ class Number5006 : StressfulInteger {
     val b = Number5004()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5007 : StressfulInteger {
 
   companion object {
@@ -242,8 +243,8 @@ class Number5007 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -253,9 +254,9 @@ class Number5007 : StressfulInteger {
     val b = Number5005()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5008 : StressfulInteger {
 
   companion object {
@@ -274,8 +275,8 @@ class Number5008 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -285,9 +286,9 @@ class Number5008 : StressfulInteger {
     val b = Number5006()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5009 : StressfulInteger {
 
   companion object {
@@ -306,8 +307,8 @@ class Number5009 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -317,9 +318,9 @@ class Number5009 : StressfulInteger {
     val b = Number5007()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5010 : StressfulInteger {
 
   companion object {
@@ -338,8 +339,8 @@ class Number5010 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -349,9 +350,9 @@ class Number5010 : StressfulInteger {
     val b = Number5008()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5011 : StressfulInteger {
 
   companion object {
@@ -370,8 +371,8 @@ class Number5011 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -381,9 +382,9 @@ class Number5011 : StressfulInteger {
     val b = Number5009()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5012 : StressfulInteger {
 
   companion object {
@@ -402,8 +403,8 @@ class Number5012 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -413,9 +414,9 @@ class Number5012 : StressfulInteger {
     val b = Number5010()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5013 : StressfulInteger {
 
   companion object {
@@ -434,8 +435,8 @@ class Number5013 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -445,9 +446,9 @@ class Number5013 : StressfulInteger {
     val b = Number5011()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5014 : StressfulInteger {
 
   companion object {
@@ -466,8 +467,8 @@ class Number5014 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -477,9 +478,9 @@ class Number5014 : StressfulInteger {
     val b = Number5012()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5015 : StressfulInteger {
 
   companion object {
@@ -498,8 +499,8 @@ class Number5015 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -509,9 +510,9 @@ class Number5015 : StressfulInteger {
     val b = Number5013()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5016 : StressfulInteger {
 
   companion object {
@@ -530,8 +531,8 @@ class Number5016 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -541,9 +542,9 @@ class Number5016 : StressfulInteger {
     val b = Number5014()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5017 : StressfulInteger {
 
   companion object {
@@ -562,8 +563,8 @@ class Number5017 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -573,9 +574,9 @@ class Number5017 : StressfulInteger {
     val b = Number5015()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5018 : StressfulInteger {
 
   companion object {
@@ -594,8 +595,8 @@ class Number5018 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -605,9 +606,9 @@ class Number5018 : StressfulInteger {
     val b = Number5016()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5019 : StressfulInteger {
 
   companion object {
@@ -626,8 +627,8 @@ class Number5019 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -637,9 +638,9 @@ class Number5019 : StressfulInteger {
     val b = Number5017()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5020 : StressfulInteger {
 
   companion object {
@@ -658,8 +659,8 @@ class Number5020 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -669,9 +670,9 @@ class Number5020 : StressfulInteger {
     val b = Number5018()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5021 : StressfulInteger {
 
   companion object {
@@ -690,8 +691,8 @@ class Number5021 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -701,9 +702,9 @@ class Number5021 : StressfulInteger {
     val b = Number5019()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5022 : StressfulInteger {
 
   companion object {
@@ -722,8 +723,8 @@ class Number5022 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -733,9 +734,9 @@ class Number5022 : StressfulInteger {
     val b = Number5020()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5023 : StressfulInteger {
 
   companion object {
@@ -754,8 +755,8 @@ class Number5023 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -765,9 +766,9 @@ class Number5023 : StressfulInteger {
     val b = Number5021()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5024 : StressfulInteger {
 
   companion object {
@@ -786,8 +787,8 @@ class Number5024 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -797,9 +798,9 @@ class Number5024 : StressfulInteger {
     val b = Number5022()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5025 : StressfulInteger {
 
   companion object {
@@ -818,8 +819,8 @@ class Number5025 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -829,9 +830,9 @@ class Number5025 : StressfulInteger {
     val b = Number5023()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5026 : StressfulInteger {
 
   companion object {
@@ -850,8 +851,8 @@ class Number5026 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -861,9 +862,9 @@ class Number5026 : StressfulInteger {
     val b = Number5024()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5027 : StressfulInteger {
 
   companion object {
@@ -882,8 +883,8 @@ class Number5027 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -893,9 +894,9 @@ class Number5027 : StressfulInteger {
     val b = Number5025()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5028 : StressfulInteger {
 
   companion object {
@@ -914,8 +915,8 @@ class Number5028 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -925,9 +926,9 @@ class Number5028 : StressfulInteger {
     val b = Number5026()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5029 : StressfulInteger {
 
   companion object {
@@ -946,8 +947,8 @@ class Number5029 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -957,9 +958,9 @@ class Number5029 : StressfulInteger {
     val b = Number5027()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5030 : StressfulInteger {
 
   companion object {
@@ -978,8 +979,8 @@ class Number5030 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -989,9 +990,9 @@ class Number5030 : StressfulInteger {
     val b = Number5028()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5031 : StressfulInteger {
 
   companion object {
@@ -1010,8 +1011,8 @@ class Number5031 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1021,9 +1022,9 @@ class Number5031 : StressfulInteger {
     val b = Number5029()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5032 : StressfulInteger {
 
   companion object {
@@ -1042,8 +1043,8 @@ class Number5032 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1053,9 +1054,9 @@ class Number5032 : StressfulInteger {
     val b = Number5030()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5033 : StressfulInteger {
 
   companion object {
@@ -1074,8 +1075,8 @@ class Number5033 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1085,9 +1086,9 @@ class Number5033 : StressfulInteger {
     val b = Number5031()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5034 : StressfulInteger {
 
   companion object {
@@ -1106,8 +1107,8 @@ class Number5034 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1117,9 +1118,9 @@ class Number5034 : StressfulInteger {
     val b = Number5032()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5035 : StressfulInteger {
 
   companion object {
@@ -1138,8 +1139,8 @@ class Number5035 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1149,9 +1150,9 @@ class Number5035 : StressfulInteger {
     val b = Number5033()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5036 : StressfulInteger {
 
   companion object {
@@ -1170,8 +1171,8 @@ class Number5036 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1181,9 +1182,9 @@ class Number5036 : StressfulInteger {
     val b = Number5034()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5037 : StressfulInteger {
 
   companion object {
@@ -1202,8 +1203,8 @@ class Number5037 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1213,9 +1214,9 @@ class Number5037 : StressfulInteger {
     val b = Number5035()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5038 : StressfulInteger {
 
   companion object {
@@ -1234,8 +1235,8 @@ class Number5038 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1245,9 +1246,9 @@ class Number5038 : StressfulInteger {
     val b = Number5036()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5039 : StressfulInteger {
 
   companion object {
@@ -1266,8 +1267,8 @@ class Number5039 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1277,9 +1278,9 @@ class Number5039 : StressfulInteger {
     val b = Number5037()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5040 : StressfulInteger {
 
   companion object {
@@ -1298,8 +1299,8 @@ class Number5040 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1309,9 +1310,9 @@ class Number5040 : StressfulInteger {
     val b = Number5038()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5041 : StressfulInteger {
 
   companion object {
@@ -1330,8 +1331,8 @@ class Number5041 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1341,9 +1342,9 @@ class Number5041 : StressfulInteger {
     val b = Number5039()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5042 : StressfulInteger {
 
   companion object {
@@ -1362,8 +1363,8 @@ class Number5042 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1373,9 +1374,9 @@ class Number5042 : StressfulInteger {
     val b = Number5040()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5043 : StressfulInteger {
 
   companion object {
@@ -1394,8 +1395,8 @@ class Number5043 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1405,9 +1406,9 @@ class Number5043 : StressfulInteger {
     val b = Number5041()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5044 : StressfulInteger {
 
   companion object {
@@ -1426,8 +1427,8 @@ class Number5044 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1437,9 +1438,9 @@ class Number5044 : StressfulInteger {
     val b = Number5042()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5045 : StressfulInteger {
 
   companion object {
@@ -1458,8 +1459,8 @@ class Number5045 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1469,9 +1470,9 @@ class Number5045 : StressfulInteger {
     val b = Number5043()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5046 : StressfulInteger {
 
   companion object {
@@ -1490,8 +1491,8 @@ class Number5046 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1501,9 +1502,9 @@ class Number5046 : StressfulInteger {
     val b = Number5044()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5047 : StressfulInteger {
 
   companion object {
@@ -1522,8 +1523,8 @@ class Number5047 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1533,9 +1534,9 @@ class Number5047 : StressfulInteger {
     val b = Number5045()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5048 : StressfulInteger {
 
   companion object {
@@ -1554,8 +1555,8 @@ class Number5048 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1565,9 +1566,9 @@ class Number5048 : StressfulInteger {
     val b = Number5046()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5049 : StressfulInteger {
 
   companion object {
@@ -1586,8 +1587,8 @@ class Number5049 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1597,9 +1598,9 @@ class Number5049 : StressfulInteger {
     val b = Number5047()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5050 : StressfulInteger {
 
   companion object {
@@ -1618,8 +1619,8 @@ class Number5050 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1629,9 +1630,9 @@ class Number5050 : StressfulInteger {
     val b = Number5048()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5051 : StressfulInteger {
 
   companion object {
@@ -1650,8 +1651,8 @@ class Number5051 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1661,9 +1662,9 @@ class Number5051 : StressfulInteger {
     val b = Number5049()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5052 : StressfulInteger {
 
   companion object {
@@ -1682,8 +1683,8 @@ class Number5052 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1693,9 +1694,9 @@ class Number5052 : StressfulInteger {
     val b = Number5050()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5053 : StressfulInteger {
 
   companion object {
@@ -1714,8 +1715,8 @@ class Number5053 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1725,9 +1726,9 @@ class Number5053 : StressfulInteger {
     val b = Number5051()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5054 : StressfulInteger {
 
   companion object {
@@ -1746,8 +1747,8 @@ class Number5054 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1757,9 +1758,9 @@ class Number5054 : StressfulInteger {
     val b = Number5052()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5055 : StressfulInteger {
 
   companion object {
@@ -1778,8 +1779,8 @@ class Number5055 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1789,9 +1790,9 @@ class Number5055 : StressfulInteger {
     val b = Number5053()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5056 : StressfulInteger {
 
   companion object {
@@ -1810,8 +1811,8 @@ class Number5056 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1821,9 +1822,9 @@ class Number5056 : StressfulInteger {
     val b = Number5054()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5057 : StressfulInteger {
 
   companion object {
@@ -1842,8 +1843,8 @@ class Number5057 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1853,9 +1854,9 @@ class Number5057 : StressfulInteger {
     val b = Number5055()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5058 : StressfulInteger {
 
   companion object {
@@ -1874,8 +1875,8 @@ class Number5058 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1885,9 +1886,9 @@ class Number5058 : StressfulInteger {
     val b = Number5056()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5059 : StressfulInteger {
 
   companion object {
@@ -1906,8 +1907,8 @@ class Number5059 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1917,9 +1918,9 @@ class Number5059 : StressfulInteger {
     val b = Number5057()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5060 : StressfulInteger {
 
   companion object {
@@ -1938,8 +1939,8 @@ class Number5060 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1949,9 +1950,9 @@ class Number5060 : StressfulInteger {
     val b = Number5058()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5061 : StressfulInteger {
 
   companion object {
@@ -1970,8 +1971,8 @@ class Number5061 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -1981,9 +1982,9 @@ class Number5061 : StressfulInteger {
     val b = Number5059()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5062 : StressfulInteger {
 
   companion object {
@@ -2002,8 +2003,8 @@ class Number5062 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2013,9 +2014,9 @@ class Number5062 : StressfulInteger {
     val b = Number5060()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5063 : StressfulInteger {
 
   companion object {
@@ -2034,8 +2035,8 @@ class Number5063 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2045,9 +2046,9 @@ class Number5063 : StressfulInteger {
     val b = Number5061()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5064 : StressfulInteger {
 
   companion object {
@@ -2066,8 +2067,8 @@ class Number5064 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2077,9 +2078,9 @@ class Number5064 : StressfulInteger {
     val b = Number5062()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5065 : StressfulInteger {
 
   companion object {
@@ -2098,8 +2099,8 @@ class Number5065 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2109,9 +2110,9 @@ class Number5065 : StressfulInteger {
     val b = Number5063()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5066 : StressfulInteger {
 
   companion object {
@@ -2130,8 +2131,8 @@ class Number5066 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2141,9 +2142,9 @@ class Number5066 : StressfulInteger {
     val b = Number5064()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5067 : StressfulInteger {
 
   companion object {
@@ -2162,8 +2163,8 @@ class Number5067 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2173,9 +2174,9 @@ class Number5067 : StressfulInteger {
     val b = Number5065()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5068 : StressfulInteger {
 
   companion object {
@@ -2194,8 +2195,8 @@ class Number5068 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2205,9 +2206,9 @@ class Number5068 : StressfulInteger {
     val b = Number5066()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5069 : StressfulInteger {
 
   companion object {
@@ -2226,8 +2227,8 @@ class Number5069 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2237,9 +2238,9 @@ class Number5069 : StressfulInteger {
     val b = Number5067()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5070 : StressfulInteger {
 
   companion object {
@@ -2258,8 +2259,8 @@ class Number5070 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2269,9 +2270,9 @@ class Number5070 : StressfulInteger {
     val b = Number5068()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5071 : StressfulInteger {
 
   companion object {
@@ -2290,8 +2291,8 @@ class Number5071 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2301,9 +2302,9 @@ class Number5071 : StressfulInteger {
     val b = Number5069()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5072 : StressfulInteger {
 
   companion object {
@@ -2322,8 +2323,8 @@ class Number5072 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2333,9 +2334,9 @@ class Number5072 : StressfulInteger {
     val b = Number5070()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5073 : StressfulInteger {
 
   companion object {
@@ -2354,8 +2355,8 @@ class Number5073 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2365,9 +2366,9 @@ class Number5073 : StressfulInteger {
     val b = Number5071()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5074 : StressfulInteger {
 
   companion object {
@@ -2386,8 +2387,8 @@ class Number5074 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2397,9 +2398,9 @@ class Number5074 : StressfulInteger {
     val b = Number5072()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5075 : StressfulInteger {
 
   companion object {
@@ -2418,8 +2419,8 @@ class Number5075 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2429,9 +2430,9 @@ class Number5075 : StressfulInteger {
     val b = Number5073()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5076 : StressfulInteger {
 
   companion object {
@@ -2450,8 +2451,8 @@ class Number5076 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2461,9 +2462,9 @@ class Number5076 : StressfulInteger {
     val b = Number5074()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5077 : StressfulInteger {
 
   companion object {
@@ -2482,8 +2483,8 @@ class Number5077 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2493,9 +2494,9 @@ class Number5077 : StressfulInteger {
     val b = Number5075()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5078 : StressfulInteger {
 
   companion object {
@@ -2514,8 +2515,8 @@ class Number5078 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2525,9 +2526,9 @@ class Number5078 : StressfulInteger {
     val b = Number5076()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5079 : StressfulInteger {
 
   companion object {
@@ -2546,8 +2547,8 @@ class Number5079 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2557,9 +2558,9 @@ class Number5079 : StressfulInteger {
     val b = Number5077()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5080 : StressfulInteger {
 
   companion object {
@@ -2578,8 +2579,8 @@ class Number5080 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2589,9 +2590,9 @@ class Number5080 : StressfulInteger {
     val b = Number5078()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5081 : StressfulInteger {
 
   companion object {
@@ -2610,8 +2611,8 @@ class Number5081 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2621,9 +2622,9 @@ class Number5081 : StressfulInteger {
     val b = Number5079()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5082 : StressfulInteger {
 
   companion object {
@@ -2642,8 +2643,8 @@ class Number5082 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2653,9 +2654,9 @@ class Number5082 : StressfulInteger {
     val b = Number5080()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5083 : StressfulInteger {
 
   companion object {
@@ -2674,8 +2675,8 @@ class Number5083 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2685,9 +2686,9 @@ class Number5083 : StressfulInteger {
     val b = Number5081()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5084 : StressfulInteger {
 
   companion object {
@@ -2706,8 +2707,8 @@ class Number5084 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2717,9 +2718,9 @@ class Number5084 : StressfulInteger {
     val b = Number5082()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5085 : StressfulInteger {
 
   companion object {
@@ -2738,8 +2739,8 @@ class Number5085 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2749,9 +2750,9 @@ class Number5085 : StressfulInteger {
     val b = Number5083()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5086 : StressfulInteger {
 
   companion object {
@@ -2770,8 +2771,8 @@ class Number5086 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2781,9 +2782,9 @@ class Number5086 : StressfulInteger {
     val b = Number5084()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5087 : StressfulInteger {
 
   companion object {
@@ -2802,8 +2803,8 @@ class Number5087 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2813,9 +2814,9 @@ class Number5087 : StressfulInteger {
     val b = Number5085()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5088 : StressfulInteger {
 
   companion object {
@@ -2834,8 +2835,8 @@ class Number5088 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2845,9 +2846,9 @@ class Number5088 : StressfulInteger {
     val b = Number5086()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5089 : StressfulInteger {
 
   companion object {
@@ -2866,8 +2867,8 @@ class Number5089 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2877,9 +2878,9 @@ class Number5089 : StressfulInteger {
     val b = Number5087()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5090 : StressfulInteger {
 
   companion object {
@@ -2898,8 +2899,8 @@ class Number5090 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2909,9 +2910,9 @@ class Number5090 : StressfulInteger {
     val b = Number5088()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5091 : StressfulInteger {
 
   companion object {
@@ -2930,8 +2931,8 @@ class Number5091 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2941,9 +2942,9 @@ class Number5091 : StressfulInteger {
     val b = Number5089()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5092 : StressfulInteger {
 
   companion object {
@@ -2962,8 +2963,8 @@ class Number5092 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -2973,9 +2974,9 @@ class Number5092 : StressfulInteger {
     val b = Number5090()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5093 : StressfulInteger {
 
   companion object {
@@ -2994,8 +2995,8 @@ class Number5093 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3005,9 +3006,9 @@ class Number5093 : StressfulInteger {
     val b = Number5091()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5094 : StressfulInteger {
 
   companion object {
@@ -3026,8 +3027,8 @@ class Number5094 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3037,9 +3038,9 @@ class Number5094 : StressfulInteger {
     val b = Number5092()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5095 : StressfulInteger {
 
   companion object {
@@ -3058,8 +3059,8 @@ class Number5095 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3069,9 +3070,9 @@ class Number5095 : StressfulInteger {
     val b = Number5093()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5096 : StressfulInteger {
 
   companion object {
@@ -3090,8 +3091,8 @@ class Number5096 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3101,9 +3102,9 @@ class Number5096 : StressfulInteger {
     val b = Number5094()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5097 : StressfulInteger {
 
   companion object {
@@ -3122,8 +3123,8 @@ class Number5097 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3133,9 +3134,9 @@ class Number5097 : StressfulInteger {
     val b = Number5095()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5098 : StressfulInteger {
 
   companion object {
@@ -3154,8 +3155,8 @@ class Number5098 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3165,9 +3166,9 @@ class Number5098 : StressfulInteger {
     val b = Number5096()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5099 : StressfulInteger {
 
   companion object {
@@ -3186,8 +3187,8 @@ class Number5099 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3197,9 +3198,9 @@ class Number5099 : StressfulInteger {
     val b = Number5097()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5100 : StressfulInteger {
 
   companion object {
@@ -3218,8 +3219,8 @@ class Number5100 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3229,9 +3230,9 @@ class Number5100 : StressfulInteger {
     val b = Number5098()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5101 : StressfulInteger {
 
   companion object {
@@ -3250,8 +3251,8 @@ class Number5101 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3261,9 +3262,9 @@ class Number5101 : StressfulInteger {
     val b = Number5099()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5102 : StressfulInteger {
 
   companion object {
@@ -3282,8 +3283,8 @@ class Number5102 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3293,9 +3294,9 @@ class Number5102 : StressfulInteger {
     val b = Number5100()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5103 : StressfulInteger {
 
   companion object {
@@ -3314,8 +3315,8 @@ class Number5103 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3325,9 +3326,9 @@ class Number5103 : StressfulInteger {
     val b = Number5101()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5104 : StressfulInteger {
 
   companion object {
@@ -3346,8 +3347,8 @@ class Number5104 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3357,9 +3358,9 @@ class Number5104 : StressfulInteger {
     val b = Number5102()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5105 : StressfulInteger {
 
   companion object {
@@ -3378,8 +3379,8 @@ class Number5105 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3389,9 +3390,9 @@ class Number5105 : StressfulInteger {
     val b = Number5103()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5106 : StressfulInteger {
 
   companion object {
@@ -3410,8 +3411,8 @@ class Number5106 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3421,9 +3422,9 @@ class Number5106 : StressfulInteger {
     val b = Number5104()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5107 : StressfulInteger {
 
   companion object {
@@ -3442,8 +3443,8 @@ class Number5107 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3453,9 +3454,9 @@ class Number5107 : StressfulInteger {
     val b = Number5105()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5108 : StressfulInteger {
 
   companion object {
@@ -3474,8 +3475,8 @@ class Number5108 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3485,9 +3486,9 @@ class Number5108 : StressfulInteger {
     val b = Number5106()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5109 : StressfulInteger {
 
   companion object {
@@ -3506,8 +3507,8 @@ class Number5109 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3517,9 +3518,9 @@ class Number5109 : StressfulInteger {
     val b = Number5107()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5110 : StressfulInteger {
 
   companion object {
@@ -3538,8 +3539,8 @@ class Number5110 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3549,9 +3550,9 @@ class Number5110 : StressfulInteger {
     val b = Number5108()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5111 : StressfulInteger {
 
   companion object {
@@ -3570,8 +3571,8 @@ class Number5111 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3581,9 +3582,9 @@ class Number5111 : StressfulInteger {
     val b = Number5109()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5112 : StressfulInteger {
 
   companion object {
@@ -3602,8 +3603,8 @@ class Number5112 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3613,9 +3614,9 @@ class Number5112 : StressfulInteger {
     val b = Number5110()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5113 : StressfulInteger {
 
   companion object {
@@ -3634,8 +3635,8 @@ class Number5113 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3645,9 +3646,9 @@ class Number5113 : StressfulInteger {
     val b = Number5111()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5114 : StressfulInteger {
 
   companion object {
@@ -3666,8 +3667,8 @@ class Number5114 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3677,9 +3678,9 @@ class Number5114 : StressfulInteger {
     val b = Number5112()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5115 : StressfulInteger {
 
   companion object {
@@ -3698,8 +3699,8 @@ class Number5115 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3709,9 +3710,9 @@ class Number5115 : StressfulInteger {
     val b = Number5113()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5116 : StressfulInteger {
 
   companion object {
@@ -3730,8 +3731,8 @@ class Number5116 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3741,9 +3742,9 @@ class Number5116 : StressfulInteger {
     val b = Number5114()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5117 : StressfulInteger {
 
   companion object {
@@ -3762,8 +3763,8 @@ class Number5117 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3773,9 +3774,9 @@ class Number5117 : StressfulInteger {
     val b = Number5115()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5118 : StressfulInteger {
 
   companion object {
@@ -3794,8 +3795,8 @@ class Number5118 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3805,9 +3806,9 @@ class Number5118 : StressfulInteger {
     val b = Number5116()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5119 : StressfulInteger {
 
   companion object {
@@ -3826,8 +3827,8 @@ class Number5119 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3837,9 +3838,9 @@ class Number5119 : StressfulInteger {
     val b = Number5117()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5120 : StressfulInteger {
 
   companion object {
@@ -3858,8 +3859,8 @@ class Number5120 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3869,9 +3870,9 @@ class Number5120 : StressfulInteger {
     val b = Number5118()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5121 : StressfulInteger {
 
   companion object {
@@ -3890,8 +3891,8 @@ class Number5121 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3901,9 +3902,9 @@ class Number5121 : StressfulInteger {
     val b = Number5119()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5122 : StressfulInteger {
 
   companion object {
@@ -3922,8 +3923,8 @@ class Number5122 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3933,9 +3934,9 @@ class Number5122 : StressfulInteger {
     val b = Number5120()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5123 : StressfulInteger {
 
   companion object {
@@ -3954,8 +3955,8 @@ class Number5123 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3965,9 +3966,9 @@ class Number5123 : StressfulInteger {
     val b = Number5121()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5124 : StressfulInteger {
 
   companion object {
@@ -3986,8 +3987,8 @@ class Number5124 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -3997,9 +3998,9 @@ class Number5124 : StressfulInteger {
     val b = Number5122()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5125 : StressfulInteger {
 
   companion object {
@@ -4018,8 +4019,8 @@ class Number5125 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4029,9 +4030,9 @@ class Number5125 : StressfulInteger {
     val b = Number5123()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5126 : StressfulInteger {
 
   companion object {
@@ -4050,8 +4051,8 @@ class Number5126 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4061,9 +4062,9 @@ class Number5126 : StressfulInteger {
     val b = Number5124()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5127 : StressfulInteger {
 
   companion object {
@@ -4082,8 +4083,8 @@ class Number5127 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4093,9 +4094,9 @@ class Number5127 : StressfulInteger {
     val b = Number5125()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5128 : StressfulInteger {
 
   companion object {
@@ -4114,8 +4115,8 @@ class Number5128 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4125,9 +4126,9 @@ class Number5128 : StressfulInteger {
     val b = Number5126()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5129 : StressfulInteger {
 
   companion object {
@@ -4146,8 +4147,8 @@ class Number5129 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4157,9 +4158,9 @@ class Number5129 : StressfulInteger {
     val b = Number5127()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5130 : StressfulInteger {
 
   companion object {
@@ -4178,8 +4179,8 @@ class Number5130 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4189,9 +4190,9 @@ class Number5130 : StressfulInteger {
     val b = Number5128()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5131 : StressfulInteger {
 
   companion object {
@@ -4210,8 +4211,8 @@ class Number5131 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4221,9 +4222,9 @@ class Number5131 : StressfulInteger {
     val b = Number5129()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5132 : StressfulInteger {
 
   companion object {
@@ -4242,8 +4243,8 @@ class Number5132 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4253,9 +4254,9 @@ class Number5132 : StressfulInteger {
     val b = Number5130()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5133 : StressfulInteger {
 
   companion object {
@@ -4274,8 +4275,8 @@ class Number5133 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4285,9 +4286,9 @@ class Number5133 : StressfulInteger {
     val b = Number5131()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5134 : StressfulInteger {
 
   companion object {
@@ -4306,8 +4307,8 @@ class Number5134 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4317,9 +4318,9 @@ class Number5134 : StressfulInteger {
     val b = Number5132()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5135 : StressfulInteger {
 
   companion object {
@@ -4338,8 +4339,8 @@ class Number5135 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4349,9 +4350,9 @@ class Number5135 : StressfulInteger {
     val b = Number5133()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5136 : StressfulInteger {
 
   companion object {
@@ -4370,8 +4371,8 @@ class Number5136 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4381,9 +4382,9 @@ class Number5136 : StressfulInteger {
     val b = Number5134()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5137 : StressfulInteger {
 
   companion object {
@@ -4402,8 +4403,8 @@ class Number5137 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4413,9 +4414,9 @@ class Number5137 : StressfulInteger {
     val b = Number5135()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5138 : StressfulInteger {
 
   companion object {
@@ -4434,8 +4435,8 @@ class Number5138 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4445,9 +4446,9 @@ class Number5138 : StressfulInteger {
     val b = Number5136()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5139 : StressfulInteger {
 
   companion object {
@@ -4466,8 +4467,8 @@ class Number5139 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4477,9 +4478,9 @@ class Number5139 : StressfulInteger {
     val b = Number5137()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5140 : StressfulInteger {
 
   companion object {
@@ -4498,8 +4499,8 @@ class Number5140 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4509,9 +4510,9 @@ class Number5140 : StressfulInteger {
     val b = Number5138()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5141 : StressfulInteger {
 
   companion object {
@@ -4530,8 +4531,8 @@ class Number5141 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4541,9 +4542,9 @@ class Number5141 : StressfulInteger {
     val b = Number5139()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5142 : StressfulInteger {
 
   companion object {
@@ -4562,8 +4563,8 @@ class Number5142 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4573,9 +4574,9 @@ class Number5142 : StressfulInteger {
     val b = Number5140()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5143 : StressfulInteger {
 
   companion object {
@@ -4594,8 +4595,8 @@ class Number5143 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4605,9 +4606,9 @@ class Number5143 : StressfulInteger {
     val b = Number5141()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5144 : StressfulInteger {
 
   companion object {
@@ -4626,8 +4627,8 @@ class Number5144 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4637,9 +4638,9 @@ class Number5144 : StressfulInteger {
     val b = Number5142()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5145 : StressfulInteger {
 
   companion object {
@@ -4658,8 +4659,8 @@ class Number5145 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4669,9 +4670,9 @@ class Number5145 : StressfulInteger {
     val b = Number5143()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5146 : StressfulInteger {
 
   companion object {
@@ -4690,8 +4691,8 @@ class Number5146 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4701,9 +4702,9 @@ class Number5146 : StressfulInteger {
     val b = Number5144()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5147 : StressfulInteger {
 
   companion object {
@@ -4722,8 +4723,8 @@ class Number5147 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4733,9 +4734,9 @@ class Number5147 : StressfulInteger {
     val b = Number5145()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5148 : StressfulInteger {
 
   companion object {
@@ -4754,8 +4755,8 @@ class Number5148 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4765,9 +4766,9 @@ class Number5148 : StressfulInteger {
     val b = Number5146()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5149 : StressfulInteger {
 
   companion object {
@@ -4786,8 +4787,8 @@ class Number5149 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4797,9 +4798,9 @@ class Number5149 : StressfulInteger {
     val b = Number5147()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5150 : StressfulInteger {
 
   companion object {
@@ -4818,8 +4819,8 @@ class Number5150 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4829,9 +4830,9 @@ class Number5150 : StressfulInteger {
     val b = Number5148()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5151 : StressfulInteger {
 
   companion object {
@@ -4850,8 +4851,8 @@ class Number5151 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4861,9 +4862,9 @@ class Number5151 : StressfulInteger {
     val b = Number5149()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5152 : StressfulInteger {
 
   companion object {
@@ -4882,8 +4883,8 @@ class Number5152 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4893,9 +4894,9 @@ class Number5152 : StressfulInteger {
     val b = Number5150()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5153 : StressfulInteger {
 
   companion object {
@@ -4914,8 +4915,8 @@ class Number5153 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4925,9 +4926,9 @@ class Number5153 : StressfulInteger {
     val b = Number5151()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5154 : StressfulInteger {
 
   companion object {
@@ -4946,8 +4947,8 @@ class Number5154 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4957,9 +4958,9 @@ class Number5154 : StressfulInteger {
     val b = Number5152()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5155 : StressfulInteger {
 
   companion object {
@@ -4978,8 +4979,8 @@ class Number5155 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -4989,9 +4990,9 @@ class Number5155 : StressfulInteger {
     val b = Number5153()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5156 : StressfulInteger {
 
   companion object {
@@ -5010,8 +5011,8 @@ class Number5156 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5021,9 +5022,9 @@ class Number5156 : StressfulInteger {
     val b = Number5154()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5157 : StressfulInteger {
 
   companion object {
@@ -5042,8 +5043,8 @@ class Number5157 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5053,9 +5054,9 @@ class Number5157 : StressfulInteger {
     val b = Number5155()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5158 : StressfulInteger {
 
   companion object {
@@ -5074,8 +5075,8 @@ class Number5158 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5085,9 +5086,9 @@ class Number5158 : StressfulInteger {
     val b = Number5156()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5159 : StressfulInteger {
 
   companion object {
@@ -5106,8 +5107,8 @@ class Number5159 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5117,9 +5118,9 @@ class Number5159 : StressfulInteger {
     val b = Number5157()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5160 : StressfulInteger {
 
   companion object {
@@ -5138,8 +5139,8 @@ class Number5160 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5149,9 +5150,9 @@ class Number5160 : StressfulInteger {
     val b = Number5158()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5161 : StressfulInteger {
 
   companion object {
@@ -5170,8 +5171,8 @@ class Number5161 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5181,9 +5182,9 @@ class Number5161 : StressfulInteger {
     val b = Number5159()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5162 : StressfulInteger {
 
   companion object {
@@ -5202,8 +5203,8 @@ class Number5162 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5213,9 +5214,9 @@ class Number5162 : StressfulInteger {
     val b = Number5160()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5163 : StressfulInteger {
 
   companion object {
@@ -5234,8 +5235,8 @@ class Number5163 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5245,9 +5246,9 @@ class Number5163 : StressfulInteger {
     val b = Number5161()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5164 : StressfulInteger {
 
   companion object {
@@ -5266,8 +5267,8 @@ class Number5164 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5277,9 +5278,9 @@ class Number5164 : StressfulInteger {
     val b = Number5162()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5165 : StressfulInteger {
 
   companion object {
@@ -5298,8 +5299,8 @@ class Number5165 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5309,9 +5310,9 @@ class Number5165 : StressfulInteger {
     val b = Number5163()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5166 : StressfulInteger {
 
   companion object {
@@ -5330,8 +5331,8 @@ class Number5166 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5341,9 +5342,9 @@ class Number5166 : StressfulInteger {
     val b = Number5164()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5167 : StressfulInteger {
 
   companion object {
@@ -5362,8 +5363,8 @@ class Number5167 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5373,9 +5374,9 @@ class Number5167 : StressfulInteger {
     val b = Number5165()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5168 : StressfulInteger {
 
   companion object {
@@ -5394,8 +5395,8 @@ class Number5168 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5405,9 +5406,9 @@ class Number5168 : StressfulInteger {
     val b = Number5166()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5169 : StressfulInteger {
 
   companion object {
@@ -5426,8 +5427,8 @@ class Number5169 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5437,9 +5438,9 @@ class Number5169 : StressfulInteger {
     val b = Number5167()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5170 : StressfulInteger {
 
   companion object {
@@ -5458,8 +5459,8 @@ class Number5170 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5469,9 +5470,9 @@ class Number5170 : StressfulInteger {
     val b = Number5168()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5171 : StressfulInteger {
 
   companion object {
@@ -5490,8 +5491,8 @@ class Number5171 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5501,9 +5502,9 @@ class Number5171 : StressfulInteger {
     val b = Number5169()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5172 : StressfulInteger {
 
   companion object {
@@ -5522,8 +5523,8 @@ class Number5172 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5533,9 +5534,9 @@ class Number5172 : StressfulInteger {
     val b = Number5170()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5173 : StressfulInteger {
 
   companion object {
@@ -5554,8 +5555,8 @@ class Number5173 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5565,9 +5566,9 @@ class Number5173 : StressfulInteger {
     val b = Number5171()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5174 : StressfulInteger {
 
   companion object {
@@ -5586,8 +5587,8 @@ class Number5174 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5597,9 +5598,9 @@ class Number5174 : StressfulInteger {
     val b = Number5172()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5175 : StressfulInteger {
 
   companion object {
@@ -5618,8 +5619,8 @@ class Number5175 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5629,9 +5630,9 @@ class Number5175 : StressfulInteger {
     val b = Number5173()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5176 : StressfulInteger {
 
   companion object {
@@ -5650,8 +5651,8 @@ class Number5176 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5661,9 +5662,9 @@ class Number5176 : StressfulInteger {
     val b = Number5174()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5177 : StressfulInteger {
 
   companion object {
@@ -5682,8 +5683,8 @@ class Number5177 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5693,9 +5694,9 @@ class Number5177 : StressfulInteger {
     val b = Number5175()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5178 : StressfulInteger {
 
   companion object {
@@ -5714,8 +5715,8 @@ class Number5178 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5725,9 +5726,9 @@ class Number5178 : StressfulInteger {
     val b = Number5176()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5179 : StressfulInteger {
 
   companion object {
@@ -5746,8 +5747,8 @@ class Number5179 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5757,9 +5758,9 @@ class Number5179 : StressfulInteger {
     val b = Number5177()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5180 : StressfulInteger {
 
   companion object {
@@ -5778,8 +5779,8 @@ class Number5180 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5789,9 +5790,9 @@ class Number5180 : StressfulInteger {
     val b = Number5178()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5181 : StressfulInteger {
 
   companion object {
@@ -5810,8 +5811,8 @@ class Number5181 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5821,9 +5822,9 @@ class Number5181 : StressfulInteger {
     val b = Number5179()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5182 : StressfulInteger {
 
   companion object {
@@ -5842,8 +5843,8 @@ class Number5182 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5853,9 +5854,9 @@ class Number5182 : StressfulInteger {
     val b = Number5180()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5183 : StressfulInteger {
 
   companion object {
@@ -5874,8 +5875,8 @@ class Number5183 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5885,9 +5886,9 @@ class Number5183 : StressfulInteger {
     val b = Number5181()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5184 : StressfulInteger {
 
   companion object {
@@ -5906,8 +5907,8 @@ class Number5184 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5917,9 +5918,9 @@ class Number5184 : StressfulInteger {
     val b = Number5182()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5185 : StressfulInteger {
 
   companion object {
@@ -5938,8 +5939,8 @@ class Number5185 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5949,9 +5950,9 @@ class Number5185 : StressfulInteger {
     val b = Number5183()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5186 : StressfulInteger {
 
   companion object {
@@ -5970,8 +5971,8 @@ class Number5186 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -5981,9 +5982,9 @@ class Number5186 : StressfulInteger {
     val b = Number5184()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5187 : StressfulInteger {
 
   companion object {
@@ -6002,8 +6003,8 @@ class Number5187 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6013,9 +6014,9 @@ class Number5187 : StressfulInteger {
     val b = Number5185()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5188 : StressfulInteger {
 
   companion object {
@@ -6034,8 +6035,8 @@ class Number5188 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6045,9 +6046,9 @@ class Number5188 : StressfulInteger {
     val b = Number5186()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5189 : StressfulInteger {
 
   companion object {
@@ -6066,8 +6067,8 @@ class Number5189 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6077,9 +6078,9 @@ class Number5189 : StressfulInteger {
     val b = Number5187()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5190 : StressfulInteger {
 
   companion object {
@@ -6098,8 +6099,8 @@ class Number5190 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6109,9 +6110,9 @@ class Number5190 : StressfulInteger {
     val b = Number5188()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5191 : StressfulInteger {
 
   companion object {
@@ -6130,8 +6131,8 @@ class Number5191 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6141,9 +6142,9 @@ class Number5191 : StressfulInteger {
     val b = Number5189()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5192 : StressfulInteger {
 
   companion object {
@@ -6162,8 +6163,8 @@ class Number5192 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6173,9 +6174,9 @@ class Number5192 : StressfulInteger {
     val b = Number5190()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5193 : StressfulInteger {
 
   companion object {
@@ -6194,8 +6195,8 @@ class Number5193 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6205,9 +6206,9 @@ class Number5193 : StressfulInteger {
     val b = Number5191()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5194 : StressfulInteger {
 
   companion object {
@@ -6226,8 +6227,8 @@ class Number5194 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6237,9 +6238,9 @@ class Number5194 : StressfulInteger {
     val b = Number5192()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5195 : StressfulInteger {
 
   companion object {
@@ -6258,8 +6259,8 @@ class Number5195 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6269,9 +6270,9 @@ class Number5195 : StressfulInteger {
     val b = Number5193()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5196 : StressfulInteger {
 
   companion object {
@@ -6290,8 +6291,8 @@ class Number5196 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6301,9 +6302,9 @@ class Number5196 : StressfulInteger {
     val b = Number5194()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5197 : StressfulInteger {
 
   companion object {
@@ -6322,8 +6323,8 @@ class Number5197 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6333,9 +6334,9 @@ class Number5197 : StressfulInteger {
     val b = Number5195()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5198 : StressfulInteger {
 
   companion object {
@@ -6354,8 +6355,8 @@ class Number5198 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6365,9 +6366,9 @@ class Number5198 : StressfulInteger {
     val b = Number5196()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5199 : StressfulInteger {
 
   companion object {
@@ -6386,8 +6387,8 @@ class Number5199 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6397,9 +6398,9 @@ class Number5199 : StressfulInteger {
     val b = Number5197()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5200 : StressfulInteger {
 
   companion object {
@@ -6418,8 +6419,8 @@ class Number5200 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6429,9 +6430,9 @@ class Number5200 : StressfulInteger {
     val b = Number5198()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5201 : StressfulInteger {
 
   companion object {
@@ -6450,8 +6451,8 @@ class Number5201 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6461,9 +6462,9 @@ class Number5201 : StressfulInteger {
     val b = Number5199()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5202 : StressfulInteger {
 
   companion object {
@@ -6482,8 +6483,8 @@ class Number5202 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6493,9 +6494,9 @@ class Number5202 : StressfulInteger {
     val b = Number5200()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5203 : StressfulInteger {
 
   companion object {
@@ -6514,8 +6515,8 @@ class Number5203 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6525,9 +6526,9 @@ class Number5203 : StressfulInteger {
     val b = Number5201()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5204 : StressfulInteger {
 
   companion object {
@@ -6546,8 +6547,8 @@ class Number5204 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6557,9 +6558,9 @@ class Number5204 : StressfulInteger {
     val b = Number5202()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5205 : StressfulInteger {
 
   companion object {
@@ -6578,8 +6579,8 @@ class Number5205 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6589,9 +6590,9 @@ class Number5205 : StressfulInteger {
     val b = Number5203()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5206 : StressfulInteger {
 
   companion object {
@@ -6610,8 +6611,8 @@ class Number5206 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6621,9 +6622,9 @@ class Number5206 : StressfulInteger {
     val b = Number5204()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5207 : StressfulInteger {
 
   companion object {
@@ -6642,8 +6643,8 @@ class Number5207 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6653,9 +6654,9 @@ class Number5207 : StressfulInteger {
     val b = Number5205()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5208 : StressfulInteger {
 
   companion object {
@@ -6674,8 +6675,8 @@ class Number5208 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6685,9 +6686,9 @@ class Number5208 : StressfulInteger {
     val b = Number5206()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5209 : StressfulInteger {
 
   companion object {
@@ -6706,8 +6707,8 @@ class Number5209 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6717,9 +6718,9 @@ class Number5209 : StressfulInteger {
     val b = Number5207()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5210 : StressfulInteger {
 
   companion object {
@@ -6738,8 +6739,8 @@ class Number5210 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6749,9 +6750,9 @@ class Number5210 : StressfulInteger {
     val b = Number5208()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5211 : StressfulInteger {
 
   companion object {
@@ -6770,8 +6771,8 @@ class Number5211 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6781,9 +6782,9 @@ class Number5211 : StressfulInteger {
     val b = Number5209()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5212 : StressfulInteger {
 
   companion object {
@@ -6802,8 +6803,8 @@ class Number5212 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6813,9 +6814,9 @@ class Number5212 : StressfulInteger {
     val b = Number5210()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5213 : StressfulInteger {
 
   companion object {
@@ -6834,8 +6835,8 @@ class Number5213 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6845,9 +6846,9 @@ class Number5213 : StressfulInteger {
     val b = Number5211()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5214 : StressfulInteger {
 
   companion object {
@@ -6866,8 +6867,8 @@ class Number5214 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6877,9 +6878,9 @@ class Number5214 : StressfulInteger {
     val b = Number5212()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5215 : StressfulInteger {
 
   companion object {
@@ -6898,8 +6899,8 @@ class Number5215 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6909,9 +6910,9 @@ class Number5215 : StressfulInteger {
     val b = Number5213()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5216 : StressfulInteger {
 
   companion object {
@@ -6930,8 +6931,8 @@ class Number5216 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6941,9 +6942,9 @@ class Number5216 : StressfulInteger {
     val b = Number5214()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5217 : StressfulInteger {
 
   companion object {
@@ -6962,8 +6963,8 @@ class Number5217 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -6973,9 +6974,9 @@ class Number5217 : StressfulInteger {
     val b = Number5215()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5218 : StressfulInteger {
 
   companion object {
@@ -6994,8 +6995,8 @@ class Number5218 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7005,9 +7006,9 @@ class Number5218 : StressfulInteger {
     val b = Number5216()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5219 : StressfulInteger {
 
   companion object {
@@ -7026,8 +7027,8 @@ class Number5219 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7037,9 +7038,9 @@ class Number5219 : StressfulInteger {
     val b = Number5217()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5220 : StressfulInteger {
 
   companion object {
@@ -7058,8 +7059,8 @@ class Number5220 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7069,9 +7070,9 @@ class Number5220 : StressfulInteger {
     val b = Number5218()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5221 : StressfulInteger {
 
   companion object {
@@ -7090,8 +7091,8 @@ class Number5221 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7101,9 +7102,9 @@ class Number5221 : StressfulInteger {
     val b = Number5219()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5222 : StressfulInteger {
 
   companion object {
@@ -7122,8 +7123,8 @@ class Number5222 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7133,9 +7134,9 @@ class Number5222 : StressfulInteger {
     val b = Number5220()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5223 : StressfulInteger {
 
   companion object {
@@ -7154,8 +7155,8 @@ class Number5223 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7165,9 +7166,9 @@ class Number5223 : StressfulInteger {
     val b = Number5221()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5224 : StressfulInteger {
 
   companion object {
@@ -7186,8 +7187,8 @@ class Number5224 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7197,9 +7198,9 @@ class Number5224 : StressfulInteger {
     val b = Number5222()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5225 : StressfulInteger {
 
   companion object {
@@ -7218,8 +7219,8 @@ class Number5225 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7229,9 +7230,9 @@ class Number5225 : StressfulInteger {
     val b = Number5223()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5226 : StressfulInteger {
 
   companion object {
@@ -7250,8 +7251,8 @@ class Number5226 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7261,9 +7262,9 @@ class Number5226 : StressfulInteger {
     val b = Number5224()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5227 : StressfulInteger {
 
   companion object {
@@ -7282,8 +7283,8 @@ class Number5227 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7293,9 +7294,9 @@ class Number5227 : StressfulInteger {
     val b = Number5225()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5228 : StressfulInteger {
 
   companion object {
@@ -7314,8 +7315,8 @@ class Number5228 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7325,9 +7326,9 @@ class Number5228 : StressfulInteger {
     val b = Number5226()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5229 : StressfulInteger {
 
   companion object {
@@ -7346,8 +7347,8 @@ class Number5229 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7357,9 +7358,9 @@ class Number5229 : StressfulInteger {
     val b = Number5227()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5230 : StressfulInteger {
 
   companion object {
@@ -7378,8 +7379,8 @@ class Number5230 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7389,9 +7390,9 @@ class Number5230 : StressfulInteger {
     val b = Number5228()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5231 : StressfulInteger {
 
   companion object {
@@ -7410,8 +7411,8 @@ class Number5231 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7421,9 +7422,9 @@ class Number5231 : StressfulInteger {
     val b = Number5229()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5232 : StressfulInteger {
 
   companion object {
@@ -7442,8 +7443,8 @@ class Number5232 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7453,9 +7454,9 @@ class Number5232 : StressfulInteger {
     val b = Number5230()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5233 : StressfulInteger {
 
   companion object {
@@ -7474,8 +7475,8 @@ class Number5233 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7485,9 +7486,9 @@ class Number5233 : StressfulInteger {
     val b = Number5231()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5234 : StressfulInteger {
 
   companion object {
@@ -7506,8 +7507,8 @@ class Number5234 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7517,9 +7518,9 @@ class Number5234 : StressfulInteger {
     val b = Number5232()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5235 : StressfulInteger {
 
   companion object {
@@ -7538,8 +7539,8 @@ class Number5235 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7549,9 +7550,9 @@ class Number5235 : StressfulInteger {
     val b = Number5233()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5236 : StressfulInteger {
 
   companion object {
@@ -7570,8 +7571,8 @@ class Number5236 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7581,9 +7582,9 @@ class Number5236 : StressfulInteger {
     val b = Number5234()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5237 : StressfulInteger {
 
   companion object {
@@ -7602,8 +7603,8 @@ class Number5237 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7613,9 +7614,9 @@ class Number5237 : StressfulInteger {
     val b = Number5235()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5238 : StressfulInteger {
 
   companion object {
@@ -7634,8 +7635,8 @@ class Number5238 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7645,9 +7646,9 @@ class Number5238 : StressfulInteger {
     val b = Number5236()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5239 : StressfulInteger {
 
   companion object {
@@ -7666,8 +7667,8 @@ class Number5239 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7677,9 +7678,9 @@ class Number5239 : StressfulInteger {
     val b = Number5237()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5240 : StressfulInteger {
 
   companion object {
@@ -7698,8 +7699,8 @@ class Number5240 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7709,9 +7710,9 @@ class Number5240 : StressfulInteger {
     val b = Number5238()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5241 : StressfulInteger {
 
   companion object {
@@ -7730,8 +7731,8 @@ class Number5241 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7741,9 +7742,9 @@ class Number5241 : StressfulInteger {
     val b = Number5239()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5242 : StressfulInteger {
 
   companion object {
@@ -7762,8 +7763,8 @@ class Number5242 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7773,9 +7774,9 @@ class Number5242 : StressfulInteger {
     val b = Number5240()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5243 : StressfulInteger {
 
   companion object {
@@ -7794,8 +7795,8 @@ class Number5243 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7805,9 +7806,9 @@ class Number5243 : StressfulInteger {
     val b = Number5241()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5244 : StressfulInteger {
 
   companion object {
@@ -7826,8 +7827,8 @@ class Number5244 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7837,9 +7838,9 @@ class Number5244 : StressfulInteger {
     val b = Number5242()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5245 : StressfulInteger {
 
   companion object {
@@ -7858,8 +7859,8 @@ class Number5245 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7869,9 +7870,9 @@ class Number5245 : StressfulInteger {
     val b = Number5243()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5246 : StressfulInteger {
 
   companion object {
@@ -7890,8 +7891,8 @@ class Number5246 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7901,9 +7902,9 @@ class Number5246 : StressfulInteger {
     val b = Number5244()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5247 : StressfulInteger {
 
   companion object {
@@ -7922,8 +7923,8 @@ class Number5247 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7933,9 +7934,9 @@ class Number5247 : StressfulInteger {
     val b = Number5245()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5248 : StressfulInteger {
 
   companion object {
@@ -7954,8 +7955,8 @@ class Number5248 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7965,9 +7966,9 @@ class Number5248 : StressfulInteger {
     val b = Number5246()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5249 : StressfulInteger {
 
   companion object {
@@ -7986,8 +7987,8 @@ class Number5249 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -7997,9 +7998,9 @@ class Number5249 : StressfulInteger {
     val b = Number5247()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5250 : StressfulInteger {
 
   companion object {
@@ -8018,8 +8019,8 @@ class Number5250 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8029,9 +8030,9 @@ class Number5250 : StressfulInteger {
     val b = Number5248()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5251 : StressfulInteger {
 
   companion object {
@@ -8050,8 +8051,8 @@ class Number5251 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8061,9 +8062,9 @@ class Number5251 : StressfulInteger {
     val b = Number5249()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5252 : StressfulInteger {
 
   companion object {
@@ -8082,8 +8083,8 @@ class Number5252 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8093,9 +8094,9 @@ class Number5252 : StressfulInteger {
     val b = Number5250()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5253 : StressfulInteger {
 
   companion object {
@@ -8114,8 +8115,8 @@ class Number5253 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8125,9 +8126,9 @@ class Number5253 : StressfulInteger {
     val b = Number5251()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5254 : StressfulInteger {
 
   companion object {
@@ -8146,8 +8147,8 @@ class Number5254 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8157,9 +8158,9 @@ class Number5254 : StressfulInteger {
     val b = Number5252()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5255 : StressfulInteger {
 
   companion object {
@@ -8178,8 +8179,8 @@ class Number5255 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8189,9 +8190,9 @@ class Number5255 : StressfulInteger {
     val b = Number5253()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5256 : StressfulInteger {
 
   companion object {
@@ -8210,8 +8211,8 @@ class Number5256 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8221,9 +8222,9 @@ class Number5256 : StressfulInteger {
     val b = Number5254()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5257 : StressfulInteger {
 
   companion object {
@@ -8242,8 +8243,8 @@ class Number5257 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8253,9 +8254,9 @@ class Number5257 : StressfulInteger {
     val b = Number5255()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5258 : StressfulInteger {
 
   companion object {
@@ -8274,8 +8275,8 @@ class Number5258 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8285,9 +8286,9 @@ class Number5258 : StressfulInteger {
     val b = Number5256()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5259 : StressfulInteger {
 
   companion object {
@@ -8306,8 +8307,8 @@ class Number5259 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8317,9 +8318,9 @@ class Number5259 : StressfulInteger {
     val b = Number5257()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5260 : StressfulInteger {
 
   companion object {
@@ -8338,8 +8339,8 @@ class Number5260 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8349,9 +8350,9 @@ class Number5260 : StressfulInteger {
     val b = Number5258()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5261 : StressfulInteger {
 
   companion object {
@@ -8370,8 +8371,8 @@ class Number5261 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8381,9 +8382,9 @@ class Number5261 : StressfulInteger {
     val b = Number5259()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5262 : StressfulInteger {
 
   companion object {
@@ -8402,8 +8403,8 @@ class Number5262 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8413,9 +8414,9 @@ class Number5262 : StressfulInteger {
     val b = Number5260()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5263 : StressfulInteger {
 
   companion object {
@@ -8434,8 +8435,8 @@ class Number5263 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8445,9 +8446,9 @@ class Number5263 : StressfulInteger {
     val b = Number5261()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5264 : StressfulInteger {
 
   companion object {
@@ -8466,8 +8467,8 @@ class Number5264 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8477,9 +8478,9 @@ class Number5264 : StressfulInteger {
     val b = Number5262()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5265 : StressfulInteger {
 
   companion object {
@@ -8498,8 +8499,8 @@ class Number5265 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8509,9 +8510,9 @@ class Number5265 : StressfulInteger {
     val b = Number5263()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5266 : StressfulInteger {
 
   companion object {
@@ -8530,8 +8531,8 @@ class Number5266 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8541,9 +8542,9 @@ class Number5266 : StressfulInteger {
     val b = Number5264()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5267 : StressfulInteger {
 
   companion object {
@@ -8562,8 +8563,8 @@ class Number5267 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8573,9 +8574,9 @@ class Number5267 : StressfulInteger {
     val b = Number5265()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5268 : StressfulInteger {
 
   companion object {
@@ -8594,8 +8595,8 @@ class Number5268 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8605,9 +8606,9 @@ class Number5268 : StressfulInteger {
     val b = Number5266()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5269 : StressfulInteger {
 
   companion object {
@@ -8626,8 +8627,8 @@ class Number5269 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8637,9 +8638,9 @@ class Number5269 : StressfulInteger {
     val b = Number5267()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5270 : StressfulInteger {
 
   companion object {
@@ -8658,8 +8659,8 @@ class Number5270 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8669,9 +8670,9 @@ class Number5270 : StressfulInteger {
     val b = Number5268()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5271 : StressfulInteger {
 
   companion object {
@@ -8690,8 +8691,8 @@ class Number5271 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8701,9 +8702,9 @@ class Number5271 : StressfulInteger {
     val b = Number5269()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5272 : StressfulInteger {
 
   companion object {
@@ -8722,8 +8723,8 @@ class Number5272 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8733,9 +8734,9 @@ class Number5272 : StressfulInteger {
     val b = Number5270()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5273 : StressfulInteger {
 
   companion object {
@@ -8754,8 +8755,8 @@ class Number5273 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8765,9 +8766,9 @@ class Number5273 : StressfulInteger {
     val b = Number5271()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5274 : StressfulInteger {
 
   companion object {
@@ -8786,8 +8787,8 @@ class Number5274 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8797,9 +8798,9 @@ class Number5274 : StressfulInteger {
     val b = Number5272()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5275 : StressfulInteger {
 
   companion object {
@@ -8818,8 +8819,8 @@ class Number5275 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8829,9 +8830,9 @@ class Number5275 : StressfulInteger {
     val b = Number5273()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5276 : StressfulInteger {
 
   companion object {
@@ -8850,8 +8851,8 @@ class Number5276 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8861,9 +8862,9 @@ class Number5276 : StressfulInteger {
     val b = Number5274()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5277 : StressfulInteger {
 
   companion object {
@@ -8882,8 +8883,8 @@ class Number5277 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8893,9 +8894,9 @@ class Number5277 : StressfulInteger {
     val b = Number5275()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5278 : StressfulInteger {
 
   companion object {
@@ -8914,8 +8915,8 @@ class Number5278 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8925,9 +8926,9 @@ class Number5278 : StressfulInteger {
     val b = Number5276()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5279 : StressfulInteger {
 
   companion object {
@@ -8946,8 +8947,8 @@ class Number5279 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8957,9 +8958,9 @@ class Number5279 : StressfulInteger {
     val b = Number5277()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5280 : StressfulInteger {
 
   companion object {
@@ -8978,8 +8979,8 @@ class Number5280 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -8989,9 +8990,9 @@ class Number5280 : StressfulInteger {
     val b = Number5278()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5281 : StressfulInteger {
 
   companion object {
@@ -9010,8 +9011,8 @@ class Number5281 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9021,9 +9022,9 @@ class Number5281 : StressfulInteger {
     val b = Number5279()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5282 : StressfulInteger {
 
   companion object {
@@ -9042,8 +9043,8 @@ class Number5282 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9053,9 +9054,9 @@ class Number5282 : StressfulInteger {
     val b = Number5280()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5283 : StressfulInteger {
 
   companion object {
@@ -9074,8 +9075,8 @@ class Number5283 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9085,9 +9086,9 @@ class Number5283 : StressfulInteger {
     val b = Number5281()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5284 : StressfulInteger {
 
   companion object {
@@ -9106,8 +9107,8 @@ class Number5284 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9117,9 +9118,9 @@ class Number5284 : StressfulInteger {
     val b = Number5282()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5285 : StressfulInteger {
 
   companion object {
@@ -9138,8 +9139,8 @@ class Number5285 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9149,9 +9150,9 @@ class Number5285 : StressfulInteger {
     val b = Number5283()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5286 : StressfulInteger {
 
   companion object {
@@ -9170,8 +9171,8 @@ class Number5286 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9181,9 +9182,9 @@ class Number5286 : StressfulInteger {
     val b = Number5284()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5287 : StressfulInteger {
 
   companion object {
@@ -9202,8 +9203,8 @@ class Number5287 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9213,9 +9214,9 @@ class Number5287 : StressfulInteger {
     val b = Number5285()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5288 : StressfulInteger {
 
   companion object {
@@ -9234,8 +9235,8 @@ class Number5288 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9245,9 +9246,9 @@ class Number5288 : StressfulInteger {
     val b = Number5286()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5289 : StressfulInteger {
 
   companion object {
@@ -9266,8 +9267,8 @@ class Number5289 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9277,9 +9278,9 @@ class Number5289 : StressfulInteger {
     val b = Number5287()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5290 : StressfulInteger {
 
   companion object {
@@ -9298,8 +9299,8 @@ class Number5290 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9309,9 +9310,9 @@ class Number5290 : StressfulInteger {
     val b = Number5288()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5291 : StressfulInteger {
 
   companion object {
@@ -9330,8 +9331,8 @@ class Number5291 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9341,9 +9342,9 @@ class Number5291 : StressfulInteger {
     val b = Number5289()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5292 : StressfulInteger {
 
   companion object {
@@ -9362,8 +9363,8 @@ class Number5292 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9373,9 +9374,9 @@ class Number5292 : StressfulInteger {
     val b = Number5290()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5293 : StressfulInteger {
 
   companion object {
@@ -9394,8 +9395,8 @@ class Number5293 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9405,9 +9406,9 @@ class Number5293 : StressfulInteger {
     val b = Number5291()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5294 : StressfulInteger {
 
   companion object {
@@ -9426,8 +9427,8 @@ class Number5294 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9437,9 +9438,9 @@ class Number5294 : StressfulInteger {
     val b = Number5292()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5295 : StressfulInteger {
 
   companion object {
@@ -9458,8 +9459,8 @@ class Number5295 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9469,9 +9470,9 @@ class Number5295 : StressfulInteger {
     val b = Number5293()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5296 : StressfulInteger {
 
   companion object {
@@ -9490,8 +9491,8 @@ class Number5296 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9501,9 +9502,9 @@ class Number5296 : StressfulInteger {
     val b = Number5294()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5297 : StressfulInteger {
 
   companion object {
@@ -9522,8 +9523,8 @@ class Number5297 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9533,9 +9534,9 @@ class Number5297 : StressfulInteger {
     val b = Number5295()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5298 : StressfulInteger {
 
   companion object {
@@ -9554,8 +9555,8 @@ class Number5298 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9565,9 +9566,9 @@ class Number5298 : StressfulInteger {
     val b = Number5296()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5299 : StressfulInteger {
 
   companion object {
@@ -9586,8 +9587,8 @@ class Number5299 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9597,9 +9598,9 @@ class Number5299 : StressfulInteger {
     val b = Number5297()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5300 : StressfulInteger {
 
   companion object {
@@ -9618,8 +9619,8 @@ class Number5300 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9629,9 +9630,9 @@ class Number5300 : StressfulInteger {
     val b = Number5298()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5301 : StressfulInteger {
 
   companion object {
@@ -9650,8 +9651,8 @@ class Number5301 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9661,9 +9662,9 @@ class Number5301 : StressfulInteger {
     val b = Number5299()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5302 : StressfulInteger {
 
   companion object {
@@ -9682,8 +9683,8 @@ class Number5302 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9693,9 +9694,9 @@ class Number5302 : StressfulInteger {
     val b = Number5300()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5303 : StressfulInteger {
 
   companion object {
@@ -9714,8 +9715,8 @@ class Number5303 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9725,9 +9726,9 @@ class Number5303 : StressfulInteger {
     val b = Number5301()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5304 : StressfulInteger {
 
   companion object {
@@ -9746,8 +9747,8 @@ class Number5304 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9757,9 +9758,9 @@ class Number5304 : StressfulInteger {
     val b = Number5302()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5305 : StressfulInteger {
 
   companion object {
@@ -9778,8 +9779,8 @@ class Number5305 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9789,9 +9790,9 @@ class Number5305 : StressfulInteger {
     val b = Number5303()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5306 : StressfulInteger {
 
   companion object {
@@ -9810,8 +9811,8 @@ class Number5306 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9821,9 +9822,9 @@ class Number5306 : StressfulInteger {
     val b = Number5304()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5307 : StressfulInteger {
 
   companion object {
@@ -9842,8 +9843,8 @@ class Number5307 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9853,9 +9854,9 @@ class Number5307 : StressfulInteger {
     val b = Number5305()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5308 : StressfulInteger {
 
   companion object {
@@ -9874,8 +9875,8 @@ class Number5308 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9885,9 +9886,9 @@ class Number5308 : StressfulInteger {
     val b = Number5306()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5309 : StressfulInteger {
 
   companion object {
@@ -9906,8 +9907,8 @@ class Number5309 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9917,9 +9918,9 @@ class Number5309 : StressfulInteger {
     val b = Number5307()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5310 : StressfulInteger {
 
   companion object {
@@ -9938,8 +9939,8 @@ class Number5310 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9949,9 +9950,9 @@ class Number5310 : StressfulInteger {
     val b = Number5308()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5311 : StressfulInteger {
 
   companion object {
@@ -9970,8 +9971,8 @@ class Number5311 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -9981,9 +9982,9 @@ class Number5311 : StressfulInteger {
     val b = Number5309()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5312 : StressfulInteger {
 
   companion object {
@@ -10002,8 +10003,8 @@ class Number5312 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10013,9 +10014,9 @@ class Number5312 : StressfulInteger {
     val b = Number5310()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5313 : StressfulInteger {
 
   companion object {
@@ -10034,8 +10035,8 @@ class Number5313 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10045,9 +10046,9 @@ class Number5313 : StressfulInteger {
     val b = Number5311()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5314 : StressfulInteger {
 
   companion object {
@@ -10066,8 +10067,8 @@ class Number5314 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10077,9 +10078,9 @@ class Number5314 : StressfulInteger {
     val b = Number5312()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5315 : StressfulInteger {
 
   companion object {
@@ -10098,8 +10099,8 @@ class Number5315 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10109,9 +10110,9 @@ class Number5315 : StressfulInteger {
     val b = Number5313()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5316 : StressfulInteger {
 
   companion object {
@@ -10130,8 +10131,8 @@ class Number5316 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10141,9 +10142,9 @@ class Number5316 : StressfulInteger {
     val b = Number5314()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5317 : StressfulInteger {
 
   companion object {
@@ -10162,8 +10163,8 @@ class Number5317 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10173,9 +10174,9 @@ class Number5317 : StressfulInteger {
     val b = Number5315()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5318 : StressfulInteger {
 
   companion object {
@@ -10194,8 +10195,8 @@ class Number5318 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10205,9 +10206,9 @@ class Number5318 : StressfulInteger {
     val b = Number5316()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5319 : StressfulInteger {
 
   companion object {
@@ -10226,8 +10227,8 @@ class Number5319 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10237,9 +10238,9 @@ class Number5319 : StressfulInteger {
     val b = Number5317()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5320 : StressfulInteger {
 
   companion object {
@@ -10258,8 +10259,8 @@ class Number5320 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10269,9 +10270,9 @@ class Number5320 : StressfulInteger {
     val b = Number5318()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5321 : StressfulInteger {
 
   companion object {
@@ -10290,8 +10291,8 @@ class Number5321 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10301,9 +10302,9 @@ class Number5321 : StressfulInteger {
     val b = Number5319()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5322 : StressfulInteger {
 
   companion object {
@@ -10322,8 +10323,8 @@ class Number5322 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10333,9 +10334,9 @@ class Number5322 : StressfulInteger {
     val b = Number5320()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5323 : StressfulInteger {
 
   companion object {
@@ -10354,8 +10355,8 @@ class Number5323 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10365,9 +10366,9 @@ class Number5323 : StressfulInteger {
     val b = Number5321()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5324 : StressfulInteger {
 
   companion object {
@@ -10386,8 +10387,8 @@ class Number5324 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10397,9 +10398,9 @@ class Number5324 : StressfulInteger {
     val b = Number5322()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5325 : StressfulInteger {
 
   companion object {
@@ -10418,8 +10419,8 @@ class Number5325 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10429,9 +10430,9 @@ class Number5325 : StressfulInteger {
     val b = Number5323()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5326 : StressfulInteger {
 
   companion object {
@@ -10450,8 +10451,8 @@ class Number5326 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10461,9 +10462,9 @@ class Number5326 : StressfulInteger {
     val b = Number5324()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5327 : StressfulInteger {
 
   companion object {
@@ -10482,8 +10483,8 @@ class Number5327 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10493,9 +10494,9 @@ class Number5327 : StressfulInteger {
     val b = Number5325()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5328 : StressfulInteger {
 
   companion object {
@@ -10514,8 +10515,8 @@ class Number5328 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10525,9 +10526,9 @@ class Number5328 : StressfulInteger {
     val b = Number5326()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5329 : StressfulInteger {
 
   companion object {
@@ -10546,8 +10547,8 @@ class Number5329 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10557,9 +10558,9 @@ class Number5329 : StressfulInteger {
     val b = Number5327()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5330 : StressfulInteger {
 
   companion object {
@@ -10578,8 +10579,8 @@ class Number5330 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10589,9 +10590,9 @@ class Number5330 : StressfulInteger {
     val b = Number5328()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5331 : StressfulInteger {
 
   companion object {
@@ -10610,8 +10611,8 @@ class Number5331 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10621,9 +10622,9 @@ class Number5331 : StressfulInteger {
     val b = Number5329()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5332 : StressfulInteger {
 
   companion object {
@@ -10642,8 +10643,8 @@ class Number5332 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10653,9 +10654,9 @@ class Number5332 : StressfulInteger {
     val b = Number5330()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5333 : StressfulInteger {
 
   companion object {
@@ -10674,8 +10675,8 @@ class Number5333 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10685,9 +10686,9 @@ class Number5333 : StressfulInteger {
     val b = Number5331()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5334 : StressfulInteger {
 
   companion object {
@@ -10706,8 +10707,8 @@ class Number5334 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10717,9 +10718,9 @@ class Number5334 : StressfulInteger {
     val b = Number5332()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5335 : StressfulInteger {
 
   companion object {
@@ -10738,8 +10739,8 @@ class Number5335 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10749,9 +10750,9 @@ class Number5335 : StressfulInteger {
     val b = Number5333()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5336 : StressfulInteger {
 
   companion object {
@@ -10770,8 +10771,8 @@ class Number5336 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10781,9 +10782,9 @@ class Number5336 : StressfulInteger {
     val b = Number5334()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5337 : StressfulInteger {
 
   companion object {
@@ -10802,8 +10803,8 @@ class Number5337 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10813,9 +10814,9 @@ class Number5337 : StressfulInteger {
     val b = Number5335()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5338 : StressfulInteger {
 
   companion object {
@@ -10834,8 +10835,8 @@ class Number5338 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10845,9 +10846,9 @@ class Number5338 : StressfulInteger {
     val b = Number5336()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5339 : StressfulInteger {
 
   companion object {
@@ -10866,8 +10867,8 @@ class Number5339 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10877,9 +10878,9 @@ class Number5339 : StressfulInteger {
     val b = Number5337()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5340 : StressfulInteger {
 
   companion object {
@@ -10898,8 +10899,8 @@ class Number5340 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10909,9 +10910,9 @@ class Number5340 : StressfulInteger {
     val b = Number5338()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5341 : StressfulInteger {
 
   companion object {
@@ -10930,8 +10931,8 @@ class Number5341 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10941,9 +10942,9 @@ class Number5341 : StressfulInteger {
     val b = Number5339()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5342 : StressfulInteger {
 
   companion object {
@@ -10962,8 +10963,8 @@ class Number5342 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -10973,9 +10974,9 @@ class Number5342 : StressfulInteger {
     val b = Number5340()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5343 : StressfulInteger {
 
   companion object {
@@ -10994,8 +10995,8 @@ class Number5343 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11005,9 +11006,9 @@ class Number5343 : StressfulInteger {
     val b = Number5341()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5344 : StressfulInteger {
 
   companion object {
@@ -11026,8 +11027,8 @@ class Number5344 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11037,9 +11038,9 @@ class Number5344 : StressfulInteger {
     val b = Number5342()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5345 : StressfulInteger {
 
   companion object {
@@ -11058,8 +11059,8 @@ class Number5345 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11069,9 +11070,9 @@ class Number5345 : StressfulInteger {
     val b = Number5343()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5346 : StressfulInteger {
 
   companion object {
@@ -11090,8 +11091,8 @@ class Number5346 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11101,9 +11102,9 @@ class Number5346 : StressfulInteger {
     val b = Number5344()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5347 : StressfulInteger {
 
   companion object {
@@ -11122,8 +11123,8 @@ class Number5347 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11133,9 +11134,9 @@ class Number5347 : StressfulInteger {
     val b = Number5345()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5348 : StressfulInteger {
 
   companion object {
@@ -11154,8 +11155,8 @@ class Number5348 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11165,9 +11166,9 @@ class Number5348 : StressfulInteger {
     val b = Number5346()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5349 : StressfulInteger {
 
   companion object {
@@ -11186,8 +11187,8 @@ class Number5349 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11197,9 +11198,9 @@ class Number5349 : StressfulInteger {
     val b = Number5347()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5350 : StressfulInteger {
 
   companion object {
@@ -11218,8 +11219,8 @@ class Number5350 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11229,9 +11230,9 @@ class Number5350 : StressfulInteger {
     val b = Number5348()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5351 : StressfulInteger {
 
   companion object {
@@ -11250,8 +11251,8 @@ class Number5351 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11261,9 +11262,9 @@ class Number5351 : StressfulInteger {
     val b = Number5349()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5352 : StressfulInteger {
 
   companion object {
@@ -11282,8 +11283,8 @@ class Number5352 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11293,9 +11294,9 @@ class Number5352 : StressfulInteger {
     val b = Number5350()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5353 : StressfulInteger {
 
   companion object {
@@ -11314,8 +11315,8 @@ class Number5353 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11325,9 +11326,9 @@ class Number5353 : StressfulInteger {
     val b = Number5351()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5354 : StressfulInteger {
 
   companion object {
@@ -11346,8 +11347,8 @@ class Number5354 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11357,9 +11358,9 @@ class Number5354 : StressfulInteger {
     val b = Number5352()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5355 : StressfulInteger {
 
   companion object {
@@ -11378,8 +11379,8 @@ class Number5355 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11389,9 +11390,9 @@ class Number5355 : StressfulInteger {
     val b = Number5353()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5356 : StressfulInteger {
 
   companion object {
@@ -11410,8 +11411,8 @@ class Number5356 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11421,9 +11422,9 @@ class Number5356 : StressfulInteger {
     val b = Number5354()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5357 : StressfulInteger {
 
   companion object {
@@ -11442,8 +11443,8 @@ class Number5357 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11453,9 +11454,9 @@ class Number5357 : StressfulInteger {
     val b = Number5355()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5358 : StressfulInteger {
 
   companion object {
@@ -11474,8 +11475,8 @@ class Number5358 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11485,9 +11486,9 @@ class Number5358 : StressfulInteger {
     val b = Number5356()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5359 : StressfulInteger {
 
   companion object {
@@ -11506,8 +11507,8 @@ class Number5359 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11517,9 +11518,9 @@ class Number5359 : StressfulInteger {
     val b = Number5357()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5360 : StressfulInteger {
 
   companion object {
@@ -11538,8 +11539,8 @@ class Number5360 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11549,9 +11550,9 @@ class Number5360 : StressfulInteger {
     val b = Number5358()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5361 : StressfulInteger {
 
   companion object {
@@ -11570,8 +11571,8 @@ class Number5361 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11581,9 +11582,9 @@ class Number5361 : StressfulInteger {
     val b = Number5359()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5362 : StressfulInteger {
 
   companion object {
@@ -11602,8 +11603,8 @@ class Number5362 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11613,9 +11614,9 @@ class Number5362 : StressfulInteger {
     val b = Number5360()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5363 : StressfulInteger {
 
   companion object {
@@ -11634,8 +11635,8 @@ class Number5363 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11645,9 +11646,9 @@ class Number5363 : StressfulInteger {
     val b = Number5361()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5364 : StressfulInteger {
 
   companion object {
@@ -11666,8 +11667,8 @@ class Number5364 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11677,9 +11678,9 @@ class Number5364 : StressfulInteger {
     val b = Number5362()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5365 : StressfulInteger {
 
   companion object {
@@ -11698,8 +11699,8 @@ class Number5365 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11709,9 +11710,9 @@ class Number5365 : StressfulInteger {
     val b = Number5363()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5366 : StressfulInteger {
 
   companion object {
@@ -11730,8 +11731,8 @@ class Number5366 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11741,9 +11742,9 @@ class Number5366 : StressfulInteger {
     val b = Number5364()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5367 : StressfulInteger {
 
   companion object {
@@ -11762,8 +11763,8 @@ class Number5367 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11773,9 +11774,9 @@ class Number5367 : StressfulInteger {
     val b = Number5365()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5368 : StressfulInteger {
 
   companion object {
@@ -11794,8 +11795,8 @@ class Number5368 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11805,9 +11806,9 @@ class Number5368 : StressfulInteger {
     val b = Number5366()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5369 : StressfulInteger {
 
   companion object {
@@ -11826,8 +11827,8 @@ class Number5369 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11837,9 +11838,9 @@ class Number5369 : StressfulInteger {
     val b = Number5367()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5370 : StressfulInteger {
 
   companion object {
@@ -11858,8 +11859,8 @@ class Number5370 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11869,9 +11870,9 @@ class Number5370 : StressfulInteger {
     val b = Number5368()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5371 : StressfulInteger {
 
   companion object {
@@ -11890,8 +11891,8 @@ class Number5371 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11901,9 +11902,9 @@ class Number5371 : StressfulInteger {
     val b = Number5369()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5372 : StressfulInteger {
 
   companion object {
@@ -11922,8 +11923,8 @@ class Number5372 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11933,9 +11934,9 @@ class Number5372 : StressfulInteger {
     val b = Number5370()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5373 : StressfulInteger {
 
   companion object {
@@ -11954,8 +11955,8 @@ class Number5373 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11965,9 +11966,9 @@ class Number5373 : StressfulInteger {
     val b = Number5371()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5374 : StressfulInteger {
 
   companion object {
@@ -11986,8 +11987,8 @@ class Number5374 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -11997,9 +11998,9 @@ class Number5374 : StressfulInteger {
     val b = Number5372()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5375 : StressfulInteger {
 
   companion object {
@@ -12018,8 +12019,8 @@ class Number5375 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12029,9 +12030,9 @@ class Number5375 : StressfulInteger {
     val b = Number5373()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5376 : StressfulInteger {
 
   companion object {
@@ -12050,8 +12051,8 @@ class Number5376 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12061,9 +12062,9 @@ class Number5376 : StressfulInteger {
     val b = Number5374()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5377 : StressfulInteger {
 
   companion object {
@@ -12082,8 +12083,8 @@ class Number5377 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12093,9 +12094,9 @@ class Number5377 : StressfulInteger {
     val b = Number5375()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5378 : StressfulInteger {
 
   companion object {
@@ -12114,8 +12115,8 @@ class Number5378 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12125,9 +12126,9 @@ class Number5378 : StressfulInteger {
     val b = Number5376()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5379 : StressfulInteger {
 
   companion object {
@@ -12146,8 +12147,8 @@ class Number5379 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12157,9 +12158,9 @@ class Number5379 : StressfulInteger {
     val b = Number5377()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5380 : StressfulInteger {
 
   companion object {
@@ -12178,8 +12179,8 @@ class Number5380 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12189,9 +12190,9 @@ class Number5380 : StressfulInteger {
     val b = Number5378()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5381 : StressfulInteger {
 
   companion object {
@@ -12210,8 +12211,8 @@ class Number5381 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12221,9 +12222,9 @@ class Number5381 : StressfulInteger {
     val b = Number5379()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5382 : StressfulInteger {
 
   companion object {
@@ -12242,8 +12243,8 @@ class Number5382 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12253,9 +12254,9 @@ class Number5382 : StressfulInteger {
     val b = Number5380()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5383 : StressfulInteger {
 
   companion object {
@@ -12274,8 +12275,8 @@ class Number5383 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12285,9 +12286,9 @@ class Number5383 : StressfulInteger {
     val b = Number5381()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5384 : StressfulInteger {
 
   companion object {
@@ -12306,8 +12307,8 @@ class Number5384 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12317,9 +12318,9 @@ class Number5384 : StressfulInteger {
     val b = Number5382()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5385 : StressfulInteger {
 
   companion object {
@@ -12338,8 +12339,8 @@ class Number5385 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12349,9 +12350,9 @@ class Number5385 : StressfulInteger {
     val b = Number5383()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5386 : StressfulInteger {
 
   companion object {
@@ -12370,8 +12371,8 @@ class Number5386 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12381,9 +12382,9 @@ class Number5386 : StressfulInteger {
     val b = Number5384()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5387 : StressfulInteger {
 
   companion object {
@@ -12402,8 +12403,8 @@ class Number5387 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12413,9 +12414,9 @@ class Number5387 : StressfulInteger {
     val b = Number5385()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5388 : StressfulInteger {
 
   companion object {
@@ -12434,8 +12435,8 @@ class Number5388 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12445,9 +12446,9 @@ class Number5388 : StressfulInteger {
     val b = Number5386()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5389 : StressfulInteger {
 
   companion object {
@@ -12466,8 +12467,8 @@ class Number5389 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12477,9 +12478,9 @@ class Number5389 : StressfulInteger {
     val b = Number5387()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5390 : StressfulInteger {
 
   companion object {
@@ -12498,8 +12499,8 @@ class Number5390 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12509,9 +12510,9 @@ class Number5390 : StressfulInteger {
     val b = Number5388()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5391 : StressfulInteger {
 
   companion object {
@@ -12530,8 +12531,8 @@ class Number5391 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12541,9 +12542,9 @@ class Number5391 : StressfulInteger {
     val b = Number5389()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5392 : StressfulInteger {
 
   companion object {
@@ -12562,8 +12563,8 @@ class Number5392 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12573,9 +12574,9 @@ class Number5392 : StressfulInteger {
     val b = Number5390()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5393 : StressfulInteger {
 
   companion object {
@@ -12594,8 +12595,8 @@ class Number5393 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12605,9 +12606,9 @@ class Number5393 : StressfulInteger {
     val b = Number5391()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5394 : StressfulInteger {
 
   companion object {
@@ -12626,8 +12627,8 @@ class Number5394 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12637,9 +12638,9 @@ class Number5394 : StressfulInteger {
     val b = Number5392()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5395 : StressfulInteger {
 
   companion object {
@@ -12658,8 +12659,8 @@ class Number5395 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12669,9 +12670,9 @@ class Number5395 : StressfulInteger {
     val b = Number5393()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5396 : StressfulInteger {
 
   companion object {
@@ -12690,8 +12691,8 @@ class Number5396 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12701,9 +12702,9 @@ class Number5396 : StressfulInteger {
     val b = Number5394()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5397 : StressfulInteger {
 
   companion object {
@@ -12722,8 +12723,8 @@ class Number5397 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12733,9 +12734,9 @@ class Number5397 : StressfulInteger {
     val b = Number5395()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5398 : StressfulInteger {
 
   companion object {
@@ -12754,8 +12755,8 @@ class Number5398 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12765,9 +12766,9 @@ class Number5398 : StressfulInteger {
     val b = Number5396()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5399 : StressfulInteger {
 
   companion object {
@@ -12786,8 +12787,8 @@ class Number5399 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12797,9 +12798,9 @@ class Number5399 : StressfulInteger {
     val b = Number5397()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5400 : StressfulInteger {
 
   companion object {
@@ -12818,8 +12819,8 @@ class Number5400 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12829,9 +12830,9 @@ class Number5400 : StressfulInteger {
     val b = Number5398()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5401 : StressfulInteger {
 
   companion object {
@@ -12850,8 +12851,8 @@ class Number5401 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12861,9 +12862,9 @@ class Number5401 : StressfulInteger {
     val b = Number5399()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5402 : StressfulInteger {
 
   companion object {
@@ -12882,8 +12883,8 @@ class Number5402 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12893,9 +12894,9 @@ class Number5402 : StressfulInteger {
     val b = Number5400()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5403 : StressfulInteger {
 
   companion object {
@@ -12914,8 +12915,8 @@ class Number5403 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12925,9 +12926,9 @@ class Number5403 : StressfulInteger {
     val b = Number5401()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5404 : StressfulInteger {
 
   companion object {
@@ -12946,8 +12947,8 @@ class Number5404 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12957,9 +12958,9 @@ class Number5404 : StressfulInteger {
     val b = Number5402()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5405 : StressfulInteger {
 
   companion object {
@@ -12978,8 +12979,8 @@ class Number5405 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -12989,9 +12990,9 @@ class Number5405 : StressfulInteger {
     val b = Number5403()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5406 : StressfulInteger {
 
   companion object {
@@ -13010,8 +13011,8 @@ class Number5406 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13021,9 +13022,9 @@ class Number5406 : StressfulInteger {
     val b = Number5404()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5407 : StressfulInteger {
 
   companion object {
@@ -13042,8 +13043,8 @@ class Number5407 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13053,9 +13054,9 @@ class Number5407 : StressfulInteger {
     val b = Number5405()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5408 : StressfulInteger {
 
   companion object {
@@ -13074,8 +13075,8 @@ class Number5408 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13085,9 +13086,9 @@ class Number5408 : StressfulInteger {
     val b = Number5406()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5409 : StressfulInteger {
 
   companion object {
@@ -13106,8 +13107,8 @@ class Number5409 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13117,9 +13118,9 @@ class Number5409 : StressfulInteger {
     val b = Number5407()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5410 : StressfulInteger {
 
   companion object {
@@ -13138,8 +13139,8 @@ class Number5410 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13149,9 +13150,9 @@ class Number5410 : StressfulInteger {
     val b = Number5408()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5411 : StressfulInteger {
 
   companion object {
@@ -13170,8 +13171,8 @@ class Number5411 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13181,9 +13182,9 @@ class Number5411 : StressfulInteger {
     val b = Number5409()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5412 : StressfulInteger {
 
   companion object {
@@ -13202,8 +13203,8 @@ class Number5412 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13213,9 +13214,9 @@ class Number5412 : StressfulInteger {
     val b = Number5410()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5413 : StressfulInteger {
 
   companion object {
@@ -13234,8 +13235,8 @@ class Number5413 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13245,9 +13246,9 @@ class Number5413 : StressfulInteger {
     val b = Number5411()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5414 : StressfulInteger {
 
   companion object {
@@ -13266,8 +13267,8 @@ class Number5414 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13277,9 +13278,9 @@ class Number5414 : StressfulInteger {
     val b = Number5412()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5415 : StressfulInteger {
 
   companion object {
@@ -13298,8 +13299,8 @@ class Number5415 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13309,9 +13310,9 @@ class Number5415 : StressfulInteger {
     val b = Number5413()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5416 : StressfulInteger {
 
   companion object {
@@ -13330,8 +13331,8 @@ class Number5416 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13341,9 +13342,9 @@ class Number5416 : StressfulInteger {
     val b = Number5414()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5417 : StressfulInteger {
 
   companion object {
@@ -13362,8 +13363,8 @@ class Number5417 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13373,9 +13374,9 @@ class Number5417 : StressfulInteger {
     val b = Number5415()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5418 : StressfulInteger {
 
   companion object {
@@ -13394,8 +13395,8 @@ class Number5418 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13405,9 +13406,9 @@ class Number5418 : StressfulInteger {
     val b = Number5416()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5419 : StressfulInteger {
 
   companion object {
@@ -13426,8 +13427,8 @@ class Number5419 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13437,9 +13438,9 @@ class Number5419 : StressfulInteger {
     val b = Number5417()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5420 : StressfulInteger {
 
   companion object {
@@ -13458,8 +13459,8 @@ class Number5420 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13469,9 +13470,9 @@ class Number5420 : StressfulInteger {
     val b = Number5418()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5421 : StressfulInteger {
 
   companion object {
@@ -13490,8 +13491,8 @@ class Number5421 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13501,9 +13502,9 @@ class Number5421 : StressfulInteger {
     val b = Number5419()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5422 : StressfulInteger {
 
   companion object {
@@ -13522,8 +13523,8 @@ class Number5422 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13533,9 +13534,9 @@ class Number5422 : StressfulInteger {
     val b = Number5420()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5423 : StressfulInteger {
 
   companion object {
@@ -13554,8 +13555,8 @@ class Number5423 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13565,9 +13566,9 @@ class Number5423 : StressfulInteger {
     val b = Number5421()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5424 : StressfulInteger {
 
   companion object {
@@ -13586,8 +13587,8 @@ class Number5424 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13597,9 +13598,9 @@ class Number5424 : StressfulInteger {
     val b = Number5422()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5425 : StressfulInteger {
 
   companion object {
@@ -13618,8 +13619,8 @@ class Number5425 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13629,9 +13630,9 @@ class Number5425 : StressfulInteger {
     val b = Number5423()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5426 : StressfulInteger {
 
   companion object {
@@ -13650,8 +13651,8 @@ class Number5426 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13661,9 +13662,9 @@ class Number5426 : StressfulInteger {
     val b = Number5424()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5427 : StressfulInteger {
 
   companion object {
@@ -13682,8 +13683,8 @@ class Number5427 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13693,9 +13694,9 @@ class Number5427 : StressfulInteger {
     val b = Number5425()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5428 : StressfulInteger {
 
   companion object {
@@ -13714,8 +13715,8 @@ class Number5428 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13725,9 +13726,9 @@ class Number5428 : StressfulInteger {
     val b = Number5426()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5429 : StressfulInteger {
 
   companion object {
@@ -13746,8 +13747,8 @@ class Number5429 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13757,9 +13758,9 @@ class Number5429 : StressfulInteger {
     val b = Number5427()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5430 : StressfulInteger {
 
   companion object {
@@ -13778,8 +13779,8 @@ class Number5430 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13789,9 +13790,9 @@ class Number5430 : StressfulInteger {
     val b = Number5428()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5431 : StressfulInteger {
 
   companion object {
@@ -13810,8 +13811,8 @@ class Number5431 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13821,9 +13822,9 @@ class Number5431 : StressfulInteger {
     val b = Number5429()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5432 : StressfulInteger {
 
   companion object {
@@ -13842,8 +13843,8 @@ class Number5432 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13853,9 +13854,9 @@ class Number5432 : StressfulInteger {
     val b = Number5430()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5433 : StressfulInteger {
 
   companion object {
@@ -13874,8 +13875,8 @@ class Number5433 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13885,9 +13886,9 @@ class Number5433 : StressfulInteger {
     val b = Number5431()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5434 : StressfulInteger {
 
   companion object {
@@ -13906,8 +13907,8 @@ class Number5434 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13917,9 +13918,9 @@ class Number5434 : StressfulInteger {
     val b = Number5432()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5435 : StressfulInteger {
 
   companion object {
@@ -13938,8 +13939,8 @@ class Number5435 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13949,9 +13950,9 @@ class Number5435 : StressfulInteger {
     val b = Number5433()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5436 : StressfulInteger {
 
   companion object {
@@ -13970,8 +13971,8 @@ class Number5436 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -13981,9 +13982,9 @@ class Number5436 : StressfulInteger {
     val b = Number5434()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5437 : StressfulInteger {
 
   companion object {
@@ -14002,8 +14003,8 @@ class Number5437 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14013,9 +14014,9 @@ class Number5437 : StressfulInteger {
     val b = Number5435()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5438 : StressfulInteger {
 
   companion object {
@@ -14034,8 +14035,8 @@ class Number5438 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14045,9 +14046,9 @@ class Number5438 : StressfulInteger {
     val b = Number5436()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5439 : StressfulInteger {
 
   companion object {
@@ -14066,8 +14067,8 @@ class Number5439 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14077,9 +14078,9 @@ class Number5439 : StressfulInteger {
     val b = Number5437()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5440 : StressfulInteger {
 
   companion object {
@@ -14098,8 +14099,8 @@ class Number5440 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14109,9 +14110,9 @@ class Number5440 : StressfulInteger {
     val b = Number5438()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5441 : StressfulInteger {
 
   companion object {
@@ -14130,8 +14131,8 @@ class Number5441 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14141,9 +14142,9 @@ class Number5441 : StressfulInteger {
     val b = Number5439()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5442 : StressfulInteger {
 
   companion object {
@@ -14162,8 +14163,8 @@ class Number5442 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14173,9 +14174,9 @@ class Number5442 : StressfulInteger {
     val b = Number5440()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5443 : StressfulInteger {
 
   companion object {
@@ -14194,8 +14195,8 @@ class Number5443 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14205,9 +14206,9 @@ class Number5443 : StressfulInteger {
     val b = Number5441()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5444 : StressfulInteger {
 
   companion object {
@@ -14226,8 +14227,8 @@ class Number5444 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14237,9 +14238,9 @@ class Number5444 : StressfulInteger {
     val b = Number5442()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5445 : StressfulInteger {
 
   companion object {
@@ -14258,8 +14259,8 @@ class Number5445 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14269,9 +14270,9 @@ class Number5445 : StressfulInteger {
     val b = Number5443()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5446 : StressfulInteger {
 
   companion object {
@@ -14290,8 +14291,8 @@ class Number5446 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14301,9 +14302,9 @@ class Number5446 : StressfulInteger {
     val b = Number5444()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5447 : StressfulInteger {
 
   companion object {
@@ -14322,8 +14323,8 @@ class Number5447 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14333,9 +14334,9 @@ class Number5447 : StressfulInteger {
     val b = Number5445()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5448 : StressfulInteger {
 
   companion object {
@@ -14354,8 +14355,8 @@ class Number5448 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14365,9 +14366,9 @@ class Number5448 : StressfulInteger {
     val b = Number5446()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5449 : StressfulInteger {
 
   companion object {
@@ -14386,8 +14387,8 @@ class Number5449 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14397,9 +14398,9 @@ class Number5449 : StressfulInteger {
     val b = Number5447()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5450 : StressfulInteger {
 
   companion object {
@@ -14418,8 +14419,8 @@ class Number5450 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14429,9 +14430,9 @@ class Number5450 : StressfulInteger {
     val b = Number5448()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5451 : StressfulInteger {
 
   companion object {
@@ -14450,8 +14451,8 @@ class Number5451 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14461,9 +14462,9 @@ class Number5451 : StressfulInteger {
     val b = Number5449()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5452 : StressfulInteger {
 
   companion object {
@@ -14482,8 +14483,8 @@ class Number5452 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14493,9 +14494,9 @@ class Number5452 : StressfulInteger {
     val b = Number5450()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5453 : StressfulInteger {
 
   companion object {
@@ -14514,8 +14515,8 @@ class Number5453 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14525,9 +14526,9 @@ class Number5453 : StressfulInteger {
     val b = Number5451()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5454 : StressfulInteger {
 
   companion object {
@@ -14546,8 +14547,8 @@ class Number5454 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14557,9 +14558,9 @@ class Number5454 : StressfulInteger {
     val b = Number5452()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5455 : StressfulInteger {
 
   companion object {
@@ -14578,8 +14579,8 @@ class Number5455 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14589,9 +14590,9 @@ class Number5455 : StressfulInteger {
     val b = Number5453()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5456 : StressfulInteger {
 
   companion object {
@@ -14610,8 +14611,8 @@ class Number5456 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14621,9 +14622,9 @@ class Number5456 : StressfulInteger {
     val b = Number5454()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5457 : StressfulInteger {
 
   companion object {
@@ -14642,8 +14643,8 @@ class Number5457 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14653,9 +14654,9 @@ class Number5457 : StressfulInteger {
     val b = Number5455()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5458 : StressfulInteger {
 
   companion object {
@@ -14674,8 +14675,8 @@ class Number5458 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14685,9 +14686,9 @@ class Number5458 : StressfulInteger {
     val b = Number5456()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5459 : StressfulInteger {
 
   companion object {
@@ -14706,8 +14707,8 @@ class Number5459 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14717,9 +14718,9 @@ class Number5459 : StressfulInteger {
     val b = Number5457()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5460 : StressfulInteger {
 
   companion object {
@@ -14738,8 +14739,8 @@ class Number5460 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14749,9 +14750,9 @@ class Number5460 : StressfulInteger {
     val b = Number5458()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5461 : StressfulInteger {
 
   companion object {
@@ -14770,8 +14771,8 @@ class Number5461 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14781,9 +14782,9 @@ class Number5461 : StressfulInteger {
     val b = Number5459()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5462 : StressfulInteger {
 
   companion object {
@@ -14802,8 +14803,8 @@ class Number5462 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14813,9 +14814,9 @@ class Number5462 : StressfulInteger {
     val b = Number5460()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5463 : StressfulInteger {
 
   companion object {
@@ -14834,8 +14835,8 @@ class Number5463 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14845,9 +14846,9 @@ class Number5463 : StressfulInteger {
     val b = Number5461()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5464 : StressfulInteger {
 
   companion object {
@@ -14866,8 +14867,8 @@ class Number5464 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14877,9 +14878,9 @@ class Number5464 : StressfulInteger {
     val b = Number5462()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5465 : StressfulInteger {
 
   companion object {
@@ -14898,8 +14899,8 @@ class Number5465 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14909,9 +14910,9 @@ class Number5465 : StressfulInteger {
     val b = Number5463()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5466 : StressfulInteger {
 
   companion object {
@@ -14930,8 +14931,8 @@ class Number5466 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14941,9 +14942,9 @@ class Number5466 : StressfulInteger {
     val b = Number5464()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5467 : StressfulInteger {
 
   companion object {
@@ -14962,8 +14963,8 @@ class Number5467 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -14973,9 +14974,9 @@ class Number5467 : StressfulInteger {
     val b = Number5465()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5468 : StressfulInteger {
 
   companion object {
@@ -14994,8 +14995,8 @@ class Number5468 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15005,9 +15006,9 @@ class Number5468 : StressfulInteger {
     val b = Number5466()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5469 : StressfulInteger {
 
   companion object {
@@ -15026,8 +15027,8 @@ class Number5469 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15037,9 +15038,9 @@ class Number5469 : StressfulInteger {
     val b = Number5467()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5470 : StressfulInteger {
 
   companion object {
@@ -15058,8 +15059,8 @@ class Number5470 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15069,9 +15070,9 @@ class Number5470 : StressfulInteger {
     val b = Number5468()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5471 : StressfulInteger {
 
   companion object {
@@ -15090,8 +15091,8 @@ class Number5471 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15101,9 +15102,9 @@ class Number5471 : StressfulInteger {
     val b = Number5469()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5472 : StressfulInteger {
 
   companion object {
@@ -15122,8 +15123,8 @@ class Number5472 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15133,9 +15134,9 @@ class Number5472 : StressfulInteger {
     val b = Number5470()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5473 : StressfulInteger {
 
   companion object {
@@ -15154,8 +15155,8 @@ class Number5473 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15165,9 +15166,9 @@ class Number5473 : StressfulInteger {
     val b = Number5471()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5474 : StressfulInteger {
 
   companion object {
@@ -15186,8 +15187,8 @@ class Number5474 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15197,9 +15198,9 @@ class Number5474 : StressfulInteger {
     val b = Number5472()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5475 : StressfulInteger {
 
   companion object {
@@ -15218,8 +15219,8 @@ class Number5475 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15229,9 +15230,9 @@ class Number5475 : StressfulInteger {
     val b = Number5473()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5476 : StressfulInteger {
 
   companion object {
@@ -15250,8 +15251,8 @@ class Number5476 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15261,9 +15262,9 @@ class Number5476 : StressfulInteger {
     val b = Number5474()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5477 : StressfulInteger {
 
   companion object {
@@ -15282,8 +15283,8 @@ class Number5477 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15293,9 +15294,9 @@ class Number5477 : StressfulInteger {
     val b = Number5475()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5478 : StressfulInteger {
 
   companion object {
@@ -15314,8 +15315,8 @@ class Number5478 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15325,9 +15326,9 @@ class Number5478 : StressfulInteger {
     val b = Number5476()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5479 : StressfulInteger {
 
   companion object {
@@ -15346,8 +15347,8 @@ class Number5479 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15357,9 +15358,9 @@ class Number5479 : StressfulInteger {
     val b = Number5477()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5480 : StressfulInteger {
 
   companion object {
@@ -15378,8 +15379,8 @@ class Number5480 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15389,9 +15390,9 @@ class Number5480 : StressfulInteger {
     val b = Number5478()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5481 : StressfulInteger {
 
   companion object {
@@ -15410,8 +15411,8 @@ class Number5481 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15421,9 +15422,9 @@ class Number5481 : StressfulInteger {
     val b = Number5479()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5482 : StressfulInteger {
 
   companion object {
@@ -15442,8 +15443,8 @@ class Number5482 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15453,9 +15454,9 @@ class Number5482 : StressfulInteger {
     val b = Number5480()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5483 : StressfulInteger {
 
   companion object {
@@ -15474,8 +15475,8 @@ class Number5483 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15485,9 +15486,9 @@ class Number5483 : StressfulInteger {
     val b = Number5481()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5484 : StressfulInteger {
 
   companion object {
@@ -15506,8 +15507,8 @@ class Number5484 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15517,9 +15518,9 @@ class Number5484 : StressfulInteger {
     val b = Number5482()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5485 : StressfulInteger {
 
   companion object {
@@ -15538,8 +15539,8 @@ class Number5485 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15549,9 +15550,9 @@ class Number5485 : StressfulInteger {
     val b = Number5483()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5486 : StressfulInteger {
 
   companion object {
@@ -15570,8 +15571,8 @@ class Number5486 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15581,9 +15582,9 @@ class Number5486 : StressfulInteger {
     val b = Number5484()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5487 : StressfulInteger {
 
   companion object {
@@ -15602,8 +15603,8 @@ class Number5487 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15613,9 +15614,9 @@ class Number5487 : StressfulInteger {
     val b = Number5485()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5488 : StressfulInteger {
 
   companion object {
@@ -15634,8 +15635,8 @@ class Number5488 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15645,9 +15646,9 @@ class Number5488 : StressfulInteger {
     val b = Number5486()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5489 : StressfulInteger {
 
   companion object {
@@ -15666,8 +15667,8 @@ class Number5489 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15677,9 +15678,9 @@ class Number5489 : StressfulInteger {
     val b = Number5487()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5490 : StressfulInteger {
 
   companion object {
@@ -15698,8 +15699,8 @@ class Number5490 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15709,9 +15710,9 @@ class Number5490 : StressfulInteger {
     val b = Number5488()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5491 : StressfulInteger {
 
   companion object {
@@ -15730,8 +15731,8 @@ class Number5491 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15741,9 +15742,9 @@ class Number5491 : StressfulInteger {
     val b = Number5489()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5492 : StressfulInteger {
 
   companion object {
@@ -15762,8 +15763,8 @@ class Number5492 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15773,9 +15774,9 @@ class Number5492 : StressfulInteger {
     val b = Number5490()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5493 : StressfulInteger {
 
   companion object {
@@ -15794,8 +15795,8 @@ class Number5493 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15805,9 +15806,9 @@ class Number5493 : StressfulInteger {
     val b = Number5491()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5494 : StressfulInteger {
 
   companion object {
@@ -15826,8 +15827,8 @@ class Number5494 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15837,9 +15838,9 @@ class Number5494 : StressfulInteger {
     val b = Number5492()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5495 : StressfulInteger {
 
   companion object {
@@ -15858,8 +15859,8 @@ class Number5495 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15869,9 +15870,9 @@ class Number5495 : StressfulInteger {
     val b = Number5493()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5496 : StressfulInteger {
 
   companion object {
@@ -15890,8 +15891,8 @@ class Number5496 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15901,9 +15902,9 @@ class Number5496 : StressfulInteger {
     val b = Number5494()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5497 : StressfulInteger {
 
   companion object {
@@ -15922,8 +15923,8 @@ class Number5497 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15933,9 +15934,9 @@ class Number5497 : StressfulInteger {
     val b = Number5495()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5498 : StressfulInteger {
 
   companion object {
@@ -15954,8 +15955,8 @@ class Number5498 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15965,9 +15966,9 @@ class Number5498 : StressfulInteger {
     val b = Number5496()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5499 : StressfulInteger {
 
   companion object {
@@ -15986,8 +15987,8 @@ class Number5499 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -15997,9 +15998,9 @@ class Number5499 : StressfulInteger {
     val b = Number5497()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5500 : StressfulInteger {
 
   companion object {
@@ -16018,8 +16019,8 @@ class Number5500 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16029,9 +16030,9 @@ class Number5500 : StressfulInteger {
     val b = Number5498()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5501 : StressfulInteger {
 
   companion object {
@@ -16050,8 +16051,8 @@ class Number5501 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16061,9 +16062,9 @@ class Number5501 : StressfulInteger {
     val b = Number5499()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5502 : StressfulInteger {
 
   companion object {
@@ -16082,8 +16083,8 @@ class Number5502 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16093,9 +16094,9 @@ class Number5502 : StressfulInteger {
     val b = Number5500()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5503 : StressfulInteger {
 
   companion object {
@@ -16114,8 +16115,8 @@ class Number5503 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16125,9 +16126,9 @@ class Number5503 : StressfulInteger {
     val b = Number5501()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5504 : StressfulInteger {
 
   companion object {
@@ -16146,8 +16147,8 @@ class Number5504 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16157,9 +16158,9 @@ class Number5504 : StressfulInteger {
     val b = Number5502()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5505 : StressfulInteger {
 
   companion object {
@@ -16178,8 +16179,8 @@ class Number5505 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16189,9 +16190,9 @@ class Number5505 : StressfulInteger {
     val b = Number5503()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5506 : StressfulInteger {
 
   companion object {
@@ -16210,8 +16211,8 @@ class Number5506 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16221,9 +16222,9 @@ class Number5506 : StressfulInteger {
     val b = Number5504()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5507 : StressfulInteger {
 
   companion object {
@@ -16242,8 +16243,8 @@ class Number5507 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16253,9 +16254,9 @@ class Number5507 : StressfulInteger {
     val b = Number5505()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5508 : StressfulInteger {
 
   companion object {
@@ -16274,8 +16275,8 @@ class Number5508 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16285,9 +16286,9 @@ class Number5508 : StressfulInteger {
     val b = Number5506()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5509 : StressfulInteger {
 
   companion object {
@@ -16306,8 +16307,8 @@ class Number5509 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16317,9 +16318,9 @@ class Number5509 : StressfulInteger {
     val b = Number5507()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5510 : StressfulInteger {
 
   companion object {
@@ -16338,8 +16339,8 @@ class Number5510 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16349,9 +16350,9 @@ class Number5510 : StressfulInteger {
     val b = Number5508()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5511 : StressfulInteger {
 
   companion object {
@@ -16370,8 +16371,8 @@ class Number5511 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16381,9 +16382,9 @@ class Number5511 : StressfulInteger {
     val b = Number5509()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5512 : StressfulInteger {
 
   companion object {
@@ -16402,8 +16403,8 @@ class Number5512 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16413,9 +16414,9 @@ class Number5512 : StressfulInteger {
     val b = Number5510()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5513 : StressfulInteger {
 
   companion object {
@@ -16434,8 +16435,8 @@ class Number5513 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16445,9 +16446,9 @@ class Number5513 : StressfulInteger {
     val b = Number5511()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5514 : StressfulInteger {
 
   companion object {
@@ -16466,8 +16467,8 @@ class Number5514 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16477,9 +16478,9 @@ class Number5514 : StressfulInteger {
     val b = Number5512()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5515 : StressfulInteger {
 
   companion object {
@@ -16498,8 +16499,8 @@ class Number5515 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16509,9 +16510,9 @@ class Number5515 : StressfulInteger {
     val b = Number5513()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5516 : StressfulInteger {
 
   companion object {
@@ -16530,8 +16531,8 @@ class Number5516 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16541,9 +16542,9 @@ class Number5516 : StressfulInteger {
     val b = Number5514()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5517 : StressfulInteger {
 
   companion object {
@@ -16562,8 +16563,8 @@ class Number5517 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16573,9 +16574,9 @@ class Number5517 : StressfulInteger {
     val b = Number5515()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5518 : StressfulInteger {
 
   companion object {
@@ -16594,8 +16595,8 @@ class Number5518 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16605,9 +16606,9 @@ class Number5518 : StressfulInteger {
     val b = Number5516()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5519 : StressfulInteger {
 
   companion object {
@@ -16626,8 +16627,8 @@ class Number5519 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16637,9 +16638,9 @@ class Number5519 : StressfulInteger {
     val b = Number5517()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5520 : StressfulInteger {
 
   companion object {
@@ -16658,8 +16659,8 @@ class Number5520 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16669,9 +16670,9 @@ class Number5520 : StressfulInteger {
     val b = Number5518()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5521 : StressfulInteger {
 
   companion object {
@@ -16690,8 +16691,8 @@ class Number5521 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16701,9 +16702,9 @@ class Number5521 : StressfulInteger {
     val b = Number5519()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5522 : StressfulInteger {
 
   companion object {
@@ -16722,8 +16723,8 @@ class Number5522 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16733,9 +16734,9 @@ class Number5522 : StressfulInteger {
     val b = Number5520()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5523 : StressfulInteger {
 
   companion object {
@@ -16754,8 +16755,8 @@ class Number5523 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16765,9 +16766,9 @@ class Number5523 : StressfulInteger {
     val b = Number5521()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5524 : StressfulInteger {
 
   companion object {
@@ -16786,8 +16787,8 @@ class Number5524 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16797,9 +16798,9 @@ class Number5524 : StressfulInteger {
     val b = Number5522()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5525 : StressfulInteger {
 
   companion object {
@@ -16818,8 +16819,8 @@ class Number5525 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16829,9 +16830,9 @@ class Number5525 : StressfulInteger {
     val b = Number5523()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5526 : StressfulInteger {
 
   companion object {
@@ -16850,8 +16851,8 @@ class Number5526 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16861,9 +16862,9 @@ class Number5526 : StressfulInteger {
     val b = Number5524()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5527 : StressfulInteger {
 
   companion object {
@@ -16882,8 +16883,8 @@ class Number5527 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16893,9 +16894,9 @@ class Number5527 : StressfulInteger {
     val b = Number5525()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5528 : StressfulInteger {
 
   companion object {
@@ -16914,8 +16915,8 @@ class Number5528 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16925,9 +16926,9 @@ class Number5528 : StressfulInteger {
     val b = Number5526()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5529 : StressfulInteger {
 
   companion object {
@@ -16946,8 +16947,8 @@ class Number5529 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16957,9 +16958,9 @@ class Number5529 : StressfulInteger {
     val b = Number5527()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5530 : StressfulInteger {
 
   companion object {
@@ -16978,8 +16979,8 @@ class Number5530 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -16989,9 +16990,9 @@ class Number5530 : StressfulInteger {
     val b = Number5528()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5531 : StressfulInteger {
 
   companion object {
@@ -17010,8 +17011,8 @@ class Number5531 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17021,9 +17022,9 @@ class Number5531 : StressfulInteger {
     val b = Number5529()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5532 : StressfulInteger {
 
   companion object {
@@ -17042,8 +17043,8 @@ class Number5532 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17053,9 +17054,9 @@ class Number5532 : StressfulInteger {
     val b = Number5530()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5533 : StressfulInteger {
 
   companion object {
@@ -17074,8 +17075,8 @@ class Number5533 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17085,9 +17086,9 @@ class Number5533 : StressfulInteger {
     val b = Number5531()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5534 : StressfulInteger {
 
   companion object {
@@ -17106,8 +17107,8 @@ class Number5534 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17117,9 +17118,9 @@ class Number5534 : StressfulInteger {
     val b = Number5532()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5535 : StressfulInteger {
 
   companion object {
@@ -17138,8 +17139,8 @@ class Number5535 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17149,9 +17150,9 @@ class Number5535 : StressfulInteger {
     val b = Number5533()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5536 : StressfulInteger {
 
   companion object {
@@ -17170,8 +17171,8 @@ class Number5536 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17181,9 +17182,9 @@ class Number5536 : StressfulInteger {
     val b = Number5534()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5537 : StressfulInteger {
 
   companion object {
@@ -17202,8 +17203,8 @@ class Number5537 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17213,9 +17214,9 @@ class Number5537 : StressfulInteger {
     val b = Number5535()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5538 : StressfulInteger {
 
   companion object {
@@ -17234,8 +17235,8 @@ class Number5538 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17245,9 +17246,9 @@ class Number5538 : StressfulInteger {
     val b = Number5536()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5539 : StressfulInteger {
 
   companion object {
@@ -17266,8 +17267,8 @@ class Number5539 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17277,9 +17278,9 @@ class Number5539 : StressfulInteger {
     val b = Number5537()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5540 : StressfulInteger {
 
   companion object {
@@ -17298,8 +17299,8 @@ class Number5540 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17309,9 +17310,9 @@ class Number5540 : StressfulInteger {
     val b = Number5538()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5541 : StressfulInteger {
 
   companion object {
@@ -17330,8 +17331,8 @@ class Number5541 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17341,9 +17342,9 @@ class Number5541 : StressfulInteger {
     val b = Number5539()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5542 : StressfulInteger {
 
   companion object {
@@ -17362,8 +17363,8 @@ class Number5542 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17373,9 +17374,9 @@ class Number5542 : StressfulInteger {
     val b = Number5540()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5543 : StressfulInteger {
 
   companion object {
@@ -17394,8 +17395,8 @@ class Number5543 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17405,9 +17406,9 @@ class Number5543 : StressfulInteger {
     val b = Number5541()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5544 : StressfulInteger {
 
   companion object {
@@ -17426,8 +17427,8 @@ class Number5544 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17437,9 +17438,9 @@ class Number5544 : StressfulInteger {
     val b = Number5542()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5545 : StressfulInteger {
 
   companion object {
@@ -17458,8 +17459,8 @@ class Number5545 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17469,9 +17470,9 @@ class Number5545 : StressfulInteger {
     val b = Number5543()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5546 : StressfulInteger {
 
   companion object {
@@ -17490,8 +17491,8 @@ class Number5546 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17501,9 +17502,9 @@ class Number5546 : StressfulInteger {
     val b = Number5544()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5547 : StressfulInteger {
 
   companion object {
@@ -17522,8 +17523,8 @@ class Number5547 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17533,9 +17534,9 @@ class Number5547 : StressfulInteger {
     val b = Number5545()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5548 : StressfulInteger {
 
   companion object {
@@ -17554,8 +17555,8 @@ class Number5548 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17565,9 +17566,9 @@ class Number5548 : StressfulInteger {
     val b = Number5546()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5549 : StressfulInteger {
 
   companion object {
@@ -17586,8 +17587,8 @@ class Number5549 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17597,9 +17598,9 @@ class Number5549 : StressfulInteger {
     val b = Number5547()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5550 : StressfulInteger {
 
   companion object {
@@ -17618,8 +17619,8 @@ class Number5550 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17629,9 +17630,9 @@ class Number5550 : StressfulInteger {
     val b = Number5548()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5551 : StressfulInteger {
 
   companion object {
@@ -17650,8 +17651,8 @@ class Number5551 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17661,9 +17662,9 @@ class Number5551 : StressfulInteger {
     val b = Number5549()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5552 : StressfulInteger {
 
   companion object {
@@ -17682,8 +17683,8 @@ class Number5552 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17693,9 +17694,9 @@ class Number5552 : StressfulInteger {
     val b = Number5550()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5553 : StressfulInteger {
 
   companion object {
@@ -17714,8 +17715,8 @@ class Number5553 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17725,9 +17726,9 @@ class Number5553 : StressfulInteger {
     val b = Number5551()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5554 : StressfulInteger {
 
   companion object {
@@ -17746,8 +17747,8 @@ class Number5554 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17757,9 +17758,9 @@ class Number5554 : StressfulInteger {
     val b = Number5552()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5555 : StressfulInteger {
 
   companion object {
@@ -17778,8 +17779,8 @@ class Number5555 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17789,9 +17790,9 @@ class Number5555 : StressfulInteger {
     val b = Number5553()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5556 : StressfulInteger {
 
   companion object {
@@ -17810,8 +17811,8 @@ class Number5556 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17821,9 +17822,9 @@ class Number5556 : StressfulInteger {
     val b = Number5554()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5557 : StressfulInteger {
 
   companion object {
@@ -17842,8 +17843,8 @@ class Number5557 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17853,9 +17854,9 @@ class Number5557 : StressfulInteger {
     val b = Number5555()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5558 : StressfulInteger {
 
   companion object {
@@ -17874,8 +17875,8 @@ class Number5558 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17885,9 +17886,9 @@ class Number5558 : StressfulInteger {
     val b = Number5556()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5559 : StressfulInteger {
 
   companion object {
@@ -17906,8 +17907,8 @@ class Number5559 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17917,9 +17918,9 @@ class Number5559 : StressfulInteger {
     val b = Number5557()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5560 : StressfulInteger {
 
   companion object {
@@ -17938,8 +17939,8 @@ class Number5560 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17949,9 +17950,9 @@ class Number5560 : StressfulInteger {
     val b = Number5558()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5561 : StressfulInteger {
 
   companion object {
@@ -17970,8 +17971,8 @@ class Number5561 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -17981,9 +17982,9 @@ class Number5561 : StressfulInteger {
     val b = Number5559()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5562 : StressfulInteger {
 
   companion object {
@@ -18002,8 +18003,8 @@ class Number5562 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18013,9 +18014,9 @@ class Number5562 : StressfulInteger {
     val b = Number5560()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5563 : StressfulInteger {
 
   companion object {
@@ -18034,8 +18035,8 @@ class Number5563 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18045,9 +18046,9 @@ class Number5563 : StressfulInteger {
     val b = Number5561()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5564 : StressfulInteger {
 
   companion object {
@@ -18066,8 +18067,8 @@ class Number5564 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18077,9 +18078,9 @@ class Number5564 : StressfulInteger {
     val b = Number5562()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5565 : StressfulInteger {
 
   companion object {
@@ -18098,8 +18099,8 @@ class Number5565 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18109,9 +18110,9 @@ class Number5565 : StressfulInteger {
     val b = Number5563()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5566 : StressfulInteger {
 
   companion object {
@@ -18130,8 +18131,8 @@ class Number5566 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18141,9 +18142,9 @@ class Number5566 : StressfulInteger {
     val b = Number5564()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5567 : StressfulInteger {
 
   companion object {
@@ -18162,8 +18163,8 @@ class Number5567 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18173,9 +18174,9 @@ class Number5567 : StressfulInteger {
     val b = Number5565()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5568 : StressfulInteger {
 
   companion object {
@@ -18194,8 +18195,8 @@ class Number5568 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18205,9 +18206,9 @@ class Number5568 : StressfulInteger {
     val b = Number5566()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5569 : StressfulInteger {
 
   companion object {
@@ -18226,8 +18227,8 @@ class Number5569 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18237,9 +18238,9 @@ class Number5569 : StressfulInteger {
     val b = Number5567()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5570 : StressfulInteger {
 
   companion object {
@@ -18258,8 +18259,8 @@ class Number5570 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18269,9 +18270,9 @@ class Number5570 : StressfulInteger {
     val b = Number5568()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5571 : StressfulInteger {
 
   companion object {
@@ -18290,8 +18291,8 @@ class Number5571 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18301,9 +18302,9 @@ class Number5571 : StressfulInteger {
     val b = Number5569()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5572 : StressfulInteger {
 
   companion object {
@@ -18322,8 +18323,8 @@ class Number5572 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18333,9 +18334,9 @@ class Number5572 : StressfulInteger {
     val b = Number5570()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5573 : StressfulInteger {
 
   companion object {
@@ -18354,8 +18355,8 @@ class Number5573 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18365,9 +18366,9 @@ class Number5573 : StressfulInteger {
     val b = Number5571()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5574 : StressfulInteger {
 
   companion object {
@@ -18386,8 +18387,8 @@ class Number5574 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18397,9 +18398,9 @@ class Number5574 : StressfulInteger {
     val b = Number5572()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5575 : StressfulInteger {
 
   companion object {
@@ -18418,8 +18419,8 @@ class Number5575 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18429,9 +18430,9 @@ class Number5575 : StressfulInteger {
     val b = Number5573()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5576 : StressfulInteger {
 
   companion object {
@@ -18450,8 +18451,8 @@ class Number5576 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18461,9 +18462,9 @@ class Number5576 : StressfulInteger {
     val b = Number5574()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5577 : StressfulInteger {
 
   companion object {
@@ -18482,8 +18483,8 @@ class Number5577 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18493,9 +18494,9 @@ class Number5577 : StressfulInteger {
     val b = Number5575()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5578 : StressfulInteger {
 
   companion object {
@@ -18514,8 +18515,8 @@ class Number5578 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18525,9 +18526,9 @@ class Number5578 : StressfulInteger {
     val b = Number5576()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5579 : StressfulInteger {
 
   companion object {
@@ -18546,8 +18547,8 @@ class Number5579 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18557,9 +18558,9 @@ class Number5579 : StressfulInteger {
     val b = Number5577()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5580 : StressfulInteger {
 
   companion object {
@@ -18578,8 +18579,8 @@ class Number5580 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18589,9 +18590,9 @@ class Number5580 : StressfulInteger {
     val b = Number5578()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5581 : StressfulInteger {
 
   companion object {
@@ -18610,8 +18611,8 @@ class Number5581 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18621,9 +18622,9 @@ class Number5581 : StressfulInteger {
     val b = Number5579()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5582 : StressfulInteger {
 
   companion object {
@@ -18642,8 +18643,8 @@ class Number5582 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18653,9 +18654,9 @@ class Number5582 : StressfulInteger {
     val b = Number5580()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5583 : StressfulInteger {
 
   companion object {
@@ -18674,8 +18675,8 @@ class Number5583 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18685,9 +18686,9 @@ class Number5583 : StressfulInteger {
     val b = Number5581()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5584 : StressfulInteger {
 
   companion object {
@@ -18706,8 +18707,8 @@ class Number5584 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18717,9 +18718,9 @@ class Number5584 : StressfulInteger {
     val b = Number5582()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5585 : StressfulInteger {
 
   companion object {
@@ -18738,8 +18739,8 @@ class Number5585 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18749,9 +18750,9 @@ class Number5585 : StressfulInteger {
     val b = Number5583()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5586 : StressfulInteger {
 
   companion object {
@@ -18770,8 +18771,8 @@ class Number5586 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18781,9 +18782,9 @@ class Number5586 : StressfulInteger {
     val b = Number5584()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5587 : StressfulInteger {
 
   companion object {
@@ -18802,8 +18803,8 @@ class Number5587 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18813,9 +18814,9 @@ class Number5587 : StressfulInteger {
     val b = Number5585()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5588 : StressfulInteger {
 
   companion object {
@@ -18834,8 +18835,8 @@ class Number5588 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18845,9 +18846,9 @@ class Number5588 : StressfulInteger {
     val b = Number5586()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5589 : StressfulInteger {
 
   companion object {
@@ -18866,8 +18867,8 @@ class Number5589 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18877,9 +18878,9 @@ class Number5589 : StressfulInteger {
     val b = Number5587()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5590 : StressfulInteger {
 
   companion object {
@@ -18898,8 +18899,8 @@ class Number5590 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18909,9 +18910,9 @@ class Number5590 : StressfulInteger {
     val b = Number5588()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5591 : StressfulInteger {
 
   companion object {
@@ -18930,8 +18931,8 @@ class Number5591 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18941,9 +18942,9 @@ class Number5591 : StressfulInteger {
     val b = Number5589()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5592 : StressfulInteger {
 
   companion object {
@@ -18962,8 +18963,8 @@ class Number5592 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -18973,9 +18974,9 @@ class Number5592 : StressfulInteger {
     val b = Number5590()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5593 : StressfulInteger {
 
   companion object {
@@ -18994,8 +18995,8 @@ class Number5593 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19005,9 +19006,9 @@ class Number5593 : StressfulInteger {
     val b = Number5591()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5594 : StressfulInteger {
 
   companion object {
@@ -19026,8 +19027,8 @@ class Number5594 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19037,9 +19038,9 @@ class Number5594 : StressfulInteger {
     val b = Number5592()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5595 : StressfulInteger {
 
   companion object {
@@ -19058,8 +19059,8 @@ class Number5595 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19069,9 +19070,9 @@ class Number5595 : StressfulInteger {
     val b = Number5593()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5596 : StressfulInteger {
 
   companion object {
@@ -19090,8 +19091,8 @@ class Number5596 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19101,9 +19102,9 @@ class Number5596 : StressfulInteger {
     val b = Number5594()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5597 : StressfulInteger {
 
   companion object {
@@ -19122,8 +19123,8 @@ class Number5597 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19133,9 +19134,9 @@ class Number5597 : StressfulInteger {
     val b = Number5595()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5598 : StressfulInteger {
 
   companion object {
@@ -19154,8 +19155,8 @@ class Number5598 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19165,9 +19166,9 @@ class Number5598 : StressfulInteger {
     val b = Number5596()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5599 : StressfulInteger {
 
   companion object {
@@ -19186,8 +19187,8 @@ class Number5599 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19197,9 +19198,9 @@ class Number5599 : StressfulInteger {
     val b = Number5597()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5600 : StressfulInteger {
 
   companion object {
@@ -19218,8 +19219,8 @@ class Number5600 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19229,9 +19230,9 @@ class Number5600 : StressfulInteger {
     val b = Number5598()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5601 : StressfulInteger {
 
   companion object {
@@ -19250,8 +19251,8 @@ class Number5601 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19261,9 +19262,9 @@ class Number5601 : StressfulInteger {
     val b = Number5599()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5602 : StressfulInteger {
 
   companion object {
@@ -19282,8 +19283,8 @@ class Number5602 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19293,9 +19294,9 @@ class Number5602 : StressfulInteger {
     val b = Number5600()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5603 : StressfulInteger {
 
   companion object {
@@ -19314,8 +19315,8 @@ class Number5603 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19325,9 +19326,9 @@ class Number5603 : StressfulInteger {
     val b = Number5601()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5604 : StressfulInteger {
 
   companion object {
@@ -19346,8 +19347,8 @@ class Number5604 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19357,9 +19358,9 @@ class Number5604 : StressfulInteger {
     val b = Number5602()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5605 : StressfulInteger {
 
   companion object {
@@ -19378,8 +19379,8 @@ class Number5605 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19389,9 +19390,9 @@ class Number5605 : StressfulInteger {
     val b = Number5603()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5606 : StressfulInteger {
 
   companion object {
@@ -19410,8 +19411,8 @@ class Number5606 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19421,9 +19422,9 @@ class Number5606 : StressfulInteger {
     val b = Number5604()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5607 : StressfulInteger {
 
   companion object {
@@ -19442,8 +19443,8 @@ class Number5607 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19453,9 +19454,9 @@ class Number5607 : StressfulInteger {
     val b = Number5605()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5608 : StressfulInteger {
 
   companion object {
@@ -19474,8 +19475,8 @@ class Number5608 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19485,9 +19486,9 @@ class Number5608 : StressfulInteger {
     val b = Number5606()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5609 : StressfulInteger {
 
   companion object {
@@ -19506,8 +19507,8 @@ class Number5609 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19517,9 +19518,9 @@ class Number5609 : StressfulInteger {
     val b = Number5607()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5610 : StressfulInteger {
 
   companion object {
@@ -19538,8 +19539,8 @@ class Number5610 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19549,9 +19550,9 @@ class Number5610 : StressfulInteger {
     val b = Number5608()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5611 : StressfulInteger {
 
   companion object {
@@ -19570,8 +19571,8 @@ class Number5611 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19581,9 +19582,9 @@ class Number5611 : StressfulInteger {
     val b = Number5609()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5612 : StressfulInteger {
 
   companion object {
@@ -19602,8 +19603,8 @@ class Number5612 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19613,9 +19614,9 @@ class Number5612 : StressfulInteger {
     val b = Number5610()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5613 : StressfulInteger {
 
   companion object {
@@ -19634,8 +19635,8 @@ class Number5613 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19645,9 +19646,9 @@ class Number5613 : StressfulInteger {
     val b = Number5611()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5614 : StressfulInteger {
 
   companion object {
@@ -19666,8 +19667,8 @@ class Number5614 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19677,9 +19678,9 @@ class Number5614 : StressfulInteger {
     val b = Number5612()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5615 : StressfulInteger {
 
   companion object {
@@ -19698,8 +19699,8 @@ class Number5615 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19709,9 +19710,9 @@ class Number5615 : StressfulInteger {
     val b = Number5613()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5616 : StressfulInteger {
 
   companion object {
@@ -19730,8 +19731,8 @@ class Number5616 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19741,9 +19742,9 @@ class Number5616 : StressfulInteger {
     val b = Number5614()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5617 : StressfulInteger {
 
   companion object {
@@ -19762,8 +19763,8 @@ class Number5617 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19773,9 +19774,9 @@ class Number5617 : StressfulInteger {
     val b = Number5615()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5618 : StressfulInteger {
 
   companion object {
@@ -19794,8 +19795,8 @@ class Number5618 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19805,9 +19806,9 @@ class Number5618 : StressfulInteger {
     val b = Number5616()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5619 : StressfulInteger {
 
   companion object {
@@ -19826,8 +19827,8 @@ class Number5619 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19837,9 +19838,9 @@ class Number5619 : StressfulInteger {
     val b = Number5617()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5620 : StressfulInteger {
 
   companion object {
@@ -19858,8 +19859,8 @@ class Number5620 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19869,9 +19870,9 @@ class Number5620 : StressfulInteger {
     val b = Number5618()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5621 : StressfulInteger {
 
   companion object {
@@ -19890,8 +19891,8 @@ class Number5621 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19901,9 +19902,9 @@ class Number5621 : StressfulInteger {
     val b = Number5619()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5622 : StressfulInteger {
 
   companion object {
@@ -19922,8 +19923,8 @@ class Number5622 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19933,9 +19934,9 @@ class Number5622 : StressfulInteger {
     val b = Number5620()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5623 : StressfulInteger {
 
   companion object {
@@ -19954,8 +19955,8 @@ class Number5623 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19965,9 +19966,9 @@ class Number5623 : StressfulInteger {
     val b = Number5621()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5624 : StressfulInteger {
 
   companion object {
@@ -19986,8 +19987,8 @@ class Number5624 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -19997,9 +19998,9 @@ class Number5624 : StressfulInteger {
     val b = Number5622()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5625 : StressfulInteger {
 
   companion object {
@@ -20018,8 +20019,8 @@ class Number5625 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20029,9 +20030,9 @@ class Number5625 : StressfulInteger {
     val b = Number5623()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5626 : StressfulInteger {
 
   companion object {
@@ -20050,8 +20051,8 @@ class Number5626 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20061,9 +20062,9 @@ class Number5626 : StressfulInteger {
     val b = Number5624()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5627 : StressfulInteger {
 
   companion object {
@@ -20082,8 +20083,8 @@ class Number5627 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20093,9 +20094,9 @@ class Number5627 : StressfulInteger {
     val b = Number5625()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5628 : StressfulInteger {
 
   companion object {
@@ -20114,8 +20115,8 @@ class Number5628 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20125,9 +20126,9 @@ class Number5628 : StressfulInteger {
     val b = Number5626()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5629 : StressfulInteger {
 
   companion object {
@@ -20146,8 +20147,8 @@ class Number5629 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20157,9 +20158,9 @@ class Number5629 : StressfulInteger {
     val b = Number5627()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5630 : StressfulInteger {
 
   companion object {
@@ -20178,8 +20179,8 @@ class Number5630 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20189,9 +20190,9 @@ class Number5630 : StressfulInteger {
     val b = Number5628()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5631 : StressfulInteger {
 
   companion object {
@@ -20210,8 +20211,8 @@ class Number5631 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20221,9 +20222,9 @@ class Number5631 : StressfulInteger {
     val b = Number5629()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5632 : StressfulInteger {
 
   companion object {
@@ -20242,8 +20243,8 @@ class Number5632 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20253,9 +20254,9 @@ class Number5632 : StressfulInteger {
     val b = Number5630()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5633 : StressfulInteger {
 
   companion object {
@@ -20274,8 +20275,8 @@ class Number5633 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20285,9 +20286,9 @@ class Number5633 : StressfulInteger {
     val b = Number5631()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5634 : StressfulInteger {
 
   companion object {
@@ -20306,8 +20307,8 @@ class Number5634 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20317,9 +20318,9 @@ class Number5634 : StressfulInteger {
     val b = Number5632()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5635 : StressfulInteger {
 
   companion object {
@@ -20338,8 +20339,8 @@ class Number5635 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20349,9 +20350,9 @@ class Number5635 : StressfulInteger {
     val b = Number5633()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5636 : StressfulInteger {
 
   companion object {
@@ -20370,8 +20371,8 @@ class Number5636 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20381,9 +20382,9 @@ class Number5636 : StressfulInteger {
     val b = Number5634()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5637 : StressfulInteger {
 
   companion object {
@@ -20402,8 +20403,8 @@ class Number5637 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20413,9 +20414,9 @@ class Number5637 : StressfulInteger {
     val b = Number5635()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5638 : StressfulInteger {
 
   companion object {
@@ -20434,8 +20435,8 @@ class Number5638 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20445,9 +20446,9 @@ class Number5638 : StressfulInteger {
     val b = Number5636()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5639 : StressfulInteger {
 
   companion object {
@@ -20466,8 +20467,8 @@ class Number5639 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20477,9 +20478,9 @@ class Number5639 : StressfulInteger {
     val b = Number5637()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5640 : StressfulInteger {
 
   companion object {
@@ -20498,8 +20499,8 @@ class Number5640 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20509,9 +20510,9 @@ class Number5640 : StressfulInteger {
     val b = Number5638()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5641 : StressfulInteger {
 
   companion object {
@@ -20530,8 +20531,8 @@ class Number5641 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20541,9 +20542,9 @@ class Number5641 : StressfulInteger {
     val b = Number5639()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5642 : StressfulInteger {
 
   companion object {
@@ -20562,8 +20563,8 @@ class Number5642 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20573,9 +20574,9 @@ class Number5642 : StressfulInteger {
     val b = Number5640()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5643 : StressfulInteger {
 
   companion object {
@@ -20594,8 +20595,8 @@ class Number5643 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20605,9 +20606,9 @@ class Number5643 : StressfulInteger {
     val b = Number5641()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5644 : StressfulInteger {
 
   companion object {
@@ -20626,8 +20627,8 @@ class Number5644 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20637,9 +20638,9 @@ class Number5644 : StressfulInteger {
     val b = Number5642()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5645 : StressfulInteger {
 
   companion object {
@@ -20658,8 +20659,8 @@ class Number5645 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20669,9 +20670,9 @@ class Number5645 : StressfulInteger {
     val b = Number5643()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5646 : StressfulInteger {
 
   companion object {
@@ -20690,8 +20691,8 @@ class Number5646 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20701,9 +20702,9 @@ class Number5646 : StressfulInteger {
     val b = Number5644()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5647 : StressfulInteger {
 
   companion object {
@@ -20722,8 +20723,8 @@ class Number5647 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20733,9 +20734,9 @@ class Number5647 : StressfulInteger {
     val b = Number5645()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5648 : StressfulInteger {
 
   companion object {
@@ -20754,8 +20755,8 @@ class Number5648 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20765,9 +20766,9 @@ class Number5648 : StressfulInteger {
     val b = Number5646()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5649 : StressfulInteger {
 
   companion object {
@@ -20786,8 +20787,8 @@ class Number5649 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20797,9 +20798,9 @@ class Number5649 : StressfulInteger {
     val b = Number5647()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5650 : StressfulInteger {
 
   companion object {
@@ -20818,8 +20819,8 @@ class Number5650 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20829,9 +20830,9 @@ class Number5650 : StressfulInteger {
     val b = Number5648()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5651 : StressfulInteger {
 
   companion object {
@@ -20850,8 +20851,8 @@ class Number5651 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20861,9 +20862,9 @@ class Number5651 : StressfulInteger {
     val b = Number5649()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5652 : StressfulInteger {
 
   companion object {
@@ -20882,8 +20883,8 @@ class Number5652 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20893,9 +20894,9 @@ class Number5652 : StressfulInteger {
     val b = Number5650()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5653 : StressfulInteger {
 
   companion object {
@@ -20914,8 +20915,8 @@ class Number5653 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20925,9 +20926,9 @@ class Number5653 : StressfulInteger {
     val b = Number5651()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5654 : StressfulInteger {
 
   companion object {
@@ -20946,8 +20947,8 @@ class Number5654 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20957,9 +20958,9 @@ class Number5654 : StressfulInteger {
     val b = Number5652()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5655 : StressfulInteger {
 
   companion object {
@@ -20978,8 +20979,8 @@ class Number5655 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -20989,9 +20990,9 @@ class Number5655 : StressfulInteger {
     val b = Number5653()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5656 : StressfulInteger {
 
   companion object {
@@ -21010,8 +21011,8 @@ class Number5656 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21021,9 +21022,9 @@ class Number5656 : StressfulInteger {
     val b = Number5654()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5657 : StressfulInteger {
 
   companion object {
@@ -21042,8 +21043,8 @@ class Number5657 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21053,9 +21054,9 @@ class Number5657 : StressfulInteger {
     val b = Number5655()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5658 : StressfulInteger {
 
   companion object {
@@ -21074,8 +21075,8 @@ class Number5658 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21085,9 +21086,9 @@ class Number5658 : StressfulInteger {
     val b = Number5656()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5659 : StressfulInteger {
 
   companion object {
@@ -21106,8 +21107,8 @@ class Number5659 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21117,9 +21118,9 @@ class Number5659 : StressfulInteger {
     val b = Number5657()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5660 : StressfulInteger {
 
   companion object {
@@ -21138,8 +21139,8 @@ class Number5660 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21149,9 +21150,9 @@ class Number5660 : StressfulInteger {
     val b = Number5658()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5661 : StressfulInteger {
 
   companion object {
@@ -21170,8 +21171,8 @@ class Number5661 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21181,9 +21182,9 @@ class Number5661 : StressfulInteger {
     val b = Number5659()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5662 : StressfulInteger {
 
   companion object {
@@ -21202,8 +21203,8 @@ class Number5662 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21213,9 +21214,9 @@ class Number5662 : StressfulInteger {
     val b = Number5660()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5663 : StressfulInteger {
 
   companion object {
@@ -21234,8 +21235,8 @@ class Number5663 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21245,9 +21246,9 @@ class Number5663 : StressfulInteger {
     val b = Number5661()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5664 : StressfulInteger {
 
   companion object {
@@ -21266,8 +21267,8 @@ class Number5664 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21277,9 +21278,9 @@ class Number5664 : StressfulInteger {
     val b = Number5662()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5665 : StressfulInteger {
 
   companion object {
@@ -21298,8 +21299,8 @@ class Number5665 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21309,9 +21310,9 @@ class Number5665 : StressfulInteger {
     val b = Number5663()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5666 : StressfulInteger {
 
   companion object {
@@ -21330,8 +21331,8 @@ class Number5666 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21341,9 +21342,9 @@ class Number5666 : StressfulInteger {
     val b = Number5664()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5667 : StressfulInteger {
 
   companion object {
@@ -21362,8 +21363,8 @@ class Number5667 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21373,9 +21374,9 @@ class Number5667 : StressfulInteger {
     val b = Number5665()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5668 : StressfulInteger {
 
   companion object {
@@ -21394,8 +21395,8 @@ class Number5668 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21405,9 +21406,9 @@ class Number5668 : StressfulInteger {
     val b = Number5666()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5669 : StressfulInteger {
 
   companion object {
@@ -21426,8 +21427,8 @@ class Number5669 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21437,9 +21438,9 @@ class Number5669 : StressfulInteger {
     val b = Number5667()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5670 : StressfulInteger {
 
   companion object {
@@ -21458,8 +21459,8 @@ class Number5670 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21469,9 +21470,9 @@ class Number5670 : StressfulInteger {
     val b = Number5668()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5671 : StressfulInteger {
 
   companion object {
@@ -21490,8 +21491,8 @@ class Number5671 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21501,9 +21502,9 @@ class Number5671 : StressfulInteger {
     val b = Number5669()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5672 : StressfulInteger {
 
   companion object {
@@ -21522,8 +21523,8 @@ class Number5672 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21533,9 +21534,9 @@ class Number5672 : StressfulInteger {
     val b = Number5670()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5673 : StressfulInteger {
 
   companion object {
@@ -21554,8 +21555,8 @@ class Number5673 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21565,9 +21566,9 @@ class Number5673 : StressfulInteger {
     val b = Number5671()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5674 : StressfulInteger {
 
   companion object {
@@ -21586,8 +21587,8 @@ class Number5674 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21597,9 +21598,9 @@ class Number5674 : StressfulInteger {
     val b = Number5672()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5675 : StressfulInteger {
 
   companion object {
@@ -21618,8 +21619,8 @@ class Number5675 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21629,9 +21630,9 @@ class Number5675 : StressfulInteger {
     val b = Number5673()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5676 : StressfulInteger {
 
   companion object {
@@ -21650,8 +21651,8 @@ class Number5676 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21661,9 +21662,9 @@ class Number5676 : StressfulInteger {
     val b = Number5674()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5677 : StressfulInteger {
 
   companion object {
@@ -21682,8 +21683,8 @@ class Number5677 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21693,9 +21694,9 @@ class Number5677 : StressfulInteger {
     val b = Number5675()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5678 : StressfulInteger {
 
   companion object {
@@ -21714,8 +21715,8 @@ class Number5678 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21725,9 +21726,9 @@ class Number5678 : StressfulInteger {
     val b = Number5676()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5679 : StressfulInteger {
 
   companion object {
@@ -21746,8 +21747,8 @@ class Number5679 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21757,9 +21758,9 @@ class Number5679 : StressfulInteger {
     val b = Number5677()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5680 : StressfulInteger {
 
   companion object {
@@ -21778,8 +21779,8 @@ class Number5680 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21789,9 +21790,9 @@ class Number5680 : StressfulInteger {
     val b = Number5678()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5681 : StressfulInteger {
 
   companion object {
@@ -21810,8 +21811,8 @@ class Number5681 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21821,9 +21822,9 @@ class Number5681 : StressfulInteger {
     val b = Number5679()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5682 : StressfulInteger {
 
   companion object {
@@ -21842,8 +21843,8 @@ class Number5682 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21853,9 +21854,9 @@ class Number5682 : StressfulInteger {
     val b = Number5680()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5683 : StressfulInteger {
 
   companion object {
@@ -21874,8 +21875,8 @@ class Number5683 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21885,9 +21886,9 @@ class Number5683 : StressfulInteger {
     val b = Number5681()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5684 : StressfulInteger {
 
   companion object {
@@ -21906,8 +21907,8 @@ class Number5684 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21917,9 +21918,9 @@ class Number5684 : StressfulInteger {
     val b = Number5682()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5685 : StressfulInteger {
 
   companion object {
@@ -21938,8 +21939,8 @@ class Number5685 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21949,9 +21950,9 @@ class Number5685 : StressfulInteger {
     val b = Number5683()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5686 : StressfulInteger {
 
   companion object {
@@ -21970,8 +21971,8 @@ class Number5686 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -21981,9 +21982,9 @@ class Number5686 : StressfulInteger {
     val b = Number5684()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5687 : StressfulInteger {
 
   companion object {
@@ -22002,8 +22003,8 @@ class Number5687 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22013,9 +22014,9 @@ class Number5687 : StressfulInteger {
     val b = Number5685()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5688 : StressfulInteger {
 
   companion object {
@@ -22034,8 +22035,8 @@ class Number5688 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22045,9 +22046,9 @@ class Number5688 : StressfulInteger {
     val b = Number5686()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5689 : StressfulInteger {
 
   companion object {
@@ -22066,8 +22067,8 @@ class Number5689 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22077,9 +22078,9 @@ class Number5689 : StressfulInteger {
     val b = Number5687()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5690 : StressfulInteger {
 
   companion object {
@@ -22098,8 +22099,8 @@ class Number5690 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22109,9 +22110,9 @@ class Number5690 : StressfulInteger {
     val b = Number5688()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5691 : StressfulInteger {
 
   companion object {
@@ -22130,8 +22131,8 @@ class Number5691 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22141,9 +22142,9 @@ class Number5691 : StressfulInteger {
     val b = Number5689()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5692 : StressfulInteger {
 
   companion object {
@@ -22162,8 +22163,8 @@ class Number5692 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22173,9 +22174,9 @@ class Number5692 : StressfulInteger {
     val b = Number5690()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5693 : StressfulInteger {
 
   companion object {
@@ -22194,8 +22195,8 @@ class Number5693 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22205,9 +22206,9 @@ class Number5693 : StressfulInteger {
     val b = Number5691()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5694 : StressfulInteger {
 
   companion object {
@@ -22226,8 +22227,8 @@ class Number5694 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22237,9 +22238,9 @@ class Number5694 : StressfulInteger {
     val b = Number5692()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5695 : StressfulInteger {
 
   companion object {
@@ -22258,8 +22259,8 @@ class Number5695 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22269,9 +22270,9 @@ class Number5695 : StressfulInteger {
     val b = Number5693()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5696 : StressfulInteger {
 
   companion object {
@@ -22290,8 +22291,8 @@ class Number5696 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22301,9 +22302,9 @@ class Number5696 : StressfulInteger {
     val b = Number5694()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5697 : StressfulInteger {
 
   companion object {
@@ -22322,8 +22323,8 @@ class Number5697 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22333,9 +22334,9 @@ class Number5697 : StressfulInteger {
     val b = Number5695()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5698 : StressfulInteger {
 
   companion object {
@@ -22354,8 +22355,8 @@ class Number5698 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22365,9 +22366,9 @@ class Number5698 : StressfulInteger {
     val b = Number5696()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5699 : StressfulInteger {
 
   companion object {
@@ -22386,8 +22387,8 @@ class Number5699 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22397,9 +22398,9 @@ class Number5699 : StressfulInteger {
     val b = Number5697()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5700 : StressfulInteger {
 
   companion object {
@@ -22418,8 +22419,8 @@ class Number5700 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22429,9 +22430,9 @@ class Number5700 : StressfulInteger {
     val b = Number5698()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5701 : StressfulInteger {
 
   companion object {
@@ -22450,8 +22451,8 @@ class Number5701 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22461,9 +22462,9 @@ class Number5701 : StressfulInteger {
     val b = Number5699()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5702 : StressfulInteger {
 
   companion object {
@@ -22482,8 +22483,8 @@ class Number5702 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22493,9 +22494,9 @@ class Number5702 : StressfulInteger {
     val b = Number5700()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5703 : StressfulInteger {
 
   companion object {
@@ -22514,8 +22515,8 @@ class Number5703 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22525,9 +22526,9 @@ class Number5703 : StressfulInteger {
     val b = Number5701()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5704 : StressfulInteger {
 
   companion object {
@@ -22546,8 +22547,8 @@ class Number5704 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22557,9 +22558,9 @@ class Number5704 : StressfulInteger {
     val b = Number5702()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5705 : StressfulInteger {
 
   companion object {
@@ -22578,8 +22579,8 @@ class Number5705 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22589,9 +22590,9 @@ class Number5705 : StressfulInteger {
     val b = Number5703()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5706 : StressfulInteger {
 
   companion object {
@@ -22610,8 +22611,8 @@ class Number5706 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22621,9 +22622,9 @@ class Number5706 : StressfulInteger {
     val b = Number5704()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5707 : StressfulInteger {
 
   companion object {
@@ -22642,8 +22643,8 @@ class Number5707 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22653,9 +22654,9 @@ class Number5707 : StressfulInteger {
     val b = Number5705()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5708 : StressfulInteger {
 
   companion object {
@@ -22674,8 +22675,8 @@ class Number5708 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22685,9 +22686,9 @@ class Number5708 : StressfulInteger {
     val b = Number5706()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5709 : StressfulInteger {
 
   companion object {
@@ -22706,8 +22707,8 @@ class Number5709 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22717,9 +22718,9 @@ class Number5709 : StressfulInteger {
     val b = Number5707()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5710 : StressfulInteger {
 
   companion object {
@@ -22738,8 +22739,8 @@ class Number5710 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22749,9 +22750,9 @@ class Number5710 : StressfulInteger {
     val b = Number5708()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5711 : StressfulInteger {
 
   companion object {
@@ -22770,8 +22771,8 @@ class Number5711 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22781,9 +22782,9 @@ class Number5711 : StressfulInteger {
     val b = Number5709()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5712 : StressfulInteger {
 
   companion object {
@@ -22802,8 +22803,8 @@ class Number5712 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22813,9 +22814,9 @@ class Number5712 : StressfulInteger {
     val b = Number5710()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5713 : StressfulInteger {
 
   companion object {
@@ -22834,8 +22835,8 @@ class Number5713 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22845,9 +22846,9 @@ class Number5713 : StressfulInteger {
     val b = Number5711()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5714 : StressfulInteger {
 
   companion object {
@@ -22866,8 +22867,8 @@ class Number5714 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22877,9 +22878,9 @@ class Number5714 : StressfulInteger {
     val b = Number5712()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5715 : StressfulInteger {
 
   companion object {
@@ -22898,8 +22899,8 @@ class Number5715 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22909,9 +22910,9 @@ class Number5715 : StressfulInteger {
     val b = Number5713()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5716 : StressfulInteger {
 
   companion object {
@@ -22930,8 +22931,8 @@ class Number5716 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22941,9 +22942,9 @@ class Number5716 : StressfulInteger {
     val b = Number5714()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5717 : StressfulInteger {
 
   companion object {
@@ -22962,8 +22963,8 @@ class Number5717 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -22973,9 +22974,9 @@ class Number5717 : StressfulInteger {
     val b = Number5715()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5718 : StressfulInteger {
 
   companion object {
@@ -22994,8 +22995,8 @@ class Number5718 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23005,9 +23006,9 @@ class Number5718 : StressfulInteger {
     val b = Number5716()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5719 : StressfulInteger {
 
   companion object {
@@ -23026,8 +23027,8 @@ class Number5719 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23037,9 +23038,9 @@ class Number5719 : StressfulInteger {
     val b = Number5717()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5720 : StressfulInteger {
 
   companion object {
@@ -23058,8 +23059,8 @@ class Number5720 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23069,9 +23070,9 @@ class Number5720 : StressfulInteger {
     val b = Number5718()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5721 : StressfulInteger {
 
   companion object {
@@ -23090,8 +23091,8 @@ class Number5721 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23101,9 +23102,9 @@ class Number5721 : StressfulInteger {
     val b = Number5719()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5722 : StressfulInteger {
 
   companion object {
@@ -23122,8 +23123,8 @@ class Number5722 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23133,9 +23134,9 @@ class Number5722 : StressfulInteger {
     val b = Number5720()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5723 : StressfulInteger {
 
   companion object {
@@ -23154,8 +23155,8 @@ class Number5723 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23165,9 +23166,9 @@ class Number5723 : StressfulInteger {
     val b = Number5721()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5724 : StressfulInteger {
 
   companion object {
@@ -23186,8 +23187,8 @@ class Number5724 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23197,9 +23198,9 @@ class Number5724 : StressfulInteger {
     val b = Number5722()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5725 : StressfulInteger {
 
   companion object {
@@ -23218,8 +23219,8 @@ class Number5725 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23229,9 +23230,9 @@ class Number5725 : StressfulInteger {
     val b = Number5723()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5726 : StressfulInteger {
 
   companion object {
@@ -23250,8 +23251,8 @@ class Number5726 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23261,9 +23262,9 @@ class Number5726 : StressfulInteger {
     val b = Number5724()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5727 : StressfulInteger {
 
   companion object {
@@ -23282,8 +23283,8 @@ class Number5727 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23293,9 +23294,9 @@ class Number5727 : StressfulInteger {
     val b = Number5725()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5728 : StressfulInteger {
 
   companion object {
@@ -23314,8 +23315,8 @@ class Number5728 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23325,9 +23326,9 @@ class Number5728 : StressfulInteger {
     val b = Number5726()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5729 : StressfulInteger {
 
   companion object {
@@ -23346,8 +23347,8 @@ class Number5729 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23357,9 +23358,9 @@ class Number5729 : StressfulInteger {
     val b = Number5727()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5730 : StressfulInteger {
 
   companion object {
@@ -23378,8 +23379,8 @@ class Number5730 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23389,9 +23390,9 @@ class Number5730 : StressfulInteger {
     val b = Number5728()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5731 : StressfulInteger {
 
   companion object {
@@ -23410,8 +23411,8 @@ class Number5731 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23421,9 +23422,9 @@ class Number5731 : StressfulInteger {
     val b = Number5729()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5732 : StressfulInteger {
 
   companion object {
@@ -23442,8 +23443,8 @@ class Number5732 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23453,9 +23454,9 @@ class Number5732 : StressfulInteger {
     val b = Number5730()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5733 : StressfulInteger {
 
   companion object {
@@ -23474,8 +23475,8 @@ class Number5733 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23485,9 +23486,9 @@ class Number5733 : StressfulInteger {
     val b = Number5731()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5734 : StressfulInteger {
 
   companion object {
@@ -23506,8 +23507,8 @@ class Number5734 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23517,9 +23518,9 @@ class Number5734 : StressfulInteger {
     val b = Number5732()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5735 : StressfulInteger {
 
   companion object {
@@ -23538,8 +23539,8 @@ class Number5735 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23549,9 +23550,9 @@ class Number5735 : StressfulInteger {
     val b = Number5733()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5736 : StressfulInteger {
 
   companion object {
@@ -23570,8 +23571,8 @@ class Number5736 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23581,9 +23582,9 @@ class Number5736 : StressfulInteger {
     val b = Number5734()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5737 : StressfulInteger {
 
   companion object {
@@ -23602,8 +23603,8 @@ class Number5737 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23613,9 +23614,9 @@ class Number5737 : StressfulInteger {
     val b = Number5735()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5738 : StressfulInteger {
 
   companion object {
@@ -23634,8 +23635,8 @@ class Number5738 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23645,9 +23646,9 @@ class Number5738 : StressfulInteger {
     val b = Number5736()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5739 : StressfulInteger {
 
   companion object {
@@ -23666,8 +23667,8 @@ class Number5739 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23677,9 +23678,9 @@ class Number5739 : StressfulInteger {
     val b = Number5737()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5740 : StressfulInteger {
 
   companion object {
@@ -23698,8 +23699,8 @@ class Number5740 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23709,9 +23710,9 @@ class Number5740 : StressfulInteger {
     val b = Number5738()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5741 : StressfulInteger {
 
   companion object {
@@ -23730,8 +23731,8 @@ class Number5741 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23741,9 +23742,9 @@ class Number5741 : StressfulInteger {
     val b = Number5739()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5742 : StressfulInteger {
 
   companion object {
@@ -23762,8 +23763,8 @@ class Number5742 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23773,9 +23774,9 @@ class Number5742 : StressfulInteger {
     val b = Number5740()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5743 : StressfulInteger {
 
   companion object {
@@ -23794,8 +23795,8 @@ class Number5743 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23805,9 +23806,9 @@ class Number5743 : StressfulInteger {
     val b = Number5741()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5744 : StressfulInteger {
 
   companion object {
@@ -23826,8 +23827,8 @@ class Number5744 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23837,9 +23838,9 @@ class Number5744 : StressfulInteger {
     val b = Number5742()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5745 : StressfulInteger {
 
   companion object {
@@ -23858,8 +23859,8 @@ class Number5745 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23869,9 +23870,9 @@ class Number5745 : StressfulInteger {
     val b = Number5743()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5746 : StressfulInteger {
 
   companion object {
@@ -23890,8 +23891,8 @@ class Number5746 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23901,9 +23902,9 @@ class Number5746 : StressfulInteger {
     val b = Number5744()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5747 : StressfulInteger {
 
   companion object {
@@ -23922,8 +23923,8 @@ class Number5747 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23933,9 +23934,9 @@ class Number5747 : StressfulInteger {
     val b = Number5745()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5748 : StressfulInteger {
 
   companion object {
@@ -23954,8 +23955,8 @@ class Number5748 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23965,9 +23966,9 @@ class Number5748 : StressfulInteger {
     val b = Number5746()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5749 : StressfulInteger {
 
   companion object {
@@ -23986,8 +23987,8 @@ class Number5749 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -23997,9 +23998,9 @@ class Number5749 : StressfulInteger {
     val b = Number5747()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5750 : StressfulInteger {
 
   companion object {
@@ -24018,8 +24019,8 @@ class Number5750 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24029,9 +24030,9 @@ class Number5750 : StressfulInteger {
     val b = Number5748()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5751 : StressfulInteger {
 
   companion object {
@@ -24050,8 +24051,8 @@ class Number5751 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24061,9 +24062,9 @@ class Number5751 : StressfulInteger {
     val b = Number5749()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5752 : StressfulInteger {
 
   companion object {
@@ -24082,8 +24083,8 @@ class Number5752 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24093,9 +24094,9 @@ class Number5752 : StressfulInteger {
     val b = Number5750()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5753 : StressfulInteger {
 
   companion object {
@@ -24114,8 +24115,8 @@ class Number5753 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24125,9 +24126,9 @@ class Number5753 : StressfulInteger {
     val b = Number5751()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5754 : StressfulInteger {
 
   companion object {
@@ -24146,8 +24147,8 @@ class Number5754 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24157,9 +24158,9 @@ class Number5754 : StressfulInteger {
     val b = Number5752()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5755 : StressfulInteger {
 
   companion object {
@@ -24178,8 +24179,8 @@ class Number5755 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24189,9 +24190,9 @@ class Number5755 : StressfulInteger {
     val b = Number5753()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5756 : StressfulInteger {
 
   companion object {
@@ -24210,8 +24211,8 @@ class Number5756 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24221,9 +24222,9 @@ class Number5756 : StressfulInteger {
     val b = Number5754()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5757 : StressfulInteger {
 
   companion object {
@@ -24242,8 +24243,8 @@ class Number5757 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24253,9 +24254,9 @@ class Number5757 : StressfulInteger {
     val b = Number5755()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5758 : StressfulInteger {
 
   companion object {
@@ -24274,8 +24275,8 @@ class Number5758 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24285,9 +24286,9 @@ class Number5758 : StressfulInteger {
     val b = Number5756()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5759 : StressfulInteger {
 
   companion object {
@@ -24306,8 +24307,8 @@ class Number5759 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24317,9 +24318,9 @@ class Number5759 : StressfulInteger {
     val b = Number5757()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5760 : StressfulInteger {
 
   companion object {
@@ -24338,8 +24339,8 @@ class Number5760 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24349,9 +24350,9 @@ class Number5760 : StressfulInteger {
     val b = Number5758()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5761 : StressfulInteger {
 
   companion object {
@@ -24370,8 +24371,8 @@ class Number5761 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24381,9 +24382,9 @@ class Number5761 : StressfulInteger {
     val b = Number5759()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5762 : StressfulInteger {
 
   companion object {
@@ -24402,8 +24403,8 @@ class Number5762 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24413,9 +24414,9 @@ class Number5762 : StressfulInteger {
     val b = Number5760()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5763 : StressfulInteger {
 
   companion object {
@@ -24434,8 +24435,8 @@ class Number5763 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24445,9 +24446,9 @@ class Number5763 : StressfulInteger {
     val b = Number5761()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5764 : StressfulInteger {
 
   companion object {
@@ -24466,8 +24467,8 @@ class Number5764 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24477,9 +24478,9 @@ class Number5764 : StressfulInteger {
     val b = Number5762()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5765 : StressfulInteger {
 
   companion object {
@@ -24498,8 +24499,8 @@ class Number5765 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24509,9 +24510,9 @@ class Number5765 : StressfulInteger {
     val b = Number5763()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5766 : StressfulInteger {
 
   companion object {
@@ -24530,8 +24531,8 @@ class Number5766 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24541,9 +24542,9 @@ class Number5766 : StressfulInteger {
     val b = Number5764()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5767 : StressfulInteger {
 
   companion object {
@@ -24562,8 +24563,8 @@ class Number5767 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24573,9 +24574,9 @@ class Number5767 : StressfulInteger {
     val b = Number5765()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5768 : StressfulInteger {
 
   companion object {
@@ -24594,8 +24595,8 @@ class Number5768 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24605,9 +24606,9 @@ class Number5768 : StressfulInteger {
     val b = Number5766()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5769 : StressfulInteger {
 
   companion object {
@@ -24626,8 +24627,8 @@ class Number5769 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24637,9 +24638,9 @@ class Number5769 : StressfulInteger {
     val b = Number5767()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5770 : StressfulInteger {
 
   companion object {
@@ -24658,8 +24659,8 @@ class Number5770 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24669,9 +24670,9 @@ class Number5770 : StressfulInteger {
     val b = Number5768()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5771 : StressfulInteger {
 
   companion object {
@@ -24690,8 +24691,8 @@ class Number5771 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24701,9 +24702,9 @@ class Number5771 : StressfulInteger {
     val b = Number5769()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5772 : StressfulInteger {
 
   companion object {
@@ -24722,8 +24723,8 @@ class Number5772 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24733,9 +24734,9 @@ class Number5772 : StressfulInteger {
     val b = Number5770()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5773 : StressfulInteger {
 
   companion object {
@@ -24754,8 +24755,8 @@ class Number5773 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24765,9 +24766,9 @@ class Number5773 : StressfulInteger {
     val b = Number5771()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5774 : StressfulInteger {
 
   companion object {
@@ -24786,8 +24787,8 @@ class Number5774 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24797,9 +24798,9 @@ class Number5774 : StressfulInteger {
     val b = Number5772()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5775 : StressfulInteger {
 
   companion object {
@@ -24818,8 +24819,8 @@ class Number5775 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24829,9 +24830,9 @@ class Number5775 : StressfulInteger {
     val b = Number5773()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5776 : StressfulInteger {
 
   companion object {
@@ -24850,8 +24851,8 @@ class Number5776 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24861,9 +24862,9 @@ class Number5776 : StressfulInteger {
     val b = Number5774()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5777 : StressfulInteger {
 
   companion object {
@@ -24882,8 +24883,8 @@ class Number5777 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24893,9 +24894,9 @@ class Number5777 : StressfulInteger {
     val b = Number5775()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5778 : StressfulInteger {
 
   companion object {
@@ -24914,8 +24915,8 @@ class Number5778 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24925,9 +24926,9 @@ class Number5778 : StressfulInteger {
     val b = Number5776()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5779 : StressfulInteger {
 
   companion object {
@@ -24946,8 +24947,8 @@ class Number5779 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24957,9 +24958,9 @@ class Number5779 : StressfulInteger {
     val b = Number5777()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5780 : StressfulInteger {
 
   companion object {
@@ -24978,8 +24979,8 @@ class Number5780 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -24989,9 +24990,9 @@ class Number5780 : StressfulInteger {
     val b = Number5778()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5781 : StressfulInteger {
 
   companion object {
@@ -25010,8 +25011,8 @@ class Number5781 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25021,9 +25022,9 @@ class Number5781 : StressfulInteger {
     val b = Number5779()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5782 : StressfulInteger {
 
   companion object {
@@ -25042,8 +25043,8 @@ class Number5782 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25053,9 +25054,9 @@ class Number5782 : StressfulInteger {
     val b = Number5780()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5783 : StressfulInteger {
 
   companion object {
@@ -25074,8 +25075,8 @@ class Number5783 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25085,9 +25086,9 @@ class Number5783 : StressfulInteger {
     val b = Number5781()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5784 : StressfulInteger {
 
   companion object {
@@ -25106,8 +25107,8 @@ class Number5784 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25117,9 +25118,9 @@ class Number5784 : StressfulInteger {
     val b = Number5782()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5785 : StressfulInteger {
 
   companion object {
@@ -25138,8 +25139,8 @@ class Number5785 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25149,9 +25150,9 @@ class Number5785 : StressfulInteger {
     val b = Number5783()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5786 : StressfulInteger {
 
   companion object {
@@ -25170,8 +25171,8 @@ class Number5786 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25181,9 +25182,9 @@ class Number5786 : StressfulInteger {
     val b = Number5784()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5787 : StressfulInteger {
 
   companion object {
@@ -25202,8 +25203,8 @@ class Number5787 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25213,9 +25214,9 @@ class Number5787 : StressfulInteger {
     val b = Number5785()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5788 : StressfulInteger {
 
   companion object {
@@ -25234,8 +25235,8 @@ class Number5788 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25245,9 +25246,9 @@ class Number5788 : StressfulInteger {
     val b = Number5786()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5789 : StressfulInteger {
 
   companion object {
@@ -25266,8 +25267,8 @@ class Number5789 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25277,9 +25278,9 @@ class Number5789 : StressfulInteger {
     val b = Number5787()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5790 : StressfulInteger {
 
   companion object {
@@ -25298,8 +25299,8 @@ class Number5790 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25309,9 +25310,9 @@ class Number5790 : StressfulInteger {
     val b = Number5788()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5791 : StressfulInteger {
 
   companion object {
@@ -25330,8 +25331,8 @@ class Number5791 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25341,9 +25342,9 @@ class Number5791 : StressfulInteger {
     val b = Number5789()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5792 : StressfulInteger {
 
   companion object {
@@ -25362,8 +25363,8 @@ class Number5792 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25373,9 +25374,9 @@ class Number5792 : StressfulInteger {
     val b = Number5790()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5793 : StressfulInteger {
 
   companion object {
@@ -25394,8 +25395,8 @@ class Number5793 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25405,9 +25406,9 @@ class Number5793 : StressfulInteger {
     val b = Number5791()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5794 : StressfulInteger {
 
   companion object {
@@ -25426,8 +25427,8 @@ class Number5794 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25437,9 +25438,9 @@ class Number5794 : StressfulInteger {
     val b = Number5792()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5795 : StressfulInteger {
 
   companion object {
@@ -25458,8 +25459,8 @@ class Number5795 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25469,9 +25470,9 @@ class Number5795 : StressfulInteger {
     val b = Number5793()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5796 : StressfulInteger {
 
   companion object {
@@ -25490,8 +25491,8 @@ class Number5796 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25501,9 +25502,9 @@ class Number5796 : StressfulInteger {
     val b = Number5794()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5797 : StressfulInteger {
 
   companion object {
@@ -25522,8 +25523,8 @@ class Number5797 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25533,9 +25534,9 @@ class Number5797 : StressfulInteger {
     val b = Number5795()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5798 : StressfulInteger {
 
   companion object {
@@ -25554,8 +25555,8 @@ class Number5798 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25565,9 +25566,9 @@ class Number5798 : StressfulInteger {
     val b = Number5796()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5799 : StressfulInteger {
 
   companion object {
@@ -25586,8 +25587,8 @@ class Number5799 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25597,9 +25598,9 @@ class Number5799 : StressfulInteger {
     val b = Number5797()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5800 : StressfulInteger {
 
   companion object {
@@ -25618,8 +25619,8 @@ class Number5800 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25629,9 +25630,9 @@ class Number5800 : StressfulInteger {
     val b = Number5798()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5801 : StressfulInteger {
 
   companion object {
@@ -25650,8 +25651,8 @@ class Number5801 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25661,9 +25662,9 @@ class Number5801 : StressfulInteger {
     val b = Number5799()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5802 : StressfulInteger {
 
   companion object {
@@ -25682,8 +25683,8 @@ class Number5802 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25693,9 +25694,9 @@ class Number5802 : StressfulInteger {
     val b = Number5800()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5803 : StressfulInteger {
 
   companion object {
@@ -25714,8 +25715,8 @@ class Number5803 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25725,9 +25726,9 @@ class Number5803 : StressfulInteger {
     val b = Number5801()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5804 : StressfulInteger {
 
   companion object {
@@ -25746,8 +25747,8 @@ class Number5804 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25757,9 +25758,9 @@ class Number5804 : StressfulInteger {
     val b = Number5802()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5805 : StressfulInteger {
 
   companion object {
@@ -25778,8 +25779,8 @@ class Number5805 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25789,9 +25790,9 @@ class Number5805 : StressfulInteger {
     val b = Number5803()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5806 : StressfulInteger {
 
   companion object {
@@ -25810,8 +25811,8 @@ class Number5806 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25821,9 +25822,9 @@ class Number5806 : StressfulInteger {
     val b = Number5804()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5807 : StressfulInteger {
 
   companion object {
@@ -25842,8 +25843,8 @@ class Number5807 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25853,9 +25854,9 @@ class Number5807 : StressfulInteger {
     val b = Number5805()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5808 : StressfulInteger {
 
   companion object {
@@ -25874,8 +25875,8 @@ class Number5808 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25885,9 +25886,9 @@ class Number5808 : StressfulInteger {
     val b = Number5806()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5809 : StressfulInteger {
 
   companion object {
@@ -25906,8 +25907,8 @@ class Number5809 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25917,9 +25918,9 @@ class Number5809 : StressfulInteger {
     val b = Number5807()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5810 : StressfulInteger {
 
   companion object {
@@ -25938,8 +25939,8 @@ class Number5810 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25949,9 +25950,9 @@ class Number5810 : StressfulInteger {
     val b = Number5808()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5811 : StressfulInteger {
 
   companion object {
@@ -25970,8 +25971,8 @@ class Number5811 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -25981,9 +25982,9 @@ class Number5811 : StressfulInteger {
     val b = Number5809()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5812 : StressfulInteger {
 
   companion object {
@@ -26002,8 +26003,8 @@ class Number5812 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26013,9 +26014,9 @@ class Number5812 : StressfulInteger {
     val b = Number5810()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5813 : StressfulInteger {
 
   companion object {
@@ -26034,8 +26035,8 @@ class Number5813 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26045,9 +26046,9 @@ class Number5813 : StressfulInteger {
     val b = Number5811()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5814 : StressfulInteger {
 
   companion object {
@@ -26066,8 +26067,8 @@ class Number5814 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26077,9 +26078,9 @@ class Number5814 : StressfulInteger {
     val b = Number5812()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5815 : StressfulInteger {
 
   companion object {
@@ -26098,8 +26099,8 @@ class Number5815 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26109,9 +26110,9 @@ class Number5815 : StressfulInteger {
     val b = Number5813()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5816 : StressfulInteger {
 
   companion object {
@@ -26130,8 +26131,8 @@ class Number5816 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26141,9 +26142,9 @@ class Number5816 : StressfulInteger {
     val b = Number5814()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5817 : StressfulInteger {
 
   companion object {
@@ -26162,8 +26163,8 @@ class Number5817 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26173,9 +26174,9 @@ class Number5817 : StressfulInteger {
     val b = Number5815()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5818 : StressfulInteger {
 
   companion object {
@@ -26194,8 +26195,8 @@ class Number5818 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26205,9 +26206,9 @@ class Number5818 : StressfulInteger {
     val b = Number5816()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5819 : StressfulInteger {
 
   companion object {
@@ -26226,8 +26227,8 @@ class Number5819 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26237,9 +26238,9 @@ class Number5819 : StressfulInteger {
     val b = Number5817()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5820 : StressfulInteger {
 
   companion object {
@@ -26258,8 +26259,8 @@ class Number5820 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26269,9 +26270,9 @@ class Number5820 : StressfulInteger {
     val b = Number5818()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5821 : StressfulInteger {
 
   companion object {
@@ -26290,8 +26291,8 @@ class Number5821 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26301,9 +26302,9 @@ class Number5821 : StressfulInteger {
     val b = Number5819()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5822 : StressfulInteger {
 
   companion object {
@@ -26322,8 +26323,8 @@ class Number5822 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26333,9 +26334,9 @@ class Number5822 : StressfulInteger {
     val b = Number5820()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5823 : StressfulInteger {
 
   companion object {
@@ -26354,8 +26355,8 @@ class Number5823 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26365,9 +26366,9 @@ class Number5823 : StressfulInteger {
     val b = Number5821()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5824 : StressfulInteger {
 
   companion object {
@@ -26386,8 +26387,8 @@ class Number5824 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26397,9 +26398,9 @@ class Number5824 : StressfulInteger {
     val b = Number5822()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5825 : StressfulInteger {
 
   companion object {
@@ -26418,8 +26419,8 @@ class Number5825 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26429,9 +26430,9 @@ class Number5825 : StressfulInteger {
     val b = Number5823()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5826 : StressfulInteger {
 
   companion object {
@@ -26450,8 +26451,8 @@ class Number5826 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26461,9 +26462,9 @@ class Number5826 : StressfulInteger {
     val b = Number5824()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5827 : StressfulInteger {
 
   companion object {
@@ -26482,8 +26483,8 @@ class Number5827 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26493,9 +26494,9 @@ class Number5827 : StressfulInteger {
     val b = Number5825()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5828 : StressfulInteger {
 
   companion object {
@@ -26514,8 +26515,8 @@ class Number5828 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26525,9 +26526,9 @@ class Number5828 : StressfulInteger {
     val b = Number5826()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5829 : StressfulInteger {
 
   companion object {
@@ -26546,8 +26547,8 @@ class Number5829 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26557,9 +26558,9 @@ class Number5829 : StressfulInteger {
     val b = Number5827()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5830 : StressfulInteger {
 
   companion object {
@@ -26578,8 +26579,8 @@ class Number5830 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26589,9 +26590,9 @@ class Number5830 : StressfulInteger {
     val b = Number5828()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5831 : StressfulInteger {
 
   companion object {
@@ -26610,8 +26611,8 @@ class Number5831 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26621,9 +26622,9 @@ class Number5831 : StressfulInteger {
     val b = Number5829()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5832 : StressfulInteger {
 
   companion object {
@@ -26642,8 +26643,8 @@ class Number5832 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26653,9 +26654,9 @@ class Number5832 : StressfulInteger {
     val b = Number5830()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5833 : StressfulInteger {
 
   companion object {
@@ -26674,8 +26675,8 @@ class Number5833 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26685,9 +26686,9 @@ class Number5833 : StressfulInteger {
     val b = Number5831()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5834 : StressfulInteger {
 
   companion object {
@@ -26706,8 +26707,8 @@ class Number5834 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26717,9 +26718,9 @@ class Number5834 : StressfulInteger {
     val b = Number5832()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5835 : StressfulInteger {
 
   companion object {
@@ -26738,8 +26739,8 @@ class Number5835 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26749,9 +26750,9 @@ class Number5835 : StressfulInteger {
     val b = Number5833()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5836 : StressfulInteger {
 
   companion object {
@@ -26770,8 +26771,8 @@ class Number5836 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26781,9 +26782,9 @@ class Number5836 : StressfulInteger {
     val b = Number5834()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5837 : StressfulInteger {
 
   companion object {
@@ -26802,8 +26803,8 @@ class Number5837 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26813,9 +26814,9 @@ class Number5837 : StressfulInteger {
     val b = Number5835()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5838 : StressfulInteger {
 
   companion object {
@@ -26834,8 +26835,8 @@ class Number5838 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26845,9 +26846,9 @@ class Number5838 : StressfulInteger {
     val b = Number5836()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5839 : StressfulInteger {
 
   companion object {
@@ -26866,8 +26867,8 @@ class Number5839 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26877,9 +26878,9 @@ class Number5839 : StressfulInteger {
     val b = Number5837()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5840 : StressfulInteger {
 
   companion object {
@@ -26898,8 +26899,8 @@ class Number5840 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26909,9 +26910,9 @@ class Number5840 : StressfulInteger {
     val b = Number5838()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5841 : StressfulInteger {
 
   companion object {
@@ -26930,8 +26931,8 @@ class Number5841 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26941,9 +26942,9 @@ class Number5841 : StressfulInteger {
     val b = Number5839()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5842 : StressfulInteger {
 
   companion object {
@@ -26962,8 +26963,8 @@ class Number5842 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -26973,9 +26974,9 @@ class Number5842 : StressfulInteger {
     val b = Number5840()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5843 : StressfulInteger {
 
   companion object {
@@ -26994,8 +26995,8 @@ class Number5843 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27005,9 +27006,9 @@ class Number5843 : StressfulInteger {
     val b = Number5841()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5844 : StressfulInteger {
 
   companion object {
@@ -27026,8 +27027,8 @@ class Number5844 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27037,9 +27038,9 @@ class Number5844 : StressfulInteger {
     val b = Number5842()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5845 : StressfulInteger {
 
   companion object {
@@ -27058,8 +27059,8 @@ class Number5845 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27069,9 +27070,9 @@ class Number5845 : StressfulInteger {
     val b = Number5843()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5846 : StressfulInteger {
 
   companion object {
@@ -27090,8 +27091,8 @@ class Number5846 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27101,9 +27102,9 @@ class Number5846 : StressfulInteger {
     val b = Number5844()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5847 : StressfulInteger {
 
   companion object {
@@ -27122,8 +27123,8 @@ class Number5847 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27133,9 +27134,9 @@ class Number5847 : StressfulInteger {
     val b = Number5845()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5848 : StressfulInteger {
 
   companion object {
@@ -27154,8 +27155,8 @@ class Number5848 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27165,9 +27166,9 @@ class Number5848 : StressfulInteger {
     val b = Number5846()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5849 : StressfulInteger {
 
   companion object {
@@ -27186,8 +27187,8 @@ class Number5849 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27197,9 +27198,9 @@ class Number5849 : StressfulInteger {
     val b = Number5847()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5850 : StressfulInteger {
 
   companion object {
@@ -27218,8 +27219,8 @@ class Number5850 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27229,9 +27230,9 @@ class Number5850 : StressfulInteger {
     val b = Number5848()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5851 : StressfulInteger {
 
   companion object {
@@ -27250,8 +27251,8 @@ class Number5851 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27261,9 +27262,9 @@ class Number5851 : StressfulInteger {
     val b = Number5849()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5852 : StressfulInteger {
 
   companion object {
@@ -27282,8 +27283,8 @@ class Number5852 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27293,9 +27294,9 @@ class Number5852 : StressfulInteger {
     val b = Number5850()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5853 : StressfulInteger {
 
   companion object {
@@ -27314,8 +27315,8 @@ class Number5853 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27325,9 +27326,9 @@ class Number5853 : StressfulInteger {
     val b = Number5851()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5854 : StressfulInteger {
 
   companion object {
@@ -27346,8 +27347,8 @@ class Number5854 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27357,9 +27358,9 @@ class Number5854 : StressfulInteger {
     val b = Number5852()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5855 : StressfulInteger {
 
   companion object {
@@ -27378,8 +27379,8 @@ class Number5855 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27389,9 +27390,9 @@ class Number5855 : StressfulInteger {
     val b = Number5853()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5856 : StressfulInteger {
 
   companion object {
@@ -27410,8 +27411,8 @@ class Number5856 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27421,9 +27422,9 @@ class Number5856 : StressfulInteger {
     val b = Number5854()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5857 : StressfulInteger {
 
   companion object {
@@ -27442,8 +27443,8 @@ class Number5857 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27453,9 +27454,9 @@ class Number5857 : StressfulInteger {
     val b = Number5855()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5858 : StressfulInteger {
 
   companion object {
@@ -27474,8 +27475,8 @@ class Number5858 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27485,9 +27486,9 @@ class Number5858 : StressfulInteger {
     val b = Number5856()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5859 : StressfulInteger {
 
   companion object {
@@ -27506,8 +27507,8 @@ class Number5859 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27517,9 +27518,9 @@ class Number5859 : StressfulInteger {
     val b = Number5857()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5860 : StressfulInteger {
 
   companion object {
@@ -27538,8 +27539,8 @@ class Number5860 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27549,9 +27550,9 @@ class Number5860 : StressfulInteger {
     val b = Number5858()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5861 : StressfulInteger {
 
   companion object {
@@ -27570,8 +27571,8 @@ class Number5861 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27581,9 +27582,9 @@ class Number5861 : StressfulInteger {
     val b = Number5859()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5862 : StressfulInteger {
 
   companion object {
@@ -27602,8 +27603,8 @@ class Number5862 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27613,9 +27614,9 @@ class Number5862 : StressfulInteger {
     val b = Number5860()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5863 : StressfulInteger {
 
   companion object {
@@ -27634,8 +27635,8 @@ class Number5863 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27645,9 +27646,9 @@ class Number5863 : StressfulInteger {
     val b = Number5861()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5864 : StressfulInteger {
 
   companion object {
@@ -27666,8 +27667,8 @@ class Number5864 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27677,9 +27678,9 @@ class Number5864 : StressfulInteger {
     val b = Number5862()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5865 : StressfulInteger {
 
   companion object {
@@ -27698,8 +27699,8 @@ class Number5865 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27709,9 +27710,9 @@ class Number5865 : StressfulInteger {
     val b = Number5863()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5866 : StressfulInteger {
 
   companion object {
@@ -27730,8 +27731,8 @@ class Number5866 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27741,9 +27742,9 @@ class Number5866 : StressfulInteger {
     val b = Number5864()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5867 : StressfulInteger {
 
   companion object {
@@ -27762,8 +27763,8 @@ class Number5867 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27773,9 +27774,9 @@ class Number5867 : StressfulInteger {
     val b = Number5865()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5868 : StressfulInteger {
 
   companion object {
@@ -27794,8 +27795,8 @@ class Number5868 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27805,9 +27806,9 @@ class Number5868 : StressfulInteger {
     val b = Number5866()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5869 : StressfulInteger {
 
   companion object {
@@ -27826,8 +27827,8 @@ class Number5869 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27837,9 +27838,9 @@ class Number5869 : StressfulInteger {
     val b = Number5867()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5870 : StressfulInteger {
 
   companion object {
@@ -27858,8 +27859,8 @@ class Number5870 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27869,9 +27870,9 @@ class Number5870 : StressfulInteger {
     val b = Number5868()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5871 : StressfulInteger {
 
   companion object {
@@ -27890,8 +27891,8 @@ class Number5871 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27901,9 +27902,9 @@ class Number5871 : StressfulInteger {
     val b = Number5869()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5872 : StressfulInteger {
 
   companion object {
@@ -27922,8 +27923,8 @@ class Number5872 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27933,9 +27934,9 @@ class Number5872 : StressfulInteger {
     val b = Number5870()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5873 : StressfulInteger {
 
   companion object {
@@ -27954,8 +27955,8 @@ class Number5873 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27965,9 +27966,9 @@ class Number5873 : StressfulInteger {
     val b = Number5871()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5874 : StressfulInteger {
 
   companion object {
@@ -27986,8 +27987,8 @@ class Number5874 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -27997,9 +27998,9 @@ class Number5874 : StressfulInteger {
     val b = Number5872()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5875 : StressfulInteger {
 
   companion object {
@@ -28018,8 +28019,8 @@ class Number5875 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28029,9 +28030,9 @@ class Number5875 : StressfulInteger {
     val b = Number5873()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5876 : StressfulInteger {
 
   companion object {
@@ -28050,8 +28051,8 @@ class Number5876 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28061,9 +28062,9 @@ class Number5876 : StressfulInteger {
     val b = Number5874()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5877 : StressfulInteger {
 
   companion object {
@@ -28082,8 +28083,8 @@ class Number5877 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28093,9 +28094,9 @@ class Number5877 : StressfulInteger {
     val b = Number5875()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5878 : StressfulInteger {
 
   companion object {
@@ -28114,8 +28115,8 @@ class Number5878 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28125,9 +28126,9 @@ class Number5878 : StressfulInteger {
     val b = Number5876()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5879 : StressfulInteger {
 
   companion object {
@@ -28146,8 +28147,8 @@ class Number5879 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28157,9 +28158,9 @@ class Number5879 : StressfulInteger {
     val b = Number5877()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5880 : StressfulInteger {
 
   companion object {
@@ -28178,8 +28179,8 @@ class Number5880 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28189,9 +28190,9 @@ class Number5880 : StressfulInteger {
     val b = Number5878()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5881 : StressfulInteger {
 
   companion object {
@@ -28210,8 +28211,8 @@ class Number5881 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28221,9 +28222,9 @@ class Number5881 : StressfulInteger {
     val b = Number5879()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5882 : StressfulInteger {
 
   companion object {
@@ -28242,8 +28243,8 @@ class Number5882 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28253,9 +28254,9 @@ class Number5882 : StressfulInteger {
     val b = Number5880()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5883 : StressfulInteger {
 
   companion object {
@@ -28274,8 +28275,8 @@ class Number5883 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28285,9 +28286,9 @@ class Number5883 : StressfulInteger {
     val b = Number5881()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5884 : StressfulInteger {
 
   companion object {
@@ -28306,8 +28307,8 @@ class Number5884 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28317,9 +28318,9 @@ class Number5884 : StressfulInteger {
     val b = Number5882()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5885 : StressfulInteger {
 
   companion object {
@@ -28338,8 +28339,8 @@ class Number5885 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28349,9 +28350,9 @@ class Number5885 : StressfulInteger {
     val b = Number5883()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5886 : StressfulInteger {
 
   companion object {
@@ -28370,8 +28371,8 @@ class Number5886 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28381,9 +28382,9 @@ class Number5886 : StressfulInteger {
     val b = Number5884()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5887 : StressfulInteger {
 
   companion object {
@@ -28402,8 +28403,8 @@ class Number5887 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28413,9 +28414,9 @@ class Number5887 : StressfulInteger {
     val b = Number5885()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5888 : StressfulInteger {
 
   companion object {
@@ -28434,8 +28435,8 @@ class Number5888 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28445,9 +28446,9 @@ class Number5888 : StressfulInteger {
     val b = Number5886()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5889 : StressfulInteger {
 
   companion object {
@@ -28466,8 +28467,8 @@ class Number5889 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28477,9 +28478,9 @@ class Number5889 : StressfulInteger {
     val b = Number5887()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5890 : StressfulInteger {
 
   companion object {
@@ -28498,8 +28499,8 @@ class Number5890 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28509,9 +28510,9 @@ class Number5890 : StressfulInteger {
     val b = Number5888()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5891 : StressfulInteger {
 
   companion object {
@@ -28530,8 +28531,8 @@ class Number5891 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28541,9 +28542,9 @@ class Number5891 : StressfulInteger {
     val b = Number5889()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5892 : StressfulInteger {
 
   companion object {
@@ -28562,8 +28563,8 @@ class Number5892 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28573,9 +28574,9 @@ class Number5892 : StressfulInteger {
     val b = Number5890()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5893 : StressfulInteger {
 
   companion object {
@@ -28594,8 +28595,8 @@ class Number5893 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28605,9 +28606,9 @@ class Number5893 : StressfulInteger {
     val b = Number5891()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5894 : StressfulInteger {
 
   companion object {
@@ -28626,8 +28627,8 @@ class Number5894 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28637,9 +28638,9 @@ class Number5894 : StressfulInteger {
     val b = Number5892()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5895 : StressfulInteger {
 
   companion object {
@@ -28658,8 +28659,8 @@ class Number5895 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28669,9 +28670,9 @@ class Number5895 : StressfulInteger {
     val b = Number5893()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5896 : StressfulInteger {
 
   companion object {
@@ -28690,8 +28691,8 @@ class Number5896 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28701,9 +28702,9 @@ class Number5896 : StressfulInteger {
     val b = Number5894()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5897 : StressfulInteger {
 
   companion object {
@@ -28722,8 +28723,8 @@ class Number5897 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28733,9 +28734,9 @@ class Number5897 : StressfulInteger {
     val b = Number5895()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5898 : StressfulInteger {
 
   companion object {
@@ -28754,8 +28755,8 @@ class Number5898 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28765,9 +28766,9 @@ class Number5898 : StressfulInteger {
     val b = Number5896()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5899 : StressfulInteger {
 
   companion object {
@@ -28786,8 +28787,8 @@ class Number5899 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28797,9 +28798,9 @@ class Number5899 : StressfulInteger {
     val b = Number5897()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5900 : StressfulInteger {
 
   companion object {
@@ -28818,8 +28819,8 @@ class Number5900 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28829,9 +28830,9 @@ class Number5900 : StressfulInteger {
     val b = Number5898()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5901 : StressfulInteger {
 
   companion object {
@@ -28850,8 +28851,8 @@ class Number5901 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28861,9 +28862,9 @@ class Number5901 : StressfulInteger {
     val b = Number5899()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5902 : StressfulInteger {
 
   companion object {
@@ -28882,8 +28883,8 @@ class Number5902 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28893,9 +28894,9 @@ class Number5902 : StressfulInteger {
     val b = Number5900()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5903 : StressfulInteger {
 
   companion object {
@@ -28914,8 +28915,8 @@ class Number5903 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28925,9 +28926,9 @@ class Number5903 : StressfulInteger {
     val b = Number5901()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5904 : StressfulInteger {
 
   companion object {
@@ -28946,8 +28947,8 @@ class Number5904 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28957,9 +28958,9 @@ class Number5904 : StressfulInteger {
     val b = Number5902()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5905 : StressfulInteger {
 
   companion object {
@@ -28978,8 +28979,8 @@ class Number5905 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -28989,9 +28990,9 @@ class Number5905 : StressfulInteger {
     val b = Number5903()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5906 : StressfulInteger {
 
   companion object {
@@ -29010,8 +29011,8 @@ class Number5906 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29021,9 +29022,9 @@ class Number5906 : StressfulInteger {
     val b = Number5904()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5907 : StressfulInteger {
 
   companion object {
@@ -29042,8 +29043,8 @@ class Number5907 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29053,9 +29054,9 @@ class Number5907 : StressfulInteger {
     val b = Number5905()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5908 : StressfulInteger {
 
   companion object {
@@ -29074,8 +29075,8 @@ class Number5908 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29085,9 +29086,9 @@ class Number5908 : StressfulInteger {
     val b = Number5906()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5909 : StressfulInteger {
 
   companion object {
@@ -29106,8 +29107,8 @@ class Number5909 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29117,9 +29118,9 @@ class Number5909 : StressfulInteger {
     val b = Number5907()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5910 : StressfulInteger {
 
   companion object {
@@ -29138,8 +29139,8 @@ class Number5910 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29149,9 +29150,9 @@ class Number5910 : StressfulInteger {
     val b = Number5908()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5911 : StressfulInteger {
 
   companion object {
@@ -29170,8 +29171,8 @@ class Number5911 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29181,9 +29182,9 @@ class Number5911 : StressfulInteger {
     val b = Number5909()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5912 : StressfulInteger {
 
   companion object {
@@ -29202,8 +29203,8 @@ class Number5912 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29213,9 +29214,9 @@ class Number5912 : StressfulInteger {
     val b = Number5910()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5913 : StressfulInteger {
 
   companion object {
@@ -29234,8 +29235,8 @@ class Number5913 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29245,9 +29246,9 @@ class Number5913 : StressfulInteger {
     val b = Number5911()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5914 : StressfulInteger {
 
   companion object {
@@ -29266,8 +29267,8 @@ class Number5914 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29277,9 +29278,9 @@ class Number5914 : StressfulInteger {
     val b = Number5912()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5915 : StressfulInteger {
 
   companion object {
@@ -29298,8 +29299,8 @@ class Number5915 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29309,9 +29310,9 @@ class Number5915 : StressfulInteger {
     val b = Number5913()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5916 : StressfulInteger {
 
   companion object {
@@ -29330,8 +29331,8 @@ class Number5916 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29341,9 +29342,9 @@ class Number5916 : StressfulInteger {
     val b = Number5914()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5917 : StressfulInteger {
 
   companion object {
@@ -29362,8 +29363,8 @@ class Number5917 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29373,9 +29374,9 @@ class Number5917 : StressfulInteger {
     val b = Number5915()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5918 : StressfulInteger {
 
   companion object {
@@ -29394,8 +29395,8 @@ class Number5918 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29405,9 +29406,9 @@ class Number5918 : StressfulInteger {
     val b = Number5916()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5919 : StressfulInteger {
 
   companion object {
@@ -29426,8 +29427,8 @@ class Number5919 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29437,9 +29438,9 @@ class Number5919 : StressfulInteger {
     val b = Number5917()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5920 : StressfulInteger {
 
   companion object {
@@ -29458,8 +29459,8 @@ class Number5920 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29469,9 +29470,9 @@ class Number5920 : StressfulInteger {
     val b = Number5918()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5921 : StressfulInteger {
 
   companion object {
@@ -29490,8 +29491,8 @@ class Number5921 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29501,9 +29502,9 @@ class Number5921 : StressfulInteger {
     val b = Number5919()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5922 : StressfulInteger {
 
   companion object {
@@ -29522,8 +29523,8 @@ class Number5922 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29533,9 +29534,9 @@ class Number5922 : StressfulInteger {
     val b = Number5920()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5923 : StressfulInteger {
 
   companion object {
@@ -29554,8 +29555,8 @@ class Number5923 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29565,9 +29566,9 @@ class Number5923 : StressfulInteger {
     val b = Number5921()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5924 : StressfulInteger {
 
   companion object {
@@ -29586,8 +29587,8 @@ class Number5924 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29597,9 +29598,9 @@ class Number5924 : StressfulInteger {
     val b = Number5922()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5925 : StressfulInteger {
 
   companion object {
@@ -29618,8 +29619,8 @@ class Number5925 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29629,9 +29630,9 @@ class Number5925 : StressfulInteger {
     val b = Number5923()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5926 : StressfulInteger {
 
   companion object {
@@ -29650,8 +29651,8 @@ class Number5926 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29661,9 +29662,9 @@ class Number5926 : StressfulInteger {
     val b = Number5924()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5927 : StressfulInteger {
 
   companion object {
@@ -29682,8 +29683,8 @@ class Number5927 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29693,9 +29694,9 @@ class Number5927 : StressfulInteger {
     val b = Number5925()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5928 : StressfulInteger {
 
   companion object {
@@ -29714,8 +29715,8 @@ class Number5928 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29725,9 +29726,9 @@ class Number5928 : StressfulInteger {
     val b = Number5926()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5929 : StressfulInteger {
 
   companion object {
@@ -29746,8 +29747,8 @@ class Number5929 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29757,9 +29758,9 @@ class Number5929 : StressfulInteger {
     val b = Number5927()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5930 : StressfulInteger {
 
   companion object {
@@ -29778,8 +29779,8 @@ class Number5930 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29789,9 +29790,9 @@ class Number5930 : StressfulInteger {
     val b = Number5928()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5931 : StressfulInteger {
 
   companion object {
@@ -29810,8 +29811,8 @@ class Number5931 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29821,9 +29822,9 @@ class Number5931 : StressfulInteger {
     val b = Number5929()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5932 : StressfulInteger {
 
   companion object {
@@ -29842,8 +29843,8 @@ class Number5932 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29853,9 +29854,9 @@ class Number5932 : StressfulInteger {
     val b = Number5930()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5933 : StressfulInteger {
 
   companion object {
@@ -29874,8 +29875,8 @@ class Number5933 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29885,9 +29886,9 @@ class Number5933 : StressfulInteger {
     val b = Number5931()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5934 : StressfulInteger {
 
   companion object {
@@ -29906,8 +29907,8 @@ class Number5934 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29917,9 +29918,9 @@ class Number5934 : StressfulInteger {
     val b = Number5932()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5935 : StressfulInteger {
 
   companion object {
@@ -29938,8 +29939,8 @@ class Number5935 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29949,9 +29950,9 @@ class Number5935 : StressfulInteger {
     val b = Number5933()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5936 : StressfulInteger {
 
   companion object {
@@ -29970,8 +29971,8 @@ class Number5936 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -29981,9 +29982,9 @@ class Number5936 : StressfulInteger {
     val b = Number5934()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5937 : StressfulInteger {
 
   companion object {
@@ -30002,8 +30003,8 @@ class Number5937 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30013,9 +30014,9 @@ class Number5937 : StressfulInteger {
     val b = Number5935()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5938 : StressfulInteger {
 
   companion object {
@@ -30034,8 +30035,8 @@ class Number5938 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30045,9 +30046,9 @@ class Number5938 : StressfulInteger {
     val b = Number5936()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5939 : StressfulInteger {
 
   companion object {
@@ -30066,8 +30067,8 @@ class Number5939 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30077,9 +30078,9 @@ class Number5939 : StressfulInteger {
     val b = Number5937()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5940 : StressfulInteger {
 
   companion object {
@@ -30098,8 +30099,8 @@ class Number5940 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30109,9 +30110,9 @@ class Number5940 : StressfulInteger {
     val b = Number5938()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5941 : StressfulInteger {
 
   companion object {
@@ -30130,8 +30131,8 @@ class Number5941 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30141,9 +30142,9 @@ class Number5941 : StressfulInteger {
     val b = Number5939()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5942 : StressfulInteger {
 
   companion object {
@@ -30162,8 +30163,8 @@ class Number5942 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30173,9 +30174,9 @@ class Number5942 : StressfulInteger {
     val b = Number5940()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5943 : StressfulInteger {
 
   companion object {
@@ -30194,8 +30195,8 @@ class Number5943 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30205,9 +30206,9 @@ class Number5943 : StressfulInteger {
     val b = Number5941()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5944 : StressfulInteger {
 
   companion object {
@@ -30226,8 +30227,8 @@ class Number5944 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30237,9 +30238,9 @@ class Number5944 : StressfulInteger {
     val b = Number5942()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5945 : StressfulInteger {
 
   companion object {
@@ -30258,8 +30259,8 @@ class Number5945 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30269,9 +30270,9 @@ class Number5945 : StressfulInteger {
     val b = Number5943()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5946 : StressfulInteger {
 
   companion object {
@@ -30290,8 +30291,8 @@ class Number5946 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30301,9 +30302,9 @@ class Number5946 : StressfulInteger {
     val b = Number5944()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5947 : StressfulInteger {
 
   companion object {
@@ -30322,8 +30323,8 @@ class Number5947 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30333,9 +30334,9 @@ class Number5947 : StressfulInteger {
     val b = Number5945()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5948 : StressfulInteger {
 
   companion object {
@@ -30354,8 +30355,8 @@ class Number5948 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30365,9 +30366,9 @@ class Number5948 : StressfulInteger {
     val b = Number5946()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5949 : StressfulInteger {
 
   companion object {
@@ -30386,8 +30387,8 @@ class Number5949 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30397,9 +30398,9 @@ class Number5949 : StressfulInteger {
     val b = Number5947()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5950 : StressfulInteger {
 
   companion object {
@@ -30418,8 +30419,8 @@ class Number5950 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30429,9 +30430,9 @@ class Number5950 : StressfulInteger {
     val b = Number5948()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5951 : StressfulInteger {
 
   companion object {
@@ -30450,8 +30451,8 @@ class Number5951 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30461,9 +30462,9 @@ class Number5951 : StressfulInteger {
     val b = Number5949()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5952 : StressfulInteger {
 
   companion object {
@@ -30482,8 +30483,8 @@ class Number5952 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30493,9 +30494,9 @@ class Number5952 : StressfulInteger {
     val b = Number5950()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5953 : StressfulInteger {
 
   companion object {
@@ -30514,8 +30515,8 @@ class Number5953 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30525,9 +30526,9 @@ class Number5953 : StressfulInteger {
     val b = Number5951()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5954 : StressfulInteger {
 
   companion object {
@@ -30546,8 +30547,8 @@ class Number5954 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30557,9 +30558,9 @@ class Number5954 : StressfulInteger {
     val b = Number5952()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5955 : StressfulInteger {
 
   companion object {
@@ -30578,8 +30579,8 @@ class Number5955 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30589,9 +30590,9 @@ class Number5955 : StressfulInteger {
     val b = Number5953()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5956 : StressfulInteger {
 
   companion object {
@@ -30610,8 +30611,8 @@ class Number5956 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30621,9 +30622,9 @@ class Number5956 : StressfulInteger {
     val b = Number5954()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5957 : StressfulInteger {
 
   companion object {
@@ -30642,8 +30643,8 @@ class Number5957 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30653,9 +30654,9 @@ class Number5957 : StressfulInteger {
     val b = Number5955()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5958 : StressfulInteger {
 
   companion object {
@@ -30674,8 +30675,8 @@ class Number5958 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30685,9 +30686,9 @@ class Number5958 : StressfulInteger {
     val b = Number5956()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5959 : StressfulInteger {
 
   companion object {
@@ -30706,8 +30707,8 @@ class Number5959 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30717,9 +30718,9 @@ class Number5959 : StressfulInteger {
     val b = Number5957()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5960 : StressfulInteger {
 
   companion object {
@@ -30738,8 +30739,8 @@ class Number5960 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30749,9 +30750,9 @@ class Number5960 : StressfulInteger {
     val b = Number5958()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5961 : StressfulInteger {
 
   companion object {
@@ -30770,8 +30771,8 @@ class Number5961 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30781,9 +30782,9 @@ class Number5961 : StressfulInteger {
     val b = Number5959()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5962 : StressfulInteger {
 
   companion object {
@@ -30802,8 +30803,8 @@ class Number5962 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30813,9 +30814,9 @@ class Number5962 : StressfulInteger {
     val b = Number5960()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5963 : StressfulInteger {
 
   companion object {
@@ -30834,8 +30835,8 @@ class Number5963 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30845,9 +30846,9 @@ class Number5963 : StressfulInteger {
     val b = Number5961()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5964 : StressfulInteger {
 
   companion object {
@@ -30866,8 +30867,8 @@ class Number5964 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30877,9 +30878,9 @@ class Number5964 : StressfulInteger {
     val b = Number5962()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5965 : StressfulInteger {
 
   companion object {
@@ -30898,8 +30899,8 @@ class Number5965 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30909,9 +30910,9 @@ class Number5965 : StressfulInteger {
     val b = Number5963()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5966 : StressfulInteger {
 
   companion object {
@@ -30930,8 +30931,8 @@ class Number5966 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30941,9 +30942,9 @@ class Number5966 : StressfulInteger {
     val b = Number5964()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5967 : StressfulInteger {
 
   companion object {
@@ -30962,8 +30963,8 @@ class Number5967 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -30973,9 +30974,9 @@ class Number5967 : StressfulInteger {
     val b = Number5965()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5968 : StressfulInteger {
 
   companion object {
@@ -30994,8 +30995,8 @@ class Number5968 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31005,9 +31006,9 @@ class Number5968 : StressfulInteger {
     val b = Number5966()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5969 : StressfulInteger {
 
   companion object {
@@ -31026,8 +31027,8 @@ class Number5969 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31037,9 +31038,9 @@ class Number5969 : StressfulInteger {
     val b = Number5967()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5970 : StressfulInteger {
 
   companion object {
@@ -31058,8 +31059,8 @@ class Number5970 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31069,9 +31070,9 @@ class Number5970 : StressfulInteger {
     val b = Number5968()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5971 : StressfulInteger {
 
   companion object {
@@ -31090,8 +31091,8 @@ class Number5971 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31101,9 +31102,9 @@ class Number5971 : StressfulInteger {
     val b = Number5969()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5972 : StressfulInteger {
 
   companion object {
@@ -31122,8 +31123,8 @@ class Number5972 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31133,9 +31134,9 @@ class Number5972 : StressfulInteger {
     val b = Number5970()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5973 : StressfulInteger {
 
   companion object {
@@ -31154,8 +31155,8 @@ class Number5973 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31165,9 +31166,9 @@ class Number5973 : StressfulInteger {
     val b = Number5971()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5974 : StressfulInteger {
 
   companion object {
@@ -31186,8 +31187,8 @@ class Number5974 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31197,9 +31198,9 @@ class Number5974 : StressfulInteger {
     val b = Number5972()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5975 : StressfulInteger {
 
   companion object {
@@ -31218,8 +31219,8 @@ class Number5975 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31229,9 +31230,9 @@ class Number5975 : StressfulInteger {
     val b = Number5973()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5976 : StressfulInteger {
 
   companion object {
@@ -31250,8 +31251,8 @@ class Number5976 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31261,9 +31262,9 @@ class Number5976 : StressfulInteger {
     val b = Number5974()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5977 : StressfulInteger {
 
   companion object {
@@ -31282,8 +31283,8 @@ class Number5977 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31293,9 +31294,9 @@ class Number5977 : StressfulInteger {
     val b = Number5975()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5978 : StressfulInteger {
 
   companion object {
@@ -31314,8 +31315,8 @@ class Number5978 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31325,9 +31326,9 @@ class Number5978 : StressfulInteger {
     val b = Number5976()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5979 : StressfulInteger {
 
   companion object {
@@ -31346,8 +31347,8 @@ class Number5979 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31357,9 +31358,9 @@ class Number5979 : StressfulInteger {
     val b = Number5977()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5980 : StressfulInteger {
 
   companion object {
@@ -31378,8 +31379,8 @@ class Number5980 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31389,9 +31390,9 @@ class Number5980 : StressfulInteger {
     val b = Number5978()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5981 : StressfulInteger {
 
   companion object {
@@ -31410,8 +31411,8 @@ class Number5981 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31421,9 +31422,9 @@ class Number5981 : StressfulInteger {
     val b = Number5979()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5982 : StressfulInteger {
 
   companion object {
@@ -31442,8 +31443,8 @@ class Number5982 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31453,9 +31454,9 @@ class Number5982 : StressfulInteger {
     val b = Number5980()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5983 : StressfulInteger {
 
   companion object {
@@ -31474,8 +31475,8 @@ class Number5983 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31485,9 +31486,9 @@ class Number5983 : StressfulInteger {
     val b = Number5981()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5984 : StressfulInteger {
 
   companion object {
@@ -31506,8 +31507,8 @@ class Number5984 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31517,9 +31518,9 @@ class Number5984 : StressfulInteger {
     val b = Number5982()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5985 : StressfulInteger {
 
   companion object {
@@ -31538,8 +31539,8 @@ class Number5985 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31549,9 +31550,9 @@ class Number5985 : StressfulInteger {
     val b = Number5983()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5986 : StressfulInteger {
 
   companion object {
@@ -31570,8 +31571,8 @@ class Number5986 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31581,9 +31582,9 @@ class Number5986 : StressfulInteger {
     val b = Number5984()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5987 : StressfulInteger {
 
   companion object {
@@ -31602,8 +31603,8 @@ class Number5987 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31613,9 +31614,9 @@ class Number5987 : StressfulInteger {
     val b = Number5985()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5988 : StressfulInteger {
 
   companion object {
@@ -31634,8 +31635,8 @@ class Number5988 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31645,9 +31646,9 @@ class Number5988 : StressfulInteger {
     val b = Number5986()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5989 : StressfulInteger {
 
   companion object {
@@ -31666,8 +31667,8 @@ class Number5989 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31677,9 +31678,9 @@ class Number5989 : StressfulInteger {
     val b = Number5987()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5990 : StressfulInteger {
 
   companion object {
@@ -31698,8 +31699,8 @@ class Number5990 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31709,9 +31710,9 @@ class Number5990 : StressfulInteger {
     val b = Number5988()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5991 : StressfulInteger {
 
   companion object {
@@ -31730,8 +31731,8 @@ class Number5991 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31741,9 +31742,9 @@ class Number5991 : StressfulInteger {
     val b = Number5989()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5992 : StressfulInteger {
 
   companion object {
@@ -31762,8 +31763,8 @@ class Number5992 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31773,9 +31774,9 @@ class Number5992 : StressfulInteger {
     val b = Number5990()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5993 : StressfulInteger {
 
   companion object {
@@ -31794,8 +31795,8 @@ class Number5993 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31805,9 +31806,9 @@ class Number5993 : StressfulInteger {
     val b = Number5991()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5994 : StressfulInteger {
 
   companion object {
@@ -31826,8 +31827,8 @@ class Number5994 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31837,9 +31838,9 @@ class Number5994 : StressfulInteger {
     val b = Number5992()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5995 : StressfulInteger {
 
   companion object {
@@ -31858,8 +31859,8 @@ class Number5995 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31869,9 +31870,9 @@ class Number5995 : StressfulInteger {
     val b = Number5993()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5996 : StressfulInteger {
 
   companion object {
@@ -31890,8 +31891,8 @@ class Number5996 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31901,9 +31902,9 @@ class Number5996 : StressfulInteger {
     val b = Number5994()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5997 : StressfulInteger {
 
   companion object {
@@ -31922,8 +31923,8 @@ class Number5997 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31933,9 +31934,9 @@ class Number5997 : StressfulInteger {
     val b = Number5995()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5998 : StressfulInteger {
 
   companion object {
@@ -31954,8 +31955,8 @@ class Number5998 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31965,9 +31966,9 @@ class Number5998 : StressfulInteger {
     val b = Number5996()
     return a.fib() + b.fib()
   }
-
 }
 
+@Suppress("MatchingDeclarationName")
 class Number5999 : StressfulInteger {
 
   companion object {
@@ -31986,8 +31987,8 @@ class Number5999 : StressfulInteger {
     if (value() >= limit.value()) {
       return 0
     } else {
-      val left = Number10000()
-      val right = Number10000()
+      val left = Number10001()
+      val right = Number10001()
       return value() + left.sumTo(limit) + right.sumTo(limit)
     }
   }
@@ -31997,6 +31998,4 @@ class Number5999 : StressfulInteger {
     val b = Number5997()
     return a.fib() + b.fib()
   }
-
 }
-
