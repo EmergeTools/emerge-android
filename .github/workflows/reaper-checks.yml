@@ -60,7 +60,7 @@ jobs:
         run: |
           gcloud firebase test android run \
             --type instrumentation \
-            --app reaper/sample/stress/build/outputs/apk/releaseWithReaper/stress-releaseWithReaper.apk \
+            --app reaper/sample/stress/build/outputs/apk/debug/stress-debug.apk \
             --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-debug-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \

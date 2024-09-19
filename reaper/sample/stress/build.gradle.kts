@@ -17,7 +17,7 @@ emerge {
   }
 
   reaper {
-    enabledVariants.set(listOf("releaseWithReaper"))
+    enabledVariants.set(listOf("releaseWithReaper, debug"))
     publishableApiKey.set(System.getenv("EMERGE_REAPER_API_KEY") ?: "<key>")
   }
 }
