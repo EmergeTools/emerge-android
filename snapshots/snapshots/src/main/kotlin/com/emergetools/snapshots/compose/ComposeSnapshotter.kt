@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
-import com.emergetools.snapshots.SnapshotType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.max
 

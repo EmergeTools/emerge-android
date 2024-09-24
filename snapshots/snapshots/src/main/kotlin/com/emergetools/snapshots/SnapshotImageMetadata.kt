@@ -5,7 +5,10 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonClassDiscriminator
 
-@Deprecated("Composable is the only supported view type. For legacy views, wrap with AndroidView")
+@Deprecated(
+  "Composable is the only supported view type. " +
+    "For legacy views, wrap with AndroidView"
+)
 enum class SnapshotType {
   COMPOSABLE,
 }
@@ -23,7 +26,10 @@ sealed class SnapshotMetadata {
   abstract val displayName: String?
   abstract val fqn: String
 
-  @Deprecated("Non-compose view types are no longer supported. Wrap views with AndroidView in a compose preview to test.")
+  @Deprecated(
+    "Non-compose view types are no longer supported. " +
+      "Wrap views with AndroidView in a compose preview to test."
+  )
   abstract val type: SnapshotType
   abstract val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig
 
@@ -37,7 +43,10 @@ sealed class SnapshotMetadata {
     val filename: String,
     // FQN of the test class
     override val fqn: String,
-    @Deprecated("Non-compose view types are no longer supported. Wrap views with AndroidView in a compose preview to test.")
+    @Deprecated(
+      "Non-compose view types are no longer supported. " +
+        "Wrap views with AndroidView in a compose preview to test."
+    )
     override val type: SnapshotType,
     // Compose-specific metadata, only set if type == COMPOSABLE
     override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
@@ -51,7 +60,10 @@ sealed class SnapshotMetadata {
     override val displayName: String?,
     // FQN of the test class
     override val fqn: String,
-    @Deprecated("Non-compose view types are no longer supported. Wrap views with AndroidView in a compose preview to test.")
+    @Deprecated(
+      "Non-compose view types are no longer supported. " +
+        "Wrap views with AndroidView in a compose preview to test."
+    )
     override val type: SnapshotType,
     val errorType: SnapshotErrorType,
     // Compose-specific metadata, only set if type == COMPOSABLE

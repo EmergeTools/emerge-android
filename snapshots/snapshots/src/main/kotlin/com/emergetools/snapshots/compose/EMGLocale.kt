@@ -1,4 +1,4 @@
-package com.emergetools.snapshots.shared
+package com.emergetools.snapshots.compose
 
 import java.util.Locale
 
