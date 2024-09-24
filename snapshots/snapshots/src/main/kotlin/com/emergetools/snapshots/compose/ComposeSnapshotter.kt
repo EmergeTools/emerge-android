@@ -77,7 +77,6 @@ fun snapshotComposable(
         snapshotRule.take(bitmap, previewConfig)
       } ?: run {
         snapshotRule.saveError(
-          type = SnapshotType.COMPOSABLE,
           errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
           composePreviewSnapshotConfig = previewConfig,
         )
@@ -90,7 +89,6 @@ fun snapshotComposable(
       e,
     )
     snapshotRule.saveError(
-      type = SnapshotType.COMPOSABLE,
       errorType = SnapshotErrorType.GENERAL,
       composePreviewSnapshotConfig = previewConfig,
     )
