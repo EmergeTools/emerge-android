@@ -1,6 +1,6 @@
 package com.emergetools.snapshots
 
-import com.emergetools.snapshots.shared.EMGLocale
+import com.emergetools.snapshots.compose.EMGLocale
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
