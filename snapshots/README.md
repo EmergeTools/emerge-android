@@ -1,4 +1,4 @@
-# 🛰️ Emerge Snapshot Testing
+# 📸 Emerge Snapshot Testing
 
 All-in-one Android snapshot testing with 2 lines of code.
 
