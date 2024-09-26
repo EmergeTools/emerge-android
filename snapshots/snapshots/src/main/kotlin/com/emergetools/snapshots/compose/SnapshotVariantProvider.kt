@@ -20,7 +20,6 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.dp
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import com.emergetools.snapshots.shared.EMGLocale
 import java.util.Locale
 
 @Composable

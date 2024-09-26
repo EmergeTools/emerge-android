@@ -5,12 +5,6 @@ import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonClassDiscriminator
 
-enum class SnapshotType {
-  COMPOSABLE,
-  VIEW,
-  ACTIVITY,
-}
-
 enum class SnapshotErrorType {
   EMPTY_SNAPSHOT,
   GENERAL,
@@ -23,8 +17,7 @@ sealed class SnapshotMetadata {
   abstract val name: String
   abstract val displayName: String?
   abstract val fqn: String
-  abstract val type: SnapshotType
-  abstract val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig?
+  abstract val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig
 
   @Serializable
   internal class SuccessMetadata(
@@ -36,9 +29,8 @@ sealed class SnapshotMetadata {
     val filename: String,
     // FQN of the test class
     override val fqn: String,
-    override val type: SnapshotType,
     // Compose-specific metadata, only set if type == COMPOSABLE
-    override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) : SnapshotMetadata()
 
   @Serializable
@@ -49,9 +41,8 @@ sealed class SnapshotMetadata {
     override val displayName: String?,
     // FQN of the test class
     override val fqn: String,
-    override val type: SnapshotType,
     val errorType: SnapshotErrorType,
     // Compose-specific metadata, only set if type == COMPOSABLE
-    override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    override val composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) : SnapshotMetadata()
 }

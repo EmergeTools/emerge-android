@@ -1,16 +1,6 @@
-package com.emergetools.snapshots.shared
+package com.emergetools.snapshots.compose
 
-import androidx.annotation.VisibleForTesting
 import java.util.Locale
-
-fun String.normalize(): String {
-  return replace(Regex("[ .-]"), "_")
-    //  lowercase the string
-    .lowercase()
-}
-
-@VisibleForTesting
-const val MAX_KEY_NAME_LENGTH = 128
 
 object EMGLocale {
   // Android's default `Locale` class doesn't seem to play nicely with regions syntax, like `es-rES`

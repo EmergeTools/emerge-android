@@ -1,9 +1,6 @@
 package com.emergetools.snapshots
 
-import android.app.Activity
 import android.graphics.Bitmap
-import android.view.View
-import androidx.test.runner.screenshot.Screenshot
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import org.junit.rules.TestRule
 import org.junit.runner.Description
@@ -22,26 +19,6 @@ class EmergeSnapshots : TestRule {
   }
 
   fun take(
-    name: String,
-    view: View,
-  ) = SnapshotSaver.save(
-    displayName = name,
-    bitmap = Screenshot.capture(view).bitmap,
-    fqn = fqn,
-    type = SnapshotType.VIEW,
-  )
-
-  fun take(
-    name: String,
-    activity: Activity,
-  ) = SnapshotSaver.save(
-    displayName = name,
-    bitmap = Screenshot.capture(activity).bitmap,
-    fqn = fqn,
-    type = SnapshotType.ACTIVITY,
-  )
-
-  fun take(
     bitmap: Bitmap,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
@@ -50,20 +27,17 @@ class EmergeSnapshots : TestRule {
       displayName = null,
       bitmap = bitmap,
       fqn = fqn,
-      type = SnapshotType.COMPOSABLE,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
   }
 
   internal fun saveError(
-    type: SnapshotType,
     errorType: SnapshotErrorType,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     SnapshotSaver.saveError(
       displayName = null,
       fqn = fqn,
-      type = type,
       errorType = errorType,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )

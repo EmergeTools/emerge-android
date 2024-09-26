@@ -12,7 +12,6 @@ import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
-import com.emergetools.snapshots.SnapshotType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.max
 
@@ -77,7 +76,6 @@ fun snapshotComposable(
         snapshotRule.take(bitmap, previewConfig)
       } ?: run {
         snapshotRule.saveError(
-          type = SnapshotType.COMPOSABLE,
           errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
           composePreviewSnapshotConfig = previewConfig,
         )
@@ -90,7 +88,6 @@ fun snapshotComposable(
       e,
     )
     snapshotRule.saveError(
-      type = SnapshotType.COMPOSABLE,
       errorType = SnapshotErrorType.GENERAL,
       composePreviewSnapshotConfig = previewConfig,
     )

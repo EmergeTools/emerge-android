@@ -4,11 +4,8 @@ import android.content.Context
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
-import androidx.annotation.VisibleForTesting
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import com.emergetools.snapshots.shared.MAX_KEY_NAME_LENGTH
-import com.emergetools.snapshots.shared.normalize
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -39,8 +36,7 @@ internal object SnapshotSaver {
     displayName: String?,
     bitmap: Bitmap,
     fqn: String,
-    type: SnapshotType,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
@@ -50,11 +46,7 @@ internal object SnapshotSaver {
     // We need a stable key to use for the filename and comparison
     // For composables, see [ComposePreviewSnapshotConfig.keyName]
     // For non-composables, we use the normalized displayName
-    val keyName = keyName(
-      type = type,
-      displayName = displayName,
-      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
-    )
+    val keyName = composePreviewSnapshotConfig.keyName()
     saveImage(
       snapshotsDir = snapshotsDir,
       keyName = keyName,
@@ -65,7 +57,6 @@ internal object SnapshotSaver {
         snapshotsDir = snapshotsDir,
         displayName = displayName,
         keyName = keyName,
-        type = type,
         fqn = fqn,
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
@@ -75,29 +66,18 @@ internal object SnapshotSaver {
   fun saveError(
     displayName: String?,
     fqn: String,
-    type: SnapshotType,
     errorType: SnapshotErrorType,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
     }
 
-    // We need a stable key to use for the filename and comparison
-    // For composables, see [ComposePreviewSnapshotConfig.keyName]
-    // For non-composables, we use the normalized displayName
-    val keyName = keyName(
-      type = type,
-      displayName = displayName,
-      composePreviewSnapshotConfig = composePreviewSnapshotConfig,
-    )
     if (saveMetadata) {
       saveErrorMetadata(
         snapshotsDir = snapshotsDir,
         displayName = displayName,
-        keyName = keyName,
-        type = type,
         fqn = fqn,
         errorType = errorType,
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
@@ -120,15 +100,13 @@ internal object SnapshotSaver {
     keyName: String,
     displayName: String?,
     fqn: String,
-    type: SnapshotType,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
       name = keyName,
       displayName = displayName,
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,
-      type = type,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
 
@@ -142,18 +120,16 @@ internal object SnapshotSaver {
 
   private fun saveErrorMetadata(
     snapshotsDir: File,
-    keyName: String,
     displayName: String?,
     fqn: String,
-    type: SnapshotType,
     errorType: SnapshotErrorType,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
+    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    val keyName = composePreviewSnapshotConfig.keyName()
     val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
-      name = keyName,
+      name = composePreviewSnapshotConfig.keyName(),
       displayName = displayName,
       fqn = fqn,
-      type = type,
       errorType = errorType,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
@@ -163,25 +139,6 @@ internal object SnapshotSaver {
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
-    }
-  }
-
-  @VisibleForTesting
-  fun keyName(
-    type: SnapshotType,
-    displayName: String?,
-    composePreviewSnapshotConfig: ComposePreviewSnapshotConfig? = null,
-  ): String {
-    return if (type == SnapshotType.COMPOSABLE) {
-      checkNotNull(composePreviewSnapshotConfig) {
-        "composePreviewSnapshotConfig must be set for COMPOSABLE snapshots"
-      }
-      composePreviewSnapshotConfig.keyName()
-    } else {
-      checkNotNull(displayName) {
-        "displayName must be set for non-COMPOSABLE snapshots"
-      }
-      displayName.normalize().take(MAX_KEY_NAME_LENGTH)
     }
   }
 
