@@ -57,7 +57,6 @@ internal object SnapshotSaver {
         snapshotsDir = snapshotsDir,
         displayName = displayName,
         keyName = keyName,
-        type = SnapshotType.COMPOSABLE,
         fqn = fqn,
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
@@ -101,7 +100,6 @@ internal object SnapshotSaver {
     keyName: String,
     displayName: String?,
     fqn: String,
-    type: SnapshotType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
     val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
@@ -109,7 +107,6 @@ internal object SnapshotSaver {
       displayName = displayName,
       filename = "$keyName$PNG_EXTENSION",
       fqn = fqn,
-      type = type,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
 
@@ -133,7 +130,6 @@ internal object SnapshotSaver {
       name = composePreviewSnapshotConfig.keyName(),
       displayName = displayName,
       fqn = fqn,
-      type = SnapshotType.COMPOSABLE,
       errorType = errorType,
       composePreviewSnapshotConfig = composePreviewSnapshotConfig,
     )
