@@ -229,37 +229,42 @@ emerge {
 }
 ```
 
-### Activities & View snapshotting
+### Legacy View snapshotting
 
-Create a basic instrumentation test class that uses the `EmergeSnapshot` rule to generate snapshots.
+Emerge is 100% invested in Compose, but we know your codebase might not be fully there yet.
+
+Emerge can snapshot legacy views through Compose Previews. Wrap the legacy view in an `AndroidView` ([docs](https://developer.android.com/develop/ui/compose/migrate/interoperability-apis/views-in-compose)) and add to any Preview!
 
 ```kotlin
-@RunWith(AndroidJUnit4::class)
-class MainActivityTest {
-
-  @get:Rule
-  val activityScenarioRule = ActivityScenarioRule(MainActivity::class.java)
-
-  @get:Rule
-  val snapshots = EmergeSnapshot()
-
-  @Test
-  fun mainActivitySnapshot() {
-    val scenario = activityScenarioRule.scenario
-    scenario.onActivity {
-      snapshots.take(name = "MainActivity", activity = it)
+@Preview
+@Composable
+fun LegacyTitleViewPreview() {
+  AndroidView(
+    factory = { context: Context ->
+      LegacyTitleView(context).apply {
+        layoutParams = ViewGroup.LayoutParams(
+          ViewGroup.LayoutParams.WRAP_CONTENT,
+          ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+      }
+    },
+    update = { view ->
+      // Configure legaacy view here.
+      view.setTitle("Hello, Legacy View!")
+      view.setSubtitle("I'm a legacy view in a Compose preview")
     }
-  }
+  )
+}
 
-  @Test
-  fun customViewSnapshot() {
-    val view = CustomView(InstrumentationRegistry.getInstrumentation().targetContext)
-    snapshots.take(name = "CustomView", view = view)
-  }
+class LegacyTitleView @JvmOverloads constructor(
+  context: Context,
+  attrs: AttributeSet? = null,
+  defStyleAttr: Int = 0
+) : LinearLayout(context, attrs, defStyleAttr) {
+
+  //  ...
 }
 ```
-
-_Each `name` parameter must be unique as it's used as the primary key for saving & diffing._
 
 ## Gradle plugin
 
