@@ -32,7 +32,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     const val ARG_REFLECTIVE_INVOKE_DATA_PATH = "invoke_data_path"
 
     @JvmStatic
-    @Parameterized.Parameters(name = "{index} {0}")
+    @Parameterized.Parameters(name = "{index}_{0}")
     fun data(): Iterable<EmergeComposeSnapshotReflectiveParameters> {
       val args = InstrumentationRegistry.getArguments()
 
