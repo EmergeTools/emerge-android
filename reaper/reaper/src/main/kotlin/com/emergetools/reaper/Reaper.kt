@@ -17,11 +17,13 @@ object Reaper {
    * Initialize Reaper. This should be called once in each process. In
    * addition to calling this method the codebase must be instrumented using the Emergetools
    * gradle plugin. This method may be called from any thread with a Looper. It is safe to
-   * call this from the main thread.
+   * call this from the main thread. Options may be passed if you want to override the default
+   * values.
    * @param context Android context
+   * @param options Override Reaper settings
    */
-  fun init(context: Context) {
-    ReaperInternal.init(context)
+  fun init(context: Context, options: ReaperOptions? = null) {
+    ReaperInternal.init(context, options ?: ReaperOptions())
   }
 
   /**
@@ -33,4 +35,37 @@ object Reaper {
   fun flush(context: Context) {
     ReaperInternal.flush(context)
   }
+}
+
+/**
+ * Optional settings for Reaper.
+ */
+data class ReaperOptions(
+  /**
+   * Adjust the logcat detail level of Reaper.
+   * Reaper uses the tag 'REAPER' for all logcat messages.
+   * By default Reaper logs everything to logcat.
+   */
+  val logLevel: ReaperLogLevel = ReaperLogLevel.ALL,
+)
+
+/**
+ * Desired logcat level for Reaper.
+ */
+enum class ReaperLogLevel {
+  /**
+   * Never log to logcat during operation.
+   * Fatal errors during initialization will still log to logcat.
+   */
+  NONE,
+
+  /**
+   *  Log errors (Log.e) and above:
+   */
+  ERRORS,
+
+  /**
+   *  Log everything:
+   */
+  ALL,
 }

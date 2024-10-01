@@ -64,10 +64,10 @@ internal object ReaperInternal {
    * - [ReaperImpl.startReport] to start the current report
    * - Sets up a recurring call to [ReaperImpl.flush] every [FLUSH_PERIOD_MS]
    */
-  fun init(context: Context) {
+  fun init(context: Context, options: ReaperOptions) {
     synchronized(this) {
       androidTrace("Reaper#init") {
-        initSynchronized(context)
+        initSynchronized(context, options)
       }
     }
   }
@@ -101,7 +101,7 @@ internal object ReaperInternal {
     }
   }
 
-  private fun initSynchronized(context: Context) {
+  private fun initSynchronized(context: Context, options: ReaperOptions) {
     if (impl != null) {
       Log.e(TAG, "Reaper already initialized, ignoring Reaper.init().")
       return
@@ -131,7 +131,7 @@ internal object ReaperInternal {
     val isDebug = isDebug(metaData)
     val baseUrl = getBaseUrl(metaData)
 
-    val delegate = ReaperImplDelegate(context.applicationContext)
+    val delegate = ReaperImplDelegate(context.applicationContext, options)
     val theImpl = ReaperImpl(
       tracker = tracker,
       delegate = delegate,
@@ -151,7 +151,8 @@ internal object ReaperInternal {
   }
 }
 
-private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Delegate {
+private class ReaperImplDelegate(private val context: Context, options: ReaperOptions) : ReaperImpl.Delegate {
+  val logLevel = options.logLevel
 
   override fun startReport(id: String): File? {
     ensureDirectories(context)
@@ -240,11 +241,17 @@ private class ReaperImplDelegate(private val context: Context) : ReaperImpl.Dele
   }
 
   override fun d(message: String) {
-    Log.d(TAG, message)
+    when (logLevel) {
+      ReaperLogLevel.ALL -> Log.d(TAG, message)
+      ReaperLogLevel.NONE, ReaperLogLevel.ERRORS -> {}
+    }
   }
 
   override fun e(message: String) {
-    Log.e(TAG, message)
+    when (logLevel) {
+      ReaperLogLevel.ALL, ReaperLogLevel.ERRORS -> Log.e(TAG, message)
+      ReaperLogLevel.NONE -> {}
+    }
   }
 
   override fun <T> trace(name: String, block: () -> T): T {
@@ -287,15 +294,15 @@ private fun fatalError(context: Context, message: String) {
 
 @MainThread
 private fun mainThreadStart(context: Context, impl: ReaperImpl) {
-  Log.d(TAG, "Reaper#mainThreadStart")
-  androidTrace("Reaper#mainThreadStart") {
+  impl.delegate.d("Reaper#mainThreadStart")
+  impl.delegate.trace("Reaper#mainThreadStart") {
     val thread = HandlerThread("ReaperWorker")
     thread.start()
 
     val looper = thread.looper
     if (looper == null) {
       fatalError(context, "Could not initialize Reaper worker")
-      return@androidTrace
+      return@trace
     }
     val handler = Handler(looper)
 
@@ -323,8 +330,8 @@ private fun wrap(context: Context, lambda: () -> Unit) {
 }
 
 private fun workerThreadStart(context: Context, looper: Looper, impl: ReaperImpl) {
-  Log.d(TAG, "Reaper#workerThreadStart")
-  androidTrace("Reaper#workerThreadStart") {
+  impl.delegate.d("Reaper#workerThreadStart")
+  impl.delegate.trace("Reaper#workerThreadStart") {
     // If Reaper was running previously but we did not get a chance to finalize the report we may
     // end up with reports 'stuck' in current which will never be finalized. Schedule those for
     // upload.
@@ -335,7 +342,7 @@ private fun workerThreadStart(context: Context, looper: Looper, impl: ReaperImpl
     wrap(context) {
       val path = impl.startReport()
       if (path == null) {
-        Log.e(TAG, "Failed to start report")
+        impl.delegate.e("Failed to start report")
       } else {
         // Schedule flushes every FLUSH_PERIOD_MS
         scheduleFlush(context, Handler(looper), impl)
