@@ -66,7 +66,7 @@ class HashTrackerBenchmark {
   fun synchronizedSet() {
     val seen = mutableSetOf<Long>()
     val hashes = getHashes(HASH_COUNT)
-    val tracker = SynchronizedSetHashTracker { seen.addAll(it) }
+    val tracker = com.emergetools.reaper.SynchronizedSetHashTracker { seen.addAll(it) }
     benchmarkWithContention(hashes, tracker);
     assertEquals(seen.size, hashes.size)
   }
@@ -84,7 +84,7 @@ class HashTrackerBenchmark {
   fun counting() {
     val seen = mutableSetOf<Long>()
     val hashes = getHashes(HASH_COUNT)
-    val tracker = CountingHashTracker { seen.addAll(it) }
+    val tracker = com.emergetools.reaper.CountingHashTracker { seen.addAll(it) }
     benchmarkWithContention(hashes, tracker);
     // Not asserting on purpose. CountingHashTracker doesn't store hashes it just counts the number
     // of calls to logMethodEntry.
