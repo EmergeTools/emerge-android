@@ -12,6 +12,7 @@ data class ComposeSnapshots(
 data class ComposePreviewSnapshotConfig(
   val originalFqn: String,
   val fullyQualifiedClassName: String,
+  val previewParameter: PreviewParameter? = null,
   // Preview annotation params:
   val name: String?,
   val group: String?,
@@ -24,4 +25,14 @@ data class ComposePreviewSnapshotConfig(
   val backgroundColor: Long?,
   val showSystemUi: Boolean?,
   val device: String? = null,
+  val apiLevel: Int? = null,
+  val wallpaper: Int? = null,
+)
+
+@Serializable
+data class PreviewParameter(
+  val parameterName: String,
+  val providerClassFqn: String,
+  val limit: Int? = null,
+  val index: Int? = null,
 )
