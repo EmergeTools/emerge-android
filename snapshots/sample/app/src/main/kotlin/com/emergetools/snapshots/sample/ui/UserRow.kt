@@ -25,6 +25,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewParameter
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.dp
+import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 data class User(val name: String, val email: String)
 
@@ -75,7 +76,9 @@ fun UserRow(user: User) {
 fun PreviewUserRow(
   @PreviewParameter(UserRowPreviewProvider::class) user: User,
 ) {
-  UserRow(user = user)
+  SnapshotsSampleTheme {
+    UserRow(user = user)
+  }
 }
 
 class UserRowPreviewProvider : PreviewParameterProvider<User> {
