@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.reflect.ComposableMethod
@@ -85,25 +86,20 @@ fun snapshotComposable(
       "Invoking composable method: ${backingMethod.name}"
     )
 
-    // TODO: See if we can combine to be a bit more elegant
-    previewProviderClass?.let {
-      snapshot(
-        activity = activity,
-        snapshotRule = snapshotRule,
-        previewConfig = previewConfig,
-        composableMethod = composableMethod,
-        composableClass = klass,
-        previewParams = getPreviewProviderParameters(it),
-      )
-    } ?: run {
-      snapshot(
-        activity = activity,
-        snapshotRule = snapshotRule,
-        previewConfig = previewConfig,
-        composableMethod = composableMethod,
-        composableClass = klass,
-      )
-    }
+    // Fallback having a list of a single null item is intentional to ensure we run at least one iteration of previews
+    val previewParams = previewProviderClass?.let {
+      val params = getPreviewProviderParameters(it)
+      val limit = previewConfig.previewParameter?.limit ?: params.size
+      params.take(limit)
+    } ?: listOf(null)
+    snapshot(
+      activity = activity,
+      snapshotRule = snapshotRule,
+      previewConfig = previewConfig,
+      composableMethod = composableMethod,
+      composableClass = klass,
+      previewParams = previewParams,
+    )
 
   } catch (e: Exception) {
     Log.e(
@@ -148,8 +144,10 @@ private fun snapshot(
     LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
   previewParams.forEachIndexed { index, prevParam ->
-    // TODO: More elegant
-    val args = if (prevParam == null) arrayOf(0) else arrayOf(prevParam, 0)
+    val args = buildList {
+      prevParam?.let(this::add)
+      add(0)
+    }.toTypedArray()
 
     composeView.setContent {
       SnapshotVariantProvider(previewConfig) {
