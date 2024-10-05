@@ -34,7 +34,7 @@ fun SnapshotVariantProvider(
     density = dimensionSpec.scalingFactor ?: LocalDensity.current.density,
   )
 
-  val locale = config.locale?.let { EMGLocale.forLanguageCode(it) } ?: Locale.getDefault()
+  val locale = config.locale?.let(::localeForLanguageCode) ?: Locale.getDefault()
 
   val wrappedContext = SnapshotVariantContextWrapper(
     LocalContext.current,
@@ -58,15 +58,15 @@ fun SnapshotVariantProvider(
     values = providedValues.toList().toTypedArray(),
   ) {
     val modifier = Modifier
-      .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
-      .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
-      .then(
-        config.showBackground?.let {
-          // By default, previews use White as the background color, so preserve behavior.
-          val color = config.backgroundColor?.let { Color(it) } ?: Color.White
-          Modifier.background(color)
-        } ?: Modifier
-      )
+        .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
+        .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
+        .then(
+            config.showBackground?.let {
+                // By default, previews use White as the background color, so preserve behavior.
+                val color = config.backgroundColor?.let { Color(it) } ?: Color.White
+                Modifier.background(color)
+            } ?: Modifier
+        )
 
     Box(modifier = modifier) {
       content()
@@ -117,4 +117,16 @@ class SnapshotVariantContextWrapper(
 
     return createConfigurationContext(config)
   }
+}
+
+// Android's default `Locale` class doesn't seem to play nicely with regions syntax, like `es-rES`
+// Instead, we can manually split the locale string ourselves and pass into the appropriate constructor
+// which seems to work better.
+// Android Studio has completely separate code for parsing locale codes.
+fun localeForLanguageCode(code: String): Locale {
+  val split = code.split("-")
+  if (split.size > 1) {
+    return Locale(split[0], split[1])
+  }
+  return Locale.forLanguageTag(code)
 }
