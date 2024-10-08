@@ -73,8 +73,19 @@ fun UserRow(user: User) {
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
 @Composable
-fun PreviewUserRow(
+fun UserRowPreview(
   @PreviewParameter(UserRowPreviewProvider::class) user: User,
+) {
+  SnapshotsSampleTheme {
+    UserRow(user = user)
+  }
+}
+
+@Preview(showBackground = true)
+@Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)
+@Composable
+fun UserRowPreviewWithLimit(
+  @PreviewParameter(UserRowPreviewProvider::class, limit = 2) user: User,
 ) {
   SnapshotsSampleTheme {
     UserRow(user = user)
@@ -85,5 +96,6 @@ class UserRowPreviewProvider : PreviewParameterProvider<User> {
   override val values: Sequence<User> = sequenceOf(
     User(name = "Ryan", email = "ryan@emergetools.com"),
     User(name = "Trevor", email = "trevor@emergetools.com"),
+    User(name = "Josh", email = "josh@emergetools.com"),
   )
 }
