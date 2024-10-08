@@ -67,7 +67,7 @@ data class ComposePreviewSnapshotConfig(
       apiLevel?.let { append("_api_$it") }
       wallpaper?.let { append("_wp_$it") }
       previewParameter?.let {
-        append("_prevp_${it.parameterName}")
+        append("_param_${it.parameterName}")
         it.index?.let { idx -> append("_idx_$idx") }
       }
     }
