@@ -56,4 +56,6 @@ buildConfig {
 dependencies {
   // Distribution SDK
   implementation(projects.distribution.distribution)
+  implementation(libs.androidx.activity.ktx)
+  implementation(libs.navigation.compose)
 }
