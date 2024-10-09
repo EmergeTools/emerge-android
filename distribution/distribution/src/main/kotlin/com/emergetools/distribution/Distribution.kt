@@ -1,7 +1,10 @@
 package com.emergetools.distribution
 
 import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import com.emergetools.distribution.internal.DistributionInternal
+import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
 
 /**
@@ -22,8 +25,23 @@ object Distribution {
   /**
    *
    */
-  suspend fun checkForUpdate(context: Context, apiKey: String? = null): UpdateStatus {
-    return DistributionInternal.checkForUpdate(context, apiKey)
+  fun isEnabled(context: Context): Boolean {
+    return DistributionInternal.isEnabled(context)
+  }
+
+  /**
+   * Check to see if an updated version of the current app exists.
+   */
+  suspend fun checkForUpdate(context: Context): UpdateStatus {
+    return DistributionInternal.checkForUpdate(context)
+  }
+
+  /**
+   * Download the provided update.
+   */
+  fun downloadUpdate(context: Context, info: UpdateInfo) {
+    val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(info.downloadUrl))
+    context.startActivity(browserIntent)
   }
 }
 
@@ -36,16 +54,24 @@ data class DistributionOptions(
    * This allows reuse of existing OkHttpClient thread pools etc.
    */
   val okHttpClient: OkHttpClient? = null,
+
+  /**
+   * Emerge Tools build tag used to find the desired next build.
+   */
+  val tag: String? = null,
+)
+
+@Serializable
+data class UpdateInfo(
+  val id: String,
+  val tag: String,
+  val version: String,
+  val appId: String,
+  val downloadUrl: String,
 )
 
 sealed class UpdateStatus {
   class Error(val message: String) : UpdateStatus()
-  class NewRelease(
-    val id: String,
-    val tag: String,
-    val version: String,
-    val appId: String,
-    val downloadUrl: String
-  ) : UpdateStatus()
+  class NewRelease(val info: UpdateInfo) : UpdateStatus()
   object UpToDate : UpdateStatus()
 }

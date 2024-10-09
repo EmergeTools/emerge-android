@@ -4,10 +4,13 @@
 package com.emergetools.distribution.internal
 
 import android.content.Context
+import android.content.pm.PackageManager
+import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
 import com.emergetools.distribution.DistributionOptions
+import com.emergetools.distribution.UpdateInfo
 import com.emergetools.distribution.UpdateStatus
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -26,9 +29,24 @@ import okhttp3.internal.closeQuietly
 import java.io.IOException
 import kotlin.coroutines.resumeWithException
 
+private const val MANIFEST_TAG_API_KEY = "com.emergetools.distribution.API_KEY"
+
+internal fun getApiKey(metadata: Bundle): String? {
+  val apiKey = metadata.getString(MANIFEST_TAG_API_KEY, null)
+  if (apiKey == "") {
+    return null
+  }
+  return apiKey
+}
+
 @Serializable
 internal data class CheckForUpdatesMessageResult(
   val message: String
+)
+
+@Serializable
+internal data class CheckForUpdatesSuccessResult(
+  val updateInfo: UpdateInfo
 )
 
 private inline fun <reified T> tryDecode(s: String): T? {
@@ -46,6 +64,11 @@ private fun decodeResult(body: String?): UpdateStatus {
     return UpdateStatus.Error("Empty response from server")
   }
 
+  val success = tryDecode<CheckForUpdatesSuccessResult>(body)
+  if (success !== null) {
+    return UpdateStatus.NewRelease(success.updateInfo)
+  }
+
   val message = tryDecode<CheckForUpdatesMessageResult>(body)
   if (message !== null) {
     return UpdateStatus.Error(message.message)
@@ -54,7 +77,12 @@ private fun decodeResult(body: String?): UpdateStatus {
   return UpdateStatus.Error("Unexpected response $body")
 }
 
-private class State(val handler: Handler, private var okHttpClient: OkHttpClient?) {
+private class State(
+  val handler: Handler,
+  val tag: String,
+  val apiKey: String?,
+  private var okHttpClient: OkHttpClient?
+) {
 
   @Synchronized
   fun getOkHttpClient(): OkHttpClient {
@@ -71,7 +99,6 @@ object DistributionInternal {
   private var state: State? = null
 
   @Synchronized
-  @Suppress("unused")
   fun init(context: Context, options: DistributionOptions) {
     if (state != null) {
       Log.e(TAG, "Distribution already initialized, ignoring Distribution.init().")
@@ -85,7 +112,17 @@ object DistributionInternal {
     }
 
     val handler = Handler(looper)
-    state = State(handler, options.okHttpClient)
+
+    // apiKey may be null if
+    val metaData = context.packageManager.getApplicationInfo(
+      context.packageName,
+      PackageManager.GET_META_DATA
+    ).metaData
+    val apiKey = getApiKey(metaData)
+
+    val tag = options.tag ?: "release"
+
+    state = State(handler, tag, apiKey, options.okHttpClient)
   }
 
   private fun getState(): State? {
@@ -96,29 +133,41 @@ object DistributionInternal {
     return theState
   }
 
-  suspend fun checkForUpdate(context: Context, apiKey: String?): UpdateStatus {
+  suspend fun checkForUpdate(context: Context): UpdateStatus {
     try {
       val state = getState()
       if (state == null) {
         Log.e(TAG, "Build distribution not initialized")
         return UpdateStatus.Error("Build distribution not initialized")
       }
-      if (apiKey == null) {
-        Log.e(TAG, "No API key available")
-        return UpdateStatus.Error("No API key available")
-      }
-      return doCheckForUpdate(context, state, apiKey)
+      return doCheckForUpdate(context, state)
     } catch (e: Exception) {
       Log.e(TAG, "Error: $e")
       return UpdateStatus.Error("Error: $e")
     }
   }
+
+  @Suppress("unused")
+  fun isEnabled(context: Context): Boolean {
+    try {
+      val state = getState()
+      return state?.apiKey != null
+    } catch (e: Exception) {
+      Log.e(TAG, "Error: $e")
+      return false
+    }
+  }
 }
 
 @OptIn(ExperimentalCoroutinesApi::class)
-private suspend fun doCheckForUpdate(context: Context, state: State, apiKey: String): UpdateStatus {
+private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStatus {
   // Despite the name context.packageName is the actually the application id.
   val applicationId = context.packageName
+  val apiKey = state.apiKey
+  if (apiKey == null) {
+    Log.e(TAG, "No API key available")
+    return UpdateStatus.Error("No API key available")
+  }
 
   val url = HttpUrl.Builder().apply {
     scheme("https")
@@ -126,7 +175,7 @@ private suspend fun doCheckForUpdate(context: Context, state: State, apiKey: Str
     addPathSegment("distribution")
     addPathSegment("checkForUpdates")
     addQueryParameter("apiKey", apiKey)
-    addQueryParameter("binaryIdentifier", "polar bears")
+    addQueryParameter("tag", state.tag)
     addQueryParameter("appId", applicationId)
     addQueryParameter("platform", "android")
   }.build()
