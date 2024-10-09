@@ -1,6 +1,6 @@
 package com.emergetools.snapshots
 
-import com.emergetools.snapshots.compose.EMGLocale
+import com.emergetools.snapshots.compose.localeForLanguageCode
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -8,49 +8,49 @@ class UtilsTest {
 
   @Test
   fun `makes en locale`() {
-    val locale = EMGLocale.forLanguageCode("en")
+    val locale = localeForLanguageCode("en")
     assertEquals("en", locale.language)
     assertEquals("", locale.country)
   }
 
   @Test
   fun `makes en-US locale`() {
-    val locale = EMGLocale.forLanguageCode("en-US")
+    val locale = localeForLanguageCode("en-US")
     assertEquals("en", locale.language)
     assertEquals("US", locale.country)
   }
 
   @Test
   fun `makes es locale`() {
-    val locale = EMGLocale.forLanguageCode("es")
+    val locale = localeForLanguageCode("es")
     assertEquals("es", locale.language)
     assertEquals("", locale.country)
   }
 
   @Test
   fun `makes es-ES locale`() {
-    val locale = EMGLocale.forLanguageCode("es-ES")
+    val locale = localeForLanguageCode("es-ES")
     assertEquals("es", locale.language)
     assertEquals("ES", locale.country)
   }
 
   @Test
   fun `makes es-rES locale`() {
-    val locale = EMGLocale.forLanguageCode("es-rES")
+    val locale = localeForLanguageCode("es-rES")
     assertEquals("es", locale.language)
     assertEquals("RES", locale.country)
   }
 
   @Test
   fun `makes de locale`() {
-    val locale = EMGLocale.forLanguageCode("de")
+    val locale = localeForLanguageCode("de")
     assertEquals("de", locale.language)
     assertEquals("", locale.country)
   }
 
   @Test
   fun `makes de-DE locale`() {
-    val locale = EMGLocale.forLanguageCode("de-DE")
+    val locale = localeForLanguageCode("de-DE")
     assertEquals("de", locale.language)
     assertEquals("DE", locale.country)
   }
