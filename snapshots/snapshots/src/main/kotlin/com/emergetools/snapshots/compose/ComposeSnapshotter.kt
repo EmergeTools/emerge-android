@@ -5,6 +5,7 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.reflect.ComposableMethod
@@ -140,11 +141,11 @@ private fun snapshot(
   previewConfig: ComposePreviewSnapshotConfig,
   previewParams: List<Any?> = listOf(null),
 ) {
-  val composeView = ComposeView(activity)
-  composeView.layoutParams =
-    LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-
   previewParams.forEachIndexed { index, prevParam ->
+    val composeView = ComposeView(activity)
+    composeView.layoutParams =
+      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+
     Log.d(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Invoking composable method with preview parameter: $prevParam"
@@ -169,16 +170,16 @@ private fun snapshot(
       }
     }
 
-    activity.setContentView(composeView)
+    activity.addContentView(composeView, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
+
+    // Need to update to accommodate param index in case when preview param is present
+    val saveablePreviewConfig = previewConfig.copy(
+      previewParameter = previewConfig.previewParameter?.copy(index = index)
+    )
 
     composeView.post {
-      // Need to update to accommodate param index in case when preview param is present
-      val saveablePreviewConfig = previewConfig.copy(
-        previewParameter = previewConfig.previewParameter?.copy(index = index)
-      )
-
       // Measure the composable agnostic of the parent constraints to layout properly in activity
-      val composableSize = measureComposableSize(composeView, saveablePreviewConfig)
+      val composableSize = measureComposableSize(composeView, previewConfig)
       val bitmap = captureBitmap(
         view = composeView,
         width = composableSize.width,
@@ -192,6 +193,9 @@ private fun snapshot(
           composePreviewSnapshotConfig = saveablePreviewConfig,
         )
       }
+
+      // Remove the view from the activity to ensure it doesn't interfere with the next preview param
+      (composeView.parent as? ViewGroup)?.removeView(composeView)
     }
   }
 }
