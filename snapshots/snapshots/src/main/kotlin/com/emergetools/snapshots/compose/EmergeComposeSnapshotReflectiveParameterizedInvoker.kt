@@ -35,6 +35,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     @Parameterized.Parameters(name = "{index}_{0}")
     fun data(): Iterable<EmergeComposeSnapshotReflectiveParameters> {
       val args = InstrumentationRegistry.getArguments()
+      Log.d(TAG, "Instrumentation arguments: $args")
 
       val invokeDataPath = args.getString(ARG_REFLECTIVE_INVOKE_DATA_PATH) ?: run {
         Log.w(TAG, "Missing invoke_data_path arg")
