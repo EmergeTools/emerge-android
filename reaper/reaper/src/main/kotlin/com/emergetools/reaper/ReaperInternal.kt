@@ -131,6 +131,12 @@ internal object ReaperInternal {
     val isDebug = isDebug(metaData)
     val baseUrl = getBaseUrl(metaData)
 
+    // If user provides a OkHttpClient stash that in WorkerResources so Workers use it when doing
+    // networking.
+    if (options.okHttpClient != null) {
+      WorkerResources.setOkHttpClient(options.okHttpClient)
+    }
+
     val delegate = ReaperImplDelegate(context.applicationContext, options)
     val theImpl = ReaperImpl(
       tracker = tracker,

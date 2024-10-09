@@ -1,6 +1,7 @@
 package com.emergetools.reaper
 
 import android.content.Context
+import okhttp3.OkHttpClient
 
 /**
  * The is the public SDK for Reaper, an Emergetools service which detects and deletes dead code in
@@ -47,6 +48,12 @@ data class ReaperOptions(
    * By default Reaper logs everything to logcat.
    */
   val logLevel: ReaperLogLevel = ReaperLogLevel.ALL,
+
+  /**
+   * Pass an existing OkHttpClient. If null Reaper will create it's own OkHttpClient.
+   * This allows reuse of existing OkHttpClient thread pools etc.
+   */
+  val okHttpClient: OkHttpClient? = null,
 )
 
 /**
