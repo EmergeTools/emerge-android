@@ -42,7 +42,8 @@ data class ComposePreviewSnapshotConfig(
       showSystemUi == null &&
       device == null &&
       apiLevel == null &&
-      wallpaper == null
+      wallpaper == null &&
+      previewParameter == null
   }
 
   /**
