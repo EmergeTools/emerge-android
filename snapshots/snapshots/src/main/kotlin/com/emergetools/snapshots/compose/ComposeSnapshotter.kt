@@ -171,12 +171,12 @@ private fun snapshot(
 
     activity.setContentView(composeView)
 
-    // Need to update to accommodate param index in case when preview param is present
-    val saveablePreviewConfig = previewConfig.copy(
-      previewParameter = previewConfig.previewParameter?.copy(index = index)
-    )
-
     composeView.post {
+      // Need to update to accommodate param index in case when preview param is present
+      val saveablePreviewConfig = previewConfig.copy(
+        previewParameter = previewConfig.previewParameter?.copy(index = index)
+      )
+
       // Measure the composable agnostic of the parent constraints to layout properly in activity
       val composableSize = measureComposableSize(composeView, saveablePreviewConfig)
       val bitmap = captureBitmap(
