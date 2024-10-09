@@ -7,9 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- Fixed a bug that prevented the number of pending reports from being limited. [#260](https://github.com/EmergeTools/emerge-android/pull/260)
-- Changed initialization and flushing to move much of the work off the
-  startup path and onto a dedicated background thread. [#259](https://github.com/EmergeTools/emerge-android/pull/259)
+- Add option to use existing OkHttpClient. [#270](https://github.com/EmergeTools/emerge-android/pull/272)
+- Add option to control log level. [#269](https://github.com/EmergeTools/emerge-android/pull/269)
 
 ## 1.0.0-rc02 - 2024-09-18
 

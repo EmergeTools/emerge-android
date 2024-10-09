@@ -18,7 +18,6 @@ import kotlinx.serialization.json.Json
 import okhttp3.Call
 import okhttp3.Callback
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
 import okhttp3.Response
@@ -42,7 +41,7 @@ internal class ReaperReportUploadWorker(
     const val EXTRA_DEBUG = "REAPER_DEBUG"
   }
 
-  private val client = OkHttpClient()
+  private val client = WorkerResources.getOkHttpClient()
 
   override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
     Log.d(
