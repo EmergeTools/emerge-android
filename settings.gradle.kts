@@ -39,5 +39,8 @@ include(
   ":snapshots:sample:ui-module",
   ":tools",
   ":benchmark",
+  ":distribution:distribution",
+  ":distribution:sample",
+  ":distribution:sample:app",
 )
 includeBuild("gradle-plugin")
