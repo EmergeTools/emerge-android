@@ -33,16 +33,16 @@ data class User(val name: String, val email: String)
 fun UserRow(user: User) {
   Row(
     modifier = Modifier
-        .fillMaxWidth()
-        .padding(16.dp),
+      .fillMaxWidth()
+      .padding(16.dp),
     verticalAlignment = Alignment.CenterVertically
   ) {
     // Profile picture
     Surface(
       modifier = Modifier
-          .size(40.dp)
-          .clip(CircleShape)
-          .background(Color.Cyan),
+        .size(40.dp)
+        .clip(CircleShape)
+        .background(Color.Cyan),
       color = Color.Transparent
     ) {
       // Center content vertically and horizontally
@@ -58,7 +58,6 @@ fun UserRow(user: User) {
         )
       }
     }
-
 
     Spacer(modifier = Modifier.width(16.dp))
 

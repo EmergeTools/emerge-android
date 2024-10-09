@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.reflect.ComposableMethod
@@ -21,8 +20,7 @@ import java.lang.reflect.Modifier
 import java.lang.reflect.ParameterizedType
 import kotlin.math.max
 
-
-@Suppress("TooGenericExceptionCaught")
+@Suppress("TooGenericExceptionCaught", "ThrowsCount")
 fun snapshotComposable(
   snapshotRule: EmergeSnapshots,
   activity: PreviewActivity,
@@ -39,10 +37,8 @@ fun snapshotComposable(
     val previewProviderClass: Class<out PreviewParameterProvider<*>>? =
       previewConfig.previewParameter?.providerClassFqn?.let {
         val clazz = Class.forName(it)
-        if (!PreviewParameterProvider::class.java.isAssignableFrom(clazz)) {
-          throw IllegalArgumentException(
-            "Preview parameter provider class must implement PreviewParameterProvider"
-          )
+        require(PreviewParameterProvider::class.java.isAssignableFrom(clazz)) {
+          "Preview parameter provider class must implement PreviewParameterProvider"
         }
         clazz as Class<out PreviewParameterProvider<*>>
       }
@@ -92,6 +88,7 @@ fun snapshotComposable(
       val limit = previewConfig.previewParameter?.limit ?: params.size
       params.take(limit)
     } ?: listOf(null)
+
     snapshot(
       activity = activity,
       snapshotRule = snapshotRule,
@@ -100,7 +97,6 @@ fun snapshotComposable(
       composableClass = klass,
       previewParams = previewParams,
     )
-
   } catch (e: Exception) {
     Log.e(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
@@ -151,6 +147,7 @@ private fun snapshot(
 
     composeView.setContent {
       SnapshotVariantProvider(previewConfig) {
+        @Suppress("SpreadOperator")
         if (Modifier.isStatic(composableMethod.asMethod().modifiers)) {
           // This is a top level or static method
           composableMethod.invoke(currentComposer, null, *args)
