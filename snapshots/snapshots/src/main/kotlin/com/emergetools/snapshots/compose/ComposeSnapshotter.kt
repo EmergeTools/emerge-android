@@ -89,6 +89,11 @@ fun snapshotComposable(
       params.take(limit)
     } ?: listOf(null)
 
+    Log.d(
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+      "Found ${previewParams.size} preview parameters for ${previewConfig.originalFqn}"
+    )
+
     snapshot(
       activity = activity,
       snapshotRule = snapshotRule,
@@ -140,6 +145,10 @@ private fun snapshot(
     LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
 
   previewParams.forEachIndexed { index, prevParam ->
+    Log.d(
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+      "Invoking composable method with preview parameter: $prevParam"
+    )
     val args = buildList {
       prevParam?.let(this::add)
       add(0)
