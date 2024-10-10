@@ -24,6 +24,8 @@ data class ComposePreviewSnapshotConfig(
   val apiLevel: Int? = null,
   val wallpaper: Int? = null,
 ) {
+  val functionName: String
+    get() = originalFqn.substringAfterLast(".")
 
   /**
    * We consider the "default" config to be one where no variants are set.
@@ -45,13 +47,15 @@ data class ComposePreviewSnapshotConfig(
   /**
    * Stable key name generation that takes into account all diff-relevant variants.
    */
-  fun keyName(): String {
+  fun keyName(shortFqn: Boolean = false): String {
+    val fqn = if (shortFqn) functionName else originalFqn
+
     if (isDefault()) {
-      return originalFqn
+      return fqn
     }
 
     return buildString {
-      append(originalFqn)
+      append(fqn)
       uiMode?.let { append("_uim_$it") }
       locale?.let { append("_loc_$it") }
       fontScale?.let { append("_fsc_$it") }
@@ -65,4 +69,5 @@ data class ComposePreviewSnapshotConfig(
       wallpaper?.let { append("_wp_$it") }
     }
   }
+
 }

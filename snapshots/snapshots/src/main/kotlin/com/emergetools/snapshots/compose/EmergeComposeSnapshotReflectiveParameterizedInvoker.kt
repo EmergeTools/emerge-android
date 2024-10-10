@@ -24,8 +24,9 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   data class EmergeComposeSnapshotReflectiveParameters(
     val previewConfig: ComposePreviewSnapshotConfig,
   ) {
-    // AndroidTestOrchestrator requires tests be
-    override fun toString(): String = previewConfig.hashCode().toString()
+    // AndroidTestOrchestrator requires a max name of 127 (inclusive of EmergeComposeSnapshotReflectiveParameterizedInvoker.reflectiveComposableInvoker[index_])
+    // This gives us a max limit of 40 characters for the parameter name, which we'll
+    override fun toString(): String = previewConfig.keyName(shortFqn = true).take(40)
   }
 
   companion object {
@@ -65,6 +66,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
 
   @Test
   fun reflectiveComposableInvoker() {
+    Log.i(TAG, "Running snapshot test ${parameter.previewConfig.keyName()}")
     // Force application to be debuggable to ensure PreviewActivity doesn't early exit
     val applicationInfo = InstrumentationRegistry.getInstrumentation().targetContext.applicationInfo
     applicationInfo.flags = applicationInfo.flags or ApplicationInfo.FLAG_DEBUGGABLE
