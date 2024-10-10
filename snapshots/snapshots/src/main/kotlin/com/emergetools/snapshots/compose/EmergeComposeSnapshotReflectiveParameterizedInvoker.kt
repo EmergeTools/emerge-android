@@ -25,7 +25,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     val previewConfig: ComposePreviewSnapshotConfig,
   ) {
     // AndroidTestOrchestrator requires tests be
-    override fun toString(): String = previewConfig.keyName(shortFqn = true)
+    override fun toString(): String = previewConfig.hashCode().toString()
   }
 
   companion object {
