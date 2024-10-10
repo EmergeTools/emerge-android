@@ -47,7 +47,7 @@ data class ComposePreviewSnapshotConfig(
    */
   fun keyName(shortFqn: Boolean = false): String {
     val fqn = if (shortFqn) {
-      originalFqn.substringBeforeLast('.')
+      originalFqn.substringAfterLast('.')
     } else {
       originalFqn
     }

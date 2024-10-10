@@ -24,6 +24,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   data class EmergeComposeSnapshotReflectiveParameters(
     val previewConfig: ComposePreviewSnapshotConfig,
   ) {
+    // AndroidTestOrchestrator requires tests be
     override fun toString(): String = previewConfig.keyName(shortFqn = true)
   }
 
@@ -35,7 +36,6 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     @Parameterized.Parameters(name = "{index}_{0}")
     fun data(): Iterable<EmergeComposeSnapshotReflectiveParameters> {
       val args = InstrumentationRegistry.getArguments()
-      Log.d(TAG, "Instrumentation arguments: $args")
 
       val invokeDataPath = args.getString(ARG_REFLECTIVE_INVOKE_DATA_PATH) ?: run {
         Log.w(TAG, "Missing invoke_data_path arg")
@@ -52,7 +52,6 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
       }
 
       return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots.mapIndexed { index, param ->
-        Log.d(TAG, "Parameterized ${index}: ${param.keyName()}")
         EmergeComposeSnapshotReflectiveParameters(param)
       }
     }
