@@ -32,18 +32,20 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     // https://github.com/android/android-test/issues/1935 is one reference issue
     override fun toString(): String {
       val key = previewConfig.keyName(shortFqn = true)
-      return if (key.length > MAX_PARAM_NAME_LENGTH) {
-        key.substring(
+      if (key.length > MAX_PARAM_NAME_LENGTH) {
+        return key.substring(
           0,
-          MAX_PARAM_NAME_LENGTH - 3
-        ) + "..."
-      } else key
+          MAX_PARAM_NAME_LENGTH - ELLIPSIS_SIZE
+        ) + ".".repeat(ELLIPSIS_SIZE)
+      }
+      return key
     }
   }
 
   companion object {
     const val TAG = "EmergeComposeSnapshotReflectiveParameterizedInvoker"
     const val ARG_REFLECTIVE_INVOKE_DATA_PATH = "invoke_data_path"
+    const val ELLIPSIS_SIZE = 3
     const val MAX_PARAM_NAME_LENGTH = 40
 
     @JvmStatic
