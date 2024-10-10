@@ -24,7 +24,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   data class EmergeComposeSnapshotReflectiveParameters(
     val previewConfig: ComposePreviewSnapshotConfig,
   ) {
-    override fun toString(): String = previewConfig.keyName()
+    override fun toString(): String = previewConfig.keyName().hashCode().toString()
   }
 
   companion object {
