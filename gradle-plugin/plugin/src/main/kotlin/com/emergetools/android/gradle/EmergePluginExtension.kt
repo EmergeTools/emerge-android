@@ -7,6 +7,7 @@ import com.emergetools.android.gradle.util.providers.GitCurrentBranchValueSource
 import com.emergetools.android.gradle.util.providers.GitHubPrNumberValueSource
 import com.emergetools.android.gradle.util.providers.GitHubRepoNameValueSource
 import com.emergetools.android.gradle.util.providers.GitHubRepoOwnerValueSource
+import com.emergetools.android.gradle.util.providers.GitPreviousShaValueSource
 import com.emergetools.android.gradle.util.providers.GitShaValueSource
 import org.gradle.api.Action
 import org.gradle.api.file.DirectoryProperty
@@ -92,6 +93,9 @@ abstract class VCSOptions @Inject constructor(
 
   val baseSha: Property<String> = objects.property(String::class.java)
     .convention(providers.of(GitBaseShaValueSource::class.java) {})
+
+  val previousSha: Property<String> = objects.property(String::class.java)
+    .convention(providers.of(GitPreviousShaValueSource::class.java) {})
 
   val branchName: Property<String> = objects.property(String::class.java)
     .convention(providers.of(GitCurrentBranchValueSource::class.java) {})

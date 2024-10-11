@@ -1,4 +1,5 @@
 {
+  "before": "github_previous_sha",
   "push": {
     "before": "github_before_sha"
   }

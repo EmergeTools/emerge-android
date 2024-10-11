@@ -74,6 +74,7 @@ abstract class SaveExtensionConfigTask : DefaultTask() {
     data class VCSOptionsData(
       val sha: String?,
       val baseSha: String?,
+      val previousSha: String?,
       val branchName: String?,
       val prNumber: String?,
       val gitHubOptions: GitHubOptionsData?,
@@ -84,6 +85,7 @@ abstract class SaveExtensionConfigTask : DefaultTask() {
       return VCSOptionsData(
         sha = sha.orNull,
         baseSha = baseSha.orNull,
+        previousSha = previousSha.orNull,
         branchName = branchName.orNull,
         prNumber = prNumber.orNull,
         gitHubOptions = gitHubOptions.dataFromExtension(),

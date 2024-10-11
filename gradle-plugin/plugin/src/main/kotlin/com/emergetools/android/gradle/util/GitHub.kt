@@ -57,8 +57,20 @@ internal class GitHub(private val execOperations: ExecOperations) {
   fun baseSha(): String? {
     return when {
       isPullRequest() -> getPullRequestEventData().pr.base.sha
-      // By default, we don't set a base sha for push events as it could trigger unexpected
-      // main branch comparison.
+      // By default, we don't automatically set a base sha for push events as it could trigger
+      // unexpected main branch comparison.
+      isPush() -> null
+      else -> null
+    }
+  }
+
+  /**
+   * Similar to [sha], but returns the sha for the commit right before the current one.
+   */
+  fun previousSha(): String? {
+    return when {
+      isPush() -> getPushEventData().before
+      isPullRequest() -> getPullRequestEventData().before
       else -> null
     }
   }
@@ -68,7 +80,15 @@ internal class GitHub(private val execOperations: ExecOperations) {
     return getPullRequestEventData().number
   }
 
+  private fun getPushEventData(): GitHubPushEvent {
+    return json.decodeFromString(getEventDataString())
+  }
+
   private fun getPullRequestEventData(): GitHubPullRequestEvent {
+    return json.decodeFromString(getEventDataString())
+  }
+
+  private fun getEventDataString(): String {
     val gitHubEventPath = checkNotNull(System.getenv("GITHUB_EVENT_PATH")) {
       "GITHUB_EVENT_PATH is not set"
     }
@@ -77,14 +97,19 @@ internal class GitHub(private val execOperations: ExecOperations) {
       "File $gitHubEventPath doesn't exist"
     }
 
-    val fileContent = file.readText()
-    return json.decodeFromString(fileContent)
+    return file.readText()
   }
+
+  @Serializable
+  data class GitHubPushEvent(
+    val before: String,
+  )
 
   @Serializable
   data class GitHubPullRequestEvent(
     @SerialName("pull_request")
     val pr: GitHubPullRequest,
+    val before: String,
     val number: Int,
   )
 

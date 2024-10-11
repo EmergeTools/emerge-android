@@ -37,7 +37,8 @@ emerge {
 }
 ```
 
-Latest version: [![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/com.emergetools.android)](https://plugins.gradle.org/plugin/com.emergetools.android).
+Latest
+version: [![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/com.emergetools.android)](https://plugins.gradle.org/plugin/com.emergetools.android).
 
 Only the `apiToken` property is required. By default, without any property set, `apiToken` will
 attempt to use the `EMERGE_API_TOKEN` env variable. Other configuration properties are
@@ -69,6 +70,7 @@ emerge {
   vcs {
     sha.set("..")
     baseSha.set("..")
+    previousSha.set("..")
     branchName.set("my-feature")
     prNumber.set("123")
   }
@@ -118,16 +120,17 @@ emerge {
 
 ##### Properties
 
-| Field                            | Type     | Default                | Description                                         |
-|----------------------------------|----------|------------------------|-----------------------------------------------------|
-| `sha`                            | `String` | HEAD branch commit sha | The Git sha of the HEAD build.                      |
-| `baseSha`                        | `String` | base branch commit sha | The Git sha of the base build to compare against.   |
-| `branchName`                     | `String` | Current branch name    | The name of the branch being built.                 |
-| `prNumber`                       | `String` |                        | The number of the pull request being built.         |
-| `gitHub.repoOwner`               | `String` | Repo ID before '/'     | The owner of the GitHub repository.                 |
-| `gitHub.repoName`                | `String` | Repo ID after '/'      | The name of the GitHub repository.                  |
-| `gitHub.includeEventInformation` | `String` | `true`                 | Whether to include GitHub event data for debugging. |
-| `gitLab.projectId`               | `String` |                        | The ID of the GitLab repository.                    |
+| Field                            | Type     | Default                         | Description                                         |
+|----------------------------------|----------|---------------------------------|-----------------------------------------------------|
+| `sha`                            | `String` | HEAD branch commit sha          | The Git sha of the HEAD build.                      |
+| `baseSha`                        | `String` | base branch commit sha          | The Git sha of the base build to compare against.   |
+| `previousSha`                    | `String` | HEAD branch previous commit sha | The Git sha of the commit before the HEAD build.    |
+| `branchName`                     | `String` | Current branch name             | The name of the branch being built.                 |
+| `prNumber`                       | `String` |                                 | The number of the pull request being built.         |
+| `gitHub.repoOwner`               | `String` | Repo ID before '/'              | The owner of the GitHub repository.                 |
+| `gitHub.repoName`                | `String` | Repo ID after '/'               | The name of the GitHub repository.                  |
+| `gitHub.includeEventInformation` | `String` | `true`                          | Whether to include GitHub event data for debugging. |
+| `gitLab.projectId`               | `String` |                                 | The ID of the GitLab repository.                    |
 
 ## App size
 
@@ -267,7 +270,7 @@ emerge {
 | Field               | Type           | Default       | Description                                                                                   |
 |---------------------|----------------|---------------|-----------------------------------------------------------------------------------------------|
 | `publishableApiKey` | `String`       |               | This key is used to identify Reaper reports sent from your application for your organization. |
-| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                  |
+| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                     |
 | `tag`               | `String`       | `release`     | The build tag to use for grouping builds in the Emerge dashboard.                             |
 
 ### Performance
@@ -327,13 +330,16 @@ emerge {
   // Optional, defaults to false, use to execute tasks without uploading to Emerge
   dryRun.set(false)
 
-verbose.set(false)
+  verbose.set(false)
 
   vcs {
     // Optional, will attempt to set automatically using Git information.
     sha.set("..")
     // Optional, will attempt to set automatically using Git information.
     baseSha.set("..")
+    // Optional, will attempt to set automatically using Git information.
+    previousSha.set("..")
+
     // Optional, will attempt to set automatically using Git information.
     branchName.set("my-feature")
 
@@ -442,11 +448,11 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 1. Update the `/gradle-plugin/CHANGELOG.md`
 1. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 1. Alt
-    - `git add *`
-    - `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
+  - `git add *`
+  - `git commit -m "Prepare for Gradle plugin release X.Y.Z"`
 1. `gt ss`
 1. Alt:
-    - `git push`
+  - `git push`
 1. Open PR
 1. Get PR approved and merge
 1. Create a new release on GitHub

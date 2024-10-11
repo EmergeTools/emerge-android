@@ -99,6 +99,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
 
     assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
     assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
+    assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
     assertEquals("123", configuration.vcsOptions!!.prNumber)
   }
 
@@ -125,6 +126,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
     )
 
     assertEquals("github_env_sha", configuration.vcsOptions!!.sha)
+    assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
     // BaseSha not set by default
     assertNull(configuration.vcsOptions!!.baseSha)
   }

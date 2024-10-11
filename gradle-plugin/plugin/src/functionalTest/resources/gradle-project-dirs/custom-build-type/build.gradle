@@ -33,6 +33,7 @@ emerge {
   vcs {
     sha = 'testSha'
     baseSha = 'testBaseSha'
+    previousSha = 'testPreviousSha'
     branchName = 'testBranchName'
     gitHub {
       repoOwner = 'repoOwner'

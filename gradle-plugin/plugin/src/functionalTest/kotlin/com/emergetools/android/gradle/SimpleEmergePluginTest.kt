@@ -129,5 +129,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
     assertEquals("testSha", configuration.vcsOptions!!.sha)
     assertEquals("testBaseSha", configuration.vcsOptions!!.baseSha)
+    assertEquals("testPreviousSha", configuration.vcsOptions!!.previousSha)
   }
 }
