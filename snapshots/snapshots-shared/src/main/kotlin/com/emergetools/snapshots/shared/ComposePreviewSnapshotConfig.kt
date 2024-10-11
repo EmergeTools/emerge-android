@@ -47,15 +47,13 @@ data class ComposePreviewSnapshotConfig(
   /**
    * Stable key name generation that takes into account all diff-relevant variants.
    */
-  fun keyName(shortFqn: Boolean = false): String {
-    val fqn = if (shortFqn) functionName else originalFqn
-
+  fun keyName(baseKey: String = originalFqn): String {
     if (isDefault()) {
-      return fqn
+      return baseKey
     }
 
     return buildString {
-      append(fqn)
+      append(baseKey)
       uiMode?.let { append("_uim_$it") }
       locale?.let { append("_loc_$it") }
       fontScale?.let { append("_fsc_$it") }
@@ -69,5 +67,4 @@ data class ComposePreviewSnapshotConfig(
       wallpaper?.let { append("_wp_$it") }
     }
   }
-
 }
