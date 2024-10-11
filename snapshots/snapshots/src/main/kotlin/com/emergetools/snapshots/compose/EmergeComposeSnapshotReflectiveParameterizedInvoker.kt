@@ -31,7 +31,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     // Different issues online have presented different limits, so we'll be conservative here.
     // https://github.com/android/android-test/issues/1935 is one reference issue
     override fun toString(): String {
-      val key = previewConfig.keyName(shortFqn = true)
+      val key = previewConfig.keyName(baseKey = previewConfig.functionName)
       if (key.length > MAX_PARAM_NAME_LENGTH) {
         return key.substring(
           0,
