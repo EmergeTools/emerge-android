@@ -298,6 +298,7 @@ class EmergePlugin : Plugin<Project> {
       val vcsOptionsHeading = addHeading("vcsOptions (optional, defaults to Git values)")
       addItem("sha: ${extension.vcsOptions.sha.orEmpty()}", vcsOptionsHeading)
       addItem("baseSha: ${extension.vcsOptions.baseSha.orEmpty()}", vcsOptionsHeading)
+      addItem("previousSha: ${extension.vcsOptions.previousSha.orEmpty()}", vcsOptionsHeading)
       addItem("branchName: ${extension.vcsOptions.branchName.orEmpty()}", vcsOptionsHeading)
       addItem("prNumber: ${extension.vcsOptions.prNumber.orEmpty()}", vcsOptionsHeading)
       addItem("gitHubOptions", vcsOptionsHeading)

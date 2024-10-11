@@ -1,4 +1,5 @@
 {
+  "before": "github_previous_sha",
   "number": 123,
   "pull_request": {
     "head": {

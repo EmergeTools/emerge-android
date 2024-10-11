@@ -20,11 +20,7 @@ internal class Git(private val execOperations: ExecOperations) {
   }
 
   fun previousSha(): String? {
-    return if (execOperations.execute("git rev-parse HEAD^ >/dev/null 2>&1") != null) {
-        execOperations.execute("git rev-parse HEAD^")
-    } else {
-        null
-    }
+    return execOperations.execute("git rev-parse HEAD^")
   }
 
   fun remoteUrl(remote: String? = primaryRemote()): String? {

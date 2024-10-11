@@ -22,6 +22,7 @@ data class EmergeUploadRequestData(
   val filename: String,
   val sha: String?,
   val baseSha: String?,
+  val previousSha: String?,
   val branch: String?,
   val repoName: String?,
   val prNumber: String?,

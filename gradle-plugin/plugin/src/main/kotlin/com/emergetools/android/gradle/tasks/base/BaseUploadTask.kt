@@ -99,6 +99,10 @@ abstract class BaseUploadTask : DefaultTask() {
 
   @get:Input
   @get:Optional
+  abstract val previousSha: Property<String>
+
+  @get:Input
+  @get:Optional
   abstract val branchName: Property<String>
 
   @get:Input
@@ -262,6 +266,7 @@ abstract class BaseUploadTask : DefaultTask() {
       filename = file.name,
       sha = sha.orNull,
       baseSha = baseSha.orNull,
+      previousSha = previousSha.orNull,
       branch = branchName.orNull,
       repoName = repoName,
       prNumber = prNumber.orNull,
@@ -323,6 +328,7 @@ abstract class BaseUploadTask : DefaultTask() {
 
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
+      previousSha.set(extension.vcsOptions.previousSha)
       branchName.set(extension.vcsOptions.branchName)
       prNumber.set(extension.vcsOptions.prNumber)
       gitHubRepoOwner.set(extension.vcsOptions.gitHubOptions.repoOwner)
