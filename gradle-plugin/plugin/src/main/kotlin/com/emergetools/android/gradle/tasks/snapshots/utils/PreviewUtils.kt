@@ -16,7 +16,6 @@ import org.jf.dexlib2.iface.value.LongEncodedValue
 import org.jf.dexlib2.iface.value.StringEncodedValue
 import org.slf4j.Logger
 import java.io.File
-import kotlin.math.log
 
 object PreviewUtils {
 

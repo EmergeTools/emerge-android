@@ -134,9 +134,6 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add(key)
             it.add(value)
           }
-          it.add("-e")
-          it.add("runnerBuilder")
-          it.add("com.emergetools.snapshots.runner.SnapshotsRunnerBuilder")
           if (composeSnapshotsJson.exists()) {
             push(
               localFile = composeSnapshotsJson.absolutePath,
