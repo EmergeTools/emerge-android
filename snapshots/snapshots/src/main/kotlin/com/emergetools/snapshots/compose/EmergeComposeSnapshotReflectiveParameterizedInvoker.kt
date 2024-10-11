@@ -67,8 +67,8 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
         ignoreUnknownKeys = true
       }
 
-      return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots.mapIndexed { index, param ->
-        EmergeComposeSnapshotReflectiveParameters(param)
+      return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots.map {
+        EmergeComposeSnapshotReflectiveParameters(it)
       }
     }
   }
