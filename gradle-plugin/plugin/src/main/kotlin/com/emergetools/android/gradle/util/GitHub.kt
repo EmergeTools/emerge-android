@@ -46,7 +46,7 @@ internal class GitHub(private val execOperations: ExecOperations) {
   fun sha(): String? {
     return when {
       isPush() -> System.getenv("GITHUB_SHA")
-      isPullRequest() -> getPullRequestEventData().pr.head.sha
+      isPullRequest() -> getGithubEventData().pr.head.sha
       else -> null
     }
   }
@@ -56,19 +56,34 @@ internal class GitHub(private val execOperations: ExecOperations) {
    */
   fun baseSha(): String? {
     return when {
-      isPullRequest() -> getPullRequestEventData().pr.base.sha
-      // By default, we don't set a base sha for push events as it could trigger unexpected
-      // main branch comparison.
+      isPush() -> {
+        if (execOperations.execute("git rev-parse HEAD^ >/dev/null 2>&1") != null) {
+          execOperations.execute("git rev-parse HEAD^")
+        } else {
+          null
+        }
+      }
+      isPullRequest() -> getGithubEventData().pr.base.sha
+      else -> null
+    }
+  }
+  /**
+   * Similar to [sha], but returns the sha for the commit right before the current one.
+   */
+  fun previousSha(): String? {
+    return when {
+      isPush() -> System.getenv("GITHUB_SHA")
+      isPullRequest() -> getGithubEventData().before
       else -> null
     }
   }
 
   fun prNumber(): Int? {
     if (!isPullRequest()) return null
-    return getPullRequestEventData().number
+    return getGithubEventData().number
   }
 
-  private fun getPullRequestEventData(): GitHubPullRequestEvent {
+  private fun getGithubEventData(): GitHubPullRequestEvent {
     val gitHubEventPath = checkNotNull(System.getenv("GITHUB_EVENT_PATH")) {
       "GITHUB_EVENT_PATH is not set"
     }

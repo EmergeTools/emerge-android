@@ -19,6 +19,14 @@ internal class Git(private val execOperations: ExecOperations) {
     return baseSha
   }
 
+  fun previousSha(): String? {
+    return if (execOperations.execute("git rev-parse HEAD^ >/dev/null 2>&1") != null) {
+        execOperations.execute("git rev-parse HEAD^")
+    } else {
+        null
+    }
+  }
+
   fun remoteUrl(remote: String? = primaryRemote()): String? {
     if (remote == null) return null
     return execOperations.execute("git config --get remote.$remote.url")
