@@ -24,6 +24,8 @@ data class ComposePreviewSnapshotConfig(
   val apiLevel: Int? = null,
   val wallpaper: Int? = null,
 ) {
+  val functionName: String
+    get() = originalFqn.substringAfterLast(".")
 
   /**
    * We consider the "default" config to be one where no variants are set.
@@ -45,13 +47,13 @@ data class ComposePreviewSnapshotConfig(
   /**
    * Stable key name generation that takes into account all diff-relevant variants.
    */
-  fun keyName(): String {
+  fun keyName(baseKey: String = originalFqn): String {
     if (isDefault()) {
-      return originalFqn
+      return baseKey
     }
 
     return buildString {
-      append(originalFqn)
+      append(baseKey)
       uiMode?.let { append("_uim_$it") }
       locale?.let { append("_loc_$it") }
       fontScale?.let { append("_fsc_$it") }

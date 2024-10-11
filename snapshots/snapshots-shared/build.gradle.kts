@@ -34,6 +34,8 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
   implementation(libs.kotlinx.serialization)
+
+  testImplementation(libs.junit)
 }
 
 tasks.register("generateMetaInfVersion") {
