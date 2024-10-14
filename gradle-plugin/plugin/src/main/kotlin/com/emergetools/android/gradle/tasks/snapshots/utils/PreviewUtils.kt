@@ -91,7 +91,6 @@ object PreviewUtils {
     }
 
     val methods = methodsWithConfigs.values.flatten().filter {
-      logger.info("Found preview method: ${previewFunctions.contains(it.originalFqn)} $it matching functions ${previewFunctions.joinToString()}")
       previewFunctions.isEmpty() || previewFunctions.contains(it.originalFqn)
     }
 
