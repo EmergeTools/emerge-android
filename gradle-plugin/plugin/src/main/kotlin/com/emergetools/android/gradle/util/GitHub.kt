@@ -70,7 +70,8 @@ internal class GitHub(private val execOperations: ExecOperations) {
   fun previousSha(): String? {
     return when {
       isPush() -> getPushEventData().before
-      isPullRequest() -> getPullRequestEventData().before
+      // Fallback to git previous sha if not available in the event data
+      isPullRequest() -> getPullRequestEventData().before ?: git.previousSha()
       else -> null
     }
   }
@@ -109,8 +110,8 @@ internal class GitHub(private val execOperations: ExecOperations) {
   data class GitHubPullRequestEvent(
     @SerialName("pull_request")
     val pr: GitHubPullRequest,
-    val before: String,
     val number: Int,
+    val before: String? = null,
   )
 
   @Serializable
