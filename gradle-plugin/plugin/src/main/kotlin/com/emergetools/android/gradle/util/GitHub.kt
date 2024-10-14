@@ -70,8 +70,9 @@ internal class GitHub(private val execOperations: ExecOperations) {
   fun previousSha(): String? {
     return when {
       isPush() -> getPushEventData().before
-      // Fallback to git previous sha if not available in the event data
-      isPullRequest() -> getPullRequestEventData().before ?: git.previousSha()
+      // In the case of the first commit on a PR, the before sha is not available.
+      // We want previousSha to be the last commit on main, so we'll fallback to baseSha
+      isPullRequest() -> getPullRequestEventData().before ?: baseSha()
       else -> null
     }
   }
