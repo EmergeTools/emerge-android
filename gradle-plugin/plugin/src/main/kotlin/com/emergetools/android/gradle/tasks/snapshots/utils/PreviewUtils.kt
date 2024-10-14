@@ -34,6 +34,7 @@ object PreviewUtils {
   fun findPreviews(
     extractedApkDirectory: File,
     includePrivatePreviews: Boolean,
+    previewFunctions: List<String>,
     logger: Logger,
   ): ComposeSnapshots {
 
@@ -89,8 +90,13 @@ object PreviewUtils {
       }
     }
 
+    val methods = methodsWithConfigs.values.flatten().filter {
+      logger.info("Found preview method: ${previewFunctions.contains(it.originalFqn)} $it matching functions ${previewFunctions.joinToString()}")
+      previewFunctions.isEmpty() || previewFunctions.contains(it.originalFqn)
+    }
+
     return ComposeSnapshots(
-      snapshots = methodsWithConfigs.values.flatten()
+      snapshots = methods
     )
   }
 

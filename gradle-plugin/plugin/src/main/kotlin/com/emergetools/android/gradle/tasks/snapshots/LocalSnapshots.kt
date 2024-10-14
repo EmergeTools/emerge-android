@@ -1,7 +1,7 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
-import com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
+import com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils
 import com.emergetools.android.gradle.util.adb.AdbHelper
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
@@ -30,11 +30,12 @@ abstract class LocalSnapshots : DefaultTask() {
   private val arguments = mutableMapOf<String, String>()
 
   @Option(
-    option = "class",
-    description = "A single class, a single method or a comma-separated list of classes"
+    option = "preview",
+    description = "A single fully qualified preview method" +
+      " or a comma-separated list of fully qualified preview methods"
   )
-  fun setClazz(clazz: String) {
-    arguments["class"] = clazz
+  fun setPreviews(previewFunctions: String) {
+    arguments["previews"] = previewFunctions
   }
 
   @get:Inject
@@ -100,11 +101,14 @@ abstract class LocalSnapshots : DefaultTask() {
       outputDir = extractedApkDir
     )
 
+    val previews = arguments["previews"]?.split(",")?.map(String::trim) ?: emptyList()
     val composeSnapshots = PreviewUtils.findPreviews(
       extractedApkDir,
       includePrivatePreviews.getOrElse(true),
+      previews,
       logger
     )
+
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
     val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
     composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))
