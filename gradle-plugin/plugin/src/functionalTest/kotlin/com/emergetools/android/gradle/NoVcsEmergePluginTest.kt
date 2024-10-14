@@ -4,7 +4,9 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
+import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREventNoBefore
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPushEvent
+import junit.framework.TestCase
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import org.junit.Assert.assertEquals
@@ -129,5 +131,28 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
     assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
     // BaseSha not set by default
     assertNull(configuration.vcsOptions!!.baseSha)
+  }
+
+  @Test
+  fun `Assert previousSha and baseSha are the same on first commit to PR`() {
+    val runner = EmergeGradleRunner.create("no-vcs-params")
+    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
+
+    runner
+      .withArguments("saveExtensionConfig", "--outputPath", configurationJson.path)
+      .withDebugTasks()
+      .withGitHubPREventNoBefore()
+      .assert { result, _ ->
+        result.assertSuccessfulTask(":saveExtensionConfig")
+      }
+      .build()
+
+    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
+      configurationJson.inputStream()
+    )
+
+    TestCase.assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
+    TestCase.assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
+    TestCase.assertEquals("github_base_sha", configuration.vcsOptions!!.previousSha)
   }
 }
