@@ -6,7 +6,6 @@ import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Com
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREventNoBefore
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPushEvent
-import junit.framework.TestCase
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
 import org.junit.Assert.assertEquals
@@ -151,8 +150,8 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
       configurationJson.inputStream()
     )
 
-    TestCase.assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
-    TestCase.assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
-    TestCase.assertEquals("github_base_sha", configuration.vcsOptions!!.previousSha)
+    assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
+    assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
+    assertEquals("github_base_sha", configuration.vcsOptions!!.previousSha)
   }
 }
