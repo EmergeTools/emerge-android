@@ -4,6 +4,7 @@ import org.jf.dexlib2.AccessFlags
 import org.jf.dexlib2.DexFileFactory
 import org.jf.dexlib2.dexbacked.DexBackedClassDef
 import org.jf.dexlib2.dexbacked.DexBackedMethod
+import org.jf.dexlib2.dexbacked.value.DexBackedTypeEncodedValue
 import org.jf.dexlib2.iface.Annotation
 import org.jf.dexlib2.iface.DexFile
 import org.jf.dexlib2.iface.value.AnnotationEncodedValue
@@ -15,6 +16,7 @@ import org.jf.dexlib2.iface.value.LongEncodedValue
 import org.jf.dexlib2.iface.value.StringEncodedValue
 import org.slf4j.Logger
 import java.io.File
+import kotlin.math.log
 
 object PreviewUtils {
 
@@ -23,6 +25,7 @@ object PreviewUtils {
     "Landroidx/compose/ui/tooling/preview/Preview\$Container;"
   const val IGNORE_SNAPSHOT_ANNOTATION =
     "Lcom/emergetools/snapshots/annotations/IgnoreEmergeSnapshot;"
+  const val PREVIEW_PARAMETER_ANNOTATION = "Landroidx/compose/ui/tooling/preview/PreviewParameter;"
 
   const val COMPOSER_SIGNATURE = "Landroidx/compose/runtime/Composer;"
 
@@ -31,6 +34,7 @@ object PreviewUtils {
   fun findPreviews(
     extractedApkDirectory: File,
     includePrivatePreviews: Boolean,
+    previewFunctions: List<String>,
     logger: Logger,
   ): ComposeSnapshots {
 
@@ -73,30 +77,64 @@ object PreviewUtils {
           return@forEach
         }
 
-        if (method.parameters.size != 2 || method.parameters.map { it.type } != listOf(
-            COMPOSER_SIGNATURE, "I"
-          )) {
-          logger.info(
-            "Ignoring snapshot for method: $methodKey as it does not have a no-arg signature"
-          )
+        if (!hasSupportedMethodParameters(method, logger)) {
+          logger.info("Ignoring snapshot for method: $methodKey as params are not supported.")
           return@forEach
         }
 
         val configs = previewAnnotations.flatMap { previewAnnotation ->
-          composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation)
+          composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation, logger)
         }
 
         methodsWithConfigs[methodKey] = configs
       }
     }
 
+    val methods = methodsWithConfigs.values.flatten().filter {
+      previewFunctions.isEmpty() || previewFunctions.contains(it.originalFqn)
+    }
+
     return ComposeSnapshots(
-      snapshots = methodsWithConfigs.values.flatten()
+      snapshots = methods
     )
   }
 
   private fun classSignatureToFqn(signature: String): String {
     return signature.replace('/', '.').substring(1, signature.length - 1)
+  }
+
+  private fun hasSupportedMethodParameters(method: DexBackedMethod, logger: Logger): Boolean {
+    // Only supporting 0-1 preview params
+    val methodParamCount = method.parameters.size
+    if (methodParamCount < 2 || methodParamCount > 3) {
+      logger.info("Method ${method.name} has $methodParamCount parameters, expected 2 or 3")
+      return false
+    }
+
+    // Check last 2 params are (Composer, int)
+    val paramTypes = method.parameters.map { it.type }
+    if (paramTypes.takeLast(2) != listOf(COMPOSER_SIGNATURE, "I")) {
+      logger.info("Method ${method.name} has unsupported parameter types: $paramTypes")
+      return false
+    }
+
+    if (methodParamCount == 3) {
+      // Check first param annotated with @PreviewParameter
+      val firstParam = method.parameters[0]
+      val hasPreviewParameterAnnotation = firstParam.annotations.any { annotation ->
+        annotation.type == PREVIEW_PARAMETER_ANNOTATION
+      }
+
+      if (!hasPreviewParameterAnnotation) {
+        logger.info("Method ${method.name} has 3 parameters, but the first one is not annotated with @PreviewParameter")
+        return false
+      }
+
+      logger.info("Method ${method.name} has 3 parameters, and the first one is annotated with @PreviewParameter!")
+    }
+
+    logger.info("Method ${method.name} has supported parameters!")
+    return true
   }
 
   /**
@@ -149,9 +187,27 @@ object PreviewUtils {
   private fun composePreviewSnapshotConfigsFromPreviewAnnotation(
     method: DexBackedMethod,
     annotation: Annotation,
+    logger: Logger,
   ): List<ComposePreviewSnapshotConfig> {
     val className = classSignatureToFqn(method.definingClass)
     val originalFqn = fqnForPreviewMethod(method)
+
+    var previewParameter: PreviewParameter? = null
+    if (method.parameters.size == 3) {
+      val firstParam =  method.parameters[0]
+      val paramName = firstParam.name ?: throw IllegalStateException("Preview parameter must have a name")
+
+      val previewParamAnnotation = firstParam.annotations.first { it.type == PREVIEW_PARAMETER_ANNOTATION }
+      val providerClassSignature = previewParamAnnotation.elements.first { it.name == "provider" }.value as DexBackedTypeEncodedValue
+      val previewParamLimit = previewParamAnnotation.elements.firstOrNull { it.name == "limit" }?.value as? IntEncodedValue
+
+      logger.info("Found @PreviewParameter annotation for method ${method.name}, parameter: $paramName, provider: ${providerClassSignature.value}, limit: ${previewParamLimit?.value}")
+      previewParameter = PreviewParameter(
+        parameterName = paramName,
+        providerClassFqn = classSignatureToFqn(providerClassSignature.value),
+        limit = previewParamLimit?.value,
+      )
+    }
 
     return when (annotation.type) {
       PREVIEW_ANNOTATION -> listOf(
@@ -169,6 +225,7 @@ object PreviewUtils {
           backgroundColor = (annotation.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
           showSystemUi = (annotation.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
           device = (annotation.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
+          previewParameter = previewParameter,
         )
       )
 
@@ -190,6 +247,7 @@ object PreviewUtils {
             backgroundColor = (preview.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
             showSystemUi = (preview.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
             device = (preview.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
+            previewParameter = previewParameter,
           )
         }.orEmpty()
       }

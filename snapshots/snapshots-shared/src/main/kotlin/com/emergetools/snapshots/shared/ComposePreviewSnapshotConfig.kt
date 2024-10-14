@@ -9,6 +9,7 @@ data class ComposePreviewSnapshotConfig(
   val fullyQualifiedClassName: String,
   val originalFqn: String,
   val isAppStoreSnapshot: Boolean? = null,
+  val previewParameter: PreviewParameter? = null,
   // Preview annotation params:
   val name: String? = null,
   val group: String? = null,
@@ -41,7 +42,8 @@ data class ComposePreviewSnapshotConfig(
       showSystemUi == null &&
       device == null &&
       apiLevel == null &&
-      wallpaper == null
+      wallpaper == null &&
+      previewParameter == null
   }
 
   /**
@@ -65,6 +67,18 @@ data class ComposePreviewSnapshotConfig(
       device?.let { append("_dev_$it") }
       apiLevel?.let { append("_api_$it") }
       wallpaper?.let { append("_wp_$it") }
+      previewParameter?.let {
+        append("_param_${it.parameterName}")
+        it.index?.let { idx -> append("_idx_$idx") }
+      }
     }
   }
 }
+
+@Serializable
+data class PreviewParameter(
+  val parameterName: String,
+  val providerClassFqn: String,
+  val limit: Int? = null,
+  val index: Int? = null,
+)
