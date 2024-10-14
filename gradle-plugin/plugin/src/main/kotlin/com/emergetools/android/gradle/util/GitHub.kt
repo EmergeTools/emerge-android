@@ -70,7 +70,9 @@ internal class GitHub(private val execOperations: ExecOperations) {
   fun previousSha(): String? {
     return when {
       isPush() -> getPushEventData().before
-      isPullRequest() -> getPullRequestEventData().before
+      // In the case of the first commit on a PR, the before sha is not available.
+      // We want previousSha to be the last commit on main, so we'll fallback to baseSha
+      isPullRequest() -> getPullRequestEventData().before ?: baseSha()
       else -> null
     }
   }
@@ -109,8 +111,8 @@ internal class GitHub(private val execOperations: ExecOperations) {
   data class GitHubPullRequestEvent(
     @SerialName("pull_request")
     val pr: GitHubPullRequest,
-    val before: String,
     val number: Int,
+    val before: String? = null,
   )
 
   @Serializable
