@@ -5,6 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.1 - 2024-10-15
+
+- Support @PreviewParameter annotated params in snapshots. (Requires snapshots SDK 1.3.0-rc01 or
+  later). [#271](https://github.com/EmergeTools/emerge-android/pull/271)
+- Add `previousSha` field to upload for use with history
+  tracking. [#274](https://github.com/EmergeTools/emerge-android/pull/274)
+
 ## 4.0.0 - 2024-08-26
 
 4.0.0 brings support for Reaper, Emerge's SDK to detect dead code at runtime, as well as cleanups,
