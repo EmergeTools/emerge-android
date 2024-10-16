@@ -26,3 +26,7 @@ allprojects {
     add("detektPlugins", rootProject.libs.detekt.formatting)
   }
 }
+
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
+  exclude("**/reaper/sample/stress/**")
+}
