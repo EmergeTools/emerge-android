@@ -100,7 +100,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
 
     assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
     assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
-    assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
+    assertEquals(null, configuration.vcsOptions!!.previousSha)
     assertEquals("123", configuration.vcsOptions!!.prNumber)
   }
 
@@ -130,28 +130,5 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
     assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
     // BaseSha not set by default
     assertNull(configuration.vcsOptions!!.baseSha)
-  }
-
-  @Test
-  fun `Assert previousSha and baseSha are the same on first commit to PR`() {
-    val runner = EmergeGradleRunner.create("no-vcs-params")
-    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
-
-    runner
-      .withArguments("saveExtensionConfig", "--outputPath", configurationJson.path)
-      .withDebugTasks()
-      .withGitHubPREventNoBefore()
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":saveExtensionConfig")
-      }
-      .build()
-
-    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
-      configurationJson.inputStream()
-    )
-
-    assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
-    assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
-    assertEquals("github_base_sha", configuration.vcsOptions!!.previousSha)
   }
 }
