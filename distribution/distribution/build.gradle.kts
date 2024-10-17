@@ -47,6 +47,9 @@ dependencies {
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.kotlin.coroutines.android)
   implementation(libs.androidx.startup.runtime)
+  implementation(libs.androidx.runtime.android)
+  implementation(libs.androidx.foundation.layout.android)
+  implementation(libs.androidx.material3.android)
 
   testImplementation(libs.google.truth)
 
