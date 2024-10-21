@@ -23,10 +23,11 @@ object Distribution {
   }
 
   /**
-   *
+   * Allows testing if build distribution is in use.
+   * @return true iff build distribution is enabled
    */
-  fun isEnabled(context: Context): Boolean {
-    return DistributionInternal.isEnabled(context)
+  fun isEnabled(): Boolean {
+    return DistributionInternal.isEnabled()
   }
 
   /**
