@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- Remove context argument from `Distribution.isEnabled` [#284](https://github.com/EmergeTools/emerge-android/pull/284).
+
 ## 0.0.1 - 2024-10-08
 
 - Initial release

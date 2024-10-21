@@ -147,8 +147,7 @@ object DistributionInternal {
     }
   }
 
-  @Suppress("unused")
-  fun isEnabled(context: Context): Boolean {
+  fun isEnabled(): Boolean {
     try {
       val state = getState()
       return state?.apiKey != null
