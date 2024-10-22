@@ -6,8 +6,8 @@ import android.util.DisplayMetrics
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 
 data class DeviceSpec(
-  val widthDp: Int,
-  val heightDp: Int,
+  val widthDp: Int?,
+  val heightDp: Int?,
   val dpi: Int,
 ) {
   // Calculate the density factor the same way Android does
@@ -15,10 +15,10 @@ data class DeviceSpec(
 
   // For pixel calculations, we need to use the actual density
   val widthPixels: Int
-    get() = if (widthDp < 0) -1 else (widthDp * density).toInt()
+    get() = if (widthDp == null) 0 else (widthDp * density).toInt()
 
   val heightPixels: Int
-    get() = if (heightDp < 0) -1 else (heightDp * density).toInt()
+    get() = if (heightDp == null) 0 else (heightDp * density).toInt()
 
   // This is used for the preview scaling factor
   val scalingFactor: Float
@@ -220,8 +220,8 @@ fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
       }
 
       DeviceSpec(
-        heightDp = heightDp ?: -1,
-        widthDp = widthDp ?: -1,
+        heightDp = heightDp,
+        widthDp = widthDp,
         // https://cs.android.com/android-studio/platform/tools/adt/idea/+/mirror-goog-studio-main:preview-elements/src/com/android/tools/preview/config/Constants.kt;l=80
         dpi = devicePreviewString?.dpi ?: DisplayMetrics.DENSITY_420,
       )

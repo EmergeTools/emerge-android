@@ -220,7 +220,7 @@ private fun measureViewSize(
       )
     }
 
-    deviceSpec?.widthPixels != null && deviceSpec.widthPixels != -1 ->
+    deviceSpec?.widthPixels != null && deviceSpec.widthPixels > 0 ->
       View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.EXACTLY)
 
     else ->
@@ -235,7 +235,7 @@ private fun measureViewSize(
       )
     }
 
-    deviceSpec?.heightPixels != null && deviceSpec.heightPixels != -1 ->
+    deviceSpec?.heightPixels != null && deviceSpec.heightPixels > 0 ->
       View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.EXACTLY)
 
     else ->
