@@ -5,6 +5,11 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.2 - 2024-10-22
+
+- Remove `previousSha` from PR
+  uploads. [#281](https://github.com/EmergeTools/emerge-android/pull/281)
+
 ## 4.0.1 - 2024-10-15
 
 - Support @PreviewParameter annotated params in snapshots. (Requires snapshots SDK 1.3.0-rc01 or

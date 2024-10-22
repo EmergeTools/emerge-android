@@ -19,7 +19,7 @@ benchmark-junit4 = "1.2.4"
 mockito = "4.0.0"
 
 # internal
-emerge-gradle-plugin = "4.0.1"
+emerge-gradle-plugin = "4.0.2"
 emerge-performance = "2.1.2"
 emerge-reaper = "1.0.0-rc02"
 emerge-snapshots = "1.3.0-rc01"
