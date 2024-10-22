@@ -4,6 +4,7 @@ package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import kotlin.math.roundToInt
 
 data class DeviceSpec(
   val widthDp: Int?,
@@ -15,19 +16,24 @@ data class DeviceSpec(
 
   // For pixel calculations, we need to use the actual density
   val widthPixels: Int
-    get() = if (widthDp == null) 0 else (widthDp * density).toInt()
+    get() = if (widthDp == null) 0 else (widthDp * density).roundToTen()
 
   val heightPixels: Int
-    get() = if (heightDp == null) 0 else (heightDp * density).toInt()
+    get() = if (heightDp == null) 0 else (heightDp * density).roundToTen()
 
   // This is used for the preview scaling factor
   val scalingFactor: Float
     get() = density
+
+  // Restrict width/height to be multiples of 10
+  private fun Float.roundToTen(): Int {
+    return (this / 10).roundToInt() * 10
+  }
 }
 
 // https://m3.material.io/blog/device-metrics#putting-it-all-together
 // Calculated by dimension / (ppi / 160)
-val KNOWN_DEVICE_SPECS = mapOf<String, DeviceSpec>(
+val KNOWN_DEVICE_SPECS = mapOf(
   // https://www.gsmarena.com/asus_google_nexus_7-4850.php
   "Nexus 7" to DeviceSpec(
     widthDp = 593,
@@ -132,7 +138,7 @@ val KNOWN_DEVICE_SPECS = mapOf<String, DeviceSpec>(
   ),
   // https://www.gsmarena.com/google_pixel_4-9896.php
   "pixel_4" to DeviceSpec(
-    widthDp = 392,
+    widthDp = 390,
     heightDp = 822,
     dpi = 444,
   ),
