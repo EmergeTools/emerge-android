@@ -210,6 +210,14 @@ private fun measureViewSize(
   val widthMeasureSpec = when {
     deviceSpec?.widthPixels != null && deviceSpec.widthPixels != -1 ->
       View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.EXACTLY)
+
+    previewConfig.widthDp != null -> {
+      View.MeasureSpec.makeMeasureSpec(
+        dpToPx(previewConfig.widthDp!!, view),
+        View.MeasureSpec.UNSPECIFIED
+      )
+    }
+
     else ->
       View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
   }
@@ -217,8 +225,16 @@ private fun measureViewSize(
   val heightMeasureSpec = when {
     deviceSpec?.heightPixels != null && deviceSpec.heightPixels != -1 ->
       View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.EXACTLY)
+
+    previewConfig.heightDp != null -> {
+      View.MeasureSpec.makeMeasureSpec(
+        dpToPx(previewConfig.heightDp!!, view),
+        View.MeasureSpec.UNSPECIFIED
+      )
+    }
+
     else ->
-      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.AT_MOST)
   }
 
   view.measure(widthMeasureSpec, heightMeasureSpec)
@@ -235,8 +251,8 @@ private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
   }
 }
 
-private fun dpToPx(view: View, dp: Int, scalingFactor: Float): Int {
-  return (dp * scalingFactor).toInt()
+private fun dpToPx(dp: Int, view: View): Int {
+  return (dp * view.resources.displayMetrics.density).toInt()
 }
 
 fun captureBitmap(
