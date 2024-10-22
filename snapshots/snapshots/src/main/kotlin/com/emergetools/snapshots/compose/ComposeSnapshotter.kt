@@ -179,7 +179,7 @@ private fun snapshot(
     }
 
     // Add the ComposeView to the activity
-    activity.setContentView(composeView)
+    activity.addContentView(composeView, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
 
     composeView.post {
       val size = measureViewSize(composeView, previewConfig)
@@ -219,7 +219,7 @@ private fun measureViewSize(
     }
 
     else ->
-      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+      View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.AT_MOST)
   }
 
   val heightMeasureSpec = when {
@@ -234,7 +234,7 @@ private fun measureViewSize(
     }
 
     else ->
-      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.AT_MOST)
+      View.MeasureSpec.makeMeasureSpec(view.height, View.MeasureSpec.AT_MOST)
   }
 
   view.measure(widthMeasureSpec, heightMeasureSpec)
