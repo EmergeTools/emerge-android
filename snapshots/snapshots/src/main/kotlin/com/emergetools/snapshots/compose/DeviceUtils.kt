@@ -26,6 +26,7 @@ data class DeviceSpec(
     get() = density
 
   // Restrict width/height to be multiples of 10
+  @Suppress("MagicNumber")
   private fun Float.roundToTen(): Int {
     return (this / 10).roundToInt() * 10
   }
