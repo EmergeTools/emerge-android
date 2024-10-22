@@ -43,17 +43,9 @@ fun SnapshotVariantProvider(
     setLocale(locale)
     parseDevicePreviewString(config.device)?.orientation?.let {
       orientation = when (it) {
-        "landscape" -> {
-          Configuration.ORIENTATION_LANDSCAPE
-        }
-
-        "portrait" -> {
-          Configuration.ORIENTATION_PORTRAIT
-        }
-
-        else -> {
-          Configuration.ORIENTATION_UNDEFINED
-        }
+        "landscape" -> Configuration.ORIENTATION_LANDSCAPE
+        "portrait" -> Configuration.ORIENTATION_PORTRAIT
+        else -> Configuration.ORIENTATION_UNDEFINED
       }
     }
   }

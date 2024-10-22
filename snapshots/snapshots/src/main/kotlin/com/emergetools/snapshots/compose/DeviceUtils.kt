@@ -4,7 +4,6 @@ package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import kotlin.math.roundToInt
 
 data class DeviceSpec(
   val widthDp: Int,
