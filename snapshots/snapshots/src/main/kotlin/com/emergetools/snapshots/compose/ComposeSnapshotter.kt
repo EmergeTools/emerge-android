@@ -208,9 +208,6 @@ private fun measureViewSize(
 
   // Use exact measurements when we have them
   val widthMeasureSpec = when {
-    deviceSpec?.widthPixels != null && deviceSpec.widthPixels != -1 ->
-      View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.EXACTLY)
-
     previewConfig.widthDp != null -> {
       View.MeasureSpec.makeMeasureSpec(
         dpToPx(previewConfig.widthDp!!, view),
@@ -218,20 +215,23 @@ private fun measureViewSize(
       )
     }
 
+    deviceSpec?.widthPixels != null && deviceSpec.widthPixels != -1 ->
+      View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.EXACTLY)
+
     else ->
       View.MeasureSpec.makeMeasureSpec(view.width, View.MeasureSpec.AT_MOST)
   }
 
   val heightMeasureSpec = when {
-    deviceSpec?.heightPixels != null && deviceSpec.heightPixels != -1 ->
-      View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.EXACTLY)
-
     previewConfig.heightDp != null -> {
       View.MeasureSpec.makeMeasureSpec(
         dpToPx(previewConfig.heightDp!!, view),
         View.MeasureSpec.UNSPECIFIED
       )
     }
+
+    deviceSpec?.heightPixels != null && deviceSpec.heightPixels != -1 ->
+      View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.EXACTLY)
 
     else ->
       View.MeasureSpec.makeMeasureSpec(view.height, View.MeasureSpec.AT_MOST)

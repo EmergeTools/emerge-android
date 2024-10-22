@@ -3,7 +3,6 @@
 package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
-import android.util.Log
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.roundToInt
 
@@ -216,11 +215,9 @@ fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
       var heightDp = config.heightDp ?: devicePreviewString?.heightDp
 
       if (devicePreviewString?.orientation == "landscape") {
-        Log.d("SnapshotVariantProvider", "Flipping width $widthDp and height $heightDp")
         val height = heightDp
         heightDp = widthDp
         widthDp = height
-        Log.d("SnapshotVariantProvider", "Flipped new width $widthDp and height $heightDp")
       }
 
       DeviceSpec(
@@ -276,11 +273,6 @@ private fun parseSpecContent(specContent: String): DevicePreviewString {
   val paramPattern = Regex("""([^,:\s]\w+)=([^,]+)""")
   val params = paramPattern.findAll(specContent)
     .associate { it.groupValues[1].trim() to it.groupValues[2].trim() }
-
-  Log.d(
-    "SnapshotVariantProvider",
-    "params: ${params.entries.joinToString(separator = ",") { "${it.key}=${it.value}" }}"
-  )
 
   return DevicePreviewString(
     type = "spec",

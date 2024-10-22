@@ -23,8 +23,8 @@ fun PortraitLandscapeView() {
   BoxWithConstraints(modifier = Modifier.fillMaxSize()) {
     val aspectRatio = maxWidth / maxHeight
 
+    // Repro of client case with different layouts for different screen sizes
     if (maxWidth < 840.dp) {
-      // Portrait mode for phones, tablets, and unfolded foldables
       Column(
         modifier = Modifier.fillMaxSize()
       ) {
@@ -41,14 +41,11 @@ fun PortraitLandscapeView() {
             .weight(1f)
             .padding(16.dp)
         ) {
-          // Card content can be added here
           Box(modifier = Modifier.fillMaxSize()) // Placeholder for card content
         }
       }
     } else {
-      // Landscape mode or desktop
       if (aspectRatio >= 2) {
-        // Mobile landscape
         Row(
           modifier = Modifier.fillMaxSize()
         ) {
@@ -65,12 +62,10 @@ fun PortraitLandscapeView() {
               .fillMaxHeight()
               .padding(16.dp)
           ) {
-            // Card content can be added here
             Box(modifier = Modifier.fillMaxSize()) // Placeholder for card content
           }
         }
       } else {
-        // Portrait mode for tablets and unfolded foldables, landscape for desktops
         Column(
           modifier = Modifier.fillMaxSize()
         ) {
@@ -87,7 +82,6 @@ fun PortraitLandscapeView() {
               .weight(1f)
               .padding(16.dp)
           ) {
-            // Card content can be added here
             Box(modifier = Modifier.fillMaxSize()) // Placeholder for card content
           }
         }
@@ -95,7 +89,6 @@ fun PortraitLandscapeView() {
     }
   }
 }
-
 
 @Preview(device = Devices.PIXEL_5)
 @Preview(name = "Phone (Landscape)", device = "spec:width=430dp,height=860dp,orientation=landscape")
