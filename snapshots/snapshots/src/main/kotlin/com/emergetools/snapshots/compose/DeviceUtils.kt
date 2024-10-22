@@ -16,10 +16,10 @@ data class DeviceSpec(
 
   // For pixel calculations, we need to use the actual density
   val widthPixels: Int
-    get() = if (widthDp < 0) -1 else (widthDp * density).roundToInt()
+    get() = if (widthDp < 0) -1 else (widthDp * density).toInt()
 
   val heightPixels: Int
-    get() = if (heightDp < 0) -1 else (heightDp * density).roundToInt()
+    get() = if (heightDp < 0) -1 else (heightDp * density).toInt()
 
   // This is used for the preview scaling factor
   val scalingFactor: Float

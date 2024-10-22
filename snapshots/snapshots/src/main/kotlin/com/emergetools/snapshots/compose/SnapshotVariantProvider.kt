@@ -41,6 +41,21 @@ fun SnapshotVariantProvider(
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
     setLocale(locale)
+    parseDevicePreviewString(config.device)?.orientation?.let {
+      orientation = when (it) {
+        "landscape" -> {
+          Configuration.ORIENTATION_LANDSCAPE
+        }
+
+        "portrait" -> {
+          Configuration.ORIENTATION_PORTRAIT
+        }
+
+        else -> {
+          Configuration.ORIENTATION_UNDEFINED
+        }
+      }
+    }
   }
 
   val providedValues = arrayOf(
