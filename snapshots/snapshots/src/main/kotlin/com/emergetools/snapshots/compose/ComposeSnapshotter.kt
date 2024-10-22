@@ -179,7 +179,10 @@ private fun snapshot(
     }
 
     // Add the ComposeView to the activity
-    activity.addContentView(composeView, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
+    activity.addContentView(
+      composeView,
+      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+    )
 
     composeView.post {
       val size = measureViewSize(composeView, previewConfig)
@@ -207,11 +210,13 @@ private fun measureViewSize(
   val deviceSpec = configToDeviceSpec(previewConfig)
 
   // Use exact measurements when we have them
+  val scalingFactor = deviceSpec?.scalingFactor ?: view.resources.displayMetrics.density
+
   val widthMeasureSpec = when {
     previewConfig.widthDp != null -> {
       View.MeasureSpec.makeMeasureSpec(
-        dpToPx(previewConfig.widthDp!!, view),
-        View.MeasureSpec.UNSPECIFIED
+        dpToPx(previewConfig.widthDp!!, scalingFactor),
+        View.MeasureSpec.EXACTLY
       )
     }
 
@@ -225,8 +230,8 @@ private fun measureViewSize(
   val heightMeasureSpec = when {
     previewConfig.heightDp != null -> {
       View.MeasureSpec.makeMeasureSpec(
-        dpToPx(previewConfig.heightDp!!, view),
-        View.MeasureSpec.UNSPECIFIED
+        dpToPx(previewConfig.heightDp!!, scalingFactor),
+        View.MeasureSpec.EXACTLY
       )
     }
 
@@ -251,8 +256,8 @@ private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
   }
 }
 
-private fun dpToPx(dp: Int, view: View): Int {
-  return (dp * view.resources.displayMetrics.density).toInt()
+private fun dpToPx(dp: Int, scalingFactor: Float): Int {
+  return (dp * scalingFactor).toInt()
 }
 
 fun captureBitmap(
