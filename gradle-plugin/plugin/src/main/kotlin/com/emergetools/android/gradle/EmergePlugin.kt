@@ -9,6 +9,7 @@ import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.TestAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
+import com.emergetools.android.gradle.tasks.distribution.registerDistributionTasks
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.registerGeneratePerfProjectTask
 import com.emergetools.android.gradle.tasks.perf.registerPerformanceTasks
@@ -96,9 +97,9 @@ class EmergePlugin : Plugin<Project> {
           registerSizeTasks(appProject, emergeExtension, variant)
         }
 
-        // Always register the Reaper initialization task even if Reaper is disabled since users use
-        // it to help get Reaper setup for the first time.
+        // Reaper and distribution handle the enabled checks themselves:
         registerReaperTasks(appProject, emergeExtension, variant)
+        registerDistributionTasks(appProject, emergeExtension, variant)
 
         registerReaperTransform(
           project = appProject,
@@ -293,6 +294,17 @@ class EmergePlugin : Plugin<Project> {
         reaperHeading
       )
       addItem("tag (optional): ${extension.reaperOptions.tag.orEmpty()}", reaperHeading)
+
+      val distributionHeading = addHeading("distribution")
+      addItem(
+        "enabledVariants: ${extension.distributionOptions.enabledVariants.getOrElse(emptyList())}",
+        distributionHeading
+      )
+      addItem(
+        "publishableApiKey: ${if (extension.distributionOptions.publishableApiKey.isPresent) "*****" else "MISSING"}",
+       distributionHeading
+      )
+      addItem("tag (optional): ${extension.distributionOptions.tag.orEmpty()}", distributionHeading)
 
       val performanceHeading = addHeading("performance")
       addItem("projectPath: ${extension.perfOptions.projectPath.orEmpty()}", performanceHeading)

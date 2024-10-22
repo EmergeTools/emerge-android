@@ -59,6 +59,13 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
   }
 
   @get:Nested
+  abstract val distributionOptions: DistributionOptions
+
+  fun distribution(action: Action<DistributionOptions>) {
+    action.execute(distributionOptions)
+  }
+
+  @get:Nested
   abstract val vcsOptions: VCSOptions
 
   fun vcs(action: Action<VCSOptions>) {
@@ -221,6 +228,22 @@ abstract class ReaperOptions : ProductOptions() {
    * in the Emerge Reaper UI or the Emerge settings page.
    */
   abstract val publishableApiKey: Property<String>
+}
+
+abstract class DistributionOptions : ProductOptions() {
+  /**
+   * The list of build variants Distribution  is enabled for.
+   */
+  abstract val enabledVariants: ListProperty<String>
+
+  /**
+   * The key used to authenticate downloads for future updates.
+   * Emerge recommends setting this as an environment variable.
+   * This key can be found at https://www.emergetools.com/settings?tab=feature-configuration&cards=distribution_enabled
+   * Note: This key is not the same as the API token used for uploading to Emerge.
+   */
+  abstract val publishableApiKey: Property<String>
+
 }
 
 abstract class DebugOptions : ProductOptions() {
