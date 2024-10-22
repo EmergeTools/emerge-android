@@ -19,7 +19,6 @@ import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.lang.reflect.Modifier
 import java.lang.reflect.ParameterizedType
-import kotlin.math.max
 
 @Suppress("TooGenericExceptionCaught", "ThrowsCount")
 fun snapshotComposable(
@@ -125,13 +124,11 @@ private fun getPreviewProviderParameters(
     .singleOrNull { it.parameterTypes.isEmpty() }
     ?.apply { isAccessible = true }
     ?: throw IllegalArgumentException(
-      "PreviewParameterProvider constructor can not" + " have parameters"
+      "PreviewParameterProvider constructor can not have parameters"
     )
   val params = constructor.newInstance() as PreviewParameterProvider<*>
   return params.values.toList()
 }
-
-const val DEFAULT_DENSITY_PPI = 160
 
 private fun snapshot(
   activity: Activity,
@@ -155,8 +152,19 @@ private fun snapshot(
       add(0)
     }.toTypedArray()
 
+    val deviceSpec = configToDeviceSpec(previewConfig)
+
+    val saveablePreviewConfig = previewConfig.copy(
+      previewParameter = previewConfig.previewParameter?.copy(index = index)
+    )
+
+    // Update activity window size if device is specified
+    if (deviceSpec != null) {
+      updateActivityBounds(activity, deviceSpec)
+    }
+
     composeView.setContent {
-      SnapshotVariantProvider(previewConfig) {
+      SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
         @Suppress("SpreadOperator")
         if (Modifier.isStatic(composableMethod.asMethod().modifiers)) {
           // This is a top level or static method
@@ -170,85 +178,65 @@ private fun snapshot(
       }
     }
 
-    activity.addContentView(composeView, LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT))
-
-    // Need to update to accommodate param index in case when preview param is present
-    val saveablePreviewConfig = previewConfig.copy(
-      previewParameter = previewConfig.previewParameter?.copy(index = index)
-    )
+    // Add the ComposeView to the activity
+    activity.setContentView(composeView)
 
     composeView.post {
-      // Measure the composable agnostic of the parent constraints to layout properly in activity
-      val composableSize = measureComposableSize(composeView, previewConfig)
-      val bitmap = captureBitmap(
-        view = composeView,
-        width = composableSize.width,
-        height = composableSize.height,
-      )
+      val size = measureViewSize(composeView, previewConfig)
+      val bitmap = captureBitmap(composeView, size.width, size.height)
+
       bitmap?.let {
-        snapshotRule.take(bitmap, saveablePreviewConfig)
+        snapshotRule.take(it, saveablePreviewConfig)
       } ?: run {
         snapshotRule.saveError(
           errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
-          composePreviewSnapshotConfig = saveablePreviewConfig,
+          composePreviewSnapshotConfig = saveablePreviewConfig
         )
       }
 
-      // Remove the view from the activity to ensure it doesn't interfere with the next preview param
+      // Reset activity content view
       (composeView.parent as? ViewGroup)?.removeView(composeView)
     }
   }
 }
 
-private fun measureComposableSize(
-  view: ComposeView,
-  previewConfig: ComposePreviewSnapshotConfig,
+private fun measureViewSize(
+  view: View,
+  previewConfig: ComposePreviewSnapshotConfig
 ): IntSize {
-  if (previewConfig.device != null) {
-    val deviceSpec = configToDeviceSpec(previewConfig)
-    if (deviceSpec != null) {
-      // Measure the composable with the device dimensions
-      // Override the width and height if set in preview annotation
-      val deviceDpScale = deviceSpec.densityPpi / DEFAULT_DENSITY_PPI
-      val widthPixels = previewConfig.widthDp?.let { it * deviceDpScale } ?: deviceSpec.widthPixels
-      val heightPixels =
-        previewConfig.heightDp?.let { it * deviceDpScale } ?: deviceSpec.heightPixels
-      Log.i(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Measuring composable with device dimensions: $widthPixels x $heightPixels"
-      )
-      view.measure(
-        View.MeasureSpec.makeMeasureSpec(widthPixels, View.MeasureSpec.EXACTLY),
-        View.MeasureSpec.makeMeasureSpec(heightPixels, View.MeasureSpec.EXACTLY),
-      )
-      return IntSize(view.measuredWidth, view.measuredHeight)
-    } else {
-      Log.e(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Device not found for preview annotation: ${previewConfig.device}"
-      )
-    }
+  val deviceSpec = configToDeviceSpec(previewConfig)
+
+  // Use exact measurements when we have them
+  val widthMeasureSpec = when {
+    deviceSpec?.widthPixels != null && deviceSpec.widthPixels != -1 ->
+      View.MeasureSpec.makeMeasureSpec(deviceSpec.widthPixels, View.MeasureSpec.EXACTLY)
+    else ->
+      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
   }
 
-  // Default to 0 if not set which will allow parent to impose constraints on child when
-  // AT_MOST set.
-  val emulatorDensity = view.resources.displayMetrics.density
-  val heightPx = (previewConfig.heightDp ?: 0) * emulatorDensity
-  val widthPx = (previewConfig.widthDp ?: 0) * emulatorDensity
+  val heightMeasureSpec = when {
+    deviceSpec?.heightPixels != null && deviceSpec.heightPixels != -1 ->
+      View.MeasureSpec.makeMeasureSpec(deviceSpec.heightPixels, View.MeasureSpec.EXACTLY)
+    else ->
+      View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED)
+  }
 
-  // If width or height is set in preview annotation, measure with unspecified to allow
-  // stretching past bounds of parent.
-  // Otherwise, use AT_MOST to allow parent to impose constraints on child.
-  val widthMeasureSpec =
-    previewConfig.widthDp?.let { View.MeasureSpec.UNSPECIFIED } ?: View.MeasureSpec.AT_MOST
-  val heightMeasureSpec =
-    previewConfig.heightDp?.let { View.MeasureSpec.UNSPECIFIED } ?: View.MeasureSpec.AT_MOST
-
-  view.measure(
-    View.MeasureSpec.makeMeasureSpec(max(view.width, widthPx.toInt()), widthMeasureSpec),
-    View.MeasureSpec.makeMeasureSpec(max(view.height, heightPx.toInt()), heightMeasureSpec),
-  )
+  view.measure(widthMeasureSpec, heightMeasureSpec)
   return IntSize(view.measuredWidth, view.measuredHeight)
+}
+
+private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
+  // Apply the device spec dimensions to the activity window
+  val width = deviceSpec.widthPixels
+  val height = deviceSpec.heightPixels
+
+  if (width > 0 && height > 0) {
+    activity.window.setLayout(width, height)
+  }
+}
+
+private fun dpToPx(view: View, dp: Int, scalingFactor: Float): Int {
+  return (dp * scalingFactor).toInt()
 }
 
 fun captureBitmap(

@@ -5,6 +5,7 @@ import android.content.ContextWrapper
 import android.content.res.Configuration
 import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Resources
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
@@ -25,13 +26,12 @@ import java.util.Locale
 @Composable
 fun SnapshotVariantProvider(
   config: ComposePreviewSnapshotConfig,
+  scalingFactor: Float?,
   content: @Composable () -> Unit,
 ) {
-  val dimensionSpec = configToDimensionSpec(config)
-
   val localDensity = Density(
-    fontScale = dimensionSpec.fontScale ?: LocalDensity.current.fontScale,
-    density = dimensionSpec.scalingFactor ?: LocalDensity.current.density,
+    fontScale = config.fontScale ?: LocalDensity.current.fontScale,
+    density = scalingFactor ?: LocalDensity.current.density,
   )
 
   val locale = config.locale?.let(::localeForLanguageCode) ?: Locale.getDefault()
@@ -58,8 +58,6 @@ fun SnapshotVariantProvider(
     values = providedValues.toList().toTypedArray(),
   ) {
     val modifier = Modifier
-      .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
-      .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
       .then(
         config.showBackground?.let {
           // By default, previews use White as the background color, so preserve behavior.
