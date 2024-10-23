@@ -9,7 +9,6 @@ import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.compose.runtime.currentComposer
 import androidx.compose.runtime.reflect.ComposableMethod
-import androidx.compose.runtime.reflect.getDeclaredComposableMethod
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.PreviewActivity
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
@@ -18,7 +17,6 @@ import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.lang.reflect.Modifier
-import java.lang.reflect.ParameterizedType
 
 @Suppress("TooGenericExceptionCaught", "ThrowsCount")
 fun snapshotComposable(
@@ -43,51 +41,18 @@ fun snapshotComposable(
         clazz as Class<out PreviewParameterProvider<*>>
       }
 
-    val composableMethod: ComposableMethod = previewProviderClass?.let { previewProvider ->
-      Log.d(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Looking for parameterized composable method: $methodName in class: ${klass.name}"
-      )
-      val providerType = previewProvider.genericInterfaces
-        .filterIsInstance<ParameterizedType>()
-        .firstOrNull { it.rawType == PreviewParameterProvider::class.java }
-        ?.actualTypeArguments?.firstOrNull() as? Class<*> ?: throw IllegalArgumentException(
-        "Unable to determine type argument for PreviewParameterProvider"
-      )
-
-      klass.getDeclaredComposableMethod(methodName, providerType)
-    } ?: run {
-      Log.d(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Looking for composable method: $methodName in class: ${klass.name}"
-      )
-      klass.getDeclaredComposableMethod(methodName)
-    }
-
-    Log.d(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-      "Found composable method for ${previewConfig.originalFqn}: ${composableMethod.javaClass.simpleName}"
-    )
-    val backingMethod = composableMethod.asMethod()
-    if (!backingMethod.isAccessible) {
-      Log.i(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Marking composable method as accessible: ${previewConfig.originalFqn}"
-      )
-      backingMethod.isAccessible = true
-    }
-
-    Log.d(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-      "Invoking composable method: ${backingMethod.name}"
+    // Use ComposableInvoker to find and prepare the method
+    val composableMethod = ComposableInvoker.findComposableMethod(
+      klass = klass,
+      methodName = methodName,
+      previewProviderClass = previewProviderClass
     )
 
-    // Fallback having a list of a single null item is intentional to ensure we run at least one iteration of previews
-    val previewParams = previewProviderClass?.let {
-      val params = getPreviewProviderParameters(it)
-      val limit = previewConfig.previewParameter?.limit ?: params.size
-      params.take(limit)
-    } ?: listOf(null)
+    // Get preview parameters
+    val previewParams = ComposableInvoker.getPreviewParameters(
+      parameterProviderClass = previewProviderClass,
+      limit = previewConfig.previewParameter?.limit
+    )
 
     Log.d(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
@@ -115,19 +80,6 @@ fun snapshotComposable(
     // Re-throw to fail the test
     throw e
   }
-}
-
-private fun getPreviewProviderParameters(
-  parameterProviderClass: Class<out PreviewParameterProvider<*>>,
-): List<Any?> {
-  val constructor = parameterProviderClass.constructors
-    .singleOrNull { it.parameterTypes.isEmpty() }
-    ?.apply { isAccessible = true }
-    ?: throw IllegalArgumentException(
-      "PreviewParameterProvider constructor can not have parameters"
-    )
-  val params = constructor.newInstance() as PreviewParameterProvider<*>
-  return params.values.toList()
 }
 
 private fun snapshot(
