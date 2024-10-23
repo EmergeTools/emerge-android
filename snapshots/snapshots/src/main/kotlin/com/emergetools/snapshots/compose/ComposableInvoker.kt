@@ -76,10 +76,8 @@ object ComposableInvoker {
       if (genericInterface is ParameterizedType &&
         genericInterface.rawType == PreviewParameterProvider::class.java
       ) {
-        val typeArg = genericInterface.actualTypeArguments.firstOrNull()
-
         // Handle different types of type arguments
-        return when (typeArg) {
+        return when (val typeArg = genericInterface.actualTypeArguments.firstOrNull()) {
           // Direct class reference
           is Class<*> -> typeArg
           // Nested generic type (e.g., List<User>)
@@ -99,12 +97,13 @@ object ComposableInvoker {
     return null
   }
 
+  @Suppress("SwallowedException")
   private fun tryGetComposableMethod(
     klass: Class<*>,
     methodName: String,
     parameterType: Class<*>
   ): ComposableMethod? {
-    // Map of primitive types to their wrapper classes
+    // Map of primitive types to their object wrapper classes
     val primitiveToWrapper: Map<Class<*>?, Class<*>?> = mapOf(
       Int::class.javaPrimitiveType to Integer::class.java,
       Long::class.javaPrimitiveType to Long::class.java,
@@ -123,6 +122,10 @@ object ComposableInvoker {
       // First try with the original type
       klass.getDeclaredComposableMethod(methodName, parameterType)
     } catch (e: NoSuchMethodException) {
+      Log.d(
+        TAG,
+        "Method $methodName not found with parameter type: $parameterType, trying primitive/wrapper type"
+      )
       // If that fails, try with the corresponding primitive/wrapper type
       val alternateType: Class<*>? = when {
         parameterType.isPrimitive -> primitiveToWrapper[parameterType]
@@ -134,6 +137,10 @@ object ComposableInvoker {
         try {
           klass.getDeclaredComposableMethod(methodName, it)
         } catch (e: NoSuchMethodException) {
+          Log.d(
+            TAG,
+            "Method $methodName not found with primitive/wrapped type: $parameterType, returning null"
+          )
           null
         }
       }

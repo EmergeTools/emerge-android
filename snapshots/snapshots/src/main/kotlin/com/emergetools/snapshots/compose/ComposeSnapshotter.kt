@@ -16,7 +16,6 @@ import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import java.lang.reflect.Modifier
 
 @Suppress("TooGenericExceptionCaught", "ThrowsCount")
 fun snapshotComposable(

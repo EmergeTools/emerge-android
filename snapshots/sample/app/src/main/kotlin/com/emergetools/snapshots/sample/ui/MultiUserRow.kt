@@ -33,16 +33,16 @@ fun MultiUserRow(users: List<User>) {
     users.forEach { user ->
       Row(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(16.dp),
+          .fillMaxWidth()
+          .padding(16.dp),
         verticalAlignment = Alignment.CenterVertically
       ) {
         // Profile picture
         Surface(
           modifier = Modifier
-              .size(40.dp)
-              .clip(CircleShape)
-              .background(Color.Cyan),
+            .size(40.dp)
+            .clip(CircleShape)
+            .background(Color.Cyan),
           color = Color.Transparent
         ) {
           // Center content vertically and horizontally
@@ -70,7 +70,6 @@ fun MultiUserRow(users: List<User>) {
     }
   }
 }
-
 
 @Preview(showBackground = true)
 @Preview(uiMode = Configuration.UI_MODE_NIGHT_YES)

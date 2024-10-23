@@ -1,3 +1,5 @@
+@file:Suppress("MagicNumber")
+
 package com.emergetools.snapshots.sample.ui
 
 import androidx.annotation.IntRange
@@ -29,7 +31,7 @@ private class CompletedWorkoutsDataForPreview : PreviewParameterProvider<Int> {
 
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
-private fun CompletedIconPilePreview(
+fun CompletedIconPilePreview(
   @PreviewParameter(CompletedWorkoutsDataForPreview::class) completedWorkouts: Int,
 ) {
   SnapshotsSampleTheme {
@@ -57,10 +59,10 @@ fun IconGroup(
     repeat(resultCompletedCount) {
       Box(
         modifier = Modifier
-            .clip(CircleShape)
-            .background(Color.Blue)
-            .border(borderSize, Color.White, CircleShape)
-            .size(boxSize),
+          .clip(CircleShape)
+          .background(Color.Blue)
+          .border(borderSize, Color.White, CircleShape)
+          .size(boxSize),
         contentAlignment = Alignment.Center,
       ) {
         Icon(
