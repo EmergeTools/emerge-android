@@ -24,7 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.times
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
-private class CompletedWorkoutsDataForPreview : PreviewParameterProvider<Int> {
+private class CompletedIconPreviewProvider : PreviewParameterProvider<Int> {
   override val values: Sequence<Int>
     get() = sequenceOf(1, 2, 3, 4, 5)
 }
@@ -32,7 +32,7 @@ private class CompletedWorkoutsDataForPreview : PreviewParameterProvider<Int> {
 @Preview(showBackground = true, backgroundColor = 0xFFFFFFFF)
 @Composable
 fun CompletedIconPilePreview(
-  @PreviewParameter(CompletedWorkoutsDataForPreview::class) completedWorkouts: Int,
+  @PreviewParameter(CompletedIconPreviewProvider::class) completedWorkouts: Int,
 ) {
   SnapshotsSampleTheme {
     IconGroup(

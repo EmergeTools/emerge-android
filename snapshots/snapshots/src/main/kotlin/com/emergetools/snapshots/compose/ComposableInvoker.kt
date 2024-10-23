@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.compose.runtime.reflect.ComposableMethod
 import androidx.compose.runtime.reflect.getDeclaredComposableMethod
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import java.lang.reflect.Modifier
 import java.lang.reflect.ParameterizedType
 
 /**
@@ -22,7 +21,7 @@ object ComposableInvoker {
     methodName: String,
     previewProviderClass: Class<out PreviewParameterProvider<*>>? = null
   ): ComposableMethod {
-    return previewProviderClass?.let { previewProvider ->
+    val composableMethod = previewProviderClass?.let { previewProvider ->
       Log.d(TAG, "Looking for parameterized composable method: $methodName in class: ${klass.name}")
 
       // Find the type argument for PreviewParameterProvider
@@ -36,21 +35,13 @@ object ComposableInvoker {
       Log.d(TAG, "Looking for composable method: $methodName in class: ${klass.name}")
       klass.getDeclaredComposableMethod(methodName)
     }
-  }
-
-  /**
-   * Prepares the composable method for invocation by ensuring accessibility.
-   */
-  fun prepareComposableMethod(
-    composableMethod: ComposableMethod,
-    originalFqn: String
-  ): ComposableMethod {
-    val backingMethod = composableMethod.asMethod()
-    if (!backingMethod.isAccessible) {
-      Log.i(TAG, "Marking composable method as accessible: $originalFqn")
-      backingMethod.isAccessible = true
+    return composableMethod.also {
+      val backingMethod = composableMethod.asMethod()
+      if (!backingMethod.isAccessible) {
+        Log.i(TAG, "Marking composable method $methodName as accessible")
+        backingMethod.isAccessible = true
+      }
     }
-    return composableMethod
   }
 
   /**
@@ -64,10 +55,6 @@ object ComposableInvoker {
       val params = getPreviewProviderParameters(it)
       limit?.let { maxLimit -> params.take(maxLimit) } ?: params
     } ?: listOf(null)
-  }
-
-  fun isStatic(composableMethod: ComposableMethod): Boolean {
-    return Modifier.isStatic(composableMethod.asMethod().modifiers)
   }
 
   private fun findPreviewParameterType(previewProviderClass: Class<*>): Class<*>? {
@@ -103,7 +90,7 @@ object ComposableInvoker {
     methodName: String,
     parameterType: Class<*>
   ): ComposableMethod? {
-    // Map of primitive types to their object wrapper classes
+    // Map of primitive types to their Java object wrapper classes
     val primitiveToWrapper: Map<Class<*>?, Class<*>?> = mapOf(
       Int::class.javaPrimitiveType to Integer::class.java,
       Long::class.javaPrimitiveType to Long::class.java,

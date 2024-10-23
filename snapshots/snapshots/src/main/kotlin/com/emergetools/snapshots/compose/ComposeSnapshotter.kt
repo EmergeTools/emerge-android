@@ -16,6 +16,7 @@ import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import java.lang.reflect.Modifier
 
 @Suppress("TooGenericExceptionCaught", "ThrowsCount")
 fun snapshotComposable(
@@ -45,9 +46,7 @@ fun snapshotComposable(
       klass = klass,
       methodName = methodName,
       previewProviderClass = previewProviderClass
-    ).also { method ->
-      ComposableInvoker.prepareComposableMethod(method, previewConfig.originalFqn)
-    }
+    )
 
     // Get preview parameters
     val previewParams = ComposableInvoker.getPreviewParameters(
@@ -119,7 +118,7 @@ private fun snapshot(
     composeView.setContent {
       SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
         @Suppress("SpreadOperator")
-        if (ComposableInvoker.isStatic(composableMethod)) {
+        if (Modifier.isStatic(composableMethod.asMethod().modifiers)) {
           // This is a top level or static method
           composableMethod.invoke(currentComposer, null, *args)
         } else {
