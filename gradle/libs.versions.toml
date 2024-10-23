@@ -106,6 +106,8 @@ kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
 
 ktor-network = { module = "io.ktor:ktor-network", version = "2.1.1" }
 
+lottie = { module = "com.airbnb.android:lottie", version = "6.5.2" }
+
 mockito = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
 
