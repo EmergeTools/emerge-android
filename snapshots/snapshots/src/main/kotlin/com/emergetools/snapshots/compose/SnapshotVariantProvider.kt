@@ -7,8 +7,6 @@ import android.content.res.Configuration.UI_MODE_NIGHT_MASK
 import android.content.res.Resources
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
@@ -18,20 +16,18 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.unit.Density
-import androidx.compose.ui.unit.dp
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
 
 @Composable
 fun SnapshotVariantProvider(
   config: ComposePreviewSnapshotConfig,
+  scalingFactor: Float?,
   content: @Composable () -> Unit,
 ) {
-  val dimensionSpec = configToDimensionSpec(config)
-
   val localDensity = Density(
-    fontScale = dimensionSpec.fontScale ?: LocalDensity.current.fontScale,
-    density = dimensionSpec.scalingFactor ?: LocalDensity.current.density,
+    fontScale = config.fontScale ?: LocalDensity.current.fontScale,
+    density = scalingFactor ?: LocalDensity.current.density,
   )
 
   val locale = config.locale?.let(::localeForLanguageCode) ?: Locale.getDefault()
@@ -45,6 +41,13 @@ fun SnapshotVariantProvider(
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
     setLocale(locale)
+    parseDevicePreviewString(config.device)?.orientation?.let {
+      orientation = when (it) {
+        "landscape" -> Configuration.ORIENTATION_LANDSCAPE
+        "portrait" -> Configuration.ORIENTATION_PORTRAIT
+        else -> Configuration.ORIENTATION_UNDEFINED
+      }
+    }
   }
 
   val providedValues = arrayOf(
@@ -58,8 +61,6 @@ fun SnapshotVariantProvider(
     values = providedValues.toList().toTypedArray(),
   ) {
     val modifier = Modifier
-      .then(dimensionSpec.widthDp?.let { Modifier.width(it.dp) } ?: Modifier)
-      .then(dimensionSpec.heightDp?.let { Modifier.height(it.dp) } ?: Modifier)
       .then(
         config.showBackground?.let {
           // By default, previews use White as the background color, so preserve behavior.
