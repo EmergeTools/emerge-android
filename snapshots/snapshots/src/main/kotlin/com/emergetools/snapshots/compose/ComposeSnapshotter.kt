@@ -54,6 +54,11 @@ fun snapshotComposable(
         ?.actualTypeArguments?.firstOrNull() as? Class<*> ?: throw IllegalArgumentException(
         "Unable to determine type argument for PreviewParameterProvider"
       )
+      // Find the type argument for PreviewParameterProvider
+      // TODO: Handle value types
+//      val providerType = findPreviewParameterType(previewProvider)
+//        ?: throw IllegalArgumentException("Unable to determine type argument for PreviewParameterProvider")
+
 
       klass.getDeclaredComposableMethod(methodName, providerType)
     } ?: run {
@@ -116,6 +121,39 @@ fun snapshotComposable(
     throw e
   }
 }
+
+///**
+// * Finds the actual type argument for a PreviewParameterProvider, handling nested generic types.
+// */
+//private fun findPreviewParameterType(previewProviderClass: Class<*>): Class<*>? {
+//  // Look through all interfaces implemented by the class
+//  for (genericInterface in previewProviderClass.genericInterfaces) {
+//    if (genericInterface is ParameterizedType &&
+//      genericInterface.rawType == PreviewParameterProvider::class.java) {
+//      val typeArg = genericInterface.actualTypeArguments.firstOrNull()
+//
+//      // Handle different types of type arguments
+//      return when (typeArg) {
+//        // Direct class reference
+//        is Class<*> -> typeArg
+//
+//        // Nested generic type (e.g., List<User>)
+//        is ParameterizedType -> typeArg.rawType as? Class<*>
+//
+//        // Other cases (wildcards, type variables, etc.)
+//        else -> null
+//      }
+//    }
+//  }
+//
+//  // Check superclass if the interface isn't found in the current class
+//  val superclass = previewProviderClass.genericSuperclass
+//  if (superclass is ParameterizedType) {
+//    return findPreviewParameterType(superclass.rawType as Class<*>)
+//  }
+//
+//  return null
+//}
 
 private fun getPreviewProviderParameters(
   parameterProviderClass: Class<out PreviewParameterProvider<*>>,
