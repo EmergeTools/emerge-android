@@ -5,12 +5,27 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.3.0-beta01 - 2024-09-04
+## 1.3.0-rc01 - 2024-10-22
 
-Note: Existing previews with custom `device` specs will potentially have expected diffs.
-1.3.0 fixes an issue where custom `device` specs did not produce expected dimensions.
-Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
-commit with 1.3.
+> [!IMPORTANT]
+> Note: Existing previews with custom `device` specs will have expected diffs.
+> 1.3.0 fixes an issue where `device` specs did not produce expected dimensions.
+> Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
+> commit with 1.3.
+> All future diffs should be stable once rebased!
+
+- Support `@PreviewParameter` annotated
+  params. [#271](https://github.com/EmergeTools/emerge-android/pull/271)
+- Remove whitespace from parameterized test names to support
+  orchestrator. [#267](https://github.com/EmergeTools/emerge-android/pull/267)
+- Fix bugs that blocked use of Android test
+  orchestrator. [#273](https://github.com/EmergeTools/emerge-android/pull/273)
+- Remove unused runners. [#275](https://github.com/EmergeTools/emerge-android/pull/275)
+- Fix device specs. [#285](https://github.com/EmergeTools/emerge-android/pull/285)
+- Remove manual activity & view
+  snapshotting. [#265](https://github.com/EmergeTools/emerge-android/pull/265)
+
+## 1.3.0-beta01 - 2024-09-04
 
 - Remove skipping logic and ignore a test entirely if not a snapshot
   test. [#253](https://github.com/EmergeTools/emerge-android/pull/253)
