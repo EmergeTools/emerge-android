@@ -52,11 +52,11 @@ dependencies {
   implementation(libs.junit)
   implementation(libs.kotlinx.serialization)
 
-  api(platform(libs.compose.bom))
-  api(libs.compose.runtime)
-  api(libs.compose.ui)
-  api(libs.compose.ui.tooling)
-  api(libs.compose.foundation.android)
+  compileOnly(platform(libs.compose.bom))
+  compileOnly(libs.compose.runtime)
+  compileOnly(libs.compose.ui)
+  compileOnly(libs.compose.ui.tooling)
+  compileOnly(libs.compose.foundation.android)
 
   api(projects.snapshots.snapshotsShared)
   api(libs.androidx.test.core)
