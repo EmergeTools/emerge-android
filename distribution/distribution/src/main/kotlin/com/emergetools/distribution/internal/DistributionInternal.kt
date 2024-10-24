@@ -12,8 +12,12 @@ import android.util.Log
 import com.emergetools.distribution.DistributionOptions
 import com.emergetools.distribution.UpdateInfo
 import com.emergetools.distribution.UpdateStatus
+import kotlinx.coroutines.DelicateCoroutinesApi
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.async
+import kotlinx.coroutines.future.asCompletableFuture
 import kotlinx.coroutines.suspendCancellableCoroutine
 import kotlinx.coroutines.withContext
 import kotlinx.serialization.Serializable
@@ -27,9 +31,11 @@ import okhttp3.Request
 import okhttp3.Response
 import okhttp3.internal.closeQuietly
 import java.io.IOException
+import java.util.concurrent.CompletableFuture
 import kotlin.coroutines.resumeWithException
 
 private const val MANIFEST_TAG_API_KEY = "com.emergetools.distribution.API_KEY"
+private const val MANIFEST_TAG_TAG_KEY = "com.emergetools.distribution.TAG"
 
 internal fun getApiKey(metadata: Bundle): String? {
   val apiKey = metadata.getString(MANIFEST_TAG_API_KEY, null)
@@ -37,6 +43,14 @@ internal fun getApiKey(metadata: Bundle): String? {
     return null
   }
   return apiKey
+}
+
+internal fun getTag(metadata: Bundle): String? {
+  val tag = metadata.getString(MANIFEST_TAG_TAG_KEY, null)
+  if (tag == "") {
+    return null
+  }
+  return tag
 }
 
 @Serializable
@@ -79,7 +93,7 @@ private fun decodeResult(body: String?): UpdateStatus {
 
 private class State(
   val handler: Handler,
-  val tag: String,
+  val tag: String?,
   val apiKey: String?,
   private var okHttpClient: OkHttpClient?
 ) {
@@ -113,16 +127,28 @@ object DistributionInternal {
 
     val handler = Handler(looper)
 
-    // apiKey may be null if
+    // apiKey may be null if build distribution is disabled.
     val metaData = context.packageManager.getApplicationInfo(
       context.packageName,
       PackageManager.GET_META_DATA
     ).metaData
     val apiKey = getApiKey(metaData)
 
-    val tag = options.tag ?: "release"
+    // tag:
+    // - defaults to ""
+    // - can be set from the manifest
+    // - and overridden by init argument (via state)
+    var tag = ""
+    val manifestTag = getTag(metaData)
+    if (manifestTag != null) {
+      tag = manifestTag
+    }
+    val optionsTag = options.tag
+    if (optionsTag != null) {
+      tag = optionsTag
+    }
 
-    state = State(handler, tag, apiKey, options.okHttpClient)
+    state = State(handler = handler, tag = tag, apiKey = apiKey, okHttpClient = options.okHttpClient)
   }
 
   private fun getState(): State? {
@@ -131,6 +157,17 @@ object DistributionInternal {
       theState = state
     }
     return theState
+  }
+
+  @OptIn(DelicateCoroutinesApi::class)
+  fun checkForUpdateCompletableFuture(context: Context): CompletableFuture<UpdateStatus> {
+    // GlobalScope is correct here since we're converting this to a CompletableFuture immediately.
+    // The calling code is opting out of structured concurrency and takes responsibility for waiting
+    // for (or canceling) the future.
+    val job = GlobalScope.async {
+      return@async checkForUpdate(context)
+    }
+    return job.asCompletableFuture()
   }
 
   suspend fun checkForUpdate(context: Context): UpdateStatus {
