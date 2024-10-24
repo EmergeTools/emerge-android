@@ -5,7 +5,7 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.3.0-rc01 - 2024-10-22
+## 1.3.0-beta02 - 2024-10-23
 
 > [!IMPORTANT]
 > Note: Existing previews with custom `device` specs will have expected diffs.
@@ -13,6 +13,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
 > commit with 1.3.
 > All future diffs should be stable once rebased!
+
+- Bug fixes for PreviewParameters with nested types (i.e. `List<*>`) and
+  primitives. [#290](https://github.com/EmergeTools/emerge-android/pull/290)
+
+## 1.3.0-rc01 - 2024-10-22
 
 - Support `@PreviewParameter` annotated
   params. [#271](https://github.com/EmergeTools/emerge-android/pull/271)
