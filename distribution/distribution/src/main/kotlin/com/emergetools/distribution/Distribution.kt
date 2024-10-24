@@ -6,6 +6,7 @@ import android.net.Uri
 import com.emergetools.distribution.internal.DistributionInternal
 import kotlinx.serialization.Serializable
 import okhttp3.OkHttpClient
+import java.util.concurrent.CompletableFuture
 
 /**
  * The public Android SDK for Emerge Tools Build Distribution.
@@ -32,9 +33,20 @@ object Distribution {
 
   /**
    * Check to see if an updated version of the current app exists.
+   * A suspendable function which asynchronously finds the latest available version by querying
+   * the Emerge
+   * @return The current
    */
   suspend fun checkForUpdate(context: Context): UpdateStatus {
     return DistributionInternal.checkForUpdate(context)
+  }
+
+  /**
+   * A non-coroutine, non-blocking version of `checkForUpdate` designed for use with Jetpack
+   * Compose.
+   */
+  fun checkForUpdateCompletableFuture(context: Context): CompletableFuture<UpdateStatus> {
+    return DistributionInternal.checkForUpdateCompletableFuture(context)
   }
 
   /**
@@ -62,15 +74,40 @@ data class DistributionOptions(
   val tag: String? = null,
 )
 
+/**
+ * An available update that it is possible to upgrade to.
+ */
 @Serializable
 data class UpdateInfo(
+  /**
+   * The Emerge id for the update build.
+   */
   val id: String,
+
+  /**
+   * The Emerge tag for the update build.
+   */
   val tag: String,
+
+  /**
+   * The version of the update.
+   */
   val version: String,
+
+  /**
+   * The package name of the update app.
+   */
   val appId: String,
+
+  /**
+   * A signed URL for downloading the update.
+   */
   val downloadUrl: String,
 )
 
+/**
+ * The result of checking for an update.
+ */
 sealed class UpdateStatus {
   class Error(val message: String) : UpdateStatus()
   class NewRelease(val info: UpdateInfo) : UpdateStatus()
