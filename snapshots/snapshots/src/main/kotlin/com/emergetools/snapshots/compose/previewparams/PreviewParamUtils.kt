@@ -8,16 +8,17 @@ import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 object PreviewParamUtils {
   private const val TAG = "PreviewParamUtils"
 
+  @Suppress("ReturnCount")
   internal fun getPreviewProviderParameters(
     previewConfig: ComposePreviewSnapshotConfig
   ): Array<Any?>? {
     if (previewConfig.previewParameter == null) {
-      Log.d(TAG, "No PreviewParameterProvider found")
+      Log.d(TAG, "No PreviewParameterProvider found for ${previewConfig.originalFqn}")
       return null
     }
 
     if (previewConfig.previewParameter?.providerClassFqn.isNullOrEmpty()) {
-      Log.e(TAG, "PreviewParameterProvider class name is empty")
+      Log.e(TAG, "PreviewParameterProvider class name is empty for ${previewConfig.originalFqn}")
       return null
     }
 
@@ -26,7 +27,8 @@ object PreviewParamUtils {
     } catch (e: ClassNotFoundException) {
       Log.e(
         TAG,
-        "Unable to find PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'",
+        "Unable to find PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'" +
+          " for ${previewConfig.originalFqn}",
         e
       )
       return null
@@ -35,7 +37,8 @@ object PreviewParamUtils {
     if (paramProviderClass == null) {
       Log.e(
         TAG,
-        "PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}' is not a PreviewParameterProvider"
+        "PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'" +
+          " is not a PreviewParameterProvider for ${previewConfig.originalFqn}"
       )
       return null
     }

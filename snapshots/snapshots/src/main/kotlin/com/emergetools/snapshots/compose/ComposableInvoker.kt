@@ -7,6 +7,7 @@ import java.lang.reflect.Modifier
 import kotlin.math.ceil
 
 // Inspired by https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling/src/jvmMain/kotlin/androidx/compose/ui/tooling/ComposableInvoker.jvm.kt
+@Suppress("TooGenericExceptionCaught", "SwallowedException", "SpreadOperator")
 object ComposableInvoker {
   private const val TAG = "ComposableInvoker"
 
@@ -100,23 +101,24 @@ object ComposableInvoker {
     val argsArray: Array<Class<out Any>> =
       previewParamArgs.mapNotNull { it?.javaClass }.toTypedArray()
     return try {
-      // without defaults
       val changedParamsCount = changedParamCount(argsArray.size, 0)
       val changedParams = Int::class.java.dup(changedParamsCount)
       declaredMethods.findCompatibleComposeMethod(
         methodName,
         *argsArray,
-        Composer::class.java, // composer param
-        *changedParams // changed param
+        Composer::class.java,
+        *changedParams,
       )
     } catch (e: ReflectiveOperationException) {
       try {
+        Log.d(TAG, "Method $methodName not found in class ${this.simpleName}, trying mangled name")
         declaredMethods.find {
           // Methods with inlined classes as parameter will have the name mangled
           // so we need to check for methodName-xxxx as well
           it.name == methodName || it.name.startsWith("$methodName-")
         }
       } catch (e: ReflectiveOperationException) {
+        Log.w(TAG, "Method $methodName not found in class ${this.simpleName}")
         null
       }
     }
@@ -126,6 +128,7 @@ object ComposableInvoker {
    * Calls the method on the given [instance]. If the method accepts default values, this function
    * will call it with the correct options set.
    */
+  @Suppress("MagicNumber")
   private fun Method.invokeComposableMethod(
     instance: Any?,
     composer: Composer,
@@ -205,4 +208,3 @@ object ComposableInvoker {
     return ceil(realValueParams.toDouble() / BITS_PER_INT.toDouble()).toInt()
   }
 }
-
