@@ -52,11 +52,11 @@ dependencies {
   implementation(libs.junit)
   implementation(libs.kotlinx.serialization)
 
-  api(platform(libs.compose.bom))
-  api(libs.compose.runtime)
-  api(libs.compose.ui)
-  api(libs.compose.ui.tooling)
-  api(libs.compose.foundation.android)
+  compileOnly(platform(libs.compose.bom))
+  compileOnly(libs.compose.runtime)
+  compileOnly(libs.compose.ui)
+  compileOnly(libs.compose.ui.tooling)
+  compileOnly(libs.compose.foundation.android)
 
   api(projects.snapshots.snapshotsShared)
   api(libs.androidx.test.core)
@@ -67,6 +67,11 @@ dependencies {
   api(libs.compose.ui.test.junit)
 
   testImplementation(libs.junit)
+  testImplementation(platform(libs.compose.bom))
+  testImplementation(libs.compose.runtime)
+  testImplementation(libs.compose.ui)
+  testImplementation(libs.compose.ui.tooling)
+  testImplementation(libs.compose.foundation.android)
 }
 
 tasks.register("generateMetaInfVersion") {
