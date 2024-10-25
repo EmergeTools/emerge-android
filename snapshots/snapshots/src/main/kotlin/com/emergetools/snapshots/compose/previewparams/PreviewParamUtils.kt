@@ -53,6 +53,7 @@ object PreviewParamUtils {
 
     return params.values.toArray(params.count)
       .map { unwrapIfInline(it) }
+      .take(previewConfig.previewParameter?.limit ?: params.count)
       .toTypedArray()
   }
 
