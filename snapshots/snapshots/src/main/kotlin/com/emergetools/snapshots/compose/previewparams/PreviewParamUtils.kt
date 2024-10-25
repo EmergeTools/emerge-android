@@ -51,9 +51,14 @@ object PreviewParamUtils {
       )
     val params = constructor.newInstance() as PreviewParameterProvider<*>
 
-    return Array(params.count) { params.values.iterator().next() }
+    return params.values.toArray(params.count)
       .map { unwrapIfInline(it) }
       .toTypedArray()
+  }
+
+  private fun Sequence<Any?>.toArray(size: Int): Array<Any?> {
+    val iterator = iterator()
+    return Array(size) { iterator.next() }
   }
 
   /**
