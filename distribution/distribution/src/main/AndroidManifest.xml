@@ -12,6 +12,9 @@
     <meta-data
       android:name="com.emergetools.distribution.API_KEY"
       android:value="${emerge.distribution.apiKey}" />
+    <meta-data
+      android:name="com.emergetools.distribution.TAG"
+      android:value="${emerge.distribution.tag}" />
 
     <provider android:name="androidx.startup.InitializationProvider"
       android:authorities="${applicationId}.androidx-startup"

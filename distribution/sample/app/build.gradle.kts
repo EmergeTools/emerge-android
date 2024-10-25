@@ -31,6 +31,7 @@ android {
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
     manifestPlaceholders["emerge.distribution.apiKey"] = ""
+    manifestPlaceholders["emerge.distribution.tag"] = ""
 
     vectorDrawables {
       useSupportLibrary = true
