@@ -8,64 +8,25 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.ViewGroup.LayoutParams
 import androidx.compose.runtime.currentComposer
-import androidx.compose.runtime.reflect.ComposableMethod
 import androidx.compose.ui.platform.ComposeView
 import androidx.compose.ui.tooling.PreviewActivity
-import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
+import com.emergetools.snapshots.compose.previewparams.PreviewParamUtils
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import java.lang.reflect.Modifier
 
-@Suppress("TooGenericExceptionCaught", "ThrowsCount")
+@Suppress("TooGenericExceptionCaught")
 fun snapshotComposable(
   snapshotRule: EmergeSnapshots,
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
   try {
-    val klass = Class.forName(previewConfig.fullyQualifiedClassName)
-    Log.d(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-      "Found class for ${previewConfig.fullyQualifiedClassName}: ${klass.name}"
-    )
-    val methodName = previewConfig.originalFqn.substringAfterLast(".")
-
-    val previewProviderClass: Class<out PreviewParameterProvider<*>>? =
-      previewConfig.previewParameter?.providerClassFqn?.let {
-        val clazz = Class.forName(it)
-        require(PreviewParameterProvider::class.java.isAssignableFrom(clazz)) {
-          "Preview parameter provider class must implement PreviewParameterProvider"
-        }
-        clazz as Class<out PreviewParameterProvider<*>>
-      }
-
-    // Use ComposableInvoker to find and prepare the method
-    val composableMethod = ComposableInvoker.findComposableMethod(
-      klass = klass,
-      methodName = methodName,
-      previewProviderClass = previewProviderClass
-    )
-
-    // Get preview parameters
-    val previewParams = ComposableInvoker.getPreviewParameters(
-      parameterProviderClass = previewProviderClass,
-      limit = previewConfig.previewParameter?.limit
-    )
-
-    Log.d(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-      "Found ${previewParams.size} preview parameters for ${previewConfig.originalFqn}"
-    )
-
     snapshot(
       activity = activity,
       snapshotRule = snapshotRule,
       previewConfig = previewConfig,
-      composableMethod = composableMethod,
-      composableClass = klass,
-      previewParams = previewParams,
     )
   } catch (e: Exception) {
     Log.e(
@@ -85,26 +46,26 @@ fun snapshotComposable(
 private fun snapshot(
   activity: Activity,
   snapshotRule: EmergeSnapshots,
-  composableMethod: ComposableMethod,
-  composableClass: Class<*>,
   previewConfig: ComposePreviewSnapshotConfig,
-  previewParams: List<Any?> = listOf(null),
 ) {
-  previewParams.forEachIndexed { index, prevParam ->
-    val composeView = ComposeView(activity)
-    composeView.layoutParams =
-      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+  // If no preview params, fallback to a single array of one null item to ensure we
+  // snapshot the composable.
+  val previewParameters =
+    PreviewParamUtils.getPreviewProviderParameters(previewConfig) ?: arrayOf<Any?>(null)
 
+  val deviceSpec = configToDeviceSpec(previewConfig)
+
+  for (index in previewParameters.indices) {
+    val prevParam = previewParameters[index]
     Log.d(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Invoking composable method with preview parameter: $prevParam"
     )
-    val args = buildList {
-      prevParam?.let(this::add)
-      add(0)
-    }.toTypedArray()
-
-    val deviceSpec = configToDeviceSpec(previewConfig)
+    val composeView = ComposeView(activity)
+    composeView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+    val args = emptyArray<Any?>().apply {
+      prevParam?.let(this::plus)
+    }
 
     val saveablePreviewConfig = previewConfig.copy(
       previewParameter = previewConfig.previewParameter?.copy(index = index)
@@ -117,16 +78,12 @@ private fun snapshot(
 
     composeView.setContent {
       SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
-        @Suppress("SpreadOperator")
-        if (Modifier.isStatic(composableMethod.asMethod().modifiers)) {
-          // This is a top level or static method
-          composableMethod.invoke(currentComposer, null, *args)
-        } else {
-          // The method is part of a class. We try to instantiate the class with an empty
-          // constructor.
-          val instance = composableClass.getConstructor().newInstance()
-          composableMethod.invoke(currentComposer, instance, *args)
-        }
+        ComposableInvoker.invokeComposable(
+          className = previewConfig.fullyQualifiedClassName,
+          methodName = previewConfig.originalFqn.substringAfterLast("."),
+          composer = currentComposer,
+          args = args,
+        )
       }
     }
 
