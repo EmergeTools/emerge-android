@@ -63,9 +63,7 @@ private fun snapshot(
     )
     val composeView = ComposeView(activity)
     composeView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-    val args = emptyArray<Any?>().apply {
-      prevParam?.let(this::plus)
-    }
+    val args = if (prevParam != null) arrayOf(prevParam) else emptyArray()
 
     val saveablePreviewConfig = previewConfig.copy(
       previewParameter = previewConfig.previewParameter?.copy(index = index)
