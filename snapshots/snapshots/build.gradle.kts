@@ -67,6 +67,11 @@ dependencies {
   api(libs.compose.ui.test.junit)
 
   testImplementation(libs.junit)
+  testImplementation(platform(libs.compose.bom))
+  testImplementation(libs.compose.runtime)
+  testImplementation(libs.compose.ui)
+  testImplementation(libs.compose.ui.tooling)
+  testImplementation(libs.compose.foundation.android)
 }
 
 tasks.register("generateMetaInfVersion") {
