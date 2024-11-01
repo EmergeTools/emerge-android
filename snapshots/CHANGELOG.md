@@ -16,6 +16,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Bug fixes for PreviewParameters with nested types (i.e. `List<*>`) and
   primitives. [#290](https://github.com/EmergeTools/emerge-android/pull/290)
+- Bug fixes for reflective invoking. [#296](https://github.com/EmergeTools/emerge-android/pull/296)
 
 ## 1.3.0-rc01 - 2024-10-22
 
