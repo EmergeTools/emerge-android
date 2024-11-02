@@ -59,6 +59,13 @@ abstract class EmergePluginExtension @Inject constructor(objects: ObjectFactory)
   }
 
   @get:Nested
+  abstract val distributionOptions: DistributionOptions
+
+  fun distribution(action: Action<DistributionOptions>) {
+    action.execute(distributionOptions)
+  }
+
+  @get:Nested
   abstract val vcsOptions: VCSOptions
 
   fun vcs(action: Action<VCSOptions>) {
@@ -182,4 +189,10 @@ abstract class ReaperOptions : ProductOptions() {
   abstract val enabledVariants: ListProperty<String>
 
   abstract val publishableApiKey: Property<String>
+}
+
+abstract class DistributionOptions : ProductOptions() {
+  abstract val enabledVariants: ListProperty<String>
+
+  abstract val apiKey: Property<String>
 }
