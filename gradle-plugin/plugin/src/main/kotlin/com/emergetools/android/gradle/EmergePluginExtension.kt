@@ -155,31 +155,72 @@ abstract class ProductOptions {
 
 abstract class SizeOptions : ProductOptions() {
 
+  /**
+   * Whether or not to generate size analysis tasks.
+   */
   abstract val enabled: Property<Boolean>
 }
 
 abstract class PerfOptions : ProductOptions() {
+
+  /**
+   * Whether or not to generate performance analysis tasks.
+   */
   abstract val enabled: Property<Boolean>
 
+  /**
+   * The module path of the Emerge performance testing module. E.g. `:app:performance`.
+   */
   abstract val projectPath: Property<String>
 }
 
 abstract class SnapshotOptions : ProductOptions() {
+
+  /**
+   * Whether or not to generate snapshot testing tasks.
+   */
   abstract val enabled: Property<Boolean>
 
+  /**
+   * Path to local snapshot image storage, defaults to /build/emerge/snapshots/outputs
+   */
   abstract val snapshotsStorageDirectory: DirectoryProperty
 
+  /**
+   * Android API version to run snapshots on, must be 29, 31, 33, 34 or 35, defaults to 34.
+   */
   abstract val apiVersion: Property<Int>
 
+  /**
+   * Include private previews in snapshot generation, defaults to true
+   */
   abstract val includePrivatePreviews: Property<Boolean>
 }
 
-abstract class DebugOptions : ProductOptions() {
-  abstract val forceInstrumentation: Property<Boolean>
-}
-
 abstract class ReaperOptions : ProductOptions() {
+
+  /**
+   * The list of build variants Reaper is enabled for.
+   *
+   * When Reaper is enabled the application bytecode will be instrumented to support Reaper and the
+   * default bundle<variant> task will be hooked to upload the instrumented AAB to Emerge.
+   */
   abstract val enabledVariants: ListProperty<String>
 
+  /**
+   * The key used to identify Reaper reports for your organization. Emerge recommends setting this
+   * from an environment variable to avoid storing keys in plain-text.
+   *
+   * Note: This key is not the same as the API key used for uploading to Emerge - you can find this
+   * in the Emerge Reaper UI or the Emerge settings page.
+   */
   abstract val publishableApiKey: Property<String>
+}
+
+abstract class DebugOptions : ProductOptions() {
+
+  /**
+   * Forces any ASM instrumentation to be applied to the application bytecode even if cached.
+   */
+  abstract val forceInstrumentation: Property<Boolean>
 }
