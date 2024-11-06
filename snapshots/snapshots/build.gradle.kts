@@ -3,6 +3,7 @@ import java.util.Date
 
 plugins {
   alias(libs.plugins.android.library)
+  alias(libs.plugins.compose.compiler)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
@@ -36,10 +37,6 @@ android {
 
   buildFeatures {
     compose = true
-  }
-
-  composeOptions {
-    kotlinCompilerExtensionVersion = libs.versions.compose.compiler.extension.get()
   }
 
   // Ensures our version.txt is packaged in with release.
