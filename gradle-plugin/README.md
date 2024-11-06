@@ -195,7 +195,7 @@ emerge {
 
   snapshots {
     // Path to local snapshot image storage, defaults to `/build/emerge/snapshots/outputs`
-    snapshotsStorageDirectory.set(File("/src/main/snapshots"))
+    snapshotsStorageDirectory.set(file("/src/main/snapshots"))
 
     // Android API version to run snapshots on, must be 29, 31, 33, 34 or 35.
     apiVersion.set(33)
