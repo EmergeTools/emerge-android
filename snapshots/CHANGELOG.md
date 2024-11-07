@@ -20,13 +20,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 1.3.0-rc02 - 2024-10-25
 
-> [!IMPORTANT]
-> Note: Existing previews with custom `device` specs will have expected diffs.
-> 1.3.0 fixes an issue where `device` specs did not produce expected dimensions.
-> Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
-> commit with 1.3.
-> All future diffs should be stable once rebased!
-
 - Bug fixes for PreviewParameters with nested types (i.e. `List<*>`) and
   primitives. [#290](https://github.com/EmergeTools/emerge-android/pull/290)
 - Bug fixes for reflective invoking. [#296](https://github.com/EmergeTools/emerge-android/pull/296)
