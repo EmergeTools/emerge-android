@@ -5,6 +5,19 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.0-rc03 - 2024-11-06
+
+> [!IMPORTANT]
+> Note: Existing previews with custom `device` specs will have expected diffs.
+> 1.3.0 fixes an issue where `device` specs did not produce expected dimensions.
+> Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
+> commit with 1.3.
+> All future diffs should be stable once rebased!
+
+- Lower compose-bom to 1.6.8 to avoid breaking change in
+  1.7.0. [#301](https://github.com/EmergeTools/emerge-android/pull/301)
+- Use compose compiler gradle plugin. [#300](https://github.com/EmergeTools/emerge-android/pull/300)
+
 ## 1.3.0-rc02 - 2024-10-25
 
 > [!IMPORTANT]
