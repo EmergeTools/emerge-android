@@ -276,6 +276,10 @@ class EmergePlugin : Plugin<Project> {
         "includePrivatePreviews: ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}",
         snapshotsHeading
       )
+      addItem(
+        "includePreviewParamPreviews: ${extension.snapshotOptions.includePreviewParamPreviews.orEmpty()}",
+        snapshotsHeading
+      )
       addItem("tag (optional): ${extension.snapshotOptions.tag.orEmpty()}", snapshotsHeading)
       addItem("enabled: ${extension.snapshotOptions.enabled.getOrElse(true)}", snapshotsHeading)
 

@@ -195,6 +195,12 @@ abstract class SnapshotOptions : ProductOptions() {
    * Include private previews in snapshot generation, defaults to true
    */
   abstract val includePrivatePreviews: Property<Boolean>
+
+  /**
+   * Include previews with PreviewParameter annotated Previews in snapshot generation,
+   * defaults to true
+   */
+  abstract val includePreviewParamPreviews: Property<Boolean>
 }
 
 abstract class ReaperOptions : ProductOptions() {
