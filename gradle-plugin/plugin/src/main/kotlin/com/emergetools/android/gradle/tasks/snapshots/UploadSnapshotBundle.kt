@@ -33,6 +33,10 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:Optional
   abstract val includePrivatePreviews: Property<Boolean>
 
+  @get:Input
+  @get:Optional
+  abstract val includePreviewParamPreviews: Property<Boolean>
+
   @get:InputFile
   abstract val artifactMetadataPath: RegularFileProperty
 
@@ -70,6 +74,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
       androidSnapshotsEnabled = true,
       androidSnapshotsApiVersion = apiVersion.orNull,
       androidSnapshotsPrivateEnabled = includePrivatePreviews.getOrElse(true),
+      androidSnapshotsPreviewParamsEnabled = includePreviewParamPreviews.getOrElse(true),
     )
   }
 

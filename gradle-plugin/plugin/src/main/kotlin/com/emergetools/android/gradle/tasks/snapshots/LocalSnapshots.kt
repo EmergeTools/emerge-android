@@ -64,6 +64,10 @@ abstract class LocalSnapshots : DefaultTask() {
   @get:Optional
   abstract val includePrivatePreviews: Property<Boolean>
 
+  @get:Input
+  @get:Optional
+  abstract val includePreviewParamPreviews: Property<Boolean>
+
   @TaskAction
   fun execute() {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
@@ -105,6 +109,7 @@ abstract class LocalSnapshots : DefaultTask() {
     val composeSnapshots = PreviewUtils.findPreviews(
       extractedApkDir,
       includePrivatePreviews.getOrElse(true),
+      includePreviewParamPreviews.getOrElse(true),
       previews,
       logger
     )

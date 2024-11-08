@@ -33,6 +33,7 @@ object PreviewUtils {
   fun findPreviews(
     extractedApkDirectory: File,
     includePrivatePreviews: Boolean,
+    includePreviewParamPreviews: Boolean,
     previewFunctions: List<String>,
     logger: Logger,
   ): ComposeSnapshots {
@@ -76,7 +77,7 @@ object PreviewUtils {
           return@forEach
         }
 
-        if (!hasSupportedMethodParameters(method, logger)) {
+        if (!hasSupportedMethodParameters(method, includePreviewParamPreviews, logger)) {
           logger.info("Ignoring snapshot for method: $methodKey as params are not supported.")
           return@forEach
         }
@@ -102,7 +103,11 @@ object PreviewUtils {
     return signature.replace('/', '.').substring(1, signature.length - 1)
   }
 
-  private fun hasSupportedMethodParameters(method: DexBackedMethod, logger: Logger): Boolean {
+  private fun hasSupportedMethodParameters(
+    method: DexBackedMethod,
+    includePreviewParamPreviews: Boolean,
+    logger: Logger,
+  ): Boolean {
     // Only supporting 0-1 preview params
     val methodParamCount = method.parameters.size
     if (methodParamCount < 2 || methodParamCount > 3) {
@@ -118,6 +123,7 @@ object PreviewUtils {
     }
 
     if (methodParamCount == 3) {
+
       // Check first param annotated with @PreviewParameter
       val firstParam = method.parameters[0]
       val hasPreviewParameterAnnotation = firstParam.annotations.any { annotation ->
@@ -129,7 +135,12 @@ object PreviewUtils {
         return false
       }
 
-      logger.info("Method ${method.name} has 3 parameters, and the first one is annotated with @PreviewParameter!")
+      if (!includePreviewParamPreviews) {
+        logger.info("Method ${method.name} has 3 parameters and the first one is annotated with @PreviewParameter but includePreviewParamPreviews is set to false")
+        return false
+      }
+
+      logger.info("Method ${method.name} has 3 parameters and the first one is annotated with @PreviewParameter!")
     }
 
     logger.info("Method ${method.name} has supported parameters!")
