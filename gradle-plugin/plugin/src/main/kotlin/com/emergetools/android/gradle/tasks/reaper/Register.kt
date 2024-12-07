@@ -59,15 +59,30 @@ private fun registerReaperUploadTask(
 ) {
   val uploadReaperAabTaskName = "${EMERGE_TASK_PREFIX}UploadReaperAab${variant.name.capitalize()}"
   val uploadReaperAabTask =
-    appProject.tasks.register(uploadReaperAabTaskName, InitializeReaper::class.java) {
+    appProject.tasks.register(uploadReaperAabTaskName, UploadReaperAab::class.java) {
       it.artifact.set(variant.artifacts.get(SingleArtifact.BUNDLE))
       it.publishableApiKey.set(extension.reaperOptions.publishableApiKey)
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
     }
-  // Hook the bundle tasks to run the reaper upload task after they complete.
+
+
+  val uploadReaperApkTaskName = "${EMERGE_TASK_PREFIX}UploadReaperApk${variant.name.capitalize()}"
+  val uploadReaperApkTask =
+    appProject.tasks.register(uploadReaperApkTaskName, UploadReaperApk::class.java) {
+      it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
+      it.proguardMapping.set(variant.artifacts.get(SingleArtifact.OBFUSCATION_MAPPING_FILE))
+      it.publishableApiKey.set(extension.reaperOptions.publishableApiKey)
+      it.setUploadTaskInputs(extension, appProject, variant)
+      it.setTagFromProductOptions(extension.reaperOptions, variant)
+    }
+
+  // Hook the bundle & assemble tasks to run the reaper upload task after they complete.
   appProject.afterEvaluate { project ->
     val bundleTask = project.tasks.named("bundle${variant.name.capitalize()}")
     bundleTask.configure { it.finalizedBy(uploadReaperAabTask) }
+
+    val assembleTask = project.tasks.named("assemble${variant.name.capitalize()}")
+    assembleTask.configure { it.finalizedBy(uploadReaperApkTask) }
   }
 }
