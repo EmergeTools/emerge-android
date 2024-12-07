@@ -62,6 +62,7 @@ dependencies {
   api(libs.androidx.test.rules)
   api(libs.androidx.test.runner)
   api(libs.compose.ui.test.junit)
+  api(libs.lottie)
 
   testImplementation(libs.junit)
 }
