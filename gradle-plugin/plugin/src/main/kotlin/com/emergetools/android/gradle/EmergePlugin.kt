@@ -114,7 +114,7 @@ class EmergePlugin : Plugin<Project> {
           registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
         }
 
-        if (appProject.hasProperty(EMERGE_DEBUG_TASK_PROPERTY)) {
+        if (appProject.providers.gradleProperty(EMERGE_DEBUG_TASK_PROPERTY).orNull != null) {
           registerDebugTasks(appProject, emergeExtension)
         }
       }
