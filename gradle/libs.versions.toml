@@ -33,7 +33,7 @@ emerge-gradle-plugin = "4.0.4-beta01"
 emerge-performance = "2.1.2"
 emerge-reaper = "1.0.0"
 emerge-snapshots = "1.3.0-rc03"
-emerge-distribution = "0.0.1"
+emerge-distribution = "0.0.2"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
