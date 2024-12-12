@@ -225,7 +225,6 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
   executeAsync(call).use { response ->
     return withContext(Dispatchers.IO) {
       val body = response.body?.string()
-      println(body)
       return@withContext decodeResult(body)
     }
   }
