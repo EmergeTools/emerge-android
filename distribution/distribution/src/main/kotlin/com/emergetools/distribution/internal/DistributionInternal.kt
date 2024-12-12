@@ -65,7 +65,8 @@ internal data class CheckForUpdatesSuccessResult(
 
 private inline fun <reified T> tryDecode(s: String): T? {
   return try {
-    Json.decodeFromString<T>(s)
+    val json = Json { ignoreUnknownKeys = true }
+    json.decodeFromString<T>(s)
   } catch (_: SerializationException) {
     null
   } catch (_: IllegalArgumentException) {
