@@ -179,7 +179,7 @@ abstract class LocalSnapshots : DefaultTask() {
   ) {
     ZipFile(apk).use { zip ->
       zip.entries().asSequence().forEach { entry ->
-        if (entry.name.endsWith(".dex")) {
+        if (entry.name.matches(Regex("^classes[0-9]*\\.dex"))) {
           val outputFile = File(outputDir, entry.name)
           zip.getInputStream(entry).use { input ->
             outputFile.outputStream().use { output ->
