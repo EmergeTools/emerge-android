@@ -5,7 +5,7 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 1.3.0-rc03 - 2024-11-06
+## 1.3.0 - 2024-12-13
 
 > [!IMPORTANT]
 > Note: Existing previews with custom `device` specs will have expected diffs.
@@ -13,6 +13,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > Emerge recommends merging the 1.3 update and rebasing PRs with unexpected diffs onto the main base
 > commit with 1.3.
 > All future diffs should be stable once rebased!
+
+1.3.0 brings big improvements, notably:
+
+- Tests are now siloed, using AndroidTestOrchestrator. This means crashing tests no longer can bring
+  other tests down too.
+- Previews with `device` parameters are now 1:1 with their exact dimensions.
+- `@PreviewParameter` annotated params are now supported and will generate a unique snapshot for
+  each.
+
+## 1.3.0-rc03 - 2024-11-06
 
 - Lower compose-bom to 1.6.8 to avoid breaking change in
   1.7.0. [#301](https://github.com/EmergeTools/emerge-android/pull/301)
@@ -136,7 +146,8 @@ to 1.1 as part of a single PR and rebasing changes to avoid unexpected diffs.
 - Provide result registry for
   CompositionLocal. [#98](https://github.com/EmergeTools/emerge-android/pull/98)
 - Add api dependencies
-  for `androidx.activity` & `androidx.test.runner`. [#99](https://github.com/EmergeTools/emerge-android/pull/99)
+  for `androidx.activity` &
+  `androidx.test.runner`. [#99](https://github.com/EmergeTools/emerge-android/pull/99)
 - Add additional logging to snapshots. [#97](https://github.com/EmergeTools/emerge-android/pull/97)
 - API dep for `androidx.test.rules`. [#100](https://github.com/EmergeTools/emerge-android/pull/100)
 
