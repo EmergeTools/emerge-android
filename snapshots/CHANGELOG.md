@@ -14,9 +14,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 > commit with 1.3.
 > All future diffs should be stable once rebased!
 
-1.3.0 bring big improvements, notably:
+1.3.0 brings big improvements, notably:
 
-- Tests are now siloed, using AndroidTestOrchestrator. This means bad tests no longer can bring
+- Tests are now siloed, using AndroidTestOrchestrator. This means crashing tests no longer can bring
   other tests down too.
 - Previews with `device` parameters are now 1:1 with their exact dimensions.
 - `@PreviewParameter` annotated params are now supported and will generate a unique snapshot for
