@@ -22,7 +22,7 @@ fun snapshotComposable(
   snapshotRule: EmergeSnapshots,
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
-) = Profiler.trace(previewConfig.keyName()) {
+) = Profiler.trace("snapshotComposable") {
   try {
     snapshot(
       activity = activity,
@@ -57,7 +57,7 @@ private fun snapshot(
   val deviceSpec = configToDeviceSpec(previewConfig)
 
   for (index in previewParameters.indices) {
-    Profiler.trace("snapshot preview param $index") {
+    Profiler.trace("previewParam_$index") {
 
       val prevParam = previewParameters[index]
       Log.d(

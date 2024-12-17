@@ -98,10 +98,10 @@ object ComposableInvoker {
   private fun Class<*>.findComposableMethod(
     methodName: String,
     vararg previewParamArgs: Any?
-  ): Method? {
+  ): Method? = Profiler.trace("findComposableMethod") {
     val argsArray: Array<Class<out Any>> =
       previewParamArgs.mapNotNull { it?.javaClass }.toTypedArray()
-    return try {
+    return@trace try {
       val changedParamsCount = changedParamCount(argsArray.size, 0)
       val changedParams = Int::class.java.dup(changedParamsCount)
       declaredMethods.findCompatibleComposeMethod(
@@ -134,7 +134,7 @@ object ComposableInvoker {
     instance: Any?,
     composer: Composer,
     vararg args: Any?
-  ): Any? {
+  ): Any? = Profiler.trace("Method.invokeComposableMethod") {
     val composerIndex = parameterTypes.indexOfLast { it == Composer::class.java }
     val realParams = composerIndex
     val thisParams = if (instance != null) 1 else 0
@@ -176,7 +176,7 @@ object ComposableInvoker {
           else -> error("Unexpected index")
         }
       }
-    return invoke(instance, *arguments)
+    return@trace invoke(instance, *arguments)
   }
 
   /**

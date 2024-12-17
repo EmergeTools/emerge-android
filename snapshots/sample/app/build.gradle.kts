@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.util.profile
+
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.compose.compiler)
@@ -17,6 +19,8 @@ emerge {
 
   snapshots {
     tag.setFromVariant()
+
+    profile.set(true)
   }
 }
 

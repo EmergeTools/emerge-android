@@ -18,7 +18,6 @@ internal object SnapshotSaver {
   private const val DEFAULT_PNG_QUALITY = 100
   private const val SNAPSHOTS_DIR_NAME = "snapshots"
   private const val ARG_KEY_SAVE_METADATA = "save_metadata"
-  private const val ARG_KEY_SAVE_PROFILE = "save_profile"
   private const val TAG = "SnapshotSaver"
 
   private val targetContext: Context
@@ -33,10 +32,6 @@ internal object SnapshotSaver {
   private val saveMetadata: Boolean
     get() = args.getBoolean(ARG_KEY_SAVE_METADATA, false) ||
       args.getString(ARG_KEY_SAVE_METADATA, "false").toBoolean()
-
-  private val saveProfile: Boolean
-    get() = args.getBoolean(ARG_KEY_SAVE_PROFILE, false) ||
-      args.getString(ARG_KEY_SAVE_PROFILE, "false").toBoolean()
 
   fun save(
     displayName: String?,
@@ -68,13 +63,6 @@ internal object SnapshotSaver {
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
-
-    if (saveProfile) {
-      saveProfile(
-        snapshotsDir = snapshotsDir,
-        keyName = keyName,
-      )
-    }
   }
 
   fun saveError(
@@ -95,13 +83,6 @@ internal object SnapshotSaver {
         fqn = fqn,
         errorType = errorType,
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
-      )
-    }
-
-    if (saveProfile) {
-      saveProfile(
-        snapshotsDir = snapshotsDir,
-        keyName = composePreviewSnapshotConfig.keyName(),
       )
     }
   }
@@ -163,18 +144,6 @@ internal object SnapshotSaver {
     }
   }
 
-  private fun saveProfile(
-    snapshotsDir: File,
-    keyName: String,
-  ) {
-    val profileData = Profiler.export() ?: return
-
-    Log.d(TAG, "Saving profile for $keyName")
-    saveFile(snapshotsDir, "$keyName$FOLDED_EXTENSION") {
-      write(profileData.toByteArray(Charset.defaultCharset()))
-    }
-  }
-
   private fun saveFile(
     dir: File,
     filenameWithExtension: String,
@@ -193,5 +162,4 @@ internal object SnapshotSaver {
 
   private const val PNG_EXTENSION = ".png"
   private const val JSON_EXTENSION = ".json"
-  private const val FOLDED_EXTENSION = ".folded"
 }

@@ -282,6 +282,7 @@ class EmergePlugin : Plugin<Project> {
       )
       addItem("tag (optional): ${extension.snapshotOptions.tag.orEmpty()}", snapshotsHeading)
       addItem("enabled: ${extension.snapshotOptions.enabled.getOrElse(true)}", snapshotsHeading)
+      addItem("profile: ${extension.snapshotOptions.profile.getOrElse(false)}", snapshotsHeading)
 
       val reaperHeading = addHeading("reaper")
       addItem(

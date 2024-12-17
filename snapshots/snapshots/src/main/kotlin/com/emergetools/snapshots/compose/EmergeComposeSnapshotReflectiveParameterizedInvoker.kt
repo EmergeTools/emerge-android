@@ -80,6 +80,9 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   @get:Rule
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
 
+  @get:Rule
+  val profiler = Profiler.getInstance(parameter.previewConfig)
+
   @Test
   fun reflectiveComposableInvoker() {
     Log.i(TAG, "Running snapshot test ${parameter.previewConfig.keyName()}")
