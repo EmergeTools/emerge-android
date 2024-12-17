@@ -28,15 +28,15 @@ class Profiler(
       }
 
     fun <T> trace(name: String, block: () -> T): T {
-      return instance!!.traceInternal(name, block)
+      return instance?.traceInternal(name, block) ?: block()
     }
 
     fun startSpan(name: String) {
-      return instance!!.startSpanInternal(name)
+      return instance?.startSpanInternal(name) ?: Unit
     }
 
     fun stopSpan() {
-      return instance!!.stopSpanInternal()
+      return instance?.stopSpanInternal() ?: Unit
     }
   }
 

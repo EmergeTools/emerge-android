@@ -1,5 +1,3 @@
-import org.jetbrains.kotlin.util.profile
-
 plugins {
   alias(libs.plugins.android.application)
   alias(libs.plugins.compose.compiler)
