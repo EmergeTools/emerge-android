@@ -58,7 +58,6 @@ private fun snapshot(
 
   for (index in previewParameters.indices) {
     Profiler.trace("previewParam_$index") {
-
       val prevParam = previewParameters[index]
       Log.d(
         EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,

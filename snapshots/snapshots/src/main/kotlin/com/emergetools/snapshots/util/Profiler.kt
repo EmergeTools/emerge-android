@@ -108,7 +108,6 @@ class Profiler(
       return
     }
 
-
     if (stack.isNotEmpty()) {
       val endTime = System.currentTimeMillis()
       val spanName = stack.removeAt(stack.size - 1)
@@ -151,4 +150,3 @@ class Profiler(
     outputFile.outputStream().use { it.write(profileData.toByteArray(Charset.defaultCharset())) }
   }
 }
-
