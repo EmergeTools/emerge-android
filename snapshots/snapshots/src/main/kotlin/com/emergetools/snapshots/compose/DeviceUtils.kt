@@ -4,6 +4,7 @@ package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 import kotlin.math.roundToInt
 
 data class DeviceSpec(
@@ -211,9 +212,9 @@ val KNOWN_DEVICE_SPECS = mapOf(
   ),
 )
 
-fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
+fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? = Profiler.trace("configToDeviceSpec") {
   val devicePreviewString = parseDevicePreviewString(config.device)
-  return when {
+  return@trace when {
     devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]
     devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]
     else -> {

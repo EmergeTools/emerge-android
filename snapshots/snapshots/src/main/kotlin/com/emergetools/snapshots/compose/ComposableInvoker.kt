@@ -2,6 +2,7 @@ package com.emergetools.snapshots.compose
 
 import android.util.Log
 import androidx.compose.runtime.Composer
+import com.emergetools.snapshots.util.Profiler
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import kotlin.math.ceil
@@ -16,7 +17,7 @@ object ComposableInvoker {
     methodName: String,
     composer: Composer,
     vararg args: Any?
-  ) {
+  ) = Profiler.trace("invokeComposable") {
     try {
       val composableClass = Class.forName(className)
       val method = composableClass.findComposableMethod(methodName, *args)

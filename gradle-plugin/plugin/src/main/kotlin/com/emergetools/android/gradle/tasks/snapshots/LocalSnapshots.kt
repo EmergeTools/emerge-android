@@ -148,6 +148,9 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add("-e")
             it.add("invoke_data_path")
             it.add("/data/local/tmp/$COMPOSE_SNAPSHOTS_FILENAME")
+            it.add("-e")
+            it.add("save_profile")
+            it.add("true")
           }
           it.add("${testAppId}/${testInstrumentationRunner.get()}")
         }

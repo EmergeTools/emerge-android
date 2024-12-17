@@ -15,13 +15,14 @@ import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.compose.previewparams.PreviewParamUtils
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 
 @Suppress("TooGenericExceptionCaught")
 fun snapshotComposable(
   snapshotRule: EmergeSnapshots,
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
-) {
+) = Profiler.trace(previewConfig.keyName()) {
   try {
     snapshot(
       activity = activity,
@@ -56,56 +57,66 @@ private fun snapshot(
   val deviceSpec = configToDeviceSpec(previewConfig)
 
   for (index in previewParameters.indices) {
-    val prevParam = previewParameters[index]
-    Log.d(
-      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-      "Invoking composable method with preview parameter: $prevParam"
-    )
-    val composeView = ComposeView(activity)
-    composeView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-    val args = if (prevParam != null) arrayOf(prevParam) else emptyArray()
+    Profiler.trace("snapshot preview param $index") {
 
-    val saveablePreviewConfig = previewConfig.copy(
-      previewParameter = previewConfig.previewParameter?.copy(index = index)
-    )
+      val prevParam = previewParameters[index]
+      Log.d(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Invoking composable method with preview parameter: $prevParam"
+      )
 
-    // Update activity window size if device is specified
-    if (deviceSpec != null) {
-      updateActivityBounds(activity, deviceSpec)
-    }
+      Profiler.startSpan("setupComposeView")
 
-    composeView.setContent {
-      SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
-        ComposableInvoker.invokeComposable(
-          className = previewConfig.fullyQualifiedClassName,
-          methodName = previewConfig.originalFqn.substringAfterLast("."),
-          composer = currentComposer,
-          args = args,
-        )
+      val composeView = ComposeView(activity)
+      composeView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
+      val args = if (prevParam != null) arrayOf(prevParam) else emptyArray()
+
+      val saveablePreviewConfig = previewConfig.copy(
+        previewParameter = previewConfig.previewParameter?.copy(index = index)
+      )
+
+      Profiler.stopSpan()
+
+      // Update activity window size if device is specified
+      if (deviceSpec != null) {
+        updateActivityBounds(activity, deviceSpec)
       }
-    }
 
-    // Add the ComposeView to the activity
-    activity.addContentView(
-      composeView,
-      LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
-    )
+      composeView.setContent {
+        SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
+          ComposableInvoker.invokeComposable(
+            className = previewConfig.fullyQualifiedClassName,
+            methodName = previewConfig.originalFqn.substringAfterLast("."),
+            composer = currentComposer,
+            args = args,
+          )
+        }
+      }
 
-    composeView.post {
-      val size = measureViewSize(composeView, previewConfig)
-      val bitmap = captureBitmap(composeView, size.width, size.height)
-
-      bitmap?.let {
-        snapshotRule.take(it, saveablePreviewConfig)
-      } ?: run {
-        snapshotRule.saveError(
-          errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
-          composePreviewSnapshotConfig = saveablePreviewConfig
+      // Add the ComposeView to the activity
+      Profiler.trace("addContentView") {
+        activity.addContentView(
+          composeView,
+          LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
         )
       }
 
-      // Reset activity content view
-      (composeView.parent as? ViewGroup)?.removeView(composeView)
+      composeView.post {
+        val size = measureViewSize(composeView, previewConfig)
+        val bitmap = captureBitmap(composeView, size.width, size.height)
+
+        bitmap?.let {
+          snapshotRule.take(it, saveablePreviewConfig)
+        } ?: run {
+          snapshotRule.saveError(
+            errorType = SnapshotErrorType.EMPTY_SNAPSHOT,
+            composePreviewSnapshotConfig = saveablePreviewConfig
+          )
+        }
+
+        // Reset activity content view
+        (composeView.parent as? ViewGroup)?.removeView(composeView)
+      }
     }
   }
 }
@@ -113,7 +124,7 @@ private fun snapshot(
 private fun measureViewSize(
   view: View,
   previewConfig: ComposePreviewSnapshotConfig
-): IntSize {
+): IntSize = Profiler.trace("measureViewSize") {
   val deviceSpec = configToDeviceSpec(previewConfig)
 
   // Use exact measurements when we have them
@@ -150,18 +161,19 @@ private fun measureViewSize(
   }
 
   view.measure(widthMeasureSpec, heightMeasureSpec)
-  return IntSize(view.measuredWidth, view.measuredHeight)
+  return@trace IntSize(view.measuredWidth, view.measuredHeight)
 }
 
-private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
-  // Apply the device spec dimensions to the activity window
-  val width = deviceSpec.widthPixels
-  val height = deviceSpec.heightPixels
+private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) =
+  Profiler.trace("updateActivityBounds") {
+    // Apply the device spec dimensions to the activity window
+    val width = deviceSpec.widthPixels
+    val height = deviceSpec.heightPixels
 
-  if (width > 0 && height > 0) {
-    activity.window.setLayout(width, height)
+    if (width > 0 && height > 0) {
+      activity.window.setLayout(width, height)
+    }
   }
-}
 
 private fun dpToPx(dp: Int, scalingFactor: Float): Int {
   return (dp * scalingFactor).toInt()
@@ -171,19 +183,19 @@ fun captureBitmap(
   view: View,
   width: Int,
   height: Int,
-): Bitmap? {
+): Bitmap? = Profiler.trace("captureBitmap") {
   try {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
     view.layout(0, 0, width, height)
     view.draw(canvas)
-    return bitmap
+    return@trace bitmap
   } catch (e: IllegalArgumentException) {
     Log.e(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Error capturing bitmap",
       e,
     )
-    return null
+    return@trace null
   }
 }
