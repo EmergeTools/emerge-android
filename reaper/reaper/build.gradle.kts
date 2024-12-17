@@ -61,7 +61,7 @@ tasks.withType<Test> {
   useJUnitPlatform()
 }
 
-val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://api.emergetools.com"
+val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://reaper.emergetools.com"
 buildConfig {
   className("ReaperConfig")
   packageName("com.emergetools.reaper")
