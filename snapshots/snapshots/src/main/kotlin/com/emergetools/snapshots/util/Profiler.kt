@@ -76,7 +76,7 @@ class Profiler(
     }
   }
 
-  private inline fun <T> traceInternal(name: String, crossinline block: () -> T): T {
+  private inline fun <T> traceInternal(name: String, noinline block: () -> T): T {
     if (!profilingEnabled) {
       Log.d(TAG, "Profiling disabled, skipping trace")
       return block()
