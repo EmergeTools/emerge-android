@@ -35,8 +35,8 @@ class Profiler(
       return instance?.startSpanInternal(name) ?: Unit
     }
 
-    fun stopSpan() {
-      return instance?.stopSpanInternal() ?: Unit
+    fun endSpan() {
+      return instance?.endSpanInternal() ?: Unit
     }
   }
 
@@ -76,7 +76,7 @@ class Profiler(
     }
   }
 
-  private inline fun <T> traceInternal(name: String, noinline block: () -> T): T {
+  private fun <T> traceInternal(name: String, block: () -> T): T {
     if (!profilingEnabled) {
       Log.d(TAG, "Profiling disabled, skipping trace")
       return block()
@@ -86,7 +86,7 @@ class Profiler(
     return try {
       block()
     } finally {
-      stopSpanInternal()
+      endSpanInternal()
     }
   }
 
@@ -102,7 +102,7 @@ class Profiler(
     stack.add(name)
   }
 
-  private fun stopSpanInternal() {
+  private fun endSpanInternal() {
     if (!profilingEnabled) {
       Log.d(TAG, "Profiling disabled, skipping stopSpan")
       return
@@ -123,7 +123,7 @@ class Profiler(
   fun saveProfile() {
     while (stack.isNotEmpty()) {
       // Finish any hanging stacks
-      stopSpanInternal()
+      endSpanInternal()
     }
 
     if (foldedStacks.isEmpty()) {

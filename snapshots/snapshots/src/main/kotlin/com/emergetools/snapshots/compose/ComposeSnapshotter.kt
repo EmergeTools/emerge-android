@@ -74,7 +74,7 @@ private fun snapshot(
         previewParameter = previewConfig.previewParameter?.copy(index = index)
       )
 
-      Profiler.stopSpan()
+      Profiler.endSpan()
 
       // Update activity window size if device is specified
       if (deviceSpec != null) {
