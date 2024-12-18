@@ -127,6 +127,7 @@ private fun registerSnapshotLocalTask(
     it.testInstrumentationRunner.set(testInstrumentationRunner)
     it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
     it.includePreviewParamPreviews.set(extension.snapshotOptions.includePreviewParamPreviews)
+    it.profile.set(extension.snapshotOptions.profile)
     it.dependsOn(packageTask)
   }
 }

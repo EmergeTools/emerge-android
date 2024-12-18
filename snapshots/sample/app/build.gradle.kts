@@ -17,6 +17,8 @@ emerge {
 
   snapshots {
     tag.setFromVariant()
+
+    profile.set(true)
   }
 }
 

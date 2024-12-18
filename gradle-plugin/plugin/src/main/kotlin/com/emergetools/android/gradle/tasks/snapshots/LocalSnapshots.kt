@@ -68,6 +68,10 @@ abstract class LocalSnapshots : DefaultTask() {
   @get:Optional
   abstract val includePreviewParamPreviews: Property<Boolean>
 
+  @get:Input
+  @get:Optional
+  abstract val profile: Property<Boolean>
+
   @TaskAction
   fun execute() {
     val artifactMetadataFiles = packageDir.asFileTree.matching {
@@ -148,6 +152,11 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add("-e")
             it.add("invoke_data_path")
             it.add("/data/local/tmp/$COMPOSE_SNAPSHOTS_FILENAME")
+          }
+          if (profile.getOrElse(false)) {
+            it.add("-e")
+            it.add("save_profile")
+            it.add("true")
           }
           it.add("${testAppId}/${testInstrumentationRunner.get()}")
         }

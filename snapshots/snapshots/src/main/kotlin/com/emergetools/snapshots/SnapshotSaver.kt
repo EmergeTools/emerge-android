@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -52,6 +53,7 @@ internal object SnapshotSaver {
       keyName = keyName,
       bitmap = bitmap
     )
+
     if (saveMetadata) {
       saveMetadata(
         snapshotsDir = snapshotsDir,
@@ -89,7 +91,7 @@ internal object SnapshotSaver {
     snapshotsDir: File,
     keyName: String,
     bitmap: Bitmap,
-  ) {
+  ) = Profiler.trace("saveImage") {
     saveFile(snapshotsDir, "$keyName$PNG_EXTENSION") {
       bitmap.compress(Bitmap.CompressFormat.PNG, DEFAULT_PNG_QUALITY, this)
     }
@@ -101,7 +103,7 @@ internal object SnapshotSaver {
     displayName: String?,
     fqn: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
-  ) {
+  ) = Profiler.trace("saveMetadata") {
     val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
       name = keyName,
       displayName = displayName,
@@ -124,7 +126,7 @@ internal object SnapshotSaver {
     fqn: String,
     errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
-  ) {
+  ) = Profiler.trace("saveErrorMetadata") {
     val keyName = composePreviewSnapshotConfig.keyName()
     val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
       name = composePreviewSnapshotConfig.keyName(),
@@ -146,12 +148,12 @@ internal object SnapshotSaver {
     dir: File,
     filenameWithExtension: String,
     writer: FileOutputStream.() -> Unit,
-  ) {
+  ) = Profiler.trace("saveFile") {
     val outputFile = File(dir, filenameWithExtension)
 
     if (outputFile.exists()) {
       Log.e(TAG, "File with name $filenameWithExtension already exists, skipping save.")
-      return
+      return@trace
     }
 
     Log.d(TAG, "Saving file to ${outputFile.path}")

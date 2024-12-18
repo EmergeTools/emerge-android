@@ -8,6 +8,7 @@ import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposeSnapshots
+import com.emergetools.snapshots.util.Profiler
 import kotlinx.serialization.json.Json
 import org.junit.Rule
 import org.junit.Test
@@ -78,6 +79,9 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
 
   @get:Rule
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
+
+  @get:Rule
+  val profiler = Profiler.getInstance(parameter.previewConfig)
 
   @Test
   fun reflectiveComposableInvoker() {

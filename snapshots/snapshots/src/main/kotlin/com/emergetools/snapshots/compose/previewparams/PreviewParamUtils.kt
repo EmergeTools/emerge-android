@@ -3,6 +3,7 @@ package com.emergetools.snapshots.compose.previewparams
 import android.util.Log
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 
 // Inspired by https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling/src/androidMain/kotlin/androidx/compose/ui/tooling/PreviewUtils.android.kt
 object PreviewParamUtils {
@@ -11,15 +12,15 @@ object PreviewParamUtils {
   @Suppress("ReturnCount")
   internal fun getPreviewProviderParameters(
     previewConfig: ComposePreviewSnapshotConfig
-  ): Array<Any?>? {
+  ): Array<Any?>? = Profiler.trace("getPreviewProviderParameters") {
     if (previewConfig.previewParameter == null) {
       Log.d(TAG, "No PreviewParameterProvider found for ${previewConfig.originalFqn}")
-      return null
+      return@trace null
     }
 
     if (previewConfig.previewParameter?.providerClassFqn.isNullOrEmpty()) {
       Log.e(TAG, "PreviewParameterProvider class name is empty for ${previewConfig.originalFqn}")
-      return null
+      return@trace null
     }
 
     val paramProviderClass = try {
@@ -31,7 +32,7 @@ object PreviewParamUtils {
           " for ${previewConfig.originalFqn}",
         e
       )
-      return null
+      return@trace null
     }
 
     if (paramProviderClass == null) {
@@ -40,7 +41,7 @@ object PreviewParamUtils {
         "PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'" +
           " is not a PreviewParameterProvider for ${previewConfig.originalFqn}"
       )
-      return null
+      return@trace null
     }
 
     val constructor = paramProviderClass.constructors
@@ -51,7 +52,7 @@ object PreviewParamUtils {
       )
     val params = constructor.newInstance() as PreviewParameterProvider<*>
 
-    return params.values.toArray(params.count)
+    return@trace params.values.toArray(params.count)
       .map { unwrapIfInline(it) }
       .take(previewConfig.previewParameter?.limit ?: params.count)
       .toTypedArray()

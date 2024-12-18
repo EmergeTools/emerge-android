@@ -201,6 +201,11 @@ abstract class SnapshotOptions : ProductOptions() {
    * defaults to true
    */
   abstract val includePreviewParamPreviews: Property<Boolean>
+
+  /**
+   * Record profiling information for snapshot tests, defaults to false.
+   */
+  abstract val profile: Property<Boolean>
 }
 
 abstract class ReaperOptions : ProductOptions() {
