@@ -91,10 +91,12 @@ internal object SnapshotSaver {
     snapshotsDir: File,
     keyName: String,
     bitmap: Bitmap,
-  ) = Profiler.trace("saveImage") {
+  ) {
+    Profiler.startSpan("saveImage")
     saveFile(snapshotsDir, "$keyName$PNG_EXTENSION") {
       bitmap.compress(Bitmap.CompressFormat.PNG, DEFAULT_PNG_QUALITY, this)
     }
+    Profiler.endSpan()
   }
 
   private fun saveMetadata(
@@ -103,7 +105,8 @@ internal object SnapshotSaver {
     displayName: String?,
     fqn: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
-  ) = Profiler.trace("saveMetadata") {
+  ) {
+    Profiler.startSpan("saveMetadata")
     val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
       name = keyName,
       displayName = displayName,
@@ -118,6 +121,7 @@ internal object SnapshotSaver {
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
     }
+    Profiler.endSpan()
   }
 
   private fun saveErrorMetadata(
@@ -126,7 +130,8 @@ internal object SnapshotSaver {
     fqn: String,
     errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
-  ) = Profiler.trace("saveErrorMetadata") {
+  ) {
+    Profiler.startSpan("saveErrorMetadata")
     val keyName = composePreviewSnapshotConfig.keyName()
     val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
       name = composePreviewSnapshotConfig.keyName(),
@@ -142,22 +147,25 @@ internal object SnapshotSaver {
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
     }
+    Profiler.endSpan()
   }
 
   private fun saveFile(
     dir: File,
     filenameWithExtension: String,
     writer: FileOutputStream.() -> Unit,
-  ) = Profiler.trace("saveFile") {
+  ) {
+    Profiler.startSpan("saveFile")
     val outputFile = File(dir, filenameWithExtension)
 
     if (outputFile.exists()) {
       Log.e(TAG, "File with name $filenameWithExtension already exists, skipping save.")
-      return@trace
+      return
     }
 
     Log.d(TAG, "Saving file to ${outputFile.path}")
     outputFile.outputStream().use { writer(it) }
+    Profiler.endSpan()
   }
 
   private const val PNG_EXTENSION = ".png"

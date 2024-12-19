@@ -11,6 +11,14 @@ import org.junit.runners.model.Statement
 import java.io.File
 import java.nio.charset.Charset
 
+/**
+ * Helper to generate a simple folded stacks flamegraph of a given test.
+ *
+ * Note: While we wanted to use Profiler.trace(lambda: () -> Unit) for this, the lambda wrapping
+ * seems to cause issues in timing/the rendering pipeling which manifest in tiny
+ * rendering diffs (i.e. no anti-aliasing). This is a simpler version that just
+ * requires manual startSpan/endSpan calls to avoid
+ */
 class Profiler(
   private val parameter: ComposePreviewSnapshotConfig,
 ) : TestRule {
@@ -26,10 +34,6 @@ class Profiler(
       instance ?: synchronized(this) {
         instance ?: Profiler(previewConfig).also { instance = it }
       }
-
-    fun <T> trace(name: String, block: () -> T): T {
-      return instance?.traceInternal(name, block) ?: block()
-    }
 
     fun startSpan(name: String) {
       return instance?.startSpanInternal(name) ?: Unit
@@ -64,29 +68,15 @@ class Profiler(
       @Throws(Throwable::class)
       override fun evaluate() {
         try {
-          traceInternal(parameter.keyName()) {
-            base.evaluate()
-          }
+          startSpanInternal(parameter.keyName())
+          base.evaluate()
+          endSpanInternal()
         } finally {
           saveProfile()
           // Reset the instance to ensure future tests
           instance = null
         }
       }
-    }
-  }
-
-  private fun <T> traceInternal(name: String, block: () -> T): T {
-    if (!profilingEnabled) {
-      Log.d(TAG, "Profiling disabled, skipping trace")
-      return block()
-    }
-
-    startSpanInternal(name)
-    return try {
-      block()
-    } finally {
-      endSpanInternal()
     }
   }
 

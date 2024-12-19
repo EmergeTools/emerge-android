@@ -4,7 +4,6 @@ package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
-import com.emergetools.snapshots.util.Profiler
 import kotlin.math.roundToInt
 
 data class DeviceSpec(
@@ -212,31 +211,30 @@ val KNOWN_DEVICE_SPECS = mapOf(
   ),
 )
 
-fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? =
-  Profiler.trace("configToDeviceSpec") {
-    val devicePreviewString = parseDevicePreviewString(config.device)
-    return@trace when {
-      devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]
-      devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]
-      else -> {
-        var widthDp = config.widthDp ?: devicePreviewString?.widthDp
-        var heightDp = config.heightDp ?: devicePreviewString?.heightDp
+fun configToDeviceSpec(config: ComposePreviewSnapshotConfig): DeviceSpec? {
+  val devicePreviewString = parseDevicePreviewString(config.device)
+  return when {
+    devicePreviewString?.name != null -> KNOWN_DEVICE_SPECS[devicePreviewString.name]
+    devicePreviewString?.id != null -> KNOWN_DEVICE_SPECS[devicePreviewString.id]
+    else -> {
+      var widthDp = config.widthDp ?: devicePreviewString?.widthDp
+      var heightDp = config.heightDp ?: devicePreviewString?.heightDp
 
-        if (devicePreviewString?.orientation == "landscape") {
-          val height = heightDp
-          heightDp = widthDp
-          widthDp = height
-        }
-
-        DeviceSpec(
-          heightDp = heightDp,
-          widthDp = widthDp,
-          // https://cs.android.com/android-studio/platform/tools/adt/idea/+/mirror-goog-studio-main:preview-elements/src/com/android/tools/preview/config/Constants.kt;l=80
-          dpi = devicePreviewString?.dpi ?: DisplayMetrics.DENSITY_420,
-        )
+      if (devicePreviewString?.orientation == "landscape") {
+        val height = heightDp
+        heightDp = widthDp
+        widthDp = height
       }
+
+      DeviceSpec(
+        heightDp = heightDp,
+        widthDp = widthDp,
+        // https://cs.android.com/android-studio/platform/tools/adt/idea/+/mirror-goog-studio-main:preview-elements/src/com/android/tools/preview/config/Constants.kt;l=80
+        dpi = devicePreviewString?.dpi ?: DisplayMetrics.DENSITY_420,
+      )
     }
   }
+}
 
 data class DevicePreviewString(
   val type: String,
@@ -249,48 +247,46 @@ data class DevicePreviewString(
   // Intentionally not supporting `shape`
 )
 
-fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? =
-  Profiler.trace("parseDevicePreviewString") {
-    if (deviceString.isNullOrEmpty()) return@trace null
+fun parseDevicePreviewString(deviceString: String?): DevicePreviewString? {
+  if (deviceString.isNullOrEmpty()) return null
 
-    val idPattern = Regex("""id:(?<id>[a-zA-Z0-9_ ]+)""")
-    val namePattern = Regex("""name:(?<name>[a-zA-Z0-9_ ]+)""")
-    val specPattern = Regex("""spec:(?<spec>.+)""")
+  val idPattern = Regex("""id:(?<id>[a-zA-Z0-9_ ]+)""")
+  val namePattern = Regex("""name:(?<name>[a-zA-Z0-9_ ]+)""")
+  val specPattern = Regex("""spec:(?<spec>.+)""")
 
-    return@trace when {
-      idPattern.matchEntire(deviceString) != null -> {
-        val match = idPattern.matchEntire(deviceString)!!
-        DevicePreviewString(type = "id", id = match.groups["id"]?.value)
-      }
-
-      namePattern.matchEntire(deviceString) != null -> {
-        val match = namePattern.matchEntire(deviceString)!!
-        DevicePreviewString(type = "name", name = match.groups["name"]?.value)
-      }
-
-      specPattern.matchEntire(deviceString) != null -> {
-        val match = specPattern.matchEntire(deviceString)!!
-        val specContent = match.groups["spec"]?.value ?: return@trace null
-        parseSpecContent(specContent)
-      }
-
-      else -> null
+  return when {
+    idPattern.matchEntire(deviceString) != null -> {
+      val match = idPattern.matchEntire(deviceString)!!
+      DevicePreviewString(type = "id", id = match.groups["id"]?.value)
     }
-  }
 
-private fun parseSpecContent(specContent: String): DevicePreviewString =
-  Profiler.trace("parseSpecContent") {
-    val paramPattern = Regex("""([^,:\s]\w+)=([^,]+)""")
-    val params = paramPattern.findAll(specContent)
-      .associate { it.groupValues[1].trim() to it.groupValues[2].trim() }
+    namePattern.matchEntire(deviceString) != null -> {
+      val match = namePattern.matchEntire(deviceString)!!
+      DevicePreviewString(type = "name", name = match.groups["name"]?.value)
+    }
 
-    return@trace DevicePreviewString(
-      type = "spec",
-      id = params["id"],
-      // Currently assuming dp, add support later if needed for other values
-      widthDp = params["width"]?.removeSuffix("dp")?.toIntOrNull(),
-      heightDp = params["height"]?.removeSuffix("dp")?.toIntOrNull(),
-      dpi = params["dpi"]?.toIntOrNull(),
-      orientation = params["orientation"]?.lowercase()
-    )
+    specPattern.matchEntire(deviceString) != null -> {
+      val match = specPattern.matchEntire(deviceString)!!
+      val specContent = match.groups["spec"]?.value ?: return null
+      parseSpecContent(specContent)
+    }
+
+    else -> null
   }
+}
+
+private fun parseSpecContent(specContent: String): DevicePreviewString {
+  val paramPattern = Regex("""([^,:\s]\w+)=([^,]+)""")
+  val params = paramPattern.findAll(specContent)
+    .associate { it.groupValues[1].trim() to it.groupValues[2].trim() }
+
+  return DevicePreviewString(
+    type = "spec",
+    id = params["id"],
+    // Currently assuming dp, add support later if needed for other values
+    widthDp = params["width"]?.removeSuffix("dp")?.toIntOrNull(),
+    heightDp = params["height"]?.removeSuffix("dp")?.toIntOrNull(),
+    dpi = params["dpi"]?.toIntOrNull(),
+    orientation = params["orientation"]?.lowercase()
+  )
+}

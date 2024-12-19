@@ -17,7 +17,8 @@ object ComposableInvoker {
     methodName: String,
     composer: Composer,
     vararg args: Any?
-  ) = Profiler.trace("invokeComposable") {
+  ) {
+    Profiler.startSpan("invokeComposable")
     try {
       val composableClass = Class.forName(className)
       val method = composableClass.findComposableMethod(methodName, *args)
@@ -36,6 +37,8 @@ object ComposableInvoker {
     } catch (e: Exception) {
       Log.w(TAG, "Failed to invoke Composable Method '$className.$methodName'")
       throw e
+    } finally {
+      Profiler.endSpan()
     }
   }
 
@@ -98,10 +101,11 @@ object ComposableInvoker {
   private fun Class<*>.findComposableMethod(
     methodName: String,
     vararg previewParamArgs: Any?
-  ): Method? = Profiler.trace("findComposableMethod") {
+  ): Method? {
+    Profiler.startSpan("findComposableMethod")
     val argsArray: Array<Class<out Any>> =
       previewParamArgs.mapNotNull { it?.javaClass }.toTypedArray()
-    return@trace try {
+    return try {
       val changedParamsCount = changedParamCount(argsArray.size, 0)
       val changedParams = Int::class.java.dup(changedParamsCount)
       declaredMethods.findCompatibleComposeMethod(
@@ -122,6 +126,8 @@ object ComposableInvoker {
         Log.w(TAG, "Method $methodName not found in class ${this.simpleName}")
         null
       }
+    } finally {
+      Profiler.endSpan()
     }
   }
 
@@ -134,7 +140,8 @@ object ComposableInvoker {
     instance: Any?,
     composer: Composer,
     vararg args: Any?
-  ): Any? = Profiler.trace("Method.invokeComposableMethod") {
+  ): Any? {
+    Profiler.startSpan("Method.invokeComposableMethod")
     val composerIndex = parameterTypes.indexOfLast { it == Composer::class.java }
     val realParams = composerIndex
     val thisParams = if (instance != null) 1 else 0
@@ -176,7 +183,10 @@ object ComposableInvoker {
           else -> error("Unexpected index")
         }
       }
-    return@trace invoke(instance, *arguments)
+
+    val result = invoke(instance, *arguments)
+    Profiler.endSpan()
+    return result
   }
 
   /**

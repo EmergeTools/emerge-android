@@ -12,15 +12,18 @@ object PreviewParamUtils {
   @Suppress("ReturnCount")
   internal fun getPreviewProviderParameters(
     previewConfig: ComposePreviewSnapshotConfig
-  ): Array<Any?>? = Profiler.trace("getPreviewProviderParameters") {
+  ): Array<Any?>? {
+    Profiler.startSpan("getPreviewProviderParameters")
     if (previewConfig.previewParameter == null) {
       Log.d(TAG, "No PreviewParameterProvider found for ${previewConfig.originalFqn}")
-      return@trace null
+      Profiler.endSpan()
+      return null
     }
 
     if (previewConfig.previewParameter?.providerClassFqn.isNullOrEmpty()) {
       Log.e(TAG, "PreviewParameterProvider class name is empty for ${previewConfig.originalFqn}")
-      return@trace null
+      Profiler.endSpan()
+      return null
     }
 
     val paramProviderClass = try {
@@ -32,7 +35,8 @@ object PreviewParamUtils {
           " for ${previewConfig.originalFqn}",
         e
       )
-      return@trace null
+      Profiler.endSpan()
+      return null
     }
 
     if (paramProviderClass == null) {
@@ -41,7 +45,8 @@ object PreviewParamUtils {
         "PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'" +
           " is not a PreviewParameterProvider for ${previewConfig.originalFqn}"
       )
-      return@trace null
+      Profiler.endSpan()
+      return null
     }
 
     val constructor = paramProviderClass.constructors
@@ -52,10 +57,13 @@ object PreviewParamUtils {
       )
     val params = constructor.newInstance() as PreviewParameterProvider<*>
 
-    return@trace params.values.toArray(params.count)
+    val values = params.values.toArray(params.count)
       .map { unwrapIfInline(it) }
       .take(previewConfig.previewParameter?.limit ?: params.count)
       .toTypedArray()
+
+    Profiler.endSpan()
+    return values
   }
 
   private fun Sequence<Any?>.toArray(size: Int): Array<Any?> {
