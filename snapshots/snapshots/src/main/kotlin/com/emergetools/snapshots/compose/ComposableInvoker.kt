@@ -2,6 +2,7 @@ package com.emergetools.snapshots.compose
 
 import android.util.Log
 import androidx.compose.runtime.Composer
+import com.emergetools.snapshots.util.Profiler
 import java.lang.reflect.Method
 import java.lang.reflect.Modifier
 import kotlin.math.ceil
@@ -17,6 +18,7 @@ object ComposableInvoker {
     composer: Composer,
     vararg args: Any?
   ) {
+    Profiler.startSpan("invokeComposable")
     try {
       val composableClass = Class.forName(className)
       val method = composableClass.findComposableMethod(methodName, *args)
@@ -35,6 +37,8 @@ object ComposableInvoker {
     } catch (e: Exception) {
       Log.w(TAG, "Failed to invoke Composable Method '$className.$methodName'")
       throw e
+    } finally {
+      Profiler.endSpan()
     }
   }
 
@@ -98,6 +102,7 @@ object ComposableInvoker {
     methodName: String,
     vararg previewParamArgs: Any?
   ): Method? {
+    Profiler.startSpan("findComposableMethod")
     val argsArray: Array<Class<out Any>> =
       previewParamArgs.mapNotNull { it?.javaClass }.toTypedArray()
     return try {
@@ -121,6 +126,8 @@ object ComposableInvoker {
         Log.w(TAG, "Method $methodName not found in class ${this.simpleName}")
         null
       }
+    } finally {
+      Profiler.endSpan()
     }
   }
 
@@ -134,6 +141,7 @@ object ComposableInvoker {
     composer: Composer,
     vararg args: Any?
   ): Any? {
+    Profiler.startSpan("Method.invokeComposableMethod")
     val composerIndex = parameterTypes.indexOfLast { it == Composer::class.java }
     val realParams = composerIndex
     val thisParams = if (instance != null) 1 else 0
@@ -175,7 +183,10 @@ object ComposableInvoker {
           else -> error("Unexpected index")
         }
       }
-    return invoke(instance, *arguments)
+
+    val result = invoke(instance, *arguments)
+    Profiler.endSpan()
+    return result
   }
 
   /**

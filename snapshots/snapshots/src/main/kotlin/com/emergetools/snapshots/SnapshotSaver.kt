@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
@@ -38,6 +39,7 @@ internal object SnapshotSaver {
     fqn: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("save")
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
@@ -52,6 +54,7 @@ internal object SnapshotSaver {
       keyName = keyName,
       bitmap = bitmap
     )
+
     if (saveMetadata) {
       saveMetadata(
         snapshotsDir = snapshotsDir,
@@ -61,6 +64,7 @@ internal object SnapshotSaver {
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
+    Profiler.endSpan()
   }
 
   fun saveError(
@@ -69,6 +73,7 @@ internal object SnapshotSaver {
     errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("saveError")
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
@@ -83,6 +88,7 @@ internal object SnapshotSaver {
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
+    Profiler.endSpan()
   }
 
   private fun saveImage(
@@ -90,9 +96,11 @@ internal object SnapshotSaver {
     keyName: String,
     bitmap: Bitmap,
   ) {
+    Profiler.startSpan("saveImage")
     saveFile(snapshotsDir, "$keyName$PNG_EXTENSION") {
       bitmap.compress(Bitmap.CompressFormat.PNG, DEFAULT_PNG_QUALITY, this)
     }
+    Profiler.endSpan()
   }
 
   private fun saveMetadata(
@@ -102,6 +110,7 @@ internal object SnapshotSaver {
     fqn: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("saveMetadata")
     val metadata: SnapshotMetadata = SnapshotMetadata.SuccessMetadata(
       name = keyName,
       displayName = displayName,
@@ -116,6 +125,7 @@ internal object SnapshotSaver {
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
     }
+    Profiler.endSpan()
   }
 
   private fun saveErrorMetadata(
@@ -125,6 +135,7 @@ internal object SnapshotSaver {
     errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("saveErrorMetadata")
     val keyName = composePreviewSnapshotConfig.keyName()
     val metadata: SnapshotMetadata = SnapshotMetadata.ErrorMetadata(
       name = composePreviewSnapshotConfig.keyName(),
@@ -140,6 +151,7 @@ internal object SnapshotSaver {
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
     }
+    Profiler.endSpan()
   }
 
   private fun saveFile(
@@ -147,6 +159,7 @@ internal object SnapshotSaver {
     filenameWithExtension: String,
     writer: FileOutputStream.() -> Unit,
   ) {
+    Profiler.startSpan("saveFile")
     val outputFile = File(dir, filenameWithExtension)
 
     if (outputFile.exists()) {
@@ -156,6 +169,7 @@ internal object SnapshotSaver {
 
     Log.d(TAG, "Saving file to ${outputFile.path}")
     outputFile.outputStream().use { writer(it) }
+    Profiler.endSpan()
   }
 
   private const val PNG_EXTENSION = ".png"

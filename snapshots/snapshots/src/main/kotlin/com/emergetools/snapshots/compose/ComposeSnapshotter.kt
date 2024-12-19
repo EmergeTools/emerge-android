@@ -15,6 +15,7 @@ import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.compose.previewparams.PreviewParamUtils
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 
 @Suppress("TooGenericExceptionCaught")
 fun snapshotComposable(
@@ -22,6 +23,7 @@ fun snapshotComposable(
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
+  Profiler.startSpan("snapshotComposable")
   try {
     snapshot(
       activity = activity,
@@ -40,6 +42,8 @@ fun snapshotComposable(
     )
     // Re-throw to fail the test
     throw e
+  } finally {
+    Profiler.endSpan()
   }
 }
 
@@ -53,14 +57,20 @@ private fun snapshot(
   val previewParameters =
     PreviewParamUtils.getPreviewProviderParameters(previewConfig) ?: arrayOf<Any?>(null)
 
+  Profiler.startSpan("configToDeviceSpec")
   val deviceSpec = configToDeviceSpec(previewConfig)
+  Profiler.endSpan()
 
   for (index in previewParameters.indices) {
+    Profiler.startSpan("previewParam_$index")
     val prevParam = previewParameters[index]
     Log.d(
       EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
       "Invoking composable method with preview parameter: $prevParam"
     )
+
+    Profiler.startSpan("setupComposeView")
+
     val composeView = ComposeView(activity)
     composeView.layoutParams = LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
     val args = if (prevParam != null) arrayOf(prevParam) else emptyArray()
@@ -68,6 +78,8 @@ private fun snapshot(
     val saveablePreviewConfig = previewConfig.copy(
       previewParameter = previewConfig.previewParameter?.copy(index = index)
     )
+
+    Profiler.endSpan()
 
     // Update activity window size if device is specified
     if (deviceSpec != null) {
@@ -86,12 +98,15 @@ private fun snapshot(
     }
 
     // Add the ComposeView to the activity
+    Profiler.startSpan("addContentView")
     activity.addContentView(
       composeView,
       LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT)
     )
+    Profiler.endSpan()
 
     composeView.post {
+      Profiler.startSpan("post")
       val size = measureViewSize(composeView, previewConfig)
       val bitmap = captureBitmap(composeView, size.width, size.height)
 
@@ -106,7 +121,9 @@ private fun snapshot(
 
       // Reset activity content view
       (composeView.parent as? ViewGroup)?.removeView(composeView)
+      Profiler.endSpan()
     }
+    Profiler.endSpan()
   }
 }
 
@@ -114,6 +131,7 @@ private fun measureViewSize(
   view: View,
   previewConfig: ComposePreviewSnapshotConfig
 ): IntSize {
+  Profiler.startSpan("measureViewSize")
   val deviceSpec = configToDeviceSpec(previewConfig)
 
   // Use exact measurements when we have them
@@ -149,11 +167,17 @@ private fun measureViewSize(
       View.MeasureSpec.makeMeasureSpec(view.height, View.MeasureSpec.AT_MOST)
   }
 
+  Profiler.startSpan("view.measure")
   view.measure(widthMeasureSpec, heightMeasureSpec)
-  return IntSize(view.measuredWidth, view.measuredHeight)
+  Profiler.endSpan()
+
+  val size = IntSize(view.measuredWidth, view.measuredHeight)
+  Profiler.endSpan()
+  return size
 }
 
 private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
+  Profiler.startSpan("updateActivityBounds")
   // Apply the device spec dimensions to the activity window
   val width = deviceSpec.widthPixels
   val height = deviceSpec.heightPixels
@@ -161,6 +185,7 @@ private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {
   if (width > 0 && height > 0) {
     activity.window.setLayout(width, height)
   }
+  Profiler.endSpan()
 }
 
 private fun dpToPx(dp: Int, scalingFactor: Float): Int {
@@ -172,6 +197,7 @@ fun captureBitmap(
   width: Int,
   height: Int,
 ): Bitmap? {
+  Profiler.startSpan("captureBitmap")
   try {
     val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
     val canvas = Canvas(bitmap)
@@ -185,5 +211,7 @@ fun captureBitmap(
       e,
     )
     return null
+  } finally {
+    Profiler.endSpan()
   }
 }

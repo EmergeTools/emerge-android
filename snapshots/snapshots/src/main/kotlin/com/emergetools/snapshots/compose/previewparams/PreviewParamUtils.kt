@@ -3,6 +3,7 @@ package com.emergetools.snapshots.compose.previewparams
 import android.util.Log
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.util.Profiler
 
 // Inspired by https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling/src/androidMain/kotlin/androidx/compose/ui/tooling/PreviewUtils.android.kt
 object PreviewParamUtils {
@@ -12,13 +13,16 @@ object PreviewParamUtils {
   internal fun getPreviewProviderParameters(
     previewConfig: ComposePreviewSnapshotConfig
   ): Array<Any?>? {
+    Profiler.startSpan("getPreviewProviderParameters")
     if (previewConfig.previewParameter == null) {
       Log.d(TAG, "No PreviewParameterProvider found for ${previewConfig.originalFqn}")
+      Profiler.endSpan()
       return null
     }
 
     if (previewConfig.previewParameter?.providerClassFqn.isNullOrEmpty()) {
       Log.e(TAG, "PreviewParameterProvider class name is empty for ${previewConfig.originalFqn}")
+      Profiler.endSpan()
       return null
     }
 
@@ -31,6 +35,7 @@ object PreviewParamUtils {
           " for ${previewConfig.originalFqn}",
         e
       )
+      Profiler.endSpan()
       return null
     }
 
@@ -40,6 +45,7 @@ object PreviewParamUtils {
         "PreviewProvider '${previewConfig.previewParameter!!.providerClassFqn}'" +
           " is not a PreviewParameterProvider for ${previewConfig.originalFqn}"
       )
+      Profiler.endSpan()
       return null
     }
 
@@ -51,10 +57,13 @@ object PreviewParamUtils {
       )
     val params = constructor.newInstance() as PreviewParameterProvider<*>
 
-    return params.values.toArray(params.count)
+    val values = params.values.toArray(params.count)
       .map { unwrapIfInline(it) }
       .take(previewConfig.previewParameter?.limit ?: params.count)
       .toTypedArray()
+
+    Profiler.endSpan()
+    return values
   }
 
   private fun Sequence<Any?>.toArray(size: Int): Array<Any?> {
