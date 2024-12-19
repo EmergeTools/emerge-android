@@ -139,6 +139,9 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add(key)
             it.add(value)
           }
+          it.add("-e")
+          it.add("class")
+          it.add("com.emergetools.snapshots.v2.EmergeComposeSnapshotInvoker")
           if (composeSnapshotsJson.exists()) {
             push(
               localFile = composeSnapshotsJson.absolutePath,
