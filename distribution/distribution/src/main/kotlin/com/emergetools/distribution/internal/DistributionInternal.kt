@@ -206,6 +206,10 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     return UpdateStatus.Error("No API key available")
   }
 
+  val info = context.packageManager.getPackageInfo(applicationId, 0)
+  val version = info.versionName
+  val build = info.versionCode
+
   val url = HttpUrl.Builder().apply {
     scheme("https")
     host("api.emergetools.com")
@@ -214,6 +218,8 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("apiKey", apiKey)
     addQueryParameter("tag", state.tag)
     addQueryParameter("appId", applicationId)
+    addQueryParameter("version", version)
+    addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
   }.build()
 
