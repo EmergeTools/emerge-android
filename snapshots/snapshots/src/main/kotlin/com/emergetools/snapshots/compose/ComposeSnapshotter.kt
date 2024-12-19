@@ -23,6 +23,7 @@ fun snapshotComposable(
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
+  Profiler.startSpan("snapshotComposable")
   try {
     snapshot(
       activity = activity,
@@ -41,6 +42,8 @@ fun snapshotComposable(
     )
     // Re-throw to fail the test
     throw e
+  } finally {
+    Profiler.endSpan()
   }
 }
 
@@ -54,7 +57,9 @@ private fun snapshot(
   val previewParameters =
     PreviewParamUtils.getPreviewProviderParameters(previewConfig) ?: arrayOf<Any?>(null)
 
+  Profiler.startSpan("configToDeviceSpec")
   val deviceSpec = configToDeviceSpec(previewConfig)
+  Profiler.endSpan()
 
   for (index in previewParameters.indices) {
     Profiler.startSpan("previewParam_$index")
@@ -101,6 +106,7 @@ private fun snapshot(
     Profiler.endSpan()
 
     composeView.post {
+      Profiler.startSpan("post")
       val size = measureViewSize(composeView, previewConfig)
       val bitmap = captureBitmap(composeView, size.width, size.height)
 
@@ -115,6 +121,7 @@ private fun snapshot(
 
       // Reset activity content view
       (composeView.parent as? ViewGroup)?.removeView(composeView)
+      Profiler.endSpan()
     }
     Profiler.endSpan()
   }
@@ -160,9 +167,13 @@ private fun measureViewSize(
       View.MeasureSpec.makeMeasureSpec(view.height, View.MeasureSpec.AT_MOST)
   }
 
+  Profiler.startSpan("view.measure")
   view.measure(widthMeasureSpec, heightMeasureSpec)
   Profiler.endSpan()
-  return IntSize(view.measuredWidth, view.measuredHeight)
+
+  val size = IntSize(view.measuredWidth, view.measuredHeight)
+  Profiler.endSpan()
+  return size
 }
 
 private fun updateActivityBounds(activity: Activity, deviceSpec: DeviceSpec) {

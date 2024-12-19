@@ -39,6 +39,7 @@ internal object SnapshotSaver {
     fqn: String,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("save")
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
@@ -63,6 +64,7 @@ internal object SnapshotSaver {
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
+    Profiler.endSpan()
   }
 
   fun saveError(
@@ -71,6 +73,7 @@ internal object SnapshotSaver {
     errorType: SnapshotErrorType,
     composePreviewSnapshotConfig: ComposePreviewSnapshotConfig,
   ) {
+    Profiler.startSpan("saveError")
     val snapshotsDir = File(filesDir, SNAPSHOTS_DIR_NAME)
     if (!snapshotsDir.exists() && !snapshotsDir.mkdirs()) {
       error("Unable to create snapshots storage directory.")
@@ -85,6 +88,7 @@ internal object SnapshotSaver {
         composePreviewSnapshotConfig = composePreviewSnapshotConfig,
       )
     }
+    Profiler.endSpan()
   }
 
   private fun saveImage(

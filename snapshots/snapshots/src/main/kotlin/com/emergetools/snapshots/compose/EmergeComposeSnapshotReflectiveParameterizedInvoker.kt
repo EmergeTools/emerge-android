@@ -83,8 +83,15 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   @get:Rule
   val profiler = Profiler.getInstance(parameter.previewConfig)
 
+  fun someMethod() {
+    Profiler.startSpan("someMethod")
+    // some code
+    Profiler.endSpan()
+  }
+
   @Test
   fun reflectiveComposableInvoker() {
+    Profiler.startSpan("reflectiveComposableInvoker")
     Log.i(TAG, "Running snapshot test ${parameter.previewConfig.keyName()}")
     // Force application to be debuggable to ensure PreviewActivity doesn't early exit
     val applicationInfo = InstrumentationRegistry.getInstrumentation().targetContext.applicationInfo
@@ -94,5 +101,6 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     scenarioRule.scenario.onActivity { activity ->
       snapshotComposable(snapshotRule, activity, previewConfig)
     }
+    Profiler.endSpan()
   }
 }

@@ -58,10 +58,13 @@ class Profiler(
       args.getString(ARG_KEY_SAVE_PROFILE, "false").toBoolean()
   }
 
-  private val stack = mutableListOf<String>()
-  private val foldedStacks = mutableListOf<String>()
+  private data class SpanInfo(
+    val name: String,
+    val startTime: Long
+  )
 
-  private var startTime = 0L
+  private val stack = mutableListOf<SpanInfo>()
+  private val foldedStacks = mutableListOf<String>()
 
   override fun apply(base: Statement, description: Description): Statement {
     return object : Statement() {
@@ -86,10 +89,12 @@ class Profiler(
       return
     }
 
-    if (stack.isEmpty()) {
-      startTime = System.currentTimeMillis()
-    }
-    stack.add(name)
+    stack.add(
+      SpanInfo(
+        name = name,
+        startTime = System.currentTimeMillis()
+      )
+    )
   }
 
   private fun endSpanInternal() {
@@ -100,13 +105,15 @@ class Profiler(
 
     if (stack.isNotEmpty()) {
       val endTime = System.currentTimeMillis()
-      val spanName = stack.removeAt(stack.size - 1)
-      var foldedStack = stack.joinToString(";")
+      val spanInfo = stack.removeAt(stack.size - 1)
+
+      var foldedStack = stack.joinToString(";") { it.name }
       if (foldedStack.isNotEmpty()) {
         foldedStack = "$foldedStack;"
       }
-      val duration = endTime - startTime
-      foldedStacks.add("$foldedStack$spanName $duration")
+
+      val duration = endTime - spanInfo.startTime
+      foldedStacks.add("$foldedStack${spanInfo.name} $duration")
     }
   }
 
