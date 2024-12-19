@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 - Update API endpoint from https://api.emergetools.com to https://reaper.emergetools.com
-  both endpoints will continue to accept reports.
+  both endpoints will continue to accept reports. [#316](https://github.com/EmergeTools/emerge-android/pull/316)
 
 ## 1.0.0 - 2024-12-02
 
