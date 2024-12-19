@@ -5,15 +5,18 @@ import android.util.Log
 import androidx.compose.ui.tooling.PreviewActivity
 import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
+import com.airbnb.lottie.LottieTask
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposeSnapshots
 import kotlinx.serialization.json.Json
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.junit.runners.Parameterized
 import java.io.File
+import java.util.concurrent.Executor
 
 @RunWith(Parameterized::class)
 class EmergeComposeSnapshotReflectiveParameterizedInvoker(
@@ -78,6 +81,12 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
 
   @get:Rule
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
+
+  @Before
+  fun setup() {
+    // https://github.com/cashapp/paparazzi/issues/630#issuecomment-1512516656
+    LottieTask.EXECUTOR = Executor(Runnable::run)
+  }
 
   @Test
   fun reflectiveComposableInvoker() {
