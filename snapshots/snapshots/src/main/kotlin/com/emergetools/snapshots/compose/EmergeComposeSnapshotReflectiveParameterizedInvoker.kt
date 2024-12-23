@@ -2,10 +2,9 @@ package com.emergetools.snapshots.compose
 
 import android.content.pm.ApplicationInfo
 import android.util.Log
-import androidx.compose.ui.tooling.PreviewActivity
-import androidx.test.ext.junit.rules.ActivityScenarioRule
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.EmergeSnapshots
+import com.emergetools.snapshots.rules.EmergeActivityScenarioRule
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.shared.ComposeSnapshots
 import com.emergetools.snapshots.util.Profiler
@@ -75,19 +74,13 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   }
 
   @get:Rule
-  val scenarioRule = ActivityScenarioRule(PreviewActivity::class.java)
+  val scenarioRule = EmergeActivityScenarioRule()
 
   @get:Rule
   val snapshotRule: EmergeSnapshots = EmergeSnapshots()
 
   @get:Rule
   val profiler = Profiler.getInstance(parameter.previewConfig)
-
-  fun someMethod() {
-    Profiler.startSpan("someMethod")
-    // some code
-    Profiler.endSpan()
-  }
 
   @Test
   fun reflectiveComposableInvoker() {

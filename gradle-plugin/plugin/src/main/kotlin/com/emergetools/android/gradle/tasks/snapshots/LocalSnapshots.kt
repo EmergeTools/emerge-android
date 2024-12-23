@@ -143,6 +143,9 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add(key)
             it.add(value)
           }
+          it.add("-e")
+          it.add("waitForActivitiesToComplete")
+          it.add("false")
           if (composeSnapshotsJson.exists()) {
             push(
               localFile = composeSnapshotsJson.absolutePath,
