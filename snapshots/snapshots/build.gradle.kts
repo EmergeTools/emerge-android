@@ -58,7 +58,6 @@ dependencies {
   api(projects.snapshots.snapshotsShared)
   api(libs.androidx.test.core)
   api(libs.androidx.test.core.ktx)
-  api(libs.androidx.test.ext.junit)
   api(libs.androidx.test.rules)
   api(libs.androidx.test.runner)
   api(libs.compose.ui.test.junit)
