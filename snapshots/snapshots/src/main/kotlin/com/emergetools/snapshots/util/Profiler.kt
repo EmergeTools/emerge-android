@@ -84,6 +84,7 @@ class Profiler(
   }
 
   private fun startSpanInternal(name: String) {
+    Log.d(TAG, "Starting span: $name")
     if (!profilingEnabled) {
       Log.d(TAG, "Profiling disabled, skipping startSpan")
       return
@@ -98,6 +99,7 @@ class Profiler(
   }
 
   private fun endSpanInternal() {
+    Log.d(TAG, "Ending span ${stack.lastOrNull()?.name}")
     if (!profilingEnabled) {
       Log.d(TAG, "Profiling disabled, skipping stopSpan")
       return
