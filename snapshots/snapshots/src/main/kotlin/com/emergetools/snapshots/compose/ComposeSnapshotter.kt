@@ -24,7 +24,7 @@ fun snapshotComposable(
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
   activity.runOnUiThread {
-    val priorExceptionHandler = Thread.getDefaultUncaughtExceptionHandler();
+    val priorExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
     Thread.setDefaultUncaughtExceptionHandler { t, e ->
       Log.e(
         EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
