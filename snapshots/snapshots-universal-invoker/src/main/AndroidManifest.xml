@@ -15,6 +15,6 @@
 
   <instrumentation
     android:name="androidx.test.runner.AndroidJUnitRunner"
-    android:targetPackage="com.classpass.classpass.dev" />
+    android:targetPackage="placeholder" />
 
 </manifest>
