@@ -12,8 +12,10 @@ android {
   defaultConfig {
     minSdk = 29
     targetSdk = 35
-
     testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+    val targetPackage = project.properties["targetPackage"] as? String ?: "placeholder"
+    manifestPlaceholders["targetPackage"] = targetPackage
   }
 
   buildTypes {
