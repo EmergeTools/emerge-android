@@ -23,6 +23,23 @@ fun snapshotComposable(
   activity: PreviewActivity,
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
+  activity.runOnUiThread {
+    val priorExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
+    Thread.setDefaultUncaughtExceptionHandler { t, e ->
+      Log.e(
+        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+        "Uncaught exception in UI thread",
+        e
+      )
+      snapshotRule.saveError(
+        errorType = SnapshotErrorType.GENERAL,
+        composePreviewSnapshotConfig = previewConfig
+      )
+      priorExceptionHandler?.uncaughtException(t, e)
+      activity.finish()
+    }
+  }
+
   Profiler.startSpan("snapshotComposable")
   try {
     snapshot(
