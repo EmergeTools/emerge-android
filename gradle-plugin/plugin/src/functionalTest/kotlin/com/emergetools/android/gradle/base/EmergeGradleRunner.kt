@@ -72,17 +72,13 @@ class EmergeGradleRunner private constructor(
     androidGradlePluginVersion = version
   }
 
-  fun withKotlinAndroidGradlePluginVersion(version: String) = apply {
-    check(version in SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS) {
-      "This version of the Kotlin Android Gradle Plugin is not currently supported."
-    }
-    kotlinAndroidGradlePluginVersion = version
-  }
-
   private fun withJavaVersion(version: String) = apply {
-    val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
-    val javaHomeEnvKey = "JAVA_HOME_${version}_$arch"
-    arguments = arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}"
+    // Check if we are running on Github Actions and find appropriate JAVA_HOME accordingly
+    if (System.getenv("GITHUB_ACTIONS") == "true") {
+      val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
+      val javaHomeEnvKey = "JAVA_HOME_${version}_$arch"
+      arguments = arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}"
+    }
   }
 
   fun withServer(serverReceiver: MockWebServer.(HttpUrl) -> Unit) = apply {
