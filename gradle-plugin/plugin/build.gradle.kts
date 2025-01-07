@@ -95,7 +95,6 @@ val functionalTestTask = tasks.register<Test>("functionalTest") {
   group = "verification"
   testClassesDirs = functionalTest.output.classesDirs
   classpath = functionalTest.runtimeClasspath
-  mustRunAfter(tasks.test)
 }
 
 tasks.check {
