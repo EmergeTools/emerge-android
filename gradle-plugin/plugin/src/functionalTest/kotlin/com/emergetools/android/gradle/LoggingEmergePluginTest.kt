@@ -1,6 +1,7 @@
 package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
 import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
@@ -11,6 +12,7 @@ class LoggingEmergePluginTest : EmergePluginTest() {
   fun logExtension() {
     val result = EmergeGradleRunner.create("simple")
       .withArguments("logExtension")
+      .withGitHubPREvent()
       .build()
       .assertSuccessfulTask(":logExtension")
 
@@ -57,7 +59,7 @@ class LoggingEmergePluginTest : EmergePluginTest() {
           "╠═ baseSha: testBaseSha\n" +
           "╠═ previousSha: testPreviousSha\n" +
           "╠═ branchName: testBranchName\n" +
-          "╠═ prNumber: \n" +
+          "╠═ prNumber: 123\n" +
           "╠═ gitHubOptions\n" +
           "╠═ repoOwner: repoOwner\n" +
           "╠═ repoName: repoName\n" +
