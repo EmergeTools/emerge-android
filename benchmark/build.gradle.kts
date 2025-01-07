@@ -19,7 +19,6 @@ android {
 
     defaultConfig {
       minSdk = 26
-      targetSdk = 34
       // TODO(chromy): Should not be needed.
       manifestPlaceholders["emerge.reaper.enabled"] = false
       testInstrumentationRunner = "androidx.benchmark.junit4.AndroidBenchmarkRunner"

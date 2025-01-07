@@ -9,6 +9,7 @@ import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.TestAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
+import com.emergetools.android.gradle.tasks.internal.LogExtensionTask
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.registerGeneratePerfProjectTask
 import com.emergetools.android.gradle.tasks.perf.registerPerformanceTasks
@@ -16,8 +17,6 @@ import com.emergetools.android.gradle.tasks.reaper.registerReaperTasks
 import com.emergetools.android.gradle.tasks.size.registerSizeTasks
 import com.emergetools.android.gradle.tasks.snapshots.registerSnapshotTasks
 import com.emergetools.android.gradle.util.AgpVersions
-import com.emergetools.android.gradle.util.orEmpty
-import com.emergetools.android.gradle.util.treePrinter
 import org.gradle.api.Plugin
 import org.gradle.api.Project
 import org.gradle.api.tasks.StopExecutionException
@@ -74,9 +73,8 @@ class EmergePlugin : Plugin<Project> {
             registerGeneratePerfProjectTask(project, perfProjectPath, appVariants)
           }
         }
-
-        logExtension(project, emergeExtension)
       }
+      registerLogExtensionTask(project, emergeExtension)
     }
   }
 
@@ -249,84 +247,15 @@ class EmergePlugin : Plugin<Project> {
     variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
 
-  private fun logExtension(
+  private fun registerLogExtensionTask(
     project: Project,
-    extension: EmergePluginExtension,
+    emergeExtension: EmergePluginExtension
   ) {
-    if (!project.logger.isInfoEnabled) return
-
-    val extensionTree = treePrinter("Emerge configuration") {
-
-      addItem("apiToken: ${if (extension.apiToken.isPresent) "*****" else "MISSING"}")
-      addItem("includeDependencyInformation: ${extension.includeDependencyInformation.getOrElse(true)}")
-      addItem("dryRun (optional): ${extension.dryRun.orEmpty()}")
-      addItem("verbose (optional): ${extension.verbose.orEmpty()}")
-
-      val sizeHeading = addHeading("size")
-      addItem("tag (optional): ${extension.sizeOptions.tag.orEmpty()}", sizeHeading)
-      addItem("enabled: ${extension.sizeOptions.enabled.getOrElse(true)}", sizeHeading)
-
-      val snapshotsHeading = addHeading("snapshots")
-      addItem(
-        "snapshotsStorageDirectory: ${extension.snapshotOptions.snapshotsStorageDirectory.orEmpty()}",
-        snapshotsHeading
-      )
-      addItem("apiVersion: ${extension.snapshotOptions.apiVersion.orEmpty()}", snapshotsHeading)
-      addItem(
-        "includePrivatePreviews: ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}",
-        snapshotsHeading
-      )
-      addItem(
-        "includePreviewParamPreviews: ${extension.snapshotOptions.includePreviewParamPreviews.orEmpty()}",
-        snapshotsHeading
-      )
-      addItem("tag (optional): ${extension.snapshotOptions.tag.orEmpty()}", snapshotsHeading)
-      addItem("enabled: ${extension.snapshotOptions.enabled.getOrElse(true)}", snapshotsHeading)
-      addItem("profile: ${extension.snapshotOptions.profile.getOrElse(false)}", snapshotsHeading)
-
-      val reaperHeading = addHeading("reaper")
-      addItem(
-        "enabledVariants: ${extension.reaperOptions.enabledVariants.getOrElse(emptyList())}",
-        reaperHeading
-      )
-      addItem(
-        "publishableApiKey: ${if (extension.reaperOptions.publishableApiKey.isPresent) "*****" else "MISSING"}",
-        reaperHeading
-      )
-      addItem("tag (optional): ${extension.reaperOptions.tag.orEmpty()}", reaperHeading)
-
-      val performanceHeading = addHeading("performance")
-      addItem("projectPath: ${extension.perfOptions.projectPath.orEmpty()}", performanceHeading)
-      addItem("tag (optional): ${extension.perfOptions.tag.orEmpty()}", performanceHeading)
-      addItem("enabled: ${extension.perfOptions.enabled.getOrElse(true)}", performanceHeading)
-
-      val vcsOptionsHeading = addHeading("vcsOptions (optional, defaults to Git values)")
-      addItem("sha: ${extension.vcsOptions.sha.orEmpty()}", vcsOptionsHeading)
-      addItem("baseSha: ${extension.vcsOptions.baseSha.orEmpty()}", vcsOptionsHeading)
-      addItem("previousSha: ${extension.vcsOptions.previousSha.orEmpty()}", vcsOptionsHeading)
-      addItem("branchName: ${extension.vcsOptions.branchName.orEmpty()}", vcsOptionsHeading)
-      addItem("prNumber: ${extension.vcsOptions.prNumber.orEmpty()}", vcsOptionsHeading)
-      addItem("gitHubOptions", vcsOptionsHeading)
-      addItem(
-        "repoOwner: ${extension.vcsOptions.gitHubOptions.repoOwner.orEmpty()}",
-        vcsOptionsHeading
-      )
-      addItem(
-        "repoName: ${extension.vcsOptions.gitHubOptions.repoName.orEmpty()}",
-        vcsOptionsHeading
-      )
-      addItem(
-        "includeEventInformation: ${extension.vcsOptions.gitHubOptions.includeEventInformation.orEmpty()}",
-        vcsOptionsHeading
-      )
-      addItem("gitLabOptions", vcsOptionsHeading)
-      addItem(
-        "projectId: ${extension.vcsOptions.gitLabOptions.projectId.orEmpty()}",
-        vcsOptionsHeading
-      )
+    project.tasks.register("logExtension", LogExtensionTask::class.java) {
+      it.group = "Emerge debug"
+      it.description = "Logs the Emerge extension configuration to the console."
+      it.emergePluginExtension.set(emergeExtension)
     }
-
-    project.logger.lifecycle(extensionTree)
   }
 
   companion object {

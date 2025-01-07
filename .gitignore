@@ -24,3 +24,5 @@ captures/
 
 # Metadata used for plugin testing
 **/emerge_config.json
+
+.tool-versions
