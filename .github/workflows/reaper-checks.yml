@@ -107,7 +107,7 @@ jobs:
             model=NexusLowRes,version=21
             model=Pixel2,version=23
       - name: Publish test report
-        uses: mikepenz/action-junit-report@v2
+        uses: mikepenz/action-junit-report@v5
         if: always() # always run even if the tests fail
         with:
           report_paths: 'build/test-results/**/*.xml'
