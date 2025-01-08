@@ -27,7 +27,7 @@ mockito = "4.0.0"
 activity-ktx = "1.9.2"
 navigation-compose = "2.8.2"
 material3-android = "1.3.0"
-runtime-android = "1.7.3"
+runtime-android = "1.7.6"
 foundation-layout-android = "1.7.3"
 
 # internal
