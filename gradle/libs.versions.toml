@@ -13,7 +13,7 @@ androidxactivity = "1.7.1"
 # versions are supported when we decided to update.
 # https://android-review.googlesource.com/c/platform/frameworks/support/+/2692852/37/compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/internal/ComposableLambda.kt#625
 compose-bom = "2024.08.00"
-detekt = "1.22.0"
+detekt = "1.23.7"
 kotlin = "2.0.21"
 kotlin-coroutines = "1.8.0"
 kotlinpoet = "1.14.2"
