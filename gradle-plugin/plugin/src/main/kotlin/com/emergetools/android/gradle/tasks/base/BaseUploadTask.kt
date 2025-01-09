@@ -165,6 +165,11 @@ abstract class BaseUploadTask : DefaultTask() {
     val zipFile = File(createTempDirectory("").absolutePathString(), OUTPUT_FILE_NAME)
     logger.debug("Creating Emerge upload zip: ${zipFile.path}")
 
+    val json = Json {
+      encodeDefaults = true
+      explicitNulls = false
+    }
+
     ZipOutputStream(BufferedOutputStream(zipFile.outputStream())).use { zos ->
       includeFilesInUpload(zos)
 
@@ -184,7 +189,7 @@ abstract class BaseUploadTask : DefaultTask() {
           defaultModulePath = appModulePath.get(),
           logger = logger,
         )
-        val dependenciesJson = Json.encodeToString(dependencies)
+        val dependenciesJson = json.encodeToString(dependencies)
         val dependenciesFile = File(outputDir, Dependencies.JSON_FILE_NAME).also {
           it.createNewFile()
           it.writeText(dependenciesJson)
@@ -221,10 +226,10 @@ abstract class BaseUploadTask : DefaultTask() {
         }
       }
 
-      val json = Json.encodeToString(finalArtifactMetadata)
+      val artifactMetadataJson = json.encodeToString(finalArtifactMetadata)
       val appMetadataFile = File(outputDir, ArtifactMetadata.JSON_FILE_NAME).also {
         it.createNewFile()
-        it.writeText(json)
+        it.writeText(artifactMetadataJson)
       }
       appMetadataFile.inputStream().use { inputStream ->
         zos.putNextEntry(ZipEntry(appMetadataFile.name))
