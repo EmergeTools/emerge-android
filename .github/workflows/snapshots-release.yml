@@ -29,13 +29,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Sanity check snapshots test
-        run: ./gradlew :snapshots:snapshots:test -Pandroid.useAndroidX=true
+        run: ./gradlew :snapshots:snapshots:test :snapshots:snapshots-shared:test
       - name: Sanity check snapshots-shared test
-        run: ./gradlew :snapshots:snapshots-shared:test
-      - name: Deploy snapshots-shared
-        run: ./gradlew :snapshots:snapshots-shared:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
-      - name: Deploy snapshots-annotations
-        run: ./gradlew :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository
-      - name: Deploy snapshots
-        run: ./gradlew :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Pandroid.useAndroidX=true
+      - name: Deploy snapshots-shared, shapsnhots-annotations, snapshots
+        run: ./gradlew :snapshots:snapshots-shared:publishReleasePublicationToSonatypeStagingRepository :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository

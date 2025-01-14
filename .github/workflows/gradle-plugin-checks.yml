@@ -24,6 +24,8 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run build
         run: ./gradlew :gradle-plugin:build
 
@@ -37,6 +39,8 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run unit tests
         run: ./gradlew :gradle-plugin:plugin:test
 
@@ -52,6 +56,8 @@ jobs:
           java-version: |
             11
             17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run functional tests
         run: ./gradlew :gradle-plugin:plugin:functionalTest --stacktrace
       - name: Archive test reports

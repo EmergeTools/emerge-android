@@ -19,5 +19,7 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
       - name: Run Detekt
         run: ./gradlew detekt
