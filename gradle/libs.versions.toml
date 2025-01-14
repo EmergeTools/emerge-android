@@ -28,7 +28,7 @@ activity-ktx = "1.9.2"
 navigation-compose = "2.8.2"
 material3-android = "1.3.0"
 runtime-android = "1.7.3"
-foundation-layout-android = "1.7.3"
+foundation-layout-android = "1.7.6"
 
 # internal
 emerge-gradle-plugin = "4.0.5"
