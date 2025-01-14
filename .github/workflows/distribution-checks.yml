@@ -14,9 +14,6 @@ on:
       - gradle-plugin/**
       - distribution/**
 
-env:
-  GRADLE_OPTS: "-Dorg.gradle.jvmargs=-Xmx6g -Dorg.gradle.daemon=false -Dorg.gradle.vfs.watch=false -Dkotlin.incremental=false"
-
 jobs:
   device-spread-test:
     runs-on: ubuntu-latest
@@ -34,14 +31,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Generate target APK
-        run: ./gradlew :distribution:sample:app:assembleDebug -Pandroid.useAndroidX=true
-        env:
-          EMERGE_DISTRIBUTION_API_KEY: ${{ secrets.EMERGE_DISTRIBUTION_API_KEY }}
-          PR_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      - name: Generate test APK
-        run: ./gradlew :distribution:sample:app:assembleAndroidTest -Pandroid.useAndroidX=true
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Generate target and test APK
+        run: ./gradlew :distribution:sample:app:assembleDebug :distribution:sample:app:assembleAndroidTest
         env:
           EMERGE_DISTRIBUTION_API_KEY: ${{ secrets.EMERGE_DISTRIBUTION_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
@@ -63,14 +56,10 @@ jobs:
         with:
           java-version: '17'
           distribution: 'adopt'
-      - name: Generate target APK
-        run: ./gradlew :distribution:sample:app:assembleDebug -Pandroid.useAndroidX=true
-        env:
-          EMERGE_DISTRIBUTION_API_KEY: ${{ secrets.EMERGE_DISTRIBUTION_API_KEY }}
-          PR_SHA: ${{ github.event.pull_request.head.sha }}
-          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
-      - name: Generate test APK
-        run: ./gradlew :distribution:sample:app:assembleAndroidTest -Pandroid.useAndroidX=true
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Generate target and test APK
+        run: ./gradlew :distribution:sample:app:assembleDebug :distribution:sample:app:assembleAndroidTest
         env:
           EMERGE_DISTRIBUTION_API_KEY: ${{ secrets.EMERGE_DISTRIBUTION_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
