@@ -49,7 +49,7 @@ detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
-gradle-publish = { id = "com.gradle.plugin-publish", version = "0.20.0" }
+gradle-publish = { id = "com.gradle.plugin-publish", version = "0.21.0" }
 grgit = { id = "org.ajoberstar.grgit", version = "5.0.0" }
 plugin-best-practices = { id = "com.autonomousapps.plugin-best-practices-plugin", version = "0.10" }
 
