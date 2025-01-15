@@ -76,7 +76,7 @@ androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 asm = "org.ow2.asm:asm:9.7.1"
-asm-commons = "org.ow2.asm:asm-commons:9.5"
+asm-commons = "org.ow2.asm:asm-commons:9.7.1"
 
 assertj = "org.assertj:assertj-core:3.27.2"
 
