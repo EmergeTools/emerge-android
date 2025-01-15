@@ -95,7 +95,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 
 dexlib2 = "org.smali:dexlib2:2.5.2"
 
-google-truth = "com.google.truth:truth:1.1.3"
+google-truth = "com.google.truth:truth:1.4.4"
 
 guava = "com.google.guava:guava:30.1.1-jre"
 
