@@ -7,7 +7,9 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault(because = "Always runs as a check and has no outputs.")
 abstract class SizePreflight : BasePreflightTask() {
   @get:Input
   @get:Optional
@@ -30,14 +32,20 @@ abstract class SizePreflight : BasePreflightTask() {
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {
       if (!hasEmergeApiToken) {
-        throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")
+        throw PreflightFailure(
+          "Emerge API token not set. See " +
+            "https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key"
+        )
       }
     }
 
     val sizeEnabled = sizeEnabled.getOrElse(false)
     preflight.add("Size analysis enabled") {
       if (!sizeEnabled) {
-        throw PreflightFailure("Size analysis not enabled. Make sure `size.enabled` is set to true in the emerge configuration block.")
+        throw PreflightFailure(
+          "Size analysis not enabled. Make sure `size.enabled` is set to true" +
+            " in the emerge configuration block."
+        )
       }
     }
 

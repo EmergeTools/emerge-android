@@ -15,10 +15,12 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
+@DisableCachingByDefault(because = "Uploading snapshot bundles should not be cached.")
 abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
@@ -37,6 +39,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   abstract val includePreviewParamPreviews: Property<Boolean>
 
   @get:InputFile
+  @get:PathSensitive(PathSensitivity.RELATIVE)
   abstract val artifactMetadataPath: RegularFileProperty
 
   override fun includeFilesInUpload(zos: ZipOutputStream) {
@@ -92,9 +95,9 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
     upload(
       artifactMetadata =
-        artifactMetadata.copy(
-          created = Clock.System.now(),
-        ),
+      artifactMetadata.copy(
+        created = Clock.System.now(),
+      ),
     ) { response ->
       logger.lifecycle(
         "Snapshot bundle upload successful! View snapshots at the following url:",

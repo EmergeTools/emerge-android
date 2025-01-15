@@ -9,9 +9,11 @@ import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
+@DisableCachingByDefault(because = "Uploading AABs should not be cached.")
 abstract class UploadAAB : BaseUploadTask() {
   @get:InputFile
   @get:PathSensitive(PathSensitivity.NAME_ONLY)

@@ -32,6 +32,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
+import org.gradle.work.DisableCachingByDefault
 import java.io.BufferedOutputStream
 import java.io.File
 import java.util.concurrent.TimeUnit
@@ -69,6 +70,7 @@ data class CIDebugData(
   }
 }
 
+@DisableCachingByDefault(because = "Task has no outputs and should always run.")
 abstract class BaseUploadTask : DefaultTask() {
   @get:Input
   abstract val apiToken: Property<String>
@@ -216,9 +218,9 @@ abstract class BaseUploadTask : DefaultTask() {
             finalArtifactMetadata =
               artifactMetadata.copy(
                 ciDebugData =
-                  CIDebugData(
-                    gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
-                  ),
+                CIDebugData(
+                  gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
+                ),
               )
           }
         }

@@ -26,40 +26,8 @@ jobs:
           java-version: 17
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Run build
-        run: ./gradlew :gradle-plugin:build
-
-  unit_tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDKs
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'adopt'
-          java-version: 17
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-      - name: Run unit tests
-        run: ./gradlew :gradle-plugin:plugin:test
-
-  functional_tests:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-      - name: Set up JDKs
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'adopt'
-          java-version: |
-            11
-            17
-      - name: Set up Gradle
-        uses: gradle/actions/setup-gradle@v4
-      - name: Run functional tests
-        run: ./gradlew :gradle-plugin:plugin:functionalTest --stacktrace
+      - name: Check
+        run: ./gradlew :gradle-plugin:plugin:check
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         if: always()

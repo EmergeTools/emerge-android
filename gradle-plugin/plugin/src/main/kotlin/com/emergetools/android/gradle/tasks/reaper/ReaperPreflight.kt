@@ -7,7 +7,9 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault(because = "Always runs as a check and has no outputs.")
 abstract class ReaperPreflight : DefaultTask() {
   @get:Input
   @get:Optional
@@ -34,7 +36,10 @@ abstract class ReaperPreflight : DefaultTask() {
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {
       if (!hasEmergeApiToken) {
-        throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")
+        throw PreflightFailure(
+          "Emerge API token not set. See " +
+            "https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key"
+        )
       }
     }
 
@@ -42,7 +47,8 @@ abstract class ReaperPreflight : DefaultTask() {
     preflight.add("enabled for variant: $variantName") {
       if (!reaperEnabled.getOrElse(false)) {
         throw PreflightFailure(
-          "Reaper not enabled for variant $variantName. Make sure \"${variantName}\" is included in `reaper.enabledVariants`",
+          "Reaper not enabled for variant $variantName. Make sure \"${variantName}\" is included " +
+            "in `reaper.enabledVariants`",
         )
       }
     }
@@ -50,11 +56,13 @@ abstract class ReaperPreflight : DefaultTask() {
     preflight.add("publishableApiKey set") {
       val key = reaperPublishableApiKey.orNull
       if (key == null) {
-        throw PreflightFailure("publishableApiKey not set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk")
+        throw PreflightFailure("publishableApiKey not set. See " +
+          "https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk")
       }
       if (key == "") {
         throw PreflightFailure(
-          "publishableApiKey must not be empty. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk",
+          "publishableApiKey must not be empty. See " +
+            "https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk",
         )
       }
     }
@@ -62,7 +70,8 @@ abstract class ReaperPreflight : DefaultTask() {
     preflight.add("Runtime SDK added") {
       if (!hasReaperImplementationDependency.getOrElse(false)) {
         throw PreflightFailure(
-          "Reaper runtime SDK missing as an implementation dependency. See https://docs.emergetools.com/docs/reaper-setup-android#install-the-sdk",
+          "Reaper runtime SDK missing as an implementation dependency. See " +
+            "https://docs.emergetools.com/docs/reaper-setup-android#install-the-sdk",
         )
       }
     }

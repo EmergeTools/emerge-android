@@ -8,6 +8,7 @@ import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Optional
@@ -21,6 +22,7 @@ import java.io.File
 import java.util.zip.ZipFile
 import javax.inject.Inject
 
+@CacheableTask
 abstract class LocalSnapshots : DefaultTask() {
   companion object {
     const val COMPOSE_SNAPSHOTS_FILENAME = "snapshots.json"
@@ -31,8 +33,8 @@ abstract class LocalSnapshots : DefaultTask() {
   @Option(
     option = "preview",
     description =
-      "A single fully qualified preview method" +
-        " or a comma-separated list of fully qualified preview methods",
+    "A single fully qualified preview method" +
+      " or a comma-separated list of fully qualified preview methods",
   )
   fun setPreviews(previewFunctions: String) {
     arguments["previews"] = previewFunctions
@@ -97,18 +99,9 @@ abstract class LocalSnapshots : DefaultTask() {
     val snapshotStorageDir = snapshotStorageDirectory.asFile.get()
     snapshotStorageDir.mkdirs()
 
-    val previewExtractionDir =
-      previewExtractDir.asFile.get().also {
-        it.mkdirs()
-        it.deleteOnExit()
-      }
-
-    val extractedApkDir =
-      previewExtractionDir.resolve("extracted_apk").also {
-        it.mkdirs()
-        it.deleteOnExit()
-      }
-
+    val extractedApkDir = previewExtractDir.dir("extracted_apk").get().asFile.also {
+      it.mkdirs()
+    }
     extractDexFromApk(
       apk = targetApk,
       outputDir = extractedApkDir,
@@ -125,7 +118,7 @@ abstract class LocalSnapshots : DefaultTask() {
       )
 
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
-    val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
+    val composeSnapshotsJson = File(previewExtractDir.get().asFile, COMPOSE_SNAPSHOTS_FILENAME)
     composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))
 
     val adbHelper = AdbHelper(execOperations, logger)

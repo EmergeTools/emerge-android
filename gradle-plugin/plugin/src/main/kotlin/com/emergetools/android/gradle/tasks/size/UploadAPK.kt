@@ -12,10 +12,12 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 import java.io.File
 import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
+@DisableCachingByDefault(because = "Uploading APKs should not be cached.")
 abstract class UploadAPK : BaseUploadTask() {
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)

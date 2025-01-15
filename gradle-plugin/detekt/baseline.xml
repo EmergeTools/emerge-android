@@ -3,10 +3,8 @@
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
     <ID>ArgumentListWrapping:com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadTest.kt:30</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:37</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:53</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.size.SizePreflight.kt:33</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.size.SizePreflight.kt:40</ID>
+    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:59</ID>
+    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:60</ID>
     <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:58</ID>
     <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:59</ID>
     <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:60</ID>
@@ -112,14 +110,6 @@
     <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:97</ID>
     <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:98</ID>
     <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:99</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.base.BaseUploadTask.kt:219</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.base.BaseUploadTask.kt:220</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.base.BaseUploadTask.kt:221</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots.kt:34</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.LocalSnapshots.kt:35</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle.kt:95</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle.kt:96</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.UploadSnapshotBundle.kt:97</ID>
     <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:178</ID>
     <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:251</ID>
     <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:252</ID>
@@ -151,26 +141,10 @@
     <ID>MagicNumber:ReaperClassLoadTransform.kt$7</ID>
     <ID>MagicNumber:ReaperClassLoadTransform.kt$8</ID>
     <ID>MaxLineLength:DependencyUtils.kt$"Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!"</ID>
-    <ID>MaxLineLength:InitializeReaper.kt$InitializeReaper$"publishableApiKey must be set for Reaper to work properly. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk."</ID>
     <ID>MaxLineLength:ReaperClassLoadTest.kt$ReaperClassLoadTest$Assertions.assertEquals(-1167088121787636991L, topLong(byteArrayOf(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff, 0xff)))</ID>
-    <ID>MaxLineLength:ReaperPreflight.kt$ReaperPreflight$"Reaper not enabled for variant $variantName. Make sure \"${variantName}\" is included in `reaper.enabledVariants`"</ID>
-    <ID>MaxLineLength:ReaperPreflight.kt$ReaperPreflight$"Reaper runtime SDK missing as an implementation dependency. See https://docs.emergetools.com/docs/reaper-setup-android#install-the-sdk"</ID>
-    <ID>MaxLineLength:ReaperPreflight.kt$ReaperPreflight$"publishableApiKey must not be empty. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk"</ID>
-    <ID>MaxLineLength:ReaperPreflight.kt$ReaperPreflight$throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")</ID>
-    <ID>MaxLineLength:ReaperPreflight.kt$ReaperPreflight$throw PreflightFailure("publishableApiKey not set. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk")</ID>
-    <ID>MaxLineLength:SizePreflight.kt$SizePreflight$throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")</ID>
-    <ID>MaxLineLength:SizePreflight.kt$SizePreflight$throw PreflightFailure("Size analysis not enabled. Make sure `size.enabled` is set to true in the emerge configuration block.")</ID>
     <ID>MaxLineLength:SnapshotsPreviewRuntimeRetentionTransform.kt$SnapshotsPreviewRuntimeRetentionTransformFactory$abstract</ID>
     <ID>MaximumLineLength:com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadTest.kt:30</ID>
     <ID>MaximumLineLength:com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransform.kt:16</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.InitializeReaper.kt:38</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:37</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:45</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:53</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:57</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:65</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.size.SizePreflight.kt:33</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.tasks.size.SizePreflight.kt:40</ID>
     <ID>MaximumLineLength:com.emergetools.android.gradle.util.dependencies.DependencyUtils.kt:87</ID>
     <ID>NestedBlockDepth:BaseUploadTask.kt$BaseUploadTask$protected fun upload( artifactMetadata: ArtifactMetadata, onSuccessfulUpload: (EmergeUploadResponse) -&gt; Unit, )</ID>
     <ID>NestedBlockDepth:LocalSnapshots.kt$LocalSnapshots$private fun extractDexFromApk( apk: File, outputDir: File, )</ID>
@@ -187,5 +161,7 @@
     <ID>UnusedPrivateMember:Preflight.kt$Result.Success$value: T</ID>
     <ID>UseCheckOrError:EmergeUploadRequest.kt$throw IllegalStateException("Could not resolve /upload for baseUrl: $baseUrl")</ID>
     <ID>UseCheckOrError:PreviewUtils.kt$PreviewUtils$throw IllegalStateException("Preview parameter must have a name")</ID>
+    <ID>Wrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:59</ID>
+    <ID>Wrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:60</ID>
   </CurrentIssues>
 </SmellBaseline>
