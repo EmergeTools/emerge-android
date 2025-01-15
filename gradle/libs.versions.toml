@@ -78,7 +78,7 @@ androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "j
 asm = "org.ow2.asm:asm:9.5"
 asm-commons = "org.ow2.asm:asm-commons:9.5"
 
-assertj = "org.assertj:assertj-core:3.21.0"
+assertj = "org.assertj:assertj-core:3.27.2"
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
 compose-foundation-android = { group = "androidx.compose.foundation", name = "foundation-android" }
