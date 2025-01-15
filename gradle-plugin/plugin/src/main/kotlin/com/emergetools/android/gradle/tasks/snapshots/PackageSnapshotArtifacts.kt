@@ -22,7 +22,6 @@ import org.gradle.api.tasks.TaskAction
  * Intended to be dependent of LocalSnapshot task and UploadSnapshots task.
  */
 abstract class PackageSnapshotArtifacts : DefaultTask() {
-
   @get:Input
   abstract val agpVersion: Property<String>
 
@@ -54,12 +53,13 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
     targetApk.copyTo(outputDirectory.get().asFile.resolve(targetApk.name), overwrite = true)
     testApk.copyTo(outputDirectory.get().asFile.resolve(testApk.name), overwrite = true)
 
-    val metadata = ArtifactMetadata(
-      emergeGradlePluginVersion = BuildConfig.VERSION,
-      androidGradlePluginVersion = agpVersion.get(),
-      targetArtifactZipPath = targetApk.name,
-      testArtifactZipPath = testApk.name,
-    )
+    val metadata =
+      ArtifactMetadata(
+        emergeGradlePluginVersion = BuildConfig.VERSION,
+        androidGradlePluginVersion = agpVersion.get(),
+        targetArtifactZipPath = targetApk.name,
+        testArtifactZipPath = testApk.name,
+      )
     val metadataString = Json.encodeToString(metadata)
     artifactMetadataPath.asFile.get().let {
       if (!it.exists()) {

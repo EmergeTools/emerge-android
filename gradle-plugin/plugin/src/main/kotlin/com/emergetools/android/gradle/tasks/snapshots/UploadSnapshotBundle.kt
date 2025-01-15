@@ -20,7 +20,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 abstract class UploadSnapshotBundle : BaseUploadTask() {
-
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val packageDir: DirectoryProperty
@@ -40,21 +39,23 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
   @get:InputFile
   abstract val artifactMetadataPath: RegularFileProperty
 
-
   override fun includeFilesInUpload(zos: ZipOutputStream) {
-    val artifactMetadataFilePath = checkNotNull(artifactMetadataPath.asFile.orNull) {
-      "Artifact metadata file must be provided to upload snapshot bundle."
-    }
+    val artifactMetadataFilePath =
+      checkNotNull(artifactMetadataPath.asFile.orNull) {
+        "Artifact metadata file must be provided to upload snapshot bundle."
+      }
     check(artifactMetadataFilePath.exists()) {
       "Artifact metadata file does not exist: ${artifactMetadataFilePath.absolutePath}"
     }
     val artifactMetadata: ArtifactMetadata = Json.decodeFromString(artifactMetadataFilePath.readText())
 
-    val targetApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-      .first { it.name == artifactMetadata.targetArtifactZipPath }
+    val targetApk =
+      packageDir.asFileTree.matching { it.include("*.apk") }.files
+        .first { it.name == artifactMetadata.targetArtifactZipPath }
 
-    val testApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-      .first { it.name == artifactMetadata.testArtifactZipPath }
+    val testApk =
+      packageDir.asFileTree.matching { it.include("*.apk") }.files
+        .first { it.name == artifactMetadata.testArtifactZipPath }
 
     targetApk.inputStream().use {
       zos.putNextEntry(ZipEntry(targetApk.name))
@@ -80,21 +81,23 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
   @TaskAction
   fun execute() {
-    val artifactMetadataFilePath = checkNotNull(artifactMetadataPath.asFile.orNull) {
-      "Artifact metadata file must be provided to upload snapshot bundle."
-    }
+    val artifactMetadataFilePath =
+      checkNotNull(artifactMetadataPath.asFile.orNull) {
+        "Artifact metadata file must be provided to upload snapshot bundle."
+      }
     check(artifactMetadataFilePath.exists()) {
       "Artifact metadata file does not exist: ${artifactMetadataFilePath.absolutePath}"
     }
     val artifactMetadata: ArtifactMetadata = Json.decodeFromString(artifactMetadataFilePath.readText())
 
     upload(
-      artifactMetadata = artifactMetadata.copy(
-        created = Clock.System.now()
-      )
+      artifactMetadata =
+        artifactMetadata.copy(
+          created = Clock.System.now(),
+        ),
     ) { response ->
       logger.lifecycle(
-        "Snapshot bundle upload successful! View snapshots at the following url:"
+        "Snapshot bundle upload successful! View snapshots at the following url:",
       )
       logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
       logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")

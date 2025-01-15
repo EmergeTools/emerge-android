@@ -22,7 +22,6 @@ import java.util.zip.ZipFile
 import javax.inject.Inject
 
 abstract class LocalSnapshots : DefaultTask() {
-
   companion object {
     const val COMPOSE_SNAPSHOTS_FILENAME = "snapshots.json"
   }
@@ -31,8 +30,9 @@ abstract class LocalSnapshots : DefaultTask() {
 
   @Option(
     option = "preview",
-    description = "A single fully qualified preview method" +
-      " or a comma-separated list of fully qualified preview methods"
+    description =
+      "A single fully qualified preview method" +
+        " or a comma-separated list of fully qualified preview methods",
   )
   fun setPreviews(previewFunctions: String) {
     arguments["previews"] = previewFunctions
@@ -74,49 +74,55 @@ abstract class LocalSnapshots : DefaultTask() {
 
   @TaskAction
   fun execute() {
-    val artifactMetadataFiles = packageDir.asFileTree.matching {
-      it.include(ArtifactMetadata.JSON_FILE_NAME)
-    }
+    val artifactMetadataFiles =
+      packageDir.asFileTree.matching {
+        it.include(ArtifactMetadata.JSON_FILE_NAME)
+      }
     check(artifactMetadataFiles.files.size > 0) { "No artifact metadata files found" }
     check(artifactMetadataFiles.files.size < 2) { "Multiple artifact metadata files found" }
     val artifactMetadataFile = artifactMetadataFiles.singleFile
 
     val artifactMetadata = Json.decodeFromString<ArtifactMetadata>(artifactMetadataFile.readText())
 
-    val targetApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-      .first { it.name == artifactMetadata.targetArtifactZipPath }
+    val targetApk =
+      packageDir.asFileTree.matching { it.include("*.apk") }.files
+        .first { it.name == artifactMetadata.targetArtifactZipPath }
     val targetAppId = targetAppId.get()
 
-    val testApk = packageDir.asFileTree.matching { it.include("*.apk") }.files
-      .first { it.name == artifactMetadata.testArtifactZipPath }
+    val testApk =
+      packageDir.asFileTree.matching { it.include("*.apk") }.files
+        .first { it.name == artifactMetadata.testArtifactZipPath }
     val testAppId = testAppId.get()
 
     val snapshotStorageDir = snapshotStorageDirectory.asFile.get()
     snapshotStorageDir.mkdirs()
 
-    val previewExtractionDir = previewExtractDir.asFile.get().also {
-      it.mkdirs()
-      it.deleteOnExit()
-    }
+    val previewExtractionDir =
+      previewExtractDir.asFile.get().also {
+        it.mkdirs()
+        it.deleteOnExit()
+      }
 
-    val extractedApkDir = previewExtractionDir.resolve("extracted_apk").also {
-      it.mkdirs()
-      it.deleteOnExit()
-    }
+    val extractedApkDir =
+      previewExtractionDir.resolve("extracted_apk").also {
+        it.mkdirs()
+        it.deleteOnExit()
+      }
 
     extractDexFromApk(
       apk = targetApk,
-      outputDir = extractedApkDir
+      outputDir = extractedApkDir,
     )
 
     val previews = arguments["previews"]?.split(",")?.map(String::trim) ?: emptyList()
-    val composeSnapshots = PreviewUtils.findPreviews(
-      extractedApkDir,
-      includePrivatePreviews.getOrElse(true),
-      includePreviewParamPreviews.getOrElse(true),
-      previews,
-      logger
-    )
+    val composeSnapshots =
+      PreviewUtils.findPreviews(
+        extractedApkDir,
+        includePrivatePreviews.getOrElse(true),
+        includePreviewParamPreviews.getOrElse(true),
+        previews,
+        logger,
+      )
 
     logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
     val composeSnapshotsJson = File(previewExtractionDir, COMPOSE_SNAPSHOTS_FILENAME)
@@ -158,26 +164,26 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add("save_profile")
             it.add("true")
           }
-          it.add("${testAppId}/${testInstrumentationRunner.get()}")
+          it.add("$testAppId/${testInstrumentationRunner.get()}")
         }
 
       val output = shell(instrumentationArgs)
       logger.lifecycle(output)
 
-      val logcatFile = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/logcat.txt"
+      val logcatFile = "/storage/emulated/0/Android/data/$targetAppId/files/snapshots/logcat.txt"
       shell("logcat -d > $logcatFile")
 
       pull(
-        deviceDir = "/storage/emulated/0/Android/data/${targetAppId}/files/snapshots/",
+        deviceDir = "/storage/emulated/0/Android/data/$targetAppId/files/snapshots/",
         localDir = snapshotStorageDir.absolutePath,
       )
-      shell("rm -r /storage/emulated/0/Android/data/${targetAppId}/files/snapshots/")
+      shell("rm -r /storage/emulated/0/Android/data/$targetAppId/files/snapshots/")
       shell("rm /data/local/tmp/$COMPOSE_SNAPSHOTS_FILENAME")
 
       val count = snapshotStorageDir.listFiles()?.size ?: 0
       logger.lifecycle("Snapshots successful!")
       logger.lifecycle(
-        "$count files saved to ${snapshotStorageDir.absolutePath}"
+        "$count files saved to ${snapshotStorageDir.absolutePath}",
       )
     }
   }

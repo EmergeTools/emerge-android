@@ -4,9 +4,7 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner
 import java.io.File
 
 object EnvUtils {
-
   fun EmergeGradleRunner.withGitHubPREvent(): EmergeGradleRunner {
-
     val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event.json")
     val jsonFile = File(resource.toURI())
 
@@ -17,7 +15,6 @@ object EnvUtils {
   }
 
   fun EmergeGradleRunner.withGitHubPREventNoBefore(): EmergeGradleRunner {
-
     val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event_no_before.json")
     val jsonFile = File(resource.toURI())
 
@@ -28,7 +25,6 @@ object EnvUtils {
   }
 
   fun EmergeGradleRunner.withGitHubPushEvent(): EmergeGradleRunner {
-
     val resource = this.javaClass.getResource("/github-event-mocks/mock_push_event.json")
     val jsonFile = File(resource.toURI())
 

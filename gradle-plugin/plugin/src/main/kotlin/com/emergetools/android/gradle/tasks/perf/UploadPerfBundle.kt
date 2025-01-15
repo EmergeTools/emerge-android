@@ -1,10 +1,10 @@
 package com.emergetools.android.gradle.tasks.perf
 
 import com.emergetools.android.gradle.BuildConfig
-import com.emergetools.android.gradle.tasks.size.UploadAAB
-import com.emergetools.android.gradle.tasks.size.UploadAPK
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask
+import com.emergetools.android.gradle.tasks.size.UploadAAB
+import com.emergetools.android.gradle.tasks.size.UploadAPK
 import kotlinx.datetime.Clock
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
@@ -18,7 +18,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 abstract class UploadPerfBundle : BaseUploadTask() {
-
   @get:InputFile
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val artifact: RegularFileProperty
@@ -55,20 +54,21 @@ abstract class UploadPerfBundle : BaseUploadTask() {
   @TaskAction
   fun execute() {
     val artifactName = artifact.get().asFile.name
-    val artifactMetadata = ArtifactMetadata(
-      created = Clock.System.now(),
-      emergeGradlePluginVersion = BuildConfig.VERSION,
-      androidGradlePluginVersion = agpVersion.get(),
-      targetArtifactZipPath = artifactName,
-      testArtifactZipPath = perfArtifact.name,
-      // Primary artifact is always an AAB for this task
-      proguardMappingsZipPath = "$artifactName/${UploadAAB.AAB_PROGUARD_PATH}",
-    )
+    val artifactMetadata =
+      ArtifactMetadata(
+        created = Clock.System.now(),
+        emergeGradlePluginVersion = BuildConfig.VERSION,
+        androidGradlePluginVersion = agpVersion.get(),
+        targetArtifactZipPath = artifactName,
+        testArtifactZipPath = perfArtifact.name,
+        // Primary artifact is always an AAB for this task
+        proguardMappingsZipPath = "$artifactName/${UploadAAB.AAB_PROGUARD_PATH}",
+      )
 
     upload(artifactMetadata) { response ->
       logger.lifecycle(
         "Performance bundle upload successful! " +
-          "View Emerge's performance analysis at the following url:"
+          "View Emerge's performance analysis at the following url:",
       )
       logger.lifecycle("https://emergetools.com/performance/compare/${response.uploadId}")
       logger.lifecycle("Performance testing usually takes around 30 minutes or less.")

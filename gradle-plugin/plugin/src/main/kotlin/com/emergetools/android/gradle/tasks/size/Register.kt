@@ -18,7 +18,7 @@ fun registerSizeTasks(
   variant: Variant,
 ) {
   appProject.logger.debug(
-    "Registering size tasks for variant ${variant.name} in project ${appProject.path}"
+    "Registering size tasks for variant ${variant.name} in project ${appProject.path}",
   )
 
   registerSizeAnalysisPreflightTask(appProject, extension, variant)

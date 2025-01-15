@@ -18,9 +18,10 @@ fun getSuccessfulUpload(baseUrl: HttpUrl): MockResponse {
   }
 }
 
-val mockSuccessfulSignedUrlUpload = MockResponse().apply {
-  setResponseCode(200)
-}
+val mockSuccessfulSignedUrlUpload =
+  MockResponse().apply {
+    setResponseCode(200)
+  }
 
 fun getEmergeDispatcher(
   baseUrl: HttpUrl,
@@ -29,15 +30,17 @@ fun getEmergeDispatcher(
   return object : Dispatcher() {
     @Throws(InterruptedException::class)
     override fun dispatch(request: RecordedRequest): MockResponse {
-      val response = when (request.requestUrl?.host) {
-        "localhost" -> when (request.path?.substringBefore("?")) {
-          "/upload" -> getSuccessfulUpload(baseUrl)
-          "/signed_url" -> mockSuccessfulSignedUrlUpload
+      val response =
+        when (request.requestUrl?.host) {
+          "localhost" ->
+            when (request.path?.substringBefore("?")) {
+              "/upload" -> getSuccessfulUpload(baseUrl)
+              "/signed_url" -> mockSuccessfulSignedUrlUpload
+              else -> MockResponse().setResponseCode(404)
+            }
+
           else -> MockResponse().setResponseCode(404)
         }
-
-        else -> MockResponse().setResponseCode(404)
-      }
 
       if (timeout) {
         response.setSocketPolicy(SocketPolicy.NO_RESPONSE)

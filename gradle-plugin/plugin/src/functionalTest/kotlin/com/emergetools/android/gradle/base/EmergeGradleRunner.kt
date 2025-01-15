@@ -16,21 +16,21 @@ class EmergeGradleRunner private constructor(
   private val projectDir: String,
   private val server: MockWebServer = MockWebServer(),
 ) {
-
   companion object {
-
     /** Must be kept in sync with the build.gradle list. */
-    val SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS = sortedSetOf(
-      "7.0.0",
-      "7.1.0",
-      "7.2.0",
-      "7.3.0",
-      "8.0.0"
-    )
+    val SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS =
+      sortedSetOf(
+        "7.0.0",
+        "7.1.0",
+        "7.2.0",
+        "7.3.0",
+        "8.0.0",
+      )
 
-    val SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS = sortedSetOf(
-      "1.8.21",
-    )
+    val SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS =
+      sortedSetOf(
+        "1.8.21",
+      )
 
     fun create(projectDir: String): EmergeGradleRunner = EmergeGradleRunner(projectDir)
   }
@@ -53,49 +53,58 @@ class EmergeGradleRunner private constructor(
 
   private var environment: Map<String, String> = emptyMap()
 
-  fun withArguments(vararg arguments: String) = apply {
-    this.arguments = arguments.toList()
-  }
-
-  fun withDebugTasks() = apply {
-    arguments = arguments + "-PemergeDebug"
-  }
-
-  fun withGradleVersion(version: String) = apply {
-    gradleRunner.withGradleVersion(version)
-  }
-
-  fun withAndroidGradlePluginVersion(version: String) = apply {
-    check(version in SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS) {
-      "This version of the Android Gradle Plugin is not currently supported."
+  fun withArguments(vararg arguments: String) =
+    apply {
+      this.arguments = arguments.toList()
     }
-    androidGradlePluginVersion = version
-  }
 
-  fun withKotlinAndroidGradlePluginVersion(version: String) = apply {
-    check(version in SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS) {
-      "This version of the Kotlin Android Gradle Plugin is not currently supported."
+  fun withDebugTasks() =
+    apply {
+      arguments = arguments + "-PemergeDebug"
     }
-    kotlinAndroidGradlePluginVersion = version
-  }
 
-  private fun withJavaVersion(version: String) = apply {
-    val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
-    val javaHomeEnvKey = "JAVA_HOME_${version}_$arch"
-    arguments = arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}"
-  }
+  fun withGradleVersion(version: String) =
+    apply {
+      gradleRunner.withGradleVersion(version)
+    }
 
-  fun withServer(serverReceiver: MockWebServer.(HttpUrl) -> Unit) = apply {
-    server.apply { serverReceiver(baseUrl) }
-  }
+  fun withAndroidGradlePluginVersion(version: String) =
+    apply {
+      check(version in SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS) {
+        "This version of the Android Gradle Plugin is not currently supported."
+      }
+      androidGradlePluginVersion = version
+    }
 
-  fun assert(assertions: (BuildResult, MockWebServer) -> Unit) = apply {
-    this.assertions = assertions
-  }
+  fun withKotlinAndroidGradlePluginVersion(version: String) =
+    apply {
+      check(version in SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS) {
+        "This version of the Kotlin Android Gradle Plugin is not currently supported."
+      }
+      kotlinAndroidGradlePluginVersion = version
+    }
 
-  fun withEnvironment(vararg pairs: Pair<String, String>) = apply {
-    this.environment = mapOf(*pairs)
-  }
+  private fun withJavaVersion(version: String) =
+    apply {
+      val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
+      val javaHomeEnvKey = "JAVA_HOME_${version}_$arch"
+      arguments = arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}"
+    }
+
+  fun withServer(serverReceiver: MockWebServer.(HttpUrl) -> Unit) =
+    apply {
+      server.apply { serverReceiver(baseUrl) }
+    }
+
+  fun assert(assertions: (BuildResult, MockWebServer) -> Unit) =
+    apply {
+      this.assertions = assertions
+    }
+
+  fun withEnvironment(vararg pairs: Pair<String, String>) =
+    apply {
+      this.environment = mapOf(*pairs)
+    }
 
   private fun preBuild() {
     @Suppress("DEPRECATION")
@@ -113,11 +122,12 @@ class EmergeGradleRunner private constructor(
       withJavaVersion("11")
     }
 
-    val customEnvironment = mapOf(
-      *environment.toList().toTypedArray(),
-      // Turns off repository discovery to test projects that don't use Git
-      "GIT_DIR" to tempProjectDir!!.path,
-    )
+    val customEnvironment =
+      mapOf(
+        *environment.toList().toTypedArray(),
+        // Turns off repository discovery to test projects that don't use Git
+        "GIT_DIR" to tempProjectDir!!.path,
+      )
     gradleRunner
       .withProjectDir(tempProjectDir)
       .withArguments(arguments)
@@ -125,9 +135,9 @@ class EmergeGradleRunner private constructor(
       // Must be called first in order to set the default plugin classpath.
       .withPluginClasspath()
       .withPluginClasspath(
-        gradleRunner.pluginClasspath
-          + androidGradlePluginClasspath(androidGradlePluginVersion)
-          + kotlinAndroidGradlePluginClasspath(kotlinAndroidGradlePluginVersion)
+        gradleRunner.pluginClasspath +
+          androidGradlePluginClasspath(androidGradlePluginVersion) +
+          kotlinAndroidGradlePluginClasspath(kotlinAndroidGradlePluginVersion),
       )
   }
 

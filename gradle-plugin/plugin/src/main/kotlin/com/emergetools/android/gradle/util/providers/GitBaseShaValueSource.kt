@@ -8,7 +8,6 @@ import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
 abstract class GitBaseShaValueSource : ValueSource<String?, None> {
-
   @get:Inject
   abstract val execOperations: ExecOperations
 

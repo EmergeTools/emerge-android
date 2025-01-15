@@ -22,7 +22,6 @@ import org.gradle.api.Project
 import org.gradle.api.tasks.StopExecutionException
 
 class EmergePlugin : Plugin<Project> {
-
   // Temporary storage for app variants, used to configure perf tasks
   private val appVariants = mutableListOf<ApplicationVariant>()
 
@@ -30,14 +29,15 @@ class EmergePlugin : Plugin<Project> {
     if (AgpVersions.CURRENT < AgpVersions.VERSION_7_0) {
       throw StopExecutionException(
         "Version ${AgpVersions.CURRENT} of AGP is not supported with the " +
-          "Emerge gradle plugin. Please use AGP 7.0+."
+          "Emerge gradle plugin. Please use AGP 7.0+.",
       )
     }
 
-    val emergeExtension = project.extensions.create(
-      EMERGE_EXTENSION_NAME,
-      EmergePluginExtension::class.java
-    )
+    val emergeExtension =
+      project.extensions.create(
+        EMERGE_EXTENSION_NAME,
+        EmergePluginExtension::class.java,
+      )
 
     applyToAppProject(project, emergeExtension)
 
@@ -47,19 +47,21 @@ class EmergePlugin : Plugin<Project> {
       project.afterEvaluate { appProject ->
         val rootProject = appProject.rootProject
         val perfProjectPath = emergeExtension.perfOptions.projectPath
-        val performanceProject = rootProject.subprojects.find { subProject ->
-          appProject.logger.debug(
-            "Checking subproject ${subProject.path} from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
-          )
-          appProject.logger.debug(
-            "Checking absoluteProjectPath ${
-              rootProject.absoluteProjectPath(
-                subProject.path
-              )
-            } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}"
-          )
-          rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
-        }
+        val performanceProject =
+          rootProject.subprojects.find { subProject ->
+            appProject.logger.debug(
+              "Checking subproject ${subProject.path} from rootProject ${rootProject.path}," +
+                " resolving perfProjectPath: ${perfProjectPath.orNull}",
+            )
+            appProject.logger.debug(
+              "Checking absoluteProjectPath ${
+                rootProject.absoluteProjectPath(
+                  subProject.path,
+                )
+              } from rootProject ${rootProject.path}, resolving perfProjectPath: ${perfProjectPath.orNull}",
+            )
+            rootProject.absoluteProjectPath(subProject.path) == perfProjectPath.orNull
+          }
         performanceProject?.let { perfProject ->
           applyToPerformanceProject(appProject, perfProject, emergeExtension)
         } ?: run {
@@ -68,7 +70,7 @@ class EmergePlugin : Plugin<Project> {
           if (perfProjectPath.isPresent) {
             appProject.logger.debug(
               "No performance project found for path ${perfProjectPath.get()}, " +
-                "registering generate task only"
+                "registering generate task only",
             )
             registerGeneratePerfProjectTask(project, perfProjectPath, appVariants)
           }
@@ -83,9 +85,10 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
-      val androidComponents = appProject.extensions.getByType(
-        ApplicationAndroidComponentsExtension::class.java
-      )
+      val androidComponents =
+        appProject.extensions.getByType(
+          ApplicationAndroidComponentsExtension::class.java,
+        )
 
       androidComponents.onVariants { variant ->
         appVariants.add(variant)
@@ -105,8 +108,9 @@ class EmergePlugin : Plugin<Project> {
         )
 
         // Only register snapshot tasks for builds with androidTest source set
-        val androidTest = variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
-          ?: return@onVariants
+        val androidTest =
+          variant.nestedComponents.filterIsInstance<AndroidTest>().firstOrNull()
+            ?: return@onVariants
 
         if (emergeExtension.snapshotOptions.enabled.getOrElse(true)) {
           registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
@@ -127,32 +131,37 @@ class EmergePlugin : Plugin<Project> {
     performanceProject.pluginManager.apply(ANDROID_TEST_PLUGIN_ID)
 
     appProject.logger.debug(
-      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path}"
+      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path}",
     )
     configurePerformanceProject(performanceProject, appProject)
     appProject.logger.debug(
-      "Configuring performance project ${performanceProject.path} from appProject ${appProject.path} complete"
+      "Configuring performance project ${performanceProject.path} from appProject " +
+        "${appProject.path} complete",
     )
 
     performanceProject.pluginManager.withPlugin(ANDROID_TEST_PLUGIN_ID) { _ ->
       appProject.logger.debug(
-        "Registering performance project tasks for ${performanceProject.path} from appProject ${appProject.path} with android test plugin"
+        "Registering performance project tasks for ${performanceProject.path} from " +
+          "appProject ${appProject.path} with android test plugin",
       )
-      val androidTestComponents = performanceProject.extensions.getByType(
-        TestAndroidComponentsExtension::class.java
-      )
+      val androidTestComponents =
+        performanceProject.extensions.getByType(
+          TestAndroidComponentsExtension::class.java,
+        )
 
-      // In practice, we configure only one variant (debug) for the perf project, so this should only run for that single variant
+      // In practice, we configure only one variant (debug) for the perf project, so this should
+      // only run for that single variant
       androidTestComponents.onVariants { perfVariant ->
         appProject.logger.debug(
-          "Registering performance project tasks for ${performanceProject.path} from appProject ${appProject.path} with android test plugin for variant ${perfVariant.name}"
+          "Registering performance project tasks for ${performanceProject.path} from " +
+            "appProject ${appProject.path} with android test plugin for variant ${perfVariant.name}",
         )
         registerPerformanceTasks(
           appProject,
           performanceProject,
           emergeExtension,
           perfVariant,
-          appVariants
+          appVariants,
         )
       }
     }
@@ -242,14 +251,14 @@ class EmergePlugin : Plugin<Project> {
     // We must always set these to something make the manifest merger happy:
     variant.manifestPlaceholders.put(
       "emerge.reaper.instrumented",
-      if (isVariantEnabled) "true" else "false"
+      if (isVariantEnabled) "true" else "false",
     )
     variant.manifestPlaceholders.put("emerge.reaper.publishableApiKey", publishableApiKey)
   }
 
   private fun registerLogExtensionTask(
     project: Project,
-    emergeExtension: EmergePluginExtension
+    emergeExtension: EmergePluginExtension,
   ) {
     project.tasks.register("logExtension", LogExtensionTask::class.java) {
       it.group = "Emerge debug"
@@ -270,10 +279,11 @@ class EmergePlugin : Plugin<Project> {
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
     const val EMERGE_JUNIT_RUNNER = "com.emergetools.test.EmergeJUnitRunner"
 
-    private val PERFORMANCE_PROJECT_DEPENDENCIES = listOf(
-      "androidx.test.ext:junit:1.1.3",
-      "androidx.test.uiautomator:uiautomator:2.2.0",
-      "io.ktor:ktor-network:2.1.1"
-    )
+    private val PERFORMANCE_PROJECT_DEPENDENCIES =
+      listOf(
+        "androidx.test.ext:junit:1.1.3",
+        "androidx.test.uiautomator:uiautomator:2.2.0",
+        "io.ktor:ktor-network:2.1.1",
+      )
   }
 }

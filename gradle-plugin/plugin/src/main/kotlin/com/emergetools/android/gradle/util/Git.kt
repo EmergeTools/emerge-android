@@ -3,7 +3,6 @@ package com.emergetools.android.gradle.util
 import org.gradle.process.ExecOperations
 
 internal class Git(private val execOperations: ExecOperations) {
-
   fun currentBranch(): String? {
     return execOperations.execute("git rev-parse --abbrev-ref HEAD")
   }

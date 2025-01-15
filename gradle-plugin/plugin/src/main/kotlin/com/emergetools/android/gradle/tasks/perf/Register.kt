@@ -23,7 +23,7 @@ fun registerPerformanceTasks(
   appVariants: List<ApplicationVariant>,
 ) {
   appProject.logger.debug(
-    "Registering performance tasks for variant ${perfVariant.name} in project ${appProject.path}"
+    "Registering performance tasks for variant ${perfVariant.name} in project ${appProject.path}",
   )
 
   // We're not concerned with the variants of the performance project, rather the app variants,
@@ -31,7 +31,11 @@ fun registerPerformanceTasks(
   appVariants.forEach { appVariant ->
     registerEmergeLocalTestTask(appProject, performanceProject, appVariant, perfVariant)
     registerUploadPerfBundleTask(
-      appProject, performanceProject, appVariant, perfVariant, extension
+      appProject,
+      performanceProject,
+      appVariant,
+      perfVariant,
+      extension,
     )
   }
 }
@@ -65,13 +69,14 @@ private fun registerEmergeLocalTestTask(
   val perfVariantName = performanceVariant.name.capitalize()
 
   val taskName = "emergeLocal${appVariantName}Test"
-  val task = appProject.tasks.register(taskName, LocalPerfTest::class.java) {
-    it.group = EMERGE_PERFORMANCE_TASK_GROUP
-    it.description = "Installs and runs tests for ${performanceVariant.name} on" +
-      " connected devices. For testing and debugging."
-    it.appPackageName.set(appVariant.applicationId)
-    it.testPackageName.set(performanceVariant.namespace)
-  }
+  val task =
+    appProject.tasks.register(taskName, LocalPerfTest::class.java) {
+      it.group = EMERGE_PERFORMANCE_TASK_GROUP
+      it.description = "Installs and runs tests for ${performanceVariant.name} on" +
+        " connected devices. For testing and debugging."
+      it.appPackageName.set(appVariant.applicationId)
+      it.testPackageName.set(performanceVariant.namespace)
+    }
 
   val uninstallAppTaskPath = "${appProject.path}:uninstall$appVariantName"
   val installAppTaskPath = "${appProject.path}:install$appVariantName"
@@ -97,7 +102,7 @@ fun registerGeneratePerfProjectTask(
   appVariants: List<ApplicationVariant>,
 ) {
   appProject.logger.debug(
-    "Registering generate perf project tasks in project ${appProject.path}"
+    "Registering generate perf project tasks in project ${appProject.path}",
   )
 
   val rootDir = appProject.rootDir
@@ -110,7 +115,7 @@ fun registerGeneratePerfProjectTask(
         val appVariant =
           appVariants.find { appVariant -> appVariant.name == "release" } ?: appVariants.first()
         appVariant.applicationId.get()
-      }
+      },
     )
     it.performanceProjectPath.set(performanceProjectPath)
     it.rootDir.set(rootDir)

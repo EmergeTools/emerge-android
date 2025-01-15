@@ -7,7 +7,6 @@ import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
 abstract class GitHubRepoOwnerValueSource : ValueSource<String?, None> {
-
   @get:Inject
   abstract val execOperations: ExecOperations
 

@@ -33,52 +33,58 @@ java {
   }
 }
 
-tasks.withType<KotlinCompile> {
+tasks.withType<KotlinCompile>().configureEach {
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_11.toString()
   }
 }
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
-val agpClasspathDir = project.buildDir.resolve("agp-classpath").apply {
-  mkdir()
-}
+val agpClasspathDir =
+  project.buildDir.resolve("agp-classpath").apply {
+    mkdir()
+  }
 
-val kgpClasspathDir = project.buildDir.resolve("kgp-classpath").apply {
-  mkdir()
-}
+val kgpClasspathDir =
+  project.buildDir.resolve("kgp-classpath").apply {
+    mkdir()
+  }
 
 // Versions prior to 7.0.0 do not have an official API, supporting them would require considerably more work.
 // ATTENTION: Must be kept in sync with the EmergeGradleRunner list.
-val supportedAgpVersions = setOf(
-  "7.0.0",
-  "7.1.0",
-  "7.2.0",
-  "7.3.0",
-  "8.0.0",
-)
+val supportedAgpVersions =
+  setOf(
+    "7.0.0",
+    "7.1.0",
+    "7.2.0",
+    "7.3.0",
+    "8.0.0",
+  )
 
-val supportedKotlinVersions = setOf(
-  "1.8.21",
-)
+val supportedKotlinVersions =
+  setOf(
+    "1.8.21",
+  )
 
 // Creates a classpath file for each version of AGP we wish to test against. This allows the functional tests to target
 // a particular version using the GradleRunner.
 supportedAgpVersions.forEach { version ->
   val configuration = configurations.create("agp$version")
   dependencies.add(configuration.name, "com.android.tools.build:gradle:$version")
-  val classpathFile = agpClasspathDir.resolve("agp-classpath-$version.txt").apply {
-    ensureParentDirsCreated()
-  }
+  val classpathFile =
+    agpClasspathDir.resolve("agp-classpath-$version.txt").apply {
+      ensureParentDirsCreated()
+    }
   classpathFile.writeText(configuration.joinToString(separator = "\n"))
 }
 
 supportedKotlinVersions.forEach { version ->
   val configuration = configurations.create("kgp$version")
   dependencies.add(configuration.name, "org.jetbrains.kotlin:kotlin-gradle-plugin:$version")
-  val classpathFile = kgpClasspathDir.resolve("kgp-classpath-$version.txt").apply {
-    ensureParentDirsCreated()
-  }
+  val classpathFile =
+    kgpClasspathDir.resolve("kgp-classpath-$version.txt").apply {
+      ensureParentDirsCreated()
+    }
   classpathFile.writeText(configuration.joinToString(separator = "\n"))
 }
 
@@ -90,12 +96,13 @@ val functionalTest: SourceSet by sourceSets.creating {
   }
 }
 
-val functionalTestTask = tasks.register<Test>("functionalTest") {
-  description = "Runs the functional tests."
-  group = "verification"
-  testClassesDirs = functionalTest.output.classesDirs
-  classpath = functionalTest.runtimeClasspath
-}
+val functionalTestTask =
+  tasks.register<Test>("functionalTest") {
+    description = "Runs the functional tests."
+    group = "verification"
+    testClassesDirs = functionalTest.output.classesDirs
+    classpath = functionalTest.runtimeClasspath
+  }
 
 tasks.check {
   dependsOn(functionalTestTask)
@@ -115,8 +122,8 @@ afterEvaluate {
 
 detekt {
   buildUponDefaultConfig = true
-  config.setFrom("$rootDir/detekt/detekt.yml")
-  baseline = file("$rootDir/detekt/baseline.xml")
+  config.setFrom(rootProject.layout.projectDirectory.file("../detekt/detekt.yml"))
+  baseline = rootProject.layout.projectDirectory.file("detekt/baseline.xml").asFile
 }
 
 dependencies {
@@ -166,10 +173,6 @@ gradlePlugin {
     }
   }
   testSourceSets(functionalTest)
-}
-
-tasks.withType<Wrapper> {
-  distributionType = Wrapper.DistributionType.ALL
 }
 
 val emergeBaseUrl: String? by project

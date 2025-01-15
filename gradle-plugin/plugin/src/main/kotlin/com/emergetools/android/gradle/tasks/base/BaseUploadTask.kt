@@ -55,7 +55,6 @@ data class ArtifactMetadata(
   val dependencyMetadataZipPath: String? = null,
   val ciDebugData: CIDebugData? = null,
 ) {
-
   companion object {
     const val JSON_FILE_NAME = "emerge_metadata.json"
   }
@@ -71,7 +70,6 @@ data class CIDebugData(
 }
 
 abstract class BaseUploadTask : DefaultTask() {
-
   @get:Input
   abstract val apiToken: Property<String>
 
@@ -178,17 +176,19 @@ abstract class BaseUploadTask : DefaultTask() {
           "appModulePath must be set when includeDependencyInformation is true"
         }
 
-        val dependencies = buildDependencies(
-          artifacts = artifacts,
-          defaultModuleName = appModuleName.get(),
-          defaultModulePath = appModulePath.get(),
-          logger = logger,
-        )
+        val dependencies =
+          buildDependencies(
+            artifacts = artifacts,
+            defaultModuleName = appModuleName.get(),
+            defaultModulePath = appModulePath.get(),
+            logger = logger,
+          )
         val dependenciesJson = Json.encodeToString(dependencies)
-        val dependenciesFile = File(outputDir, Dependencies.JSON_FILE_NAME).also {
-          it.createNewFile()
-          it.writeText(dependenciesJson)
-        }
+        val dependenciesFile =
+          File(outputDir, Dependencies.JSON_FILE_NAME).also {
+            it.createNewFile()
+            it.writeText(dependenciesJson)
+          }
 
         if (dependenciesFile.exists()) {
           dependenciesFile.inputStream().use { inputStream ->
@@ -196,9 +196,10 @@ abstract class BaseUploadTask : DefaultTask() {
             inputStream.copyTo(zos)
             zos.closeEntry()
           }
-          finalArtifactMetadata = artifactMetadata.copy(
-            dependencyMetadataZipPath = dependenciesFile.name,
-          )
+          finalArtifactMetadata =
+            artifactMetadata.copy(
+              dependencyMetadataZipPath = dependenciesFile.name,
+            )
         }
       }
 
@@ -212,20 +213,23 @@ abstract class BaseUploadTask : DefaultTask() {
               inputStream.copyTo(zos)
               zos.closeEntry()
             }
-            finalArtifactMetadata = artifactMetadata.copy(
-              ciDebugData = CIDebugData(
-                gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
-              ),
-            )
+            finalArtifactMetadata =
+              artifactMetadata.copy(
+                ciDebugData =
+                  CIDebugData(
+                    gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
+                  ),
+              )
           }
         }
       }
 
       val json = Json.encodeToString(finalArtifactMetadata)
-      val appMetadataFile = File(outputDir, ArtifactMetadata.JSON_FILE_NAME).also {
-        it.createNewFile()
-        it.writeText(json)
-      }
+      val appMetadataFile =
+        File(outputDir, ArtifactMetadata.JSON_FILE_NAME).also {
+          it.createNewFile()
+          it.writeText(json)
+        }
       appMetadataFile.inputStream().use { inputStream ->
         zos.putNextEntry(ZipEntry(appMetadataFile.name))
         inputStream.copyTo(zos)
@@ -256,10 +260,15 @@ abstract class BaseUploadTask : DefaultTask() {
   abstract fun includeFilesInUpload(zos: ZipOutputStream)
 
   open fun uploadRequestData(file: File): EmergeUploadRequestData {
-    val repoName = if (
-      gitHubRepoOwner.orNull.isNullOrEmpty() ||
-      gitHubRepoName.orNull.isNullOrBlank()
-    ) null else "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
+    val repoName =
+      if (
+        gitHubRepoOwner.orNull.isNullOrEmpty() ||
+        gitHubRepoName.orNull.isNullOrBlank()
+      ) {
+        null
+      } else {
+        "${gitHubRepoOwner.get()}/${gitHubRepoName.get()}"
+      }
 
     return EmergeUploadRequestData(
       apiToken = apiToken.get(),
@@ -273,35 +282,39 @@ abstract class BaseUploadTask : DefaultTask() {
       tag = tag.orNull,
       gitlabProjectId = gitLabProjectId.orNull,
       androidSnapshotsEnabled = false,
-      source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}"
+      source = "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}",
     )
   }
 
   private fun uploadFile(file: File): EmergeUploadResponse {
-    val okHttpClient = OkHttpClient.Builder()
-      .connectTimeout(30, TimeUnit.SECONDS)
-      .readTimeout(30, TimeUnit.SECONDS)
-      .writeTimeout(30, TimeUnit.SECONDS)
-      .build()
+    val okHttpClient =
+      OkHttpClient.Builder()
+        .connectTimeout(30, TimeUnit.SECONDS)
+        .readTimeout(30, TimeUnit.SECONDS)
+        .writeTimeout(30, TimeUnit.SECONDS)
+        .build()
 
     val baseUrl = baseUrl.getOrElse(BuildConfig.EMERGE_BASE_URL)
-    val baseHttpUrl = baseUrl.toHttpUrlOrNull()
-      ?: error("Invalid baseUrl provided: $baseUrl")
+    val baseHttpUrl =
+      baseUrl.toHttpUrlOrNull()
+        ?: error("Invalid baseUrl provided: $baseUrl")
 
-    val uploadResponse = fetchSignedUrl(
-      client = okHttpClient,
-      uploadData = uploadRequestData(file),
-      baseUrl = baseHttpUrl
-    )
-    val signedUrl = uploadResponse.uploadUrl.toHttpUrlOrNull()
-      ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
+    val uploadResponse =
+      fetchSignedUrl(
+        client = okHttpClient,
+        uploadData = uploadRequestData(file),
+        baseUrl = baseHttpUrl,
+      )
+    val signedUrl =
+      uploadResponse.uploadUrl.toHttpUrlOrNull()
+        ?: error("Error parsing uploadUrl: ${uploadResponse.uploadUrl}")
 
     logger.debug("Uploading file to Emerge: ${file.path}")
 
     postFile(
       client = okHttpClient,
       file = file,
-      signedUrl = signedUrl
+      signedUrl = signedUrl,
     )
     return uploadResponse
   }
@@ -348,21 +361,22 @@ abstract class BaseUploadTask : DefaultTask() {
         val runtimeClasspathConfiguration =
           project.configurations.getByName("${variant.name}RuntimeClasspath")
 
-        val artifacts = listOf(
-          ARTIFACT_RESOURCES,
-          ARTIFACT_CLASSES,
-          ARTIFACT_ASSETS,
-          ARTIFACT_JNI,
-        ).map { artifactType ->
-          runtimeClasspathConfiguration.incoming.artifactView { viewConfiguration ->
-            viewConfiguration.attributes { attributeContainer ->
-              attributeContainer.attribute(
-                Attribute.of("artifactType", String::class.java),
-                artifactType
-              )
-            }
-          }.artifacts
-        }
+        val artifacts =
+          listOf(
+            ARTIFACT_RESOURCES,
+            ARTIFACT_CLASSES,
+            ARTIFACT_ASSETS,
+            ARTIFACT_JNI,
+          ).map { artifactType ->
+            runtimeClasspathConfiguration.incoming.artifactView { viewConfiguration ->
+              viewConfiguration.attributes { attributeContainer ->
+                attributeContainer.attribute(
+                  Attribute.of("artifactType", String::class.java),
+                  artifactType,
+                )
+              }
+            }.artifacts
+          }
         setArtifacts(artifacts)
       }
     }

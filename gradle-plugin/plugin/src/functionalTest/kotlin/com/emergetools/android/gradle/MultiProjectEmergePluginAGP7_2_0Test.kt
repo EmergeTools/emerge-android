@@ -2,13 +2,11 @@ package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 @Suppress("ClassName")
 class MultiProjectEmergePluginAGP7_2_0Test : EmergePluginTest() {
-
   @Test
   fun multiProjectUpload() {
     EmergeGradleRunner.create("multi-project-agp-7.2.0")
@@ -47,8 +45,8 @@ class MultiProjectEmergePluginAGP7_2_0Test : EmergePluginTest() {
       .assert { result, _ ->
         assertTrue(
           result.output.contains(
-            "Task 'emergeGeneratePerformanceProject' not found in project ':app'"
-          )
+            "Task 'emergeGeneratePerformanceProject' not found in project ':app'",
+          ),
         )
       }
       .buildAndFail()

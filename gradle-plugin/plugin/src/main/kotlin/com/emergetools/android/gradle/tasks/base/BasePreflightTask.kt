@@ -8,9 +8,7 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
 
-
 abstract class BasePreflightTask : DefaultTask() {
-
   @get:Input
   @get:Optional
   abstract val sha: Property<String>
@@ -55,7 +53,10 @@ abstract class BasePreflightTask : DefaultTask() {
 
     vcsPreflight.add("Branch name: ${branchName.getOrElse("Not set")}") {
       if (branchName.getOrElse("") == "HEAD") {
-        throw PreflightWarning("Branch could be in a detached head state which could lead to trouble posting status checks. Make sure to check your sha matches the commit sha on your branch.")
+        throw PreflightWarning(
+          "Branch could be in a detached head state which could lead to trouble posting status " +
+            "checks. Make sure to check your sha matches the commit sha on your branch.",
+        )
       }
 
       if (branchName.getOrElse("").isBlank()) {
@@ -65,14 +66,16 @@ abstract class BasePreflightTask : DefaultTask() {
 
     vcsPreflight.add("PR number: ${prNumber.getOrElse("Not set")}") {
       if (prNumber.getOrElse("").isBlank()) {
-        throw PreflightWarning("Emerge is unable to post status checks/comments without a value. Emerge will try to set automatically in GitHub environments using PR event data.")
+        throw PreflightWarning(
+          "Emerge is unable to post status checks/comments without a value. Emerge will try to " +
+            "set automatically in GitHub environments using PR event data.",
+        )
       }
     }
 
     val hasGitLabProjectId = gitLabProjectId.getOrElse("").isBlank()
     // Don't add if GitLab info set
     if (!hasGitLabProjectId) {
-
       vcsPreflight.add("[GitHub only] GitHub repo name: ${gitHubRepoName.getOrElse("Not set")}") {
         if (gitHubRepoName.getOrElse("").isBlank()) {
           throw PreflightWarning("Emerge is unable to post status checks/comments without a value.")
@@ -101,10 +104,7 @@ abstract class BasePreflightTask : DefaultTask() {
   }
 
   companion object {
-
-    fun BasePreflightTask.setPreflightTaskInputs(
-      extension: EmergePluginExtension,
-    ) {
+    fun BasePreflightTask.setPreflightTaskInputs(extension: EmergePluginExtension) {
       sha.set(extension.vcsOptions.sha)
       baseSha.set(extension.vcsOptions.baseSha)
       branchName.set(extension.vcsOptions.branchName)

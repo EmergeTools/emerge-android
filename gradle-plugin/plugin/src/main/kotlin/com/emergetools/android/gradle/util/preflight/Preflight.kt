@@ -6,7 +6,9 @@ import org.gradle.api.logging.Logger
 
 sealed class Result<T> {
   class Success<T>(value: T) : Result<T>()
+
   class Warning<T>(val message: String) : Result<T>()
+
   class Failure<T>(val message: String) : Result<T>()
 }
 
@@ -18,7 +20,9 @@ private data class Item(val description: String, val result: Result<Unit>) {
   val isWarning: Boolean
     get() = result is Result.Warning
 }
+
 class PreflightWarning(message: String) : Exception(message)
+
 class PreflightFailure(message: String) : Exception(message)
 
 inline fun <R> runCatching(block: () -> R): Result<R> {
@@ -36,7 +40,10 @@ class Preflight(private val title: String) {
 
   private val subPreflights = mutableListOf<Preflight>()
 
-  fun add(description: String, check: () -> Unit = {}) {
+  fun add(
+    description: String,
+    check: () -> Unit = {},
+  ) {
     items.add(Item(description, runCatching(check)))
   }
 
@@ -88,33 +95,40 @@ class Preflight(private val title: String) {
    * from the preflight checks.
    */
   fun render(): String {
-    val result = if (isSuccessful()) {
-      val warningCount = items.count { it.isWarning }
-      if (warningCount > 0) {
-        "was successful with $warningCount warning${if (warningCount > 1) "s" else ""}"
-      } else "was successful"
-    } else "failed"
+    val result =
+      if (isSuccessful()) {
+        val warningCount = items.count { it.isWarning }
+        if (warningCount > 0) {
+          "was successful with $warningCount warning${if (warningCount > 1) "s" else ""}"
+        } else {
+          "was successful"
+        }
+      } else {
+        "failed"
+      }
     val successCount = items.count { it.isSuccess }
     val totalCount = items.size
-    val heading = "$title $result ($successCount/${totalCount})"
+    val heading = "$title $result ($successCount/$totalCount)"
     val treePrinter = TreePrinter(heading)
 
     for (item in items) {
-      val emoji = when {
-        item.isWarning -> "⚠️"
-        item.isSuccess -> "✅"
-        else -> "❌"
-      }
-      val description = item.description
-      val line = buildString {
-        append(emoji)
-        append(" ")
-        append(description)
-        if (item.isWarning) {
-          append(" - ")
-          append((item.result as Result.Warning).message)
+      val emoji =
+        when {
+          item.isWarning -> "⚠️"
+          item.isSuccess -> "✅"
+          else -> "❌"
         }
-      }
+      val description = item.description
+      val line =
+        buildString {
+          append(emoji)
+          append(" ")
+          append(description)
+          if (item.isWarning) {
+            append(" - ")
+            append((item.result as Result.Warning).message)
+          }
+        }
       treePrinter.addItem(line)
     }
 
@@ -128,27 +142,31 @@ class Preflight(private val title: String) {
   }
 
   private fun getHeadingTop(heading: String): String {
-    return (CharArray(heading.length) {
-      if (it == 0) {
-        return@CharArray '╔'
+    return (
+      CharArray(heading.length) {
+        if (it == 0) {
+          return@CharArray '╔'
+        }
+        if (it == heading.length - 1) {
+          return@CharArray '╗'
+        }
+        return@CharArray '═'
       }
-      if (it == heading.length - 1) {
-        return@CharArray '╗'
-      }
-      return@CharArray '═'
-    }).joinToString("")
+    ).joinToString("")
   }
 
   private fun getHeadingBottom(heading: String): String {
-    return (CharArray(heading.length) {
-      if (it == 0) {
-        return@CharArray '╠'
+    return (
+      CharArray(heading.length) {
+        if (it == 0) {
+          return@CharArray '╠'
+        }
+        if (it == heading.length - 1) {
+          return@CharArray '╝'
+        }
+        return@CharArray '═'
       }
-      if (it == heading.length - 1) {
-        return@CharArray '╝'
-      }
-      return@CharArray '═'
-    }).joinToString("")
+    ).joinToString("")
   }
 
   fun renderErrors(): String {

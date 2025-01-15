@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test
 
 @Suppress("ClassName")
 class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
-
   @Test
   fun simpleBundle() {
     EmergeGradleRunner.create("simple-agp-7.2.0")
@@ -23,12 +22,13 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
 
   @Test
   fun simpleBundleTimeout() {
-    val result = EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
-      .withGradleVersion("7.5.1")
-      .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer(true)
-      .buildAndFail()
+    val result =
+      EmergeGradleRunner.create("simple-agp-7.2.0")
+        .withAndroidGradlePluginVersion("7.2.0")
+        .withGradleVersion("7.5.1")
+        .withArguments("emergeUploadReleaseAab")
+        .withDefaultServer(true)
+        .buildAndFail()
     result.assertFailedTask(":emergeUploadReleaseAab")
   }
 
@@ -48,12 +48,13 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
 
   @Test
   fun simpleAssembleTimeout() {
-    val result = EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
-      .withGradleVersion("7.5.1")
-      .withArguments("emergeUploadReleaseApk")
-      .withDefaultServer(true)
-      .buildAndFail()
+    val result =
+      EmergeGradleRunner.create("simple-agp-7.2.0")
+        .withAndroidGradlePluginVersion("7.2.0")
+        .withGradleVersion("7.5.1")
+        .withArguments("emergeUploadReleaseApk")
+        .withDefaultServer(true)
+        .buildAndFail()
     result.assertFailedTask(":emergeUploadReleaseApk")
   }
 
@@ -87,21 +88,23 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
 
   @Test
   fun androidTasksRunBundle() {
-    val result = EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
-      .withGradleVersion("7.5.1")
-      .withArguments("signReleaseBundle")
-      .build()
+    val result =
+      EmergeGradleRunner.create("simple-agp-7.2.0")
+        .withAndroidGradlePluginVersion("7.2.0")
+        .withGradleVersion("7.5.1")
+        .withArguments("signReleaseBundle")
+        .build()
     result.assertSuccessfulTask(":signReleaseBundle")
   }
 
   @Test
   fun androidTasksRunAssemble() {
-    val result = EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
-      .withGradleVersion("7.5.1")
-      .withArguments("packageRelease")
-      .build()
+    val result =
+      EmergeGradleRunner.create("simple-agp-7.2.0")
+        .withAndroidGradlePluginVersion("7.2.0")
+        .withGradleVersion("7.5.1")
+        .withArguments("packageRelease")
+        .build()
     result.assertSuccessfulTask(":packageRelease")
   }
 }

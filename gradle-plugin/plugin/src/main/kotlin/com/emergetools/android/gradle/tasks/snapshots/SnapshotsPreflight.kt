@@ -9,7 +9,6 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 abstract class SnapshotsPreflight : BasePreflightTask() {
-
   @get:Input
   @get:Optional
   abstract val snapshotsEnabled: Property<Boolean>
@@ -34,14 +33,20 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
     val hasEmergeApiToken = hasEmergeApiToken.getOrElse(false)
     preflight.add("Emerge API token set") {
       if (!hasEmergeApiToken) {
-        throw PreflightFailure("Emerge API token not set. See https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key")
+        throw PreflightFailure(
+          "Emerge API token not set. See " +
+            "https://docs.emergetools.com/docs/uploading-basics#obtain-an-api-key",
+        )
       }
     }
 
     val snapshotsEnabled = snapshotsEnabled.getOrElse(false)
     preflight.add("Snapshots enabled") {
       if (!snapshotsEnabled) {
-        throw PreflightFailure("Snapshots not enabled. Make sure `snapshots.enabled` is set to true in the emerge configuration block.")
+        throw PreflightFailure(
+          "Snapshots not enabled. Make sure `snapshots.enabled` is set to " +
+            "true in the emerge configuration block.",
+        )
       }
     }
 
@@ -49,7 +54,10 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
       hasSnapshotsAndroidTestImplementationDependency.getOrElse(false)
     preflight.add("Snapshots SDK is an androidTestImplementation dependency") {
       if (!hasSnapshotsAndroidTestImplementationDependency) {
-        throw PreflightFailure("Snapshots androidTestImplementation dependency not set. See https://docs.emergetools.com/docs/android-snapshots-v1#add-snapshot-sdk")
+        throw PreflightFailure(
+          "Snapshots androidTestImplementation dependency not set. See " +
+            "https://docs.emergetools.com/docs/android-snapshots-v1#add-snapshot-sdk",
+        )
       }
     }
 
@@ -60,11 +68,12 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
       additionalSuccessLogging = {
         val localTaskName = getSnapshotLocalTaskName(variantName.get())
         val localTaskInstructions =
-          "Check snapshots locally with ./gradlew ${appProjectPath.get()}:${localTaskName} (make sure to have an emulator or connected device running)"
+          "Check snapshots locally with ./gradlew ${appProjectPath.get()}:$localTaskName " +
+            "(make sure to have an emulator or connected device running)"
 
         val uploadTaskName = getSnapshotUploadTaskName(variantName.get())
         val uploadTaskInstructions =
-          "Upload & run snapshots on Emerge with ./gradlew ${appProjectPath.get()}:${uploadTaskName}"
+          "Upload & run snapshots on Emerge with ./gradlew ${appProjectPath.get()}:$uploadTaskName"
 
         buildString {
           append("Snapshots preflight was successful!")
@@ -74,7 +83,7 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
           append(uploadTaskInstructions)
           append("\n")
         }
-      }
+      },
     )
   }
 }

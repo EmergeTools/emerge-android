@@ -6,15 +6,15 @@ import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.Test
 
 class LoggingEmergePluginTest : EmergePluginTest() {
-
   // Write a test that verifies that executing the task 'logExtension' prints the extension to the console.
   @Test
   fun logExtension() {
-    val result = EmergeGradleRunner.create("simple")
-      .withArguments("logExtension")
-      .withGitHubPREvent()
-      .build()
-      .assertSuccessfulTask(":logExtension")
+    val result =
+      EmergeGradleRunner.create("simple")
+        .withArguments("logExtension")
+        .withGitHubPREvent()
+        .build()
+        .assertSuccessfulTask(":logExtension")
 
     Assertions.assertTrue(
       result.output.contains(
@@ -65,8 +65,8 @@ class LoggingEmergePluginTest : EmergePluginTest() {
           "╠═ repoName: repoName\n" +
           "╠═ includeEventInformation: true\n" +
           "╠═ gitLabOptions\n" +
-          "╚═ projectId: "
-      )
+          "╚═ projectId: ",
+      ),
     )
   }
 }

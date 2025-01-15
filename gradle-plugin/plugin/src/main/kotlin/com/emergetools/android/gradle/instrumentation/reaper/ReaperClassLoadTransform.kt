@@ -13,9 +13,7 @@ import java.security.MessageDigest
 
 abstract class ReaperClassLoadClassVisitorFactory :
   AsmClassVisitorFactory<InstrumentationParameters.None> {
-
   companion object {
-
     private val logger by lazy {
       LoggerFactory.getLogger(ReaperClassLoadClassVisitorFactory::class.java)
     }
@@ -26,7 +24,7 @@ abstract class ReaperClassLoadClassVisitorFactory :
     nextClassVisitor: ClassVisitor,
   ): ClassVisitor {
     logger.info(
-      "ReaperClassVisitorFactory processing class: ${classContext.currentClassData.className}"
+      "ReaperClassVisitorFactory processing class: ${classContext.currentClassData.className}",
     )
 
     return ReaperClassLoadClassVisitor(
@@ -38,22 +36,21 @@ abstract class ReaperClassLoadClassVisitorFactory :
   }
 
   override fun isInstrumentable(classData: ClassData): Boolean {
-
     // This includes classes like kotlin.jvm.internal.Lambda which are used in
     // the <clinit> setup path of Reaper itself.
     val isKotlinStdlib = classData.className.startsWith("kotlin.")
     if (isKotlinStdlib) {
-      return false;
+      return false
     }
 
     // Don't instrument our own code but do instrument the sample.
     val isReaper = classData.className.startsWith("com.emergetools.reaper.")
     val isSample = classData.className.startsWith("com.emergetools.reaper.sample.")
     if (isReaper && !isSample) {
-      return false;
+      return false
     }
 
-    return true;
+    return true
   }
 }
 
@@ -64,7 +61,6 @@ class ReaperClassLoadClassVisitor(
   val logger: Logger,
   // private val writer: PrintWriter,
 ) : ClassVisitor(api, cv) {
-
   private var sourceFileName: String? = null
 
   override fun visitSource(
@@ -99,7 +95,6 @@ class ReaperClassLoadMethodVisitor(
   // private val writer: PrintWriter,
   private val name: String?,
 ) : MethodVisitor(api, methodVisitor) {
-
   override fun visitCode() {
     super.visitCode()
     if (name == "<clinit>" || name == "<init>") {
@@ -115,7 +110,7 @@ class ReaperClassLoadMethodVisitor(
         "com/emergetools/reaper/ReaperInternal",
         "logMethodEntry",
         "(J)V",
-        false
+        false,
       )
     }
   }
@@ -130,8 +125,7 @@ fun toSha256(s: String): ByteArray {
 fun topLong(buf: ByteArray): Long {
   var l: Long = 0L
   for (i in 0..7) {
-    l = l or ((buf[i].toLong() and 0xFFL) shl i*8)
+    l = l or ((buf[i].toLong() and 0xFFL) shl i * 8)
   }
   return l
 }
-

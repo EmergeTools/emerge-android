@@ -29,4 +29,5 @@ allprojects {
 
 tasks.withType<io.gitlab.arturbosch.detekt.Detekt>().configureEach {
   exclude("**/reaper/sample/stress/**")
+  dependsOn(gradle.includedBuild("gradle-plugin").task(":plugin:detekt"))
 }
