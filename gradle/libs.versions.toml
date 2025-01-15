@@ -75,7 +75,7 @@ androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version = "1.2
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version = "2.9.0" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
-asm = "org.ow2.asm:asm:9.5"
+asm = "org.ow2.asm:asm:9.7.1"
 asm-commons = "org.ow2.asm:asm-commons:9.5"
 
 assertj = "org.assertj:assertj-core:3.27.2"
