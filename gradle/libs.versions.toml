@@ -112,7 +112,7 @@ kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref =
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.4.0"
 kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.5.1"
 
-ktor-network = { module = "io.ktor:ktor-network", version = "2.1.1" }
+ktor-network = { module = "io.ktor:ktor-network", version = "2.3.13" }
 
 mockito = { module = "org.mockito:mockito-inline", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito" }
