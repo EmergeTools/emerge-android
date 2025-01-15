@@ -21,3 +21,4 @@ dependencyResolutionManagement {
 }
 
 include(":plugin")
+rootProject.name = "emerge-gradle-plugin"

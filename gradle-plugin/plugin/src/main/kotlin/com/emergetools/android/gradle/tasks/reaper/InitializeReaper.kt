@@ -16,7 +16,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 abstract class InitializeReaper : BaseUploadTask() {
-
   @get:InputFile
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val artifact: RegularFileProperty
@@ -35,17 +34,20 @@ abstract class InitializeReaper : BaseUploadTask() {
   @TaskAction
   fun execute() {
     if (publishableApiKey.orNull == null) {
-      throw StopExecutionException("publishableApiKey must be set for Reaper to work properly. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.")
+      throw StopExecutionException(
+        "publishableApiKey must be set for Reaper to work properly. See https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk.",
+      )
     }
 
     val artifactName = artifact.get().asFile.name
-    val artifactMetadata = ArtifactMetadata(
-      created = Clock.System.now(),
-      emergeGradlePluginVersion = BuildConfig.VERSION,
-      androidGradlePluginVersion = agpVersion.get(),
-      targetArtifactZipPath = artifactName,
-      proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
-    )
+    val artifactMetadata =
+      ArtifactMetadata(
+        created = Clock.System.now(),
+        emergeGradlePluginVersion = BuildConfig.VERSION,
+        androidGradlePluginVersion = agpVersion.get(),
+        targetArtifactZipPath = artifactName,
+        proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
+      )
 
     upload(artifactMetadata) { response ->
       logger.lifecycle("Reaper initialized! View Reaper reports for this version at the following url:")

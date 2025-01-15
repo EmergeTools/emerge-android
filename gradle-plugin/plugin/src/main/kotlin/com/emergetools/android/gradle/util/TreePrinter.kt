@@ -4,19 +4,26 @@ sealed class Node(val content: String) {
   class Heading(content: String) : Node(content) {
     val children = mutableListOf<Node>()
   }
+
   class Item(content: String) : Node(content)
 }
 
 class TreePrinter(private val rootHeading: String) {
   private val root = Node.Heading(rootHeading)
 
-  fun addHeading(content: String, parent: Node.Heading = root): Node.Heading {
+  fun addHeading(
+    content: String,
+    parent: Node.Heading = root,
+  ): Node.Heading {
     val node = Node.Heading(content)
     parent.children.add(node)
     return node
   }
 
-  fun addItem(content: String, parent: Node.Heading = root) {
+  fun addItem(
+    content: String,
+    parent: Node.Heading = root,
+  ) {
     val node = Node.Item(content)
     parent.children.add(node)
   }
@@ -25,7 +32,10 @@ class TreePrinter(private val rootHeading: String) {
     return formatNode(root)
   }
 
-  private fun formatNode(node: Node, isLast: Boolean = false): String {
+  private fun formatNode(
+    node: Node,
+    isLast: Boolean = false,
+  ): String {
     return when (node) {
       is Node.Heading -> formatHeading(node)
       is Node.Item -> formatItem(node, isLast)
@@ -50,13 +60,19 @@ class TreePrinter(private val rootHeading: String) {
     }
   }
 
-  private fun formatItem(node: Node.Item, isLast: Boolean): String {
+  private fun formatItem(
+    node: Node.Item,
+    isLast: Boolean,
+  ): String {
     val prefix = if (isLast) "╚═ " else "╠═ "
     return "$prefix${node.content}"
   }
 }
 
-fun treePrinter(rootTitle: String, build: TreePrinter.() -> Unit): String {
+fun treePrinter(
+  rootTitle: String,
+  build: TreePrinter.() -> Unit,
+): String {
   val treePrinter = TreePrinter(rootTitle)
   treePrinter.build()
   return treePrinter.print()

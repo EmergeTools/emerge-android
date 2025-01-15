@@ -11,22 +11,26 @@ fun hasDependency(
   dependencyName: String,
   androidTest: AndroidTest? = null,
 ): Boolean {
-  fun MutableList<String>.addIfNotBlank(value: String?, formatter: (String) -> String) {
+  fun MutableList<String>.addIfNotBlank(
+    value: String?,
+    formatter: (String) -> String,
+  ) {
     value?.takeIf { it.isNotBlank() }?.let { add(formatter(it)) }
   }
 
-  val configsToCheck = buildList {
-    add("implementation")
-    addIfNotBlank(variant.flavorName) { "${it}Implementation" }
-    addIfNotBlank(variant.buildType) { "${it}Implementation" }
-    addIfNotBlank(variant.name) { "${it}Implementation" }
-    androidTest?.let { test ->
-      add("androidTestImplementation")
-      addIfNotBlank(test.flavorName) { "${it}Implementation" }
-      addIfNotBlank(test.buildType) { "${it}Implementation" }
-      addIfNotBlank(test.name) { "${it}Implementation" }
+  val configsToCheck =
+    buildList {
+      add("implementation")
+      addIfNotBlank(variant.flavorName) { "${it}Implementation" }
+      addIfNotBlank(variant.buildType) { "${it}Implementation" }
+      addIfNotBlank(variant.name) { "${it}Implementation" }
+      androidTest?.let { test ->
+        add("androidTestImplementation")
+        addIfNotBlank(test.flavorName) { "${it}Implementation" }
+        addIfNotBlank(test.buildType) { "${it}Implementation" }
+        addIfNotBlank(test.name) { "${it}Implementation" }
+      }
     }
-  }
 
   project.logger.lifecycle("Checking for dependency $dependencyGroup:$dependencyName in configurations $configsToCheck")
 

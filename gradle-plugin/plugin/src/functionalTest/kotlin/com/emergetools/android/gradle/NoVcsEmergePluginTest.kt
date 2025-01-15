@@ -4,7 +4,6 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
-import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREventNoBefore
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPushEvent
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -14,7 +13,6 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class NoVcsEmergePluginTest : EmergePluginTest() {
-
   @Test
   fun noVcsBundle() {
     EmergeGradleRunner.create("no-vcs-params")
@@ -61,18 +59,20 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun androidTasksRunBundle() {
-    val result = EmergeGradleRunner.create("no-vcs-params")
-      .withArguments("packageReleaseBundle", "signReleaseBundle")
-      .build()
+    val result =
+      EmergeGradleRunner.create("no-vcs-params")
+        .withArguments("packageReleaseBundle", "signReleaseBundle")
+        .build()
     result.assertSuccessfulTask(":packageReleaseBundle")
     result.assertSuccessfulTask(":signReleaseBundle")
   }
 
   @Test
   fun androidTasksRunAssemble() {
-    val result = EmergeGradleRunner.create("no-vcs-params")
-      .withArguments("packageRelease")
-      .build()
+    val result =
+      EmergeGradleRunner.create("no-vcs-params")
+        .withArguments("packageRelease")
+        .build()
     result.assertSuccessfulTask(":packageRelease")
   }
 
@@ -94,9 +94,10 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
       }
       .build()
 
-    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
-      configurationJson.inputStream()
-    )
+    val configuration =
+      Json.decodeFromStream<EmergePluginExtensionData>(
+        configurationJson.inputStream(),
+      )
 
     assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
     assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
@@ -122,9 +123,10 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
       }
       .build()
 
-    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
-      configurationJson.inputStream()
-    )
+    val configuration =
+      Json.decodeFromStream<EmergePluginExtensionData>(
+        configurationJson.inputStream(),
+      )
 
     assertEquals("github_env_sha", configuration.vcsOptions!!.sha)
     assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)

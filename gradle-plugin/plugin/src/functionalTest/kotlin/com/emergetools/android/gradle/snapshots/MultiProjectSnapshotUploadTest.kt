@@ -6,7 +6,6 @@ import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
 
 class MultiProjectSnapshotUploadTest : EmergePluginTest() {
-
   @Test
   fun multiProjectUploadSnapshotBundle() {
     EmergeGradleRunner.create("multi-project")

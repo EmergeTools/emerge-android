@@ -27,29 +27,32 @@ fun buildDependencies(
   artifacts.forEach { artifactCollection ->
     artifactCollection.artifacts.forEach { resolvedArtifact ->
       val id = resolvedArtifact.id.componentIdentifier
-      val dependencyEntries = resolvedArtifact.file
-        .walkTopDown()
-        .filter(File::isFile)
-        .flatMap { artifactFile ->
-          // Normalize the name to remove the leading path, so it's relative to the module root.
-          val name = artifactFile.absolutePath
-            .removePrefix(resolvedArtifact.file.absolutePath)
-            .removePrefix("/")
+      val dependencyEntries =
+        resolvedArtifact.file
+          .walkTopDown()
+          .filter(File::isFile)
+          .flatMap { artifactFile ->
+            // Normalize the name to remove the leading path, so it's relative to the module root.
+            val name =
+              artifactFile.absolutePath
+                .removePrefix(resolvedArtifact.file.absolutePath)
+                .removePrefix("/")
 
-          logger.info("Processing artifact: $name")
-          when (artifactFile.extension) {
-            // If the artifact is a jar, we want to include all the entries in the jar
-            "jar" -> JarFile(artifactFile).use { jarFile ->
-              jarFile.entries()
-                .asSequence()
-                .filterNot(JarEntry::isDirectory)
-                .map { it.name.removePrefix("/") }
-                .toList()
+            logger.info("Processing artifact: $name")
+            when (artifactFile.extension) {
+              // If the artifact is a jar, we want to include all the entries in the jar
+              "jar" ->
+                JarFile(artifactFile).use { jarFile ->
+                  jarFile.entries()
+                    .asSequence()
+                    .filterNot(JarEntry::isDirectory)
+                    .map { it.name.removePrefix("/") }
+                    .toList()
+                }
+
+              else -> listOf(name)
             }
-
-            else -> listOf(name)
-          }
-        }.toList()
+          }.toList()
 
       if (dependencyEntries.isNotEmpty()) {
         dependencyEntryMap.putOrAppend(id.displayName, dependencyEntries)
@@ -57,39 +60,42 @@ fun buildDependencies(
     }
   }
 
-  val modules = mutableListOf(
-    Module(
-      name = defaultModuleName,
-      path = defaultModulePath,
-      entries = emptyList(),
-      isRoot = true,
+  val modules =
+    mutableListOf(
+      Module(
+        name = defaultModuleName,
+        path = defaultModulePath,
+        entries = emptyList(),
+        isRoot = true,
+      ),
     )
-  )
   val libraries = mutableListOf<Library>()
 
   dependencyEntryMap.entries.forEach {
     val keySplits = it.key.split(":")
     if (it.key.startsWith(PROJECT_PREFIX)) {
-      modules += Module(
-        name = keySplits.last(),
-        path = it.key.substringAfter(PROJECT_PREFIX),
-        entries = it.value,
-      )
+      modules +=
+        Module(
+          name = keySplits.last(),
+          path = it.key.substringAfter(PROJECT_PREFIX),
+          entries = it.value,
+        )
     } else {
       // Check to ensure the dependency is in the format group:name:version
       if (keySplits.size != 3) {
         logger.warn(
-          "Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!"
+          "Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!",
         )
         return@forEach
       }
 
-      libraries += Library(
-        groupId = keySplits[0],
-        artifactId = keySplits[1],
-        version = keySplits[2],
-        entries = it.value
-      )
+      libraries +=
+        Library(
+          groupId = keySplits[0],
+          artifactId = keySplits[1],
+          version = keySplits[2],
+          entries = it.value,
+        )
     }
   }
 

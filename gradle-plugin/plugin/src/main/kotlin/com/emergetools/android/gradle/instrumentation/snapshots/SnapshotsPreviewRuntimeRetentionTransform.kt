@@ -14,7 +14,6 @@ import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 abstract class SnapshotsPreviewRuntimeRetentionTransformFactory : AsmClassVisitorFactory<SnapshotsPreviewRuntimeRetentionTransformFactory.Params> {
-
   interface Params : InstrumentationParameters {
     @get:Input
     @get:Optional
@@ -49,7 +48,6 @@ class SnapshotsPreviewRuntimeRetentionTransform(
   classVisitor: ClassVisitor?,
   private val logger: Logger,
 ) : ClassVisitor(api, classVisitor) {
-
   companion object {
     const val TAG = "SnapshotRuntimePreviewClassVisitor"
 
@@ -63,12 +61,13 @@ class SnapshotsPreviewRuntimeRetentionTransform(
     const val PREVIEW_FONT_SCALE_ANNOTATION_DESC =
       "Landroidx/compose/ui/tooling/preview/PreviewFontScale;"
 
-    val ANNOTATIONS_TO_TRANSFORM = arrayOf(
-      PREVIEW_ANNOTATION_DESC,
-      PREVIEW_CONTAINER_ANNOTATION_DESC,
-      PREVIEW_LIGHT_DARK_ANNOTATION_DESC,
-      PREVIEW_FONT_SCALE_ANNOTATION_DESC,
-    )
+    val ANNOTATIONS_TO_TRANSFORM =
+      arrayOf(
+        PREVIEW_ANNOTATION_DESC,
+        PREVIEW_CONTAINER_ANNOTATION_DESC,
+        PREVIEW_LIGHT_DARK_ANNOTATION_DESC,
+        PREVIEW_FONT_SCALE_ANNOTATION_DESC,
+      )
   }
 
   override fun visitMethod(
@@ -87,7 +86,7 @@ class SnapshotsPreviewRuntimeRetentionTransform(
       ): AnnotationVisitor? {
         if (ANNOTATIONS_TO_TRANSFORM.contains(desc)) {
           logger.info(
-            "$TAG: Modifying method annotation visible at runtime to true for annotation $desc $visible"
+            "$TAG: Modifying method annotation visible at runtime to true for annotation $desc $visible",
           )
 
           // Force the annotation to be visible at runtime
@@ -105,7 +104,7 @@ class SnapshotsPreviewRuntimeRetentionTransform(
   ): AnnotationVisitor? {
     if (ANNOTATIONS_TO_TRANSFORM.contains(desc)) {
       logger.info(
-        "$TAG: Modifying class annotation visible at runtime to true for annotation $desc $visible"
+        "$TAG: Modifying class annotation visible at runtime to true for annotation $desc $visible",
       )
 
       // Force the annotation to be visible at runtime

@@ -17,7 +17,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 abstract class UploadAPK : BaseUploadTask() {
-
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val artifactDir: DirectoryProperty
@@ -57,13 +56,14 @@ abstract class UploadAPK : BaseUploadTask() {
   fun doExecute() {
     val artifactName = primaryArtifact.name
     val proguardMappingName = proguardMapping.asFile.orNull?.name
-    val artifactMetadata = ArtifactMetadata(
-      created = Clock.System.now(),
-      emergeGradlePluginVersion = BuildConfig.VERSION,
-      androidGradlePluginVersion = agpVersion.get(),
-      targetArtifactZipPath = artifactName,
-      proguardMappingsZipPath = proguardMappingName,
-    )
+    val artifactMetadata =
+      ArtifactMetadata(
+        created = Clock.System.now(),
+        emergeGradlePluginVersion = BuildConfig.VERSION,
+        androidGradlePluginVersion = agpVersion.get(),
+        targetArtifactZipPath = artifactName,
+        proguardMappingsZipPath = proguardMappingName,
+      )
 
     upload(artifactMetadata) { response ->
       logger.lifecycle("APK Upload successful! View Emerge's size analysis at the following url:")

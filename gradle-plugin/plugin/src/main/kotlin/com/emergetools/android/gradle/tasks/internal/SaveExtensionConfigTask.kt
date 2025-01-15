@@ -26,7 +26,6 @@ import java.io.File
  * contents of the JSON file to ensure our config is handled properly.
  */
 abstract class SaveExtensionConfigTask : DefaultTask() {
-
   @get:Input
   abstract val emergePluginExtension: Property<EmergePluginExtension>
 
@@ -42,15 +41,15 @@ abstract class SaveExtensionConfigTask : DefaultTask() {
   fun saveConfig() {
     val extensionData = emergePluginExtension.get().dataFromExtension()
     val configJson = Json.encodeToString(extensionData)
-    val outputFile = File(outputPath).also {
-      it.createNewFile()
-      it.writeText(configJson)
-    }
+    val outputFile =
+      File(outputPath).also {
+        it.createNewFile()
+        it.writeText(configJson)
+      }
     logger.lifecycle("Saved extension config to $outputFile")
   }
 
   companion object {
-
     @Serializable
     data class EmergePluginExtensionData(
       val apiToken: String?,
@@ -89,7 +88,7 @@ abstract class SaveExtensionConfigTask : DefaultTask() {
         branchName = branchName.orNull,
         prNumber = prNumber.orNull,
         gitHubOptions = gitHubOptions.dataFromExtension(),
-        gitLabOptions = gitLabOptions.dataFromExtension()
+        gitLabOptions = gitLabOptions.dataFromExtension(),
       )
     }
 

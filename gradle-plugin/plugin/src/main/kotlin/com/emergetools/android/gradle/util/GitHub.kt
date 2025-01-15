@@ -7,14 +7,14 @@ import org.gradle.process.ExecOperations
 import java.io.File
 
 internal class GitHub(private val execOperations: ExecOperations) {
-
   private val git by lazy {
     Git(execOperations)
   }
 
-  private val json = Json {
-    ignoreUnknownKeys = true
-  }
+  private val json =
+    Json {
+      ignoreUnknownKeys = true
+    }
 
   private fun repoId(): String? {
     val remoteUrl = git.remoteUrl() ?: return null
@@ -90,9 +90,10 @@ internal class GitHub(private val execOperations: ExecOperations) {
   }
 
   private fun getEventDataString(): String {
-    val gitHubEventPath = checkNotNull(System.getenv("GITHUB_EVENT_PATH")) {
-      "GITHUB_EVENT_PATH is not set"
-    }
+    val gitHubEventPath =
+      checkNotNull(System.getenv("GITHUB_EVENT_PATH")) {
+        "GITHUB_EVENT_PATH is not set"
+      }
     val file = File(gitHubEventPath)
     check(file.exists()) {
       "File $gitHubEventPath doesn't exist"

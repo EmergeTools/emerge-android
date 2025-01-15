@@ -4,7 +4,6 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
-import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREventNoBefore
 import junit.framework.TestCase.assertEquals
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
@@ -12,7 +11,6 @@ import org.junit.jupiter.api.Test
 import java.io.File
 
 class SimpleEmergePluginTest : EmergePluginTest() {
-
   @Test
   fun simpleBundle() {
     EmergeGradleRunner.create("simple")
@@ -41,10 +39,11 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun simpleBundleTimeout() {
-    val result = EmergeGradleRunner.create("simple")
-      .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer(true)
-      .buildAndFail()
+    val result =
+      EmergeGradleRunner.create("simple")
+        .withArguments("emergeUploadReleaseAab")
+        .withDefaultServer(true)
+        .buildAndFail()
     result.assertFailedTask(":emergeUploadReleaseAab")
   }
 
@@ -62,10 +61,11 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun simpleAssembleTimeout() {
-    val result = EmergeGradleRunner.create("simple")
-      .withArguments("emergeUploadReleaseApk")
-      .withDefaultServer(true)
-      .buildAndFail()
+    val result =
+      EmergeGradleRunner.create("simple")
+        .withArguments("emergeUploadReleaseApk")
+        .withDefaultServer(true)
+        .buildAndFail()
     result.assertFailedTask(":emergeUploadReleaseApk")
   }
 
@@ -95,18 +95,20 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun androidTasksRunBundle() {
-    val result = EmergeGradleRunner.create("simple")
-      .withArguments("packageReleaseBundle", "signReleaseBundle")
-      .build()
+    val result =
+      EmergeGradleRunner.create("simple")
+        .withArguments("packageReleaseBundle", "signReleaseBundle")
+        .build()
     result.assertSuccessfulTask(":packageReleaseBundle")
     result.assertSuccessfulTask(":signReleaseBundle")
   }
 
   @Test
   fun androidTasksRunAssemble() {
-    val result = EmergeGradleRunner.create("simple")
-      .withArguments("packageRelease")
-      .build()
+    val result =
+      EmergeGradleRunner.create("simple")
+        .withArguments("packageRelease")
+        .build()
     result.assertSuccessfulTask(":packageRelease")
   }
 
@@ -124,9 +126,10 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       }
       .build()
 
-    val configuration = Json.decodeFromStream<EmergePluginExtensionData>(
-      configurationJson.inputStream()
-    )
+    val configuration =
+      Json.decodeFromStream<EmergePluginExtensionData>(
+        configurationJson.inputStream(),
+      )
 
     assertEquals("testSha", configuration.vcsOptions!!.sha)
     assertEquals("testBaseSha", configuration.vcsOptions!!.baseSha)

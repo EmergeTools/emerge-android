@@ -9,7 +9,6 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 
 abstract class SizePreflight : BasePreflightTask() {
-
   @get:Input
   @get:Optional
   abstract val sizeEnabled: Property<Boolean>
@@ -49,7 +48,7 @@ abstract class SizePreflight : BasePreflightTask() {
       additionalSuccessLogging = {
         val uploadTaskName = getUploadAabTaskName(variantName.get())
         val uploadTaskInstructions =
-          "Upload & run size analysis on Emerge with ./gradlew ${appProjectPath.get()}:${uploadTaskName}"
+          "Upload & run size analysis on Emerge with ./gradlew ${appProjectPath.get()}:$uploadTaskName"
 
         buildString {
           append("Size analysis preflight was successful!")
@@ -57,7 +56,7 @@ abstract class SizePreflight : BasePreflightTask() {
           append(uploadTaskInstructions)
           append("\n")
         }
-      }
+      },
     )
   }
 }

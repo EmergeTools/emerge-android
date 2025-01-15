@@ -11,20 +11,21 @@ class AdbHelper(
   private val logger: Logger,
   private val path: Path = Path.of("${System.getenv("ANDROID_HOME")}/platform-tools/adb"),
 ) {
-
   init {
     check(Files.exists(path)) { "ADB not found at path: $path" }
     logger.debug("ADB Helper initialized with path: $path")
   }
 
   fun devices(): List<String> {
-    val result = checkNotNull(exec("devices")) {
-      "Error running adb devices"
-    }
+    val result =
+      checkNotNull(exec("devices")) {
+        "Error running adb devices"
+      }
 
-    val lines = result.lines()
-      .filter { it.isNotBlank() }
-      .drop(1)
+    val lines =
+      result.lines()
+        .filter { it.isNotBlank() }
+        .drop(1)
     return lines.map { it.split("\t").first() }
   }
 

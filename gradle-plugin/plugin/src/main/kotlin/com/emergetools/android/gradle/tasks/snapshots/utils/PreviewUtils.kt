@@ -18,7 +18,6 @@ import org.slf4j.Logger
 import java.io.File
 
 object PreviewUtils {
-
   const val PREVIEW_ANNOTATION = "Landroidx/compose/ui/tooling/preview/Preview;"
   const val PREVIEW_CONTAINER_ANNOTATION =
     "Landroidx/compose/ui/tooling/preview/Preview\$Container;"
@@ -37,7 +36,6 @@ object PreviewUtils {
     previewFunctions: List<String>,
     logger: Logger,
   ): ComposeSnapshots {
-
     val classSignatureMap = mutableMapOf<String, DexBackedClassDef>()
     extractedApkDirectory.listFiles { file -> file.extension == "dex" }?.forEach { dexFile ->
       val dexBackedDexFile: DexFile = DexFileFactory.loadDexFile(dexFile, null)
@@ -55,9 +53,10 @@ object PreviewUtils {
         val classFqn = classSignatureToFqn(method.definingClass)
         val methodKey = "$classFqn.${method.name}"
 
-        val previewAnnotations = method.annotations.flatMap { annotation ->
-          findAllDirectOrTransitivePreviewAnnotations(classSignatureMap, annotation)
-        }
+        val previewAnnotations =
+          method.annotations.flatMap { annotation ->
+            findAllDirectOrTransitivePreviewAnnotations(classSignatureMap, annotation)
+          }
 
         if (previewAnnotations.isEmpty()) {
           return@forEach
@@ -65,14 +64,14 @@ object PreviewUtils {
 
         if (!includePrivatePreviews && AccessFlags.PRIVATE.isSet(method.accessFlags)) {
           logger.info(
-            "Ignoring snapshot for method: $methodKey as it is private and includePrivatePreviews is set to false"
+            "Ignoring snapshot for method: $methodKey as it is private and includePrivatePreviews is set to false",
           )
           return@forEach
         }
 
         if (method.annotations.any { it.type == IGNORE_SNAPSHOT_ANNOTATION }) {
           logger.info(
-            "Ignoring snapshot for method: $methodKey as it has the @IgnoreEmergeSnapshot annotation"
+            "Ignoring snapshot for method: $methodKey as it has the @IgnoreEmergeSnapshot annotation",
           )
           return@forEach
         }
@@ -82,20 +81,22 @@ object PreviewUtils {
           return@forEach
         }
 
-        val configs = previewAnnotations.flatMap { previewAnnotation ->
-          composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation, logger)
-        }
+        val configs =
+          previewAnnotations.flatMap { previewAnnotation ->
+            composePreviewSnapshotConfigsFromPreviewAnnotation(method, previewAnnotation, logger)
+          }
 
         methodsWithConfigs[methodKey] = configs
       }
     }
 
-    val methods = methodsWithConfigs.values.flatten().filter {
-      previewFunctions.isEmpty() || previewFunctions.contains(it.originalFqn)
-    }
+    val methods =
+      methodsWithConfigs.values.flatten().filter {
+        previewFunctions.isEmpty() || previewFunctions.contains(it.originalFqn)
+      }
 
     return ComposeSnapshots(
-      snapshots = methods
+      snapshots = methods,
     )
   }
 
@@ -123,12 +124,12 @@ object PreviewUtils {
     }
 
     if (methodParamCount == 3) {
-
       // Check first param annotated with @PreviewParameter
       val firstParam = method.parameters[0]
-      val hasPreviewParameterAnnotation = firstParam.annotations.any { annotation ->
-        annotation.type == PREVIEW_PARAMETER_ANNOTATION
-      }
+      val hasPreviewParameterAnnotation =
+        firstParam.annotations.any { annotation ->
+          annotation.type == PREVIEW_PARAMETER_ANNOTATION
+        }
 
       if (!hasPreviewParameterAnnotation) {
         logger.info("Method ${method.name} has 3 parameters, but the first one is not annotated with @PreviewParameter")
@@ -136,7 +137,10 @@ object PreviewUtils {
       }
 
       if (!includePreviewParamPreviews) {
-        logger.info("Method ${method.name} has 3 parameters and the first one is annotated with @PreviewParameter but includePreviewParamPreviews is set to false")
+        logger.info(
+          "Method ${method.name} has 3 parameters and the first one is annotated with " +
+            "@PreviewParameter but includePreviewParamPreviews is set to false",
+        )
         return false
       }
 
@@ -170,26 +174,32 @@ object PreviewUtils {
     val annotationClassDef = classSignatureMap[annotation.type]
     val isPreviewAnnotation = previewSignatures.contains(annotation.type)
 
-    if (annotationClassDef == null || (seenAnnotations.contains(
-        annotation.type
-      ) && !isPreviewAnnotation)
+    if (annotationClassDef == null || (
+        seenAnnotations.contains(
+          annotation.type,
+        ) && !isPreviewAnnotation
+      )
     ) {
       return emptyList()
     }
 
     seenAnnotations.add(annotation.type)
 
-    val currentPreviewAnnotations = if (previewSignatures.contains(annotationClassDef.type)) {
-      listOf(annotation)
-    } else {
-      emptyList()
-    }
+    val currentPreviewAnnotations =
+      if (previewSignatures.contains(annotationClassDef.type)) {
+        listOf(annotation)
+      } else {
+        emptyList()
+      }
 
-    val nestedPreviewAnnotations = annotationClassDef.annotations.flatMap { nestedAnnotation ->
-      findAllDirectOrTransitivePreviewAnnotations(
-        classSignatureMap, nestedAnnotation, seenAnnotations
-      )
-    }
+    val nestedPreviewAnnotations =
+      annotationClassDef.annotations.flatMap { nestedAnnotation ->
+        findAllDirectOrTransitivePreviewAnnotations(
+          classSignatureMap,
+          nestedAnnotation,
+          seenAnnotations,
+        )
+      }
 
     return currentPreviewAnnotations + nestedPreviewAnnotations
   }
@@ -204,40 +214,65 @@ object PreviewUtils {
 
     var previewParameter: PreviewParameter? = null
     if (method.parameters.size == 3) {
-      val firstParam =  method.parameters[0]
+      val firstParam = method.parameters[0]
       val paramName = firstParam.name ?: throw IllegalStateException("Preview parameter must have a name")
 
       val previewParamAnnotation = firstParam.annotations.first { it.type == PREVIEW_PARAMETER_ANNOTATION }
-      val providerClassSignature = previewParamAnnotation.elements.first { it.name == "provider" }.value as DexBackedTypeEncodedValue
-      val previewParamLimit = previewParamAnnotation.elements.firstOrNull { it.name == "limit" }?.value as? IntEncodedValue
+      val providerClassSignature =
+        previewParamAnnotation.elements
+          .first { it.name == "provider" }.value as DexBackedTypeEncodedValue
+      val previewParamLimit =
+        previewParamAnnotation.elements
+          .firstOrNull { it.name == "limit" }?.value as? IntEncodedValue
 
-      logger.info("Found @PreviewParameter annotation for method ${method.name}, parameter: $paramName, provider: ${providerClassSignature.value}, limit: ${previewParamLimit?.value}")
-      previewParameter = PreviewParameter(
-        parameterName = paramName,
-        providerClassFqn = classSignatureToFqn(providerClassSignature.value),
-        limit = previewParamLimit?.value,
+      logger.info(
+        "Found @PreviewParameter annotation for method ${method.name}, " +
+          "parameter: $paramName, provider: ${providerClassSignature.value}, limit: ${previewParamLimit?.value}",
       )
+      previewParameter =
+        PreviewParameter(
+          parameterName = paramName,
+          providerClassFqn = classSignatureToFqn(providerClassSignature.value),
+          limit = previewParamLimit?.value,
+        )
     }
 
     return when (annotation.type) {
-      PREVIEW_ANNOTATION -> listOf(
-        ComposePreviewSnapshotConfig(
-          originalFqn = originalFqn,
-          fullyQualifiedClassName = className,
-          name = (annotation.elements.firstOrNull { it.name == "name" }?.value as? StringEncodedValue)?.value,
-          group = (annotation.elements.firstOrNull { it.name == "group" }?.value as? StringEncodedValue)?.value,
-          uiMode = (annotation.elements.firstOrNull { it.name == "uiMode" }?.value as? IntEncodedValue)?.value,
-          locale = (annotation.elements.firstOrNull { it.name == "locale" }?.value as? StringEncodedValue)?.value,
-          fontScale = (annotation.elements.firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue)?.value,
-          heightDp = (annotation.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
-          widthDp = (annotation.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
-          showBackground = (annotation.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
-          backgroundColor = (annotation.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
-          showSystemUi = (annotation.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
-          device = (annotation.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
-          previewParameter = previewParameter,
+      PREVIEW_ANNOTATION ->
+        listOf(
+          ComposePreviewSnapshotConfig(
+            originalFqn = originalFqn,
+            fullyQualifiedClassName = className,
+            name = (annotation.elements.firstOrNull { it.name == "name" }?.value as? StringEncodedValue)?.value,
+            group = (annotation.elements.firstOrNull { it.name == "group" }?.value as? StringEncodedValue)?.value,
+            uiMode = (annotation.elements.firstOrNull { it.name == "uiMode" }?.value as? IntEncodedValue)?.value,
+            locale = (annotation.elements.firstOrNull { it.name == "locale" }?.value as? StringEncodedValue)?.value,
+            fontScale =
+              (
+                annotation.elements
+                  .firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue
+              )?.value,
+            heightDp = (annotation.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
+            widthDp = (annotation.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
+            showBackground =
+              (
+                annotation.elements
+                  .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
+              )?.value,
+            backgroundColor =
+              (
+                annotation
+                  .elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
+              )?.value,
+            showSystemUi =
+              (
+                annotation.elements
+                  .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
+              )?.value,
+            device = (annotation.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
+            previewParameter = previewParameter,
+          ),
         )
-      )
 
       PREVIEW_CONTAINER_ANNOTATION -> {
         val arrayEncodedValue =
@@ -253,9 +288,21 @@ object PreviewUtils {
             fontScale = (preview.elements.firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue)?.value,
             heightDp = (preview.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
             widthDp = (preview.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
-            showBackground = (preview.elements.firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue)?.value,
-            backgroundColor = (preview.elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue)?.value,
-            showSystemUi = (preview.elements.firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue)?.value,
+            showBackground =
+              (
+                preview.elements
+                  .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
+              )?.value,
+            backgroundColor =
+              (
+                preview.elements
+                  .firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
+              )?.value,
+            showSystemUi =
+              (
+                preview.elements
+                  .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
+              )?.value,
             device = (preview.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
             previewParameter = previewParameter,
           )

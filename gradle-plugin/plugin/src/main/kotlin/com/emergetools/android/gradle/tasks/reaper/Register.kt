@@ -20,7 +20,7 @@ fun registerReaperTasks(
   variant: Variant,
 ) {
   appProject.logger.debug(
-    "Registering reaper tasks for variant ${variant.name} in project ${appProject.path}"
+    "Registering reaper tasks for variant ${variant.name} in project ${appProject.path}",
   )
 
   registerReaperPreflightTask(appProject, extension, variant)
@@ -47,7 +47,7 @@ private fun registerReaperPreflightTask(
     it.reaperEnabled.set(extension.reaperOptions.enabledVariants.getOrElse(emptyList()).contains(variant.name))
     it.reaperPublishableApiKey.set(extension.reaperOptions.publishableApiKey)
     it.hasReaperImplementationDependency.set(
-      hasDependency(appProject, variant, REAPER_DEP_GROUP, REAPER_DEP_NAME)
+      hasDependency(appProject, variant, REAPER_DEP_GROUP, REAPER_DEP_NAME),
     )
   }
 }

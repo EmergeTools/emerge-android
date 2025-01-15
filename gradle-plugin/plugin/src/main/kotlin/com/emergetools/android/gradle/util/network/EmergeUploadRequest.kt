@@ -11,7 +11,6 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
-import okhttp3.internal.userAgent
 import java.io.File
 
 const val SOURCE_GRADLE_PLUGIN = "gradle_plugin"
@@ -47,29 +46,33 @@ fun fetchSignedUrl(
   baseUrl: HttpUrl,
 ): EmergeUploadResponse {
   val mediaType = "application/json".toMediaType()
-  val json = Json {
-    ignoreUnknownKeys = true
-    encodeDefaults = false
-  }
+  val json =
+    Json {
+      ignoreUnknownKeys = true
+      encodeDefaults = false
+    }
   val body = json.encodeToString(uploadData).toRequestBody(mediaType)
-  val url = baseUrl.resolve("/upload")
-    ?: throw IllegalStateException("Could not resolve /upload for baseUrl: $baseUrl")
-  val request: Request = Request.Builder().apply {
-    url(url)
-    post(body)
-    addHeader("User-Agent", "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}")
-    addHeader("Accept", "application/json")
-    addHeader("Content-Type", "application/json")
-    addHeader("X-API-Token", uploadData.apiToken)
-  }.build()
+  val url =
+    baseUrl.resolve("/upload")
+      ?: throw IllegalStateException("Could not resolve /upload for baseUrl: $baseUrl")
+  val request: Request =
+    Request.Builder().apply {
+      url(url)
+      post(body)
+      addHeader("User-Agent", "${SOURCE_GRADLE_PLUGIN}_${BuildConfig.VERSION}")
+      addHeader("Accept", "application/json")
+      addHeader("Content-Type", "application/json")
+      addHeader("X-API-Token", uploadData.apiToken)
+    }.build()
 
   client.newCall(request).execute().use { response ->
     check(response.isSuccessful) {
       "Unexpected code $response"
     }
-    val responseString = checkNotNull(response.body?.string()) {
-      "Received null body from upload request"
-    }
+    val responseString =
+      checkNotNull(response.body?.string()) {
+        "Received null body from upload request"
+      }
     return json.decodeFromString(responseString)
   }
 }
@@ -80,11 +83,12 @@ fun postFile(
   signedUrl: HttpUrl,
 ) {
   val mediaType = "application/zip".toMediaType()
-  val request = Request.Builder().apply {
-    addHeader("Content-Type", "application/zip")
-    url(signedUrl)
-    put(file.asRequestBody(mediaType))
-  }.build()
+  val request =
+    Request.Builder().apply {
+      addHeader("Content-Type", "application/zip")
+      url(signedUrl)
+      put(file.asRequestBody(mediaType))
+    }.build()
 
   client.newCall(request).execute().use { response ->
     check(response.isSuccessful) {

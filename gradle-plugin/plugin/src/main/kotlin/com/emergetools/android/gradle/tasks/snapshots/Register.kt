@@ -29,7 +29,7 @@ fun registerSnapshotTasks(
   androidTest: AndroidTest,
 ) {
   appProject.logger.debug(
-    "Registering snapshot tasks for variant ${variant.name} in project ${appProject.path}"
+    "Registering snapshot tasks for variant ${variant.name} in project ${appProject.path}",
   )
 
   registerSnapshotPreflightTask(appProject, extension, variant)
@@ -63,12 +63,12 @@ private fun registerSnapshotPackageTask(
     it.artifactDir.set(variant.artifacts.get(SingleArtifact.APK))
     it.testArtifactDir.set(androidTest.artifacts.get(SingleArtifact.APK))
     it.outputDirectory.set(
-      appProject.layout.buildDirectory.dir("$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts")
+      appProject.layout.buildDirectory.dir("$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts"),
     )
     it.artifactMetadataPath.set(
       appProject.layout.buildDirectory.file(
-        "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}"
-      )
+        "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}",
+      ),
     )
     it.agpVersion.set(AgpVersions.CURRENT.toString())
   }
@@ -88,7 +88,7 @@ private fun registerSnapshotPreflightTask(
     it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
     it.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
     it.hasSnapshotsAndroidTestImplementationDependency.set(
-      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME, variant.androidTest)
+      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME, variant.androidTest),
     )
     it.setPreflightTaskInputs(extension)
   }
@@ -104,9 +104,10 @@ private fun registerSnapshotLocalTask(
   val variantName = variant.name.capitalize()
 
   val buildDirectory = appProject.layout.buildDirectory
-  val snapshotStorageDirectory = extension.snapshotOptions.snapshotsStorageDirectory.orElse(
-    buildDirectory.dir("$BUILD_OUTPUT_DIR_NAME/snapshots/outputs")
-  )
+  val snapshotStorageDirectory =
+    extension.snapshotOptions.snapshotsStorageDirectory.orElse(
+      buildDirectory.dir("$BUILD_OUTPUT_DIR_NAME/snapshots/outputs"),
+    )
 
   val targetAppId = variant.applicationId
   val testAppId = androidTest.applicationId
@@ -114,7 +115,7 @@ private fun registerSnapshotLocalTask(
 
   appProject.tasks.register(
     getSnapshotLocalTaskName(variant.name),
-    LocalSnapshots::class.java
+    LocalSnapshots::class.java,
   ) {
     it.group = EMERGE_SNAPSHOTS_TASK_GROUP
     it.description = "Generate snapshots locally for variant $variantName." +
@@ -144,7 +145,7 @@ private fun registerSnapshotUploadTask(
 ) {
   appProject.tasks.register(
     getSnapshotUploadTaskName(variant.name),
-    UploadSnapshotBundle::class.java
+    UploadSnapshotBundle::class.java,
   ) {
     it.group = EMERGE_SNAPSHOTS_TASK_GROUP
     it.description = "Builds and uploads a snapshot bundle to Emerge. Snapshots will be" +
@@ -152,7 +153,8 @@ private fun registerSnapshotUploadTask(
       " in the Emerge plugin extension."
     it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
     it.artifactMetadataPath.set(
-      packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath })
+      packageTask.flatMap { packageTask -> packageTask.artifactMetadataPath },
+    )
     it.apiVersion.set(extension.snapshotOptions.apiVersion)
     it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
     it.includePreviewParamPreviews.set(extension.snapshotOptions.includePreviewParamPreviews)

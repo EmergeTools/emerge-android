@@ -5,7 +5,6 @@ import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
 
 class VariantsEmergePluginTest : EmergePluginTest() {
-
   @Test
   fun customBuildTypeBundle() {
     EmergeGradleRunner.create("custom-build-type")

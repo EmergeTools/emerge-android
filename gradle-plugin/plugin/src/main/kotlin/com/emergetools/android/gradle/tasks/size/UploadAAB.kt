@@ -13,7 +13,6 @@ import java.util.zip.ZipEntry
 import java.util.zip.ZipOutputStream
 
 abstract class UploadAAB : BaseUploadTask() {
-
   @get:InputFile
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val artifact: RegularFileProperty
@@ -29,13 +28,14 @@ abstract class UploadAAB : BaseUploadTask() {
   @TaskAction
   fun execute() {
     val artifactName = artifact.get().asFile.name
-    val artifactMetadata = ArtifactMetadata(
-      created = Clock.System.now(),
-      emergeGradlePluginVersion = BuildConfig.VERSION,
-      androidGradlePluginVersion = agpVersion.get(),
-      targetArtifactZipPath = artifactName,
-      proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
-    )
+    val artifactMetadata =
+      ArtifactMetadata(
+        created = Clock.System.now(),
+        emergeGradlePluginVersion = BuildConfig.VERSION,
+        androidGradlePluginVersion = agpVersion.get(),
+        targetArtifactZipPath = artifactName,
+        proguardMappingsZipPath = "$artifactName/$AAB_PROGUARD_PATH",
+      )
 
     upload(artifactMetadata) { response ->
       logger.lifecycle("AAB Upload successful! View Emerge's size analysis at the following url:")

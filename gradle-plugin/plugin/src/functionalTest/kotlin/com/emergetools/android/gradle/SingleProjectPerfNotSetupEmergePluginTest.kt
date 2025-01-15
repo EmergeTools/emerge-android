@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class SingleProjectPerfNotSetupEmergePluginTest : EmergePluginTest() {
-
   @Test
   fun singleProjectPerfNotSetupUpload() {
     EmergeGradleRunner.create("single-project-perf-not-setup")
@@ -37,7 +36,7 @@ class SingleProjectPerfNotSetupEmergePluginTest : EmergePluginTest() {
       .withDefaultServer()
       .assert { result, _ ->
         assertTrue(
-          result.output.contains("Task 'emergeUploadReleasePerfBundle' not found")
+          result.output.contains("Task 'emergeUploadReleasePerfBundle' not found"),
         )
       }
       .buildAndFail()
@@ -52,8 +51,8 @@ class SingleProjectPerfNotSetupEmergePluginTest : EmergePluginTest() {
         println("result.output: ${result.output}")
         assertTrue(
           result.output.contains(
-            "Package name is missing. Make sure to pass the --package command line argument."
-          )
+            "Package name is missing. Make sure to pass the --package command line argument.",
+          ),
         )
       }
       .buildAndFail()

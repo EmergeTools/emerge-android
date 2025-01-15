@@ -5,7 +5,6 @@ import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
 
 class ConfigurationCacheTest : EmergePluginTest() {
-
   @Test
   fun simpleConfigurationCache() {
     EmergeGradleRunner.create("simple")

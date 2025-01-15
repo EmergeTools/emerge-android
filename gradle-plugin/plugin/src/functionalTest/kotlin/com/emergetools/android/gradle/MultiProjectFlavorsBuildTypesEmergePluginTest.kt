@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class MultiProjectFlavorsBuildTypesEmergePluginTest : EmergePluginTest() {
-
   @Test
   fun multiProjectUpload() {
     EmergeGradleRunner.create("multi-project-with-flavors-buildtypes")
@@ -39,8 +38,8 @@ class MultiProjectFlavorsBuildTypesEmergePluginTest : EmergePluginTest() {
       .assert { result, _ ->
         assertTrue(
           result.output.contains(
-            "task 'emergeGeneratePerformanceProject' not found in project ':app'"
-          )
+            "task 'emergeGeneratePerformanceProject' not found in project ':app'",
+          ),
         )
       }
       .buildAndFail()

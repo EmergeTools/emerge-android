@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import java.util.Base64
 
 class ReaperClassLoadTest {
-
   private fun byteArrayOf(vararg elements: Int): ByteArray {
     return elements.map { it.toByte() }.toByteArray()
   }
@@ -15,8 +14,8 @@ class ReaperClassLoadTest {
     val hash = toSha256("Lcom/example/ExampleKt;")
     val base64 = Base64.getEncoder().encode(hash).toString(Charsets.UTF_8)
     Assertions.assertEquals(
-        "eJstGDKanIhi3JzCGQ2w3x5We26SD1B1TPzVsups6fY=",
-        base64
+      "eJstGDKanIhi3JzCGQ2w3x5We26SD1B1TPzVsups6fY=",
+      base64,
     )
   }
 
@@ -30,5 +29,4 @@ class ReaperClassLoadTest {
     Assertions.assertEquals(-1167088121787636991L, topLong(byteArrayOf(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef)))
     Assertions.assertEquals(-1167088121787636991L, topLong(byteArrayOf(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff, 0xff)))
   }
-
 }

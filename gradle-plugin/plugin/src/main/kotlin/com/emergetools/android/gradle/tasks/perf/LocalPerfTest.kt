@@ -12,12 +12,11 @@ import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
 abstract class LocalPerfTest : DefaultTask() {
-
   private val arguments = mutableMapOf<String, String>()
 
   @Option(
     option = "class",
-    description = "A single class, a single method or a comma-separated list of classes"
+    description = "A single class, a single method or a comma-separated list of classes",
   )
   fun setClazz(clazz: String) {
     arguments["class"] = clazz
@@ -25,7 +24,7 @@ abstract class LocalPerfTest : DefaultTask() {
 
   @Option(
     option = "notClass",
-    description = "A single class, a single method or a comma-separated list of classes"
+    description = "A single class, a single method or a comma-separated list of classes",
   )
   fun setNotClass(notClass: String) {
     arguments["notClass"] = notClass
@@ -33,7 +32,7 @@ abstract class LocalPerfTest : DefaultTask() {
 
   @Option(
     option = "annotation",
-    description = "A single annotation or a comma-separated list of annotations"
+    description = "A single annotation or a comma-separated list of annotations",
   )
   fun setAnnotation(annotation: String) {
     arguments["annotation"] = annotation
@@ -41,7 +40,7 @@ abstract class LocalPerfTest : DefaultTask() {
 
   @Option(
     option = "notAnnotation",
-    description = "A single annotation or a comma-separated list of annotations"
+    description = "A single annotation or a comma-separated list of annotations",
   )
   fun setNotAnnotation(notAnnotation: String) {
     arguments["notAnnotation"] = notAnnotation
@@ -67,19 +66,20 @@ abstract class LocalPerfTest : DefaultTask() {
     adbHelper.apply {
       shell("am", "force-stop", appPackageName.get())
 
-      val instrumentationArgs = mutableListOf("am", "instrument", "-w").also {
-        arguments.forEach { (key, value) ->
-          it.add("-e")
-          it.add(key)
-          it.add(value)
+      val instrumentationArgs =
+        mutableListOf("am", "instrument", "-w").also {
+          arguments.forEach { (key, value) ->
+            it.add("-e")
+            it.add(key)
+            it.add(value)
+          }
+          if (appPackageName.isPresent) {
+            it.add("-e")
+            it.add("packageName")
+            it.add(appPackageName.get())
+          }
+          it.add("${testPackageName.get()}/${EmergePlugin.EMERGE_JUNIT_RUNNER}")
         }
-        if (appPackageName.isPresent) {
-          it.add("-e")
-          it.add("packageName")
-          it.add(appPackageName.get())
-        }
-        it.add("${testPackageName.get()}/${EmergePlugin.EMERGE_JUNIT_RUNNER}")
-      }
       val output = shell(instrumentationArgs)
       logger.lifecycle(output)
     }

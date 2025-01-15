@@ -6,7 +6,6 @@ import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
 
 class SimpleSnapshotUploadTest : EmergePluginTest() {
-
   @Test
   fun simpleUploadSnapshotBundle() {
     EmergeGradleRunner.create("simple")

@@ -7,7 +7,6 @@ data class Dependencies(
   val modules: List<Module>,
   val libraries: List<Library>,
 ) {
-
   companion object {
     const val JSON_FILE_NAME = "dependencies.json"
   }

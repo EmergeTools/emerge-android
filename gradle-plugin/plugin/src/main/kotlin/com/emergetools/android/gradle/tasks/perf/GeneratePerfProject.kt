@@ -15,7 +15,6 @@ import java.io.File
 import java.util.zip.ZipInputStream
 
 abstract class GeneratePerfProject : DefaultTask() {
-
   private var packageName: String? = null
 
   @Option(option = "package", description = "Package name for the performance project")
@@ -27,8 +26,9 @@ abstract class GeneratePerfProject : DefaultTask() {
   }
 
   @get:Input
-  val appPackageName: Property<String> = project.objects.property<String>()
-    .convention("<REPLACE WITH APP PACKAGE NAME>")
+  val appPackageName: Property<String> =
+    project.objects.property<String>()
+      .convention("<REPLACE WITH APP PACKAGE NAME>")
 
   @get:Input
   abstract val performanceProjectPath: Property<String>
@@ -42,9 +42,10 @@ abstract class GeneratePerfProject : DefaultTask() {
   @TaskAction
   fun execute() {
     val projectName = performanceProjectPath.get().removePrefix(":")
-    val packageName = checkNotNull(packageName) {
-      "Package name is missing. Make sure to pass the --package command line argument."
-    }
+    val packageName =
+      checkNotNull(packageName) {
+        "Package name is missing. Make sure to pass the --package command line argument."
+      }
 
     generateProject(projectName, packageName)
     addProjectToRootProject(projectName)
@@ -64,10 +65,11 @@ abstract class GeneratePerfProject : DefaultTask() {
         "Project template is missing"
       }
 
-    val replacements = mapOf(
-      "package_name" to packageName,
-      "app_package_name" to appPackageName.get()
-    )
+    val replacements =
+      mapOf(
+        "package_name" to packageName,
+        "app_package_name" to appPackageName.get(),
+      )
 
     ZipInputStream(stream).use { zipStream ->
       generateSequence { zipStream.nextEntry }
