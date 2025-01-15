@@ -8,6 +8,7 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputDirectory
@@ -21,6 +22,7 @@ import org.gradle.api.tasks.TaskAction
  * proper metadata associated.
  * Intended to be dependent of LocalSnapshot task and UploadSnapshots task.
  */
+@CacheableTask
 abstract class PackageSnapshotArtifacts : DefaultTask() {
   @get:Input
   abstract val agpVersion: Property<String>
@@ -49,7 +51,6 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
     check(testApks.files.size < 2) { "Cannot run snapshots with more than one test APK" }
     val testApk = testApks.singleFile
 
-    outputDirectory.get().asFile.mkdirs()
     targetApk.copyTo(outputDirectory.get().asFile.resolve(targetApk.name), overwrite = true)
     testApk.copyTo(outputDirectory.get().asFile.resolve(testApk.name), overwrite = true)
 
@@ -61,12 +62,7 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
         testArtifactZipPath = testApk.name,
       )
     val metadataString = Json.encodeToString(metadata)
-    artifactMetadataPath.asFile.get().let {
-      if (!it.exists()) {
-        it.createNewFile()
-      }
-      it.writeText(metadataString)
-    }
+    artifactMetadataPath.asFile.get().writeText(metadataString)
   }
 
   companion object {

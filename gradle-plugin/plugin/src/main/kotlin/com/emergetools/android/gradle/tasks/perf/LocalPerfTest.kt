@@ -9,8 +9,10 @@ import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.gradle.process.ExecOperations
+import org.gradle.work.DisableCachingByDefault
 import javax.inject.Inject
 
+@DisableCachingByDefault(because = "This task runs on a device and should not be cached")
 abstract class LocalPerfTest : DefaultTask() {
   private val arguments = mutableMapOf<String, String>()
 

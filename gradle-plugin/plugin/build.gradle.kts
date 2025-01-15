@@ -1,3 +1,4 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -27,26 +28,23 @@ java {
         srcDir(perfProjectTemplateResDir)
       }
     }
-    test {
-      java.srcDir("src/test/kotlin")
-    }
   }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_11)
   }
 }
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
 val agpClasspathDir =
-  project.buildDir.resolve("agp-classpath").apply {
+  project.layout.buildDirectory.dir("agp-classpath").get().asFile.apply {
     mkdir()
   }
 
 val kgpClasspathDir =
-  project.buildDir.resolve("kgp-classpath").apply {
+  project.layout.buildDirectory.dir("kgp-classpath").get().asFile.apply {
     mkdir()
   }
 
@@ -105,7 +103,7 @@ val functionalTestTask =
   }
 
 tasks.check {
-  dependsOn(functionalTestTask)
+  dependsOn(functionalTestTask, tasks.validatePlugins)
 }
 
 val packagePerformanceProjectTemplateTask =
@@ -187,4 +185,9 @@ buildConfig {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+}
+
+tasks.withType<ValidatePlugins>().configureEach {
+  failOnWarning = true
+  enableStricterValidation = true
 }

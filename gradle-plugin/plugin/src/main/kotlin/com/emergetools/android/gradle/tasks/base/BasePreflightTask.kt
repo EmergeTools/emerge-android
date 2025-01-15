@@ -7,7 +7,9 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Optional
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault(because = "This task must always run as a check and has no outputs.")
 abstract class BasePreflightTask : DefaultTask() {
   @get:Input
   @get:Optional

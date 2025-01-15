@@ -7,7 +7,9 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault(because = "This is a debugging task and should always run.")
 abstract class LogExtensionTask : DefaultTask() {
   @get:Input
   abstract val emergePluginExtension: Property<EmergePluginExtension>

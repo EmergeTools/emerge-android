@@ -11,10 +11,13 @@ import kotlinx.serialization.Serializable
 import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
+import org.gradle.api.file.RegularFile
 import org.gradle.api.provider.Property
+import org.gradle.api.provider.Provider
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
+import org.gradle.work.DisableCachingByDefault
 import java.io.File
 
 /**
@@ -25,24 +28,24 @@ import java.io.File
  * as a workaround to write the extension to JSON, where we can later assert on the
  * contents of the JSON file to ensure our config is handled properly.
  */
+@DisableCachingByDefault(because = "This task does not declare any outputs.")
 abstract class SaveExtensionConfigTask : DefaultTask() {
   @get:Input
   abstract val emergePluginExtension: Property<EmergePluginExtension>
 
-  private var outputPath: String? = null
-
+  @Input
   @Option(option = "outputPath", description = "Output path for configuration JSON file")
-  fun setOutputPath(outputPath: String) {
-    check(outputPath.isNotBlank()) { "Output path cannot be blank" }
-    this.outputPath = outputPath
-  }
+  abstract fun getOutputPath(): Property<String>
+
+  private val outputFile: Provider<RegularFile>
+    get() = project.objects.directoryProperty().file(getOutputPath())
 
   @TaskAction
   fun saveConfig() {
     val extensionData = emergePluginExtension.get().dataFromExtension()
     val configJson = Json.encodeToString(extensionData)
     val outputFile =
-      File(outputPath).also {
+      File(getOutputPath().get()).also {
         it.createNewFile()
         it.writeText(configJson)
       }
