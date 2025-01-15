@@ -64,7 +64,7 @@ androidx-benchmark-junit4 = { group = "androidx.benchmark", name = "benchmark-ju
 androidx-lifecycle-process = { module = "androidx.lifecycle:lifecycle-process", version = "2.7.0" }
 androidx-navigation-ui-ktx = { module = "androidx.navigation:navigation-ui-ktx", version.ref = "androidx-navigation" }
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version = "androidx-navigation" }
-androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.1.1" }
+androidx-startup-runtime = { module = "androidx.startup:startup-runtime", version = "1.2.0" }
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test-core" }
 androidx-test-core-ktx = { module = "androidx.test:core-ktx", version.ref = "androidx-test-core" }
 androidx-test-ext-junit = { module = "androidx.test.ext:junit-ktx", version.ref = "androidx-test-ext" }
