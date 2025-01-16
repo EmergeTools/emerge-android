@@ -168,7 +168,7 @@ abstract class BaseUploadTask : DefaultTask() {
     ZipOutputStream(BufferedOutputStream(zipFile.outputStream())).use { zos ->
       includeFilesInUpload(zos)
 
-      var finalArtifactMetadata = artifactMetadata
+      var finalArtifactMetadata = artifactMetadata.copy()
 
       if (includeDependencyInformation.get()) {
         checkNotNull(appModuleName.orNull) {
@@ -199,7 +199,7 @@ abstract class BaseUploadTask : DefaultTask() {
             zos.closeEntry()
           }
           finalArtifactMetadata =
-            artifactMetadata.copy(
+            finalArtifactMetadata.copy(
               dependencyMetadataZipPath = dependenciesFile.name,
             )
         }
@@ -216,7 +216,7 @@ abstract class BaseUploadTask : DefaultTask() {
               zos.closeEntry()
             }
             finalArtifactMetadata =
-              artifactMetadata.copy(
+              finalArtifactMetadata.copy(
                 ciDebugData =
                 CIDebugData(
                   gitHubEventDataPath = CIDebugData.GITHUB_EVENT_DATA_FILE_NAME,
