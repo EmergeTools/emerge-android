@@ -20,13 +20,8 @@ val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/per
 java {
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
-
-  sourceSets {
-    main {
-      resources {
-        srcDir(perfProjectTemplateResDir)
-      }
-    }
+  sourceSets.main {
+    resources.srcDir(perfProjectTemplateResDir)
   }
 }
 
@@ -100,14 +95,19 @@ tasks.check {
   dependsOn(functionalTestTask, tasks.validatePlugins)
 }
 
+
 val packagePerformanceProjectTemplateTask =
   tasks.register<Zip>("packagePerformanceProjectTemplate") {
     archiveFileName.set("performance-project-template.zip")
-    from(projectDir.resolve("performance-project-template"))
-    destinationDirectory.set(perfProjectTemplateResDir.get().asFile.resolve("emergetools"))
+    from(project.layout.projectDirectory.dir("performance-project-template"))
+    destinationDirectory.set(perfProjectTemplateResDir.map { it.dir("emergetools") })
   }
 
-tasks["processResources"].dependsOn(packagePerformanceProjectTemplateTask)
+afterEvaluate {
+  tasks.named("sourcesJar"){
+    dependsOn(packagePerformanceProjectTemplateTask)
+  }
+}
 
 detekt {
   buildUponDefaultConfig = true
