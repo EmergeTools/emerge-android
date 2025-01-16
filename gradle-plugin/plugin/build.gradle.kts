@@ -103,6 +103,9 @@ val packagePerformanceProjectTemplateTask =
     destinationDirectory.set(perfProjectTemplateResDir.map { it.dir("emergetools") })
   }
 
+tasks.processResources {
+  dependsOn(packagePerformanceProjectTemplateTask)
+}
 afterEvaluate {
   tasks.named("sourcesJar"){
     dependsOn(packagePerformanceProjectTemplateTask)
