@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## 4.0.6 - 2024-01-16
 
 - Fix bug where metadata was overwriting set values. [#405](https://github.com/EmergeTools/emerge-android/pull/405)
-- Resolve dependencies at configuration time. [#403](https://github.com/EmergeTools/emerge-android/pull/403)
+- Fix: logging and resolving dependencies at configuration time. [#403](https://github.com/EmergeTools/emerge-android/pull/403)
 - Move supported version classpath files to configuration time. [#394](https://github.com/EmergeTools/emerge-android/pull/394)
 - Add cacheable task annotations. [#380](https://github.com/EmergeTools/emerge-android/pull/380)
 - Run detekt on Gradle plugin. [#372](https://github.com/EmergeTools/emerge-android/pull/372)
