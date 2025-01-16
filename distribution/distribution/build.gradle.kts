@@ -66,9 +66,9 @@ tasks.withType<Test> {
 
 val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://api.emergetools.com"
 buildConfig {
-  className("distributionConfig")
+  className("DistributionConfig")
   packageName("com.emergetools.distribution")
-  buildConfigField("String", "distribution_VERSION", """"${project.version}"""")
+  buildConfigField("String", "DISTRIBUTION_VERSION", """"${project.version}"""")
   buildConfigField("String", "EMERGE_BASE_URL", """"$baseUrl"""")
 }
 
