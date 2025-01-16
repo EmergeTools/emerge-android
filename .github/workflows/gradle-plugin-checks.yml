@@ -3,9 +3,6 @@ name: gradle plugin checks
 on:
   push:
     branches: [ main ]
-    paths:
-      - gradle/**
-      - gradle-plugin/**
   pull_request:
     branches: [ main ]
     paths:
@@ -19,6 +16,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: EmergeTools/hackernews
+          path: hackernews
       - name: Set up JDKs
         uses: actions/setup-java@v4
         with:
@@ -28,6 +29,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Check
         run: ./gradlew :gradle-plugin:plugin:check
+      - name Build hackernews
+      - run: ./hackernews/android/gradlew :app:assembleDebug
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         if: always()
