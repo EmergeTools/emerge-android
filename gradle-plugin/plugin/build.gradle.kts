@@ -1,5 +1,4 @@
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
-import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
@@ -16,7 +15,7 @@ plugins {
 group = "com.emergetools"
 version = libs.versions.emerge.gradle.plugin.get()
 
-val perfProjectTemplateResDir = File(buildDir, "generated/performance-project-template/")
+val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/performance-project-template/")
 
 java {
   sourceCompatibility = JavaVersion.VERSION_11
@@ -38,15 +37,9 @@ tasks.withType<KotlinCompile>().configureEach {
 }
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
-val agpClasspathDir =
-  project.layout.buildDirectory.dir("agp-classpath").get().asFile.apply {
-    mkdir()
-  }
+val agpClasspathDir = project.layout.buildDirectory.dir("agp-classpath")
 
-val kgpClasspathDir =
-  project.layout.buildDirectory.dir("kgp-classpath").get().asFile.apply {
-    mkdir()
-  }
+val kgpClasspathDir = project.layout.buildDirectory.dir("kgp-classpath")
 
 // Versions prior to 7.0.0 do not have an official API, supporting them would require considerably more work.
 // ATTENTION: Must be kept in sync with the EmergeGradleRunner list.
@@ -63,34 +56,35 @@ val supportedKotlinVersions =
   setOf(
     "1.8.21",
   )
-
-// Creates a classpath file for each version of AGP we wish to test against. This allows the functional tests to target
-// a particular version using the GradleRunner.
-supportedAgpVersions.forEach { version ->
-  val configuration = configurations.create("agp$version")
-  dependencies.add(configuration.name, "com.android.tools.build:gradle:$version")
-  val classpathFile =
-    agpClasspathDir.resolve("agp-classpath-$version.txt").apply {
-      ensureParentDirsCreated()
+val writeSupportedVersionsFiles = tasks.register("writeSupportedVersionsFiles") {
+  inputs.property("supportedAgpVersions", supportedAgpVersions)
+  inputs.property("supportedKotlinVersion", supportedKotlinVersions)
+  outputs.dirs(agpClasspathDir, kgpClasspathDir)
+  // Creates a classpath file for each version of AGP we wish to test against. This allows the
+  // functional tests to target a particular version using the GradleRunner.
+  doLast {
+    supportedAgpVersions.forEach { version ->
+      val configuration = configurations.create("agp$version")
+      dependencies.add(configuration.name, "com.android.tools.build:gradle:$version")
+      val classpathFile =
+        agpClasspathDir.get().asFile.resolve("agp-classpath-$version.txt")
+      classpathFile.writeText(configuration.joinToString(separator = "\n"))
     }
-  classpathFile.writeText(configuration.joinToString(separator = "\n"))
-}
 
-supportedKotlinVersions.forEach { version ->
-  val configuration = configurations.create("kgp$version")
-  dependencies.add(configuration.name, "org.jetbrains.kotlin:kotlin-gradle-plugin:$version")
-  val classpathFile =
-    kgpClasspathDir.resolve("kgp-classpath-$version.txt").apply {
-      ensureParentDirsCreated()
+    supportedKotlinVersions.forEach { version ->
+      val configuration = configurations.create("kgp$version")
+      dependencies.add(configuration.name, "org.jetbrains.kotlin:kotlin-gradle-plugin:$version")
+      val classpathFile =
+        kgpClasspathDir.get().asFile.resolve("kgp-classpath-$version.txt")
+      classpathFile.writeText(configuration.joinToString(separator = "\n"))
     }
-  classpathFile.writeText(configuration.joinToString(separator = "\n"))
+  }
 }
 
 val functionalTest: SourceSet by sourceSets.creating {
   // The classpath files are added as resources so that the test code can access them.
   resources {
-    srcDir(agpClasspathDir)
-    srcDir(kgpClasspathDir)
+    srcDir(writeSupportedVersionsFiles)
   }
 }
 
@@ -110,7 +104,7 @@ val packagePerformanceProjectTemplateTask =
   tasks.register<Zip>("packagePerformanceProjectTemplate") {
     archiveFileName.set("performance-project-template.zip")
     from(projectDir.resolve("performance-project-template"))
-    destinationDirectory.set(perfProjectTemplateResDir.resolve("emergetools"))
+    destinationDirectory.set(perfProjectTemplateResDir.get().asFile.resolve("emergetools"))
   }
 
 tasks["processResources"].dependsOn(packagePerformanceProjectTemplateTask)
