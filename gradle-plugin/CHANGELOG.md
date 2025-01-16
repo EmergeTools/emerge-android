@@ -5,15 +5,23 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.6 - 2024-01-16
+
+- Fix bug where metadata was overwriting set values. [#405](https://github.com/EmergeTools/emerge-android/pull/405)
+- Fix: logging and resolving dependencies at configuration time. [#403](https://github.com/EmergeTools/emerge-android/pull/403)
+- Move supported version classpath files to configuration time. [#394](https://github.com/EmergeTools/emerge-android/pull/394)
+- Add cacheable task annotations. [#380](https://github.com/EmergeTools/emerge-android/pull/380)
+- Run detekt on Gradle plugin. [#372](https://github.com/EmergeTools/emerge-android/pull/372)
+
 ## 4.0.5 - 2024-01-08
 
-- Introduce separate `logExtension` task to log VCS options. Fixes [322](https://github.com/EmergeTools/emerge-android/issues/322) [327](https://github.com/EmergeTools/emerge-android/pull/327)
+- Introduce separate `logExtension` task to log VCS options. Fixes [#322](https://github.com/EmergeTools/emerge-android/issues/322) [#327](https://github.com/EmergeTools/emerge-android/pull/327)
 
 ## 4.0.4 - 2024-12-12
 
 Changes since 4.0.4-beta01:
 
-- Skip non-`classes*.dex` files in local snapshotting. [312](https://github.com/EmergeTools/emerge-android/pull/312)
+- Skip non-`classes*.dex` files in local snapshotting. [#312](https://github.com/EmergeTools/emerge-android/pull/312)
 
 ## 4.0.4-beta01 - 2024-12-10
 
