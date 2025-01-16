@@ -80,17 +80,23 @@ private fun registerSnapshotPreflightTask(
   variant: ApplicationVariant,
 ) {
   val preflightTaskName = "${EMERGE_TASK_PREFIX}SnapshotsPreflight${variant.name.capitalize()}"
-  appProject.tasks.register(preflightTaskName, SnapshotsPreflight::class.java) {
-    it.group = EMERGE_SNAPSHOTS_TASK_GROUP
-    it.description = "Validate Snapshots is properly set up for variant ${variant.name}"
-    it.variantName.set(variant.name)
-    it.appProjectPath.set(appProject.path)
-    it.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
-    it.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
-    it.hasSnapshotsAndroidTestImplementationDependency.set(
-      hasDependency(appProject, variant, SNAPSHOTS_DEP_GROUP, SNAPSHOTS_DEP_NAME, variant.androidTest),
+  appProject.tasks.register(preflightTaskName, SnapshotsPreflight::class.java) { task ->
+    task.group = EMERGE_SNAPSHOTS_TASK_GROUP
+    task.description = "Validate Snapshots is properly set up for variant ${variant.name}"
+    task.variantName.set(variant.name)
+    task.appProjectPath.set(appProject.path)
+    task.hasEmergeApiToken.set(!extension.apiToken.orNull.isNullOrBlank())
+    task.snapshotsEnabled.set(extension.snapshotOptions.enabled.getOrElse(true))
+    task.hasSnapshotsAndroidTestImplementationDependency.set(
+      hasDependency(
+        appProject,
+        variant,
+        SNAPSHOTS_DEP_GROUP,
+        SNAPSHOTS_DEP_NAME,
+        variant.androidTest
+      ),
     )
-    it.setPreflightTaskInputs(extension)
+    task.setPreflightTaskInputs(extension)
   }
 }
 
