@@ -108,9 +108,6 @@ val packagePerformanceProjectTemplateTask =
   }
 
 tasks["processResources"].dependsOn(packagePerformanceProjectTemplateTask)
-afterEvaluate {
-  tasks["publishPluginJar"].dependsOn(packagePerformanceProjectTemplateTask)
-}
 
 detekt {
   buildUponDefaultConfig = true
@@ -149,19 +146,16 @@ dependencies {
   detektPlugins(libs.detekt.formatting)
 }
 
-pluginBundle {
+gradlePlugin {
   website = "https://docs.emergetools.com/docs/gradle-plugin"
   vcsUrl = "https://docs.emergetools.com/docs/gradle-plugin"
-  tags = listOf("emerge", "emergetools", "android", "upload")
-}
-
-gradlePlugin {
   plugins {
-    create("com.emergetools.android") {
+    register("com.emergetools.android") {
       id = "com.emergetools.android"
       displayName = "Emerge Gradle Plugin"
       description = "Gradle plugin for building and uploading an Android AAB/APK to Emerge."
       implementationClass = "com.emergetools.android.gradle.EmergePlugin"
+      tags = listOf("emerge", "emergetools", "android", "upload")
     }
   }
   testSourceSets(functionalTest)
