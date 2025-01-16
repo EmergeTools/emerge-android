@@ -97,7 +97,7 @@ dexlib2 = "org.smali:dexlib2:2.5.2"
 
 google-truth = "com.google.truth:truth:1.4.4"
 
-guava = "com.google.guava:guava:30.1.1-jre"
+guava = "com.google.guava:guava:33.4.0-jre"
 
 junit = "junit:junit:4.13.2"
 junit-platform-launcher = "org.junit.platform:junit-platform-launcher:1.11.4"
