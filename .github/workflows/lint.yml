@@ -14,6 +14,10 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: EmergeTools/hackernews
+          path: hackernews
       - name: Set up JDKs
         uses: actions/setup-java@v4
         with:
@@ -23,3 +27,5 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Run Detekt
         run: ./gradlew detekt
+      - name: Run Detekt
+        run: ./hackernews/android/gradlew tasks
