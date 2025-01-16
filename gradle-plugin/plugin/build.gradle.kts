@@ -20,13 +20,8 @@ val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/per
 java {
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
-
-  sourceSets {
-    main {
-      resources {
-        srcDir(perfProjectTemplateResDir)
-      }
-    }
+  sourceSets.main {
+    resources.srcDir(perfProjectTemplateResDir)
   }
 }
 
@@ -100,16 +95,21 @@ tasks.check {
   dependsOn(functionalTestTask, tasks.validatePlugins)
 }
 
+
 val packagePerformanceProjectTemplateTask =
   tasks.register<Zip>("packagePerformanceProjectTemplate") {
     archiveFileName.set("performance-project-template.zip")
-    from(projectDir.resolve("performance-project-template"))
-    destinationDirectory.set(perfProjectTemplateResDir.get().asFile.resolve("emergetools"))
+    from(project.layout.projectDirectory.dir("performance-project-template"))
+    destinationDirectory.set(perfProjectTemplateResDir.map { it.dir("emergetools") })
   }
 
-tasks["processResources"].dependsOn(packagePerformanceProjectTemplateTask)
+tasks.processResources {
+  dependsOn(packagePerformanceProjectTemplateTask)
+}
 afterEvaluate {
-  tasks["publishPluginJar"].dependsOn(packagePerformanceProjectTemplateTask)
+  tasks.named("sourcesJar"){
+    dependsOn(packagePerformanceProjectTemplateTask)
+  }
 }
 
 detekt {
@@ -149,19 +149,16 @@ dependencies {
   detektPlugins(libs.detekt.formatting)
 }
 
-pluginBundle {
+gradlePlugin {
   website = "https://docs.emergetools.com/docs/gradle-plugin"
   vcsUrl = "https://docs.emergetools.com/docs/gradle-plugin"
-  tags = listOf("emerge", "emergetools", "android", "upload")
-}
-
-gradlePlugin {
   plugins {
-    create("com.emergetools.android") {
+    register("com.emergetools.android") {
       id = "com.emergetools.android"
       displayName = "Emerge Gradle Plugin"
       description = "Gradle plugin for building and uploading an Android AAB/APK to Emerge."
       implementationClass = "com.emergetools.android.gradle.EmergePlugin"
+      tags = listOf("emerge", "emergetools", "android", "upload")
     }
   }
   testSourceSets(functionalTest)
