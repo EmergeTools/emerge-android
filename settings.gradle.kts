@@ -10,6 +10,7 @@ pluginManagement {
 
 plugins {
   id("com.gradle.develocity") version("3.19")
+  id("com.android.settings") version "8.8.0" // Keep in sync with agp in libs.versions.toml
 }
 
 develocity {
@@ -17,6 +18,10 @@ develocity {
     termsOfUseUrl.set("https://gradle.com/help/legal-terms-of-use")
     termsOfUseAgree.set("yes")
   }
+}
+
+android {
+  compileSdk = 35
 }
 
 dependencyResolutionManagement {

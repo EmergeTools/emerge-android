@@ -14,7 +14,6 @@ emerge {
 
 android {
   namespace = "com.emergetools.performance.sample"
-  compileSdk = 34
 
   defaultConfig {
     applicationId = "com.emergetools.performance.sample"

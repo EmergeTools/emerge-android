@@ -20,7 +20,6 @@ emerge {
 
 android {
   namespace = "com.emergetools.distribution.sample"
-  compileSdk = 34
 
   defaultConfig {
     applicationId = "com.emergetools.distribution.sample"

@@ -19,7 +19,6 @@ var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/snapshots/")
 
 android {
   namespace = "com.emergetools.snapshots"
-  compileSdk = 34
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11
