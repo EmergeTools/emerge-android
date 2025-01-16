@@ -132,7 +132,7 @@ dependencies {
   testRuntimeOnly(libs.junit.jupiter.engine)
   testRuntimeOnly(libs.junit.platform.launcher)
 
-  "functionalTestImplementation"(projects.emergeGradlePlugin.plugin)
+  "functionalTestImplementation"(project(":plugin"))
   "functionalTestImplementation"(libs.junit.jupiter.api)
   "functionalTestImplementation"(libs.okhttp.mockwebserver)
   "functionalTestImplementation"(libs.kotlinx.serialization)
