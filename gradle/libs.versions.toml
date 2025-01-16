@@ -107,7 +107,7 @@ kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect", version.ref = "kotlin" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.1"
-kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
+kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
 
 ktor-network = { module = "io.ktor:ktor-network", version = "3.0.3" }
 
