@@ -19,8 +19,6 @@ var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
 android {
   namespace = "com.emergetools.test"
 
-  compileSdk = 34
-
   defaultConfig {
     minSdk = 23
 

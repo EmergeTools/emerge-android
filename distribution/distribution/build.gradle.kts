@@ -19,7 +19,6 @@ var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/distribution/
 
 android {
   namespace = "com.emergetools.distribution"
-  compileSdk = 34
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11

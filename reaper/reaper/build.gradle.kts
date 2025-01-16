@@ -19,7 +19,6 @@ var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/reaper/")
 
 android {
   namespace = "com.emergetools.reaper"
-  compileSdk = 34
 
   compileOptions {
     sourceCompatibility = JavaVersion.VERSION_11

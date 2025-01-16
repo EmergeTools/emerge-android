@@ -6,7 +6,6 @@ plugins {
 
 android {
     namespace = "com.emergetools.benchmark"
-    compileSdk = 34
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8

@@ -25,7 +25,6 @@ emerge {
 
 android {
   namespace = "com.emergetools.reaper.sample.manuallyInitialized"
-  compileSdk = 34
 
   defaultConfig {
     applicationId = "com.emergetools.reaper.sample.manuallyInitialized"
