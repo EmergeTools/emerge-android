@@ -30,10 +30,8 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Build hackernews with Emerge Android as included build
         run: cd hackernews/android && ./gradlew :app:emergeUploadSnapshotBundleDebug --include-build ../../emerge-android/gradle-plugin
-      - name: Archive test reports
-        uses: actions/upload-artifact@v4
-        if: always()
-        with:
-          name: Functional test reports
-          path: '**/build/reports/tests/functionalTest'
+        env:
+          EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_KEY }}
+          PR_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
 
