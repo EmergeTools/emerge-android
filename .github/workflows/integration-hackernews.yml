@@ -32,6 +32,7 @@ jobs:
         run: cd hackernews/android && ./gradlew :app:emergeUploadSnapshotBundleDebug --include-build ../../emerge-android/gradle-plugin
         env:
           EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_KEY }}
+          INTEGRATION_TEST_REPO_NAME: emerge-android
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
 
