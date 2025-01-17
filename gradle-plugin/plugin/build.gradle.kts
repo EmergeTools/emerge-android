@@ -15,14 +15,10 @@ plugins {
 group = "com.emergetools"
 version = libs.versions.emerge.gradle.plugin.get()
 
-val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/performance-project-template/")
 
 java {
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
-  sourceSets.main {
-    resources.srcDir(perfProjectTemplateResDir)
-  }
 }
 
 tasks.withType<KotlinCompile>().configureEach {
@@ -95,6 +91,7 @@ tasks.check {
   dependsOn(functionalTestTask, tasks.validatePlugins)
 }
 
+val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/performance-project-template/")
 
 val packagePerformanceProjectTemplateTask =
   tasks.register<Zip>("packagePerformanceProjectTemplate") {
@@ -103,13 +100,8 @@ val packagePerformanceProjectTemplateTask =
     destinationDirectory.set(perfProjectTemplateResDir.map { it.dir("emergetools") })
   }
 
-tasks.processResources {
-  dependsOn(packagePerformanceProjectTemplateTask)
-}
-afterEvaluate {
-  tasks.named("sourcesJar"){
-    dependsOn(packagePerformanceProjectTemplateTask)
-  }
+java.sourceSets.main {
+  resources.srcDir(packagePerformanceProjectTemplateTask.map { it.destinationDirectory })
 }
 
 detekt {
