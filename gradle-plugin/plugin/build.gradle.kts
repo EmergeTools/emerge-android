@@ -101,7 +101,7 @@ val packagePerformanceProjectTemplateTask =
   }
 
 java.sourceSets.main {
-  resources.srcDir(packagePerformanceProjectTemplateTask.map { it.destinationDirectory })
+  resources.srcDir(packagePerformanceProjectTemplateTask.map { it.destinationDirectory.get().asFile.parentFile })
 }
 
 detekt {
