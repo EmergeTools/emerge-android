@@ -7,17 +7,6 @@ plugins {
   id("com.emergetools.android")
 }
 
-emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
-
-  vcs {
-    gitHub {
-      repoName.set("emerge-android")
-      repoOwner.set("EmergeTools")
-    }
-  }
-}
-
 android {
   namespace = "com.emergetools.distribution.sample"
 
