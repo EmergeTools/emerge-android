@@ -178,7 +178,7 @@ object PreviewUtils {
         seenAnnotations.contains(
           annotation.type,
         ) && !isPreviewAnnotation
-      )
+        )
     ) {
       return emptyList()
     }
@@ -204,6 +204,7 @@ object PreviewUtils {
     return currentPreviewAnnotations + nestedPreviewAnnotations
   }
 
+  @Suppress("detekt:LongMethod")
   private fun composePreviewSnapshotConfigsFromPreviewAnnotation(
     method: DexBackedMethod,
     annotation: Annotation,
@@ -215,9 +216,11 @@ object PreviewUtils {
     var previewParameter: PreviewParameter? = null
     if (method.parameters.size == 3) {
       val firstParam = method.parameters[0]
-      val paramName = firstParam.name ?: throw IllegalStateException("Preview parameter must have a name")
+      val paramName =
+        firstParam.name ?: throw IllegalStateException("Preview parameter must have a name")
 
-      val previewParamAnnotation = firstParam.annotations.first { it.type == PREVIEW_PARAMETER_ANNOTATION }
+      val previewParamAnnotation =
+        firstParam.annotations.first { it.type == PREVIEW_PARAMETER_ANNOTATION }
       val providerClassSignature =
         previewParamAnnotation.elements
           .first { it.name == "provider" }.value as DexBackedTypeEncodedValue
@@ -248,26 +251,26 @@ object PreviewUtils {
             uiMode = (annotation.elements.firstOrNull { it.name == "uiMode" }?.value as? IntEncodedValue)?.value,
             locale = (annotation.elements.firstOrNull { it.name == "locale" }?.value as? StringEncodedValue)?.value,
             fontScale =
-              (
-                annotation.elements
-                  .firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue
+            (
+              annotation.elements
+                .firstOrNull { it.name == "fontScale" }?.value as? FloatEncodedValue
               )?.value,
             heightDp = (annotation.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
             widthDp = (annotation.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
             showBackground =
-              (
-                annotation.elements
-                  .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
+            (
+              annotation.elements
+                .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
               )?.value,
             backgroundColor =
-              (
-                annotation
-                  .elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
+            (
+              annotation
+                .elements.firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
               )?.value,
             showSystemUi =
-              (
-                annotation.elements
-                  .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
+            (
+              annotation.elements
+                .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
               )?.value,
             device = (annotation.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
             previewParameter = previewParameter,
@@ -289,19 +292,19 @@ object PreviewUtils {
             heightDp = (preview.elements.firstOrNull { it.name == "heightDp" }?.value as? IntEncodedValue)?.value,
             widthDp = (preview.elements.firstOrNull { it.name == "widthDp" }?.value as? IntEncodedValue)?.value,
             showBackground =
-              (
-                preview.elements
-                  .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
+            (
+              preview.elements
+                .firstOrNull { it.name == "showBackground" }?.value as? BooleanEncodedValue
               )?.value,
             backgroundColor =
-              (
-                preview.elements
-                  .firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
+            (
+              preview.elements
+                .firstOrNull { it.name == "backgroundColor" }?.value as? LongEncodedValue
               )?.value,
             showSystemUi =
-              (
-                preview.elements
-                  .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
+            (
+              preview.elements
+                .firstOrNull { it.name == "showSystemUi" }?.value as? BooleanEncodedValue
               )?.value,
             device = (preview.elements.firstOrNull { it.name == "device" }?.value as? StringEncodedValue)?.value,
             previewParameter = previewParameter,

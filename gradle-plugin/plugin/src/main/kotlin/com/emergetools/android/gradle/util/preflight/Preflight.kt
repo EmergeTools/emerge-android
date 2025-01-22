@@ -4,15 +4,15 @@ import com.emergetools.android.gradle.util.TreePrinter
 import org.gradle.api.GradleException
 import org.gradle.api.logging.Logger
 
-sealed class Result<T> {
-  class Success<T>(value: T) : Result<T>()
+sealed class Result {
+  object Success : Result()
 
-  class Warning<T>(val message: String) : Result<T>()
+  class Warning(val message: String) : Result()
 
-  class Failure<T>(val message: String) : Result<T>()
+  class Failure(val message: String) : Result()
 }
 
-private data class Item(val description: String, val result: Result<Unit>) {
+private data class Item(val description: String, val result: Result) {
   val isSuccess: Boolean
     get() = result !is Result.Failure
   val isFailure: Boolean
@@ -25,9 +25,10 @@ class PreflightWarning(message: String) : Exception(message)
 
 class PreflightFailure(message: String) : Exception(message)
 
-inline fun <R> runCatching(block: () -> R): Result<R> {
+inline fun runCatching(block: () -> Unit): Result {
   return try {
-    Result.Success(block())
+    block()
+    Result.Success
   } catch (e: PreflightWarning) {
     Result.Warning(e.message!!)
   } catch (e: Throwable) {
@@ -152,7 +153,7 @@ class Preflight(private val title: String) {
         }
         return@CharArray '═'
       }
-    ).joinToString("")
+      ).joinToString("")
   }
 
   private fun getHeadingBottom(heading: String): String {
@@ -166,7 +167,7 @@ class Preflight(private val title: String) {
         }
         return@CharArray '═'
       }
-    ).joinToString("")
+      ).joinToString("")
   }
 
   fun renderErrors(): String {

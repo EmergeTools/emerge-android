@@ -29,6 +29,7 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
   abstract val variantName: Property<String>
 
   @TaskAction
+  @Suppress("detekt:ThrowsCount")
   fun execute() {
     val preflight = Preflight("Snapshots preflight check")
 

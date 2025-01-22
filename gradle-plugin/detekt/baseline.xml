@@ -2,166 +2,20 @@
 <SmellBaseline>
   <ManuallySuppressedIssues></ManuallySuppressedIssues>
   <CurrentIssues>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadTest.kt:30</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:59</ID>
-    <ID>ArgumentListWrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:60</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:58</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:59</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePlugin.kt:60</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:101</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:102</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:103</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:105</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:106</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:107</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:109</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:110</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:111</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:113</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:114</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:115</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:117</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:118</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:120</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:121</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:122</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:124</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:125</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:127</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:128</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:129</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:130</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:132</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:133</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:134</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:135</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:138</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:139</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:140</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:141</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:142</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:143</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:144</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:145</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:147</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:148</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:149</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:151</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:152</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:153</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:154</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:22</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:23</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:24</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:25</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:26</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:27</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:28</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:29</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:30</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:32</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:33</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:34</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:36</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:37</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:39</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:40</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:41</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:43</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:44</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:46</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:47</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:48</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:50</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:51</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:53</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:54</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:55</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:57</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:58</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:60</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:61</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:62</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:64</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:65</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:67</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:68</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:69</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:71</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:72</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:74</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:75</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:76</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:78</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:79</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:80</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:82</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:83</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:84</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:86</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:87</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:88</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:89</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:92</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:93</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:94</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:95</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:96</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:97</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:98</ID>
-    <ID>Indentation:com.emergetools.android.gradle.EmergePluginExtension.kt:99</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:178</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:251</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:252</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:253</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:258</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:259</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:260</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:263</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:264</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:265</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:268</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:269</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:270</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:292</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:293</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:294</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:297</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:298</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:299</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:302</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:303</ID>
-    <ID>Indentation:com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils.kt:304</ID>
-    <ID>Indentation:com.emergetools.android.gradle.util.preflight.Preflight.kt:155</ID>
-    <ID>Indentation:com.emergetools.android.gradle.util.preflight.Preflight.kt:169</ID>
     <ID>MagicNumber:BaseUploadTask.kt$BaseUploadTask$30</ID>
     <ID>MagicNumber:DependencyUtils.kt$3</ID>
     <ID>MagicNumber:PreviewUtils.kt$PreviewUtils$3</ID>
     <ID>MagicNumber:ReaperClassLoadTransform.kt$0xFFL</ID>
     <ID>MagicNumber:ReaperClassLoadTransform.kt$7</ID>
     <ID>MagicNumber:ReaperClassLoadTransform.kt$8</ID>
-    <ID>MaxLineLength:DependencyUtils.kt$"Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!"</ID>
-    <ID>MaxLineLength:ReaperClassLoadTest.kt$ReaperClassLoadTest$Assertions.assertEquals(-1167088121787636991L, topLong(byteArrayOf(0x01, 0x23, 0x45, 0x67, 0x89, 0xab, 0xcd, 0xef, 0xff, 0xff)))</ID>
-    <ID>MaxLineLength:SnapshotsPreviewRuntimeRetentionTransform.kt$SnapshotsPreviewRuntimeRetentionTransformFactory$abstract</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadTest.kt:30</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransform.kt:16</ID>
-    <ID>MaximumLineLength:com.emergetools.android.gradle.util.dependencies.DependencyUtils.kt:87</ID>
     <ID>NestedBlockDepth:BaseUploadTask.kt$BaseUploadTask$protected fun upload( artifactMetadata: ArtifactMetadata, onSuccessfulUpload: (EmergeUploadResponse) -&gt; Unit, )</ID>
     <ID>NestedBlockDepth:LocalSnapshots.kt$LocalSnapshots$private fun extractDexFromApk( apk: File, outputDir: File, )</ID>
     <ID>ReturnCount:PreviewUtils.kt$PreviewUtils$private fun hasSupportedMethodParameters( method: DexBackedMethod, includePreviewParamPreviews: Boolean, logger: Logger, ): Boolean</ID>
-    <ID>ThrowsCount:BasePreflightTask.kt$BasePreflightTask$protected fun buildVcsPreflight(): Preflight</ID>
-    <ID>ThrowsCount:ReaperPreflight.kt$ReaperPreflight$@TaskAction fun execute()</ID>
-    <ID>ThrowsCount:SnapshotsPreflight.kt$SnapshotsPreflight$@TaskAction fun execute()</ID>
     <ID>TooGenericExceptionCaught:Preflight.kt$e: Throwable</ID>
     <ID>TooManyFunctions:GitHub.kt$GitHub</ID>
-    <ID>UnnecessaryAbstractClass:EmergePluginExtension.kt$GitHubOptions$GitHubOptions</ID>
-    <ID>UnnecessaryAbstractClass:EmergePluginExtension.kt$GitLabOptions$GitLabOptions</ID>
     <ID>UnusedPrivateMember:Preflight.kt$Preflight$private fun getHeadingBottom(heading: String): String</ID>
     <ID>UnusedPrivateMember:Preflight.kt$Preflight$private fun getHeadingTop(heading: String): String</ID>
-    <ID>UnusedPrivateMember:Preflight.kt$Result.Success$value: T</ID>
     <ID>UseCheckOrError:EmergeUploadRequest.kt$throw IllegalStateException("Could not resolve /upload for baseUrl: $baseUrl")</ID>
     <ID>UseCheckOrError:PreviewUtils.kt$PreviewUtils$throw IllegalStateException("Preview parameter must have a name")</ID>
-    <ID>Wrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:59</ID>
-    <ID>Wrapping:com.emergetools.android.gradle.tasks.reaper.ReaperPreflight.kt:60</ID>
   </CurrentIssues>
 </SmellBaseline>
