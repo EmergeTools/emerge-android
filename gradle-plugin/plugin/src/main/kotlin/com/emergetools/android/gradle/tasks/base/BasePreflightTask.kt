@@ -39,6 +39,7 @@ abstract class BasePreflightTask : DefaultTask() {
   @get:Optional
   abstract val gitLabProjectId: Property<String>
 
+  @Suppress("detekt:ThrowsCount")
   protected fun buildVcsPreflight(): Preflight {
     val vcsPreflight = Preflight("VCS Info check")
     vcsPreflight.add("SHA: ${sha.getOrElse("Not set")}") {

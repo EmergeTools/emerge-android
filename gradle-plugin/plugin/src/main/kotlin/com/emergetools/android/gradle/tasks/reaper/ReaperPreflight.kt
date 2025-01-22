@@ -30,6 +30,7 @@ abstract class ReaperPreflight : DefaultTask() {
   abstract val reaperPublishableApiKey: Property<String>
 
   @TaskAction
+  @Suppress("detekt:ThrowsCount")
   fun execute() {
     val preflight = Preflight("Reaper preflight check")
 
@@ -56,8 +57,10 @@ abstract class ReaperPreflight : DefaultTask() {
     preflight.add("publishableApiKey set") {
       val key = reaperPublishableApiKey.orNull
       if (key == null) {
-        throw PreflightFailure("publishableApiKey not set. See " +
-          "https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk")
+        throw PreflightFailure(
+          "publishableApiKey not set. See " +
+            "https://docs.emergetools.com/docs/reaper-setup-android#configure-the-sdk"
+        )
       }
       if (key == "") {
         throw PreflightFailure(

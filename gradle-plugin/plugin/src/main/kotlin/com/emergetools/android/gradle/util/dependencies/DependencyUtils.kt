@@ -84,7 +84,8 @@ fun buildDependencies(
       // Check to ensure the dependency is in the format group:name:version
       if (keySplits.size != 3) {
         logger.warn(
-          "Skipping invalid dependency: ${it.key}, expected format: group:name:version, please let the Emerge team know of this!",
+          "Skipping invalid dependency: ${it.key}, expected format: group:name:version, " +
+            "please let the Emerge team know of this!",
         )
         return@forEach
       }

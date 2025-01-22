@@ -13,7 +13,8 @@ import org.objectweb.asm.MethodVisitor
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 
-abstract class SnapshotsPreviewRuntimeRetentionTransformFactory : AsmClassVisitorFactory<SnapshotsPreviewRuntimeRetentionTransformFactory.Params> {
+abstract class SnapshotsPreviewRuntimeRetentionTransformFactory :
+  AsmClassVisitorFactory<SnapshotsPreviewRuntimeRetentionTransformFactory.Params> {
   interface Params : InstrumentationParameters {
     @get:Input
     @get:Optional

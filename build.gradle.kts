@@ -19,7 +19,6 @@ allprojects {
   configure<DetektExtension> {
     buildUponDefaultConfig = true
     config.setFrom("$rootDir/detekt/detekt.yml")
-    baseline = file("$rootDir/detekt/baseline.xml")
   }
 
   dependencies {
