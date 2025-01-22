@@ -8,15 +8,6 @@ plugins {
 }
 
 emerge {
-  apiToken.set(System.getenv("EMERGE_API_TOKEN"))
-
-  vcs {
-    gitHub {
-      repoName.set("emerge-android")
-      repoOwner.set("EmergeTools")
-    }
-  }
-
   reaper {
     enabledVariants.set(listOf("release"))
     publishableApiKey.set(System.getenv("EMERGE_REAPER_API_KEY") ?: "<key>")
