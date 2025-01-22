@@ -143,7 +143,7 @@ dependencies {
 
 gradlePlugin {
   website = "https://docs.emergetools.com/docs/gradle-plugin"
-  vcsUrl = "https://docs.emergetools.com/docs/gradle-plugin"
+  vcsUrl = "https://github.com/EmergeTools/emerge-android"
   plugins {
     register("com.emergetools.android") {
       id = "com.emergetools.android"
