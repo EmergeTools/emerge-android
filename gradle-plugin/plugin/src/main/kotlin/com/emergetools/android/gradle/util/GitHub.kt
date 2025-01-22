@@ -16,15 +16,13 @@ internal class GitHub(private val execOperations: ExecOperations) {
       ignoreUnknownKeys = true
     }
 
-  private fun repoId(): String? {
-    val remoteUrl = git.remoteUrl() ?: return null
-    val result = Regex("[/:]([^/]+/[^/.]+)\\.git$").find(remoteUrl) ?: return null
-    return result.groupValues[1]
+  private fun repoId(): List<String>? {
+    return git.remoteUrl()?.toWebRepoUri()?.encodedPathSegments
   }
 
-  fun repoOwner() = repoId()?.split('/')?.get(0)
+  fun repoOwner() = repoId()?.firstOrNull()
 
-  fun repoName() = repoId()?.split('/')?.get(1)
+  fun repoName() = repoId()?.get(1)
 
   private fun getEvent(): String? {
     return System.getenv("GITHUB_EVENT_NAME")
