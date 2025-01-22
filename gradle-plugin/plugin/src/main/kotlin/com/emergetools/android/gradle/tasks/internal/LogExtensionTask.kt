@@ -63,6 +63,13 @@ abstract class LogExtensionTask : DefaultTask() {
         addItem("tag (optional): ${extension.perfOptions.tag.orEmpty()}", performanceHeading)
         addItem("enabled: ${extension.perfOptions.enabled.getOrElse(true)}", performanceHeading)
 
+        val distributionHeading = addHeading("distribution")
+        addItem(
+          "enabledVariants: ${extension.distributionOptions.enabledVariants.getOrElse(emptyList())}",
+          distributionHeading,
+        )
+        addItem("tag (optional): ${extension.distributionOptions.tag.orEmpty()}", distributionHeading)
+
         val vcsOptionsHeading = addHeading("vcsOptions (optional, defaults to Git values)")
         addItem("sha: ${extension.vcsOptions.sha.orEmpty()}", vcsOptionsHeading)
         addItem("baseSha: ${extension.vcsOptions.baseSha.orEmpty()}", vcsOptionsHeading)

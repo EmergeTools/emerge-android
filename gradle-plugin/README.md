@@ -257,9 +257,10 @@ emerge {
     // The build variants Reaper is enabled for.
     // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
     enabledVariants.set(listOf("release", "releaseVariant2"))
-    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable
-    // Note: This key is not the same as the API key used for uploading to Emerge - you can find this
-    publishableApiKey.set(System.getenv("REAPER_API_TOKEN"))
+    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable.
+    // This key can be found at https://www.emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled
+    // Note: This key is not the same as the API token used for uploading to Emerge.
+    publishableApiKey.set(System.getenv("REAPER_API_KEY"))
 
     // Optional, defaults to 'release'
     tag.set("release")
@@ -276,6 +277,51 @@ emerge {
 | `publishableApiKey` | `String`       |               | This key is used to identify Reaper reports sent from your application for your organization. |
 | `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Reaper is enabled for.                                                     |
 | `tag`               | `String`       | `release`     | The build tag to use for grouping builds in the Emerge dashboard.                             |
+
+### Distribution
+
+The `distribution` extension allows you to configure build distribution specific fields.
+
+See the [build distribution](https://docs.emergetools.com/docs/distribution-setup-android) docs for more information.
+
+#### Tasks
+
+| Task                                   | Description                                                                                    |
+|----------------------------------------|------------------------------------------------------------------------------------------------|
+| `emergeDistributionPreflight{Variant}` | Run a preflight check to validate if distribution is properly set up for the specific variant. |
+
+#### Configuration
+
+The `distribution` extension allows you to configure Distribution-specific fields.
+
+```kotlin
+emerge {
+  // ..
+
+  distribution {
+    // The build variants Distribution is enabled for.
+    enabledVariants.set(listOf("release", "staging"))
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
+    tag.setFromVariant()
+
+    // The key used to authenticate downloads for future updates should
+    // be set as an environment variable: DISTRIBUTION_API_KEY
+    // This key can be found at https://www.emergetools.com/settings?tab=feature-configuration&cards=distribution_enabled
+    // Note: This key is not the same as the API token used for uploading to Emerge.
+  }
+}
+```
+
+##### Fields
+
+| Field               | Type           | Default       | Description                                                                 |
+|---------------------|----------------|---------------|-----------------------------------------------------------------------------|
+| `apiKey`            | `String`       |               | This key is used to authenticate update downloads.                          |
+| `enabledVariants`   | `List<String>` | `emptyList()` | The build variants Distribution is enabled for.                             |
+| `tag`               | `String`       | `release`     | The build tag to use for determining which builds are possible updates.     |
 
 ### Performance
 
@@ -396,15 +442,30 @@ emerge {
     // The build variants Reaper is enabled for.
     // When Reaper is enabled the application bytecode will be instrumented to support Reaper.
     enabledVariants.set(listOf("release", "releaseVariant2"))
-    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable
-    // Note: This key is not the same as the API key used for uploading to Emerge - you can find this
-    publishableApiKey.set(System.getenv("REAPER_API_TOKEN"))
+    // The key used to identify Reaper reports for your organization. Emerge recommends setting this as an environment variable.
+    // This key can be found at https://www.emergetools.com/settings?tab=feature-configuration&cards=reaper_enabled
+    // Note: This key is not the same as the API token used for uploading to Emerge.
+    publishableApiKey.set(System.getenv("REAPER_API_KEY"))
 
     // Optional, defaults to 'release'
     tag.set("release")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
     tag.setFromVariant()
+  }
 
+  distribution {
+    // The build variants Distribution is enabled for.
+    enabledVariants.set(listOf("release", "staging"))
+    // The key used to authenticate downloads for future updates.
+    // Emerge recommends setting this as an environment variable.
+    // This key can be found at https://www.emergetools.com/settings?tab=feature-configuration&cards=distribution_enabled
+    // Note: This key is not the same as the API token used for uploading to Emerge.
+    apiKey.set(System.getenv("DISTRIBUTION_API_KEY"))
+
+    // Optional, defaults to 'release'
+    tag.set("release")
+    // Alternatively, use `setFromVariant()` to set the tag from the Android build variant name
+    tag.setFromVariant()
   }
 
   performance {

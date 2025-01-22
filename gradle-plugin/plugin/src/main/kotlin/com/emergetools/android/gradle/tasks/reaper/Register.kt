@@ -10,9 +10,9 @@ import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.hasDependency
 import org.gradle.api.Project
 
-const val EMERGE_REAPER_TASK_GROUP = "Emerge reaper"
-const val REAPER_DEP_GROUP = "com.emergetools.reaper"
-const val REAPER_DEP_NAME = "reaper"
+private const val EMERGE_REAPER_TASK_GROUP = "Emerge reaper"
+private const val REAPER_DEP_GROUP = "com.emergetools.reaper"
+private const val REAPER_DEP_NAME = "reaper"
 
 fun registerReaperTasks(
   appProject: Project,
@@ -20,7 +20,7 @@ fun registerReaperTasks(
   variant: Variant,
 ) {
   appProject.logger.debug(
-    "Registering reaper tasks for variant ${variant.name} in project ${appProject.path}",
+    "Registering Reaper tasks for variant ${variant.name} in project ${appProject.path}",
   )
 
   registerReaperPreflightTask(appProject, extension, variant)
