@@ -9,8 +9,7 @@ import java.util.regex.Pattern
  * [Utils.java]
  * (https://github.com/gradle/common-custom-user-data-gradle-plugin/blob/main/src/main/java/com/gradle/Utils.java#L228)
  */
-private
-val gitRepoUriPattern: Pattern =
+private val gitRepoUriPattern: Pattern =
   Pattern.compile(
     "^(?:(?:https://|git://)(?:.+:.+@)?|(?:ssh)?.*?@)(.*?(?:github|gitlab).*?)(?:/|:[0-9]*?/|:)(.*?)(?:\\.git)?$"
   )
