@@ -2,6 +2,7 @@ package com.emergetools.snapshots.sample.ui
 
 import android.net.Uri
 import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
@@ -37,7 +38,9 @@ fun MediaPickerDemo() {
       .padding(16.dp),
     horizontalAlignment = Alignment.CenterHorizontally
   ) {
-    Button(onClick = { pickMediaLauncher.launch(null) }) {
+    Button(onClick = {
+      pickMediaLauncher.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
+    }) {
       Text("Pick Image/Video")
     }
 
