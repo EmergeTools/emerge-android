@@ -1,0 +1,38 @@
+name: Hackernews Gradle Plugin Integration
+
+on:
+  push:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - gradle/**
+      - gradle-plugin/**
+
+jobs:
+
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: emerge-android
+      - uses: actions/checkout@v4
+        with:
+          repository: EmergeTools/hackernews
+          path: hackernews
+      - name: Set up JDKs
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'adopt'
+          java-version: 17
+      - name: Set up Gradle
+        uses: gradle/actions/setup-gradle@v4
+      - name: Build hackernews with Emerge Android as included build
+        run: cd hackernews/android && ./gradlew :app:emergeUploadSnapshotBundleDebug --include-build ../../emerge-android/gradle-plugin
+        env:
+          EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_KEY }}
+          INTEGRATION_TEST_REPO_NAME: emerge-android
+          PR_SHA: ${{ github.event.pull_request.head.sha }}
+          PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+
