@@ -1,6 +1,7 @@
 package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_AGP_7_VERSION
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
@@ -28,7 +29,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     EmergeGradleRunner.create("simple")
       .withArguments("emergeUploadReleaseAab")
       .withDefaultServer()
-      .withAndroidGradlePluginVersion("7.3.0")
+      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .assert { result, server ->
         assertSuccessfulUploadRequests(server)
