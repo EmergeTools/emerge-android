@@ -37,7 +37,7 @@ fun registerSnapshotTasks(
   variant.instrumentation.let { instrumentation ->
     instrumentation.transformClassesWith(
       SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
-      InstrumentationScope.ALL,
+      InstrumentationScope.PROJECT, // We only want snapshot previews from the project classes, not dependencies
     ) { params ->
       // Force invalidate/reinstrument classes if debug option is set
       if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
