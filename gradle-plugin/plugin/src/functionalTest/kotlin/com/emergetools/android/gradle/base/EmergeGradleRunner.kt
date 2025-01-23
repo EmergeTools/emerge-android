@@ -17,6 +17,7 @@ class EmergeGradleRunner private constructor(
   private val server: MockWebServer = MockWebServer(),
 ) {
   companion object {
+    const val LATEST_AGP_7_VERSION = "7.4.2"
     /** Must be kept in sync with the build.gradle list. */
     val SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS =
       sortedSetOf(
@@ -24,8 +25,10 @@ class EmergeGradleRunner private constructor(
         "7.1.0",
         "7.2.0",
         "7.3.0",
+        LATEST_AGP_7_VERSION,
         "8.0.0",
       )
+
 
     val SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS =
       sortedSetOf(
@@ -66,6 +69,12 @@ class EmergeGradleRunner private constructor(
   fun withGradleVersion(version: String) =
     apply {
       gradleRunner.withGradleVersion(version)
+    }
+
+  @Suppress("unused")
+  fun withDebug(flag: Boolean) =
+    apply {
+      gradleRunner.withDebug(flag)
     }
 
   fun withAndroidGradlePluginVersion(version: String) =

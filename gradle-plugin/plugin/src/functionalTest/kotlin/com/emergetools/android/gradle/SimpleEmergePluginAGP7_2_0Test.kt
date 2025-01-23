@@ -1,6 +1,7 @@
 package com.emergetools.android.gradle
 
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_AGP_7_VERSION
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
 
@@ -9,7 +10,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   @Test
   fun simpleBundle() {
     EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
+      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .withArguments("emergeUploadReleaseAab")
       .withDefaultServer()
@@ -24,7 +25,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   fun simpleBundleTimeout() {
     val result =
       EmergeGradleRunner.create("simple-agp-7.2.0")
-        .withAndroidGradlePluginVersion("7.2.0")
+        .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
         .withGradleVersion("7.5.1")
         .withArguments("emergeUploadReleaseAab")
         .withDefaultServer(true)
@@ -35,7 +36,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   @Test
   fun simpleAssemble() {
     EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
+      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .withArguments("emergeUploadReleaseApk")
       .withDefaultServer()
@@ -50,7 +51,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   fun simpleAssembleTimeout() {
     val result =
       EmergeGradleRunner.create("simple-agp-7.2.0")
-        .withAndroidGradlePluginVersion("7.2.0")
+        .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
         .withGradleVersion("7.5.1")
         .withArguments("emergeUploadReleaseApk")
         .withDefaultServer(true)
@@ -61,7 +62,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   @Test
   fun twoBuildTypesBundle() {
     EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
+      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .withArguments("emergeUploadReleaseAab")
       .withDefaultServer()
@@ -75,7 +76,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   @Test
   fun twoBuildTypesAssemble() {
     EmergeGradleRunner.create("simple-agp-7.2.0")
-      .withAndroidGradlePluginVersion("7.2.0")
+      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .withArguments("emergeUploadReleaseApk")
       .withDefaultServer()
@@ -90,7 +91,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   fun androidTasksRunBundle() {
     val result =
       EmergeGradleRunner.create("simple-agp-7.2.0")
-        .withAndroidGradlePluginVersion("7.2.0")
+        .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
         .withGradleVersion("7.5.1")
         .withArguments("signReleaseBundle")
         .build()
@@ -101,7 +102,7 @@ class SimpleEmergePluginAGP7_2_0Test : EmergePluginTest() {
   fun androidTasksRunAssemble() {
     val result =
       EmergeGradleRunner.create("simple-agp-7.2.0")
-        .withAndroidGradlePluginVersion("7.2.0")
+        .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
         .withGradleVersion("7.5.1")
         .withArguments("packageRelease")
         .build()
