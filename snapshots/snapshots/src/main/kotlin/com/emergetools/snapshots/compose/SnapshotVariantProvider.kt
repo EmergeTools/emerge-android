@@ -10,7 +10,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
@@ -22,12 +24,12 @@ import java.util.Locale
 @Composable
 fun SnapshotVariantProvider(
   config: ComposePreviewSnapshotConfig,
-  scalingFactor: Float?,
+  deviceSpec: DeviceSpec?,
   content: @Composable () -> Unit,
 ) {
   val localDensity = Density(
     fontScale = config.fontScale ?: LocalDensity.current.fontScale,
-    density = scalingFactor ?: LocalDensity.current.density,
+    density = deviceSpec?.scalingFactor ?: LocalDensity.current.density,
   )
 
   val locale = config.locale?.let(::localeForLanguageCode) ?: Locale.getDefault()
@@ -67,7 +69,7 @@ fun SnapshotVariantProvider(
           val color = config.backgroundColor?.let { Color(it) } ?: Color.White
           Modifier.background(color)
         } ?: Modifier
-      )
+      ).clip(deviceSpec?.shape ?: RectangleShape)
 
     Box(modifier = modifier) {
       content()

@@ -3,6 +3,9 @@
 package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.roundToInt
 
@@ -10,6 +13,7 @@ data class DeviceSpec(
   val widthDp: Int?,
   val heightDp: Int?,
   val dpi: Int,
+  val shape: Shape = RectangleShape,
 ) {
   // Calculate the density factor the same way Android does
   private val density: Float = dpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT
@@ -208,6 +212,20 @@ val KNOWN_DEVICE_SPECS = mapOf(
     widthDp = 1484,
     heightDp = 928,
     dpi = 276,
+  ),
+  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:wear/wear-tooling-preview/src/main/java/androidx/wear/tooling/preview/devices/WearDevice.kt;l=26?q=WearDevice.kt&ss=androidx/platform/frameworks/support
+  "wearos_large_round" to DeviceSpec(
+    widthDp = 227,
+    heightDp = 227,
+    dpi = 320,
+    shape = CircleShape,
+  ),
+  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:wear/wear-tooling-preview/src/main/java/androidx/wear/tooling/preview/devices/WearDevice.kt;l=28?q=WearDevice.kt&ss=androidx/platform/frameworks/support
+  "wearos_small_round" to DeviceSpec(
+    widthDp = 192,
+    heightDp = 192,
+    dpi = 320,
+    shape = CircleShape,
   ),
 )
 

@@ -2,6 +2,7 @@ package com.emergetools.snapshots.sample.ui
 
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.wear.tooling.preview.devices.WearDevices
 
 @Preview(showSystemUi = true, device = Devices.NEXUS_7)
 @Preview(showSystemUi = true, device = Devices.NEXUS_7_2013)
@@ -69,6 +70,8 @@ import androidx.compose.ui.tooling.preview.Preview
 @Preview(showSystemUi = false, device = Devices.FOLDABLE)
 @Preview(showSystemUi = false, device = Devices.TABLET)
 @Preview(showSystemUi = false, device = Devices.DESKTOP)
+@Preview(name = "Wear (small)", device = WearDevices.SMALL_ROUND)
+@Preview(name = "Wear (large)", device = WearDevices.LARGE_ROUND)
 @Preview(
   name = "landscape",
   device = "spec:width=411dp,height=891dp, orientation=landscape, dpi=480"
