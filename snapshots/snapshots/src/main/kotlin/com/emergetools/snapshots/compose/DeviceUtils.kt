@@ -3,6 +3,9 @@
 package com.emergetools.snapshots.compose
 
 import android.util.DisplayMetrics
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.ui.graphics.RectangleShape
+import androidx.compose.ui.graphics.Shape
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import kotlin.math.roundToInt
 
@@ -10,6 +13,7 @@ data class DeviceSpec(
   val widthDp: Int?,
   val heightDp: Int?,
   val dpi: Int,
+  val shape: Shape = RectangleShape,
 ) {
   // Calculate the density factor the same way Android does
   private val density: Float = dpi.toFloat() / DisplayMetrics.DENSITY_DEFAULT
@@ -30,6 +34,7 @@ data class DeviceSpec(
   private fun Float.roundToTen(): Int {
     return (this / 10).roundToInt() * 10
   }
+
 }
 
 // https://m3.material.io/blog/device-metrics#putting-it-all-together
@@ -208,6 +213,18 @@ val KNOWN_DEVICE_SPECS = mapOf(
     widthDp = 1484,
     heightDp = 928,
     dpi = 276,
+  ),
+  "wearos_large_round" to DeviceSpec(
+    widthDp = 227,
+    heightDp = 227,
+    dpi = 320,
+    shape = CircleShape,
+  ),
+  "wearos_small_round" to DeviceSpec(
+    widthDp = 192,
+    heightDp = 192,
+    dpi = 320,
+    shape = CircleShape,
   ),
 )
 

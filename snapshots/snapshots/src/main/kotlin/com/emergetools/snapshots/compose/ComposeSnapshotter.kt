@@ -104,7 +104,7 @@ private fun snapshot(
     }
 
     composeView.setContent {
-      SnapshotVariantProvider(previewConfig, deviceSpec?.scalingFactor) {
+      SnapshotVariantProvider(previewConfig, deviceSpec) {
         ComposableInvoker.invokeComposable(
           className = previewConfig.fullyQualifiedClassName,
           methodName = previewConfig.originalFqn.substringAfterLast("."),
