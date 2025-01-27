@@ -34,7 +34,6 @@ data class DeviceSpec(
   private fun Float.roundToTen(): Int {
     return (this / 10).roundToInt() * 10
   }
-
 }
 
 // https://m3.material.io/blog/device-metrics#putting-it-all-together
@@ -214,12 +213,14 @@ val KNOWN_DEVICE_SPECS = mapOf(
     heightDp = 928,
     dpi = 276,
   ),
+  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:wear/wear-tooling-preview/src/main/java/androidx/wear/tooling/preview/devices/WearDevice.kt;l=26?q=WearDevice.kt&ss=androidx/platform/frameworks/support
   "wearos_large_round" to DeviceSpec(
     widthDp = 227,
     heightDp = 227,
     dpi = 320,
     shape = CircleShape,
   ),
+  // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:wear/wear-tooling-preview/src/main/java/androidx/wear/tooling/preview/devices/WearDevice.kt;l=28?q=WearDevice.kt&ss=androidx/platform/frameworks/support
   "wearos_small_round" to DeviceSpec(
     widthDp = 192,
     heightDp = 192,

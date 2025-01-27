@@ -17,7 +17,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.wear.tooling.preview.devices.WearDevices
 
 @Composable
 fun PortraitLandscapeView() {
@@ -94,8 +93,6 @@ fun PortraitLandscapeView() {
 @Preview(device = Devices.PIXEL_5)
 @Preview(name = "Phone (Landscape)", device = "spec:width=430dp,height=860dp,orientation=landscape")
 @Preview(name = "Phone (Portrait)", device = "spec:width=430dp,height=860dp")
-@Preview(name = "Wear (small)", device = WearDevices.SMALL_ROUND)
-@Preview(name = "Wear (large)", device = WearDevices.LARGE_ROUND)
 @Composable
 fun PortraitLandscapeViewPreview() {
   Surface {
