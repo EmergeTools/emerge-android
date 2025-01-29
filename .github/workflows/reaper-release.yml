@@ -32,4 +32,4 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Sanity check reaper test
-        run: ./gradlew :reaper:reaper:test :reaper:reaper:publishReleasePublicationToSonatypeStagingRepository
+        run: ./gradlew :reaper:reaper:test :reaper:reaper:publishReleasePublicationToSonatypeStagingRepository -Dorg.gradle.parallel=false
