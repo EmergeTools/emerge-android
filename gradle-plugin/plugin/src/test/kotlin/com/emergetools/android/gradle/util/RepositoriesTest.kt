@@ -12,6 +12,7 @@ class RepositoriesTest {
   companion object {
     private val hostNames = listOf("gitlab", "github")
     private val rawUrls = listOf(
+      "http://%s.com/acme-inc/my-project",
       "https://%s.com/acme-inc/my-project",
       "https://%s.com:443/acme-inc/my-project",
       "https://user:secret@%s.com/acme-inc/my-project",
