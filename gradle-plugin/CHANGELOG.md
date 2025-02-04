@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.0.8 - 2024-02-04
+- Correctly parse git information on bitbucket and non https urls [#439](https://github.com/EmergeTools/emerge-android/pull/439)
+
 ## 4.0.7 - 2024-01-22
 - Correctly parse git/github/gitlab urls in all environments [#419](https://github.com/EmergeTools/emerge-android/pull/419)
 
