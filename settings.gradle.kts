@@ -14,10 +14,13 @@ plugins {
   id("com.android.settings") version "8.8.0" // Keep in sync with agp in libs.versions.toml
 }
 
+val isCI = System.getenv("CI") != null
+
 develocity {
   buildScan {
     termsOfUseUrl.set("https://gradle.com/help/legal-terms-of-use")
     termsOfUseAgree.set("yes")
+    uploadInBackground = !isCI
   }
 }
 
