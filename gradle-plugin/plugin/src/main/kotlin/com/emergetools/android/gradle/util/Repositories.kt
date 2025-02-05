@@ -12,7 +12,7 @@ import java.util.regex.Pattern
 private val gitRepoUriPattern: Pattern =
   Pattern.compile(
     "^(?:(?:https://|git://|http://)(?:.+:.+@)?|(?:ssh)?.*?@)" +
-      "(.*?(?:github|gitlab).*?)(?:/|:[0-9]*?/|:)(.*?)(?:\\.git)?$"
+      "(.*?(?:github|gitlab|bitbucket).*?)(?:/|:[0-9]*?/|:)(.*?)(?:\\.git)?$"
   )
 
 /**

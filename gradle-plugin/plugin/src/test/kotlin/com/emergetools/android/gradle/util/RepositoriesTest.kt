@@ -10,7 +10,7 @@ import java.util.Locale
 class RepositoriesTest {
 
   companion object {
-    private val hostNames = listOf("gitlab", "github")
+    private val hostNames = listOf("gitlab", "github", "bitbucket")
     private val rawUrls = listOf(
       "http://%s.com/acme-inc/my-project",
       "https://%s.com/acme-inc/my-project",
