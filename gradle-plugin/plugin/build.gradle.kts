@@ -9,6 +9,7 @@ plugins {
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
 
+  signing
   `java-gradle-plugin`
   `maven-publish`
 }
@@ -20,6 +21,8 @@ version = libs.versions.emerge.gradle.plugin.get()
 java {
   sourceCompatibility = JavaVersion.VERSION_11
   targetCompatibility = JavaVersion.VERSION_11
+  withJavadocJar()
+  withSourcesJar()
 }
 
 tasks.withType<KotlinCompile>().configureEach {
@@ -173,3 +176,57 @@ tasks.withType<ValidatePlugins>().configureEach {
   failOnWarning = true
   enableStricterValidation = true
 }
+
+val isReleaseBuild : Boolean = !version.toString().endsWith("SNAPSHOT")
+
+publishing {
+    publications {
+        withType<MavenPublication> {
+
+            pom {
+                name.set("Emerge Gradle Plugin")
+                description.set("Gradle plugin for building and uploading an Android AAB/APK to Emerge.")
+                url.set("https://docs.emergetools.com/docs/gradle-plugin")
+
+                licenses {
+                    license {
+                        name.set("The Apache License, Version 2.0")
+                        url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
+                    }
+                }
+
+                developers {
+                    developer {
+                        id.set("emergetools")
+                        name.set("Emerge Tools")
+                        email.set("support@emergetools.com")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/EmergeTools/emerge-android.git")
+                    developerConnection.set("scm:git:ssh://github.com:EmergeTools/emerge-android.git")
+                    url.set("https://github.com/EmergeTools/emerge-android")
+                }
+            }
+        }
+    }
+
+    repositories {
+        maven {
+            val releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            val snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
+            url = uri(if (isReleaseBuild) releasesRepoUrl else snapshotsRepoUrl)
+
+            credentials {
+                username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
+                password = project.findProperty("ossrhPassword") as String? ?: System.getenv("OSSRH_PASSWORD")
+            }
+        }
+    }
+}
+
+signing {
+  isRequired = isReleaseBuild
+}
+
