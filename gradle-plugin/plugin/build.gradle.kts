@@ -219,14 +219,16 @@ publishing {
             url = uri(if (isReleaseBuild) releasesRepoUrl else snapshotsRepoUrl)
 
             credentials {
-                username = project.findProperty("ossrhUsername") as String? ?: System.getenv("OSSRH_USERNAME")
-                password = project.findProperty("ossrhPassword") as String? ?: System.getenv("OSSRH_PASSWORD")
+                username = System.getenv("OSSRH_USERNAME")
+                password = System.getenv("OSSRH_PASSWORD")
             }
         }
     }
 }
 
 signing {
-  isRequired = isReleaseBuild
+  val signingKey: String? by project
+  val signingPassword: String? by project
+  useInMemoryPgpKeys(signingKey, signingPassword)
 }
 
