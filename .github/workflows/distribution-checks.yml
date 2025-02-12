@@ -15,7 +15,7 @@ on:
       - distribution/**
 
 jobs:
-  device-spread-test:
+  test:
     runs-on: ubuntu-latest
 
     defaults:
@@ -34,11 +34,26 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Generate target and test APK
-        run: ./gradlew :distribution:sample:app:assembleDebug :distribution:sample:app:assembleAndroidTest
+        run: ./gradlew :distribution:sample:app:assembleDebug :distribution:sample:app:assembleAndroidTest :distribution:integration:assembleAndroidTest :distribution:integration:assembleDebug
         env:
           EMERGE_DISTRIBUTION_API_KEY: ${{ secrets.EMERGE_DISTRIBUTION_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}
           PR_BASE_SHA: ${{ github.event.pull_request.base.sha }}
+      - name: Run tests
+        uses: emulator-wtf/run-tests@v0
+        with:
+          api-token: ${{ secrets.EW_API_TOKEN }}
+          app: ./distribution/integration/build/outputs/apk/debug/integration-debug.apk
+          test: ./distribution/integration/build/outputs/apk/androidTest/debug/integration-debug-androidTest.apk
+          outputs-dir: build/test-results
+          devices: |
+            model=NexusLowRes,version=21
+            model=Pixel2,version=23
+      - name: Publish test report
+        uses: mikepenz/action-junit-report@v5
+        if: always() # always run even if the tests fail
+        with:
+          report_paths: 'build/test-results/**/*.xml'
 
   minsdk-test:
     runs-on: ubuntu-latest
