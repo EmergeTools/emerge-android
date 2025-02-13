@@ -222,6 +222,7 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("version", version)
     addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
+    addQueryParameter("binaryIdentifier", getBinaryIdentifier(context))
     addQueryParameter("distributionVersion", DistributionConfig.DISTRIBUTION_VERSION)
   }.build()
 

@@ -60,6 +60,7 @@ include(
   ":benchmark",
   ":distribution:distribution",
   ":distribution:sample",
+  ":distribution:integration",
   ":distribution:sample:app",
 )
 includeBuild("gradle-plugin")
