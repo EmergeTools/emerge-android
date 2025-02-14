@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
+  alias(libs.plugins.shadow.plugin)
 
   signing
   `java-gradle-plugin`
@@ -29,6 +30,11 @@ tasks.withType<KotlinCompile>().configureEach {
   compilerOptions {
     jvmTarget.set(JvmTarget.JVM_11)
   }
+}
+
+tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
+  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
+  archiveClassifier = ""
 }
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
