@@ -37,6 +37,19 @@ tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.Shadow
   archiveClassifier = ""
 }
 
+// This is a huge hack to get included builds to use the shadowJar instead of the regular jar.
+// This is otherwise completely unnecessary.
+configurations.configureEach {
+  outgoing {
+    val removed = artifacts.removeIf {
+      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
+    }
+    if (removed) {
+      artifact(tasks.shadowJar)
+    }
+  }
+}
+
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
 val agpClasspathDir = project.layout.buildDirectory.dir("agp-classpath")
 
@@ -137,6 +150,7 @@ dependencies {
   testImplementation(libs.slf4j.api)
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
+  testRuntimeOnly(gradleApi())
 
   functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
