@@ -7,7 +7,7 @@ import android.util.Base64
 import java.io.RandomAccessFile
 import java.nio.charset.StandardCharsets
 
-private const val EOCD_MINIUM_SIZE = 22
+private const val EOCD_MINIMUM_SIZE = 22
 private const val EOCD_MAGIC_LE = 0x06054b50
 private val EOCD_MAGIC_BE = Integer.reverseBytes(EOCD_MAGIC_LE)
 
@@ -45,7 +45,7 @@ fun getBinaryIdentifierFromApk(fd: RandomAccessFile): String? {
   // We make some assumptions below to minimize complexity since setting
   // binaryIdentifier is not critical. The first such assumption is assuming
   // no zip comment:
-  val startOfEocd = end - EOCD_MINIUM_SIZE
+  val startOfEocd = end - EOCD_MINIMUM_SIZE
 
   // Find the start of the central directory:
   fd.seek(startOfEocd)
