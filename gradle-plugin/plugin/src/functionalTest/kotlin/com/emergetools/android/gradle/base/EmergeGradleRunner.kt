@@ -1,11 +1,13 @@
 package com.emergetools.android.gradle.base
 
+import com.autonomousapps.kit.GradleBuilder
 import com.emergetools.android.gradle.EmergePluginTest
 import okhttp3.HttpUrl
 import okhttp3.mockwebserver.MockWebServer
 import org.gradle.internal.impldep.com.google.common.io.Files
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
+import org.gradle.util.GradleVersion
 import org.gradle.util.internal.VersionNumber
 import java.io.File
 
@@ -38,8 +40,6 @@ class EmergeGradleRunner private constructor(
     fun create(projectDir: String): EmergeGradleRunner = EmergeGradleRunner(projectDir)
   }
 
-  private val gradleRunner = GradleRunner.create()
-
   private val baseUrl: HttpUrl
     get() = server.url("/") // Starts the server
 
@@ -56,6 +56,10 @@ class EmergeGradleRunner private constructor(
 
   private var environment: Map<String, String> = emptyMap()
 
+  private var gradleVersion: GradleVersion? = null
+
+  private var withDebug = false
+
   fun withArguments(vararg arguments: String) =
     apply {
       this.arguments = arguments.toList()
@@ -68,14 +72,13 @@ class EmergeGradleRunner private constructor(
 
   fun withGradleVersion(version: String) =
     apply {
-      gradleRunner.withGradleVersion(version)
+      gradleVersion = GradleVersion.version(version)
     }
 
   @Suppress("unused")
-  fun withDebug(flag: Boolean) =
-    apply {
-      gradleRunner.withDebug(flag)
-    }
+  fun withDebug(flag: Boolean) {
+    withDebug = flag
+  }
 
   fun withAndroidGradlePluginVersion(version: String) =
     apply {
@@ -115,7 +118,7 @@ class EmergeGradleRunner private constructor(
       this.environment = mapOf(*pairs)
     }
 
-  private fun preBuild() {
+  private fun preBuild(): GradleRunner {
     @Suppress("DEPRECATION")
     tempProjectDir = Files.createTempDir()
     testProjectDir(projectDir).copyRecursively(tempProjectDir!!)
@@ -137,14 +140,18 @@ class EmergeGradleRunner private constructor(
         // Turns off repository discovery to test projects that don't use Git
         "GIT_DIR" to tempProjectDir!!.path,
       )
-    gradleRunner
-      .withProjectDir(tempProjectDir)
+    if (gradleVersion == null) {
+      gradleVersion = GradleVersion.current()
+    }
+    val runner = GradleBuilder.runner(gradleVersion!!, tempProjectDir!!)
+    return runner
+      .withDebug(withDebug)
       .withArguments(arguments)
       .withEnvironment(System.getenv() + customEnvironment)
       // Must be called first in order to set the default plugin classpath.
       .withPluginClasspath()
       .withPluginClasspath(
-        gradleRunner.pluginClasspath +
+        runner.pluginClasspath +
           androidGradlePluginClasspath(androidGradlePluginVersion) +
           kotlinAndroidGradlePluginClasspath(kotlinAndroidGradlePluginVersion),
       )
@@ -186,8 +193,7 @@ class EmergeGradleRunner private constructor(
   }
 
   private fun gradleRunnerBuild(buildReceiver: GradleRunner.() -> BuildResult): BuildResult {
-    preBuild()
-    val result = gradleRunner.buildReceiver()
+    val result = preBuild().buildReceiver()
     assertions?.invoke(result, server)
     postBuild()
     return result
