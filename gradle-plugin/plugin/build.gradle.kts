@@ -7,6 +7,7 @@ plugins {
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
+  alias(libs.plugins.autonomousapps.testkit)
 
   `java-gradle-plugin`
   `maven-publish`
@@ -72,24 +73,17 @@ val writeSupportedVersionsFiles = tasks.register("writeSupportedVersionsFiles") 
     }
   }
 }
-
-val functionalTest: SourceSet by sourceSets.creating {
-  // The classpath files are added as resources so that the test code can access them.
-  resources {
-    srcDir(writeSupportedVersionsFiles)
+sourceSets {
+  functionalTest {
+    // The classpath files are added as resources so that the test code can access them.
+    resources {
+      srcDir(writeSupportedVersionsFiles)
+    }
   }
 }
 
-val functionalTestTask =
-  tasks.register<Test>("functionalTest") {
-    description = "Runs the functional tests."
-    group = "verification"
-    testClassesDirs = functionalTest.output.classesDirs
-    classpath = functionalTest.runtimeClasspath
-  }
-
 tasks.check {
-  dependsOn(functionalTestTask, tasks.validatePlugins)
+  dependsOn(tasks.validatePlugins)
 }
 
 val perfProjectTemplateResDir = project.layout.buildDirectory.dir("generated/performance-project-template/")
@@ -109,6 +103,11 @@ detekt {
   buildUponDefaultConfig = true
   config.setFrom(rootProject.layout.projectDirectory.file("../detekt/detekt.yml"))
   baseline = rootProject.layout.projectDirectory.file("detekt/baseline.xml").asFile
+}
+
+gradleTestKitSupport {
+  withSupportLibrary()
+  withTruthLibrary()
 }
 
 dependencies {
@@ -154,7 +153,6 @@ gradlePlugin {
       tags = listOf("emerge", "emergetools", "android", "upload")
     }
   }
-  testSourceSets(functionalTest)
 }
 
 val emergeBaseUrl: String? by project
