@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle
 
+import com.autonomousapps.kit.truth.TestKitTruth
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import org.junit.jupiter.api.Test
