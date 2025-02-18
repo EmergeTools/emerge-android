@@ -1,20 +1,16 @@
-name: Gradle plugin release deploy
+name: Gradle plugin snapshot deploy
 
 on:
-  release:
-    types: [ published ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
   deploy-gradle-plugin:
 
     runs-on: ubuntu-latest
 
-    # Only run when the tag begins with the string "gradle-plugin-"
-    if: ${{ startsWith(github.event.release.tag_name, 'gradle-plugin-') }}
-
     env:
-      GRADLE_PUBLISH_KEY: ${{ secrets.GRADLE_PUBLISH_KEY }}
-      GRADLE_PUBLISH_SECRET: ${{ secrets.GRADLE_PUBLISH_SECRET }}
       OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
       OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
@@ -29,7 +25,5 @@ jobs:
           distribution: 'adopt'
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Deploy plugin
-        run: ./gradlew :gradle-plugin:plugin:publishPlugins
-      - name: Deploy plugin to maven central
-        run: ./gradlew :gradle-plugin:plugin:publishAllPublicationsToMavenCentralRepository
+      - name: Deploy plugin snapshot to Sonatype Snapshots
+        run: ./gradlew :gradle-plugin:plugin:publishAllPublicationsToSonatypeSnapshotsRepository
