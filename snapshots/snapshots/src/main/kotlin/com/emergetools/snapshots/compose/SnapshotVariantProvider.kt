@@ -20,14 +20,10 @@ import androidx.compose.ui.platform.LocalInspectionMode
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
+import androidx.core.text.TextUtilsCompat
+import androidx.core.view.ViewCompat
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
-
-private val RTL_LANGUAGES = setOf(
-  "ar", // Arabic
-  "he", // Hebrew (iw is legacy code)
-  "iw",
-)
 
 @Composable
 fun SnapshotVariantProvider(
@@ -61,8 +57,11 @@ fun SnapshotVariantProvider(
     }
   }
 
-  val layoutDirection =
-    if (locale.language in RTL_LANGUAGES) LayoutDirection.Rtl else LayoutDirection.Ltr
+  val layoutDirection = if (TextUtilsCompat.getLayoutDirectionFromLocale(locale) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+    LayoutDirection.Rtl
+  } else {
+    LayoutDirection.Ltr
+  }
 
   val providedValues = arrayOf(
     LocalInspectionMode provides true,
