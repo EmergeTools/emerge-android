@@ -139,7 +139,7 @@ class SnapshotVariantContextWrapper(
 // Instead, we can manually split the locale string ourselves and pass into the appropriate constructor
 // which seems to work better.
 // Android Studio has completely separate code for parsing locale codes.
-fun localeForLanguageCode(code: String): Locale {
+  fun localeForLanguageCode(code: String): Locale {
   val normalizedCode = code.replace("_", "-")
   val split = normalizedCode.split("-")
 
