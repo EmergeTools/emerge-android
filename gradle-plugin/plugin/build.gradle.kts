@@ -131,9 +131,10 @@ dependencies {
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
 
-  "functionalTestImplementation"(project(":plugin"))
-  "functionalTestImplementation"(libs.okhttp.mockwebserver)
-  "functionalTestImplementation"(libs.kotlinx.serialization)
+  functionalTestImplementation(project(":plugin"))
+  functionalTestImplementation(libs.okhttp.mockwebserver)
+  functionalTestImplementation(libs.kotlinx.serialization)
+  functionalTestImplementation(libs.junit5.jupiter)
 
   detektPlugins(libs.detekt.formatting)
 }
