@@ -1,4 +1,4 @@
-name: Gradle plugin release deploy
+name: Gradle Plugin Release Deploy
 
 on:
   release:
