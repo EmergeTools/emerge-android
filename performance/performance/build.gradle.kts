@@ -54,7 +54,7 @@ android {
 }
 
 dependencies {
-  implementation(libs.junit)
+  implementation(libs.junit4)
 
   // Only use for local debugging & testing leveraging their Perfetto utils
   implementation(libs.androidx.benchmark.common)

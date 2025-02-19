@@ -35,5 +35,5 @@ dependencies {
   implementation(libs.compose.material)
 
   androidTestImplementation(libs.compose.runtime)
-  androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.junit4)
 }

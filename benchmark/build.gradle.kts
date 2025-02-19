@@ -43,7 +43,7 @@ android {
 dependencies {
   androidTestImplementation(libs.androidx.test.runner)
   androidTestImplementation(libs.androidx.junit)
-  androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.junit4)
   androidTestImplementation(libs.androidx.benchmark.junit4)
   androidTestImplementation(projects.reaper.reaper)
 }
