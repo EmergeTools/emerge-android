@@ -1,41 +1,46 @@
 package com.emergetools.android.gradle
 
+import com.autonomousapps.kit.GradleBuilder
+import com.autonomousapps.kit.truth.TestKitTruth
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_AGP_7_VERSION
+import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.mocks.getEmergeDispatcher
+import com.emergetools.android.gradle.projects.SimpleGradleProject
 import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
 import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
 import junit.framework.TestCase.assertEquals
 import kotlinx.serialization.json.Json
 import kotlinx.serialization.json.decodeFromStream
+import okhttp3.mockwebserver.MockWebServer
+import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
   fun simpleBundle() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(GradleVersion.current(), project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(runner).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun simpleBundleAgp7_3_0() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.create(this, LATEST_AGP_7_VERSION)
+    val runner = EmergeGradleRunner2(GradleVersion.version("7.5.1"), project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
-      .withGradleVersion("7.5.1")
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(runner).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
