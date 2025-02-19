@@ -70,5 +70,5 @@ dependencies {
   androidTestImplementation(projects.snapshots.snapshots)
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.compose.ui)
-  androidTestImplementation(libs.junit)
+  androidTestImplementation(libs.junit4)
 }

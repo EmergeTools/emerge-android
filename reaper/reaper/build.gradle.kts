@@ -49,11 +49,9 @@ dependencies {
 
   testImplementation(libs.google.truth)
 
-  testImplementation(libs.junit.jupiter.api)
-  testImplementation(libs.junit.jupiter.params)
+  testImplementation(libs.junit5.jupiter)
   testImplementation(libs.mockito)
   testImplementation(libs.mockito.kotlin)
-  testRuntimeOnly(libs.junit.jupiter.engine)
 }
 
 tasks.withType<Test> {

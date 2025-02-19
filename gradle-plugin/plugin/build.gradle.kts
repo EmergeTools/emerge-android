@@ -129,17 +129,11 @@ dependencies {
   implementation(libs.okhttp)
 
   testImplementation(libs.google.truth)
-  testImplementation(libs.junit)
-  testImplementation(libs.junit.jupiter)
-  testImplementation(libs.junit.jupiter.api)
-  testRuntimeOnly(libs.junit.jupiter.engine)
-  testRuntimeOnly(libs.junit.platform.launcher)
+  testImplementation(libs.junit5.jupiter)
 
   "functionalTestImplementation"(project(":plugin"))
-  "functionalTestImplementation"(libs.junit.jupiter.api)
   "functionalTestImplementation"(libs.okhttp.mockwebserver)
   "functionalTestImplementation"(libs.kotlinx.serialization)
-  "functionalTestRuntimeOnly"(libs.junit.jupiter.engine)
 
   detektPlugins(libs.detekt.formatting)
 }
