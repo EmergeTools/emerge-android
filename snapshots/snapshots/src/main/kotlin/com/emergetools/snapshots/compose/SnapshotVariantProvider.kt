@@ -25,7 +25,8 @@ import java.util.Locale
 
 private val RTL_LANGUAGES = setOf(
   "ar", // Arabic
-  "he", "iw", // Hebrew (iw is legacy code)
+  "he", // Hebrew (iw is legacy code)
+  "iw",
 )
 
 @Composable
@@ -60,7 +61,8 @@ fun SnapshotVariantProvider(
     }
   }
 
-  val layoutDirection = if (locale.language in RTL_LANGUAGES) LayoutDirection.Rtl else LayoutDirection.Ltr
+  val layoutDirection =
+    if (locale.language in RTL_LANGUAGES) LayoutDirection.Rtl else LayoutDirection.Ltr
 
   val providedValues = arrayOf(
     LocalInspectionMode provides true,
@@ -80,7 +82,8 @@ fun SnapshotVariantProvider(
           val color = config.backgroundColor?.let { Color(it) } ?: Color.White
           Modifier.background(color)
         } ?: Modifier
-      ).clip(deviceSpec?.shape ?: RectangleShape)
+      )
+      .clip(deviceSpec?.shape ?: RectangleShape)
 
     Box(modifier = modifier) {
       content()
@@ -139,7 +142,8 @@ class SnapshotVariantContextWrapper(
 // Instead, we can manually split the locale string ourselves and pass into the appropriate constructor
 // which seems to work better.
 // Android Studio has completely separate code for parsing locale codes.
-  fun localeForLanguageCode(code: String): Locale {
+@Suppress("MagicNumber")
+fun localeForLanguageCode(code: String): Locale {
   val normalizedCode = code.replace("_", "-")
   val split = normalizedCode.split("-")
 
@@ -153,6 +157,7 @@ class SnapshotVariantContextWrapper(
         Locale(split[0], split[1])
       }
     }
+
     else -> Locale.forLanguageTag(normalizedCode)
   }
 }

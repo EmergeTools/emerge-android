@@ -99,5 +99,3 @@ fun PortraitLandscapeViewPreview() {
     PortraitLandscapeView()
   }
 }
-
-
