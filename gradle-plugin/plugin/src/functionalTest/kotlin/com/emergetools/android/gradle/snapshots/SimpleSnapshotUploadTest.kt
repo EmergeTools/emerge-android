@@ -21,7 +21,7 @@ class SimpleSnapshotUploadTest : EmergePluginTest() {
 
   @Test
   fun simpleUploadSnapshotBundle_AGP_7_2_0() {
-    EmergeGradleRunner.create("simple-agp-7.2.0")
+    EmergeGradleRunner.create("simple")
       .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
       .withGradleVersion("7.5.1")
       .withArguments("emergeUploadSnapshotBundleDebug")
