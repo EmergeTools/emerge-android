@@ -10,4 +10,8 @@ import androidx.compose.ui.tooling.preview.Preview
   name = "German",
   locale = "de"
 )
+@Preview(
+  name = "Arabic",
+  locale = "ar"
+)
 annotation class LocalePreviews

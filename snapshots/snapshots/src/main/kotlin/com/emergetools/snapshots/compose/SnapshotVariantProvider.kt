@@ -17,9 +17,16 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
+
+private val RTL_LANGUAGES = setOf(
+  "ar", // Arabic
+  "he", "iw", // Hebrew (iw is legacy code)
+)
 
 @Composable
 fun SnapshotVariantProvider(
@@ -43,6 +50,7 @@ fun SnapshotVariantProvider(
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
     setLocale(locale)
+    setLayoutDirection(locale)
     parseDevicePreviewString(config.device)?.orientation?.let {
       orientation = when (it) {
         "landscape" -> Configuration.ORIENTATION_LANDSCAPE
@@ -52,11 +60,14 @@ fun SnapshotVariantProvider(
     }
   }
 
+  val layoutDirection = if (locale.language in RTL_LANGUAGES) LayoutDirection.Rtl else LayoutDirection.Ltr
+
   val providedValues = arrayOf(
     LocalInspectionMode provides true,
     LocalContext provides wrappedContext,
     LocalConfiguration provides localConfiguration,
     LocalDensity provides localDensity,
+    LocalLayoutDirection provides layoutDirection,
   )
 
   CompositionLocalProvider(
@@ -98,6 +109,7 @@ class SnapshotVariantContextWrapper(
     val context = super.createConfigurationContext(overrideConfiguration)
     newLocale?.let {
       overrideConfiguration.setLocale(it)
+      overrideConfiguration.setLayoutDirection(it)
     }
     newUiMode?.let {
       overrideConfiguration.uiMode =
@@ -112,6 +124,7 @@ class SnapshotVariantContextWrapper(
 
     newLocale?.let {
       config.setLocale(it)
+      config.setLayoutDirection(it)
     }
 
     newUiMode?.let {
@@ -127,9 +140,19 @@ class SnapshotVariantContextWrapper(
 // which seems to work better.
 // Android Studio has completely separate code for parsing locale codes.
 fun localeForLanguageCode(code: String): Locale {
-  val split = code.split("-")
-  if (split.size > 1) {
-    return Locale(split[0], split[1])
+  val normalizedCode = code.replace("_", "-")
+  val split = normalizedCode.split("-")
+
+  return when {
+    split.size > 1 -> {
+      if (split[1].startsWith("r") && split[1].length == 3) {
+        // Handle Android resource-style region codes (e.g., es-rES)
+        Locale(split[0], split[1].substring(1))
+      } else {
+        // Standard BCP 47 language tags (e.g., ar-EG)
+        Locale(split[0], split[1])
+      }
+    }
+    else -> Locale.forLanguageTag(normalizedCode)
   }
-  return Locale.forLanguageTag(code)
 }
