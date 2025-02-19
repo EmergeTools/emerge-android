@@ -38,7 +38,7 @@ class UtilsTest {
   fun `makes es-rES locale`() {
     val locale = localeForLanguageCode("es-rES")
     assertEquals("es", locale.language)
-    assertEquals("RES", locale.country)
+    assertEquals("ES", locale.country)
   }
 
   @Test

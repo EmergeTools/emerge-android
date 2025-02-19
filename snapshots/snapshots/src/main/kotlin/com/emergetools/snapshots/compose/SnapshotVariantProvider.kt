@@ -17,7 +17,11 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalInspectionMode
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.LayoutDirection
+import androidx.core.text.TextUtilsCompat
+import androidx.core.view.ViewCompat
 import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
 import java.util.Locale
 
@@ -43,6 +47,7 @@ fun SnapshotVariantProvider(
   val localConfiguration = Configuration(LocalConfiguration.current).apply {
     config.uiMode?.let { uiMode = it }
     setLocale(locale)
+    setLayoutDirection(locale)
     parseDevicePreviewString(config.device)?.orientation?.let {
       orientation = when (it) {
         "landscape" -> Configuration.ORIENTATION_LANDSCAPE
@@ -52,11 +57,18 @@ fun SnapshotVariantProvider(
     }
   }
 
+  val layoutDirection = if (TextUtilsCompat.getLayoutDirectionFromLocale(locale) == ViewCompat.LAYOUT_DIRECTION_RTL) {
+    LayoutDirection.Rtl
+  } else {
+    LayoutDirection.Ltr
+  }
+
   val providedValues = arrayOf(
     LocalInspectionMode provides true,
     LocalContext provides wrappedContext,
     LocalConfiguration provides localConfiguration,
     LocalDensity provides localDensity,
+    LocalLayoutDirection provides layoutDirection,
   )
 
   CompositionLocalProvider(
@@ -69,7 +81,8 @@ fun SnapshotVariantProvider(
           val color = config.backgroundColor?.let { Color(it) } ?: Color.White
           Modifier.background(color)
         } ?: Modifier
-      ).clip(deviceSpec?.shape ?: RectangleShape)
+      )
+      .clip(deviceSpec?.shape ?: RectangleShape)
 
     Box(modifier = modifier) {
       content()
@@ -98,6 +111,7 @@ class SnapshotVariantContextWrapper(
     val context = super.createConfigurationContext(overrideConfiguration)
     newLocale?.let {
       overrideConfiguration.setLocale(it)
+      overrideConfiguration.setLayoutDirection(it)
     }
     newUiMode?.let {
       overrideConfiguration.uiMode =
@@ -112,6 +126,7 @@ class SnapshotVariantContextWrapper(
 
     newLocale?.let {
       config.setLocale(it)
+      config.setLayoutDirection(it)
     }
 
     newUiMode?.let {
@@ -126,10 +141,22 @@ class SnapshotVariantContextWrapper(
 // Instead, we can manually split the locale string ourselves and pass into the appropriate constructor
 // which seems to work better.
 // Android Studio has completely separate code for parsing locale codes.
+@Suppress("MagicNumber")
 fun localeForLanguageCode(code: String): Locale {
-  val split = code.split("-")
-  if (split.size > 1) {
-    return Locale(split[0], split[1])
+  val normalizedCode = code.replace("_", "-")
+  val split = normalizedCode.split("-")
+
+  return when {
+    split.size > 1 -> {
+      if (split[1].startsWith("r") && split[1].length == 3) {
+        // Handle Android resource-style region codes (e.g., es-rES)
+        Locale(split[0], split[1].substring(1))
+      } else {
+        // Standard BCP 47 language tags (e.g., ar-EG)
+        Locale(split[0], split[1])
+      }
+    }
+
+    else -> Locale.forLanguageTag(normalizedCode)
   }
-  return Locale.forLanguageTag(code)
 }
