@@ -25,6 +25,10 @@ abstract class EmergePluginTest {
     server.shutdown()
   }
 
+  protected fun enableServerTimeout() {
+    server.dispatcher = getEmergeDispatcher(baseUrl, true)
+  }
+
   protected fun EmergeGradleRunner.withDefaultServer(timeout: Boolean = false) =
     withServer { baseUrl ->
       this.dispatcher = getEmergeDispatcher(baseUrl, timeout)

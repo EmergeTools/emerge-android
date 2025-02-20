@@ -14,6 +14,7 @@ import java.io.File
 /**
  * One instance per build.
  */
+@Deprecated("Use EmergeGradleRunner2 instead")
 class EmergeGradleRunner private constructor(
   private val projectDir: String,
 ) {

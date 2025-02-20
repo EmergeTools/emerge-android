@@ -8,9 +8,9 @@ import java.io.File
 /**
  * Like EmergeGradleRunner but decouples the runner from the server and the gradle project
  */
-class EmergeGradleRunner2(gradleVersion: GradleVersion = GradleVersion.current(), projectDir: File) {
+class EmergeGradleRunner2(projectDir: File, gradleVersion: GradleVersion = GradleVersion.current()) {
 
-  private val runner = GradleBuilder.runner(gradleVersion, projectDir)
+  val runner = GradleBuilder.runner(gradleVersion, projectDir)
 
   fun withArguments(vararg args: String): EmergeGradleRunner2 {
     runner.withArguments(*args)
@@ -21,4 +21,7 @@ class EmergeGradleRunner2(gradleVersion: GradleVersion = GradleVersion.current()
     return runner.build()
   }
 
+  fun buildAndFail() : BuildResult {
+    return runner.buildAndFail()
+  }
 }

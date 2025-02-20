@@ -10,7 +10,7 @@ import com.autonomousapps.kit.gradle.android.AndroidBlock
 import com.emergetools.android.gradle.EmergePluginTest
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 
-class SimpleGradleProject(agpVersion : String, val baseUrl: String) : AbstractGradleProject() {
+class SimpleGradleProject(agpVersion : String, private val baseUrl: String) : AbstractGradleProject() {
 
   companion object {
     fun create(
@@ -31,19 +31,7 @@ class SimpleGradleProject(agpVersion : String, val baseUrl: String) : AbstractGr
           android = AndroidBlock.defaultAndroidAppBlock(false, "com.example")
           additions = """emerge {
                            apiToken = 'abcdef123'
-
-                           vcs {
-
-                             sha = 'testSha'
-                             baseSha = 'testBaseSha'
-                             previousSha = 'testPreviousSha'
-                             branchName = 'testBranchName'
-                             gitHub {
-                               repoOwner = 'repoOwner'
-                               repoName = 'repoName'
-                             }
-                           }
-                         }""".trimIndent()
+                         }""".trimMargin()
         }
         manifest = AndroidManifest.simpleApp()
       }
