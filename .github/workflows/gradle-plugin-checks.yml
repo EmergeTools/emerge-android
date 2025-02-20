@@ -1,4 +1,4 @@
-name: gradle plugin checks
+name: Gradle Plugin Checks
 
 on:
   push:

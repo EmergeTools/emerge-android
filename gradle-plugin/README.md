@@ -449,7 +449,7 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 
 ### Releasing a new version
 
-1. Update the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
+1. Remove `-SNAPSHOT` and/or update the version from/of the `emerge-gradle-plugin` version in `/gradle/libs.versions.toml`
 1. Update the `/gradle-plugin/CHANGELOG.md`
 1. `gt c -am "Prepare for Gradle plugin release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 1. Alt
@@ -464,6 +464,43 @@ Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK locati
 1. Tag version `gradle-plugin-vX.Y.Z`
 1. Release title `Gradle Plugin vX.Y.Z`
 1. Paste the content from `/gradle-plugin/CHANGELOG.md` as the description
+1. Bump version in `/gradle/libs.versions.toml`, add `-SNAPSHOT`, commit the changes with the message "Prepare for next development iteration" and push
 
 The `gradle-plugin-release` workflow will automatically publish the new version to the Gradle Plugin
 portal upon new release publish.
+
+### Publishing snapshots
+
+Snapshots are automatically published from `main` whenever the version in
+`/gradle/libs.versions.toml` contains `-SNAPSHOT`.
+
+You can also publish a snapshot from any branch using the workflow trigger.
+Here's how:
+1. Add a unique version name that ends with `-SNAPSHOT` in `/gradle/libs.versions.toml`. For example, `4.0.10-shadow-SNAPSHOT`. This ensures that the regular snapshots published from main will not override your branch's snapshot.
+2. Push the branch to Github
+3. Go to the [Gradle plugin snapshot deploy workflow](https://github.com/EmergeTools/emerge-android/actions/workflows/gradle-plugin-snapshot-deploy.yml) in Github
+4. Click `Run workflow` and pick you branch from the dropdown. Then click `Run workflow` again in the dropdown.
+5. The snapshot will be published to `https://s01.oss.sonatype.org/content/repositories/snapshots/`
+
+### Consuming snapshots
+
+Add the following to your `settings.gradle(.kts)` to consume snapshots:
+```kotlin
+pluginManagement {
+  repositories {
+    // ... other repositories
+    maven(url = "https://s01.oss.sonatype.org/content/repositories/snapshots/")
+  }
+}
+```
+```groovy
+pluginManagement {
+  repositories {
+    // ... other repositories
+    maven {
+      url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots")
+    }
+  }
+}
+```
+Make sure your version matches the version you published in the previous step.
