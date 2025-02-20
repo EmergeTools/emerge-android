@@ -67,20 +67,10 @@ class EmergeGradleRunner private constructor(
       this.arguments = arguments.toList()
     }
 
-  fun withDebugTasks() =
-    apply {
-      arguments = arguments + "-PemergeDebug"
-    }
-
   fun withGradleVersion(version: String) =
     apply {
       gradleVersion = GradleVersion.version(version)
     }
-
-  @Suppress("unused")
-  fun withDebug(flag: Boolean) {
-    withDebug = flag
-  }
 
   fun withAndroidGradlePluginVersion(version: String) =
     apply {

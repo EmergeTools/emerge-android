@@ -13,7 +13,7 @@ import java.io.File
 class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
   fun simpleBundle() {
-    val project = SimpleGradleProject.create(this)
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
       .build()
@@ -24,7 +24,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun simpleBundleAgp7_3_0() {
-    val project = SimpleGradleProject.create(this, LATEST_AGP_7_VERSION)
+    val project = SimpleGradleProject.createWithVcsInExtension(this, LATEST_AGP_7_VERSION)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir, GradleVersion.version("7.5.1"))
       .withArguments("emergeUploadReleaseAab")
       .build()
@@ -36,7 +36,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
   fun simpleBundleTimeout() {
     enableServerTimeout()
-    val project = SimpleGradleProject.create(this)
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
       .buildAndFail()
@@ -46,7 +46,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun simpleAssemble() {
-    val project = SimpleGradleProject.create(this)
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
       .build()
@@ -58,7 +58,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
   fun simpleAssembleTimeout() {
     enableServerTimeout()
-    val project = SimpleGradleProject.create(this)
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
       .buildAndFail()
@@ -68,7 +68,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun `Assert explicit sha overwrites GitHub convention sha`() {
-    val project = SimpleGradleProject.create(this)
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("logExtension")
       .withGithubPR()
@@ -76,7 +76,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
 
     assertThat(runner).task(":app:logExtension").succeeded()
 
-    assertThat(runner.output).contains("""
+    assertThat(runner).output().contains("""
       ╔═══════════════════════════════════════════════╗
       ║ vcsOptions (optional, defaults to Git values) ║
       ╠═══════════════════════════════════════════════╝
@@ -86,14 +86,5 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       """.trimIndent())
   }
 
-  fun EmergeGradleRunner2.withGithubPR() : EmergeGradleRunner2 {
-    val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event.json")!!
-    val jsonFile = File(resource.toURI())
 
-     runner.withEnvironment(mapOf(
-      "GITHUB_EVENT_NAME" to "pull_request",
-      "GITHUB_EVENT_PATH" to jsonFile.path,
-    ))
-    return this
-  }
 }

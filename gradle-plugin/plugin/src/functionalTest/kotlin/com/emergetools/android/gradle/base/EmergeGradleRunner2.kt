@@ -17,6 +17,29 @@ class EmergeGradleRunner2(projectDir: File, gradleVersion: GradleVersion = Gradl
     return this
   }
 
+  fun withGithubPR() : EmergeGradleRunner2 {
+    val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event.json")!!
+    val jsonFile = File(resource.toURI())
+
+    runner.withEnvironment(mapOf(
+      "GITHUB_EVENT_NAME" to "pull_request",
+      "GITHUB_EVENT_PATH" to jsonFile.path,
+    ))
+    return this
+  }
+
+  fun withGitHubPushEvent(): EmergeGradleRunner2 {
+    val resource = this.javaClass.getResource("/github-event-mocks/mock_push_event.json")!!
+    val jsonFile = File(resource.toURI())
+
+    runner.withEnvironment(mapOf(
+      "GITHUB_EVENT_NAME" to "push",
+      "GITHUB_EVENT_PATH" to jsonFile.path,
+      "GITHUB_SHA" to "github_env_sha",
+    ))
+    return this
+  }
+
   fun build(): BuildResult {
     return runner.build()
   }
