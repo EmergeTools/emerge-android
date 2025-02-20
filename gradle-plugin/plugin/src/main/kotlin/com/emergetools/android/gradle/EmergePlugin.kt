@@ -10,7 +10,6 @@ import com.android.build.api.variant.TestAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
 import com.emergetools.android.gradle.tasks.internal.LogExtensionTask
-import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask
 import com.emergetools.android.gradle.tasks.perf.registerGeneratePerfProjectTask
 import com.emergetools.android.gradle.tasks.perf.registerPerformanceTasks
 import com.emergetools.android.gradle.tasks.reaper.registerReaperTasks
@@ -115,10 +114,6 @@ class EmergePlugin : Plugin<Project> {
         if (emergeExtension.snapshotOptions.enabled.getOrElse(true)) {
           registerSnapshotTasks(appProject, emergeExtension, variant, androidTest)
         }
-
-        if (appProject.providers.gradleProperty(EMERGE_DEBUG_TASK_PROPERTY).orNull != null) {
-          registerDebugTasks(appProject, emergeExtension)
-        }
       }
     }
   }
@@ -210,24 +205,6 @@ class EmergePlugin : Plugin<Project> {
     }
   }
 
-  private fun registerDebugTasks(
-    project: Project,
-    extension: EmergePluginExtension,
-  ) {
-    registerSaveExtensionConfigTask(project, extension)
-  }
-
-  private fun registerSaveExtensionConfigTask(
-    project: Project,
-    extension: EmergePluginExtension,
-  ) {
-    project.tasks.register("saveExtensionConfig", SaveExtensionConfigTask::class.java) {
-      it.group = "Emerge debug"
-      it.description = "Saves the Emerge extension configuration to a local file for debugging."
-      it.emergePluginExtension.set(extension)
-    }
-  }
-
   private fun registerReaperTransform(
     project: Project,
     extension: EmergePluginExtension,
@@ -272,8 +249,6 @@ class EmergePlugin : Plugin<Project> {
 
     private const val EMERGE_EXTENSION_NAME = "emerge"
     const val EMERGE_TASK_PREFIX = "emerge"
-
-    private const val EMERGE_DEBUG_TASK_PROPERTY = "emergeDebug"
 
     private const val ANDROID_APPLICATION_PLUGIN_ID = "com.android.application"
     private const val ANDROID_TEST_PLUGIN_ID = "com.android.test"
