@@ -31,6 +31,16 @@ class SimpleGradleProject(agpVersion : String, private val baseUrl: String) : Ab
           android = AndroidBlock.defaultAndroidAppBlock(false, "com.example")
           additions = """emerge {
                            apiToken = 'abcdef123'
+                            vcs {
+                              sha = 'testSha'
+                              baseSha = 'testBaseSha'
+                              previousSha = 'testPreviousSha'
+                              branchName = 'testBranchName'
+                              gitHub {
+                                repoOwner = 'repoOwner'
+                                repoName = 'repoName'
+                              }
+                            }
                          }""".trimMargin()
         }
         manifest = AndroidManifest.simpleApp()

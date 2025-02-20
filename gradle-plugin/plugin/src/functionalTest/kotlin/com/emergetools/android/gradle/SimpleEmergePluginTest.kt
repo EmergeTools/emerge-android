@@ -80,9 +80,9 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       ╔═══════════════════════════════════════════════╗
       ║ vcsOptions (optional, defaults to Git values) ║
       ╠═══════════════════════════════════════════════╝
-      ╠═ sha: github_head_sha
-      ╠═ baseSha: github_base_sha
-      ╠═ previousSha:
+      ╠═ sha: testSha
+      ╠═ baseSha: testBaseSha
+      ╠═ previousSha: testPreviousSha
       """.trimIndent())
   }
 
