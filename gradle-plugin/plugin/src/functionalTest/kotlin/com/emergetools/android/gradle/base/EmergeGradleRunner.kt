@@ -14,9 +14,9 @@ import java.io.File
 /**
  * One instance per build.
  */
+@Deprecated("Use EmergeGradleRunner2 instead")
 class EmergeGradleRunner private constructor(
   private val projectDir: String,
-  private val server: MockWebServer = MockWebServer(),
 ) {
   companion object {
     const val LATEST_AGP_7_VERSION = "7.4.2"
@@ -39,6 +39,8 @@ class EmergeGradleRunner private constructor(
 
     fun create(projectDir: String): EmergeGradleRunner = EmergeGradleRunner(projectDir)
   }
+
+  private val server: MockWebServer = MockWebServer()
 
   private val baseUrl: HttpUrl
     get() = server.url("/") // Starts the server
@@ -86,14 +88,6 @@ class EmergeGradleRunner private constructor(
         "This version of the Android Gradle Plugin is not currently supported."
       }
       androidGradlePluginVersion = version
-    }
-
-  fun withKotlinAndroidGradlePluginVersion(version: String) =
-    apply {
-      check(version in SUPPORTED_KOTLIN_ANDROID_GRADLE_PLUGIN_VERSIONS) {
-        "This version of the Kotlin Android Gradle Plugin is not currently supported."
-      }
-      kotlinAndroidGradlePluginVersion = version
     }
 
   private fun withJavaVersion(version: String) =
@@ -186,6 +180,7 @@ class EmergeGradleRunner private constructor(
   }
 
   private fun postBuild() {
+    // TODO we need to shutdown the server and delete the temp dir even if the test fails
     server.shutdown()
 
     tempProjectDir?.delete()

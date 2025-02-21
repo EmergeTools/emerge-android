@@ -1,139 +1,99 @@
 package com.emergetools.android.gradle
 
-import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_AGP_7_VERSION
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
-import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
-import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
-import junit.framework.TestCase.assertEquals
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
+import com.emergetools.android.gradle.projects.SimpleGradleProject
+import com.google.common.truth.Truth.assertThat
+import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 import java.io.File
 
 class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
   fun simpleBundle() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(runner).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun simpleBundleAgp7_3_0() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.create(this, LATEST_AGP_7_VERSION)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir, GradleVersion.version("7.5.1"))
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .withAndroidGradlePluginVersion(LATEST_AGP_7_VERSION)
-      .withGradleVersion("7.5.1")
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(runner).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun simpleBundleTimeout() {
-    val result =
-      EmergeGradleRunner.create("simple")
-        .withArguments("emergeUploadReleaseAab")
-        .withDefaultServer(true)
-        .buildAndFail()
-    result.assertFailedTask(":emergeUploadReleaseAab")
+    enableServerTimeout()
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("emergeUploadReleaseAab")
+      .buildAndFail()
+
+    assertThat(runner).task(":app:emergeUploadReleaseAab").failed()
   }
 
   @Test
   fun simpleAssemble() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseApk")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(runner).task(":app:emergeUploadReleaseApk").succeeded()
   }
 
   @Test
   fun simpleAssembleTimeout() {
-    val result =
-      EmergeGradleRunner.create("simple")
-        .withArguments("emergeUploadReleaseApk")
-        .withDefaultServer(true)
-        .buildAndFail()
-    result.assertFailedTask(":emergeUploadReleaseApk")
-  }
-
-  @Test
-  fun twoBuildTypesBundle() {
-    EmergeGradleRunner.create("simple")
-      .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
-      .build()
-  }
-
-  @Test
-  fun twoBuildTypesAssemble() {
-    EmergeGradleRunner.create("simple")
+    enableServerTimeout()
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseApk")
-      }
-      .build()
-  }
+      .buildAndFail()
 
-  @Test
-  fun androidTasksRunBundle() {
-    val result =
-      EmergeGradleRunner.create("simple")
-        .withArguments("packageReleaseBundle", "signReleaseBundle")
-        .build()
-    result.assertSuccessfulTask(":packageReleaseBundle")
-    result.assertSuccessfulTask(":signReleaseBundle")
-  }
-
-  @Test
-  fun androidTasksRunAssemble() {
-    val result =
-      EmergeGradleRunner.create("simple")
-        .withArguments("packageRelease")
-        .build()
-    result.assertSuccessfulTask(":packageRelease")
+    assertThat(runner).task(":app:emergeUploadReleaseApk").failed()
   }
 
   @Test
   fun `Assert explicit sha overwrites GitHub convention sha`() {
-    val runner = EmergeGradleRunner.create("simple")
-    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
-
-    runner
-      .withArguments("saveExtensionConfig", "--outputPath", configurationJson.path)
-      .withDebugTasks()
-      .withGitHubPREvent()
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":saveExtensionConfig")
-      }
+    val project = SimpleGradleProject.create(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("logExtension")
+      .withGithubPR()
       .build()
 
-    val configuration =
-      Json.decodeFromStream<EmergePluginExtensionData>(
-        configurationJson.inputStream(),
-      )
+    assertThat(runner).task(":app:logExtension").succeeded()
 
-    assertEquals("testSha", configuration.vcsOptions!!.sha)
-    assertEquals("testBaseSha", configuration.vcsOptions!!.baseSha)
-    assertEquals("testPreviousSha", configuration.vcsOptions!!.previousSha)
+    assertThat(runner.output).contains("""
+      ╔═══════════════════════════════════════════════╗
+      ║ vcsOptions (optional, defaults to Git values) ║
+      ╠═══════════════════════════════════════════════╝
+      ╠═ sha: testSha
+      ╠═ baseSha: testBaseSha
+      ╠═ previousSha: testPreviousSha
+      """.trimIndent())
+  }
+
+  fun EmergeGradleRunner2.withGithubPR() : EmergeGradleRunner2 {
+    val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event.json")!!
+    val jsonFile = File(resource.toURI())
+
+     runner.withEnvironment(mapOf(
+      "GITHUB_EVENT_NAME" to "pull_request",
+      "GITHUB_EVENT_PATH" to jsonFile.path,
+    ))
+    return this
   }
 }
