@@ -13,7 +13,7 @@ import com.emergetools.android.gradle.EmergePluginTest
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 
 class SimpleGradleProject(
-  agpVersion: String,
+  val agpVersion: String,
   private val baseUrl: String,
   private val emergeExtension: String
 ) : AbstractGradleProject() {

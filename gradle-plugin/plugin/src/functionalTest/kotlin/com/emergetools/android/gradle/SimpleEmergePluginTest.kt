@@ -5,10 +5,8 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_A
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.SimpleGradleProject
-import com.google.common.truth.Truth.assertThat
 import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class SimpleEmergePluginTest : EmergePluginTest() {
   @Test
@@ -16,6 +14,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -27,6 +26,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this, LATEST_AGP_7_VERSION)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir, GradleVersion.version("7.5.1"))
       .withArguments("emergeUploadReleaseAab")
+      .withJavaVersionFromAgp(LATEST_AGP_7_VERSION)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -39,6 +39,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
+      .withJavaVersionFromAgp(project.agpVersion)
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseAab").failed()
@@ -49,6 +50,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -61,6 +63,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
+      .withJavaVersionFromAgp(project.agpVersion)
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseApk").failed()
@@ -71,6 +74,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("logExtension")
+      .withJavaVersionFromAgp(project.agpVersion)
       .withGithubPR()
       .build()
 
@@ -85,6 +89,4 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       ╠═ previousSha: testPreviousSha
       """.trimIndent())
   }
-
-
 }

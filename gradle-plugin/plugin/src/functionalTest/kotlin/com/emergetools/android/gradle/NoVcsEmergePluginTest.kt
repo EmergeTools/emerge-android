@@ -77,6 +77,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("logExtension")
       .withGithubPR()
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertThat(runner).task(":app:logExtension").succeeded()
@@ -101,6 +102,7 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("logExtension")
       .withGitHubPushEvent()
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertThat(runner).apply {
