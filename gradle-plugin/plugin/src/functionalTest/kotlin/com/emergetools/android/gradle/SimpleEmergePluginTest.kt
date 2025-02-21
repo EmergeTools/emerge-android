@@ -14,7 +14,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -26,7 +25,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this, LATEST_AGP_7_VERSION)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir, GradleVersion.version("7.5.1"))
       .withArguments("emergeUploadReleaseAab")
-      .withJavaVersionFromAgp(LATEST_AGP_7_VERSION)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -39,7 +37,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withJavaVersionFromAgp(project.agpVersion)
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseAab").failed()
@@ -50,7 +47,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
-      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -63,7 +59,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
-      .withJavaVersionFromAgp(project.agpVersion)
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseApk").failed()
@@ -74,7 +69,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("logExtension")
-      .withJavaVersionFromAgp(project.agpVersion)
       .withGithubPR()
       .build()
 

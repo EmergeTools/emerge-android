@@ -2,7 +2,6 @@ package com.emergetools.android.gradle.base
 
 import com.autonomousapps.kit.GradleBuilder
 import org.gradle.testkit.runner.BuildResult
-import org.gradle.testkit.runner.GradleRunner
 import org.gradle.util.GradleVersion
 import java.io.File
 
@@ -19,20 +18,6 @@ class EmergeGradleRunner2(projectDir: File, gradleVersion: GradleVersion = Gradl
   fun withArguments(vararg args: String): EmergeGradleRunner2 {
     runner.withArguments(*args)
     return this
-  }
-
-  // TODO we should stop using this and instead use Java toolchain support
-  fun withJavaVersionFromAgp(agpVersion: String): EmergeGradleRunner2 {
-    val javaVersion = if (agpVersion.startsWith("7")) {
-      "11"
-    } else {
-      "17"
-    }
-    return apply {
-      val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
-      val javaHomeEnvKey = "JAVA_HOME_${javaVersion}_$arch"
-      runner.withArguments(runner.arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}")
-    }
   }
 
   fun withGithubPR(): EmergeGradleRunner2 {
