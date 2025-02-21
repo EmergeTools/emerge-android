@@ -147,10 +147,8 @@ dependencies {
   implementation(libs.kotlinx.serialization)
   implementation(libs.okhttp)
 
-  testImplementation(libs.slf4j.api)
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
-  testRuntimeOnly(gradleApi())
 
   functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
