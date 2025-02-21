@@ -2,6 +2,7 @@ package com.emergetools.android.gradle.base
 
 import com.autonomousapps.kit.GradleBuilder
 import org.gradle.testkit.runner.BuildResult
+import org.gradle.testkit.runner.GradleRunner
 import org.gradle.util.GradleVersion
 import java.io.File
 
@@ -9,11 +10,61 @@ import java.io.File
  * Like EmergeGradleRunner but decouples the runner from the server and the gradle project
  */
 class EmergeGradleRunner2(projectDir: File, gradleVersion: GradleVersion = GradleVersion.current()) {
+  private val runner = GradleBuilder.runner(gradleVersion, projectDir)
 
-  val runner = GradleBuilder.runner(gradleVersion, projectDir)
+  init {
+    appendEnvironment(System.getenv())
+  }
 
   fun withArguments(vararg args: String): EmergeGradleRunner2 {
     runner.withArguments(*args)
+    return this
+  }
+
+  // TODO we should stop using this and instead use Java toolchain support
+  fun withJavaVersionFromAgp(agpVersion: String): EmergeGradleRunner2 {
+    val javaVersion = if (agpVersion.startsWith("7")) {
+      "11"
+    } else {
+      "17"
+    }
+    return apply {
+      val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
+      val javaHomeEnvKey = "JAVA_HOME_${javaVersion}_$arch"
+      runner.withArguments(runner.arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}")
+    }
+  }
+
+  fun withGithubPR(): EmergeGradleRunner2 {
+    val resource = this.javaClass.getResource("/github-event-mocks/mock_pr_event.json")!!
+    val jsonFile = File(resource.toURI())
+
+    return appendEnvironment(
+      "GITHUB_EVENT_NAME" to "pull_request",
+      "GITHUB_EVENT_PATH" to jsonFile.path,
+    )
+  }
+
+  fun withGitHubPushEvent(): EmergeGradleRunner2 {
+    val resource = this.javaClass.getResource("/github-event-mocks/mock_push_event.json")!!
+    val jsonFile = File(resource.toURI())
+
+    return appendEnvironment(
+      "GITHUB_EVENT_NAME" to "push",
+      "GITHUB_EVENT_PATH" to jsonFile.path,
+      "GITHUB_SHA" to "github_env_sha",
+    )
+  }
+
+  private fun appendEnvironment(vararg pairs: Pair<String, String>) : EmergeGradleRunner2 {
+    val currentEnv = runner.environment?.toMutableMap() ?: mutableMapOf()
+    runner.withEnvironment(currentEnv.plus(pairs))
+    return this
+  }
+
+  private fun appendEnvironment(map: Map<String, String>) : EmergeGradleRunner2 {
+    val currentEnv = runner.environment?.toMutableMap() ?: mutableMapOf()
+    runner.withEnvironment(currentEnv.plus(map))
     return this
   }
 

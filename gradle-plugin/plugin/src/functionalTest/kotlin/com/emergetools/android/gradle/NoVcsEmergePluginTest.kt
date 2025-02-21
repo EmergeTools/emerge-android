@@ -1,16 +1,11 @@
 package com.emergetools.android.gradle
 
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
-import com.emergetools.android.gradle.tasks.internal.SaveExtensionConfigTask.Companion.EmergePluginExtensionData
-import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPREvent
-import com.emergetools.android.gradle.utils.EnvUtils.withGitHubPushEvent
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
-import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNull
+import com.emergetools.android.gradle.projects.SimpleGradleProject
 import org.junit.jupiter.api.Test
-import java.io.File
 
 class NoVcsEmergePluginTest : EmergePluginTest() {
   @Test
@@ -78,59 +73,53 @@ class NoVcsEmergePluginTest : EmergePluginTest() {
 
   @Test
   fun `Assert GitHub PR sha overwrites sha`() {
-    val runner = EmergeGradleRunner.create("no-vcs-params")
-    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
-
-    runner
-      .withArguments(
-        "saveExtensionConfig",
-        "--outputPath",
-        configurationJson.path,
-      )
-      .withDebugTasks()
-      .withGitHubPREvent()
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":saveExtensionConfig")
-      }
+    val project = SimpleGradleProject.createWithoutVcsInExtension(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("logExtension")
+      .withGithubPR()
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
-    val configuration =
-      Json.decodeFromStream<EmergePluginExtensionData>(
-        configurationJson.inputStream(),
-      )
+    assertThat(runner).task(":app:logExtension").succeeded()
 
-    assertEquals("github_head_sha", configuration.vcsOptions!!.sha)
-    assertEquals("github_base_sha", configuration.vcsOptions!!.baseSha)
-    assertEquals(null, configuration.vcsOptions!!.previousSha)
-    assertEquals("123", configuration.vcsOptions!!.prNumber)
+    assertThat(runner).output().contains("""
+      ╔═══════════════════════════════════════════════╗
+      ║ vcsOptions (optional, defaults to Git values) ║
+      ╠═══════════════════════════════════════════════╝
+      ╠═ sha: github_head_sha
+      ╠═ baseSha: github_base_sha
+      ╠═ previousSha:
+      """.trimIndent())
+
+    assertThat(runner).output().contains("""
+      ╠═ prNumber: 123
+    """.trimIndent())
   }
 
   @Test
   fun `Assert GitHub push env sha overwrites sha`() {
-    val runner = EmergeGradleRunner.create("no-vcs-params")
-    val configurationJson = File(runner.tempProjectDir, "emerge_config.json")
-
-    runner
-      .withArguments(
-        "saveExtensionConfig",
-        "--outputPath",
-        configurationJson.path,
-      )
-      .withDebugTasks()
+    val project = SimpleGradleProject.createWithoutVcsInExtension(this)
+    val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("logExtension")
       .withGitHubPushEvent()
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":saveExtensionConfig")
-      }
+      .withJavaVersionFromAgp(project.agpVersion)
       .build()
 
-    val configuration =
-      Json.decodeFromStream<EmergePluginExtensionData>(
-        configurationJson.inputStream(),
-      )
+    assertThat(runner).apply {
+      task(":app:logExtension").succeeded()
+      output().contains("""
+      ╔═══════════════════════════════════════════════╗
+      ║ vcsOptions (optional, defaults to Git values) ║
+      ╠═══════════════════════════════════════════════╝
+      ╠═ sha: github_env_sha
+      """.trimIndent())
 
-    assertEquals("github_env_sha", configuration.vcsOptions!!.sha)
-    assertEquals("github_previous_sha", configuration.vcsOptions!!.previousSha)
-    // BaseSha not set by default
-    assertNull(configuration.vcsOptions!!.baseSha)
+      output().contains("╠═ baseSha: \n")
+
+      output().contains("""
+      ╠═ previousSha: github_previous_sha
+
+    """.trimIndent())
+    }
   }
 }

@@ -133,7 +133,6 @@ dependencies {
 
   functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
-  functionalTestImplementation(libs.kotlinx.serialization)
   functionalTestImplementation(libs.junit5.jupiter)
   functionalTestImplementation(libs.google.truth)
 
