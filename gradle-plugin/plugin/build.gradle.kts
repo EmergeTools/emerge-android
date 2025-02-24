@@ -112,7 +112,6 @@ gradleTestKitSupport {
 dependencies {
   compileOnly(gradleApi())
   compileOnly(libs.android.gradle.plugin)
-  compileOnly(libs.kotlin.gradle.plugin)
 
   implementation(libs.asm)
   implementation(libs.asm.commons)

@@ -13,7 +13,6 @@ import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.gradle.work.DisableCachingByDefault
-import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 import java.io.File
 import java.util.zip.ZipInputStream
 
@@ -105,6 +104,15 @@ abstract class GeneratePerfProject : DefaultTask() {
       settingsFile.appendText("\ninclude(\":$projectName\")\n")
     } else {
       settingsFile.appendText("\ninclude '$projectName'\n")
+    }
+  }
+
+  fun File.ensureParentDirsCreated() {
+    val parentFile = parentFile
+    if (!parentFile.exists()) {
+      check(parentFile.mkdirs()) {
+        "Cannot create parent directories for $this"
+      }
     }
   }
 }
