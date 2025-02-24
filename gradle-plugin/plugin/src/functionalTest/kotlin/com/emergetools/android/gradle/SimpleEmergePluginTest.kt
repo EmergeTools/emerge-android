@@ -5,6 +5,9 @@ import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_A
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.SimpleGradleProject
+import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 
@@ -82,5 +85,16 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       ╠═ baseSha: testBaseSha
       ╠═ previousSha: testPreviousSha
       """.trimIndent())
+
+    val metadata =
+      ArtifactMetadata(
+        emergeGradlePluginVersion = "4.0",
+        androidGradlePluginVersion = "8.0",
+        targetArtifactZipPath = "foo",
+        testArtifactZipPath = "bar",
+      )
+    val metaDataString = Json.encodeToString(metadata)
+
+    println(metaDataString)
   }
 }

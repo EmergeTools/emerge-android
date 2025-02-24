@@ -1,5 +1,7 @@
+import com.gradleup.gr8.FilterTransform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
+import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
   alias(libs.plugins.gradle.publish)
@@ -8,7 +10,7 @@ plugins {
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
-  alias(libs.plugins.shadow.plugin)
+  id("com.gradleup.gr8").version("0.11.2")
 
   signing
   `java-gradle-plugin`
@@ -32,23 +34,23 @@ tasks.withType<KotlinCompile>().configureEach {
   }
 }
 
-tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
-  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
-  archiveClassifier = ""
-}
+//tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
+//  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
+//  archiveClassifier = ""
+//}
 
 // This is a huge hack to get included builds to use the shadowJar instead of the regular jar.
 // This is otherwise completely unnecessary.
-configurations.configureEach {
-  outgoing {
-    val removed = artifacts.removeIf {
-      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
-    }
-    if (removed) {
-      artifact(tasks.shadowJar)
-    }
-  }
-}
+//configurations.configureEach {
+//  outgoing {
+//    val removed = artifacts.removeIf {
+//      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
+//    }
+//    if (removed) {
+//      artifact(tasks.shadowJar)
+//    }
+//  }
+//}
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
 val agpClasspathDir = project.layout.buildDirectory.dir("agp-classpath")
@@ -132,6 +134,17 @@ gradleTestKitSupport {
   withTruthLibrary()
 }
 
+val filteredClasspathDependencies: Configuration = configurations.create("filteredClasspathDependencies")
+//  attributes {
+//    attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, FilterTransform.artifactType)
+//  }
+//  attributes {
+//    attribute(Usage.USAGE_ATTRIBUTE, project.objects.named<Usage>(Usage.JAVA_API))
+//  }
+//}
+
+filteredClasspathDependencies.extendsFrom(configurations.getByName("compileOnly"))
+
 dependencies {
   compileOnly(gradleApi())
   compileOnly(libs.android.gradle.plugin)
@@ -140,6 +153,7 @@ dependencies {
   implementation(libs.asm)
   implementation(libs.asm.commons)
   implementation(libs.dexlib2)
+
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   implementation(libs.guava)
@@ -154,8 +168,37 @@ dependencies {
   functionalTestImplementation(libs.okhttp.mockwebserver)
   functionalTestImplementation(libs.junit5.jupiter)
   functionalTestImplementation(libs.google.truth)
+  functionalTestImplementation(libs.kotlinx.datetime)
+  functionalTestImplementation(libs.kotlinx.serialization)
 
   detektPlugins(libs.detekt.formatting)
+}
+val shadow = true
+if (shadow) {
+  gr8 {
+    val shadowedJar = create("default") {
+      addProgramJarsFrom(configurations.getByName("runtimeClasspath"))
+      addProgramJarsFrom(tasks.getByName("jar"))
+      addClassPathJarsFrom(filteredClasspathDependencies)
+//      addProgramJarsFrom(shadeConfig)
+//      addClassPathJarsFrom(compileOnlyDependencies)
+      proguardFile("rules.pro")
+    }
+
+//    configurations.named("compileOnly").configure {
+//      extendsFrom(shadeConfig)
+//    }
+//    configurations.named("testImplementation").configure {
+//      extendsFrom(shadeConfig)
+//    }
+    removeGradleApiFromApi()
+
+    replaceOutgoingJar(shadowedJar)
+  }
+//} else {
+//  configurations.named("implementation").configure {
+//    extendsFrom(shadeConfig)
+//  }
 }
 
 gradlePlugin {
