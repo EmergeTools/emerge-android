@@ -431,13 +431,7 @@ emerge {
 
 ## Testing
 
-Java 11 & Java 17 must be installed and respective environment variables must be set:
-
-- `JAVA_HOME_11_{arch}`, ex `JAVA_HOME_11_aarch64`
-- `JAVA_HOME_17_{arch}`, ex `JAVA_HOME_17_aarch64`
-
-Both Java 17 & Java 11 must be installed as we test against both AGP 7 & 8, which requires Java 11 &
-17 respectively.
+Java 17 must be installed as we test against AGP 8
 
 Additionally, `ANDROID_SDK_ROOT` must be set and point to the Android SDK location to run tests.
 

@@ -25,10 +25,10 @@ class EmergePlugin : Plugin<Project> {
   private val appVariants = mutableListOf<ApplicationVariant>()
 
   override fun apply(project: Project) {
-    if (AgpVersions.CURRENT < AgpVersions.VERSION_7_0) {
+    if (AgpVersions.CURRENT < AgpVersions.VERSION_8_0) {
       throw StopExecutionException(
         "Version ${AgpVersions.CURRENT} of AGP is not supported with the " +
-          "Emerge gradle plugin. Please use AGP 7.0+.",
+          "Emerge gradle plugin. Please use AGP 8.0+.",
       )
     }
 
