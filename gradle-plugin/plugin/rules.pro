@@ -29,7 +29,11 @@
 
 # Keep our public api
 -keep class com.emergetools.android.gradle.** { *; }
-
+-keep interface com.emergetools.android.gradle.** { *; }
+-keep class kotlin.jvm.internal.** { *; }
+-keep interface kotlin.jvm.internal.** { *; }
+-keep class com.emergetools.android.gradle.kotlin.reflect.** { *; }
+-keep interface com.emergetools.android.gradle.kotlin.reflect.** { *; }
 # The Gradle API jar and other compileOnly dependencies aren't added to the classpath, ignore the missing symbols
 # I tried adding them but they duplicate a lot of the program classes and trigger errors in R8.
 # A future version could try to remove the intersection between the compileOnly classpath and the runtime one
@@ -39,3 +43,6 @@
 -dontwarn com.android.builder.**
 -dontwarn javax.inject.Inject
 -dontwarn kotlin.collections.**
+-dontwarn org.slf4j.**
+-dontwarn com.android.build.**
+-dontwarn org.objectweb.asm.**
