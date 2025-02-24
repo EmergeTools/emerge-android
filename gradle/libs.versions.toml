@@ -102,7 +102,7 @@ kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", v
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
 kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
 
-ktor-network = { module = "io.ktor:ktor-network", version = "3.1.0" }
+ktor-network = { module = "io.ktor:ktor-network", version = "3.1.1" }
 
 mockito = { module = "org.mockito:mockito-core", version.ref = "mockito" }
 mockito-kotlin = { module = "org.mockito.kotlin:mockito-kotlin", version.ref = "mockito-kotlin" }
