@@ -1,7 +1,6 @@
 import com.gradleup.gr8.FilterTransform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-import org.jetbrains.kotlin.gradle.utils.extendsFrom
 
 plugins {
   alias(libs.plugins.gradle.publish)
@@ -34,24 +33,6 @@ tasks.withType<KotlinCompile>().configureEach {
     jvmTarget.set(JvmTarget.JVM_17)
   }
 }
-
-//tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
-//  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
-//  archiveClassifier = ""
-//}
-
-// This is a huge hack to get included builds to use the shadowJar instead of the regular jar.
-// This is otherwise completely unnecessary.
-//configurations.configureEach {
-//  outgoing {
-//    val removed = artifacts.removeIf {
-//      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
-//    }
-//    if (removed) {
-//      artifact(tasks.shadowJar)
-//    }
-//  }
-//}
 
 // This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
 val agpClasspathDir = project.layout.buildDirectory.dir("agp-classpath")
@@ -145,13 +126,14 @@ compileOnlyDependencies.extendsFrom(configurations.getByName("compileOnly"))
 dependencies {
   compileOnly(gradleApi())
   compileOnly(libs.android.gradle.plugin) {
-    exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+    exclude(group = "org.jetbrains.kotlin")
   }
 
-  add(shadowedDependencies.name, libs.asm)
-  add(shadowedDependencies.name, libs.asm.commons)
+  implementation(libs.asm)
+  implementation(libs.asm.commons)
   add(shadowedDependencies.name, libs.dexlib2)
 
+  add(shadowedDependencies.name, libs.kotlin.stdlib)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   add(shadowedDependencies.name, libs.guava)
@@ -172,13 +154,13 @@ dependencies {
 
   detektPlugins(libs.detekt.formatting)
 }
-val shadow = false
+val shadow = true
 if (shadow) {
   gr8 {
     val shadowedJar = create("default") {
       addProgramJarsFrom(shadowedDependencies)
       addProgramJarsFrom(tasks.getByName("jar"))
-      addClassPathJarsFrom(compileOnlyDependencies)
+//      addClassPathJarsFrom(compileOnlyDependencies)
       proguardFile("rules.pro")
       registerFilterTransform(listOf(".*/impldep/META-INF/versions/.*"))
     }
@@ -189,6 +171,7 @@ if (shadow) {
   }
   configurations.getByName("compileOnly").extendsFrom(shadowedDependencies)
   configurations.getByName("testImplementation").extendsFrom(shadowedDependencies)
+  configurations.getByName("functionalTestImplementation").extendsFrom(shadowedDependencies)
 } else {
   configurations.getByName("implementation").extendsFrom(shadowedDependencies)
 }
