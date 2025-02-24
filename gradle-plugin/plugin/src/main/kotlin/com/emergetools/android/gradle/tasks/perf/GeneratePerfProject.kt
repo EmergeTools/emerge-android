@@ -93,10 +93,6 @@ abstract class GeneratePerfProject : DefaultTask() {
     }
   }
 
-  private fun File.ensureParentDirsCreated() {
-    parentFile.mkdirs()
-  }
-
   private fun addProjectToRootProject(projectName: String) {
     val settingsFile = gradleSettingsFile.asFile.get()
 
