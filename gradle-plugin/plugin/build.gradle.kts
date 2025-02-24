@@ -123,13 +123,16 @@ dependencies {
   implementation(libs.kotlinx.serialization)
   implementation(libs.okhttp)
 
+  testImplementation(platform(libs.junit5.bom))
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
+  testRuntimeOnly(libs.junit5.platform.launcher)
 
-  functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
+  functionalTestImplementation(platform(libs.junit5.bom))
   functionalTestImplementation(libs.junit5.jupiter)
   functionalTestImplementation(libs.google.truth)
+  functionalTestRuntimeOnly(libs.junit5.platform.launcher)
 
   detektPlugins(libs.detekt.formatting)
 }
@@ -160,6 +163,9 @@ buildConfig {
 
 tasks.withType<Test> {
   useJUnitPlatform()
+  testLogging {
+    events("passed", "skipped", "failed")
+  }
 }
 
 tasks.withType<ValidatePlugins>().configureEach {

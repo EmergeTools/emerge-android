@@ -50,10 +50,12 @@ dependencies {
   implementation(libs.androidx.foundation.layout.android)
   implementation(libs.androidx.material3.android)
 
+  testImplementation(platform(libs.junit5.bom))
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
   testImplementation(libs.mockito)
   testImplementation(libs.mockito.kotlin)
+  testRuntimeOnly(libs.junit5.platform.launcher)
 }
 
 tasks.withType<Test> {
