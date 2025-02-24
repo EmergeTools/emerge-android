@@ -4,9 +4,6 @@ import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.SimpleGradleProject
-import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
-import kotlinx.serialization.encodeToString
-import kotlinx.serialization.json.Json
 import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 
@@ -15,7 +12,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
   fun simpleBundle() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
-      .withArguments("emergeUploadReleaseAab")
+      .withArguments("emergeUploadReleaseAab", "--stacktrace")
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -27,7 +24,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     enableServerTimeout()
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
-      .withArguments("emergeUploadReleaseAab")
+      .withArguments("emergeUploadReleaseAab", "--stacktrace")
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseAab").failed()
@@ -74,15 +71,15 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       ╠═ previousSha: testPreviousSha
       """.trimIndent())
 
-    val metadata =
-      ArtifactMetadata(
-        emergeGradlePluginVersion = "4.0",
-        androidGradlePluginVersion = "8.0",
-        targetArtifactZipPath = "foo",
-        testArtifactZipPath = "bar",
-      )
-    val metaDataString = Json.encodeToString(metadata)
-
-    println(metaDataString)
+//    val metadata =
+//      ArtifactMetadata(
+//        emergeGradlePluginVersion = "4.0",
+//        androidGradlePluginVersion = "8.0",
+//        targetArtifactZipPath = "foo",
+//        testArtifactZipPath = "bar",
+//      )
+//    val metaDataString = Json.encodeToString(metadata)
+//
+//    println(metaDataString)
   }
 }

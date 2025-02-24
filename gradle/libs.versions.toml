@@ -51,7 +51,6 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 gradle-publish = { id = "com.gradle.plugin-publish", version = "1.3.1" }
 grgit = { id = "org.ajoberstar.grgit", version = "5.3.0" }
 autonomousapps-testkit = { id = "com.autonomousapps.testkit", version = "0.12" }
-shadow-plugin = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
 android-gradle-plugin = "com.android.tools.build:gradle:8.8.2"
@@ -102,7 +101,7 @@ junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit5-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
+kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
 kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
 
