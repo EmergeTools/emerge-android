@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import java.text.SimpleDateFormat
 import java.util.Date
@@ -21,14 +23,15 @@ java {
   withJavadocJar()
   withSourcesJar()
 
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-    languageVersion = "1.7"
+  compilerOptions {
+    jvmTarget.set(JvmTarget.JVM_17)
+    languageVersion.set(KotlinVersion.KOTLIN_1_9)
   }
 }
 

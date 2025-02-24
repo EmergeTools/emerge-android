@@ -19,15 +19,16 @@ version = libs.versions.emerge.gradle.plugin.get()
 
 
 java {
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
   withJavadocJar()
   withSourcesJar()
 }
 
 tasks.withType<KotlinCompile>().configureEach {
   compilerOptions {
-    jvmTarget.set(JvmTarget.JVM_11)
+    jvmTarget.set(JvmTarget.JVM_17)
   }
 }
 
@@ -40,11 +41,6 @@ val kgpClasspathDir = project.layout.buildDirectory.dir("kgp-classpath")
 // ATTENTION: Must be kept in sync with the EmergeGradleRunner list.
 val supportedAgpVersions =
   setOf(
-    "7.0.0",
-    "7.1.0",
-    "7.2.0",
-    "7.3.0",
-    "7.4.2",
     "8.0.0",
   )
 

@@ -1,11 +1,9 @@
 package com.emergetools.android.gradle
 
 import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
-import com.emergetools.android.gradle.base.EmergeGradleRunner.Companion.LATEST_AGP_7_VERSION
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.SimpleGradleProject
-import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 
 class SimpleEmergePluginTest : EmergePluginTest() {
@@ -13,17 +11,6 @@ class SimpleEmergePluginTest : EmergePluginTest() {
   fun simpleBundle() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
-      .withArguments("emergeUploadReleaseAab")
-      .build()
-
-    assertSuccessfulUploadRequests(server)
-    assertThat(runner).task(":app:emergeUploadReleaseAab").succeeded()
-  }
-
-  @Test
-  fun simpleBundleAgp7_3_0() {
-    val project = SimpleGradleProject.createWithVcsInExtension(this, LATEST_AGP_7_VERSION)
-    val runner = EmergeGradleRunner2(project.gradleProject.rootDir, GradleVersion.version("7.5.1"))
       .withArguments("emergeUploadReleaseAab")
       .build()
 

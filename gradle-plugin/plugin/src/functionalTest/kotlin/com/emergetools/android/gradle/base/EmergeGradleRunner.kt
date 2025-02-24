@@ -8,7 +8,6 @@ import org.gradle.internal.impldep.com.google.common.io.Files
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.util.GradleVersion
-import org.gradle.util.internal.VersionNumber
 import java.io.File
 
 /**
@@ -19,15 +18,9 @@ class EmergeGradleRunner private constructor(
   private val projectDir: String,
 ) {
   companion object {
-    const val LATEST_AGP_7_VERSION = "7.4.2"
     /** Must be kept in sync with the build.gradle list. */
     val SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS =
       sortedSetOf(
-        "7.0.0",
-        "7.1.0",
-        "7.2.0",
-        "7.3.0",
-        LATEST_AGP_7_VERSION,
         "8.0.0",
       )
 
@@ -106,12 +99,6 @@ class EmergeGradleRunner private constructor(
     arguments = arguments + "-PbaseUrl=$baseUrl"
     arguments = arguments + "-Pandroid.useAndroidX=true"
     arguments = arguments + "--stacktrace"
-
-    if (VersionNumber.parse(androidGradlePluginVersion).major >= 8) {
-      withJavaVersion("17")
-    } else {
-      withJavaVersion("11")
-    }
 
     val customEnvironment =
       mapOf(
