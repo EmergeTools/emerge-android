@@ -97,11 +97,6 @@ class EmergeGradleRunner private constructor(
       this.assertions = assertions
     }
 
-  fun withEnvironment(vararg pairs: Pair<String, String>) =
-    apply {
-      this.environment = mapOf(*pairs)
-    }
-
   private fun preBuild(): GradleRunner {
     @Suppress("DEPRECATION")
     tempProjectDir = Files.createTempDir()
