@@ -134,32 +134,34 @@ gradleTestKitSupport {
   withTruthLibrary()
 }
 
-val filteredClasspathDependencies: Configuration = configurations.create("filteredClasspathDependencies")
-//  attributes {
-//    attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, FilterTransform.artifactType)
-//  }
-//  attributes {
-//    attribute(Usage.USAGE_ATTRIBUTE, project.objects.named<Usage>(Usage.JAVA_API))
-//  }
-//}
+val shadowedDependencies = configurations.create("shadowedDependencies")
+val compileOnlyDependencies: Configuration = configurations.create("compileOnlyDependencies") {
+  attributes {
+    attribute(Usage.USAGE_ATTRIBUTE, project.objects.named<Usage>(Usage.JAVA_API))
+  }
+  attributes {
+    attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, FilterTransform.artifactType)
+  }
+}
 
-filteredClasspathDependencies.extendsFrom(configurations.getByName("compileOnly"))
+compileOnlyDependencies.extendsFrom(configurations.getByName("compileOnly"))
 
 dependencies {
   compileOnly(gradleApi())
-  compileOnly(libs.android.gradle.plugin)
-  compileOnly(libs.kotlin.gradle.plugin)
+  compileOnly(libs.android.gradle.plugin) {
+    exclude(group = "org.jetbrains.kotlin", module = "kotlin-stdlib")
+  }
 
-  implementation(libs.asm)
-  implementation(libs.asm.commons)
-  implementation(libs.dexlib2)
+  add(shadowedDependencies.name, libs.asm)
+  add(shadowedDependencies.name, libs.asm.commons)
+  add(shadowedDependencies.name, libs.dexlib2)
 
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
-  implementation(libs.guava)
-  implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.serialization)
-  implementation(libs.okhttp)
+  add(shadowedDependencies.name, libs.guava)
+  add(shadowedDependencies.name, libs.kotlinx.datetime)
+  add(shadowedDependencies.name, libs.kotlinx.serialization)
+  add(shadowedDependencies.name, libs.okhttp)
 
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
@@ -173,32 +175,25 @@ dependencies {
 
   detektPlugins(libs.detekt.formatting)
 }
-val shadow = true
+val shadow = false
 if (shadow) {
   gr8 {
     val shadowedJar = create("default") {
-      addProgramJarsFrom(configurations.getByName("runtimeClasspath"))
+      addProgramJarsFrom(shadowedDependencies)
       addProgramJarsFrom(tasks.getByName("jar"))
-      addClassPathJarsFrom(filteredClasspathDependencies)
-//      addProgramJarsFrom(shadeConfig)
-//      addClassPathJarsFrom(compileOnlyDependencies)
+      addClassPathJarsFrom(compileOnlyDependencies)
       proguardFile("rules.pro")
+      registerFilterTransform(listOf(".*/impldep/META-INF/versions/.*"))
     }
 
-//    configurations.named("compileOnly").configure {
-//      extendsFrom(shadeConfig)
-//    }
-//    configurations.named("testImplementation").configure {
-//      extendsFrom(shadeConfig)
-//    }
     removeGradleApiFromApi()
 
     replaceOutgoingJar(shadowedJar)
   }
-//} else {
-//  configurations.named("implementation").configure {
-//    extendsFrom(shadeConfig)
-//  }
+  configurations.getByName("compileOnly").extendsFrom(shadowedDependencies)
+  configurations.getByName("testImplementation").extendsFrom(shadowedDependencies)
+} else {
+  configurations.getByName("implementation").extendsFrom(shadowedDependencies)
 }
 
 gradlePlugin {

@@ -54,7 +54,7 @@ autonomousapps-testkit = { id = "com.autonomousapps.testkit", version = "0.12" }
 shadow-plugin = { id = "com.gradleup.shadow", version.ref = "shadow" }
 
 [libraries]
-android-gradle-plugin = "com.android.tools.build:gradle:7.4.2"
+android-gradle-plugin = "com.android.tools.build:gradle:8.8.1"
 
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidxactivity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
