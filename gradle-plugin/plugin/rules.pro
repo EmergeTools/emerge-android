@@ -38,3 +38,4 @@
 -dontwarn com.android.build.gradle.**
 -dontwarn com.android.builder.**
 -dontwarn javax.inject.Inject
+-dontwarn kotlin.collections.**
