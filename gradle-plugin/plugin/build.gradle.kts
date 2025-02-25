@@ -1,3 +1,4 @@
+import com.gradleup.gr8.FilterTransform
 import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
@@ -8,7 +9,7 @@ plugins {
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
-  alias(libs.plugins.shadow.plugin)
+  alias(libs.plugins.gr8)
 
   signing
   `java-gradle-plugin`
@@ -30,24 +31,6 @@ java {
 tasks.withType<KotlinCompile>().configureEach {
   compilerOptions {
     jvmTarget.set(JvmTarget.JVM_17)
-  }
-}
-
-tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
-  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
-  archiveClassifier = ""
-}
-
-// This is a huge hack to get included builds to use the shadowJar instead of the regular jar.
-// This is otherwise completely unnecessary.
-configurations.configureEach {
-  outgoing {
-    val removed = artifacts.removeIf {
-      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
-    }
-    if (removed) {
-      artifact(tasks.shadowJar)
-    }
   }
 }
 
@@ -128,29 +111,65 @@ gradleTestKitSupport {
   withTruthLibrary()
 }
 
+val shadowedDependencies = configurations.create("shadowedDependencies")
+val compileOnlyDependencies: Configuration = configurations.create("compileOnlyDependencies") {
+  attributes {
+    attribute(Usage.USAGE_ATTRIBUTE, project.objects.named<Usage>(Usage.JAVA_API))
+  }
+  attributes {
+    attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, FilterTransform.artifactType)
+  }
+}
+
+compileOnlyDependencies.extendsFrom(configurations.getByName("compileOnly"))
+
 dependencies {
   compileOnly(gradleApi())
   compileOnly(libs.android.gradle.plugin)
 
+  // Ideally we'd like to relocate asm but it causes errors with R8
   implementation(libs.asm)
   implementation(libs.asm.commons)
-  implementation(libs.dexlib2)
+
+  add(shadowedDependencies.name, libs.dexlib2)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
-  implementation(libs.guava)
-  implementation(libs.kotlinx.datetime)
-  implementation(libs.kotlinx.serialization)
-  implementation(libs.okhttp)
+  add(shadowedDependencies.name, libs.guava)
+  add(shadowedDependencies.name, libs.kotlinx.datetime)
+  add(shadowedDependencies.name, libs.kotlinx.serialization)
+  add(shadowedDependencies.name, libs.okhttp)
 
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
 
-  functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
   functionalTestImplementation(libs.junit5.jupiter)
   functionalTestImplementation(libs.google.truth)
+  functionalTestImplementation(libs.kotlinx.datetime)
+  functionalTestImplementation(libs.kotlinx.serialization)
 
   detektPlugins(libs.detekt.formatting)
+}
+val shadow = true
+if (shadow) {
+  gr8 {
+    val shadowedJar = create("default") {
+      addProgramJarsFrom(shadowedDependencies)
+      addProgramJarsFrom(tasks.getByName("jar"))
+      proguardFile("rules.pro")
+      registerFilterTransform(listOf(".*/impldep/META-INF/versions/.*"))
+      r8Version("cc8127afa2e852e05b6acd1a29ccc3141f944205")
+    }
+
+    removeGradleApiFromApi()
+
+    replaceOutgoingJar(shadowedJar)
+  }
+  configurations.getByName("compileOnly").extendsFrom(shadowedDependencies)
+  configurations.getByName("testImplementation").extendsFrom(shadowedDependencies)
+  configurations.getByName("functionalTestImplementation").extendsFrom(shadowedDependencies)
+} else {
+  configurations.getByName("implementation").extendsFrom(shadowedDependencies)
 }
 
 gradlePlugin {
