@@ -18,12 +18,6 @@
 # For debug
 -keepattributes SourceFile,LineNumberTable
 
-# kotlinpoet uses EnumSetOf that makes a reflexive access to "values"
-# https://github.com/square/kotlinpoet/blob/9952ddcd5095a1fd09c86b9fb07faa347a4c04f0/kotlinpoet/src/main/java/com/squareup/kotlinpoet/PropertySpec.kt#L102
--keepclassmembers class com.squareup.kotlinpoet.KModifier {
-    public static **[] values();
-}
-
 -dontobfuscate
 -repackageclasses com.emergetools.android.gradle
 
@@ -35,6 +29,9 @@
 -keep class com.emergetools.android.gradle.kotlin.reflect.** { *; }
 -keep interface com.emergetools.android.gradle.kotlin.reflect.** { *; }
 -keep class kotlin.reflect.** { *; }
+-keepclassmembers class com.emergetools.android.gradle.ProductOptions {
+    public <fields>;
+}
 
 # The Gradle API jar and other compileOnly dependencies aren't added to the classpath, ignore the missing symbols
 # I tried adding them but they duplicate a lot of the program classes and trigger errors in R8.

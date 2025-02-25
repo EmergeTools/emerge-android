@@ -28,10 +28,9 @@ navigation-compose = "2.8.6"
 material3-android = "1.3.1"
 runtime-android = "1.7.6"
 foundation-layout-android = "1.7.6"
-shadow = "9.0.0-beta8"
 
 # internal
-emerge-gradle-plugin = "4.1.1-kotlinx-SNAPSHOT"
+emerge-gradle-plugin = "4.1.1-gr8-SNAPSHOT"
 emerge-performance = "2.1.2"
 emerge-reaper = "1.0.0"
 emerge-snapshots = "1.3.3"
@@ -51,6 +50,7 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 gradle-publish = { id = "com.gradle.plugin-publish", version = "1.3.1" }
 grgit = { id = "org.ajoberstar.grgit", version = "5.3.0" }
 autonomousapps-testkit = { id = "com.autonomousapps.testkit", version = "0.12" }
+gr8 = { id = "com.gradleup.gr8", version = "0.11.2" }
 
 [libraries]
 android-gradle-plugin = "com.android.tools.build:gradle:8.8.2"
@@ -101,7 +101,6 @@ junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit5-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
-kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
 kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.0"
 

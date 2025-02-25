@@ -4,7 +4,6 @@ import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.SimpleGradleProject
-import org.gradle.util.GradleVersion
 import org.junit.jupiter.api.Test
 
 class SimpleEmergePluginTest : EmergePluginTest() {
@@ -12,7 +11,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
   fun simpleBundle() {
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
-      .withArguments("emergeUploadReleaseAab", "--stacktrace")
+      .withArguments("emergeUploadReleaseAab")
       .build()
 
     assertSuccessfulUploadRequests(server)
@@ -24,7 +23,7 @@ class SimpleEmergePluginTest : EmergePluginTest() {
     enableServerTimeout()
     val project = SimpleGradleProject.createWithVcsInExtension(this)
     val runner = EmergeGradleRunner2(project.gradleProject.rootDir)
-      .withArguments("emergeUploadReleaseAab", "--stacktrace")
+      .withArguments("emergeUploadReleaseAab")
       .buildAndFail()
 
     assertThat(runner).task(":app:emergeUploadReleaseAab").failed()
@@ -70,16 +69,5 @@ class SimpleEmergePluginTest : EmergePluginTest() {
       ╠═ baseSha: testBaseSha
       ╠═ previousSha: testPreviousSha
       """.trimIndent())
-
-//    val metadata =
-//      ArtifactMetadata(
-//        emergeGradlePluginVersion = "4.0",
-//        androidGradlePluginVersion = "8.0",
-//        targetArtifactZipPath = "foo",
-//        testArtifactZipPath = "bar",
-//      )
-//    val metaDataString = Json.encodeToString(metadata)
-//
-//    println(metaDataString)
   }
 }
