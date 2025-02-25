@@ -7,7 +7,7 @@ plugins {
 
 emerge {
   snapshots {
-//    tag.setFromVariant()
+    tag.setFromVariant()
 
     profile.set(true)
   }

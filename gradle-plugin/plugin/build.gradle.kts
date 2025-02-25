@@ -9,7 +9,7 @@ plugins {
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
-  id("com.gradleup.gr8").version("0.11.2")
+  alias(libs.plugins.gr8)
 
   signing
   `java-gradle-plugin`
@@ -125,15 +125,13 @@ compileOnlyDependencies.extendsFrom(configurations.getByName("compileOnly"))
 
 dependencies {
   compileOnly(gradleApi())
-  compileOnly(libs.android.gradle.plugin) {
-    exclude(group = "org.jetbrains.kotlin")
-  }
+  compileOnly(libs.android.gradle.plugin)
 
+  // Ideally we'd like to relocate asm but it causes errors with R8
   implementation(libs.asm)
   implementation(libs.asm.commons)
-  add(shadowedDependencies.name, libs.dexlib2)
 
-  add(shadowedDependencies.name, libs.kotlin.stdlib)
+  add(shadowedDependencies.name, libs.dexlib2)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
   add(shadowedDependencies.name, libs.guava)
@@ -144,7 +142,6 @@ dependencies {
   testImplementation(libs.google.truth)
   testImplementation(libs.junit5.jupiter)
 
-//  functionalTestImplementation(project(":plugin"))
   functionalTestImplementation(libs.okhttp.mockwebserver)
   functionalTestImplementation(libs.junit5.jupiter)
   functionalTestImplementation(libs.google.truth)
@@ -159,9 +156,9 @@ if (shadow) {
     val shadowedJar = create("default") {
       addProgramJarsFrom(shadowedDependencies)
       addProgramJarsFrom(tasks.getByName("jar"))
-//      addClassPathJarsFrom(compileOnlyDependencies)
       proguardFile("rules.pro")
       registerFilterTransform(listOf(".*/impldep/META-INF/versions/.*"))
+      r8Version("cc8127afa2e852e05b6acd1a29ccc3141f944205")
     }
 
     removeGradleApiFromApi()

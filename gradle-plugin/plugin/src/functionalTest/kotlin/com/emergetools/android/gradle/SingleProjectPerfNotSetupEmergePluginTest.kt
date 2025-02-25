@@ -1,32 +1,73 @@
 package com.emergetools.android.gradle
 
+import com.autonomousapps.kit.truth.TestKitTruth
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.projects.SimpleGradleProject
 import org.junit.jupiter.api.Assertions.assertTrue
 import org.junit.jupiter.api.Test
 
 class SingleProjectPerfNotSetupEmergePluginTest : EmergePluginTest() {
   @Test
   fun singleProjectPerfNotSetupUpload() {
-    EmergeGradleRunner.create("single-project-perf-not-setup")
-      .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":app:emergeUploadReleaseAab")
+    val project = SimpleGradleProject.createWithExtension(this, extension = """
+      emerge {
+        apiToken = 'abcdef123'
+
+        performance {
+          projectPath = ':performance'
+        }
+
+        vcs {
+          sha = 'testSha'
+          baseSha = 'testBaseSha'
+          previousSha = 'testPreviousSha'
+          branchName = 'testBranchName'
+          gitHub {
+            repoOwner = 'repoOwner'
+            repoName = 'repoName'
+          }
+        }
       }
+    """.trimIndent())
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("emergeUploadReleaseAab")
       .build()
+
+    assertSuccessfulUploadRequests(server)
+
+    assertThat(result).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun singleProjectPerfNotSetupGeneratePerformanceProjectSucceeds() {
-    EmergeGradleRunner.create("single-project-perf-not-setup")
-      .withArguments("emergeGeneratePerformanceProject", "--package", "com.test.performance")
-      .withDefaultServer()
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":app:emergeGeneratePerformanceProject")
+    val project = SimpleGradleProject.createWithExtension(this, extension = """
+      emerge {
+        apiToken = 'abcdef123'
+
+        performance {
+          projectPath = ':performance'
+        }
+
+        vcs {
+          sha = 'testSha'
+          baseSha = 'testBaseSha'
+          previousSha = 'testPreviousSha'
+          branchName = 'testBranchName'
+          gitHub {
+            repoOwner = 'repoOwner'
+            repoName = 'repoName'
+          }
+        }
       }
+    """.trimIndent())
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("emergeGeneratePerformanceProject", "--package", "com.test.performance")
       .build()
+
+    assertThat(result).task(":app:emergeGeneratePerformanceProject").succeeded()
   }
 
   @Test
