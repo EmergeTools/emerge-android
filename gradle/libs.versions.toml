@@ -17,7 +17,7 @@ detekt = "1.23.8"
 kotlin = "2.1.10"
 kotlin-coroutines = "1.10.1"
 okhttp = "4.12.0"
-junit-jupiter = "5.11.4"
+junit-jupiter = "5.12.0"
 benchmark = "1.3.3"
 junit = "1.2.1"
 benchmark-junit4 = "1.3.3"
@@ -95,7 +95,9 @@ google-truth = "com.google.truth:truth:1.4.4"
 guava = "com.google.guava:guava:33.4.0-jre"
 
 junit4 = "junit:junit:4.13.2"
-junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter", version.ref = "junit-jupiter" }
+junit5-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
+junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
+junit5-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
 kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
