@@ -13,7 +13,7 @@ import com.emergetools.android.gradle.EmergePluginTest
 import com.emergetools.android.gradle.base.EmergeGradleRunner
 
 class SimpleGradleProject(
-  val agpVersion: String,
+  agpVersion: String,
   private val baseUrl: String,
   private val emergeExtension: String
 ) : AbstractGradleProject() {
@@ -22,8 +22,7 @@ class SimpleGradleProject(
     fun createWithVcsInExtension(
       test: EmergePluginTest,
       agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
-    ): SimpleGradleProject {
-      return SimpleGradleProject(agpVersion, test.baseUrl.toString(), """
+    ): SimpleGradleProject = createWithExtension(test, agpVersion, """
             emerge {
               apiToken = 'abcdef123'
                vcs {
@@ -37,16 +36,21 @@ class SimpleGradleProject(
                  }
                }
             }""".trimMargin())
-    }
 
     fun createWithoutVcsInExtension(
       test: EmergePluginTest,
       agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
-    ): SimpleGradleProject {
-      return SimpleGradleProject(agpVersion, test.baseUrl.toString(), """
+    ): SimpleGradleProject = createWithExtension(test, agpVersion, """
             emerge {
               apiToken = 'abcdef123'
             }""".trimMargin())
+
+    fun createWithExtension(
+      test: EmergePluginTest,
+      agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last(),
+      extension: String
+    ): SimpleGradleProject {
+      return SimpleGradleProject(agpVersion, test.baseUrl.toString(), extension)
     }
   }
 
