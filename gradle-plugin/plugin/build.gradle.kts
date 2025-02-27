@@ -8,6 +8,7 @@ plugins {
   alias(libs.plugins.buildconfig)
   alias(libs.plugins.detekt)
   alias(libs.plugins.autonomousapps.testkit)
+  alias(libs.plugins.shadow.plugin)
 
   signing
   `java-gradle-plugin`
@@ -29,6 +30,24 @@ java {
 tasks.withType<KotlinCompile>().configureEach {
   compilerOptions {
     jvmTarget.set(JvmTarget.JVM_17)
+  }
+}
+
+tasks.named("shadowJar", com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar::class.java) {
+  relocate("kotlinx.serialization", "emergetools.kotlinx.serialization")
+  archiveClassifier = ""
+}
+
+// This is a huge hack to get included builds to use the shadowJar instead of the regular jar.
+// This is otherwise completely unnecessary.
+configurations.configureEach {
+  outgoing {
+    val removed = artifacts.removeIf {
+      it.name == "plugin" && it.type == "jar" && it.classifier.isNullOrEmpty()
+    }
+    if (removed) {
+      artifact(tasks.shadowJar)
+    }
   }
 }
 
