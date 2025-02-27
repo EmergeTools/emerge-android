@@ -4,7 +4,7 @@ androidx-test-core = "1.6.1"
 androidx-test-rules = "1.6.1"
 androidx-test-runner = "1.6.2"
 androidx-test-ext = "1.2.1"
-agp = "8.8.1"
+agp = "8.8.2"
 androidxactivity = "1.10.0"
 # 2024.08.00 is 1.6.8
 # 1.7.0+ updates ComposableLambda to leverage a new rememberComposableLambda function that
