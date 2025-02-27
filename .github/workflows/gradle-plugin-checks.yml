@@ -28,6 +28,10 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Check
         run: ./gradlew :gradle-plugin:plugin:check
+        # If we build the plugin even just for testing we need the signing keys since they are required on non-snapshot builds
+        env:
+          ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
+          ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
       - name: Archive test reports
         uses: actions/upload-artifact@v4
         if: always()
