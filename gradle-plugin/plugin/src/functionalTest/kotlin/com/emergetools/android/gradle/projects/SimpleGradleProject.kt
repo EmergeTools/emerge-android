@@ -17,7 +17,8 @@ class SimpleGradleProject(
     fun createWithVcsInExtension(
       test: EmergePluginTest,
       agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
-    ): SimpleGradleProject = createWithExtension(test, agpVersion, """
+    ): SimpleGradleProject = createWithExtension(
+      test, agpVersion, """
             emerge {
               apiToken = 'abcdef123'
                vcs {
@@ -30,15 +31,18 @@ class SimpleGradleProject(
                    repoName = 'repoName'
                  }
                }
-            }""".trimMargin())
+            }""".trimMargin()
+    )
 
     fun createWithoutVcsInExtension(
       test: EmergePluginTest,
       agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
-    ): SimpleGradleProject = createWithExtension(test, agpVersion, """
+    ): SimpleGradleProject = createWithExtension(
+      test, agpVersion, """
             emerge {
               apiToken = 'abcdef123'
-            }""".trimMargin())
+            }""".trimMargin()
+    )
 
     fun createWithExtension(
       test: EmergePluginTest,
