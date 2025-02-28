@@ -1,47 +1,41 @@
 package com.emergetools.android.gradle
 
-import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
-import org.junit.jupiter.api.Assertions.assertTrue
+import com.emergetools.android.gradle.projects.MultiProjectProject
 import org.junit.jupiter.api.Test
 
 class MultiProjectEmergePluginTest : EmergePluginTest() {
   @Test
   fun multiProjectUpload() {
-    EmergeGradleRunner.create("multi-project")
+    val project = MultiProjectProject.create(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":app:emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(result).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun multiProjectUploadPerfBundle() {
-    EmergeGradleRunner.create("multi-project")
+    val project = MultiProjectProject.create(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleasePerfBundle")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":app:emergeUploadReleasePerfBundle")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(result).task(":app:emergeUploadReleasePerfBundle").succeeded()
   }
 
   @Test
   fun multiProjectGeneratePerformanceProjectMissing() {
-    EmergeGradleRunner.create("multi-project")
+    val project = MultiProjectProject.create(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments(":app:emergeGeneratePerformanceProject")
-      .withDefaultServer()
-      .assert { result, _ ->
-        assertTrue(
-          result.output.contains(
-            "task 'emergeGeneratePerformanceProject' not found in project ':app'",
-          ),
-        )
-      }
       .buildAndFail()
+
+    assertThat(result).output().contains("task 'emergeGeneratePerformanceProject' not found in project ':app'")
   }
 }
