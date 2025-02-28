@@ -28,6 +28,24 @@ object Reaper {
   }
 
   /**
+   * Permanently disable Reaper from collecting hashes for the lifetime of this process
+   * and discard any hashes collected so far.
+   * Should not be called if Reaper has been initialized.
+   * Calling more once has no effect.
+   * Calling init after this will log an error but have no other effect.
+   * The expected use case is to reduce the cost the Reaper when it is never going to be enabled
+   * (for example in the control arm of an experiment where the treatment arm is enabling Reaper).
+   * Reaper has some cost even when not initialized, this is due to the requirement of detecting
+   * code used very early during startup. 'Early startup' hashes are accumulated then flushed once
+   * Reaper is initialized. If Reaper is never initialized this flush never happens and a limited
+   * (but potentiality significant) amount of memory can be 'leaked'.
+   * @param context Android context
+   */
+  fun fuseOff(context: Context) {
+    ReaperInternal.fuseOff(context)
+  }
+
+  /**
    * Flush observed hashes into the current report if any.
    * This method may be called from any thread.
    * Blocks until the flush is complete.

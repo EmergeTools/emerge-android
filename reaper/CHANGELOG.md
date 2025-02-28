@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+- Add `Reaper.fuseOff()`. [#491](https://github.com/EmergeTools/emerge-android/pull/491)
+
 ## 1.0.0 - 2024-12-02
 
 - Initial release.
