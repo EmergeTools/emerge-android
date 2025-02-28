@@ -32,7 +32,7 @@ foundation-layout-android = "1.7.6"
 # internal
 emerge-gradle-plugin = "4.1.1-SNAPSHOT"
 emerge-performance = "2.1.2"
-emerge-reaper = "1.0.0"
+emerge-reaper = "1.0.1-SNAPSHOT"
 emerge-snapshots = "1.3.3"
 emerge-distribution = "0.0.4"
 
@@ -100,7 +100,6 @@ junit5-jupiter = { module = "org.junit.jupiter:junit-jupiter" }
 junit5-platform-launcher = { module = "org.junit.platform:junit-platform-launcher" }
 
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
-kotlin-gradle-plugin = { module = "org.jetbrains.kotlin:kotlin-gradle-plugin", version.ref = "kotlin" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.6.2"
 kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.3"
 
