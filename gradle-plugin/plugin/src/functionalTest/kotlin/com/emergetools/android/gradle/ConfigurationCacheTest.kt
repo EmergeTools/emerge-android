@@ -1,52 +1,53 @@
 package com.emergetools.android.gradle
 
-import com.autonomousapps.kit.truth.TestKitTruth
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.base.EmergeGradleRunner
+import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.projects.MultiProjectProject
+import com.emergetools.android.gradle.projects.SimpleGradleProject
 import org.junit.jupiter.api.Test
 
 class ConfigurationCacheTest : EmergePluginTest() {
   @Test
   fun simpleConfigurationCache() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("tasks", "--configuration-cache")
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":tasks")
-      }
       .build()
+
+    assertThat(result).task(":tasks").succeeded()
   }
 
   @Test
   fun simpleConfigurationCacheUpload() {
-    EmergeGradleRunner.create("simple")
+    val project = SimpleGradleProject.createWithVcsInExtension(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab", "--configuration-cache")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":emergeUploadReleaseAab")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(result).task(":app:emergeUploadReleaseAab").succeeded()
   }
 
   @Test
   fun multiProjectConfigurationCache() {
-    EmergeGradleRunner.create("multi-project")
-      .withArguments(":app:tasks", "--configuration-cache")
-      .assert { result, _ ->
-        result.assertSuccessfulTask(":app:tasks")
-      }
+    val project = MultiProjectProject.create(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
+      .withArguments("tasks", "--configuration-cache")
       .build()
+
+    assertThat(result).task(":tasks").succeeded()
   }
 
   @Test
   fun multiProjectConfigurationCachePerfBundle() {
-    EmergeGradleRunner.create("multi-project")
+    val project = MultiProjectProject.create(this)
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleasePerfBundle", "--configuration-cache")
-      .withDefaultServer()
-      .assert { result, server ->
-        assertSuccessfulUploadRequests(server)
-        result.assertSuccessfulTask(":app:emergeUploadReleasePerfBundle")
-      }
       .build()
+
+    assertSuccessfulUploadRequests(server)
+    assertThat(result).task(":app:emergeUploadReleasePerfBundle").succeeded()
   }
 }

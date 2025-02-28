@@ -60,26 +60,6 @@ class EmergeGradleRunner private constructor(
       this.arguments = arguments.toList()
     }
 
-  fun withGradleVersion(version: String) =
-    apply {
-      gradleVersion = GradleVersion.version(version)
-    }
-
-  fun withAndroidGradlePluginVersion(version: String) =
-    apply {
-      check(version in SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS) {
-        "This version of the Android Gradle Plugin is not currently supported."
-      }
-      androidGradlePluginVersion = version
-    }
-
-  private fun withJavaVersion(version: String) =
-    apply {
-      val arch = if (System.getProperty("os.arch") == "aarch64") "aarch64" else "X64"
-      val javaHomeEnvKey = "JAVA_HOME_${version}_$arch"
-      arguments = arguments + "-Dorg.gradle.java.home=${System.getenv(javaHomeEnvKey)}"
-    }
-
   fun withServer(serverReceiver: MockWebServer.(HttpUrl) -> Unit) =
     apply {
       server.apply { serverReceiver(baseUrl) }
