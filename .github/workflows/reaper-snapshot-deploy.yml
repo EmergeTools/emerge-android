@@ -1,22 +1,21 @@
-name: Reaper release deploy
+name: Reaper Snapshot Deploy
 
 on:
-  release:
-    types: [ published ]
+  push:
+    branches: [ main ]
+  workflow_dispatch:
 
 jobs:
-  deploy-reaper:
+  deploy-gradle-plugin:
 
     runs-on: ubuntu-latest
-
-    # Only run when the tag begins with the string "reaper-"
-    if: ${{ startsWith(github.event.release.tag_name, 'reaper-') }}
 
     env:
       OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
       OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
       ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
       ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
+
     steps:
       - uses: actions/checkout@v4
       - name: Set up JDK 17
@@ -26,5 +25,5 @@ jobs:
           distribution: 'adopt'
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
-      - name: Test and publish Reaper
-        run: ./gradlew :reaper:reaper:test :reaper:reaper:publishReleasePublicationToSonatypeStagingRepository -Dorg.gradle.parallel=false
+      - name: Deploy plugin snapshot to Sonatype Snapshots
+        run: ./gradlew :reaper:reaper:publishAllPublicationsToSonatypeSnapshotsRepo
