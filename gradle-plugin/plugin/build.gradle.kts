@@ -34,55 +34,6 @@ tasks.withType<KotlinCompile>().configureEach {
   }
 }
 
-// This directory will contain one file per version of the Android Gradle Plugin that we wish to test against.
-val agpClasspathDir = project.layout.buildDirectory.dir("agp-classpath")
-
-val kgpClasspathDir = project.layout.buildDirectory.dir("kgp-classpath")
-
-// Versions prior to 7.0.0 do not have an official API, supporting them would require considerably more work.
-// ATTENTION: Must be kept in sync with the EmergeGradleRunner list.
-val supportedAgpVersions =
-  setOf(
-    "8.0.0",
-  )
-
-val supportedKotlinVersions =
-  setOf(
-    "1.8.21",
-  )
-val writeSupportedVersionsFiles = tasks.register("writeSupportedVersionsFiles") {
-  inputs.property("supportedAgpVersions", supportedAgpVersions)
-  inputs.property("supportedKotlinVersion", supportedKotlinVersions)
-  outputs.dirs(agpClasspathDir, kgpClasspathDir)
-  // Creates a classpath file for each version of AGP we wish to test against. This allows the
-  // functional tests to target a particular version using the GradleRunner.
-  doLast {
-    supportedAgpVersions.forEach { version ->
-      val configuration = configurations.create("agp$version")
-      dependencies.add(configuration.name, "com.android.tools.build:gradle:$version")
-      val classpathFile =
-        agpClasspathDir.get().asFile.resolve("agp-classpath-$version.txt")
-      classpathFile.writeText(configuration.joinToString(separator = "\n"))
-    }
-
-    supportedKotlinVersions.forEach { version ->
-      val configuration = configurations.create("kgp$version")
-      dependencies.add(configuration.name, "org.jetbrains.kotlin:kotlin-gradle-plugin:$version")
-      val classpathFile =
-        kgpClasspathDir.get().asFile.resolve("kgp-classpath-$version.txt")
-      classpathFile.writeText(configuration.joinToString(separator = "\n"))
-    }
-  }
-}
-sourceSets {
-  functionalTest {
-    // The classpath files are added as resources so that the test code can access them.
-    resources {
-      srcDir(writeSupportedVersionsFiles)
-    }
-  }
-}
-
 tasks.check {
   dependsOn(tasks.validatePlugins)
 }

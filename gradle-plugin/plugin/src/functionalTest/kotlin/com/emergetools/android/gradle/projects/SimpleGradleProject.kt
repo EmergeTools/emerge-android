@@ -1,11 +1,7 @@
 package com.emergetools.android.gradle.projects
 
 import com.autonomousapps.kit.GradleProject
-import com.autonomousapps.kit.android.AndroidManifest
-import com.autonomousapps.kit.gradle.Plugin
-import com.autonomousapps.kit.gradle.android.AndroidBlock
 import com.emergetools.android.gradle.EmergePluginTest
-import com.emergetools.android.gradle.base.EmergeGradleRunner
 
 class SimpleGradleProject(
   agpVersion: String,
@@ -16,7 +12,7 @@ class SimpleGradleProject(
   companion object {
     fun createWithVcsInExtension(
       test: EmergePluginTest,
-      agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
+      agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
     ): SimpleGradleProject = createWithExtension(
       test, agpVersion, """
             emerge {
@@ -36,7 +32,7 @@ class SimpleGradleProject(
 
     fun createWithoutVcsInExtension(
       test: EmergePluginTest,
-      agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last()
+      agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
     ): SimpleGradleProject = createWithExtension(
       test, agpVersion, """
             emerge {
@@ -46,7 +42,7 @@ class SimpleGradleProject(
 
     fun createWithExtension(
       test: EmergePluginTest,
-      agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last(),
+      agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
       extension: String
     ): SimpleGradleProject {
       return SimpleGradleProject(agpVersion, test.baseUrl.toString(), extension)

@@ -5,9 +5,6 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.util.GradleVersion
 import java.io.File
 
-/**
- * Like EmergeGradleRunner but decouples the runner from the server and the gradle project
- */
 class EmergeGradleRunner2(projectDir: File, gradleVersion: GradleVersion = GradleVersion.current()) {
   private val runner = GradleBuilder.runner(gradleVersion, projectDir)
 

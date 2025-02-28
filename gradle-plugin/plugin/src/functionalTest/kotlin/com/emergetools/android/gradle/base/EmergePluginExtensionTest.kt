@@ -1,24 +1,27 @@
 package com.emergetools.android.gradle.base
 
+import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
 import com.emergetools.android.gradle.EmergePluginTest
+import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
+import com.emergetools.android.gradle.projects.SimpleGradleProject
 import org.junit.jupiter.api.Test
 
 class EmergePluginExtensionTest : EmergePluginTest() {
   @Test
   fun noApiTokenBundle() {
-    EmergeGradleRunner.create("no-api-token")
+    val project = SimpleGradleProject.createWithExtension(this, extension = "")
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseAab")
-      .withDefaultServer()
       .buildAndFail()
-      .assertFailedTask(":emergeUploadReleaseAab")
+    assertThat(result).task(":app:emergeUploadReleaseAab").failed()
   }
 
   @Test
   fun noApiTokenAssemble() {
-    EmergeGradleRunner.create("no-api-token")
+    val project = SimpleGradleProject.createWithExtension(this, extension = "")
+    val result = EmergeGradleRunner2(project.gradleProject.rootDir)
       .withArguments("emergeUploadReleaseApk")
-      .withDefaultServer()
       .buildAndFail()
-      .assertFailedTask(":emergeUploadReleaseApk")
+    assertThat(result).task(":app:emergeUploadReleaseApk").failed()
   }
 }
