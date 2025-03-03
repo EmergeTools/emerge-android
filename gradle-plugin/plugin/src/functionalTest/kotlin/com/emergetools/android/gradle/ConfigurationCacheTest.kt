@@ -1,7 +1,6 @@
 package com.emergetools.android.gradle
 
 import com.autonomousapps.kit.truth.TestKitTruth.Companion.assertThat
-import com.emergetools.android.gradle.base.EmergeGradleRunner
 import com.emergetools.android.gradle.base.EmergeGradleRunner2
 import com.emergetools.android.gradle.mocks.assertSuccessfulUploadRequests
 import com.emergetools.android.gradle.projects.MultiProjectProject

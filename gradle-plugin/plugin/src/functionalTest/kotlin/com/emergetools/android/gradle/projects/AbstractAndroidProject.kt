@@ -8,7 +8,11 @@ import com.autonomousapps.kit.gradle.GradleProperties
 import com.autonomousapps.kit.gradle.Plugin
 import com.autonomousapps.kit.gradle.android.AndroidBlock
 
-abstract class AbstractAndroidProject(val baseUrl: String) : AbstractGradleProject() {
+abstract class AbstractAndroidProject(private val baseUrl: String) : AbstractGradleProject() {
+  companion object {
+    val LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION = "8.0.0"
+  }
+
   protected fun newAndroidGradleProjectBuilder(agpVersion: String) : GradleProject.Builder{
     return newGradleProjectBuilder()
       .withRootProject {
