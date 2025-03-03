@@ -1,6 +1,6 @@
 // We catch very generic exceptions on purpose. We need to avoid
 // crashing the host app.
-@file:Suppress("MagicNumber", "TooGenericExceptionCaught", "TooManyFunctions")
+@file:Suppress("MagicNumber", "TooGenericExceptionCaught", "TooManyFunctions", "UnusedParameter")
 
 package com.emergetools.reaper
 
@@ -34,10 +34,13 @@ private const val FLUSH_PERIOD_MS = 60L * 1000L
 internal object ReaperInternal {
   // The tracker has to be statically initialized to avoid needing to check in every call to
   // logMethodEntry if it exists.
-  private val tracker = ThreadLocalSetHashTracker()
+  private var tracker: HashTracker = ThreadLocalSetHashTracker()
 
   // impl should only be accessed while holding the lock for this object. Set by init().
   private var impl: ReaperImpl? = null
+
+  // Set if the Reaper fuse
+  private var fused = false
 
   /**
    * The fast path where we see new hashes. This is called directly by the instrumentation bytecode.
@@ -80,6 +83,27 @@ internal object ReaperInternal {
   }
 
   /**
+   * Flush all pending hashes to the report on disk.
+   */
+  fun fuseOff(context: Context) {
+    synchronized(this) {
+      androidTrace("Reaper#fuseOff") {
+        if (impl != null) {
+          Log.e(TAG, "Reaper already initialized, ignoring Reaper.fuseOff()")
+          return@androidTrace
+        }
+        if (fused) {
+          return@androidTrace
+        }
+        fused = true
+        val oldTracker = tracker
+        tracker = NullHashTracker()
+        oldTracker.flush {}
+      }
+    }
+  }
+
+  /**
    * Helper for common logic that should exist on most public methods. Takes a lambda and:
    * 1. aborts with log message if not initialized
    * 2. takes the lock
@@ -104,6 +128,11 @@ internal object ReaperInternal {
   private fun initSynchronized(context: Context, options: ReaperOptions) {
     if (impl != null) {
       Log.e(TAG, "Reaper already initialized, ignoring Reaper.init().")
+      return
+    }
+
+    if (fused) {
+      Log.e(TAG, "Reaper fuse blown, ignoring Reaper.init().")
       return
     }
 
