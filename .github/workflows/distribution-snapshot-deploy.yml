@@ -1,4 +1,4 @@
-name: Reaper Snapshot Deploy
+name: Distribution Snapshot Deploy
 
 on:
   push:
@@ -26,4 +26,4 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Deploy snapshot to Sonatype Snapshots
-        run: ./gradlew :reaper:reaper:publishAllPublicationsToSonatypeSnapshotsRepo
+        run: ./gradlew :distribution:distribution:publishAllPublicationsToSonatypeSnapshotsRepo
