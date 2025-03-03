@@ -54,6 +54,7 @@ data class ArtifactMetadata(
   val testArtifactZipPath: String? = null,
   val proguardMappingsZipPath: String? = null,
   val dependencyMetadataZipPath: String? = null,
+  val snapshotConfigFile: String? = null,
   val ciDebugData: CIDebugData? = null,
 ) {
   companion object {
