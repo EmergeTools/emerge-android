@@ -1,10 +1,8 @@
 package com.emergetools.android.gradle.projects
 
 import com.autonomousapps.kit.GradleProject
-import com.autonomousapps.kit.gradle.Plugin
 import com.autonomousapps.kit.gradle.android.AndroidBlock
 import com.emergetools.android.gradle.EmergePluginTest
-import com.emergetools.android.gradle.base.EmergeGradleRunner
 
 class MultiProjectProject(
   baseUrl: String,
@@ -13,7 +11,7 @@ class MultiProjectProject(
 ) : AbstractAndroidProject(baseUrl) {
   companion object {
     fun create(test: EmergePluginTest,
-      agpVersion: String = EmergeGradleRunner.SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSIONS.last(),
+      agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
       extension: String = """
         emerge {
           apiToken = 'abcdef123'
