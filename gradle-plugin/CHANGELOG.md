@@ -5,6 +5,9 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.2.0 - 2024-03-03
+- Shade/relocate dependencies to avoid conflicts with other plugins [#453](https://github.com/EmergeTools/emerge-android/pull/453)
+
 ## 4.1.0 - 2024-02-27
 - Drop support for AGP 7.X versions and Java 11, minimum version is now AGP 8.0.0 and Java 17
 
