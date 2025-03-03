@@ -5,28 +5,28 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 4.2.0 - 2024-03-03
+## 4.2.0 - 2025-03-03
 - Shade/relocate dependencies to avoid conflicts with other plugins [#453](https://github.com/EmergeTools/emerge-android/pull/453)
 
-## 4.1.0 - 2024-02-27
+## 4.1.0 - 2025-02-27
 - Drop support for AGP 7.X versions and Java 11, minimum version is now AGP 8.0.0 and Java 17
 
-## 4.0.9 - 2024-02-05
+## 4.0.9 - 2025-02-05
 - Another fix for parsing git information on bitbucket [#442](https://github.com/EmergeTools/emerge-android/pull/442)
 
-## 4.0.8 - 2024-02-04
+## 4.0.8 - 2025-02-04
 - Correctly parse git information on bitbucket and non https urls [#439](https://github.com/EmergeTools/emerge-android/pull/439)
 
-## 4.0.7 - 2024-01-22
+## 4.0.7 - 2025-01-22
 - Correctly parse git/github/gitlab urls in all environments [#419](https://github.com/EmergeTools/emerge-android/pull/419)
 
-## 4.0.6 - 2024-01-16
+## 4.0.6 - 2025-01-16
 
 - Fix bug where metadata was overwriting set values. [#405](https://github.com/EmergeTools/emerge-android/pull/405)
 - Fix: logging and resolving dependencies at configuration time. [#403](https://github.com/EmergeTools/emerge-android/pull/403)
 - Add cacheable task annotations. [#380](https://github.com/EmergeTools/emerge-android/pull/380)
 
-## 4.0.5 - 2024-01-08
+## 4.0.5 - 2025-01-08
 
 - Introduce separate `logExtension` task to log VCS options. Fixes [#322](https://github.com/EmergeTools/emerge-android/issues/322) [#327](https://github.com/EmergeTools/emerge-android/pull/327)
 
