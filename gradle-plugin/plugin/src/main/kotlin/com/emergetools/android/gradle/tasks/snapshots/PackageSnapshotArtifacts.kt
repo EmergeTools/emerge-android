@@ -2,7 +2,6 @@ package com.emergetools.android.gradle.tasks.snapshots
 
 import com.emergetools.android.gradle.BuildConfig
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
@@ -11,6 +10,8 @@ import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
@@ -35,6 +36,11 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val testArtifactDir: DirectoryProperty
 
+  @get:Optional
+  @get:InputFile
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val snapshotConfigFile: RegularFileProperty
+
   @get:OutputDirectory
   abstract val outputDirectory: DirectoryProperty
 
@@ -54,12 +60,28 @@ abstract class PackageSnapshotArtifacts : DefaultTask() {
     targetApk.copyTo(outputDirectory.get().asFile.resolve(targetApk.name), overwrite = true)
     testApk.copyTo(outputDirectory.get().asFile.resolve(testApk.name), overwrite = true)
 
+    if (snapshotConfigFile.isPresent) {
+      snapshotConfigFile.asFile.get().copyTo(
+        outputDirectory.get().asFile
+          .resolve(
+            snapshotConfigFile.asFile.get().name
+          ),
+        overwrite = true
+      )
+    }
+
     val metadata =
       ArtifactMetadata(
         emergeGradlePluginVersion = BuildConfig.VERSION,
         androidGradlePluginVersion = agpVersion.get(),
         targetArtifactZipPath = targetApk.name,
         testArtifactZipPath = testApk.name,
+        composePreviewsConfigPath =
+        if (snapshotConfigFile.isPresent) {
+          snapshotConfigFile.asFile.get().name
+        } else {
+          null
+        },
       )
     val metadataString = Json.encodeToString(metadata)
     artifactMetadataPath.asFile.get().writeText(metadataString)

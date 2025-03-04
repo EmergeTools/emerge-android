@@ -19,7 +19,6 @@ import com.emergetools.android.gradle.util.network.fetchSignedUrl
 import com.emergetools.android.gradle.util.network.postFile
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import okhttp3.HttpUrl.Companion.toHttpUrlOrNull
 import okhttp3.OkHttpClient
@@ -54,7 +53,7 @@ data class ArtifactMetadata(
   val testArtifactZipPath: String? = null,
   val proguardMappingsZipPath: String? = null,
   val dependencyMetadataZipPath: String? = null,
-  val snapshotConfigFile: String? = null,
+  val composePreviewsConfigPath: String? = null,
   val ciDebugData: CIDebugData? = null,
 ) {
   companion object {

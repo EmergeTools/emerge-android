@@ -1,17 +1,20 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
-import com.emergetools.android.gradle.tasks.snapshots.transform.PreviewAnalyzerTransform.Companion.findPreviewMethodsInDirectory
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.PathSensitive
+import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 
+@CacheableTask
 abstract class TransformProjectClasses : DefaultTask() {
 
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
   @get:InputDirectory
   abstract val inputDir: DirectoryProperty
 
@@ -23,7 +26,7 @@ abstract class TransformProjectClasses : DefaultTask() {
     val input = inputDir.get().asFile
 
     if (!input.exists()) {
-      println("⚠️ Warning: No compiled class files found in ${input.absolutePath}")
+      logger.warn("⚠️ Warning: No compiled class files found in ${input.absolutePath}")
       return
     }
 

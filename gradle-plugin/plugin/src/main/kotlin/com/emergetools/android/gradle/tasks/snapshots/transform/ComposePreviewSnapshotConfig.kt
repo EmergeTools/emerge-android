@@ -32,13 +32,19 @@ data class PreviewParameter(
   val index: Int? = null
 )
 
+const val CLASS_CHARS_LENGTH = 6
+
 fun String.cleanName(): String {
   var newName = this.replace("/", ".")
-  // Strip .class suffix
   if (newName.endsWith(".class")) {
-    newName = newName.substring(0, newName.length - 6)
+    newName = newName.substring(0, newName.length - CLASS_CHARS_LENGTH)
   }
   return newName
+}
+
+fun String.cleanFileName(): String {
+  val newName = this.substringAfterLast(".")
+  return newName.replace("Kt", ".kt")
 }
 
 fun String.removeClassName(): String {
