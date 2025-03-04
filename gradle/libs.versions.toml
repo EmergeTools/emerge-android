@@ -53,7 +53,7 @@ autonomousapps-testkit = { id = "com.autonomousapps.testkit", version = "0.12" }
 gr8 = { id = "com.gradleup.gr8", version = "0.11.2" }
 
 [libraries]
-android-gradle-plugin = "com.android.tools.build:gradle:8.8.2"
+android-gradle-plugin = "com.android.tools.build:gradle:8.9.0"
 
 androidx-activity = { module = "androidx.activity:activity", version.ref = "androidxactivity" }
 androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidxactivity" }
