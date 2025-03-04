@@ -41,6 +41,11 @@ fun String.cleanName(): String {
   return newName
 }
 
+fun String.cleanFileName(): String {
+  val newName = this.substringAfterLast(".")
+  return newName.replace("Kt", ".kt")
+}
+
 fun String.removeClassName(): String {
   return this.substringBeforeLast(".")
 }

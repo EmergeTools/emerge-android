@@ -40,40 +40,8 @@ fun registerSnapshotTasks(
 
   registerSnapshotPreflightTask(appProject, extension, variant)
 
-  val flagEnabled = true
-  if (flagEnabled) {
-
-    val artifactType = Attribute.of("artifactType", String::class.java)
-    appProject.dependencies.registerTransform(PreviewAnalyzerTransform::class.java) { transform ->
-      transform.from.attribute(artifactType, "android-classes")
-      transform.to.attribute(artifactType, "transformed-preview")
-    }
-    val name = variant.name
-    val transformProjectClasses = appProject.tasks.register(name.transformProjectClassesTaskName, TransformProjectClasses::class.java) {
-      it.outputFile.set(appProject.layout.buildDirectory.dir("transformed-classes-$name").map { it.file("output.txt") })
-//      it.inputDir.set(appProject.tasks.named(name.kotlinCompileTaskName, KotlinCompile::class.java).flatMap { it.ou })
-      // get the KotlinCompile task reflectively
-      val kotlinCompile = appProject.tasks.named(name.kotlinCompileTaskName)
-      // get the destination dir property of the KotlinCompile task reflectively
-      val destinationDir = kotlinCompile.get().javaClass.getDeclaredMethod("getDestinationDirectory").invoke(kotlinCompile.get()) as DirectoryProperty
-      it.inputDir.set(destinationDir)
-      // Set input dir to the output dir of the kotlin compile task
-//      it.inputDir.set(appProject.layout.buildDirectory.dir("intermediates/javac/$name"))
-    }
-    appProject.tasks.register(name.aggregatePreviewMethodsName, AggregatePreviewMethodsTask::class.java) { task ->
-      task.outputFile.set(appProject.layout.buildDirectory.file("aggregated-$name/foo.txt"))
-
-
-      task.inputFiles.from(appProject.configurations.named("${name}RuntimeClasspath").map { configuration ->
-
-        configuration.incoming.artifactView { view ->
-          view.componentFilter { component ->
-            component is ProjectComponentIdentifier
-          }
-          view.attributes.attribute(artifactType, "transformed-preview")
-        }.files
-      }, transformProjectClasses)
-    }
+  if (appProject.transformFlagEnabled) {
+    setupTransformTasks(appProject, variant)
   } else {
     variant.instrumentation.let { instrumentation ->
       instrumentation.transformClassesWith(
@@ -112,6 +80,16 @@ private fun registerSnapshotPackageTask(
         "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}",
       ),
     )
+    if (appProject.transformFlagEnabled) {
+      it.snapshotConfigFile.set(
+        appProject.tasks.named(
+          variant.name.aggregatePreviewMethodsName,
+          AggregatePreviewMethodsTask::class.java,
+        ).flatMap { task ->
+          task.outputFile
+        },
+      )
+    }
     it.agpVersion.set(AgpVersions.CURRENT.toString())
   }
 }
@@ -212,9 +190,59 @@ private fun registerSnapshotUploadTask(
   }
 }
 
+fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
+  val artifactType = Attribute.of("artifactType", String::class.java)
+  appProject.dependencies.registerTransform(PreviewAnalyzerTransform::class.java) { transform ->
+    transform.from.attribute(artifactType, "android-classes")
+    transform.to.attribute(artifactType, PREVIEW_JSON)
+  }
+  val name = variant.name
+  // The above transform only applies to dependencies, but we also need to search the project classes
+  val transformProjectClasses = appProject.tasks
+    .register(name.transformProjectClassesTaskName, TransformProjectClasses::class.java) {
+      it.outputFile.set(
+        appProject.layout.buildDirectory.file("emergetools/snapshot-previews/project/$name/projectPreviews.json"))
+      val kotlinCompile = appProject.tasks.named(name.kotlinCompileTaskName)
+      // get the destination dir property of the KotlinCompile task reflectively so we don't depend on the Kotlin plugin
+      it.inputDir.set(
+        kotlinCompile.flatMap { task ->
+          task.javaClass.getDeclaredMethod("getDestinationDirectory")
+            .invoke(task) as DirectoryProperty
+        }
+      )
+    }
+
+  appProject.tasks.register(
+    name.aggregatePreviewMethodsName,
+    AggregatePreviewMethodsTask::class.java
+  ) { task ->
+    task.outputFile.set(appProject.layout.buildDirectory.file("emergetools/snapshot-previews/$name/previewSnapshots.json"))
+
+
+    task.inputFiles.from(
+      appProject.configurations.named("${name}RuntimeClasspath").map { configuration ->
+
+        configuration.incoming.artifactView { view ->
+          // This filter allows the transform to only operate on project classes
+          view.componentFilter { component ->
+            component is ProjectComponentIdentifier
+          }
+          view.attributes.attribute(artifactType, PREVIEW_JSON)
+        }.files
+      }, transformProjectClasses
+    )
+  }
+}
+
 fun getSnapshotUploadTaskName(variantName: String): String {
   return "${EMERGE_TASK_PREFIX}UploadSnapshotBundle${variantName.capitalize()}"
 }
+
+const val PREVIEW_JSON = "preview-json"
+
+private val Project.transformFlagEnabled
+  get() = providers.gradleProperty("emerge.snapshots.transform.enabled")
+    .getOrElse("false").toBoolean()
 
 private val String.transformProjectClassesTaskName : String
   get() = "transform${capitalize()}ProjectClasses"

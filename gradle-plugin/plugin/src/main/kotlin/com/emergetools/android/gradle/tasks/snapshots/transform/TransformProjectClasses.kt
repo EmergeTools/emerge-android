@@ -1,7 +1,5 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
-import com.emergetools.android.gradle.tasks.snapshots.transform.PreviewAnalyzerTransform.Companion.findPreviewMethodsInDirectory
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty

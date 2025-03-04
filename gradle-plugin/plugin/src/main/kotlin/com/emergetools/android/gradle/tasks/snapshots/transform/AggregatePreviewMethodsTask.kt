@@ -24,6 +24,7 @@ abstract class AggregatePreviewMethodsTask : DefaultTask() {
     val output = outputFile.get().asFile
     output.parentFile.mkdirs()
 
+    // Clear any existing content
     output.writeText("")
 
     // Aggregate all preview method files
