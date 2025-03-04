@@ -26,12 +26,7 @@
 -keep interface com.emergetools.android.gradle.** { *; }
 -keep class kotlin.jvm.internal.** { *; }
 -keep interface kotlin.jvm.internal.** { *; }
--keep class com.emergetools.android.gradle.kotlin.reflect.** { *; }
--keep interface com.emergetools.android.gradle.kotlin.reflect.** { *; }
 -keep class kotlin.reflect.** { *; }
--keepclassmembers class com.emergetools.android.gradle.ProductOptions {
-    public <fields>;
-}
 
 # The Gradle API jar and other compileOnly dependencies aren't added to the classpath, ignore the missing symbols
 # I tried adding them but they duplicate a lot of the program classes and trigger errors in R8.
