@@ -75,7 +75,6 @@ tasks.register("generateMetaInfVersion") {
     metaInfDestDir.mkdirs()
     File(metaInfDestDir, "version.txt").writeText(
       "version: $version" +
-        "\nbuild time: ${SimpleDateFormat("yyyy-MM-dd HH:mm:ss Z").format(Date())}" +
         "\nrevision: ${grgit.head().id}"
     )
   }
