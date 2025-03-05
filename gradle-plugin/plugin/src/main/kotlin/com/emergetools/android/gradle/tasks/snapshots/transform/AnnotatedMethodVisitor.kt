@@ -101,6 +101,10 @@ class AnnotatedMethodVisitor(
         methodNamesToAdd.addAll(snapshotConfig)
         return super.visitAnnotation(descriptor, visible)
       }
+      EMERGE_IGNORE_SNAPSHOT -> {
+        foundIgnoreAnnotation = true
+        return super.visitAnnotation(descriptor, visible)
+      }
 
       PREVIEW_CONTAINER_ANNOTATION_DESC -> {
         return object : AnnotationVisitor(api) {
