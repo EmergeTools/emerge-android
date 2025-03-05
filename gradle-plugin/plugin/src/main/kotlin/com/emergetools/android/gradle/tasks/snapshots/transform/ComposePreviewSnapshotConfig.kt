@@ -17,7 +17,7 @@ data class ComposePreviewSnapshotConfig(
   var heightDp: Int? = null,
   var widthDp: Int? = null,
   var showBackground: Boolean? = null,
-  var backgroundColor: Int? = null,
+  var backgroundColor: Long? = null,
   var showSystemUi: Boolean? = null,
   var device: String? = null,
   var apiLevel: Int? = null,

@@ -244,7 +244,7 @@ fun getSnapshotUploadTaskName(variantName: String): String {
 const val PREVIEW_JSON = "preview-json"
 
 private val Project.transformFlagEnabled
-  get() = providers.gradleProperty("emerge.snapshots.transform.enabled")
+  get() = providers.gradleProperty("emerge.experimental.firstPartySnapshots")
     .getOrElse("false").toBoolean()
 
 private val String.transformProjectClassesTaskName
