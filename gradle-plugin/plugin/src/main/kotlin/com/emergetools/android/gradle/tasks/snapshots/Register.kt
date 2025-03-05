@@ -40,7 +40,7 @@ fun registerSnapshotTasks(
 
   registerSnapshotPreflightTask(appProject, extension, variant)
 
-  if (appProject.transformFlagEnabled) {
+  if (appProject.firstPartySnapshotsEnabled) {
     setupTransformTasks(appProject, variant)
   } else {
     variant.instrumentation.let { instrumentation ->
@@ -80,7 +80,7 @@ private fun registerSnapshotPackageTask(
         "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}",
       ),
     )
-    if (appProject.transformFlagEnabled) {
+    if (appProject.firstPartySnapshotsEnabled) {
       it.snapshotConfigFile.set(
         appProject.tasks.named(
           variant.name.aggregatePreviewMethodsName,
@@ -243,7 +243,7 @@ fun getSnapshotUploadTaskName(variantName: String): String {
 
 const val PREVIEW_JSON = "preview-json"
 
-private val Project.transformFlagEnabled
+private val Project.firstPartySnapshotsEnabled
   get() = providers.gradleProperty("emerge.experimental.firstPartySnapshots")
     .getOrElse("false").toBoolean()
 
