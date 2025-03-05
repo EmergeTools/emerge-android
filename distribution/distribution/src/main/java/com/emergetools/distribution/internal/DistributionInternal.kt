@@ -197,8 +197,13 @@ object DistributionInternal {
   }
 }
 
+
+
 @OptIn(ExperimentalCoroutinesApi::class)
 private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStatus {
+
+  Foo().foo()
+
   // Despite the name context.packageName is the actually the application id.
   val applicationId = context.packageName
   val apiKey = state.apiKey
@@ -206,6 +211,8 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     Log.e(TAG, "No API key available")
     return UpdateStatus.Error("No API key available")
   }
+
+
 
   val info = context.packageManager.getPackageInfo(applicationId, 0)
   val version = info.versionName
