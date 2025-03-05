@@ -61,7 +61,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
         .first { it.name == artifactMetadata.testArtifactZipPath }
 
     val composePreview = packageDir.asFileTree.matching { it.include("*.json") }.files
-      .first { it.name == artifactMetadata.composePreviewsConfigPath }
+      .firstOrNull { it.name == artifactMetadata.composePreviewsConfigPath }
 
     targetApk.inputStream().use {
       zos.putNextEntry(ZipEntry(targetApk.name))
@@ -75,7 +75,7 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
       zos.closeEntry()
     }
 
-    composePreview.inputStream().use {
+    composePreview?.inputStream()?.use {
       zos.putNextEntry(ZipEntry(composePreview.name))
       it.copyTo(zos)
       zos.closeEntry()
