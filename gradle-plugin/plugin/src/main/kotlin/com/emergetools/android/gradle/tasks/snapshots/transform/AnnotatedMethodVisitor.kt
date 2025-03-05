@@ -1,7 +1,9 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
 import org.objectweb.asm.AnnotationVisitor
+import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
+import org.objectweb.asm.Type
 
 /**
  * This class finds methods annotated with `@Preview` and variants of it and adds them to the passed in list.
@@ -16,6 +18,17 @@ class AnnotatedMethodVisitor(
 
   private val methodNamesToAdd = mutableListOf<ComposePreviewSnapshotConfig>()
   private var foundIgnoreAnnotation = false
+
+  // Parameter and preview parameter info
+  private val parameterPreviewInfoMap = mutableMapOf<Int, PreviewParameterInfo>()
+  private val parameterNames = mutableMapOf<Int, String>()
+
+  // Temporarily store information about a parameter with @PreviewParameter annotation
+  private data class PreviewParameterInfo(
+    val providerClassFqn: String,
+    val limit: Int? = null,
+    val index: Int? = null
+  )
 
   @Suppress("detekt.ReturnCount")
   private fun createComposePreviewConfigs(forAnnotation: String): List<ComposePreviewSnapshotConfig> {
@@ -101,6 +114,7 @@ class AnnotatedMethodVisitor(
         methodNamesToAdd.addAll(snapshotConfig)
         return super.visitAnnotation(descriptor, visible)
       }
+
       EMERGE_IGNORE_SNAPSHOT -> {
         foundIgnoreAnnotation = true
         return super.visitAnnotation(descriptor, visible)
@@ -136,11 +150,107 @@ class AnnotatedMethodVisitor(
     }
   }
 
+  override fun visitParameterAnnotation(
+    parameter: Int,
+    descriptor: String?,
+    visible: Boolean
+  ): AnnotationVisitor? {
+    if (descriptor == PREVIEW_PARAMETER_ANNOTATION_DESC) {
+      // Create a visitor to collect preview parameter information
+      return object : AnnotationVisitor(api) {
+        private var providerClassFqn: String? = null
+        private var limit: Int? = null
+        private var index: Int? = null
+
+        override fun visit(name: String?, value: Any?) {
+          when (name) {
+            "limit" -> limit = value as? Int
+            "index" -> index = value as? Int
+            "provider" -> {
+              // This handles the provider class which is the main parameter
+              if (value is Type) {
+                providerClassFqn = value.className
+              }
+            }
+          }
+          super.visit(name, value)
+        }
+
+        override fun visitEnd() {
+          if (providerClassFqn != null) {
+            parameterPreviewInfoMap[parameter] = PreviewParameterInfo(
+              providerClassFqn = providerClassFqn!!,
+              limit = limit,
+              index = index
+            )
+          }
+          super.visitEnd()
+        }
+      }
+    }
+    return super.visitParameterAnnotation(parameter, descriptor, visible)
+  }
+
+  /**
+   * Capture local variable information, which includes parameter names
+   * In debug builds, this information is available
+   */
+  override fun visitLocalVariable(
+    name: String?,
+    descriptor: String?,
+    signature: String?,
+    start: Label?,
+    end: Label?,
+    index: Int
+  ) {
+    if (name != null) {
+      parameterNames[index] = name
+    }
+
+    super.visitLocalVariable(name, descriptor, signature, start, end, index)
+  }
+
   override fun visitEnd() {
+    // Apply any preview parameter information to the configs
+    if (parameterPreviewInfoMap.isNotEmpty()) {
+      applyPreviewParameterInfo()
+    }
+
     // We only add the method names in the end in case we find the ignore annotation and then we ignore what we found.
     if (!foundIgnoreAnnotation) {
       fullPreviewConfigList.addAll(methodNamesToAdd)
     }
     super.visitEnd()
+  }
+
+  /**
+   * Apply the preview parameter information to all method configs.
+   */
+  private fun applyPreviewParameterInfo() {
+    // We only handle the first preview parameter for simplicity.
+    require(
+      parameterPreviewInfoMap.entries.size == 1
+    ) {
+      "Only one @PreviewParameter annotation is supported per method, " +
+        "found ${parameterPreviewInfoMap.entries.size}"
+    }
+    val (paramIndex, previewInfo) = parameterPreviewInfoMap.entries.first()
+
+    val paramName = parameterNames[paramIndex]!!
+
+    val previewParam = PreviewParameter(
+      parameterName = paramName,
+      providerClassFqn = previewInfo.providerClassFqn,
+      limit = previewInfo.limit,
+      index = previewInfo.index
+    )
+
+    val updatedConfigs = methodNamesToAdd.map { config ->
+      config.copy(previewParameter = previewParam)
+    }
+
+    // Replace the old configs with the updated ones
+    methodNamesToAdd.clear()
+    methodNamesToAdd.addAll(updatedConfigs)
   }
 }
