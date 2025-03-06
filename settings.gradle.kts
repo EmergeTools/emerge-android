@@ -26,6 +26,7 @@ develocity {
 
 android {
   compileSdk = 35
+  targetSdk = 35
 }
 
 dependencyResolutionManagement {

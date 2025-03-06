@@ -1,6 +1,3 @@
-import java.text.SimpleDateFormat
-import java.util.Date
-
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.grgit)

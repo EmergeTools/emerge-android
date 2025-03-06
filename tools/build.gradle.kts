@@ -14,7 +14,7 @@ application {
   mainClass = "com.emergetools.tools.GenKt"
 }
 
-task<JavaExec>("runGen") {
+tasks.register<JavaExec>("runGen") {
   classpath = sourceSets["main"].runtimeClasspath
   mainClass = "com.emergetools.tools.GenKt"
 }
