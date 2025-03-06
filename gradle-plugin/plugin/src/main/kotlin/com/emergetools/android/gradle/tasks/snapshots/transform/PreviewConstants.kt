@@ -18,9 +18,13 @@ const val EMERGE_APP_STORE_SNAPSHOT =
 const val EMERGE_IGNORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/IgnoreEmergeSnapshot;"
 
+// These constants are from:
+// https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/content/res/Configuration.java
 const val UI_MODE_NIGHT_YES: Int = 32
 const val UI_MODE_TYPE_NORMAL: Int = 1
 
+// These constants are from:
+// https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Device.android.kt
 const val PHONE = "spec:id=reference_phone,shape=Normal,width=411,height=891,unit=dp,dpi=420"
 const val FOLDABLE =
   "spec:id=reference_foldable,shape=Normal,width=673,height=841,unit=dp,dpi=420"
