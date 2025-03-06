@@ -3,12 +3,10 @@ package com.emergetools.android.gradle.tasks.snapshots
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils
 import com.emergetools.android.gradle.util.adb.AdbHelper
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
-import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
 import org.gradle.api.tasks.Optional
@@ -18,11 +16,12 @@ import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.gradle.process.ExecOperations
+import org.gradle.work.DisableCachingByDefault
 import java.io.File
 import java.util.zip.ZipFile
 import javax.inject.Inject
 
-@CacheableTask
+@DisableCachingByDefault(because = "Relies on local emulator state and should not be cached")
 abstract class LocalSnapshots : DefaultTask() {
   companion object {
     const val COMPOSE_SNAPSHOTS_FILENAME = "snapshots.json"

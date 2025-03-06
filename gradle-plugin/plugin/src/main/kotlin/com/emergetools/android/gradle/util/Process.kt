@@ -4,7 +4,7 @@ import org.gradle.api.logging.Logging
 import org.gradle.process.ExecOperations
 import java.io.ByteArrayOutputStream
 
-fun ExecOperations.execute(command: String): String? {
+fun ExecOperations.executeWithSilentFailures(command: String): String? {
   val logger = Logging.getLogger(this::class.java)
   val outputStream = ByteArrayOutputStream()
   val errorOutputStream = ByteArrayOutputStream()
