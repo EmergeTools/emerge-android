@@ -4,6 +4,7 @@ import org.objectweb.asm.ClassReader
 import org.objectweb.asm.Opcodes
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
+import java.util.jar.JarFile
 
 /**
  * Find preview methods in a directory using a two-pass approach:
@@ -11,9 +12,10 @@ import java.util.concurrent.ConcurrentHashMap
  * 2. Second pass: Find methods with preview annotations, including custom ones
  */
 fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig> {
+  println("finding preview method in dir")
   // First pass: Find all custom annotation classes that are themselves annotated with @Preview
   val customPreviewAnnotations = findCustomPreviewAnnotationsInDirectory()
-  
+
   // Second pass: Find all methods with preview annotations (both standard and custom)
   return walk()
     .filter { it.name.endsWith(".class") }
@@ -28,13 +30,13 @@ fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig>
  */
 private fun File.findCustomPreviewAnnotationsInDirectory(): Map<String, CustomPreviewAnnotation> {
   val customPreviewAnnotations = ConcurrentHashMap<String, CustomPreviewAnnotation>()
-  
+
   walk()
     .filter { it.name.endsWith(".class") }
     .forEach { classFile ->
       findCustomPreviewAnnotationsInBytes(classFile.readBytes(), customPreviewAnnotations)
     }
-    
+
   return customPreviewAnnotations
 }
 
@@ -46,7 +48,7 @@ private fun findCustomPreviewAnnotationsInBytes(
   customPreviewAnnotations: MutableMap<String, CustomPreviewAnnotation>
 ) {
   val classReader = ClassReader(byteStream)
-  
+
   val visitor = FindCustomPreviewClassVisitor(Opcodes.ASM9, customPreviewAnnotations)
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 }
@@ -64,9 +66,9 @@ fun extractPreviewMethodsFromBytes(
 
   val visitor =
     SnapshotAggregatorClassVisitor(
-      Opcodes.ASM9, 
-      fileName, 
-      classReader.className, 
+      Opcodes.ASM9,
+      fileName,
+      classReader.className,
       methodNames,
       customPreviewAnnotations
     )
@@ -74,4 +76,24 @@ fun extractPreviewMethodsFromBytes(
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 
   return methodNames
+}
+
+fun analyzeJarFile(inputJar: File): Sequence<ComposePreviewSnapshotConfig> {
+  println("analyzing jar file")
+  val methods = mutableListOf<ComposePreviewSnapshotConfig>()
+  JarFile(inputJar).use { jarFile ->
+    jarFile.entries().asSequence()
+      .filter { it.name.endsWith(".class") }
+      .forEach { classEntry ->
+        jarFile.getInputStream(classEntry).use { inputStream ->
+          methods.addAll(
+            extractPreviewMethodsFromBytes(
+              classEntry.realName,
+              inputStream.readBytes()
+            )
+          )
+        }
+      }
+  }
+  return methods.asSequence()
 }

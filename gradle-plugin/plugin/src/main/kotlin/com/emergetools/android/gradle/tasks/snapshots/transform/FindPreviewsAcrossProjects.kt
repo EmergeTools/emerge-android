@@ -1,8 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
-import kotlinx.serialization.ExperimentalSerializationApi
 import kotlinx.serialization.json.Json
-import kotlinx.serialization.json.decodeFromStream
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
 import org.gradle.api.file.RegularFileProperty
@@ -13,9 +11,8 @@ import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
 import org.gradle.api.tasks.TaskAction
 
-@OptIn(ExperimentalSerializationApi::class)
 @CacheableTask
-abstract class AggregatePreviewMethodsTask : DefaultTask() {
+abstract class FindPreviewsAcrossProjects : DefaultTask() {
   @get:InputFiles
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val inputFiles: ConfigurableFileCollection
@@ -24,16 +21,24 @@ abstract class AggregatePreviewMethodsTask : DefaultTask() {
   abstract val outputFile: RegularFileProperty
 
   @TaskAction
-  fun aggregate() {
+  fun findPreviews() {
     val output = outputFile.get().asFile
     output.parentFile.mkdirs()
 
     // Clear any existing content
     output.writeText("")
 
-    // Aggregate all preview method files
-    val list =
-      inputFiles.flatMap { Json.decodeFromStream<List<ComposePreviewSnapshotConfig>>(it.inputStream()) }
-    output.writeText(Json.encodeToString(list))
+    // Merge all input files (classes) in to a single directory
+
+    val listOfPreviews =
+      inputFiles.flatMap { file ->
+        val previewMethods = when {
+          file.isDirectory -> file.findPreviewMethodsInDirectory()
+          file.name.endsWith(".jar") -> analyzeJarFile(file)
+          else -> throw IllegalArgumentException("Unsupported input type: $file")
+        }
+        previewMethods.toList()
+      }
+    output.writeText(Json.encodeToString(listOfPreviews))
   }
 }
