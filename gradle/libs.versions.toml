@@ -39,7 +39,7 @@ android-application = { id = "com.android.application", version.ref = "agp" }
 android-library = { id = "com.android.library", version.ref = "agp" }
 android-test = { id = "com.android.test", version.ref = "agp" }
 benchmark = { id = "androidx.benchmark", version.ref = "benchmark" }
-buildconfig = "com.github.gmazzo.buildconfig:5.5.1"
+buildconfig = "com.github.gmazzo.buildconfig:5.5.2"
 compose-compiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 detekt = { id = "io.gitlab.arturbosch.detekt", version.ref = "detekt" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
