@@ -90,7 +90,7 @@ class AnnotatedMethodVisitor(
       }
 
       else -> {
-        // Check if this is one of our custom preview annotations
+        // Check if this is a custom preview annotations
         val customAnnotation = customPreviewAnnotations[forAnnotation]
         if (customAnnotation != null) {
           // Create configs based on the custom annotation
