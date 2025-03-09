@@ -223,14 +223,6 @@ class AnnotatedMethodVisitor(
         if (descriptor != null && customPreviewAnnotations.containsKey(descriptor)) {
           val configs = createComposePreviewConfigs(descriptor)
           methodNamesToAdd.addAll(configs)
-
-          // If it's a custom annotation with arrays, we need to handle those
-          return object : AnnotationVisitor(api) {
-            override fun visitArray(name: String?): AnnotationVisitor? {
-              // Handle any arrays in the annotation if needed
-              return super.visitArray(name)
-            }
-          }
         }
 
         // This is just another annotation or it could be a custom annotation that includes a preview.
@@ -318,8 +310,7 @@ class AnnotatedMethodVisitor(
   private fun applyPreviewParameterInfo() {
     // We only handle the first preview parameter for simplicity.
     require(
-      parameterPreviewInfoMap.entries.size == 1
-    ) {
+      parameterPreviewInfoMap.entries.size == 1) {
       "Only one @PreviewParameter annotation is supported per method, " +
         "found ${parameterPreviewInfoMap.entries.size}"
     }
