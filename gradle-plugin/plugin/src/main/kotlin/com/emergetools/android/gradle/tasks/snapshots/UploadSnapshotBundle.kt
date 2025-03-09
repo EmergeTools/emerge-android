@@ -60,6 +60,9 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
       packageDir.asFileTree.matching { it.include("*.apk") }.files
         .first { it.name == artifactMetadata.testArtifactZipPath }
 
+    val composePreview = packageDir.asFileTree.matching { it.include("*.json") }.files
+      .firstOrNull { it.name == artifactMetadata.composePreviewsConfigPath }
+
     targetApk.inputStream().use {
       zos.putNextEntry(ZipEntry(targetApk.name))
       it.copyTo(zos)
@@ -68,6 +71,12 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
 
     testApk.inputStream().use {
       zos.putNextEntry(ZipEntry(testApk.name))
+      it.copyTo(zos)
+      zos.closeEntry()
+    }
+
+    composePreview?.inputStream()?.use {
+      zos.putNextEntry(ZipEntry(composePreview.name))
       it.copyTo(zos)
       zos.closeEntry()
     }
@@ -105,9 +114,5 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
       logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
       logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")
     }
-  }
-
-  companion object {
-    val supportedApiVersions = listOf(29, 31, 33, 34)
   }
 }
