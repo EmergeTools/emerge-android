@@ -4,7 +4,6 @@ import org.objectweb.asm.ClassReader
 import org.objectweb.asm.Opcodes
 import java.io.File
 import java.util.concurrent.ConcurrentHashMap
-import java.util.jar.JarFile
 
 /**
  * Find preview methods in a directory using a two-pass approach:
@@ -12,7 +11,6 @@ import java.util.jar.JarFile
  * 2. Second pass: Find methods with preview annotations, including custom ones
  */
 fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig> {
-  println("finding preview method in dir")
   // First pass: Find all custom annotation classes that are themselves annotated with @Preview
   val customPreviewAnnotations = findCustomPreviewAnnotationsInDirectory()
 
@@ -80,24 +78,4 @@ fun extractPreviewMethodsFromBytes(
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 
   return methodNames
-}
-
-fun analyzeJarFile(inputJar: File): Sequence<ComposePreviewSnapshotConfig> {
-  println("analyzing jar file")
-  val methods = mutableListOf<ComposePreviewSnapshotConfig>()
-  JarFile(inputJar).use { jarFile ->
-    jarFile.entries().asSequence()
-      .filter { it.name.endsWith(".class") }
-      .forEach { classEntry ->
-        jarFile.getInputStream(classEntry).use { inputStream ->
-          methods.addAll(
-            extractPreviewMethodsFromBytes(
-              classEntry.realName,
-              inputStream.readBytes()
-            )
-          )
-        }
-      }
-  }
-  return methods.asSequence()
 }

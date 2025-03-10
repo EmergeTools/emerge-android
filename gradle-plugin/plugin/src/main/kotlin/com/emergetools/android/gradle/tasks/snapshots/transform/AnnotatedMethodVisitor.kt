@@ -310,7 +310,8 @@ class AnnotatedMethodVisitor(
   private fun applyPreviewParameterInfo() {
     // We only handle the first preview parameter for simplicity.
     require(
-      parameterPreviewInfoMap.entries.size == 1) {
+      parameterPreviewInfoMap.entries.size == 1
+    ) {
       "Only one @PreviewParameter annotation is supported per method, " +
         "found ${parameterPreviewInfoMap.entries.size}"
     }
