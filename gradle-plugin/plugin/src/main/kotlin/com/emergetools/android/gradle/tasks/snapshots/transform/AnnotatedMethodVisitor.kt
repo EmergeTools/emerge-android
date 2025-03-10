@@ -1,9 +1,9 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
 import org.objectweb.asm.AnnotationVisitor
+import org.objectweb.asm.Label
 import org.objectweb.asm.MethodVisitor
 import org.objectweb.asm.Type
-import org.objectweb.asm.Label
 
 /**
  * This class finds methods annotated with `@Preview` and variants of it and adds them to the passed in list.
@@ -31,7 +31,7 @@ class AnnotatedMethodVisitor(
     val index: Int? = null
   )
 
-  @Suppress("detekt.ReturnCount")
+  @Suppress("detekt.ReturnCount", "detekt.ThrowsCount")
   private fun createComposePreviewConfigs(forAnnotation: String): List<ComposePreviewSnapshotConfig> {
     val composeConfig = ComposePreviewSnapshotConfig(
       originalFqn = className.cleanName().removeClassName() + "." + methodName,
@@ -223,14 +223,6 @@ class AnnotatedMethodVisitor(
         if (descriptor != null && customPreviewAnnotations.containsKey(descriptor)) {
           val configs = createComposePreviewConfigs(descriptor)
           methodNamesToAdd.addAll(configs)
-
-          // If it's a custom annotation with arrays, we need to handle those
-          return object : AnnotationVisitor(api) {
-            override fun visitArray(name: String?): AnnotationVisitor? {
-              // Handle any arrays in the annotation if needed
-              return super.visitArray(name)
-            }
-          }
         }
 
         // This is just another annotation or it could be a custom annotation that includes a preview.
@@ -317,8 +309,7 @@ class AnnotatedMethodVisitor(
    */
   private fun applyPreviewParameterInfo() {
     // We only handle the first preview parameter for simplicity.
-    require(parameterPreviewInfoMap.entries.size == 1
-    ) {
+    require(parameterPreviewInfoMap.entries.size == 1) {
       "Only one @PreviewParameter annotation is supported per method, " +
         "found ${parameterPreviewInfoMap.entries.size}"
     }

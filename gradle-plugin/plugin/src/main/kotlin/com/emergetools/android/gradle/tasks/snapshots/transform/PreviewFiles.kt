@@ -13,7 +13,7 @@ import java.util.concurrent.ConcurrentHashMap
 fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig> {
   // First pass: Find all custom annotation classes that are themselves annotated with @Preview
   val customPreviewAnnotations = findCustomPreviewAnnotationsInDirectory()
-  
+
   // Second pass: Find all methods with preview annotations (both standard and custom)
   return walk()
     .filter { it.name.endsWith(".class") }
@@ -28,13 +28,13 @@ fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig>
  */
 private fun File.findCustomPreviewAnnotationsInDirectory(): Map<String, CustomPreviewAnnotation> {
   val customPreviewAnnotations = ConcurrentHashMap<String, CustomPreviewAnnotation>()
-  
+
   walk()
     .filter { it.name.endsWith(".class") }
     .forEach { classFile ->
       findCustomPreviewAnnotationsInBytes(classFile.readBytes(), customPreviewAnnotations)
     }
-    
+
   return customPreviewAnnotations
 }
 
@@ -46,7 +46,7 @@ private fun findCustomPreviewAnnotationsInBytes(
   customPreviewAnnotations: MutableMap<String, CustomPreviewAnnotation>
 ) {
   val classReader = ClassReader(byteStream)
-  
+
   val visitor = FindCustomPreviewClassVisitor(Opcodes.ASM9, customPreviewAnnotations)
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 }
@@ -64,9 +64,9 @@ fun extractPreviewMethodsFromBytes(
 
   val visitor =
     SnapshotAggregatorClassVisitor(
-      Opcodes.ASM9, 
-      fileName, 
-      classReader.className, 
+      Opcodes.ASM9,
+      fileName,
+      classReader.className,
       methodNames,
       customPreviewAnnotations
     )

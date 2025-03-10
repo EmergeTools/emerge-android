@@ -103,7 +103,7 @@ dependencies {
 
   detektPlugins(libs.detekt.formatting)
 }
-val shadow = false
+val shadow = true
 if (shadow) {
   gr8 {
     val shadowedJar = create("default") {
