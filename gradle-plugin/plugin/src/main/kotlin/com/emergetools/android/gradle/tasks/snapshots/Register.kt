@@ -224,7 +224,7 @@ fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
       appProject.layout.buildDirectory.file("emergetools/snapshot-previews/$name/previewSnapshots.json")
     )
 
-    task.inputFiles.from(mergeForPreview.flatMap { it.outputDir })
+    task.inputDirectory.set(mergeForPreview.flatMap { it.outputDir })
   }
 }
 
