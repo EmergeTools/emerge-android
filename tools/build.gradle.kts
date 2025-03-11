@@ -8,13 +8,12 @@ repositories {
 }
 
 dependencies {
+  implementation(libs.kotlin.stdlib)
 }
 
 application {
   mainClass = "com.emergetools.tools.GenKt"
 }
 
-tasks.register<JavaExec>("runGen") {
-  classpath = sourceSets["main"].runtimeClasspath
-  mainClass = "com.emergetools.tools.GenKt"
-}
+// Shortcut to execute the task from the IDE
+tasks.named("run")
