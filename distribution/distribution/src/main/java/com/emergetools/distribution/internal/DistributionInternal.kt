@@ -9,7 +9,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.emergetools.distribution.DistributionConfig
+import com.emergetools.distribution.BuildConfig
 import com.emergetools.distribution.DistributionOptions
 import com.emergetools.distribution.UpdateInfo
 import com.emergetools.distribution.UpdateStatus
@@ -230,7 +230,7 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
     addQueryParameter("binaryIdentifier", getBinaryIdentifier(context))
-    addQueryParameter("distributionVersion", DistributionConfig.DISTRIBUTION_VERSION)
+    addQueryParameter("distributionVersion", BuildConfig.BUILD_TYPE)
   }.build()
 
   val request = Request.Builder().apply {

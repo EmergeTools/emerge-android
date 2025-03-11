@@ -3,8 +3,6 @@ package com.emergetools.distribution.internal;
 import android.os.Build;
 import android.util.Log;
 
-import androidx.annotation.RequiresApi;
-
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
