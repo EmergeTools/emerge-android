@@ -29,7 +29,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Build hackernews with Emerge Android as included build
-        run: cd hackernews/android && ./gradlew :app:emergeUploadSnapshotBundleDebug --include-build ../../emerge-android/gradle-plugin --include-build ../../emerge-android
+        run: cd hackernews/android && ./gradlew :app:emergeUploadSnapshotBundleDebug --include-build ../../emerge-android/gradle-plugin --include-build ../../emerge-android --no-configuration-cache
         env:
           EMERGE_API_TOKEN: ${{ secrets.EMERGE_API_KEY }}
           INTEGRATION_TEST_REPO_NAME: emerge-android
