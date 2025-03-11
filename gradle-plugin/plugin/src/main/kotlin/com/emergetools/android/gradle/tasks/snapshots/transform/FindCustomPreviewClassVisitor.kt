@@ -13,7 +13,7 @@ class FindCustomPreviewClassVisitor(
 ) : ClassVisitor(api) {
 
   private val currentAnnotation = CustomPreviewAnnotation()
-  private lateinit var currentClassName : String
+  private lateinit var currentClassName: String
 
   override fun visit(
     version: Int,
@@ -68,8 +68,9 @@ class FindCustomPreviewClassVisitor(
   override fun visitEnd() {
     // If this is an annotation with previews, add it to our map
     if (currentAnnotation.hasPreviewAnnotation ||
-                              currentAnnotation.hasPreviewArray ||
-                              currentAnnotation.isAppStoreSnapshot) {
+      currentAnnotation.hasPreviewArray ||
+      currentAnnotation.isAppStoreSnapshot
+    ) {
       val descriptor = "L$currentClassName;"
       customPreviewAnnotations[descriptor] = currentAnnotation
     }
@@ -121,6 +122,7 @@ data class PreviewConfig(
   /**
    * Capture a preview parameter from an annotation
    */
+  @Suppress("detekt.CyclomaticComplexMethod")
   fun captureParameter(name: String?, value: Any?) {
     when (name) {
       "name" -> if (value is String) this.name = value

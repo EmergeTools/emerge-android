@@ -31,7 +31,7 @@ class AnnotatedMethodVisitor(
     val index: Int? = null
   )
 
-  @Suppress("detekt.ReturnCount")
+  @Suppress("detekt.ReturnCount", "detekt.ThrowsCount")
   private fun createComposePreviewConfigs(forAnnotation: String): List<ComposePreviewSnapshotConfig> {
     val composeConfig = ComposePreviewSnapshotConfig(
       originalFqn = className.cleanName().removeClassName() + "." + methodName,
