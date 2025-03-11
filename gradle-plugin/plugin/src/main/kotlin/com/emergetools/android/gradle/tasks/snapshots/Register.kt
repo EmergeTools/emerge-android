@@ -234,7 +234,7 @@ fun getSnapshotUploadTaskName(variantName: String): String {
 
 private val Project.firstPartySnapshotsEnabled
   get() = providers.gradleProperty("emerge.experimental.firstPartySnapshots")
-    .getOrElse("false").toBoolean()
+    .getOrElse("true").toBoolean()
 
 private val String.mergeProjectClasses
   get() = "merge${capitalize()}ProjectClasses"
