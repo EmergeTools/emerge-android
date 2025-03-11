@@ -12,10 +12,16 @@ import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.base.BasePreflightTask.Companion.setPreflightTaskInputs
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
+import com.emergetools.android.gradle.tasks.snapshots.transform.AggregatePreviewMethodsTask
+import com.emergetools.android.gradle.tasks.snapshots.transform.PreviewAnalyzerTransform
+import com.emergetools.android.gradle.tasks.snapshots.transform.TransformProjectClasses
 import com.emergetools.android.gradle.util.AgpVersions
 import com.emergetools.android.gradle.util.capitalize
 import com.emergetools.android.gradle.util.hasDependency
 import org.gradle.api.Project
+import org.gradle.api.artifacts.component.ProjectComponentIdentifier
+import org.gradle.api.attributes.Attribute
+import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.TaskProvider
 
 const val EMERGE_SNAPSHOTS_TASK_GROUP = "Emerge snapshots"
@@ -34,14 +40,18 @@ fun registerSnapshotTasks(
 
   registerSnapshotPreflightTask(appProject, extension, variant)
 
-  variant.instrumentation.let { instrumentation ->
-    instrumentation.transformClassesWith(
-      SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
-      InstrumentationScope.ALL,
-    ) { params ->
-      // Force invalidate/reinstrument classes if debug option is set
-      if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
-        params.invalidate.set(System.currentTimeMillis())
+  if (appProject.transformFlagEnabled) {
+    setupTransformTasks(appProject, variant)
+  } else {
+    variant.instrumentation.let { instrumentation ->
+      instrumentation.transformClassesWith(
+        SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
+        InstrumentationScope.ALL,
+      ) { params ->
+        // Force invalidate/reinstrument classes if debug option is set
+        if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
+          params.invalidate.set(System.currentTimeMillis())
+        }
       }
     }
   }
@@ -70,6 +80,16 @@ private fun registerSnapshotPackageTask(
         "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}",
       ),
     )
+    if (appProject.transformFlagEnabled) {
+      it.snapshotConfigFile.set(
+        appProject.tasks.named(
+          variant.name.aggregatePreviewMethodsName,
+          AggregatePreviewMethodsTask::class.java,
+        ).flatMap { task ->
+          task.outputFile
+        },
+      )
+    }
     it.agpVersion.set(AgpVersions.CURRENT.toString())
   }
 }
@@ -170,6 +190,68 @@ private fun registerSnapshotUploadTask(
   }
 }
 
+fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
+  val artifactType = Attribute.of("artifactType", String::class.java)
+  appProject.dependencies.registerTransform(PreviewAnalyzerTransform::class.java) { transform ->
+    transform.from.attribute(artifactType, "android-classes")
+    transform.to.attribute(artifactType, PREVIEW_JSON)
+  }
+  val name = variant.name
+  // The above transform only applies to dependencies, but we also need to search the project classes
+  val transformProjectClasses = appProject.tasks
+    .register(name.transformProjectClassesTaskName, TransformProjectClasses::class.java) {
+      it.outputFile.set(
+        appProject.layout.buildDirectory.file("emergetools/snapshot-previews/project/$name/projectPreviews.json")
+      )
+      val kotlinCompile = appProject.tasks.named(name.kotlinCompileTaskName)
+      // get the destination dir property of the KotlinCompile task reflectively so we don't depend on the Kotlin plugin
+      it.inputDir.set(
+        kotlinCompile.flatMap { task ->
+          task.javaClass.getDeclaredMethod("getDestinationDirectory")
+            .invoke(task) as DirectoryProperty
+        }
+      )
+    }
+
+  appProject.tasks.register(
+    name.aggregatePreviewMethodsName,
+    AggregatePreviewMethodsTask::class.java
+  ) { task ->
+    task.outputFile.set(
+      appProject.layout.buildDirectory.file("emergetools/snapshot-previews/$name/previewSnapshots.json")
+    )
+
+    task.inputFiles.from(
+      appProject.configurations.named("${name}RuntimeClasspath").map { configuration ->
+
+        configuration.incoming.artifactView { view ->
+          // This filter allows the transform to only operate on project classes
+          view.componentFilter { component ->
+            component is ProjectComponentIdentifier
+          }
+          view.attributes.attribute(artifactType, PREVIEW_JSON)
+        }.files
+      },
+      transformProjectClasses
+    )
+  }
+}
+
 fun getSnapshotUploadTaskName(variantName: String): String {
   return "${EMERGE_TASK_PREFIX}UploadSnapshotBundle${variantName.capitalize()}"
 }
+
+const val PREVIEW_JSON = "preview-json"
+
+private val Project.transformFlagEnabled
+  get() = providers.gradleProperty("emerge.experimental.firstPartySnapshots")
+    .getOrElse("false").toBoolean()
+
+private val String.transformProjectClassesTaskName
+  get() = "transform${capitalize()}ProjectClasses"
+
+private val String.kotlinCompileTaskName
+  get() = "compile${capitalize()}Kotlin"
+
+private val String.aggregatePreviewMethodsName
+  get() = "aggregate${capitalize()}PreviewMethods"
