@@ -1,12 +1,8 @@
-import java.text.SimpleDateFormat
-import java.util.Date
 
 plugins {
   alias(libs.plugins.android.library)
-  alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
-//  alias(libs.plugins.buildconfig)
   `maven-publish`
   signing
 }
@@ -14,9 +10,22 @@ plugins {
 group = "com.emergetools.distribution"
 version = libs.versions.emerge.distribution.get()
 
-//var metaInfResDir = File(buildDir, "generated/emerge/")
-//var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/distribution/")
 val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://api.emergetools.com"
+
+val generateMetaInf = tasks.register("generateMetaInfVersion") {
+  val metaInfResDir = project.layout.buildDirectory.dir("generated/emerge")
+  outputs.file(metaInfResDir)
+  inputs.property("version", version)
+  inputs.property("baseUrl", baseUrl)
+  doLast {
+    val metaInfDestFile = metaInfResDir.map { it.file("META-INF/com/emergetools/distribution/version.txt") }
+    metaInfDestFile.get().asFile.writeText(
+      """version: $version
+        |baseUrl: $baseUrl
+      """.trimMargin()
+    )
+  }
+}
 
 android {
   namespace = "com.emergetools.distribution"
@@ -34,15 +43,8 @@ android {
   defaultConfig {
     version = project.version
     minSdk = 21
-    buildConfigField("String", "EMERGE_BASE_URL", """"$baseUrl"""")
-    buildConfigField("String", "DISTRIBUTION_VERSION", """"${project.version}"""")
   }
-
-  buildFeatures.buildConfig = true
-
-  // Ensures our version.txt is packaged in with release.
-  // Will be pulled in automatically to test APK upon build
-//  sourceSets.getByName("main").resources.srcDir(metaInfResDir)
+  sourceSets.getByName("main").resources.srcDir(generateMetaInf)
 }
 
 dependencies {
@@ -67,31 +69,6 @@ dependencies {
 tasks.withType<Test> {
   useJUnitPlatform()
 }
-
-//buildConfig {
-//  className("DistributionConfig")
-//  packageName("com.emergetools.distribution")
-//  buildConfigField("String", "DISTRIBUTION_VERSION", """"${project.version}"""")
-//  buildConfigField("String", "EMERGE_BASE_URL", """"$baseUrl"""")
-//}
-
-//tasks.register("generateMetaInfVersion") {
-//  doLast {
-//    metaInfDestDir.mkdirs()
-//    File(metaInfDestDir, "version.txt").writeText(
-//      "version: $version" +
-//        "\nrevision: ${grgit.head().id}"
-//    )
-//  }
-//}
-
-//afterEvaluate {
-//  tasks.filter { task ->
-//    task.name.startsWith("generate") && task.name.endsWith("Resources")
-//  }.forEach { task ->
-//    task.dependsOn(tasks.findByName("generateMetaInfVersion"))
-//  }
-//}
 
 publishing {
   repositories {

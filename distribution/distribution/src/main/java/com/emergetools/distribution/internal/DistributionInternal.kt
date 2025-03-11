@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.emergetools.distribution.BuildConfig
 import com.emergetools.distribution.DistributionOptions
 import com.emergetools.distribution.UpdateInfo
 import com.emergetools.distribution.UpdateStatus
@@ -202,8 +201,6 @@ object DistributionInternal {
 @OptIn(ExperimentalCoroutinesApi::class)
 private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStatus {
 
-  Foo().foo()
-
   // Despite the name context.packageName is the actually the application id.
   val applicationId = context.packageName
   val apiKey = state.apiKey
@@ -230,7 +227,7 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
     addQueryParameter("binaryIdentifier", getBinaryIdentifier(context))
-    addQueryParameter("distributionVersion", BuildConfig.BUILD_TYPE)
+    addQueryParameter("distributionVersion", VersionTxtReader().version)
   }.build()
 
   val request = Request.Builder().apply {
