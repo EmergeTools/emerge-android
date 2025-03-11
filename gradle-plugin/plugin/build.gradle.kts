@@ -103,7 +103,7 @@ dependencies {
 
   detektPlugins(libs.detekt.formatting)
 }
-val shadow = true
+val shadow = true // Disable for faster local build speeds
 if (shadow) {
   gr8 {
     val shadowedJar = create("default") {
