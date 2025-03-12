@@ -2,7 +2,10 @@ package com.emergetools.android.gradle.tasks.snapshots.transform
 
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.ConfigurableFileCollection
+import org.gradle.api.file.Directory
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFile
+import org.gradle.api.provider.ListProperty
 import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.InputFiles
 import org.gradle.api.tasks.OutputDirectory
@@ -16,7 +19,17 @@ import java.util.zip.ZipInputStream
 abstract class MergeClasses : DefaultTask() {
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   @get:InputFiles
-  abstract val inputFiles: ConfigurableFileCollection // JARs and directories
+  abstract val dependencyJars: ConfigurableFileCollection // JARs and directories
+
+  /** Will be empty for this task. */
+  @get:PathSensitive(PathSensitivity.RELATIVE)
+  @get:InputFiles
+  abstract val unusedJar: ListProperty<RegularFile>
+
+  /** May be empty. */
+  @get:PathSensitive(PathSensitivity.RELATIVE)
+  @get:InputFiles
+  abstract val projectDirs: ListProperty<Directory>
 
   @get:OutputDirectory
   abstract val outputDir: DirectoryProperty // Directory containing merged class files
@@ -28,12 +41,16 @@ abstract class MergeClasses : DefaultTask() {
 
     val seenEntries = mutableSetOf<String>() // Track added files to avoid duplicates
 
-    inputFiles.files.forEach { file ->
+    dependencyJars.forEach { file ->
       if (file.isDirectory) {
         processDirectory(file, outputDirectory, seenEntries)
-      } else if (file.extension == "jar") {
+      } else {
         processJar(file, outputDirectory, seenEntries)
       }
+    }
+
+    projectDirs.get().forEach {
+      processDirectory(it.asFile, outputDirectory, seenEntries)
     }
   }
 

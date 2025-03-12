@@ -1,9 +1,11 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
+import com.android.build.api.artifact.ScopedArtifact
 import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.instrumentation.InstrumentationScope
 import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationVariant
+import com.android.build.api.variant.ScopedArtifacts
 import com.emergetools.android.gradle.EmergePlugin.Companion.BUILD_OUTPUT_DIR_NAME
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
@@ -20,7 +22,6 @@ import com.emergetools.android.gradle.util.hasDependency
 import org.gradle.api.Project
 import org.gradle.api.artifacts.component.ProjectComponentIdentifier
 import org.gradle.api.attributes.Attribute
-import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.tasks.TaskProvider
 
 const val EMERGE_SNAPSHOTS_TASK_GROUP = "Emerge snapshots"
@@ -197,10 +198,9 @@ fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
     name.mergeProjectClasses,
     MergeClasses::class.java
   ) { task ->
-    val kotlinCompile = appProject.tasks.named(name.kotlinCompileTaskName)
-
     task.outputDir.set(appProject.layout.buildDirectory.dir("emergetools/snapshot-exploded/$name"))
-    task.inputFiles.from(
+    task.dependencyJars.from(
+      // Get this project's first party dependencies, but filter out third party dependencies
       appProject.configurations.named("${name}RuntimeClasspath").map { configuration ->
         configuration.incoming.artifactView { view ->
           view.componentFilter { component ->
@@ -208,13 +208,17 @@ fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
           }
           view.attributes.attribute(artifactType, "android-classes")
         }.files
-      },
-      kotlinCompile.flatMap { kotlinTask ->
-        kotlinTask.javaClass.getDeclaredMethod("getDestinationDirectory")
-          .invoke(kotlinTask) as DirectoryProperty
       }
     )
   }
+  // Get this current project's compiled classes
+  variant.artifacts.forScope(ScopedArtifacts.Scope.PROJECT)
+    .use(mergeForPreview)
+    .toGet(
+      type = ScopedArtifact.CLASSES,
+      inputJars = MergeClasses::unusedJar,
+      inputDirectories = MergeClasses::projectDirs
+    )
 
   appProject.tasks.register(
     name.aggregatePreviewMethodsName,
@@ -238,9 +242,6 @@ private val Project.firstPartySnapshotsEnabled
 
 private val String.mergeProjectClasses
   get() = "merge${capitalize()}ProjectClasses"
-
-private val String.kotlinCompileTaskName
-  get() = "compile${capitalize()}Kotlin"
 
 private val String.aggregatePreviewMethodsName
   get() = "aggregate${capitalize()}PreviewMethods"
