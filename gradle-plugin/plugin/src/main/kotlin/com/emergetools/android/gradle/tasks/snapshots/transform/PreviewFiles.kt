@@ -39,6 +39,13 @@ private fun File.findCustomPreviewAnnotationsInDirectory(): Map<String, CustomPr
       findCustomPreviewAnnotationsInBytes(classFile.readBytes(), customPreviewAnnotations)
     }
 
+  // Do a second pass in order to prevent file ordering problems
+  walk()
+    .filter { it.name.endsWith(".class") }
+    .forEach { classFile ->
+      findCustomPreviewAnnotationsInBytes(classFile.readBytes(), customPreviewAnnotations)
+    }
+
   return customPreviewAnnotations
 }
 
