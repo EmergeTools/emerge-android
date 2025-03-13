@@ -33,8 +33,8 @@ abstract class GenerateMetaInfVersion : DefaultTask() {
     val metaInfDestFile = metaInfDestDir.resolve("version.txt")
     metaInfDestFile.ensureParentDirsCreated()
     metaInfDestFile.writeText(
-      """version: $version
-        |baseUrl: $baseUrl
+      """version: ${version.get()}
+        |baseUrl: ${baseUrl.get()}
       """.trimMargin()
     )
   }
