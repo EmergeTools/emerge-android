@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
@@ -9,16 +11,28 @@ plugins {
 group = "com.emergetools.distribution"
 version = libs.versions.emerge.distribution.get()
 
-val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://api.emergetools.com"
+val generateMetaInf = tasks.register("generateMetaInfVersion", GenerateMetaInfVersion::class.java) {
+  version = project.version.toString()
+  baseUrl.set(rootProject.properties["emergeBaseUrl"]?.toString() ?: "https://api.emergetools.com")
+}
 
-val generateMetaInf = tasks.register("generateMetaInfVersion") {
-  val metaInfResDir = project.layout.buildDirectory.dir("generated/emerge")
-  outputs.file(metaInfResDir)
-  inputs.property("version", version)
-  inputs.property("baseUrl", baseUrl)
-  doLast {
-    val metaInfDestFile = metaInfResDir.map { it.file("META-INF/com/emergetools/distribution/version.txt") }
-    metaInfDestFile.get().asFile.writeText(
+abstract class GenerateMetaInfVersion : DefaultTask() {
+
+  @get:Input
+  abstract val version: Property<String>
+
+  @get:Input
+  abstract val baseUrl: Property<String>
+
+  @get:OutputDirectory
+  abstract val metaInfResDir: DirectoryProperty
+
+  @TaskAction
+  fun generate() {
+    val metaInfDestDir = metaInfResDir.dir("META-INF/com/emergetools/distribution").get().asFile
+    val metaInfDestFile = metaInfDestDir.resolve("version.txt")
+    metaInfDestFile.ensureParentDirsCreated()
+    metaInfDestFile.writeText(
       """version: $version
         |baseUrl: $baseUrl
       """.trimMargin()
@@ -43,7 +57,12 @@ android {
     version = project.version
     minSdk = 21
   }
-  sourceSets.getByName("main").resources.srcDir(generateMetaInf)
+  androidComponents.onVariants { variant ->
+    variant.sources.resources!!.addGeneratedSourceDirectory<GenerateMetaInfVersion>(
+      taskProvider = generateMetaInf,
+      wiredWith = GenerateMetaInfVersion::metaInfResDir
+    )
+  }
 }
 
 dependencies {
