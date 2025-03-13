@@ -15,7 +15,7 @@ class VersionTxtReader {
     val lines = version.split("\n")
     val properties = mutableMapOf<String, String>()
     for (line in lines) {
-      val keyValue = line.split("=")
+      val keyValue = line.split(": ", limit=2)
       check(keyValue.size == 2) { "Invalid line in version.txt: $line" }
       properties[keyValue[0]] = keyValue[1]
     }

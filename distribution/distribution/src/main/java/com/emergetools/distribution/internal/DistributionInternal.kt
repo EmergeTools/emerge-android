@@ -209,11 +209,11 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     return UpdateStatus.Error("No API key available")
   }
 
-
-
   val info = context.packageManager.getPackageInfo(applicationId, 0)
   val version = info.versionName
   val build = info.versionCode
+  val binaryIdentifier = getBinaryIdentifier(context)
+  val distributionVersion = VersionTxtReader().version
 
   val url = HttpUrl.Builder().apply {
     scheme("https")
@@ -226,8 +226,8 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("version", version)
     addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
-    addQueryParameter("binaryIdentifier", getBinaryIdentifier(context))
-    addQueryParameter("distributionVersion", VersionTxtReader().version)
+    addQueryParameter("binaryIdentifier", binaryIdentifier)
+    addQueryParameter("distributionVersion", distributionVersion)
   }.build()
 
   val request = Request.Builder().apply {
