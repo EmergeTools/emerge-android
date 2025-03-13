@@ -196,11 +196,8 @@ object DistributionInternal {
   }
 }
 
-
-
 @OptIn(ExperimentalCoroutinesApi::class)
 private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStatus {
-
   // Despite the name context.packageName is the actually the application id.
   val applicationId = context.packageName
   val apiKey = state.apiKey
@@ -245,28 +242,27 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
 }
 
 @ExperimentalCoroutinesApi // resume with a resource cleanup.
-suspend fun executeAsync(call: Call): Response =
-  suspendCancellableCoroutine { continuation ->
-    continuation.invokeOnCancellation {
-      call.cancel()
-    }
-    call.enqueue(
-      object : Callback {
-        override fun onFailure(
-          call: Call,
-          e: IOException,
-        ) {
-          continuation.resumeWithException(e)
-        }
-
-        override fun onResponse(
-          call: Call,
-          response: Response,
-        ) {
-          continuation.resume(response) {
-            response.closeQuietly()
-          }
-        }
-      },
-    )
+suspend fun executeAsync(call: Call): Response = suspendCancellableCoroutine { continuation ->
+  continuation.invokeOnCancellation {
+    call.cancel()
   }
+  call.enqueue(
+    object : Callback {
+      override fun onFailure(
+        call: Call,
+        e: IOException,
+      ) {
+        continuation.resumeWithException(e)
+      }
+
+      override fun onResponse(
+        call: Call,
+        response: Response,
+      ) {
+        continuation.resume(response) {
+          response.closeQuietly()
+        }
+      }
+    },
+  )
+}
