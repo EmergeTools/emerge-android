@@ -108,11 +108,13 @@ abstract class UploadSnapshotBundle : BaseUploadTask() {
         created = Clock.System.now(),
       ),
     ) { response ->
+      val url = "https://emergetools.com/snapshot/${response.uploadId}"
       logger.lifecycle(
         "Snapshot bundle upload successful! View snapshots at the following url:",
       )
-      logger.lifecycle("https://emergetools.com/snapshot/${response.uploadId}")
+      logger.lifecycle(url)
       logger.lifecycle("Snapshot generations usually take ~10 minutes or less.")
+      buildScan.get().link("Emerge Tools Snapshots", url)
     }
   }
 }

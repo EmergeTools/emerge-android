@@ -9,6 +9,7 @@ import com.android.build.api.variant.ScopedArtifacts
 import com.emergetools.android.gradle.EmergePlugin.Companion.BUILD_OUTPUT_DIR_NAME
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
+import com.emergetools.android.gradle.dv.getBuildScan
 import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.base.BasePreflightTask.Companion.setPreflightTaskInputs
@@ -187,6 +188,7 @@ private fun registerSnapshotUploadTask(
     it.setUploadTaskInputs(extension, appProject, variant)
     it.setTagFromProductOptions(extension.snapshotOptions, variant)
     it.dependsOn(packageTask)
+    it.buildScan.set(appProject.getBuildScan())
   }
 }
 

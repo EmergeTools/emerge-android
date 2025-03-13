@@ -53,9 +53,11 @@ abstract class InitializeReaper : BaseUploadTask() {
       )
 
     upload(artifactMetadata) { response ->
+      val url = "https://emergetools.com/reaper/${response.uploadId}"
       logger.lifecycle("Reaper initialized! View Reaper reports for this version at the following url:")
-      logger.lifecycle("https://emergetools.com/reaper/${response.uploadId}")
+      logger.lifecycle(url)
       logger.lifecycle("Note: Initial Reaper processing can take up to 10 minutes.")
+      buildScan.get().link("Emerge Tools Reaper Report", url)
     }
   }
 
