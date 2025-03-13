@@ -1,13 +1,14 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
 import org.objectweb.asm.AnnotationVisitor
+import org.objectweb.asm.Opcodes
 
 /**
  * This class captures annotation parameters for the `@Preview` annotation and puts them in
  * the [ComposePreviewSnapshotConfig] object.
  */
-class PreviewAnnotationVisitor(api: Int, val previewData: ComposePreviewSnapshotConfig) :
-  AnnotationVisitor(api) {
+class PreviewAnnotationVisitor(private val previewData: PreviewConfig) :
+  AnnotationVisitor(Opcodes.ASM9) {
   @Suppress("detekt:CyclomaticComplexMethod")
   override fun visit(name: String?, value: Any?) {
     when (name) {

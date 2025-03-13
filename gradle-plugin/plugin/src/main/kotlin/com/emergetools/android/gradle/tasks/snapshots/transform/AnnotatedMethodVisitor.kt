@@ -17,8 +17,9 @@ class AnnotatedMethodVisitor(
   private val customPreviewAnnotations: Map<String, CustomPreviewAnnotation> = emptyMap()
 ) : MethodVisitor(api) {
 
-  private val methodNamesToAdd = mutableListOf<ComposePreviewSnapshotConfig>()
+  private val methodNamesToAdd = mutableListOf<PreviewConfig>()
   private var foundIgnoreAnnotation = false
+  private var foundAppStoreSnapshot = false
 
   // Parameter and preview parameter info
   private val parameterPreviewInfoMap = mutableMapOf<Int, PreviewParameterInfo>()
@@ -31,161 +32,37 @@ class AnnotatedMethodVisitor(
     val index: Int? = null
   )
 
-  @Suppress("detekt.ReturnCount", "detekt.ThrowsCount")
-  private fun createComposePreviewConfigs(forAnnotation: String): List<ComposePreviewSnapshotConfig> {
-    val composeConfig = ComposePreviewSnapshotConfig(
-      originalFqn = className.cleanName().removeClassName() + "." + methodName,
-      sourceFileName = fileName.cleanName().cleanFileName(),
-      fullyQualifiedClassName = className.cleanName(),
-    )
-
-    when (forAnnotation) {
-      PREVIEW_ANNOTATION_DESC -> {
-        return listOf(composeConfig)
-      }
-
-      PREVIEW_LIGHT_DARK_ANNOTATION_DESC -> {
-        return listOf(
-          composeConfig.copy(name = "light"),
-          composeConfig.copy(name = "dark", uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL)
-        )
-      }
-
-      PREVIEW_SCREEN_SIZES_ANNOTATION_DESC -> {
-        return listOf(
-          composeConfig.copy(name = "Phone", device = PHONE, showSystemUi = true),
-          composeConfig.copy(
-            name = "Phone - Landscape",
-            device = "spec:width = 411dp, height = 891dp, orientation = landscape, dpi = 420",
-            showSystemUi = true
-          ),
-          composeConfig.copy(name = "Unfolded Foldable", device = FOLDABLE, showSystemUi = true),
-          composeConfig.copy(name = "Tablet", device = TABLET, showSystemUi = true),
-          composeConfig.copy(name = "Desktop", device = DESKTOP, showSystemUi = true)
-        )
-      }
-
-      PREVIEW_FONT_SCALE_ANNOTATION_DESC -> {
-        return listOf(
-          composeConfig.copy(name = "85%", fontScale = 0.85f),
-          composeConfig.copy(name = "100%", fontScale = 1.0f),
-          composeConfig.copy(name = "115%", fontScale = 1.15f),
-          composeConfig.copy(name = "130%", fontScale = 1.3f),
-          composeConfig.copy(name = "150%", fontScale = 1.5f),
-          composeConfig.copy(name = "180%", fontScale = 1.8f),
-          composeConfig.copy(name = "200%", fontScale = 2f)
-        )
-      }
-
-      EMERGE_APP_STORE_SNAPSHOT -> {
-        throw IllegalArgumentException("Emerge app store snapshot should should be handled elsewhere")
-      }
-
-      EMERGE_IGNORE_SNAPSHOT -> {
-        throw IllegalArgumentException("Emerge ignore snapshot should should be handled elsewhere")
-      }
-
-      PREVIEW_CONTAINER_ANNOTATION_DESC -> {
-        throw IllegalArgumentException("Preview container annotation should be handled as individual annotations")
-      }
-
-      else -> {
-        // Check if this is a custom preview annotations
-        val customAnnotation = customPreviewAnnotations[forAnnotation]
-        if (customAnnotation != null) {
-          // Create configs based on the custom annotation
-          return createConfigsFromCustomAnnotation(composeConfig, customAnnotation)
-        }
-        return emptyList()
-      }
+  private fun createComposePreviewConfigs(forAnnotation: String): List<PreviewConfig> {
+    val previewConfigs = previewConfigForAnnotation(forAnnotation)
+    if (previewConfigs != null) {
+      return previewConfigs
     }
-  }
-
-  /**
-   * Creates ComposePreviewSnapshotConfig objects from a custom annotation
-   */
-  private fun createConfigsFromCustomAnnotation(
-    baseConfig: ComposePreviewSnapshotConfig,
-    customAnnotation: CustomPreviewAnnotation
-  ): List<ComposePreviewSnapshotConfig> {
-    val configs = mutableListOf<ComposePreviewSnapshotConfig>()
-
-    if (customAnnotation.hasPreviewArray && customAnnotation.previewConfigs.isNotEmpty()) {
-      // Create a config for each @Preview in the array
-      for ((index, previewConfig) in customAnnotation.previewConfigs.withIndex()) {
-        val name = previewConfig.name ?: "preview-${index + 1}"
-
-        configs.add(
-          baseConfig.copy(
-            name = name,
-            group = previewConfig.group,
-            showBackground = previewConfig.showBackground,
-            backgroundColor = previewConfig.backgroundColor,
-            widthDp = previewConfig.widthDp,
-            heightDp = previewConfig.heightDp,
-            showSystemUi = previewConfig.showSystemUi,
-            device = previewConfig.device,
-            fontScale = previewConfig.fontScale,
-            locale = previewConfig.locale,
-            uiMode = previewConfig.uiMode,
-            apiLevel = previewConfig.apiLevel,
-            wallpaper = previewConfig.wallpaper,
-            isAppStoreSnapshot = customAnnotation.isAppStoreSnapshot
-          )
-        )
+    require(forAnnotation != PREVIEW_ANNOTATION_DESC) { "$forAnnotation annotation should be handled in the visitor" }
+    require(forAnnotation != EMERGE_APP_STORE_SNAPSHOT) { "$forAnnotation annotation should be handled in the visitor" }
+    require(forAnnotation != EMERGE_IGNORE_SNAPSHOT) { "$forAnnotation annotation should be handled in the visitor" }
+    require(forAnnotation != PREVIEW_ANNOTATION_DESC) { "$forAnnotation annotation should be handled in the visitor" }
+    // Check if this is a custom preview annotations
+    val customAnnotation = customPreviewAnnotations[forAnnotation]
+    if (customAnnotation != null) {
+      if (customAnnotation.isAppStoreSnapshot) {
+        foundAppStoreSnapshot = true
       }
-    } else if (customAnnotation.hasPreviewAnnotation) {
-      // Create a single config for the direct @Preview
-      configs.add(
-        baseConfig.copy(
-          name = customAnnotation.name,
-          group = customAnnotation.group,
-          showBackground = customAnnotation.showBackground,
-          backgroundColor = customAnnotation.backgroundColor,
-          widthDp = customAnnotation.widthDp,
-          heightDp = customAnnotation.heightDp,
-          showSystemUi = customAnnotation.showSystemUi,
-          device = customAnnotation.device,
-          fontScale = customAnnotation.fontScale,
-          locale = customAnnotation.locale,
-          uiMode = customAnnotation.uiMode,
-          apiLevel = customAnnotation.apiLevel,
-          wallpaper = customAnnotation.wallpaper,
-          isAppStoreSnapshot = customAnnotation.isAppStoreSnapshot
-        )
-      )
-    } else if (customAnnotation.isAppStoreSnapshot) {
-      // Only has @EmergeAppStoreSnapshot
-      configs.add(baseConfig.copy(isAppStoreSnapshot = true))
+      return customAnnotation.previewConfigs
     }
-
-    return configs
+    return emptyList()
   }
 
   @Suppress("detekt.ReturnCount")
   override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor? {
     return when (descriptor) {
       PREVIEW_ANNOTATION_DESC -> {
-        val previewConfig = createComposePreviewConfigs(PREVIEW_ANNOTATION_DESC).first()
+        val previewConfig = PreviewConfig()
         methodNamesToAdd.add(previewConfig)
-        return PreviewAnnotationVisitor(api, previewConfig)
-      }
-
-      PREVIEW_LIGHT_DARK_ANNOTATION_DESC -> {
-        val snapshotConfig = createComposePreviewConfigs(PREVIEW_LIGHT_DARK_ANNOTATION_DESC)
-        methodNamesToAdd.addAll(snapshotConfig)
-        return super.visitAnnotation(descriptor, visible)
-      }
-
-      PREVIEW_FONT_SCALE_ANNOTATION_DESC -> {
-        val snapshotConfig = createComposePreviewConfigs(PREVIEW_FONT_SCALE_ANNOTATION_DESC)
-        methodNamesToAdd.addAll(snapshotConfig)
-        return super.visitAnnotation(descriptor, visible)
+        return PreviewAnnotationVisitor(previewConfig)
       }
 
       EMERGE_APP_STORE_SNAPSHOT -> {
-        val snapshotConfig = createComposePreviewConfigs(EMERGE_APP_STORE_SNAPSHOT)
-        methodNamesToAdd.addAll(snapshotConfig)
+        foundAppStoreSnapshot = true
         return super.visitAnnotation(descriptor, visible)
       }
 
@@ -204,9 +81,9 @@ class AnnotatedMethodVisitor(
                   descriptor: String?
                 ): AnnotationVisitor? {
                   if (descriptor == PREVIEW_ANNOTATION_DESC) {
-                    val config = createComposePreviewConfigs(descriptor).first()
+                    val config = PreviewConfig()
                     methodNamesToAdd.add(config)
-                    return PreviewAnnotationVisitor(api, config)
+                    return PreviewAnnotationVisitor(config)
                   }
                   return super.visitAnnotation(name, descriptor)
                 }
@@ -218,11 +95,9 @@ class AnnotatedMethodVisitor(
       }
 
       else -> {
-        // Check if this is a custom preview annotation we discovered in the first pass
-        // Handle null descriptor safely
-        if (descriptor != null && customPreviewAnnotations.containsKey(descriptor)) {
-          val configs = createComposePreviewConfigs(descriptor)
-          methodNamesToAdd.addAll(configs)
+        if (descriptor != null) {
+          val previewConfig = createComposePreviewConfigs(descriptor)
+          methodNamesToAdd.addAll(previewConfig)
         }
 
         // This is just another annotation or it could be a custom annotation that includes a preview.
@@ -292,22 +167,21 @@ class AnnotatedMethodVisitor(
   }
 
   override fun visitEnd() {
-    // Apply any preview parameter information to the configs
-    if (parameterPreviewInfoMap.isNotEmpty()) {
-      applyPreviewParameterInfo()
-    }
+    val previewConfigs =
+      applyPreviewParameterInfo(methodNamesToAdd.toComposePreviewSnapshotConfig())
 
     // We only add the method names in the end in case we find the ignore annotation and then we ignore what we found.
     if (!foundIgnoreAnnotation) {
-      fullPreviewConfigList.addAll(methodNamesToAdd)
+      fullPreviewConfigList.addAll(previewConfigs)
     }
     super.visitEnd()
   }
 
-  /**
-   * Apply the preview parameter information to all method configs.
-   */
-  private fun applyPreviewParameterInfo() {
+  private fun applyPreviewParameterInfo(composePreviews: List<ComposePreviewSnapshotConfig>):
+    List<ComposePreviewSnapshotConfig> {
+    if (parameterPreviewInfoMap.isEmpty()) {
+      return composePreviews
+    }
     // We only handle the first preview parameter for simplicity.
     require(
       parameterPreviewInfoMap.entries.size == 1
@@ -326,12 +200,33 @@ class AnnotatedMethodVisitor(
       index = previewInfo.index
     )
 
-    val updatedConfigs = methodNamesToAdd.map { config ->
+    val updatedConfigs = composePreviews.map { config ->
       config.copy(previewParameter = previewParam)
     }
+    return updatedConfigs
+  }
 
-    // Replace the old configs with the updated ones
-    methodNamesToAdd.clear()
-    methodNamesToAdd.addAll(updatedConfigs)
+  private fun List<PreviewConfig>.toComposePreviewSnapshotConfig(): List<ComposePreviewSnapshotConfig> {
+    return map { previewConfig ->
+      ComposePreviewSnapshotConfig(
+        fullyQualifiedClassName = className.cleanName(),
+        originalFqn = className.cleanName().removeClassName() + "." + methodName,
+        sourceFileName = fileName.cleanName().cleanFileName(),
+        name = previewConfig.name,
+        group = previewConfig.group,
+        uiMode = previewConfig.uiMode,
+        locale = previewConfig.locale,
+        fontScale = previewConfig.fontScale,
+        heightDp = previewConfig.heightDp,
+        widthDp = previewConfig.widthDp,
+        showBackground = previewConfig.showBackground,
+        backgroundColor = previewConfig.backgroundColor,
+        showSystemUi = previewConfig.showSystemUi,
+        device = previewConfig.device,
+        apiLevel = previewConfig.apiLevel,
+        wallpaper = previewConfig.wallpaper,
+        isAppStoreSnapshot = foundAppStoreSnapshot
+      )
+    }
   }
 }

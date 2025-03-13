@@ -58,7 +58,7 @@ private fun findCustomPreviewAnnotationsInBytes(
 ) {
   val classReader = ClassReader(byteStream)
 
-  val visitor = FindCustomPreviewClassVisitor(Opcodes.ASM9, customPreviewAnnotations)
+  val visitor = FindCustomPreviewClassVisitor(customPreviewAnnotations)
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 }
 
@@ -85,4 +85,57 @@ fun extractPreviewMethodsFromBytes(
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
 
   return methodNames
+}
+
+/**
+ * Return a list of PreviewConfigs based on the passed in annotation
+ */
+@Suppress("detekt.ReturnCount")
+fun previewConfigForAnnotation(forAnnotation: String?): List<PreviewConfig>? {
+  when (forAnnotation) {
+    PREVIEW_LIGHT_DARK_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(name = "light"),
+        PreviewConfig(name = "dark", uiMode = UI_MODE_NIGHT_YES or UI_MODE_TYPE_NORMAL)
+      )
+    }
+
+    PREVIEW_SCREEN_SIZES_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(name = "Phone", device = PHONE, showSystemUi = true),
+        PreviewConfig(
+          name = "Phone - Landscape",
+          device = "spec:width = 411dp, height = 891dp, orientation = landscape, dpi = 420",
+          showSystemUi = true
+        ),
+        PreviewConfig(name = "Unfolded Foldable", device = FOLDABLE, showSystemUi = true),
+        PreviewConfig(name = "Tablet", device = TABLET, showSystemUi = true),
+        PreviewConfig(name = "Desktop", device = DESKTOP, showSystemUi = true)
+      )
+    }
+
+    PREVIEW_FONT_SCALE_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(name = "85%", fontScale = 0.85f),
+        PreviewConfig(name = "100%", fontScale = 1.0f),
+        PreviewConfig(name = "115%", fontScale = 1.15f),
+        PreviewConfig(name = "130%", fontScale = 1.3f),
+        PreviewConfig(name = "150%", fontScale = 1.5f),
+        PreviewConfig(name = "180%", fontScale = 1.8f),
+        PreviewConfig(name = "200%", fontScale = 2f)
+      )
+    }
+    PREVIEW_DYNAMIC_COLORS_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(name = "Red", wallpaper = 0),
+        PreviewConfig(name = "Blue", wallpaper = 1),
+        PreviewConfig(name = "Green", wallpaper = 2),
+        PreviewConfig(name = "Yellow", wallpaper = 3)
+      )
+    }
+
+    else -> {
+      return null
+    }
+  }
 }
