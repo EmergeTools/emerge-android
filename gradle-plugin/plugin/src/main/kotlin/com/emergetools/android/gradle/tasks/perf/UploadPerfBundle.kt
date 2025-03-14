@@ -68,12 +68,14 @@ abstract class UploadPerfBundle : BaseUploadTask() {
       )
 
     upload(artifactMetadata) { response ->
+      val url = "https://emergetools.com/performance/compare/${response.uploadId}"
       logger.lifecycle(
         "Performance bundle upload successful! " +
           "View Emerge's performance analysis at the following url:",
       )
-      logger.lifecycle("https://emergetools.com/performance/compare/${response.uploadId}")
+      logger.lifecycle(url)
       logger.lifecycle("Performance testing usually takes around 30 minutes or less.")
+      buildScan.get().link("Emerge Tools Performance", url)
     }
   }
 }

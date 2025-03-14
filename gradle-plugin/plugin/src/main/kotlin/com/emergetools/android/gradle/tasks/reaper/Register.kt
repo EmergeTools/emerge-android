@@ -4,6 +4,7 @@ import com.android.build.api.artifact.SingleArtifact
 import com.android.build.api.variant.Variant
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
+import com.emergetools.android.gradle.dv.getBuildScan
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setUploadTaskInputs
 import com.emergetools.android.gradle.util.capitalize
@@ -64,6 +65,7 @@ private fun registerReaperUploadTask(
       it.publishableApiKey.set(extension.reaperOptions.publishableApiKey)
       it.setUploadTaskInputs(extension, appProject, variant)
       it.setTagFromProductOptions(extension.reaperOptions, variant)
+      it.buildScan.set(appProject.getBuildScan())
     }
   // Hook the bundle tasks to run the reaper upload task after they complete.
   appProject.afterEvaluate { project ->

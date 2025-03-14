@@ -40,3 +40,4 @@
 -dontwarn org.slf4j.**
 -dontwarn com.android.build.**
 -dontwarn org.objectweb.asm.**
+-dontwarn com.gradle.develocity.agent.**

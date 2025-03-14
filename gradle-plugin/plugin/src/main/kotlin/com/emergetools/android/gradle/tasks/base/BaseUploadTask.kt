@@ -17,6 +17,7 @@ import com.emergetools.android.gradle.util.network.EmergeUploadResponse
 import com.emergetools.android.gradle.util.network.SOURCE_GRADLE_PLUGIN
 import com.emergetools.android.gradle.util.network.fetchSignedUrl
 import com.emergetools.android.gradle.util.network.postFile
+import com.gradle.develocity.agent.gradle.adapters.BuildScanAdapter
 import kotlinx.datetime.Instant
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.Json
@@ -29,6 +30,7 @@ import org.gradle.api.attributes.Attribute
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
+import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.work.DisableCachingByDefault
@@ -135,6 +137,9 @@ abstract class BaseUploadTask : DefaultTask() {
   @get:Input
   @get:Optional
   abstract val appModulePath: Property<String>
+
+  @get:Internal
+  abstract val buildScan: Property<BuildScanAdapter>
 
   private lateinit var artifacts: List<ArtifactCollection>
 

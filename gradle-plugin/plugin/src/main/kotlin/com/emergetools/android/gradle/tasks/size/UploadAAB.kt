@@ -40,9 +40,11 @@ abstract class UploadAAB : BaseUploadTask() {
       )
 
     upload(artifactMetadata) { response ->
+      val url = "https://emergetools.com/build/${response.uploadId}"
       logger.lifecycle("AAB Upload successful! View Emerge's size analysis at the following url:")
-      logger.lifecycle("https://emergetools.com/build/${response.uploadId}")
+      logger.lifecycle(url)
       logger.lifecycle("Size processing can take up to 10 minutes.")
+      buildScan.get().link("Emerge Tools Size Report", url)
     }
   }
 

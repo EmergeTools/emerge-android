@@ -82,6 +82,7 @@ dependencies {
   implementation(libs.asm)
   implementation(libs.asm.commons)
 
+  add(shadowedDependencies.name, libs.develocity.agent.adapters)
   add(shadowedDependencies.name, libs.dexlib2)
   // Needed for the GradleRunner in the functional tests. We've had issues with the version of Guava
   // from one dependency conflicting with that of dexlib2, so we'll use the same version here.
