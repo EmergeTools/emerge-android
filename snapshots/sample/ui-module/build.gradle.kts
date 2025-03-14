@@ -33,6 +33,7 @@ dependencies {
   implementation(libs.compose.ui)
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
+  implementation(libs.compose.wear.ui.tooling)
 
   androidTestImplementation(libs.compose.runtime)
   androidTestImplementation(libs.junit4)

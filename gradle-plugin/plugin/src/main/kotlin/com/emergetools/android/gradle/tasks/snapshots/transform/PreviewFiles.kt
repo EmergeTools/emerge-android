@@ -90,7 +90,7 @@ fun extractPreviewMethodsFromBytes(
 /**
  * Return a list of PreviewConfigs based on the passed in annotation
  */
-@Suppress("detekt.ReturnCount")
+@Suppress("detekt.ReturnCount", "detekt.LongMethod")
 fun previewConfigForAnnotation(forAnnotation: String?): List<PreviewConfig>? {
   when (forAnnotation) {
     PREVIEW_LIGHT_DARK_ANNOTATION_DESC -> {
@@ -125,12 +125,78 @@ fun previewConfigForAnnotation(forAnnotation: String?): List<PreviewConfig>? {
         PreviewConfig(name = "200%", fontScale = 2f)
       )
     }
+
     PREVIEW_DYNAMIC_COLORS_ANNOTATION_DESC -> {
       return listOf(
         PreviewConfig(name = "Red", wallpaper = 0),
         PreviewConfig(name = "Blue", wallpaper = 1),
         PreviewConfig(name = "Green", wallpaper = 2),
         PreviewConfig(name = "Yellow", wallpaper = 3)
+      )
+    }
+
+    PREVIEW_WEAR_SMALL_ROUND_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(
+          device = SMALL_ROUND,
+          backgroundColor = 0xff000000,
+          showBackground = true,
+          group = "Devices - Small Round",
+          showSystemUi = true
+        )
+      )
+    }
+
+    PREVIEW_WEAR_LARGE_ROUND_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(
+          device = LARGE_ROUND,
+          backgroundColor = 0xff000000,
+          showBackground = true,
+          group = "Devices - Large Round",
+          showSystemUi = true
+        )
+      )
+    }
+
+    PREVIEW_WEAR_SQUARE_ANNOTATION_DESC -> {
+      return listOf(
+        PreviewConfig(
+          device = SQUARE,
+          backgroundColor = 0xff000000,
+          showBackground = true,
+          group = "Devices - Square",
+          showSystemUi = true
+        )
+      )
+    }
+
+    PREVIEW_WEAR_FONT_SCALES -> {
+      val fontScaleConfig = PreviewConfig(
+        device = SMALL_ROUND,
+        showSystemUi = true,
+        backgroundColor = 0xff000000,
+        showBackground = true,
+      )
+      return listOf(
+        fontScaleConfig.copy(group = "Fonts - Small", fontScale = 0.94f),
+        fontScaleConfig.copy(group = "Fonts - Normal", fontScale = 1f),
+        fontScaleConfig.copy(group = "Fonts - Medium", fontScale = 1.06f),
+        fontScaleConfig.copy(group = "Fonts - Large", fontScale = 1.12f),
+        fontScaleConfig.copy(group = "Fonts - Larger", fontScale = 1.18f),
+        fontScaleConfig.copy(group = "Fonts - Largest", fontScale = 1.24f),
+      )
+    }
+
+    PREVIEW_WEAR_DEVICES_ANNOTATION_DESC -> {
+      val previewDevice = PreviewConfig(
+        showSystemUi = true,
+        backgroundColor = 0xff000000,
+        showBackground = true,
+      )
+      return listOf(
+        previewDevice.copy(device = SMALL_ROUND, group = "Devices - Small Round"),
+        previewDevice.copy(device = LARGE_ROUND, group = "Devices - Large Round"),
       )
     }
 
