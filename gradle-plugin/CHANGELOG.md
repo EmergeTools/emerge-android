@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## 4.3.0 2025-03-13
-- Do not generate snapshots for third party libraries containing compose previews. For unexpected behavior please contact us via support@emergetools.com
+- Do not generate snapshots for third party libraries containing compose previews. To re-enable the old behavior including third party snapshots use `emerge.experimental.firstPartySnapshots=false` in your `gradle.properties`.
+- Add Develocity Build Scan links for upload urls [#525](https://github.com/EmergeTools/emerge-android/pull/525)
 
 ## 4.2.1 - 2025-03-06
 - Disable caching of `LocalSnapshots` task since it depends on emulator state [#511](https://github.com/EmergeTools/emerge-android/pull/511)
