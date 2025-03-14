@@ -83,7 +83,7 @@ compose-ui = { group = "androidx.compose.ui", name = "ui" }
 compose-ui-test-junit = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 compose-ui-tooling = { group = "androidx.compose.ui", name = "ui-tooling" }
 compose-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
-compose-wear-ui-tooling-preview = { module = "androidx.wear:wear-tooling-preview", version = "1.0.0" }
+compose-wear-ui-tooling = { module = "androidx.wear.compose:compose-ui-tooling", version = "1.4.1" }
 
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 

@@ -13,11 +13,20 @@ const val PREVIEW_SCREEN_SIZES_ANNOTATION_DESC =
   "Landroidx/compose/ui/tooling/preview/PreviewScreenSizes;"
 const val PREVIEW_DYNAMIC_COLORS_ANNOTATION_DESC =
   "Landroidx/compose/ui/tooling/preview/PreviewDynamicColors;"
+const val PREVIEW_PARAMETER_ANNOTATION_DESC = "Landroidx/compose/ui/tooling/preview/PreviewParameter;"
+const val PREVIEW_WEAR_SMALL_ROUND_ANNOTATION_DESC =
+  "Landroidx/wear/compose/ui/tooling/preview/WearPreviewSmallRound;"
+const val PREVIEW_WEAR_LARGE_ROUND_ANNOTATION_DESC =
+  "Landroidx/wear/compose/ui/tooling/preview/WearPreviewLargeRound;"
+const val PREVIEW_WEAR_SQUARE_ANNOTATION_DESC =
+  "Landroidx/wear/compose/ui/tooling/preview/WearPreviewSquare;"
+const val PREVIEW_WEAR_DEVICES_ANNOTATION_DESC =
+  "Landroidx/wear/tooling/preview/devices/WearDevices;"
+const val PREVIEW_WEAR_FONT_SCALES = "Landroidx/wear/compose/ui/tooling/preview/WearPreviewFontScales;"
 const val EMERGE_APP_STORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/EmergeAppStoreSnapshot;"
 const val EMERGE_IGNORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/IgnoreEmergeSnapshot;"
-const val PREVIEW_PARAMETER_ANNOTATION_DESC = "Landroidx/compose/ui/tooling/preview/PreviewParameter;"
 
 // These constants are from:
 // https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/content/res/Configuration.java
@@ -32,3 +41,9 @@ const val FOLDABLE =
 const val TABLET = "spec:id=reference_tablet,shape=Normal,width=1280,height=800,unit=dp,dpi=240"
 const val DESKTOP =
   "spec:id=reference_desktop,shape=Normal,width=1920,height=1080,unit=dp,dpi=160"
+
+// These constants are from:
+// https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:wear/wear-tooling-preview/src/main/java/androidx/wear/tooling/preview/devices/WearDevice.kt
+const val LARGE_ROUND = "id:wearos_large_round"
+const val SMALL_ROUND = "id:wearos_small_round"
+const val SQUARE = "id:wearos_square"
