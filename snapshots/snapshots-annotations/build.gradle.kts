@@ -1,8 +1,9 @@
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
   alias(libs.plugins.kotlin.jvm)
-  alias(libs.plugins.grgit)
   `java-library`
   `maven-publish`
   signing
@@ -10,9 +11,6 @@ plugins {
 
 group = "com.emergetools.snapshots"
 version = libs.versions.emerge.snapshots.get()
-
-var metaInfResDir = File(buildDir, "generated/emerge/")
-var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/test/")
 
 java {
   withJavadocJar()
@@ -23,9 +21,9 @@ java {
 }
 
 tasks.withType<KotlinCompile> {
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-    languageVersion = "1.7"
+  compilerOptions {
+    jvmTarget = JvmTarget.JVM_11
+    languageVersion.set(KotlinVersion.KOTLIN_1_8)
   }
 }
 
@@ -33,21 +31,9 @@ dependencies {
   implementation(libs.kotlinx.serialization)
 }
 
-tasks.register("generateMetaInfVersion") {
-  doLast {
-    metaInfDestDir.mkdirs()
-    File(metaInfDestDir, "version.txt").writeText(
-      "version: $version" +
-        "\nrevision: ${grgit.head().id}"
-    )
-  }
-}
-
-afterEvaluate {
-  tasks.filter { task ->
-    task.name.startsWith("generate") && task.name.endsWith("Resources")
-  }.forEach { task ->
-    task.dependsOn(tasks.findByName("generateMetaInfVersion"))
+tasks.withType<Jar> {
+  manifest {
+    attributes["Implementation-Version"] = version
   }
 }
 
