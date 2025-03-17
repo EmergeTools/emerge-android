@@ -9,11 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Add `Reaper.fuseOff()`. [#491](https://github.com/EmergeTools/emerge-android/pull/491)
 
+- Add logging for non-404 errors [#531](https://github.com/EmergeTools/emerge-android/pull/531)
+
 ## 1.0.0 - 2024-12-02
 
 - Initial release.
 - Update API endpoint from https://api.emergetools.com to https://reaper.emergetools.com
-    both endpoints will continue to accept reports. [#316](https://github.com/EmergeTools/emerge-android/pull/316)
+  both endpoints will continue to accept
+  reports. [#316](https://github.com/EmergeTools/emerge-android/pull/316)
 
 ## 1.0.0-rc03 - 2024-09-24
 
