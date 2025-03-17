@@ -190,6 +190,10 @@ internal class ReaperReportUploadWorker(
           "Upload failed, backend or apiKey unknown. backend=$baseUrl apiKey=$apiKey"
         )
       } else {
+        Log.e(
+          TAG,
+          "Upload failed ${response.code}, $response. backend=$baseUrl apiKey=$apiKey"
+        )
         sendError(applicationContext, response.toString())
       }
     }
