@@ -4,8 +4,11 @@ import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
 import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.provider.Property
 import org.gradle.api.tasks.CacheableTask
+import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputFiles
+import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
 import org.gradle.api.tasks.PathSensitive
 import org.gradle.api.tasks.PathSensitivity
@@ -20,6 +23,10 @@ abstract class FindPreviewsAcrossProjects : DefaultTask() {
   @get:OutputFile
   abstract val outputFile: RegularFileProperty
 
+  @get:Input
+  @get:Optional
+  abstract val includePrivatePreviews: Property<Boolean>
+
   @TaskAction
   fun findPreviews() {
     val output = outputFile.get().asFile
@@ -28,7 +35,9 @@ abstract class FindPreviewsAcrossProjects : DefaultTask() {
     // Clear any existing content
     output.writeText("")
 
-    val listOfPreviews = inputDirectory.get().asFile.findPreviewMethodsInDirectory().toList()
+    val listOfPreviews = inputDirectory.get().asFile.findPreviewMethodsInDirectory(
+      includePrivatePreviews.getOrElse(true)
+    ).toList()
     output.writeText(Json.encodeToString(listOfPreviews))
   }
 }

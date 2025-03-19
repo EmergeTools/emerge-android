@@ -42,7 +42,7 @@ fun registerSnapshotTasks(
   registerSnapshotPreflightTask(appProject, extension, variant)
 
   if (appProject.firstPartySnapshotsEnabled) {
-    setupTransformTasks(appProject, variant)
+    setupTransformTasks(appProject, extension, variant)
   } else {
     variant.instrumentation.let { instrumentation ->
       instrumentation.transformClassesWith(
@@ -192,7 +192,11 @@ private fun registerSnapshotUploadTask(
   }
 }
 
-fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
+fun setupTransformTasks(
+  appProject: Project,
+  extension: EmergePluginExtension,
+  variant: ApplicationVariant,
+) {
   val artifactType = Attribute.of("artifactType", String::class.java)
   val name = variant.name
 
@@ -231,6 +235,8 @@ fun setupTransformTasks(appProject: Project, variant: ApplicationVariant) {
     )
 
     task.inputDirectory.set(mergeForPreview.flatMap { it.outputDir })
+
+    task.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
   }
 }
 
