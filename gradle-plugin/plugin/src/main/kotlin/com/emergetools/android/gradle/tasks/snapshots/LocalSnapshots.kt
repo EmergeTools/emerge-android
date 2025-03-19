@@ -18,8 +18,6 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
-import java.io.File
-import java.util.zip.ZipFile
 import javax.inject.Inject
 
 @DisableCachingByDefault(because = "Relies on local emulator state and should not be cached")
@@ -33,8 +31,8 @@ abstract class LocalSnapshots : DefaultTask() {
   @Option(
     option = "preview",
     description =
-    "A single fully qualified preview method" +
-      " or a comma-separated list of fully qualified preview methods",
+      "A single fully qualified preview method" +
+        " or a comma-separated list of fully qualified preview methods",
   )
   fun setPreviews(previewFunctions: String) {
     arguments["previews"] = previewFunctions
@@ -94,10 +92,8 @@ abstract class LocalSnapshots : DefaultTask() {
     snapshotStorageDir.mkdirs()
 
     check(snapshotConfigFile.isPresent) {
-      "Snapshot configuration file not present"
+      "Snapshot configuration file not present, make sure the emerge.experimental.firstPartySnapshots property is set in your gradle.properties file"
     }
-
-    logger.lifecycle("Snapshot config file: ${snapshotConfigFile.asFile.get().absolutePath}")
 
     val adbHelper = AdbHelper(execOperations, logger)
     adbHelper.apply {
