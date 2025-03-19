@@ -23,7 +23,7 @@ class SnapshotAggregatorClassVisitor(
     desc: String,
     signature: String?,
     exceptions: Array<out String>?
-  ): MethodVisitor {
+  ): MethodVisitor? {
     if (!includePrivatePreviews && AccessFlags.PRIVATE.isSet(access)) {
       return super.visitMethod(access, name, desc, signature, exceptions)
     }
