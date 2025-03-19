@@ -31,7 +31,6 @@ data class EmergeUploadRequestData(
   val androidSnapshotsEnabled: Boolean,
   val androidSnapshotsApiVersion: Int? = null,
   val androidSnapshotsPrivateEnabled: Boolean = true,
-  val androidSnapshotsPreviewParamsEnabled: Boolean = true,
 )
 
 @Serializable
