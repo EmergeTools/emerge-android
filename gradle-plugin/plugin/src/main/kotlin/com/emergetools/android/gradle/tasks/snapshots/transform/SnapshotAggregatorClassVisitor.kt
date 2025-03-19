@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
+import org.gradle.internal.cc.base.logger
 import org.jf.dexlib2.AccessFlags
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
@@ -25,6 +26,7 @@ class SnapshotAggregatorClassVisitor(
     exceptions: Array<out String>?
   ): MethodVisitor? {
     if (!includePrivatePreviews && AccessFlags.PRIVATE.isSet(access)) {
+      logger.lifecycle("Ignoring private method $name in class $className")
       return super.visitMethod(access, name, desc, signature, exceptions)
     }
 

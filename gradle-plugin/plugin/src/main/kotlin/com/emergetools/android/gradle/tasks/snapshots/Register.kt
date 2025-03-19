@@ -149,13 +149,22 @@ private fun registerSnapshotLocalTask(
       " Requires a device or emulator connected."
     it.packageDir.set(packageTask.flatMap { packageTask -> packageTask.outputDirectory })
     it.snapshotStorageDirectory.set(snapshotStorageDirectory)
-    it.previewExtractDir.set(buildDirectory.dir("$BUILD_OUTPUT_DIR_NAME/previews"))
     it.targetAppId.set(targetAppId)
     it.testAppId.set(testAppId)
     it.testInstrumentationRunner.set(testInstrumentationRunner)
-    it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
-    it.includePreviewParamPreviews.set(extension.snapshotOptions.includePreviewParamPreviews)
     it.profile.set(extension.snapshotOptions.profile)
+
+    if (appProject.firstPartySnapshotsEnabled) {
+      it.snapshotConfigFile.set(
+        appProject.tasks.named(
+          variant.name.aggregatePreviewMethodsName,
+          FindPreviewsAcrossProjects::class.java,
+        ).flatMap { task ->
+          task.outputFile
+        },
+      )
+    }
+
     it.dependsOn(packageTask)
   }
 }

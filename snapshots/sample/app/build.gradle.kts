@@ -9,7 +9,8 @@ emerge {
   snapshots {
     tag.setFromVariant()
 
-    profile.set(true)
+    profile.set(false)
+//    includePrivatePreviews.set(false)
   }
 }
 
