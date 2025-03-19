@@ -1,9 +1,9 @@
+import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
+
 plugins {
   alias(libs.plugins.android.library)
-  alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.buildconfig)
   `maven-publish`
   signing
 }
@@ -11,8 +11,34 @@ plugins {
 group = "com.emergetools.distribution"
 version = libs.versions.emerge.distribution.get()
 
-var metaInfResDir = File(buildDir, "generated/emerge/")
-var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/distribution/")
+val generateMetaInf = tasks.register("generateMetaInfVersion", GenerateMetaInfVersion::class.java) {
+  version = project.version.toString()
+  baseUrl.set(rootProject.properties["emergeBaseUrl"]?.toString() ?: "https://api.emergetools.com")
+}
+
+abstract class GenerateMetaInfVersion : DefaultTask() {
+
+  @get:Input
+  abstract val version: Property<String>
+
+  @get:Input
+  abstract val baseUrl: Property<String>
+
+  @get:OutputDirectory
+  abstract val metaInfResDir: DirectoryProperty
+
+  @TaskAction
+  fun generate() {
+    val metaInfDestDir = metaInfResDir.dir("META-INF/com/emergetools/distribution").get().asFile
+    val metaInfDestFile = metaInfDestDir.resolve("version.txt")
+    metaInfDestFile.ensureParentDirsCreated()
+    metaInfDestFile.writeText(
+      """version: ${version.get()}
+        |baseUrl: ${baseUrl.get()}
+      """.trimMargin()
+    )
+  }
+}
 
 android {
   namespace = "com.emergetools.distribution"
@@ -28,12 +54,15 @@ android {
   }
 
   defaultConfig {
+    version = project.version
     minSdk = 21
   }
-
-  // Ensures our version.txt is packaged in with release.
-  // Will be pulled in automatically to test APK upon build
-  sourceSets.getByName("main").resources.srcDir(metaInfResDir)
+  androidComponents.onVariants { variant ->
+    variant.sources.resources!!.addGeneratedSourceDirectory<GenerateMetaInfVersion>(
+      taskProvider = generateMetaInf,
+      wiredWith = GenerateMetaInfVersion::metaInfResDir
+    )
+  }
 }
 
 dependencies {
@@ -57,32 +86,6 @@ dependencies {
 
 tasks.withType<Test> {
   useJUnitPlatform()
-}
-
-val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://api.emergetools.com"
-buildConfig {
-  className("DistributionConfig")
-  packageName("com.emergetools.distribution")
-  buildConfigField("String", "DISTRIBUTION_VERSION", """"${project.version}"""")
-  buildConfigField("String", "EMERGE_BASE_URL", """"$baseUrl"""")
-}
-
-tasks.register("generateMetaInfVersion") {
-  doLast {
-    metaInfDestDir.mkdirs()
-    File(metaInfDestDir, "version.txt").writeText(
-      "version: $version" +
-        "\nrevision: ${grgit.head().id}"
-    )
-  }
-}
-
-afterEvaluate {
-  tasks.filter { task ->
-    task.name.startsWith("generate") && task.name.endsWith("Resources")
-  }.forEach { task ->
-    task.dependsOn(tasks.findByName("generateMetaInfVersion"))
-  }
 }
 
 publishing {

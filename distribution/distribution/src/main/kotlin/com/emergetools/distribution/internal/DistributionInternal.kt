@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
-import com.emergetools.distribution.DistributionConfig
 import com.emergetools.distribution.DistributionOptions
 import com.emergetools.distribution.UpdateInfo
 import com.emergetools.distribution.UpdateStatus
@@ -210,6 +209,8 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
   val info = context.packageManager.getPackageInfo(applicationId, 0)
   val version = info.versionName
   val build = info.versionCode
+  val binaryIdentifier = getBinaryIdentifier(context)
+  val distributionVersion = VersionTxtReader().version
 
   val url = HttpUrl.Builder().apply {
     scheme("https")
@@ -222,8 +223,8 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
     addQueryParameter("version", version)
     addQueryParameter("build", build.toString())
     addQueryParameter("platform", "android")
-    addQueryParameter("binaryIdentifier", getBinaryIdentifier(context))
-    addQueryParameter("distributionVersion", DistributionConfig.DISTRIBUTION_VERSION)
+    addQueryParameter("binaryIdentifier", binaryIdentifier)
+    addQueryParameter("distributionVersion", distributionVersion)
   }.build()
 
   val request = Request.Builder().apply {
@@ -241,28 +242,27 @@ private suspend fun doCheckForUpdate(context: Context, state: State): UpdateStat
 }
 
 @ExperimentalCoroutinesApi // resume with a resource cleanup.
-suspend fun executeAsync(call: Call): Response =
-  suspendCancellableCoroutine { continuation ->
-    continuation.invokeOnCancellation {
-      call.cancel()
-    }
-    call.enqueue(
-      object : Callback {
-        override fun onFailure(
-          call: Call,
-          e: IOException,
-        ) {
-          continuation.resumeWithException(e)
-        }
-
-        override fun onResponse(
-          call: Call,
-          response: Response,
-        ) {
-          continuation.resume(response) {
-            response.closeQuietly()
-          }
-        }
-      },
-    )
+suspend fun executeAsync(call: Call): Response = suspendCancellableCoroutine { continuation ->
+  continuation.invokeOnCancellation {
+    call.cancel()
   }
+  call.enqueue(
+    object : Callback {
+      override fun onFailure(
+        call: Call,
+        e: IOException,
+      ) {
+        continuation.resumeWithException(e)
+      }
+
+      override fun onResponse(
+        call: Call,
+        response: Response,
+      ) {
+        continuation.resume(response) {
+          response.closeQuietly()
+        }
+      }
+    },
+  )
+}
