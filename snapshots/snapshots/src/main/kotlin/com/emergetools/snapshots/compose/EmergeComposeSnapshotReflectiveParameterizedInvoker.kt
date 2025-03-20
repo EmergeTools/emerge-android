@@ -69,6 +69,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
       }
 
       val fileContent = invokeDataFile.readText()
+      @Suppress("TooGenericExceptionCaught")
       return try {
         // First try to parse directly as List<ComposePreviewSnapshotConfig>
         json.decodeFromString<List<ComposePreviewSnapshotConfig>>(fileContent).map {

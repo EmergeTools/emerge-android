@@ -30,9 +30,8 @@ abstract class LocalSnapshots : DefaultTask() {
 
   @Option(
     option = "preview",
-    description =
-      "A single fully qualified preview method" +
-        " or a comma-separated list of fully qualified preview methods",
+    description = "A single fully qualified preview method" +
+      " or a comma-separated list of fully qualified preview methods",
   )
   fun setPreviews(previewFunctions: String) {
     arguments["previews"] = previewFunctions
@@ -92,7 +91,8 @@ abstract class LocalSnapshots : DefaultTask() {
     snapshotStorageDir.mkdirs()
 
     check(snapshotConfigFile.isPresent) {
-      "Snapshot configuration file not present, make sure the emerge.experimental.firstPartySnapshots property is set in your gradle.properties file"
+      "Snapshot configuration file not present, make sure the" +
+        " emerge.experimental.firstPartySnapshots property is set in your gradle.properties file"
     }
 
     val adbHelper = AdbHelper(execOperations, logger)
