@@ -19,6 +19,7 @@ class AnnotatedMethodVisitor(
 
   private val methodNamesToAdd = mutableListOf<PreviewConfig>()
   private var foundIgnoreAnnotation = false
+  private var foundPrecision: Float = 1.0f
   private var foundAppStoreSnapshot = false
 
   // Parameter and preview parameter info
@@ -69,6 +70,19 @@ class AnnotatedMethodVisitor(
       EMERGE_IGNORE_SNAPSHOT -> {
         foundIgnoreAnnotation = true
         return super.visitAnnotation(descriptor, visible)
+      }
+
+      EMERGE_SNAPSHOT_CONFIG -> {
+        return object : AnnotationVisitor(api) {
+          override fun visit(name: String?, value: Any?) {
+            if (name == "precision") {
+              foundPrecision = value as? Float ?: 1.0f
+            } else if (name == "ignore") {
+              foundIgnoreAnnotation = value as? Boolean ?: false
+            }
+            return super.visit(name, value)
+          }
+        }
       }
 
       PREVIEW_CONTAINER_ANNOTATION_DESC -> {
@@ -212,6 +226,7 @@ class AnnotatedMethodVisitor(
         fullyQualifiedClassName = className.cleanName(),
         originalFqn = className.cleanName().removeClassName() + "." + methodName,
         sourceFileName = fileName.cleanName().cleanFileName(),
+        precision = foundPrecision.takeIf { it != 1.0f },
         name = previewConfig.name,
         group = previewConfig.group,
         uiMode = previewConfig.uiMode,

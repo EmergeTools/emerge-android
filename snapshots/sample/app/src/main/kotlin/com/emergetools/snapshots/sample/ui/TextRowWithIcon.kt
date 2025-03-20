@@ -9,6 +9,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.emergetools.snapshots.annotations.EmergeSnapshotConfig
 import com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
@@ -81,12 +82,26 @@ fun TextRowWithIconPreviewFromMainJustStackedMultiPreview() {
 
 // Should not be snapshotted as this is marked to be ignored
 @Preview
-@IgnoreEmergeSnapshot
+@EmergeSnapshotConfig(
+  ignore = true,
+)
 @Composable
 fun TextRowWithIconPreviewFromMainIgnored() {
   TextRowWithIcon(
     titleText = "Title (ignored)",
     subtitleText = "Subtitle (ignored)"
+  )
+}
+
+@Preview
+@EmergeSnapshotConfig(
+  precision = .95f,
+)
+@Composable
+fun TextRowWithIconPreviewFromMainPrecision() {
+  TextRowWithIcon(
+    titleText = "Title (precision)",
+    subtitleText = "Subtitle (precision)"
   )
 }
 
