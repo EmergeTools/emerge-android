@@ -35,8 +35,6 @@ abstract class FindPreviewsAcrossProjects : DefaultTask() {
     // Clear any existing content
     output.writeText("")
 
-    logger.lifecycle("includePrivatePreviews = ${includePrivatePreviews.orNull}")
-
     val listOfPreviews = inputDirectory.get().asFile.findPreviewMethodsInDirectory(
       includePrivatePreviews.getOrElse(true)
     ).toList()
