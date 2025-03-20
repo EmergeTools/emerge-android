@@ -87,8 +87,6 @@ compose-wear-ui-tooling = { module = "androidx.wear.compose:compose-ui-tooling",
 
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
-dexlib2 = "org.smali:dexlib2:2.5.2"
-
 google-truth = "com.google.truth:truth:1.4.4"
 
 guava = "com.google.guava:guava:33.4.0-jre"

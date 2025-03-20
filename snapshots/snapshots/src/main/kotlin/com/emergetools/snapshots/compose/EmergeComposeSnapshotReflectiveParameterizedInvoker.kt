@@ -68,8 +68,19 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
         ignoreUnknownKeys = true
       }
 
-      return json.decodeFromString<ComposeSnapshots>(invokeDataFile.readText()).snapshots.map {
-        EmergeComposeSnapshotReflectiveParameters(it)
+      val fileContent = invokeDataFile.readText()
+      @Suppress("TooGenericExceptionCaught")
+      return try {
+        // First try to parse directly as List<ComposePreviewSnapshotConfig>
+        json.decodeFromString<List<ComposePreviewSnapshotConfig>>(fileContent).map {
+          EmergeComposeSnapshotReflectiveParameters(it)
+        }
+      } catch (e: Exception) {
+        // Fallback to parsing as ComposeSnapshots
+        Log.d(TAG, "Failed to parse as List<ComposePreviewSnapshotConfig>, falling back to ComposeSnapshots", e)
+        json.decodeFromString<ComposeSnapshots>(fileContent).snapshots.map {
+          EmergeComposeSnapshotReflectiveParameters(it)
+        }
       }
     }
   }

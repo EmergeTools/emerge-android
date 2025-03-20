@@ -1,14 +1,15 @@
 package com.emergetools.android.gradle.tasks.snapshots
 
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
-import com.emergetools.android.gradle.tasks.snapshots.utils.PreviewUtils
 import com.emergetools.android.gradle.util.adb.AdbHelper
 import kotlinx.serialization.json.Json
 import org.gradle.api.DefaultTask
 import org.gradle.api.file.DirectoryProperty
+import org.gradle.api.file.RegularFileProperty
 import org.gradle.api.provider.Property
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.InputDirectory
+import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.PathSensitive
@@ -17,22 +18,19 @@ import org.gradle.api.tasks.TaskAction
 import org.gradle.api.tasks.options.Option
 import org.gradle.process.ExecOperations
 import org.gradle.work.DisableCachingByDefault
-import java.io.File
-import java.util.zip.ZipFile
 import javax.inject.Inject
 
 @DisableCachingByDefault(because = "Relies on local emulator state and should not be cached")
 abstract class LocalSnapshots : DefaultTask() {
   companion object {
-    const val COMPOSE_SNAPSHOTS_FILENAME = "snapshots.json"
+    const val COMPOSE_SNAPSHOTS_FILENAME = "previewSnapshots.json"
   }
 
   private val arguments = mutableMapOf<String, String>()
 
   @Option(
     option = "preview",
-    description =
-    "A single fully qualified preview method" +
+    description = "A single fully qualified preview method" +
       " or a comma-separated list of fully qualified preview methods",
   )
   fun setPreviews(previewFunctions: String) {
@@ -45,9 +43,6 @@ abstract class LocalSnapshots : DefaultTask() {
   @get:InputDirectory
   @get:PathSensitive(PathSensitivity.NAME_ONLY)
   abstract val packageDir: DirectoryProperty
-
-  @get:OutputDirectory
-  abstract val previewExtractDir: DirectoryProperty
 
   @get:OutputDirectory
   abstract val snapshotStorageDirectory: DirectoryProperty
@@ -63,15 +58,12 @@ abstract class LocalSnapshots : DefaultTask() {
 
   @get:Input
   @get:Optional
-  abstract val includePrivatePreviews: Property<Boolean>
-
-  @get:Input
-  @get:Optional
-  abstract val includePreviewParamPreviews: Property<Boolean>
-
-  @get:Input
-  @get:Optional
   abstract val profile: Property<Boolean>
+
+  @get:Optional
+  @get:InputFile
+  @get:PathSensitive(PathSensitivity.NAME_ONLY)
+  abstract val snapshotConfigFile: RegularFileProperty
 
   @TaskAction
   fun execute() {
@@ -98,27 +90,10 @@ abstract class LocalSnapshots : DefaultTask() {
     val snapshotStorageDir = snapshotStorageDirectory.asFile.get()
     snapshotStorageDir.mkdirs()
 
-    val extractedApkDir = previewExtractDir.dir("extracted_apk").get().asFile.also {
-      it.mkdirs()
+    check(snapshotConfigFile.isPresent) {
+      "Snapshot configuration file not present, make sure the" +
+        " emerge.experimental.firstPartySnapshots property is set in your gradle.properties file"
     }
-    extractDexFromApk(
-      apk = targetApk,
-      outputDir = extractedApkDir,
-    )
-
-    val previews = arguments["previews"]?.split(",")?.map(String::trim) ?: emptyList()
-    val composeSnapshots =
-      PreviewUtils.findPreviews(
-        extractedApkDir,
-        includePrivatePreviews.getOrElse(true),
-        includePreviewParamPreviews.getOrElse(true),
-        previews,
-        logger,
-      )
-
-    logger.info("Found ${composeSnapshots.snapshots.size} Compose Preview snapshots")
-    val composeSnapshotsJson = File(previewExtractDir.get().asFile, COMPOSE_SNAPSHOTS_FILENAME)
-    composeSnapshotsJson.writeText(Json.encodeToString(composeSnapshots))
 
     val adbHelper = AdbHelper(execOperations, logger)
     adbHelper.apply {
@@ -141,16 +116,14 @@ abstract class LocalSnapshots : DefaultTask() {
             it.add(key)
             it.add(value)
           }
-          if (composeSnapshotsJson.exists()) {
-            push(
-              localFile = composeSnapshotsJson.absolutePath,
-              deviceDir = "/data/local/tmp/",
-            )
-            // Important this is added here as runner needs to be last argument
-            it.add("-e")
-            it.add("invoke_data_path")
-            it.add("/data/local/tmp/$COMPOSE_SNAPSHOTS_FILENAME")
-          }
+          push(
+            localFile = snapshotConfigFile.asFile.get().absolutePath,
+            deviceDir = "/data/local/tmp/",
+          )
+          // Important this is added here as runner needs to be last argument
+          it.add("-e")
+          it.add("invoke_data_path")
+          it.add("/data/local/tmp/$COMPOSE_SNAPSHOTS_FILENAME")
           if (profile.getOrElse(false)) {
             it.add("-e")
             it.add("save_profile")
@@ -177,24 +150,6 @@ abstract class LocalSnapshots : DefaultTask() {
       logger.lifecycle(
         "$count files saved to ${snapshotStorageDir.absolutePath}",
       )
-    }
-  }
-
-  private fun extractDexFromApk(
-    apk: File,
-    outputDir: File,
-  ) {
-    ZipFile(apk).use { zip ->
-      zip.entries().asSequence().forEach { entry ->
-        if (entry.name.matches(Regex("^classes[0-9]*\\.dex"))) {
-          val outputFile = File(outputDir, entry.name)
-          zip.getInputStream(entry).use { input ->
-            outputFile.outputStream().use { output ->
-              input.copyTo(output)
-            }
-          }
-        }
-      }
     }
   }
 }
