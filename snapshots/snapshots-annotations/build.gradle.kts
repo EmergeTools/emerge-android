@@ -29,6 +29,7 @@ tasks.withType<KotlinCompile> {
 
 dependencies {
   implementation(libs.kotlinx.serialization)
+  implementation(libs.androidx.annotation.jvm)
 }
 
 tasks.withType<Jar> {

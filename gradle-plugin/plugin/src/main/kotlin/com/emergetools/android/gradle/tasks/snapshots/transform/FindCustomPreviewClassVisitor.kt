@@ -6,7 +6,7 @@ import org.objectweb.asm.Opcodes
 
 /**
  * First pass visitor that identifies custom annotations (like @AppStoreScreenshotPreviews) that are
- * themselves annotated with @Preview or @EmergeAppStoreSnapshot.
+ * themselves annotated with @Preview, @EmergeAppStoreSnapshot or @EmergeSnapshotConfig.
  */
 class FindCustomPreviewClassVisitor(
   private val customPreviewAnnotations: MutableMap<String, CustomPreviewAnnotation>
@@ -30,6 +30,17 @@ class FindCustomPreviewClassVisitor(
   override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor? {
     if (descriptor == EMERGE_APP_STORE_SNAPSHOT) {
       currentAnnotation.isAppStoreSnapshot = true
+    } else if (descriptor == EMERGE_SNAPSHOT_CONFIG) {
+      return object : AnnotationVisitor(Opcodes.ASM9) {
+        override fun visit(name: String?, value: Any?) {
+          if (name == "precision") {
+            currentAnnotation.precision = value as? Float ?: 1.0f
+          } else if (name == "ignore") {
+            currentAnnotation.ignored = value as? Boolean ?: false
+          }
+          return super.visit(name, value)
+        }
+      }
     } else if (descriptor == PREVIEW_ANNOTATION_DESC) {
       val newConfig = PreviewConfig()
       currentAnnotation.previewConfigs.add(newConfig)
@@ -82,6 +93,8 @@ class FindCustomPreviewClassVisitor(
  */
 data class CustomPreviewAnnotation(
   var isAppStoreSnapshot: Boolean = false,
+  var ignored: Boolean = false,
+  var precision: Float = 1.0f,
   val previewConfigs: MutableList<PreviewConfig> = mutableListOf()
 )
 

@@ -8,6 +8,7 @@ data class ComposePreviewSnapshotConfig(
   val originalFqn: String,
   val sourceFileName: String? = null,
   var isAppStoreSnapshot: Boolean? = null,
+  var precision: Float? = null,
   val previewParameter: PreviewParameter? = null,
   var name: String? = null,
   var group: String? = null,

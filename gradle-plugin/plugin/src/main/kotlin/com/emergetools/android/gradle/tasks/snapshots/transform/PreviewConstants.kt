@@ -27,6 +27,8 @@ const val EMERGE_APP_STORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/EmergeAppStoreSnapshot;"
 const val EMERGE_IGNORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/IgnoreEmergeSnapshot;"
+const val EMERGE_SNAPSHOT_CONFIG =
+  "Lcom/emergetools/snapshots/annotations/EmergeSnapshotConfig;"
 
 // These constants are from:
 // https://android.googlesource.com/platform/frameworks/base/+/master/core/java/android/content/res/Configuration.java
