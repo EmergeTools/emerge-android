@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package com.emergetools.snapshots.sample.ui
 
 import androidx.compose.foundation.layout.Column
@@ -10,7 +12,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.emergetools.snapshots.annotations.EmergeSnapshotConfig
-import com.emergetools.snapshots.annotations.IgnoreEmergeSnapshot
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Composable
