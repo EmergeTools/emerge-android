@@ -203,9 +203,6 @@ emerge {
     // Include private previews in snapshot generation - defaults to true
     includePrivatePreviews.set(false)
 
-    // Snapshot `@Preview` functions with `@PreviewParameter` annotated params - defaults to true
-    includePreviewParamPreviews.set(false)
-
     // Tag to use for grouping builds in the Emerge dashboard
     tag.set("snapshots")
     // Alternatively, use `setFromVariant()` to set the tag from the Android build variant
@@ -225,7 +222,6 @@ versions to releases & names, see [Android API levels](https://apilevels.com/).
 | Field                         | Type      | Default                           | Description                                                                                       |
 |-------------------------------|-----------|-----------------------------------|---------------------------------------------------------------------------------------------------|
 | `includePrivatePreviews`      | `Boolean` | `true`                            | If Emerge should snapshot `private` annotated `@Preview` functions.                               |
-| `includePreviewParamPreviews` | `Boolean` | `true`                            | If Emerge should snapshot `@Preview` functions with `@PreviewParameter` annotated params.         |
 | `apiVersion`                  | `Int`     | `34`                              | The Android API version to use for snapshot generation. Must be an int value in 29, 31, 33 or 34. |
 | `snapshotsStorageDirectory`   | `String`  | `/build/emerge/snapshots/outputs` | The path to local snapshot storage. Only used for local snapshot generation.                      |
 | `tag`                         | `String`  | `release`                         | The build tag to use for grouping builds in the Emerge dashboard.                                 |
@@ -379,9 +375,6 @@ emerge {
     snapshotsStorageDirectory.set("/src/main/snapshots")
     // Android API version to run snapshots on, must be 29, 31, 33 or 34.
     apiVersion.set(33)
-
-    // Snapshot `@Preview` functions with `@PreviewParameter` annotated params - defaults to true
-    includePreviewParamPreviews.set(false)
 
     // Optional, snapshots use debug builds, we recommend using a separate tag.
     tag.set("snapshots")

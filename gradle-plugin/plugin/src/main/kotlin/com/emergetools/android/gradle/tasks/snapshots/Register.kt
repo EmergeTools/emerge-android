@@ -193,7 +193,6 @@ private fun registerSnapshotUploadTask(
     )
     it.apiVersion.set(extension.snapshotOptions.apiVersion)
     it.includePrivatePreviews.set(extension.snapshotOptions.includePrivatePreviews)
-    it.includePreviewParamPreviews.set(extension.snapshotOptions.includePreviewParamPreviews)
     it.setUploadTaskInputs(extension, appProject, variant)
     it.setTagFromProductOptions(extension.snapshotOptions, variant)
     it.dependsOn(packageTask)

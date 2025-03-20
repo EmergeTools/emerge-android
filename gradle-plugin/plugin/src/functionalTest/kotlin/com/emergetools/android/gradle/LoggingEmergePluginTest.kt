@@ -38,7 +38,6 @@ class LoggingEmergePluginTest : EmergePluginTest() {
             "╠═ snapshotsStorageDirectory: \n" +
             "╠═ apiVersion: \n" +
             "╠═ includePrivatePreviews: \n" +
-            "╠═ includePreviewParamPreviews: \n" +
             "╠═ tag (optional): \n" +
             "╠═ enabled: true\n" +
             "╚═ profile: false\n" +

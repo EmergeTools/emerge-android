@@ -39,10 +39,6 @@ abstract class LogExtensionTask : DefaultTask() {
           "includePrivatePreviews: ${extension.snapshotOptions.includePrivatePreviews.orEmpty()}",
           snapshotsHeading,
         )
-        addItem(
-          "includePreviewParamPreviews: ${extension.snapshotOptions.includePreviewParamPreviews.orEmpty()}",
-          snapshotsHeading,
-        )
         addItem("tag (optional): ${extension.snapshotOptions.tag.orEmpty()}", snapshotsHeading)
         addItem("enabled: ${extension.snapshotOptions.enabled.getOrElse(true)}", snapshotsHeading)
         addItem("profile: ${extension.snapshotOptions.profile.getOrElse(false)}", snapshotsHeading)
