@@ -1,5 +1,6 @@
 package com.emergetools.android.gradle.tasks.snapshots.transform
 
+import org.jf.dexlib2.AccessFlags
 import org.objectweb.asm.ClassVisitor
 import org.objectweb.asm.MethodVisitor
 
@@ -12,6 +13,7 @@ class SnapshotAggregatorClassVisitor(
   private val fileName: String,
   private val className: String,
   private val methodNames: MutableList<ComposePreviewSnapshotConfig>,
+  private val includePrivatePreviews: Boolean,
   private val customPreviewAnnotations: Map<String, CustomPreviewAnnotation> = emptyMap()
 ) : ClassVisitor(api) {
 
@@ -21,7 +23,11 @@ class SnapshotAggregatorClassVisitor(
     desc: String,
     signature: String?,
     exceptions: Array<out String>?
-  ): MethodVisitor {
+  ): MethodVisitor? {
+    if (!includePrivatePreviews && AccessFlags.PRIVATE.isSet(access)) {
+      return super.visitMethod(access, name, desc, signature, exceptions)
+    }
+
     return AnnotatedMethodVisitor(api, name, className, fileName, methodNames, customPreviewAnnotations)
   }
 }

@@ -10,7 +10,7 @@ import java.util.concurrent.ConcurrentHashMap
  * 1. First pass: Find custom preview annotations
  * 2. Second pass: Find methods with preview annotations, including custom ones
  */
-fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig> {
+fun File.findPreviewMethodsInDirectory(includePrivatePreviews: Boolean): Sequence<ComposePreviewSnapshotConfig> {
   // First pass: Find all custom annotation classes that are themselves annotated with @Preview
   val customPreviewAnnotations = findCustomPreviewAnnotationsInDirectory()
 
@@ -21,7 +21,8 @@ fun File.findPreviewMethodsInDirectory(): Sequence<ComposePreviewSnapshotConfig>
       extractPreviewMethodsFromBytes(
         classFile.name,
         classFile.readBytes(),
-        customPreviewAnnotations
+        includePrivatePreviews,
+        customPreviewAnnotations,
       )
     }
 }
@@ -68,6 +69,7 @@ private fun findCustomPreviewAnnotationsInBytes(
 fun extractPreviewMethodsFromBytes(
   fileName: String,
   byteStream: ByteArray,
+  includePrivatePreviews: Boolean,
   customPreviewAnnotations: Map<String, CustomPreviewAnnotation> = emptyMap()
 ): List<ComposePreviewSnapshotConfig> {
   val classReader = ClassReader(byteStream)
@@ -79,7 +81,8 @@ fun extractPreviewMethodsFromBytes(
       fileName,
       classReader.className,
       methodNames,
-      customPreviewAnnotations
+      includePrivatePreviews,
+      customPreviewAnnotations,
     )
 
   classReader.accept(visitor, ClassReader.EXPAND_FRAMES)
