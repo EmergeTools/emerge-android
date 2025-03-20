@@ -207,6 +207,7 @@ abstract class SnapshotOptions : ProductOptions() {
    * Include private previews in snapshot generation, defaults to true
    */
   abstract val includePrivatePreviews: Property<Boolean>
+
   /**
    * Record profiling information for snapshot tests, defaults to false.
    */
