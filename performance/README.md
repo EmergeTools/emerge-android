@@ -57,7 +57,7 @@ _"Sync Project with Gradle Files" for your IDE to recognize the new subproject._
 
 ### Create your first performance test
 
-Open the newly generated `ExamplePerformanceTest` file. The Emerge SDK provides method annotations
+Open the newly generated `ExamplePerformanceTest` file. The Emerge library provides method annotations
 that work similarly to the JUnit annotations you may be used to:
 
 - `@EmergeTest`/`@EmergeStartupTest` defines performance test methods. Each test method is run

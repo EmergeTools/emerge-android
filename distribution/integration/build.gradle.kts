@@ -64,7 +64,7 @@ dependencies {
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.kotlinx.serialization)
 
-  // Distribution SDK
+  // Distribution library
   implementation(projects.distribution.distribution)
 
   implementation(platform(libs.compose.bom))

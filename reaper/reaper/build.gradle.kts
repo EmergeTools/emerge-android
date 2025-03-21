@@ -117,7 +117,7 @@ publishing {
       }
 
       pom {
-        name.set("Emerge Tools Reaper SDK")
+        name.set("Emerge Tools Reaper Library")
         description.set("Detect dead code in production.")
         url.set("https://www.emergetools.com")
         licenses {

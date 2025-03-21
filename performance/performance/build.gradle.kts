@@ -115,7 +115,7 @@ publishing {
       }
 
       pom {
-        name.set("Emerge Tools Performance Testing SDK")
+        name.set("Emerge Tools Performance Testing Library")
         description.set("Monitor your app's performance")
         url.set("https://www.emergetools.com")
         licenses {
