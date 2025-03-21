@@ -91,7 +91,7 @@ detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", 
 
 google-truth = "com.google.truth:truth:1.4.4"
 
-guava = "com.google.guava:guava:33.4.0-jre"
+guava = "com.google.guava:guava:33.4.5-jre"
 
 junit4 = "junit:junit:4.13.2"
 junit5-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }
