@@ -5,7 +5,14 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## 4.3.0 2025-03-13
+## 4.3.1 - 2025-03-21
+
+- Support new `@EmergeSnapshotConfig` annotation from snapshots version 1.3.4.
+- Wireup local snapshots task to use first-party snapshot generation from 4.3.0.
+- Support ignoring private previews for first-party snapshot generation.
+- Remove `includePreviewParamPreviews` configuration option.
+
+## 4.3.0 - 2025-03-13
 - **Behavior Change**: Do not generate snapshots for third party libraries containing compose previews. To re-enable the old behavior including third party snapshots use `emerge.experimental.firstPartySnapshots=false` in your `gradle.properties`.
 - Add Develocity Build Scan links for upload urls [#525](https://github.com/EmergeTools/emerge-android/pull/525)
 
