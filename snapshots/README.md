@@ -39,13 +39,13 @@ emerge {
 
 See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
-### Add Snapshots SDK
+### Add Snapshots library
 
-Emerge snapshot SDKs are published to Maven Central and should be added as dependencies to your
+Emerge snapshot libraries are published to Maven Central and should be added as dependencies to your
 app's `build.gradle.kts` file.
 
 Compose `@Preview` snapshot generation relies on a Gradle plugin instrumentation to modify Compose
-Previews to be visible at runtime. Our snapshot SDK can then handle everything else, invoking the
+Previews to be visible at runtime. Our snapshot library can then handle everything else, invoking the
 Compose Preview and saving the resulting snapshot image.
 
 ```kotlin build.gradle.kts (app module)
@@ -78,7 +78,7 @@ The preflight task will give detailed output about the Emerge snapshots integrat
 ╠════════════════════════════════════════════════╝
 ╠═ ✅ Emerge API token set
 ╠═ ✅ Snapshots enabled
-╚═ ✅ Snapshots SDK is an androidTestImplementation dependency
+╚═ ✅ Snapshots library is an androidTestImplementation dependency
 
 ╔═════════════════════════════════════╗
 ║ VCS Info check was successful (4/4) ║
@@ -327,7 +327,7 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 
 | Artifact                                          | Description                     | Latest                                                                                                                                                                                                                           | Min SDK |
 |---------------------------------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `com.emergetools.snapshots:snapshots`             | Snapshot testing SDK            | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                         | 23      |
+| `com.emergetools.snapshots:snapshots`             | Snapshot testing library        | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                         | 23      |
 | `com.emergetools.snapshots:snapshots-annotations` | Additional snapshot annotations | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23      |
 
 ## Releasing

@@ -123,7 +123,7 @@ publishing {
       }
 
       pom {
-        name.set("Emerge Tools build distribution SDK")
+        name.set("Emerge Tools build distribution library")
         description.set("Distribution for alpha, beta, and test builds.")
         url.set("https://www.emergetools.com")
         licenses {

@@ -72,7 +72,7 @@ dependencies {
   implementation(libs.compose.material)
   implementation(libs.androidx.test.core.ktx)
 
-  // Reaper SDK
+  // Reaper library
   implementation(libs.androidx.startup.runtime)
   implementation(projects.reaper.reaper)
 }

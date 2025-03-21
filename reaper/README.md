@@ -1,6 +1,6 @@
 # 💀 Emerge Reaper
 
-Reaper is an SDK that uses production data for detecting dead code.
+Reaper is a library that uses production data for detecting dead code.
 
 ## Features
 
@@ -47,9 +47,9 @@ found [here](https://emergetools.com/settings?tab=feature-configuration&cards=re
 
 See [gradle-plugin](../gradle-plugin/README.md) for more information.
 
-### Add Reaper SDK
+### Add Reaper Library
 
-Add the Reaper SDK to your application's `build.gradle.kts` file:
+Add the Reaper Library to your application's `build.gradle.kts` file:
 
 ```kotlin
 
@@ -97,7 +97,7 @@ Upon a user backgrounding the application, Emerge will send the list of hashes o
 the Emerge backend. Emerge will then process each report received, marking classes as used if any
 user session reports that class being used.
 
-## Releasing Reaper SDK
+## Releasing Reaper library
 
 ### Releasing a new version
 

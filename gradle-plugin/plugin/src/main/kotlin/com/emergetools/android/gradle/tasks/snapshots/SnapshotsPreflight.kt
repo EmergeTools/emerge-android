@@ -55,7 +55,7 @@ abstract class SnapshotsPreflight : BasePreflightTask() {
 
     val hasSnapshotsAndroidTestImplementationDependency =
       hasSnapshotsAndroidTestImplementationDependency.getOrElse(false)
-    preflight.add("Snapshots SDK is an androidTestImplementation dependency") {
+    preflight.add("Snapshots library is an androidTestImplementation dependency") {
       if (!hasSnapshotsAndroidTestImplementationDependency) {
         throw PreflightFailure(
           "Snapshots androidTestImplementation dependency not set. See " +

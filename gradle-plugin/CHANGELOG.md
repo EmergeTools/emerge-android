@@ -60,14 +60,14 @@ Changes since 4.0.4-beta01:
 
 ## 4.0.1 - 2024-10-15
 
-- Support @PreviewParameter annotated params in snapshots. (Requires snapshots SDK 1.3.0-rc01 or
+- Support @PreviewParameter annotated params in snapshots. (Requires snapshots library 1.3.0-rc01 or
   later). [#271](https://github.com/EmergeTools/emerge-android/pull/271)
 - Add `previousSha` field to upload for use with history
   tracking. [#274](https://github.com/EmergeTools/emerge-android/pull/274)
 
 ## 4.0.0 - 2024-08-26
 
-4.0.0 brings support for Reaper, Emerge's SDK to detect dead code at runtime, as well as cleanups,
+4.0.0 brings support for Reaper, Emerge's library to detect dead code at runtime, as well as cleanups,
 bug fixes and pre-flight tasks for all products to check configuration before uploading.
 
 Changes since 4.0.0-rc02:
@@ -82,7 +82,7 @@ Changes since 4.0.0-rc02:
 
 ## 4.0.0-rc02 - 2024-08-14
 
-- Fix reaper preflight check to detect SDK without hooking minify
+- Fix reaper preflight check to detect libraries without hooking minify
   task. [#234](https://github.com/EmergeTools/emerge-android/pull/234)
 
 ## 4.0.0-rc01 - 2024-08-07

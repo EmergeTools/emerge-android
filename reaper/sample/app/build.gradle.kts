@@ -67,7 +67,7 @@ dependencies {
   implementation(libs.androidx.navigation.ui.ktx)
   implementation(libs.kotlinx.serialization)
 
-  // Reaper SDK
+  // Reaper library
   implementation(projects.reaper.reaper)
 
   implementation(platform(libs.compose.bom))

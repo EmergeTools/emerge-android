@@ -115,7 +115,7 @@ publishing {
       }
 
       pom {
-        name.set("Emerge Tools Snapshots SDK")
+        name.set("Emerge Tools Snapshots Library")
         description.set("Snapshot Composables, views and activities.")
         url.set("https://www.emergetools.com")
         licenses {

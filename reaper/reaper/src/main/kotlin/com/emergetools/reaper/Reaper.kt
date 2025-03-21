@@ -4,10 +4,10 @@ import android.content.Context
 import okhttp3.OkHttpClient
 
 /**
- * The is the public SDK for Reaper, an Emergetools service which detects and deletes dead code in
+ * The is the public library for Reaper, an Emerge Tools service which detects and deletes dead code in
  * production. Reaper works in three parts:
  * - A gradle plugin which instruments JVM bytecode to detect when code is used.
- * - An SDK (this code) which uploads reports based on that instrumentation.
+ * - A library (this code) which uploads reports based on that instrumentation.
  * - A server side component which aggregates those reports and compares the used code to the
  *   code in the app. Code which is not used by any user but exists in the app is detected,
  *   displayed and can be deleted.
@@ -16,8 +16,8 @@ import okhttp3.OkHttpClient
 object Reaper {
   /**
    * Initialize Reaper. This should be called once in each process. In
-   * addition to calling this method the codebase must be instrumented using the Emergetools
-   * gradle plugin. This method may be called from any thread with a Looper. It is safe to
+   * addition to calling this method the codebase must be instrumented using the Emerge Tools
+   * Gradle Plugin. This method may be called from any thread with a Looper. It is safe to
    * call this from the main thread. Options may be passed if you want to override the default
    * values.
    * @param context Android context
