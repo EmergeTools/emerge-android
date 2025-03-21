@@ -63,6 +63,11 @@ android {
       wiredWith = GenerateMetaInfVersion::metaInfResDir
     )
   }
+  publishing {
+    singleVariant("release") {
+      withSourcesJar()
+    }
+  }
 }
 
 dependencies {
