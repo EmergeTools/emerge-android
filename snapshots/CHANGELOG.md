@@ -5,10 +5,18 @@ All notable changes to snapshots & snapshots-processor will be documented in thi
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 1.3.4 - 2025-03-21
+
+- Add `@EmergeSnapshotConfig` annotation for setting `ignore` and
+  `precision`. [#538](https://github.com/EmergeTools/emerge-android/pull/538)
+- Deprecate `@IgnoreEmergeSnapshot` in favor of
+  `@EmergeSnapshotConfig`. [#538](https://github.com/EmergeTools/emerge-android/pull/538)
+- Support existing `ComposeSnapshots` json and `List<ComposePreviewSnapshotConfig>` json for local
+  invoking. [#533](https://github.com/EmergeTools/emerge-android/pull/533)
+
 ## 1.3.3 - 2025-02-19
 
 - Fix RTL language layout direction. [#460](https://github.com/EmergeTools/emerge-android/pull/460)
-
 
 ## 1.3.2 - 2025-01-27
 
