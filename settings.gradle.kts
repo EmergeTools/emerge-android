@@ -11,7 +11,7 @@ pluginManagement {
 plugins {
   id("com.gradle.develocity") version "3.19.2"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.1"
-  id("com.android.settings") version "8.9.0" // Keep in sync with agp in libs.versions.toml
+  id("com.android.settings") version "8.9.1" // Keep in sync with agp in libs.versions.toml
 }
 
 val isCI = System.getenv("CI") != null
