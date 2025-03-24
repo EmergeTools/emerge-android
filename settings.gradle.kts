@@ -53,7 +53,6 @@ include(
   ":snapshots",
   ":snapshots:snapshots",
   ":snapshots:snapshots-annotations",
-  ":snapshots:snapshots-shared",
   ":snapshots:sample",
   ":snapshots:sample:app",
   ":snapshots:sample:ui-module",

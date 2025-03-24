@@ -22,7 +22,7 @@ import androidx.compose.ui.unit.Density
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.text.TextUtilsCompat
 import androidx.core.view.ViewCompat
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import java.util.Locale
 
 @Composable

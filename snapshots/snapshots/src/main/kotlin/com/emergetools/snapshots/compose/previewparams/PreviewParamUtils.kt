@@ -2,7 +2,7 @@ package com.emergetools.snapshots.compose.previewparams
 
 import android.util.Log
 import androidx.compose.ui.tooling.preview.PreviewParameterProvider
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.util.Profiler
 
 // Inspired by https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling/src/androidMain/kotlin/androidx/compose/ui/tooling/PreviewUtils.android.kt

@@ -26,7 +26,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Sanity check snapshots test
-        run: ./gradlew :snapshots:snapshots:test :snapshots:snapshots-shared:test
-      - name: Deploy snapshots-shared, snapshots-annotations, snapshots to Sonatype snapshots
-        run: ./gradlew :snapshots:snapshots-shared:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots-annotations:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots:publishAllPublicationsToSonatypeSnapshotsRepository -Dorg.gradle.parallel=false
+        run: ./gradlew :snapshots:snapshots:test
+      - name: Deploy snapshots-annotations, snapshots to Sonatype snapshots
+        run: ./gradlew :snapshots:snapshots-annotations:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots:publishAllPublicationsToSonatypeSnapshotsRepository -Dorg.gradle.parallel=false
 
