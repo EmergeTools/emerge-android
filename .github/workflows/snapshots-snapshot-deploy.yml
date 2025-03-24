@@ -28,5 +28,5 @@ jobs:
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test :snapshots:snapshots-shared:test
       - name: Deploy snapshots-shared, snapshots-annotations, snapshots to Sonatype snapshots
-        run: ./gradlew :snapshots:snapshots-shared:publishAllPublicationsToSonatypeSnapshotsRepo :snapshots:snapshots-annotations:publishAllPublicationsToSonatypeSnapshotsRepo :snapshots:snapshots:publishAllPublicationsToSonatypeSnapshotsRepo -Dorg.gradle.parallel=false
+        run: ./gradlew :snapshots:snapshots-shared:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots-annotations:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots:publishAllPublicationsToSonatypeSnapshotsRepository -Dorg.gradle.parallel=false
 
