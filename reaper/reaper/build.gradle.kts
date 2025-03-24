@@ -33,12 +33,20 @@ android {
   publishing {
     singleVariant("release") {
       withSourcesJar()
+      withJavadocJar()
     }
   }
 
   // Ensures our version.txt is packaged in with release.
   // Will be pulled in automatically to test APK upon build
   sourceSets.getByName("main").resources.srcDir(metaInfResDir)
+}
+
+// Workaround for https://github.com/gmazzo/gradle-buildconfig-plugin/issues/226
+afterEvaluate {
+  tasks.named("sourceReleaseJar").configure {
+    dependsOn(tasks.named("generateNonAndroidBuildConfig"))
+  }
 }
 
 dependencies {
