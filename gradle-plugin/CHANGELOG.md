@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 - Support new `@EmergeSnapshotConfig` annotation from snapshots version
   1.3.4. [#538](https://github.com/EmergeTools/emerge-android/pull/538)
-- Wireup local snapshots task to use first-party snapshot generation from
+- Local snapshots task now only generates previews for first-party snapshots from
   4.3.0. [#533](https://github.com/EmergeTools/emerge-android/pull/533)
 - Support ignoring private previews for first-party snapshot
   generation. [#532](https://github.com/EmergeTools/emerge-android/pull/532)
