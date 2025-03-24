@@ -1,15 +1,15 @@
 # 🛰️ Emerge build distribution
 
-Emerge build distribution is an SDK for distributing Beta, Alpha, and test
+Emerge build distribution is a library for distributing Beta, Alpha, and test
 builds.
 
 ## Features
 
 ## Quickstart (~10 min)
 
-### Add build distribution SDK
+### Add build distribution library
 
-Add the Build Distribution SDK to your application's `build.gradle.kts` file:
+Add the Build Distribution library to your application's `build.gradle.kts` file:
 
 ```kotlin
 
@@ -18,7 +18,7 @@ dependencies {
 }
 ```
 
-## Releasing Build Distribution SDK
+## Releasing Build Distribution library
 
 ### Releasing a new version
 

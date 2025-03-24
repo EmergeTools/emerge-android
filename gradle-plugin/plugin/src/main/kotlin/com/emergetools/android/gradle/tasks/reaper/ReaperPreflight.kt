@@ -70,10 +70,10 @@ abstract class ReaperPreflight : DefaultTask() {
       }
     }
 
-    preflight.add("Runtime SDK added") {
+    preflight.add("Runtime Library added") {
       if (!hasReaperImplementationDependency.getOrElse(false)) {
         throw PreflightFailure(
-          "Reaper runtime SDK missing as an implementation dependency. See " +
+          "Reaper runtime library missing as an implementation dependency. See " +
             "https://docs.emergetools.com/docs/reaper-setup-android#install-the-sdk",
         )
       }
