@@ -1,4 +1,4 @@
-package com.emergetools.snapshots.shared
+package com.emergetools.snapshots.models
 
 import org.junit.Assert.assertEquals
 import org.junit.Test

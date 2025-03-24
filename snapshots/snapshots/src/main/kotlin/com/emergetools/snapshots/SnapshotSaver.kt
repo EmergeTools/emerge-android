@@ -5,9 +5,8 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.util.Profiler
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 import java.io.FileOutputStream

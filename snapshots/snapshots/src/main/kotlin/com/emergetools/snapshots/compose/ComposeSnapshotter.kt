@@ -14,7 +14,7 @@ import androidx.compose.ui.unit.IntSize
 import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.compose.previewparams.PreviewParamUtils
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.util.Profiler
 
 @Suppress("TooGenericExceptionCaught")

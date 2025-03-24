@@ -6,7 +6,7 @@ import android.util.DisplayMetrics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
-import com.emergetools.snapshots.shared.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import kotlin.math.roundToInt
 
 data class DeviceSpec(
