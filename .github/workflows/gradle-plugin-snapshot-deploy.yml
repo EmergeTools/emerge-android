@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  deploy-gradle-plugin:
+  deploy-gradle-plugin-snapshot:
 
     runs-on: ubuntu-latest
 
