@@ -1,4 +1,4 @@
-name: Reaper Snapshot Deploy
+name: Snapshots Snapshot Deploy
 
 on:
   push:
