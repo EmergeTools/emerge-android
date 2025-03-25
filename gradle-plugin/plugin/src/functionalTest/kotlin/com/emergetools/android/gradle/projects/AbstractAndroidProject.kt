@@ -8,7 +8,10 @@ import com.autonomousapps.kit.gradle.GradleProperties
 import com.autonomousapps.kit.gradle.Plugin
 import com.autonomousapps.kit.gradle.android.AndroidBlock
 
-abstract class AbstractAndroidProject(private val baseUrl: String) : AbstractGradleProject() {
+abstract class AbstractAndroidProject(
+  private val baseUrl: String,
+  private val pluginId: String = "com.emergetools.android"
+) : AbstractGradleProject() {
   companion object {
     val LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION = "8.0.0"
   }
@@ -29,7 +32,7 @@ abstract class AbstractAndroidProject(private val baseUrl: String) : AbstractGra
     return newAndroidGradleProjectBuilder(agpVersion)
       .withAndroidSubproject("app") {
         withBuildScript {
-          plugins(Plugin("com.android.application"), Plugin("com.emergetools.android", PLUGIN_UNDER_TEST_VERSION))
+          plugins(Plugin("com.android.application"), Plugin(pluginId, PLUGIN_UNDER_TEST_VERSION))
           android = AndroidBlock.defaultAndroidAppBlock(false, "com.example")
           additions = extension
         }

@@ -133,6 +133,13 @@ gradlePlugin {
       implementationClass = "com.emergetools.android.gradle.EmergePlugin"
       tags = listOf("emerge", "emergetools", "android", "upload")
     }
+    register("com.emergetools.score") {
+      id = "com.emergetools.score"
+      displayName = "Emerge Score Gradle Plugin"
+      description = "Gradle plugin for uploading a build to get an Emerge Score."
+      implementationClass = "com.emergetools.android.gradle.score.ScorePlugin"
+      tags = listOf("emerge", "emergetools", "android", "score")
+    }
   }
 }
 
