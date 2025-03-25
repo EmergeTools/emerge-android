@@ -9,7 +9,6 @@ import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.TestAndroidComponentsExtension
 import com.android.build.gradle.internal.dsl.BaseAppModuleExtension
 import com.emergetools.android.gradle.instrumentation.reaper.ReaperClassLoadClassVisitorFactory
-import com.emergetools.android.gradle.score.ScorePlugin
 import com.emergetools.android.gradle.tasks.internal.LogExtensionTask
 import com.emergetools.android.gradle.tasks.perf.registerGeneratePerfProjectTask
 import com.emergetools.android.gradle.tasks.perf.registerPerformanceTasks
@@ -85,7 +84,6 @@ class EmergePlugin : Plugin<Project> {
     emergeExtension: EmergePluginExtension,
   ) {
     appProject.pluginManager.withPlugin(ANDROID_APPLICATION_PLUGIN_ID) { _ ->
-      appProject.pluginManager.apply(ScorePlugin::class.java)
       val androidComponents =
         appProject.extensions.getByType(
           ApplicationAndroidComponentsExtension::class.java,

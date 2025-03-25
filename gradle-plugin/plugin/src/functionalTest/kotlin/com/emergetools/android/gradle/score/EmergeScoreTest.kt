@@ -9,16 +9,6 @@ import org.junit.jupiter.api.Test
 class EmergeScoreTest : EmergePluginTest() {
 
   @Test
-  fun emergeScoreTestWithEmergeGradlePlugin() {
-    val simpleProject = SimpleGradleProject.createWithVcsInExtension(this)
-    val result = EmergeGradleRunner2(simpleProject.gradleProject.rootDir)
-      .withArguments("emergeScoreRelease")
-      .build()
-
-    assertThat(result).task(":app:emergeScoreRelease").succeeded()
-  }
-
-  @Test
   fun emergeScoreTestWithScorePlugin() {
     val simpleProject = SimpleGradleProject.createWithVcsInExtension(this, pluginId = "com.emergetools.score")
     val result = EmergeGradleRunner2(simpleProject.gradleProject.rootDir)
