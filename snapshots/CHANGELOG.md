@@ -7,10 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
-- Remove `snapshots-shared` module & dependency.
+## 1.4.0 - 2025-03-25
 
-## 1.3.4 - 2025-03-21
-
+- Remove `snapshots-shared`
+  module/dependency. [#550](https://github.com/EmergeTools/emerge-android/pull/550)
 - Add `@EmergeSnapshotConfig` annotation for setting `ignore` and
   `precision`. [#538](https://github.com/EmergeTools/emerge-android/pull/538)
 - Deprecate `@IgnoreEmergeSnapshot` in favor of
