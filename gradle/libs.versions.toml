@@ -114,4 +114,4 @@ androidx-material3-android = { group = "androidx.compose.material3", name = "mat
 androidx-runtime-android = { group = "androidx.compose.runtime", name = "runtime-android", version.ref = "runtime-android" }
 androidx-foundation-layout-android = { group = "androidx.compose.foundation", name = "foundation-layout-android", version.ref = "foundation-layout-android" }
 
-develocity-agent-adapters = { module = "com.gradle:develocity-gradle-plugin-adapters", version = "1.2" }
+develocity-agent-adapters = { module = "com.gradle:develocity-gradle-plugin-adapters", version = "1.2.1" }
