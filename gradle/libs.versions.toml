@@ -74,7 +74,7 @@ androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version = "1.2
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version = "2.10.0" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
-asm = "org.ow2.asm:asm:9.7.1"
+asm = "org.ow2.asm:asm:9.8"
 asm-commons = "org.ow2.asm:asm-commons:9.7.1"
 
 compose-bom = { module = "androidx.compose:compose-bom", version.ref = "compose-bom" }
