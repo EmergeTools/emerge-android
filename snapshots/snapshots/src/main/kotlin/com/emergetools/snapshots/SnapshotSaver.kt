@@ -7,7 +7,10 @@ import android.util.Log
 import androidx.test.platform.app.InstrumentationRegistry
 import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.util.Profiler
-import kotlinx.serialization.json.Json
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapter
+import com.squareup.moshi.adapters.PolymorphicJsonAdapterFactory
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import java.io.File
 import java.io.FileOutputStream
 import java.nio.charset.Charset
@@ -18,6 +21,23 @@ internal object SnapshotSaver {
   private const val SNAPSHOTS_DIR_NAME = "snapshots"
   private const val ARG_KEY_SAVE_METADATA = "save_metadata"
   private const val TAG = "SnapshotSaver"
+
+  @OptIn(ExperimentalStdlibApi::class)
+  private val moshiAdapter = Moshi.Builder()
+    .add(
+      PolymorphicJsonAdapterFactory.of(SnapshotMetadata::class.java, "metadataType")
+        .withSubtype(
+          SnapshotMetadata.SuccessMetadata::class.java,
+          "com.emergetools.snapshots.SnapshotMetadata.SuccessMetadata"
+        )
+        .withSubtype(
+          SnapshotMetadata.ErrorMetadata::class.java,
+          "com.emergetools.snapshots.SnapshotMetadata.ErrorMetadata"
+        )
+    )
+    .add(KotlinJsonAdapterFactory())
+    .build()
+    .adapter<SnapshotMetadata>()
 
   private val targetContext: Context
     get() = InstrumentationRegistry.getInstrumentation().targetContext
@@ -102,6 +122,7 @@ internal object SnapshotSaver {
     Profiler.endSpan()
   }
 
+  @OptIn(ExperimentalStdlibApi::class)
   private fun saveMetadata(
     snapshotsDir: File,
     keyName: String,
@@ -119,7 +140,7 @@ internal object SnapshotSaver {
     )
 
     Log.d(TAG, "Saving metadata for $keyName")
-    val jsonString = Json.encodeToString(metadata)
+    val jsonString = moshiAdapter.toJson(metadata)
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))
@@ -145,7 +166,8 @@ internal object SnapshotSaver {
     )
 
     Log.d(TAG, "Saving error metadata for $keyName")
-    val jsonString = Json.encodeToString(metadata)
+
+    val jsonString = moshiAdapter.toJson(metadata)
 
     saveFile(snapshotsDir, "$keyName$JSON_EXTENSION") {
       write(jsonString.toByteArray(Charset.defaultCharset()))

@@ -3,7 +3,6 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.kotlin.serialization)
   `maven-publish`
   signing
 }
@@ -49,20 +48,22 @@ android {
 dependencies {
 
   implementation(libs.junit4)
-  implementation(libs.kotlinx.serialization)
+  implementation(libs.moshi)
+  implementation(libs.moshi.kotlin)
+  implementation(libs.moshi.adapters)
 
-  api(platform(libs.compose.bom))
-  api(libs.compose.runtime)
-  api(libs.compose.ui)
-  api(libs.compose.ui.tooling)
-  api(libs.compose.foundation.android)
+  implementation(platform(libs.compose.bom))
+  implementation(libs.compose.runtime)
+  implementation(libs.compose.ui)
+  implementation(libs.compose.ui.tooling)
+  implementation(libs.compose.foundation.android)
 
-  api(libs.androidx.test.core)
-  api(libs.androidx.test.core.ktx)
-  api(libs.androidx.test.ext.junit)
-  api(libs.androidx.test.rules)
-  api(libs.androidx.test.runner)
-  api(libs.compose.ui.test.junit)
+  implementation(libs.androidx.test.core)
+  implementation(libs.androidx.test.core.ktx)
+  implementation(libs.androidx.test.ext.junit)
+  implementation(libs.androidx.test.rules)
+  implementation(libs.androidx.test.runner)
+  implementation(libs.compose.ui.test.junit)
 
   testImplementation(libs.junit4)
 }
