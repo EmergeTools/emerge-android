@@ -1,9 +1,12 @@
+import com.gradleup.gr8.FilterTransform
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
+  alias(libs.plugins.gr8)
   `maven-publish`
   signing
 }
@@ -46,25 +49,51 @@ android {
   sourceSets.getByName("main").resources.srcDir(metaInfResDir)
 }
 
+val shadowedDependencies = configurations.create("shadowedDependencies")
+val compileOnlyDependencies: Configuration = configurations.create("compileOnlyDependencies") {
+  attributes {
+    attribute(ArtifactTypeDefinition.ARTIFACT_TYPE_ATTRIBUTE, FilterTransform.artifactType)
+  }
+}
+
+compileOnlyDependencies.extendsFrom(configurations.getByName("compileOnly"))
+
 dependencies {
-
   implementation(libs.junit4)
-  implementation(libs.kotlinx.serialization)
+  add(shadowedDependencies.name, libs.kotlinx.serialization)
 
-  api(platform(libs.compose.bom))
-  api(libs.compose.runtime)
-  api(libs.compose.ui)
-  api(libs.compose.ui.tooling)
-  api(libs.compose.foundation.android)
+  implementation(platform(libs.compose.bom))
+  implementation(libs.compose.runtime)
+  implementation(libs.compose.ui)
+  implementation(libs.compose.ui.tooling)
+  implementation(libs.compose.foundation.android)
 
-  api(libs.androidx.test.core)
-  api(libs.androidx.test.core.ktx)
-  api(libs.androidx.test.ext.junit)
-  api(libs.androidx.test.rules)
-  api(libs.androidx.test.runner)
-  api(libs.compose.ui.test.junit)
+  implementation(libs.androidx.test.core)
+  implementation(libs.androidx.test.core.ktx)
+  implementation(libs.androidx.test.ext.junit)
+  implementation(libs.androidx.test.rules)
+  implementation(libs.androidx.test.runner)
+  implementation(libs.compose.ui.test.junit)
 
   testImplementation(libs.junit4)
+}
+
+val shadow = true // Disable for faster local build speeds
+if (shadow) {
+  gr8 {
+    val shadowedJar = create("default") {
+      addProgramJarsFrom(shadowedDependencies)
+      addProgramJarsFrom(configurations.getByName("implementation"))
+      proguardFile("rules.pro")
+      registerFilterTransform(listOf(".*/imldep/META-INF/versions/.*"))
+      r8Version("cc8127afa2e852e05b6acd1a29ccc3141f944205")
+    }
+    replaceOutgoingJar(shadowedJar)
+  }
+  configurations.getByName("compileOnly").extendsFrom(shadowedDependencies)
+  configurations.getByName("testImplementation").extendsFrom(shadowedDependencies)
+} else {
+  configurations.getByName("implementation").extendsFrom(shadowedDependencies)
 }
 
 tasks.register("generateMetaInfVersion") {
