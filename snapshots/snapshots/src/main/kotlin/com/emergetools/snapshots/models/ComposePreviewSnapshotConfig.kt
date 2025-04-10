@@ -1,10 +1,7 @@
 package com.emergetools.snapshots.models
 
-import kotlinx.serialization.Serializable
-
 // Keep parity with
 // https://cs.android.com/androidx/platform/frameworks/support/+/androidx-main:compose/ui/ui-tooling-preview/src/androidMain/kotlin/androidx/compose/ui/tooling/preview/Preview.kt
-@Serializable
 data class ComposePreviewSnapshotConfig(
   val fullyQualifiedClassName: String,
   val originalFqn: String,
@@ -75,7 +72,6 @@ data class ComposePreviewSnapshotConfig(
   }
 }
 
-@Serializable
 data class PreviewParameter(
   val parameterName: String,
   val providerClassFqn: String,

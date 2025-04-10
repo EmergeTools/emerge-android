@@ -23,6 +23,7 @@ junit = "1.2.1"
 benchmark-junit4 = "1.3.4"
 mockito = "5.17.0"
 mockito-kotlin = "5.4.0"
+moshi = "1.15.2"
 material3-android = "1.3.2"
 runtime-android = "1.7.6"
 foundation-layout-android = "1.7.6"
@@ -90,6 +91,10 @@ compose-wear-ui-tooling = { module = "androidx.wear.compose:compose-ui-tooling",
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
 google-truth = "com.google.truth:truth:1.4.4"
+
+moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
+moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
+moshi-kotlin = { module = "com.squareup.moshi:moshi-kotlin", version.ref = "moshi" }
 
 junit4 = "junit:junit:4.13.2"
 junit5-bom = { module = "org.junit:junit-bom", version.ref = "junit-jupiter" }

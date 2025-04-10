@@ -9,7 +9,9 @@ import com.emergetools.snapshots.EmergeSnapshots
 import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.models.ComposeSnapshots
 import com.emergetools.snapshots.util.Profiler
-import kotlinx.serialization.json.Json
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.adapter
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -49,6 +51,7 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
     const val ELLIPSIS_SIZE = 3
     const val MAX_PARAM_NAME_LENGTH = 40
 
+    @OptIn(ExperimentalStdlibApi::class)
     @JvmStatic
     @Parameterized.Parameters(name = "{index}_{0}")
     fun data(): Iterable<EmergeComposeSnapshotReflectiveParameters> {
@@ -64,21 +67,22 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
         error("Unable to find file at $invokeDataPath")
       }
 
-      val json = Json {
-        ignoreUnknownKeys = true
-      }
+      val moshi = Moshi.Builder()
+        .add(KotlinJsonAdapterFactory())
+        .build()
+      val adapter = moshi.adapter<List<ComposePreviewSnapshotConfig>>()
 
       val fileContent = invokeDataFile.readText()
       @Suppress("TooGenericExceptionCaught")
       return try {
         // First try to parse directly as List<ComposePreviewSnapshotConfig>
-        json.decodeFromString<List<ComposePreviewSnapshotConfig>>(fileContent).map {
+        adapter.fromJson(invokeDataFile.readText())!!.map {
           EmergeComposeSnapshotReflectiveParameters(it)
         }
       } catch (e: Exception) {
         // Fallback to parsing as ComposeSnapshots
         Log.d(TAG, "Failed to parse as List<ComposePreviewSnapshotConfig>, falling back to ComposeSnapshots", e)
-        json.decodeFromString<ComposeSnapshots>(fileContent).snapshots.map {
+        moshi.adapter<ComposeSnapshots>().fromJson(fileContent)!!.snapshots.map {
           EmergeComposeSnapshotReflectiveParameters(it)
         }
       }
