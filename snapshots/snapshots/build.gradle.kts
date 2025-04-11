@@ -40,6 +40,12 @@ android {
       withJavadocJar()
     }
   }
+  buildTypes {
+    release {
+      isMinifyEnabled = true
+      proguardFiles(getDefaultProguardFile("proguard-android.txt"), "rules.pro")
+    }
+  }
 
   // Ensures our version.txt is packaged in with release.
   // Will be pulled in automatically to test APK upon build
