@@ -3,7 +3,6 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
-  alias(libs.plugins.kotlin.serialization)
   `maven-publish`
   signing
 }
@@ -49,7 +48,9 @@ android {
 dependencies {
 
   implementation(libs.junit4)
-  implementation(libs.kotlinx.serialization)
+  implementation(libs.moshi)
+  implementation(libs.moshi.kotlin)
+  implementation(libs.moshi.adapters)
 
   implementation(platform(libs.compose.bom))
   implementation(libs.compose.runtime)
