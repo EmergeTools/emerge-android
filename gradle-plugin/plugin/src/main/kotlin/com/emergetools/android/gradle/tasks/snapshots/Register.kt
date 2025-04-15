@@ -2,7 +2,6 @@ package com.emergetools.android.gradle.tasks.snapshots
 
 import com.android.build.api.artifact.ScopedArtifact
 import com.android.build.api.artifact.SingleArtifact
-import com.android.build.api.instrumentation.InstrumentationScope
 import com.android.build.api.variant.AndroidTest
 import com.android.build.api.variant.ApplicationVariant
 import com.android.build.api.variant.ScopedArtifacts
@@ -10,7 +9,6 @@ import com.emergetools.android.gradle.EmergePlugin.Companion.BUILD_OUTPUT_DIR_NA
 import com.emergetools.android.gradle.EmergePlugin.Companion.EMERGE_TASK_PREFIX
 import com.emergetools.android.gradle.EmergePluginExtension
 import com.emergetools.android.gradle.dv.getBuildScan
-import com.emergetools.android.gradle.instrumentation.snapshots.SnapshotsPreviewRuntimeRetentionTransformFactory
 import com.emergetools.android.gradle.tasks.base.ArtifactMetadata
 import com.emergetools.android.gradle.tasks.base.BasePreflightTask.Companion.setPreflightTaskInputs
 import com.emergetools.android.gradle.tasks.base.BaseUploadTask.Companion.setTagFromProductOptions
@@ -41,21 +39,7 @@ fun registerSnapshotTasks(
 
   registerSnapshotPreflightTask(appProject, extension, variant)
 
-  if (appProject.firstPartySnapshotsEnabled) {
-    setupTransformTasks(appProject, extension, variant)
-  } else {
-    variant.instrumentation.let { instrumentation ->
-      instrumentation.transformClassesWith(
-        SnapshotsPreviewRuntimeRetentionTransformFactory::class.java,
-        InstrumentationScope.ALL,
-      ) { params ->
-        // Force invalidate/reinstrument classes if debug option is set
-        if (extension.debugOptions.forceInstrumentation.getOrElse(false)) {
-          params.invalidate.set(System.currentTimeMillis())
-        }
-      }
-    }
-  }
+  setupTransformTasks(appProject, extension, variant)
 
   val snapshotPackageTask = registerSnapshotPackageTask(appProject, variant, androidTest)
   registerSnapshotLocalTask(appProject, extension, variant, androidTest, snapshotPackageTask)
@@ -81,16 +65,14 @@ private fun registerSnapshotPackageTask(
         "$BUILD_OUTPUT_DIR_NAME/snapshots/artifacts/${ArtifactMetadata.JSON_FILE_NAME}",
       ),
     )
-    if (appProject.firstPartySnapshotsEnabled) {
-      it.snapshotConfigFile.set(
-        appProject.tasks.named(
-          variant.name.aggregatePreviewMethodsName,
-          FindPreviewsAcrossProjects::class.java,
-        ).flatMap { task ->
-          task.outputFile
-        },
-      )
-    }
+    it.snapshotConfigFile.set(
+      appProject.tasks.named(
+        variant.name.aggregatePreviewMethodsName,
+        FindPreviewsAcrossProjects::class.java,
+      ).flatMap { task ->
+        task.outputFile
+      },
+    )
     it.agpVersion.set(AgpVersions.CURRENT.toString())
   }
 }
@@ -154,16 +136,14 @@ private fun registerSnapshotLocalTask(
     it.testInstrumentationRunner.set(testInstrumentationRunner)
     it.profile.set(extension.snapshotOptions.profile)
 
-    if (appProject.firstPartySnapshotsEnabled) {
-      it.snapshotConfigFile.set(
-        appProject.tasks.named(
-          variant.name.aggregatePreviewMethodsName,
-          FindPreviewsAcrossProjects::class.java,
-        ).flatMap { task ->
-          task.outputFile
-        },
-      )
-    }
+    it.snapshotConfigFile.set(
+      appProject.tasks.named(
+        variant.name.aggregatePreviewMethodsName,
+        FindPreviewsAcrossProjects::class.java,
+      ).flatMap { task ->
+        task.outputFile
+      },
+    )
 
     it.dependsOn(packageTask)
   }
@@ -251,10 +231,6 @@ fun setupTransformTasks(
 fun getSnapshotUploadTaskName(variantName: String): String {
   return "${EMERGE_TASK_PREFIX}UploadSnapshotBundle${variantName.capitalize()}"
 }
-
-private val Project.firstPartySnapshotsEnabled
-  get() = providers.gradleProperty("emerge.experimental.firstPartySnapshots")
-    .getOrElse("true").toBoolean()
 
 private val String.mergeProjectClasses
   get() = "merge${capitalize()}ProjectClasses"

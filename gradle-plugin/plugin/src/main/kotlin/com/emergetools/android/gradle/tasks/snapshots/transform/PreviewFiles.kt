@@ -200,6 +200,7 @@ fun previewConfigForAnnotation(forAnnotation: String?): List<PreviewConfig>? {
       return listOf(
         previewDevice.copy(device = SMALL_ROUND, group = "Devices - Small Round"),
         previewDevice.copy(device = LARGE_ROUND, group = "Devices - Large Round"),
+        previewDevice.copy(device = SQUARE, group = "Devices - Small Square"),
       )
     }
 

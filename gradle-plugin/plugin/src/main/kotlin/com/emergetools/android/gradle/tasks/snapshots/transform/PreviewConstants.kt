@@ -21,7 +21,7 @@ const val PREVIEW_WEAR_LARGE_ROUND_ANNOTATION_DESC =
 const val PREVIEW_WEAR_SQUARE_ANNOTATION_DESC =
   "Landroidx/wear/compose/ui/tooling/preview/WearPreviewSquare;"
 const val PREVIEW_WEAR_DEVICES_ANNOTATION_DESC =
-  "Landroidx/wear/tooling/preview/devices/WearDevices;"
+  "Landroidx/wear/compose/ui/tooling/preview/WearPreviewDevices;"
 const val PREVIEW_WEAR_FONT_SCALES = "Landroidx/wear/compose/ui/tooling/preview/WearPreviewFontScales;"
 const val EMERGE_APP_STORE_SNAPSHOT =
   "Lcom/emergetools/snapshots/annotations/EmergeAppStoreSnapshot;"
