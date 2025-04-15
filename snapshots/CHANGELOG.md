@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.4.1 - 2025-04-15
+
+- Replace KotlinX Serialization with Moshi to prevent version conflicts. [#574](https://github.com/EmergeTools/emerge-android/pull/574)
+
 ## 1.4.0 - 2025-03-25
 
 - Remove `snapshots-shared`
