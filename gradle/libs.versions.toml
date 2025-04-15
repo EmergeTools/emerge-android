@@ -32,7 +32,7 @@ foundation-layout-android = "1.7.6"
 emerge-gradle-plugin = "4.3.2-SNAPSHOT"
 emerge-performance = "2.1.2"
 emerge-reaper = "1.0.2-SNAPSHOT"
-emerge-snapshots = "1.4.1-moshi-SNAPSHOT"
+emerge-snapshots = "1.4.1-SNAPSHOT"
 emerge-distribution = "0.0.5-SNAPSHOT"
 annotation-jvm = "1.9.1"
 
