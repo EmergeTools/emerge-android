@@ -91,8 +91,7 @@ abstract class LocalSnapshots : DefaultTask() {
     snapshotStorageDir.mkdirs()
 
     check(snapshotConfigFile.isPresent) {
-      "Snapshot configuration file not present, make sure the" +
-        " emerge.experimental.firstPartySnapshots property is set in your gradle.properties file"
+      "Snapshot configuration file not present"
     }
 
     val adbHelper = AdbHelper(execOperations, logger)

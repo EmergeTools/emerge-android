@@ -34,12 +34,7 @@ android {
       proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
     debug {
-      applicationIdSuffix =
-        if (providers.gradleProperty("emerge.experimental.firstPartySnapshots").getOrElse("false").toBoolean()) {
-          ".firstParty"
-        } else {
-          ".debug"
-        }
+      applicationIdSuffix = ".debug"
     }
   }
 

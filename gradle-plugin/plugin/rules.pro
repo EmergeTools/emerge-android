@@ -23,7 +23,6 @@
 
 # Keep our public api
 -keep class com.emergetools.android.gradle.** { *; }
--keep interface com.emergetools.android.gradle.** { *; }
 -keep class kotlin.jvm.internal.** { *; }
 -keep interface kotlin.jvm.internal.** { *; }
 -keep class kotlin.reflect.** { *; }
