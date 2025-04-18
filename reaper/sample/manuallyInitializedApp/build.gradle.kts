@@ -3,7 +3,6 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.buildconfig)
   id("com.emergetools.android")
 }
 
@@ -53,11 +52,6 @@ android {
   }
 }
 
-buildConfig {
-  className("ReaperConfig")
-  packageName("com.emergetools.reaper.sample.manuallyInitialized")
-}
-
 dependencies {
   implementation(libs.androidx.activity)
   implementation(libs.androidx.activity.compose)
@@ -71,8 +65,8 @@ dependencies {
   implementation(libs.compose.ui.tooling.preview)
   implementation(libs.compose.material)
   implementation(libs.androidx.test.core.ktx)
+  implementation(libs.androidx.startup.runtime)
 
   // Reaper library
-  implementation(libs.androidx.startup.runtime)
   implementation(projects.reaper.reaper)
 }
