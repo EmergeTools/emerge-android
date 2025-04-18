@@ -34,7 +34,7 @@ jobs:
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Generate target and test APK
-        run: ./gradlew :reaper:sample:stress:assembleDebug :reaper:sample:stress:assembleAndroidTest
+        run: ./gradlew :reaper:sample:stress:assembleDebug :reaper:sample:stress:assembleAndroidTest :reaper:sample:app:assembleDebug :reaper:sample:app:assembleDebug :reaper:sample:manuallyInitializedApp:assembleDebug
         env:
           EMERGE_REAPER_API_KEY: ${{ secrets.EMERGE_REAPER_API_KEY }}
           PR_SHA: ${{ github.event.pull_request.head.sha }}

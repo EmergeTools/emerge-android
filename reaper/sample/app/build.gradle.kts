@@ -3,7 +3,6 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.buildconfig)
   id("com.emergetools.android")
 }
 
@@ -53,11 +52,6 @@ android {
   buildFeatures {
     compose = true
   }
-}
-
-buildConfig {
-  className("ReaperConfig")
-  packageName("com.emergetools.reaper.sample")
 }
 
 dependencies {
