@@ -72,7 +72,7 @@ androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test-runner" }
 androidx-test-uiautomator = { module = "androidx.test.uiautomator:uiautomator", version = "2.3.0" }
 androidx-tracing-ktx = { module = "androidx.tracing:tracing-ktx", version = "1.2.0" }
-androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version = "2.10.0" }
+androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version = "2.10.1" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junit" }
 
 asm = "org.ow2.asm:asm:9.8"
