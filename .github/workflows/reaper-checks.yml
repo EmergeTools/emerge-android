@@ -57,9 +57,9 @@ jobs:
             --test reaper/sample/stress/build/outputs/apk/androidTest/debug/stress-debug-androidTest.apk \
             --device model=redfin,version=30,locale=en,orientation=portrait  \
             --device model=b0q,version=33,locale=en,orientation=portrait  \
-            --device model=Nexus6P,version=26,locale=en,orientation=portrait \
+            --device model=caiman,version=34,locale=en,orientation=portrait \
             --device model=HWMHA,version=24,locale=en,orientation=portrait \
-            --device model=Nexus6,version=25,locale=en,orientation=portrait \
+            --device model=SmallPhone.arm,version=26,locale=en,orientation=portrait \
 
   minsdk-test:
     runs-on: ubuntu-latest
