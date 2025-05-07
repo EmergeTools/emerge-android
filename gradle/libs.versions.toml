@@ -1,5 +1,5 @@
 [versions]
-androidx-navigation = "2.8.9"
+androidx-navigation = "2.9.0"
 androidx-test-core = "1.6.1"
 androidx-test-rules = "1.6.1"
 androidx-test-runner = "1.6.2"
