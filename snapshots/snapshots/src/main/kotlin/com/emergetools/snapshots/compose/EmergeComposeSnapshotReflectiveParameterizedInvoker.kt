@@ -98,12 +98,6 @@ class EmergeComposeSnapshotReflectiveParameterizedInvoker(
   @get:Rule
   val profiler = Profiler.getInstance(parameter.previewConfig)
 
-  fun someMethod() {
-    Profiler.startSpan("someMethod")
-    // some code
-    Profiler.endSpan()
-  }
-
   @Test
   fun reflectiveComposableInvoker() {
     Profiler.startSpan("reflectiveComposableInvoker")
