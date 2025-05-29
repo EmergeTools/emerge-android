@@ -28,11 +28,8 @@ android {
   }
 
   defaultConfig {
-    manifestPlaceholders.put("emerge.reaper.instrumented", false)
-    manifestPlaceholders.put("emerge.reaper.publishableApiKey", "")
     minSdk = 21
   }
-
   publishing {
     singleVariant("release") {
       withSourcesJar()
