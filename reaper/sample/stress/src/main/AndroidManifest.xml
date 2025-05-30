@@ -13,6 +13,20 @@
         <category android:name="android.intent.category.LAUNCHER" />
       </intent-filter>
     </activity>
+
+    <!-- The Reaper library sends data to two endpoints:
+      - $baseUrl/report
+      - $baseUrl/reaper/error
+      So if baseUrl is set to https://example.com/foo as
+      below Reaper reports will be sent to:
+      - https://example.com/foo/report
+      and errors will be sent to:
+      - https://example.com/foo/reaper/error
+      -->
+    <meta-data
+      android:name="com.emergetools.OVERRIDE_BASE_URL"
+      android:value="https://example.com/foo" />
+
   </application>
 
 </manifest>
