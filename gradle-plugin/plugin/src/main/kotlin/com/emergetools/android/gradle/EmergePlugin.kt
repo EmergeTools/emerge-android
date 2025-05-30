@@ -221,7 +221,11 @@ class EmergePlugin : Plugin<Project> {
         it.transformClassesWith(
           ReaperClassLoadClassVisitorFactory::class.java,
           InstrumentationScope.ALL,
-        ) { _ -> }
+        ) { params ->
+          params.instrumentationRecord.set(
+            project.layout.buildDirectory.file("emergetools/reaper/instrumented.tsv")
+          )
+        }
       }
     }
 
