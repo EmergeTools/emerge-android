@@ -10,14 +10,27 @@ import org.objectweb.asm.Opcodes
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
 import java.security.MessageDigest
+import java.util.Base64
+import java.io.PrintWriter
+import org.gradle.api.file.RegularFileProperty
+import org.gradle.api.tasks.OutputFile
+import org.gradle.api.tasks.Internal
+
+interface ReaperTransformParameters : InstrumentationParameters {
+  @get:Internal
+  val instrumentationRecord: RegularFileProperty
+}
+
+var instrumentationRecordWriter: PrintWriter? = null
 
 abstract class ReaperClassLoadClassVisitorFactory :
-  AsmClassVisitorFactory<InstrumentationParameters.None> {
+  AsmClassVisitorFactory<ReaperTransformParameters> {
   companion object {
     private val logger by lazy {
       LoggerFactory.getLogger(ReaperClassLoadClassVisitorFactory::class.java)
     }
   }
+
 
   override fun createClassVisitor(
     classContext: ClassContext,
@@ -27,11 +40,17 @@ abstract class ReaperClassLoadClassVisitorFactory :
       "ReaperClassVisitorFactory processing class: ${classContext.currentClassData.className}",
     )
 
+    if (instrumentationRecordWriter == null) {
+      val output = parameters.get().instrumentationRecord.get().getAsFile().printWriter()
+      instrumentationRecordWriter = output
+    }
+
     return ReaperClassLoadClassVisitor(
       instrumentationContext.apiVersion.get(),
       nextClassVisitor,
       classContext,
       logger,
+      instrumentationRecordWriter!!,
     )
   }
 
@@ -59,7 +78,7 @@ class ReaperClassLoadClassVisitor(
   cv: ClassVisitor,
   val classContext: ClassContext,
   val logger: Logger,
-  // private val writer: PrintWriter,
+  val writer: PrintWriter,
 ) : ClassVisitor(api, cv) {
   private var sourceFileName: String? = null
 
@@ -83,23 +102,36 @@ class ReaperClassLoadClassVisitor(
     return mv?.let {
       val sig = "$className.$name$descriptor"
       logger.info("Processing method: $sig")
-      ReaperClassLoadMethodVisitor(api, mv, className, name)
+      ReaperClassLoadMethodVisitor(api, mv, className, name, logger, writer)
     }
   }
+}
+
+fun longToBase64(hash: Long): String {
+  val buf = ByteArray(8)
+  for (i in 0..7) {
+    buf[i] = ((hash shr i * 8) and 0xFFL).toByte()
+  }
+  val hashAsBase64 = Base64.getEncoder().encode(buf).toString(Charsets.UTF_8)
+  return hashAsBase64
 }
 
 class ReaperClassLoadMethodVisitor(
   api: Int,
   methodVisitor: MethodVisitor,
   private val className: String,
-  // private val writer: PrintWriter,
   private val name: String?,
+  private val logger: Logger,
+  private val writer: PrintWriter,
 ) : MethodVisitor(api, methodVisitor) {
   override fun visitCode() {
     super.visitCode()
     if (name == "<clinit>" || name == "<init>") {
       val signature = "L" + className.replace(".", "/") + ";"
       val hashedSignature = topLong(toSha256(signature))
+
+      writer.write("${className}\t${hashedSignature}\t${longToBase64(hashedSignature)}\t${signature}\t${name}\n")
+      writer.flush()
 
       // Push method argument onto the stack
       mv.visitLdcInsn(hashedSignature)
