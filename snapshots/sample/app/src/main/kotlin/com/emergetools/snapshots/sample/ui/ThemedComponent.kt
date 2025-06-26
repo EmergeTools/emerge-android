@@ -21,7 +21,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.emergetools.snapshots.annotations.EmergeAppStoreSnapshot
+import com.emergetools.snapshots.runtime.annotations.EmergeAppStoreSnapshot
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @PreviewLightDark

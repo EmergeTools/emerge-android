@@ -1,4 +1,4 @@
-package com.emergetools.snapshots.annotations
+package com.emergetools.snapshots.runtime.annotations
 
 import androidx.annotation.FloatRange
 

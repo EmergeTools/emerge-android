@@ -65,6 +65,8 @@ dependencies {
   implementation(libs.androidx.test.runner)
   implementation(libs.compose.ui.test.junit)
 
+  implementation(projects.snapshots.snapshotsRuntime)
+
   testImplementation(libs.junit4)
 }
 

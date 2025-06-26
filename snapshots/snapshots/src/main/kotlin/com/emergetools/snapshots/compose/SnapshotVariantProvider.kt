@@ -23,6 +23,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.core.text.TextUtilsCompat
 import androidx.core.view.ViewCompat
 import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
+import com.emergetools.snapshots.runtime.LocalEmergeSnapshotMode
 import java.util.Locale
 
 @Composable
@@ -65,6 +66,7 @@ fun SnapshotVariantProvider(
 
   val providedValues = arrayOf(
     LocalInspectionMode provides true,
+    LocalEmergeSnapshotMode provides true,
     LocalContext provides wrappedContext,
     LocalConfiguration provides localConfiguration,
     LocalDensity provides localDensity,
