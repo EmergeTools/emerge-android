@@ -72,7 +72,7 @@ class AnnotatedMethodVisitor(
         return super.visitAnnotation(descriptor, visible)
       }
 
-      EMERGE_SNAPSHOT_CONFIG -> {
+      EMERGE_SNAPSHOT_CONFIG, EMERGE_RUNTIME_SNAPSHOT_CONFIG -> {
         return object : AnnotationVisitor(api) {
           override fun visit(name: String?, value: Any?) {
             if (name == "precision") {

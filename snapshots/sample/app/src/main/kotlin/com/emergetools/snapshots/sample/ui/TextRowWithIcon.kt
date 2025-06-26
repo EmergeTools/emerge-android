@@ -124,7 +124,9 @@ fun TextRowWithIconPreviewFromMainBg() {
   SnapshotsSampleTheme {
     val titleText = if (LocalEmergeSnapshotMode.current) {
       "Emerge Snapshot title"
-    } else "Title"
+    } else {
+      "Title"
+    }
     TextRowWithIcon(
       titleText = titleText,
       subtitleText = "Subtitle"
