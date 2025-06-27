@@ -67,8 +67,8 @@ internal fun TextRowWithIconPreviewFromMainInternalFunctionMultiPreview() {
 @Composable
 private fun TextRowWithIconPreviewFromMainPrivateFunctionMultiPreview() {
   TextRowWithIcon(
-    titleText = "Title (precision)",
-    subtitleText = "Subtitle (precision)"
+    titleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_title),
+    subtitleText = stringResource(com.emergetools.snapshots.sample.R.string.sample_subtitle)
   )
 }
 
