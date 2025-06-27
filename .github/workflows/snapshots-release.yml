@@ -28,5 +28,5 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test
-      - name: Deploy snapshots-annotations, snapshots
-        run: ./gradlew :snapshots:snapshots-annotations:publishReleasePublicationToSonatypeStagingRepository :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Dorg.gradle.parallel=false
+      - name: Deploy snapshots-runtime, snapshots
+        run: ./gradlew :snapshots:snapshots-runtime:publishReleasePublicationToSonatypeStagingRepository :snapshots:snapshots:publishReleasePublicationToSonatypeStagingRepository -Dorg.gradle.parallel=false
