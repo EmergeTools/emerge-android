@@ -28,9 +28,9 @@ class FindCustomPreviewClassVisitor(
   }
 
   override fun visitAnnotation(descriptor: String?, visible: Boolean): AnnotationVisitor? {
-    if (descriptor == EMERGE_APP_STORE_SNAPSHOT) {
+    if (descriptor == EMERGE_APP_STORE_SNAPSHOT || descriptor == EMERGE_RUNTIME_APP_STORE_SNAPSHOT) {
       currentAnnotation.isAppStoreSnapshot = true
-    } else if (descriptor == EMERGE_SNAPSHOT_CONFIG) {
+    } else if (descriptor == EMERGE_SNAPSHOT_CONFIG || descriptor == EMERGE_RUNTIME_SNAPSHOT_CONFIG) {
       return object : AnnotationVisitor(Opcodes.ASM9) {
         override fun visit(name: String?, value: Any?) {
           if (name == "precision") {

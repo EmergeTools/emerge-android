@@ -62,7 +62,7 @@ class AnnotatedMethodVisitor(
         return PreviewAnnotationVisitor(previewConfig)
       }
 
-      EMERGE_APP_STORE_SNAPSHOT -> {
+      EMERGE_APP_STORE_SNAPSHOT, EMERGE_RUNTIME_APP_STORE_SNAPSHOT -> {
         foundAppStoreSnapshot = true
         return super.visitAnnotation(descriptor, visible)
       }
