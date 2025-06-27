@@ -8,8 +8,7 @@ Reaper is a library that uses production data for detecting dead code.
 - View statistics on real-world code usage.
 - (Upcoming) Automated code deletion.
 
-For full details,
-see [the Emerge Reaper docs](https://docs.emergetools.com/docs/reaper-setup-android).
+See additional [resources](#resources) below.
 
 ## Quickstart (~10 min)
 
@@ -116,3 +115,8 @@ release publish.
 
 From there, the release will need to be promoted to the main repository from the Sonatype UI.
 
+## Resources
+
+- [Example backend](https://github.com/getsentry/reaper-server)
+- [Extracting all monitorable class signatures](https://github.com/getsentry/reaper-server?tab=readme-ov-file#android-1)
+- [Performance & Size Impact](https://docs.emergetools.com/docs/reaper#performance-impact-1)
