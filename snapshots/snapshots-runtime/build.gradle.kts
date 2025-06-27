@@ -16,14 +16,14 @@ java {
   withJavadocJar()
   withSourcesJar()
 
-  sourceCompatibility = JavaVersion.VERSION_11
-  targetCompatibility = JavaVersion.VERSION_11
+  sourceCompatibility = JavaVersion.VERSION_17
+  targetCompatibility = JavaVersion.VERSION_17
 }
 
-tasks.withType<KotlinCompile> {
+kotlin {
   compilerOptions {
-    jvmTarget = JvmTarget.JVM_11
-    languageVersion.set(KotlinVersion.KOTLIN_1_8)
+    jvmTarget = JvmTarget.JVM_17
+    languageVersion.set(KotlinVersion.KOTLIN_1_9)
   }
 }
 

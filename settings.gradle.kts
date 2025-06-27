@@ -52,7 +52,6 @@ include(
   ":reaper:sample:stress",
   ":snapshots",
   ":snapshots:snapshots",
-  ":snapshots:snapshots-annotations",
   ":snapshots:snapshots-runtime",
   ":snapshots:snapshots-universal-invoker",
   ":snapshots:sample",
