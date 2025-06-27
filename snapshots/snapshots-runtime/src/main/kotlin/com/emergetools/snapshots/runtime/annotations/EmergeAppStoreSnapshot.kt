@@ -1,4 +1,4 @@
-package com.emergetools.snapshots.annotations
+package com.emergetools.snapshots.runtime.annotations
 
 /**
  * Specifies the annotated function is a Preview that should be used for app store screenshots.

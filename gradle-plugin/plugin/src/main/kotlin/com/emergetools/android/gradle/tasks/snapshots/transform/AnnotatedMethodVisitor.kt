@@ -62,7 +62,7 @@ class AnnotatedMethodVisitor(
         return PreviewAnnotationVisitor(previewConfig)
       }
 
-      EMERGE_APP_STORE_SNAPSHOT -> {
+      EMERGE_APP_STORE_SNAPSHOT, EMERGE_RUNTIME_APP_STORE_SNAPSHOT -> {
         foundAppStoreSnapshot = true
         return super.visitAnnotation(descriptor, visible)
       }
@@ -72,7 +72,7 @@ class AnnotatedMethodVisitor(
         return super.visitAnnotation(descriptor, visible)
       }
 
-      EMERGE_SNAPSHOT_CONFIG -> {
+      EMERGE_SNAPSHOT_CONFIG, EMERGE_RUNTIME_SNAPSHOT_CONFIG -> {
         return object : AnnotationVisitor(api) {
           override fun visit(name: String?, value: Any?) {
             if (name == "precision") {

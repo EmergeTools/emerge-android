@@ -11,7 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.emergetools.snapshots.annotations.EmergeSnapshotConfig
+import com.emergetools.snapshots.runtime.LocalEmergeSnapshotMode
+import com.emergetools.snapshots.runtime.annotations.EmergeSnapshotConfig
 import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Composable
@@ -121,8 +122,13 @@ fun TextRowWithIconPreviewFromMainPrecision() {
 @Composable
 fun TextRowWithIconPreviewFromMainBg() {
   SnapshotsSampleTheme {
+    val titleText = if (LocalEmergeSnapshotMode.current) {
+      "Emerge Snapshot title"
+    } else {
+      "Title"
+    }
     TextRowWithIcon(
-      titleText = "Title",
+      titleText = titleText,
       subtitleText = "Subtitle"
     )
   }
