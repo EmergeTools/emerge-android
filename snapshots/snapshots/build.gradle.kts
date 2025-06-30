@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.compose.compiler)
@@ -23,7 +25,7 @@ android {
 
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_17.toString()
-    languageVersion = "1.7"
+    languageVersion = KotlinVersion.KOTLIN_1_9.version
   }
 
   defaultConfig {
