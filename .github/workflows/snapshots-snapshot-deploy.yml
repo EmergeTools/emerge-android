@@ -11,10 +11,10 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
-      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
-      ORG_GRADLE_PROJECT_signingKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
-      ORG_GRADLE_PROJECT_signingPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
+      ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.ORG_GRADLE_PROJECT_mavenCentralUsername }}
+      ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.ORG_GRADLE_PROJECT_mavenCentralPassword }}
+      ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.ORG_GRADLE_PROJECT_signingKey }}
+      ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.ORG_GRADLE_PROJECT_signingPassword }}
 
     steps:
       - uses: actions/checkout@v4
@@ -28,5 +28,5 @@ jobs:
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test
       - name: Deploy snapshots-annotations, snapshots to Sonatype snapshots
-        run: ./gradlew :snapshots:snapshots-annotations:publishAllPublicationsToSonatypeSnapshotsRepository :snapshots:snapshots:publishAllPublicationsToSonatypeSnapshotsRepository -Dorg.gradle.parallel=false
+        run: ./gradlew :snapshots:snapshots-annotations:publishToMavenCentral :snapshots:snapshots:publishToMavenCentral -Dorg.gradle.parallel=false
 

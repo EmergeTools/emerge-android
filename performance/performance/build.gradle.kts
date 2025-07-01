@@ -1,10 +1,11 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.grgit)
-  `maven-publish`
-  signing
+  alias(libs.plugins.vanniktech.publish)
 }
 
 group = "com.emergetools.test"
@@ -41,13 +42,6 @@ android {
   }
 
   sourceSets.getByName("main").resources.srcDir(metaInfResDir)
-
-  publishing {
-    singleVariant("release") {
-      withJavadocJar()
-      withSourcesJar()
-    }
-  }
 }
 
 dependencies {
@@ -84,64 +78,18 @@ afterEvaluate {
     task.dependsOn(tasks.findByName("generateMetaInfVersion"))
   }
 }
+mavenPublishing {
+  coordinates(group.toString(), "performance", version.toString())
 
-publishing {
-  repositories {
-    maven {
-      name = "SonatypeStaging"
-      url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
-
-    maven {
-      name = "SonatypeSnapshots"
-      url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
+  configure(
+    AndroidSingleVariantLibrary(
+      variant = "release",
+      sourcesJar = true,
+      publishJavadocJar = true,
+    )
+  )
+  pom {
+    name.set("Emerge Tools Performance Testing Library")
+    description.set("Monitor your app's performance")
   }
-
-  publications {
-    register<MavenPublication>("release") {
-      artifactId = "performance"
-
-      afterEvaluate {
-        from(components["release"])
-      }
-
-      pom {
-        name.set("Emerge Tools Performance Testing Library")
-        description.set("Monitor your app's performance")
-        url.set("https://www.emergetools.com")
-        licenses {
-          license {
-            name.set("The Apache License, Version 2.0")
-            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-          }
-        }
-        scm {
-          url.set("https://github.com/EmergeTools")
-        }
-        developers {
-          developer {
-            id.set("ryan")
-            name.set("Ryan Brooks")
-            email.set("ryan@emergetools.com")
-          }
-        }
-      }
-    }
-  }
-}
-
-signing {
-  val signingKey: String? by project
-  val signingPassword: String? by project
-  useInMemoryPgpKeys(signingKey, signingPassword)
-  sign(publishing.publications["release"])
 }
