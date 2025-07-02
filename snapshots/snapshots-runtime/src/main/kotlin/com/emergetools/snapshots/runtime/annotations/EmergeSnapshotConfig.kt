@@ -1,4 +1,6 @@
-package com.emergetools.snapshots.runtime.annotations
+// Intentionally not `runtime` package to be backwards compatible with
+// snapshots-annotation legacy dependency
+package com.emergetools.snapshots.annotations
 
 import androidx.annotation.FloatRange
 
