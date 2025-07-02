@@ -13,6 +13,7 @@ plugins {
   alias(libs.plugins.benchmark) apply false
   alias(libs.plugins.buildconfig) apply false
   alias(libs.plugins.compose.compiler) apply false
+  alias(libs.plugins.vanniktech.publish) apply false
   id("com.emergetools.android") apply false
 }
 

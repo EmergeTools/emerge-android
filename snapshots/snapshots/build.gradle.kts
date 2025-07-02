@@ -1,3 +1,4 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
@@ -5,8 +6,7 @@ plugins {
   alias(libs.plugins.compose.compiler)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
-  `maven-publish`
-  signing
+  alias(libs.plugins.vanniktech.publish)
 }
 
 group = "com.emergetools.snapshots"
@@ -34,12 +34,6 @@ android {
 
   buildFeatures {
     compose = true
-  }
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-      withJavadocJar()
-    }
   }
 
   // Ensures our version.txt is packaged in with release.
@@ -90,63 +84,17 @@ afterEvaluate {
   }
 }
 
-publishing {
-  repositories {
-    maven {
-      name = "SonatypeStaging"
-      url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
-
-    maven {
-      name = "SonatypeSnapshots"
-      url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
+mavenPublishing {
+  coordinates(group.toString(), "snapshots", version.toString())
+  configure(
+    AndroidSingleVariantLibrary(
+      variant = "release",
+      sourcesJar = true,
+      publishJavadocJar = true,
+    )
+  )
+  pom {
+    name.set("Emerge Tools Snapshots Library")
+    description.set("Snapshot Composables, views and activities.")
   }
-
-  publications {
-    register<MavenPublication>("release") {
-      artifactId = "snapshots"
-
-      afterEvaluate {
-        from(components["release"])
-      }
-
-      pom {
-        name.set("Emerge Tools Snapshots Library")
-        description.set("Snapshot Composables, views and activities.")
-        url.set("https://www.emergetools.com")
-        licenses {
-          license {
-            name.set("The Apache License, Version 2.0")
-            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-          }
-        }
-        scm {
-          url.set("https://github.com/EmergeTools/emerge-android")
-        }
-        developers {
-          developer {
-            id.set("ryan")
-            name.set("Ryan Brooks")
-            email.set("ryan@emergetools.com")
-          }
-        }
-      }
-    }
-  }
-}
-
-signing {
-  val signingKey: String? by project
-  val signingPassword: String? by project
-  useInMemoryPgpKeys(signingKey, signingPassword)
-  sign(publishing.publications["release"])
 }

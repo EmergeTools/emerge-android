@@ -1,11 +1,12 @@
+import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+
 plugins {
   alias(libs.plugins.android.library)
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
   alias(libs.plugins.buildconfig)
-  `maven-publish`
-  signing
+  alias(libs.plugins.vanniktech.publish)
 }
 
 group = "com.emergetools.reaper"
@@ -24,19 +25,12 @@ android {
 
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_11.toString()
-    languageVersion = "1.7"
+    languageVersion = "1.9"
   }
 
   defaultConfig {
     minSdk = 21
   }
-  publishing {
-    singleVariant("release") {
-      withSourcesJar()
-      withJavadocJar()
-    }
-  }
-
   // Ensures our version.txt is packaged in with release.
   // Will be pulled in automatically to test APK upon build
   sourceSets.getByName("main").resources.srcDir(metaInfResDir)
@@ -88,68 +82,19 @@ afterEvaluate {
   }
 }
 
-publishing {
-  repositories {
-    maven {
-      name = "SonatypeStaging"
-      url = uri("https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
+mavenPublishing {
+  coordinates(group.toString(), "reaper", version.toString())
+  configure(
+    AndroidSingleVariantLibrary(
+      variant = "release",
+      sourcesJar = true,
+      publishJavadocJar = true,
+    )
+  )
 
-    maven {
-      name = "SonatypeSnapshots"
-      url = uri("https://s01.oss.sonatype.org/content/repositories/snapshots/")
-      credentials {
-        username = System.getenv("OSSRH_USERNAME")
-        password = System.getenv("OSSRH_PASSWORD")
-      }
-    }
-  }
-
-  publications {
-    register<MavenPublication>("release") {
-      artifactId = "reaper"
-
-      afterEvaluate {
-        from(components["release"])
-      }
-
-      pom {
-        name.set("Emerge Tools Reaper Library")
-        description.set("Detect dead code in production.")
-        url.set("https://www.emergetools.com")
-        licenses {
-          license {
-            name.set("The Apache License, Version 2.0")
-            url.set("http://www.apache.org/licenses/LICENSE-2.0.txt")
-          }
-        }
-        scm {
-          url.set("https://github.com/EmergeTools/emerge-android")
-        }
-        developers {
-          developer {
-            id.set("ryan")
-            name.set("Ryan Brooks")
-            email.set("ryan@emergetools.com")
-          }
-          developer {
-            id.set("hector")
-            name.set("Hector Dearman")
-            email.set("hector@emergetools.com")
-          }
-        }
-      }
-    }
+  pom {
+    name.set("Emerge Tools Reaper Library")
+    description.set("Detect dead code in production.")
   }
 }
 
-signing {
-  val signingKey: String? by project
-  val signingPassword: String? by project
-  useInMemoryPgpKeys(signingKey, signingPassword)
-  sign(publishing.publications["release"])
-}
