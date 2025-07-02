@@ -24,7 +24,8 @@ See [gradle-plugin](./gradle-plugin/README.md) for more information.
 
 ## 📸 Snapshots
 
-Emerge offers a full end-to-end snapshot testing solution using compose `@Preview` functions with only about 10 minutes of setup.
+Emerge offers a full end-to-end snapshot testing solution using compose `@Preview` functions with
+only about 10 minutes of setup.
 
 Emerge handles the heavy lifting of generating, diffing, and hosting the snapshots for each build,
 allowing you to focus on building beautiful UI components.
@@ -53,15 +54,14 @@ Distribution is an SDK to distribute alpha, beta, and test builds.
 
 See [distribution](./distribution/README.md) for full documentation.
 
-
 ## Artifacts & versions
 
-| Artifact                                        | Description                 | Latest                                                                                                                                                                                                               | Min SDK |
-|-------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `com.emergetools.android`                       | Emerge Gradle Plugin        | [![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/com.emergetools.android)](https://plugins.gradle.org/plugin/com.emergetools.android)                                                  | N/A     |
-| `com.emergetools.snapshots:snapshots`           | Snapshot testing library    | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)             | 23      |
-| `com.emergetools.snapshots:snapshots-annotations` | Snapshots Annotations       | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23 |
-| `com.emergetools.reaper:reaper`                 | Reaper library              | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper)                         | 21      |
-| `com.emergetools.test:performance`              | Performance testing library | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance)                   | 23      |
-| `com.emergetools.distribution:distribution`     | Build distribution library  | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.distribution/distribution/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.distribution/distribution) | 21      |
+| Artifact                                      | Description                 | Latest                                                                                                                                                                                                                   | Min SDK |
+|-----------------------------------------------|-----------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `com.emergetools.android`                     | Emerge Gradle Plugin        | [![Gradle Plugin Portal Version](https://img.shields.io/gradle-plugin-portal/v/com.emergetools.android)](https://plugins.gradle.org/plugin/com.emergetools.android)                                                      | N/A     |
+| `com.emergetools.snapshots:snapshots`         | Snapshot testing library    | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                 | 23      |
+| `com.emergetools.snapshots:snapshots-runtime` | Snapshots Runtime           | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime) | 23      |
+| `com.emergetools.reaper:reaper`               | Reaper library              | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.reaper/reaper)                             | 21      |
+| `com.emergetools.test:performance`            | Performance testing library | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.test/performance)                       | 23      |
+| `com.emergetools.distribution:distribution`   | Build distribution library  | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.distribution/distribution/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.distribution/distribution)     | 21      |
 

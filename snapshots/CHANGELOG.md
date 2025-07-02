@@ -7,6 +7,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.5.0 - 2025-07-02
+
+- Add new `snapshots-runtime` library. [#628](https://github.com/EmergeTools/emerge-android/pull/628)
+- Add `LocalEmergeSnapshotMode` to provide snapshot context. [#628](https://github.com/EmergeTools/emerge-android/pull/628)
+- Deprecate `snapshots-annotations` library. [#629](https://github.com/EmergeTools/emerge-android/pull/629)
+- First party snapshots as default. [#581](https://github.com/EmergeTools/emerge-android/pull/581)
+
 ## 1.4.1 - 2025-04-15
 
 - Replace KotlinX Serialization with Moshi to prevent version conflicts. [#574](https://github.com/EmergeTools/emerge-android/pull/574)
