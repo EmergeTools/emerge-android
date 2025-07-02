@@ -36,7 +36,7 @@ tasks.withType<Jar> {
 }
 
 mavenPublishing {
-  coordinates(group.toString(), "snapshots-annotations", version.toString())
+  coordinates(group.toString(), "snapshots-runtime", version.toString())
 
   pom {
     name.set("Emerge Tools Snapshots runtime dependencies.")
