@@ -45,7 +45,8 @@ Emerge snapshot libraries are published to Maven Central and should be added as 
 app's `build.gradle.kts` file.
 
 Compose `@Preview` snapshot generation relies on a Gradle plugin instrumentation to modify Compose
-Previews to be visible at runtime. Our snapshot library can then handle everything else, invoking the
+Previews to be visible at runtime. Our snapshot library can then handle everything else, invoking
+the
 Compose Preview and saving the resulting snapshot image.
 
 ```kotlin build.gradle.kts (app module)
@@ -185,7 +186,8 @@ scale (`@Preview` with `fontScale` param).
 #### Ignoring previews from snapshotting
 
 Not all Previews might need to be snapshotted. To ignore a preview from snapshotting, add
-the `@EmergeSnapshotConfig` annotation with the `ignore` param set to `true` on your preview function.
+the `@EmergeSnapshotConfig` annotation with the `ignore` param set to `true` on your preview
+function.
 
 ```kotlin
 @Preview
@@ -198,17 +200,57 @@ fun MyComposablePreview() {
 }
 ```
 
-You'll need to add a dependency on the `snapshots-annotations` artifact to use the
-`@EmergeSnapshotConfig` annotation. This is a lightweight library only containing annotations and has a negligible impact on app size.
+You'll need to add a dependency on the `snapshots-runtime` artifact to use the
+`@EmergeSnapshotConfig` annotation. This is a lightweight library only containing constructs needed
+at runtime and has a negligible impact on app size.
 
 ```kotlin
 dependencies {
-  debugImplementation("com.emergetools.snapshots:snapshots-annotations:{latest_version}")
+  debugImplementation("com.emergetools.snapshots:snapshots-runtime:{latest_version}")
 }
 ```
 
-Latest annotations
-version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations)
+Latest runtime
+version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime)
+
+#### Knowing if preview is running in snapshot environment
+
+Sometimes when running snapshots, it's advantageous to know if the Preview is running in Emerge's
+snapshot testing environment to change logic, such as setting default dates/times or other
+snapshot-specific logic.
+
+As of the 1.5.0 release of snapshots, the `snapshots-runtime` artifact exposes a compose state
+provider, `LocalEmergeSnapshotMode` which can be used to determine if a preview is running in
+Emerge's snapshotting environment.
+
+```kotlin
+@Preview
+@Composable
+fun MyComposablePreview() {
+  val isSnapshotTest = LocalEmergeSnapshotMode.current
+
+  val text = if (LocalEmergeSnapshotMode.current) {
+    "Emerge Snapshot title"
+  } else {
+    "Title"
+  }
+  MyComposable(
+    text = text
+  )
+}
+```
+
+An implementation dependency on the snapshots-runtime library is required for using the
+`LocalEmergeSnapshotMode`:
+
+```kotlin
+dependencies {
+  debugImplementation("com.emergetools.snapshots:snapshots-runtime:{latest_version}")
+}
+```
+
+Latest runtime
+version: [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime)
 
 ##### Ignoring private previews
 
@@ -232,7 +274,9 @@ emerge {
 
 Emerge is 100% invested in Compose, but we know your codebase might not be fully there yet.
 
-Emerge can snapshot legacy views through Compose Previews. Wrap the legacy view in an `AndroidView` ([docs](https://developer.android.com/develop/ui/compose/migrate/interoperability-apis/views-in-compose)) and add to any Preview!
+Emerge can snapshot legacy views through Compose Previews. Wrap the legacy view in an
+`AndroidView` ([docs](https://developer.android.com/develop/ui/compose/migrate/interoperability-apis/views-in-compose))
+and add to any Preview!
 
 ```kotlin
 @Preview
@@ -324,10 +368,10 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 
 ## Artifacts & versions
 
-| Artifact                                          | Description                     | Latest                                                                                                                                                                                                                           | Min SDK |
-|---------------------------------------------------|---------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
-| `com.emergetools.snapshots:snapshots`             | Snapshot testing library        | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                         | 23      |
-| `com.emergetools.snapshots:snapshots-annotations` | Additional snapshot annotations | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-annotations) | 23      |
+| Artifact                                      | Description                    | Latest                                                                                                                                                                                                                   | Min SDK |
+|-----------------------------------------------|--------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| `com.emergetools.snapshots:snapshots`         | Snapshot testing library       | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots)                 | 23      |
+| `com.emergetools.snapshots:snapshots-runtime` | Snapshots runtime dependencies | [![Maven Central](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime/badge.svg)](https://maven-badges.herokuapp.com/maven-central/com.emergetools.snapshots/snapshots-runtime) | 23      |
 
 ## Releasing
 
@@ -337,12 +381,12 @@ the [full documentation](https://docs.emergetools.com/docs/android-snapshots-v1)
 2. Update the `/snapshots/CHANGELOG.md`
 3. `gt c -am "Prepare for Snapshots release X.Y.Z"` (where X.Y.Z is the version set in step 1)
 1. Alt
-   1. `git add *`
-   2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
+  1. `git add *`
+  2. `git commit -m "Prepare for Snapshots release X.Y.Z"`
 4. `gt ss`
 1. Alt:
-   1. `git push`
-   2. Open PR
+  1. `git push`
+  2. Open PR
 5. Get PR approved and merge
 6. Create a new release on GitHub
 7. Tag version `snapshots-vX.Y.Z`
