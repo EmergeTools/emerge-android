@@ -1,5 +1,7 @@
 // Intentionally not `runtime` package to be backwards compatible with
 // snapshots-annotation legacy dependency
+@file:Suppress("InvalidPackageDeclaration")
+
 package com.emergetools.snapshots.annotations
 
 /**
