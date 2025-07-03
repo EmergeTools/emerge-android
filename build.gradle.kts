@@ -17,6 +17,8 @@ plugins {
   id("com.emergetools.android") apply false
 }
 
+println("rooot project $version")
+
 allprojects {
   apply<DetektPlugin>()
 

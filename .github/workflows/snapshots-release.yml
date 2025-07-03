@@ -1,15 +1,15 @@
 name: Snapshots release deploy
 
 on:
-  release:
-    types: [published]
+  pull_request:
+    branches:
+      - main
+
+
 
 jobs:
   deploy-snapshots:
     runs-on: ubuntu-latest
-
-    # Only run when the tag begins with the string "snapshots-"
-    if: ${{ startsWith(github.event.release.tag_name, 'snapshots-') }}
 
     env:
       ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.ORG_GRADLE_PROJECT_mavenCentralUsername }}
@@ -29,4 +29,4 @@ jobs:
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test
       - name: Deploy snapshots-runtime, snapshots
-        run: ./gradlew :snapshots:snapshots-runtime:publishToMavenCentral :snapshots:snapshots:publishToMavenCentral -Dorg.gradle.parallel=false --no-configuration-cache
+        run: ./gradlew :snapshots:snapshots-runtime:publishToMavenCentral :snapshots:snapshots:publishToMavenCentral -Dorg.gradle.parallel=false --no-configuration-cache --info

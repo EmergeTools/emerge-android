@@ -5,7 +5,7 @@ plugins {
   alias(libs.plugins.kotlin.jvm)
   alias(libs.plugins.vanniktech.publish)
 }
-
+println("Version before is $version")
 group = "com.emergetools.snapshots"
 version = libs.versions.emerge.snapshots.get()
 
@@ -34,6 +34,8 @@ tasks.withType<Jar> {
     attributes["Implementation-Version"] = version
   }
 }
+
+println("Version after is $version")
 
 mavenPublishing {
   coordinates(group.toString(), "snapshots-runtime", version.toString())
