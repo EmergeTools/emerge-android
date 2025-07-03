@@ -29,4 +29,4 @@ jobs:
       - name: Sanity check snapshots test
         run: ./gradlew :snapshots:snapshots:test
       - name: Deploy snapshots-runtime, snapshots
-        run: ./gradlew :snapshots:snapshots-runtime:publishToMavenCentral :snapshots:snapshots:publishToMavenCentral -Dorg.gradle.parallel=false
+        run: ./gradlew :snapshots:snapshots-runtime:publishToMavenCentral :snapshots:snapshots:publishToMavenCentral -Dorg.gradle.parallel=false --no-configuration-cache

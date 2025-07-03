@@ -32,4 +32,4 @@ jobs:
       - name: Deploy plugin
         run: ./gradlew :gradle-plugin:plugin:publishPlugins
       - name: Deploy plugin to maven central
-        run: ./gradlew :gradle-plugin:plugin:publishToMavenCentral
+        run: ./gradlew :gradle-plugin:plugin:publishToMavenCentral --no-configuration-cache
