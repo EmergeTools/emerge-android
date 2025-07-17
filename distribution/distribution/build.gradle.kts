@@ -68,13 +68,8 @@ android {
 dependencies {
   implementation(libs.kotlinx.serialization)
   implementation(libs.okhttp)
-  implementation(libs.androidx.lifecycle.process)
   implementation(libs.androidx.work.runtime.ktx)
   implementation(libs.kotlin.coroutines.android)
-  implementation(libs.androidx.startup.runtime)
-  implementation(libs.androidx.runtime.android)
-  implementation(libs.androidx.foundation.layout.android)
-  implementation(libs.androidx.material3.android)
 
   testImplementation(platform(libs.junit5.bom))
   testImplementation(libs.google.truth)
