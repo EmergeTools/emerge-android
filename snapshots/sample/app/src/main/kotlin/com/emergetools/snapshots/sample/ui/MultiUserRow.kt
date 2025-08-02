@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -29,8 +31,10 @@ import com.emergetools.snapshots.sample.ui.theme.SnapshotsSampleTheme
 
 @Composable
 fun MultiUserRow(users: List<User>) {
-  Column {
-    users.forEach { user ->
+  LazyColumn {
+    // Force static key to trigger a process-ending crash
+    items(items = users, key= {"1"}, itemContent = { item ->
+//    users.forEach { user ->
       Row(
         modifier = Modifier
           .fillMaxWidth()
@@ -52,7 +56,7 @@ fun MultiUserRow(users: List<User>) {
             horizontalAlignment = Alignment.CenterHorizontally
           ) {
             Text(
-              text = user.name.firstOrNull()?.uppercase() ?: "",
+              text = item.name.firstOrNull()?.uppercase() ?: "",
               style = MaterialTheme.typography.bodyLarge,
               textAlign = TextAlign.Center
             )
@@ -63,11 +67,11 @@ fun MultiUserRow(users: List<User>) {
 
         // User details
         Column {
-          Text(text = user.name, style = MaterialTheme.typography.bodyMedium)
-          Text(text = user.email, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
+          Text(text = item.name, style = MaterialTheme.typography.bodyMedium)
+          Text(text = item.email, style = MaterialTheme.typography.bodySmall, color = Color.Gray)
         }
       }
-    }
+    })
   }
 }
 
