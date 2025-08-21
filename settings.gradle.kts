@@ -9,7 +9,7 @@ pluginManagement {
 }
 
 plugins {
-  id("com.gradle.develocity") version "4.1"
+  id("com.gradle.develocity") version "4.1.1"
   id("com.gradle.common-custom-user-data-gradle-plugin") version "2.3"
   id("com.android.settings") version "8.11.1" // Keep in sync with agp in libs.versions.toml
 }
