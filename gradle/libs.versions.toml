@@ -104,7 +104,7 @@ junit5-platform-launcher = { module = "org.junit.platform:junit-platform-launche
 
 kotlin-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlin-coroutines" }
 kotlinx-datetime = "org.jetbrains.kotlinx:kotlinx-datetime:0.7.1-0.6.x-compat"
-kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1"
+kotlinx-serialization = "org.jetbrains.kotlinx:kotlinx-serialization-json:1.9.0"
 kotlin-stdlib = { module = "org.jetbrains.kotlin:kotlin-stdlib", version.ref = "kotlin"}
 
 ktor-network = { module = "io.ktor:ktor-network", version = "3.2.3" }
