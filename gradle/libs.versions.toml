@@ -12,7 +12,7 @@ androidxactivity = "1.10.1"
 # so we'll need to lock ourselves to an older version and later add restrictions for what compose
 # versions are supported when we decided to update.
 # https://android-review.googlesource.com/c/platform/frameworks/support/+/2692852/37/compose/runtime/runtime/src/commonMain/kotlin/androidx/compose/runtime/internal/ComposableLambda.kt#625
-compose-bom = "2024.08.00"
+compose-bom = "2025.12.01"
 detekt = "1.23.8"
 kotlin = "2.1.21"
 kotlin-coroutines = "1.10.2"
