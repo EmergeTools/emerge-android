@@ -5,12 +5,12 @@ import org.gradle.api.provider.ValueSource
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-abstract class GitHubRepoOwnerValueSource : ValueSource<String?, EmptyParameters> {
+abstract class GitHubRepoOwnerValueSource : ValueSource<String, EmptyParameters> {
   @get:Inject
   abstract val execOperations: ExecOperations
 
-  override fun obtain(): String? {
+  override fun obtain(): String {
     val gitHub = GitHub(execOperations)
-    return gitHub.repoOwner()
+    return gitHub.repoOwner() ?: ""
   }
 }

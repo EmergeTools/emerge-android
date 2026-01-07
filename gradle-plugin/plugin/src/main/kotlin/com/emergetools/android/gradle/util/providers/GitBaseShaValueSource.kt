@@ -6,22 +6,19 @@ import org.gradle.api.provider.ValueSource
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-abstract class GitBaseShaValueSource : ValueSource<String?, EmptyParameters> {
+abstract class GitBaseShaValueSource : ValueSource<String, EmptyParameters> {
   @get:Inject
   abstract val execOperations: ExecOperations
 
-  override fun obtain(): String? {
+  override fun obtain(): String {
     val git = Git(execOperations)
     val gitHub = GitHub(execOperations)
 
-    var baseSha: String? = null
     // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
-    if (gitHub.isSupportedGitHubEvent()) {
-      gitHub.baseSha()?.let { baseSha = it }
+    return if (gitHub.isSupportedGitHubEvent()) {
+      gitHub.baseSha() ?: ""
     } else {
-      baseSha = git.baseSha()
+      git.baseSha() ?: ""
     }
-
-    return baseSha
   }
 }

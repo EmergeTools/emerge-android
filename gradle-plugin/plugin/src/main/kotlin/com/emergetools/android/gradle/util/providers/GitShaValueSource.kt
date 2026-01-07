@@ -9,22 +9,19 @@ import javax.inject.Inject
 
 interface EmptyParameters : ValueSourceParameters
 
-abstract class GitShaValueSource : ValueSource<String?, EmptyParameters> {
+abstract class GitShaValueSource : ValueSource<String, EmptyParameters> {
   @get:Inject
   abstract val execOperations: ExecOperations
 
-  override fun obtain(): String? {
+  override fun obtain(): String {
     val git = Git(execOperations)
     val gitHub = GitHub(execOperations)
 
-    var sha: String? = null
     // GitHub workflows for pull_requests are invoked on a merge commit rather than branch commit.
-    if (gitHub.isSupportedGitHubEvent()) {
-      gitHub.sha()?.let { sha = it }
+    return if (gitHub.isSupportedGitHubEvent()) {
+      gitHub.sha() ?: ""
     } else {
-      sha = git.currentSha()
+      git.currentSha() ?: ""
     }
-
-    return sha
   }
 }
