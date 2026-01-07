@@ -1,4 +1,5 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
 import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 
 plugins {
@@ -23,11 +24,6 @@ android {
     targetCompatibility = JavaVersion.VERSION_17
   }
 
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_17.toString()
-    languageVersion = KotlinVersion.KOTLIN_1_9.version
-  }
-
   defaultConfig {
     minSdk = 23
   }
@@ -39,6 +35,13 @@ android {
   // Ensures our version.txt is packaged in with release.
   // Will be pulled in automatically to test APK upon build
   sourceSets.getByName("main").resources.srcDir(metaInfResDir)
+}
+
+kotlin {
+  compilerOptions {
+    jvmTarget = JvmTarget.JVM_17
+    languageVersion = KotlinVersion.KOTLIN_1_9
+  }
 }
 
 dependencies {
