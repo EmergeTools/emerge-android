@@ -106,7 +106,7 @@ if (shadow) {
       addProgramJarsFrom(tasks.getByName("jar"))
       proguardFile("rules.pro")
       registerFilterTransform(listOf(".*/impldep/META-INF/versions/.*"))
-      r8Version("e742de788bb8367f779a7be00850e7ff206bd77a")
+      r8Version("9.0.28")
     }
 
     removeGradleApiFromApi()
