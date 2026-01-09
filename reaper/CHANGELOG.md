@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.1.0 - 2025-01-07
+
 - Require `com.emergetools.OVERRIDE_BASE_URL` to be set. [#610](https://github.com/EmergeTools/emerge-android/pull/610)
 
 ## 1.0.1 - 2025-03-05
