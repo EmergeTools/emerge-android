@@ -10,18 +10,6 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
-@Composable
-fun WindowInfoDisplay() {
-  val configuration = LocalConfiguration.current
-
-  Column(modifier = Modifier.padding(16.dp)) {
-    Text("LocalConfiguration.screenWidthDp:  ${configuration.screenWidthDp}dp")
-    Text("LocalConfiguration.screenHeightDp: ${configuration.screenHeightDp}dp")
-  }
-}
-
-// Validates that LocalConfiguration.screenWidthDp/screenHeightDp reflect the virtual device
-// dimensions (1480x1080dp) rather than the real device's dimensions.
 @Preview(
   name = "WindowInfo - 1480x1080dp tablet",
   device = "spec:width=1480dp,height=1080dp,dpi=240",
@@ -30,6 +18,11 @@ fun WindowInfoDisplay() {
 @Composable
 fun WindowInfoDisplayPreview() {
   Surface {
-    WindowInfoDisplay()
+    val configuration = LocalConfiguration.current
+
+    Column(modifier = Modifier.padding(16.dp)) {
+      Text("LocalConfiguration.screenWidthDp:  ${configuration.screenWidthDp}dp")
+      Text("LocalConfiguration.screenHeightDp: ${configuration.screenHeightDp}dp")
+    }
   }
 }
