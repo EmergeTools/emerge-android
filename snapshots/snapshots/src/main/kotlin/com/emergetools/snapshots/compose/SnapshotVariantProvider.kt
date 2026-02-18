@@ -49,6 +49,8 @@ fun SnapshotVariantProvider(
     config.uiMode?.let { uiMode = it }
     setLocale(locale)
     setLayoutDirection(locale)
+    deviceSpec?.widthDp?.let { screenWidthDp = it }
+    deviceSpec?.heightDp?.let { screenHeightDp = it }
     parseDevicePreviewString(config.device)?.orientation?.let {
       orientation = when (it) {
         "landscape" -> Configuration.ORIENTATION_LANDSCAPE
