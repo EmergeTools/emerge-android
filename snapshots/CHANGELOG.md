@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+## 1.5.1 - 2026-02-18
+
+- Provide `screenWidthDp` and `screenHeightDp` via `LocalConfiguration` for device-spec previews. [#683](https://github.com/EmergeTools/emerge-android/pull/683)
+
 ## 1.5.0 - 2025-07-02
 
 - Add new `snapshots-runtime` library. [#628](https://github.com/EmergeTools/emerge-android/pull/628)
