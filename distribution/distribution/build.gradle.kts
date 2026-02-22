@@ -1,4 +1,6 @@
 import com.vanniktech.maven.publish.AndroidSingleVariantLibrary
+import org.jetbrains.kotlin.gradle.dsl.JvmTarget
+import org.jetbrains.kotlin.gradle.dsl.KotlinVersion
 import org.jetbrains.kotlin.gradle.internal.ensureParentDirsCreated
 
 plugins {
@@ -48,11 +50,6 @@ android {
     targetCompatibility = JavaVersion.VERSION_11
   }
 
-  kotlinOptions {
-    jvmTarget = JavaVersion.VERSION_11.toString()
-    languageVersion = "1.9"
-  }
-
   defaultConfig {
     version = project.version
     minSdk = 21
@@ -63,6 +60,11 @@ android {
       wiredWith = GenerateMetaInfVersion::metaInfResDir
     )
   }
+}
+
+kotlin.compilerOptions {
+  jvmTarget = JvmTarget.JVM_11
+  languageVersion = KotlinVersion.KOTLIN_1_9
 }
 
 dependencies {
