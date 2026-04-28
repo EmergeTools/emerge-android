@@ -16,6 +16,7 @@ import com.emergetools.snapshots.SnapshotErrorType
 import com.emergetools.snapshots.compose.previewparams.PreviewParamUtils
 import com.emergetools.snapshots.models.ComposePreviewSnapshotConfig
 import com.emergetools.snapshots.util.Profiler
+import java.lang.ref.WeakReference
 
 @Suppress("TooGenericExceptionCaught")
 fun snapshotComposable(
@@ -24,20 +25,11 @@ fun snapshotComposable(
   previewConfig: ComposePreviewSnapshotConfig,
 ) {
   activity.runOnUiThread {
-    val priorExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
-    Thread.setDefaultUncaughtExceptionHandler { t, e ->
-      Log.e(
-        EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
-        "Uncaught exception in UI thread",
-        e
-      )
-      snapshotRule.saveError(
-        errorType = SnapshotErrorType.GENERAL,
-        composePreviewSnapshotConfig = previewConfig
-      )
-      priorExceptionHandler?.uncaughtException(t, e)
-      activity.finish()
-    }
+    SnapshotExceptionHandler.installOrUpdate(
+      activity = activity,
+      snapshotRule = snapshotRule,
+      previewConfig = previewConfig,
+    )
   }
 
   Profiler.startSpan("snapshotComposable")
@@ -61,6 +53,70 @@ fun snapshotComposable(
     throw e
   } finally {
     Profiler.endSpan()
+  }
+}
+
+private class SnapshotExceptionHandler(
+  private val priorExceptionHandler: Thread.UncaughtExceptionHandler?,
+) : Thread.UncaughtExceptionHandler {
+  @Volatile
+  private var activity = WeakReference<PreviewActivity>(null)
+
+  @Volatile
+  private var snapshotRule: EmergeSnapshots? = null
+
+  @Volatile
+  private var previewConfig: ComposePreviewSnapshotConfig? = null
+
+  fun update(
+    activity: PreviewActivity,
+    snapshotRule: EmergeSnapshots,
+    previewConfig: ComposePreviewSnapshotConfig,
+  ) {
+    this.activity = WeakReference(activity)
+    this.snapshotRule = snapshotRule
+    this.previewConfig = previewConfig
+  }
+
+  override fun uncaughtException(t: Thread, e: Throwable) {
+    Log.e(
+      EmergeComposeSnapshotReflectiveParameterizedInvoker.TAG,
+      "Uncaught exception in UI thread",
+      e
+    )
+
+    val snapshotRule = snapshotRule
+    val previewConfig = previewConfig
+    if (snapshotRule != null && previewConfig != null) {
+      snapshotRule.saveError(
+        errorType = SnapshotErrorType.GENERAL,
+        composePreviewSnapshotConfig = previewConfig
+      )
+    }
+
+    priorExceptionHandler?.uncaughtException(t, e)
+    activity.get()?.finish()
+  }
+
+  companion object {
+    fun installOrUpdate(
+      activity: PreviewActivity,
+      snapshotRule: EmergeSnapshots,
+      previewConfig: ComposePreviewSnapshotConfig,
+    ) {
+      val currentExceptionHandler = Thread.getDefaultUncaughtExceptionHandler()
+      val snapshotExceptionHandler =
+        currentExceptionHandler as? SnapshotExceptionHandler
+          ?: SnapshotExceptionHandler(currentExceptionHandler).also {
+            Thread.setDefaultUncaughtExceptionHandler(it)
+          }
+
+      snapshotExceptionHandler.update(
+        activity = activity,
+        snapshotRule = snapshotRule,
+        previewConfig = previewConfig,
+      )
+    }
   }
 }
 
