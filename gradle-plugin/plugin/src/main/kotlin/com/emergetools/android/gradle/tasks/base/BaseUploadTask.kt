@@ -356,9 +356,7 @@ abstract class BaseUploadTask : DefaultTask() {
       gitHubIncludeEventInformation.set(extension.vcsOptions.gitHubOptions.includeEventInformation)
       gitLabProjectId.set(extension.vcsOptions.gitLabOptions.projectId)
 
-      if (project.hasProperty(BASE_URL_ARG_KEY)) {
-        baseUrl.set(project.property(BASE_URL_ARG_KEY) as String)
-      }
+      baseUrl.set(project.providers.gradleProperty(BASE_URL_ARG_KEY))
 
       includeDependencyInformation.set(extension.includeDependencyInformation.get())
       if (extension.includeDependencyInformation.get()) {
