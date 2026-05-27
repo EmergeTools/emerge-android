@@ -13,7 +13,10 @@ abstract class AbstractAndroidProject(private val baseUrl: String) : AbstractGra
     val LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION = "8.0.0"
   }
 
-  protected fun newAndroidGradleProjectBuilder(agpVersion: String) : GradleProject.Builder{
+  protected fun newAndroidGradleProjectBuilder(
+    agpVersion: String,
+    develocityVersion: String? = null,
+  ) : GradleProject.Builder{
     return newGradleProjectBuilder()
       .withRootProject {
         gradleProperties += GradleProperties.minimalAndroidProperties()
@@ -21,12 +24,31 @@ abstract class AbstractAndroidProject(private val baseUrl: String) : AbstractGra
         withBuildScript {
           buildscript = BuildscriptBlock.defaultAndroidBuildscriptBlock(agpVersion)
         }
+        if (develocityVersion != null) {
+          withSettingsScript {
+            plugins(Plugin("com.gradle.develocity", develocityVersion))
+            additions = """
+              develocity {
+                buildScan {
+                  publishing.onlyIf { true }
+                  termsOfUseUrl = 'https://gradle.com/help/legal-terms-of-use'
+                  termsOfUseAgree = 'yes'
+                  uploadInBackground = false
+                }
+              }
+            """.trimIndent()
+          }
+        }
       }
   }
 
 
-  protected fun newAppSubproject(agpVersion: String, extension: String): GradleProject.Builder {
-    return newAndroidGradleProjectBuilder(agpVersion)
+  protected fun newAppSubproject(
+    agpVersion: String,
+    extension: String,
+    develocityVersion: String? = null,
+  ): GradleProject.Builder {
+    return newAndroidGradleProjectBuilder(agpVersion, develocityVersion)
       .withAndroidSubproject("app") {
         withBuildScript {
           plugins(Plugin("com.android.application"), Plugin("com.emergetools.android", PLUGIN_UNDER_TEST_VERSION))

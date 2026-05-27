@@ -7,20 +7,14 @@ import com.gradle.develocity.agent.gradle.adapters.BuildScanObfuscationAdapter
 import com.gradle.develocity.agent.gradle.adapters.DevelocityAdapter
 import com.gradle.develocity.agent.gradle.adapters.PublishedBuildScanAdapter
 import com.gradle.develocity.agent.gradle.adapters.develocity.DevelocityConfigurationAdapter
-import com.gradle.develocity.agent.gradle.adapters.enterprise.GradleEnterpriseExtensionAdapter
 import org.gradle.api.Action
 import org.gradle.api.Project
 import org.gradle.caching.configuration.AbstractBuildCache
 
 private fun Project.createDevelocityAdapter(): DevelocityAdapter {
-  rootProject.extensions.findByName("develocity")?.let {
-    return DevelocityConfigurationAdapter(it)
-  }
-
-  rootProject.extensions.findByName("gradleEnterprise")?.let {
-    return GradleEnterpriseExtensionAdapter(it)
-  }
-  return NoOpDevelocityAdapter()
+  return extensions.findByName("develocity")
+    ?.let { DevelocityConfigurationAdapter(it) }
+    ?: NoOpDevelocityAdapter()
 }
 
 fun Project.getBuildScan(): BuildScanAdapter {

@@ -6,13 +6,15 @@ import com.emergetools.android.gradle.EmergePluginTest
 class SimpleGradleProject(
   agpVersion: String,
   baseUrl: String,
-  private val emergeExtension: String
+  private val emergeExtension: String,
+  private val develocityVersion: String?,
 ) : AbstractAndroidProject(baseUrl) {
 
   companion object {
     fun createWithVcsInExtension(
       test: EmergePluginTest,
       agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
+      develocityVersion: String? = null,
     ): SimpleGradleProject = createWithExtension(
       test, agpVersion, """
             emerge {
@@ -27,7 +29,8 @@ class SimpleGradleProject(
                    repoName = 'repoName'
                  }
                }
-            }""".trimMargin()
+            }""".trimMargin(),
+      develocityVersion = develocityVersion,
     )
 
     fun createWithoutVcsInExtension(
@@ -43,16 +46,17 @@ class SimpleGradleProject(
     fun createWithExtension(
       test: EmergePluginTest,
       agpVersion: String = LOWEST_SUPPORTED_ANDROID_GRADLE_PLUGIN_VERSION,
-      extension: String
+      extension: String,
+      develocityVersion: String? = null,
     ): SimpleGradleProject {
-      return SimpleGradleProject(agpVersion, test.baseUrl.toString(), extension)
+      return SimpleGradleProject(agpVersion, test.baseUrl.toString(), extension, develocityVersion)
     }
   }
 
   val gradleProject: GradleProject = build(agpVersion)
 
   private fun build(agpVersion: String): GradleProject {
-    return newAppSubproject(agpVersion, emergeExtension).build()
+    return newAppSubproject(agpVersion, emergeExtension, develocityVersion).build()
         .write()
   }
 }
