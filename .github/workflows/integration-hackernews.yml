@@ -25,7 +25,7 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'adopt'
-          java-version: 17
+          java-version: 21
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
       - name: Build hackernews with Emerge Android as included build

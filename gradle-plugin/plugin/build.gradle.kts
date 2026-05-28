@@ -20,7 +20,7 @@ version = libs.versions.emerge.gradle.plugin.get()
 
 java {
   toolchain {
-    languageVersion = JavaLanguageVersion.of(17)
+    languageVersion = JavaLanguageVersion.of(21)
   }
   withJavadocJar()
   withSourcesJar()
@@ -28,7 +28,7 @@ java {
 
 tasks.withType<KotlinCompile>().configureEach {
   compilerOptions {
-    jvmTarget.set(JvmTarget.JVM_17)
+    jvmTarget.set(JvmTarget.JVM_21)
   }
 }
 
