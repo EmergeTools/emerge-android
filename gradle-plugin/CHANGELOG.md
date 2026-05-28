@@ -7,8 +7,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## 4.4.1 - 2026-05-28
 
-- Drop support for Java 17, minimum version is now Java
-  21. [#693](https://github.com/EmergeTools/emerge-android/pull/693)
 - Support Gradle Isolated Projects by using `providers.gradleProperty` and looking up Develocity
   extension on the local
   project. [#691](https://github.com/EmergeTools/emerge-android/pull/691), [#692](https://github.com/EmergeTools/emerge-android/pull/692)
