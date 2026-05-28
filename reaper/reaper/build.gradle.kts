@@ -5,13 +5,13 @@ plugins {
   alias(libs.plugins.grgit)
   alias(libs.plugins.kotlin.android)
   alias(libs.plugins.kotlin.serialization)
-  alias(libs.plugins.buildconfig)
   alias(libs.plugins.vanniktech.publish)
 }
 
 group = "com.emergetools.reaper"
 version = libs.versions.emerge.reaper.get()
 
+val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://reaper.emergetools.com"
 var metaInfResDir = File(buildDir, "generated/emerge/")
 var metaInfDestDir = File(metaInfResDir, "META-INF/com/emergetools/reaper/")
 
@@ -28,8 +28,14 @@ android {
     languageVersion = "1.9"
   }
 
+  buildFeatures {
+    buildConfig = true
+  }
+
   defaultConfig {
     minSdk = 21
+    buildConfigField("String", "REAPER_VERSION", "\"${project.version}\"")
+    buildConfigField("String", "EMERGE_BASE_URL", "\"$baseUrl\"")
   }
   // Ensures our version.txt is packaged in with release.
   // Will be pulled in automatically to test APK upon build
@@ -54,14 +60,6 @@ dependencies {
 
 tasks.withType<Test> {
   useJUnitPlatform()
-}
-
-val baseUrl = rootProject.properties["emergeBaseUrl"] ?: "https://reaper.emergetools.com"
-buildConfig {
-  className("ReaperConfig")
-  packageName("com.emergetools.reaper")
-  buildConfigField("String", "REAPER_VERSION", """"${project.version}"""")
-  buildConfigField("String", "EMERGE_BASE_URL", """"$baseUrl"""")
 }
 
 tasks.register("generateMetaInfVersion") {
