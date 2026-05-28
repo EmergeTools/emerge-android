@@ -5,6 +5,16 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 4.4.1 - 2026-05-28
+
+- Drop support for Java 17, minimum version is now Java
+  21. [#693](https://github.com/EmergeTools/emerge-android/pull/693)
+- Support Gradle Isolated Projects by using `providers.gradleProperty` and looking up Develocity
+  extension on the local
+  project. [#691](https://github.com/EmergeTools/emerge-android/pull/691), [#692](https://github.com/EmergeTools/emerge-android/pull/692)
+- Support new snapshots runtime annotation
+  package. [#628](https://github.com/EmergeTools/emerge-android/pull/628)
+
 ## 4.4.0 - 2025-04-24
 - Generating snapshots for third party libraries is now removed along with the `emerge.experimental.firstPartySnapshots` option. [#581](https://github.com/EmergeTools/emerge-android/pull/581)
 
