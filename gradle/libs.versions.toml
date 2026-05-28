@@ -91,7 +91,7 @@ compose-wear-ui-tooling = { module = "androidx.wear.compose:compose-ui-tooling",
 
 detekt-formatting = { module = "io.gitlab.arturbosch.detekt:detekt-formatting", version.ref = "detekt" }
 
-google-truth = "com.google.truth:truth:1.4.4"
+google-truth = "com.google.truth:truth:1.4.5"
 
 moshi = { module = "com.squareup.moshi:moshi", version.ref = "moshi" }
 moshi-adapters = { module = "com.squareup.moshi:moshi-adapters", version.ref = "moshi" }
