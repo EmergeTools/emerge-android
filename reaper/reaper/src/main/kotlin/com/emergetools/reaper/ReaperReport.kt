@@ -32,5 +32,5 @@ internal data class Metadata(
   val manufacturer: String,
   val model: String,
   val osVersion: String,
-  val reaperVersion: String = ReaperConfig.REAPER_VERSION,
+  val reaperVersion: String = BuildConfig.REAPER_VERSION,
 )

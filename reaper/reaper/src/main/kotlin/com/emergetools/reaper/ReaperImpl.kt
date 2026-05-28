@@ -24,7 +24,7 @@ internal class ReaperImpl(
   val tracker: HashTracker,
   val delegate: Delegate,
   val apiKey: String,
-  val baseUrl: String = ReaperConfig.EMERGE_BASE_URL,
+  val baseUrl: String = BuildConfig.EMERGE_BASE_URL,
   val isDebug: Boolean = false,
 ) {
   interface Delegate {
