@@ -29,7 +29,7 @@ runtime-android = "1.7.6"
 foundation-layout-android = "1.7.6"
 
 # internal
-emerge-gradle-plugin = "4.4.1-SNAPSHOT"
+emerge-gradle-plugin = "4.4.1"
 emerge-performance = "2.1.2"
 emerge-reaper = "1.1.0"
 emerge-snapshots = "1.5.2"
