@@ -6,7 +6,7 @@ import org.gradle.api.provider.ValueSourceParameters.None
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-abstract class GitHubRepoNameValueSource : ValueSource<String?, None> {
+abstract class GitHubRepoNameValueSource : ValueSource<String, None> {
   @get:Inject
   abstract val execOperations: ExecOperations
 
