@@ -2,10 +2,11 @@ package com.emergetools.android.gradle.util.providers
 
 import com.emergetools.android.gradle.util.GitHub
 import org.gradle.api.provider.ValueSource
+import org.gradle.api.provider.ValueSourceParameters.None
 import org.gradle.process.ExecOperations
 import javax.inject.Inject
 
-abstract class GitHubRepoNameValueSource : ValueSource<String?, EmptyParameters> {
+abstract class GitHubRepoNameValueSource : ValueSource<String?, None> {
   @get:Inject
   abstract val execOperations: ExecOperations
 
