@@ -34,7 +34,7 @@ emerge-performance = "2.1.2"
 emerge-reaper = "1.1.0"
 emerge-snapshots = "1.5.2"
 emerge-distribution = "0.0.5-SNAPSHOT"
-annotation-jvm = "1.9.1"
+annotation-jvm = "1.10.0"
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
